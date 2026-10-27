@@ -123,6 +123,15 @@ Conclusão: aprovar com redação. Sem ressalvas ao modelo (lacre coletivo com l
             </div>
           </div>
         </div>
+
+        <div class="card mt-3">
+          <div class="card-head"><h3>PAR-2026-038 · enquadramento da carteira do item</h3><span class="badge st-analise">Em revisão externa</span><span class="badge badge-outline">prazo 30/11 · validar antes do lançamento</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../admin/financeiro.html"><i data-icon="wallet"></i>Carteiras dos itens</a></div></div>
+          <div class="card-body points">
+            <div><span class="ico ok"><i data-icon="check-circle"></i></span><span><b>Sem saldo, sem saque.</b> A plataforma não guarda cripto de usuários: cada item tem a própria carteira, criada na aprovação; a comissão de 10 % é separada só na finalização e a carteira é entregue ao vendedor pela frase de recuperação. Não existe carteira interna, depósito nem saque, o que afasta o enquadramento como corretora ou custodiante permanente.</span></div>
+            <div><span class="ico warn"><i data-icon="alert-triangle"></i></span><span><b>Custódia temporária das chaves.</b> Da aprovação até a entrega, a chave da carteira do item fica no HSM da plataforma. Em algumas jurisdições isso pode ser lido como custódia temporária (Lei 14.478/2022 no Brasil; MiCA na UE). Parecer externo sobre a sede e esse enquadramento em elaboração; criação e destruição de cada chave registradas na auditoria.</span></div>
+            <div><span class="ico info"><i data-icon="info"></i></span><span><b>Fase 2 · escrow on-chain.</b> Contrato em USDC (Base ou Polygon) guarda os fundos; a plataforma só assina a liberação ou o reembolso e o contrato paga o vendedor em um endereço dele. Elimina a custódia temporária e a entrega de frase. Especificação em revisão com o jurídico.</span></div>
+          </div>
+        </div>
       </div>
 
       <div class="tab-panel" data-panel="tit">
@@ -177,7 +186,7 @@ Conclusão: aprovar com redação. Sem ressalvas ao modelo (lacre coletivo com l
                 <dt>Registro de recebimento</dt><dd>24/10 às 10:40 · Carla S. · protocolo interno OJ-2026-014 · hash do ofício <code>b91d…40ce</code> registrado na auditoria</dd>
                 <dt>Processo</dt><dd>0012345-67.2026.8.26.0100 · 12ª Vara Cível · São Paulo (número conferido no portal do tribunal)</dd>
                 <dt>O que determina</dt><dd>Fornecimento de dados cadastrais e registros de acesso da conta vendedora do item lcr-4m2x9 no período de 01/09 a 20/10/2026, em 10 dias úteis, sob sigilo</dd>
-                <dt>O que existe</dt><dd>Pseudônimo, data de criação da conta, lista de itens e ledger. Registros de acesso (data, hora e endereço IP) guardados pelo prazo exigido pela jurisdição da sede, em sistema separado e cifrado, nunca consultado pelo marketplace. <b>Não existem</b> nome, e-mail, telefone, CPF ou endereço.</dd>
+                <dt>O que existe</dt><dd>Pseudônimo, data de criação da conta, lista de itens e o histórico de pagamentos de cada item (valor, rede, txid). Não há saldo de usuário: a plataforma não guarda cripto de ninguém; a chave da carteira de um item fica no HSM só até a finalização. Registros de acesso (data, hora e endereço IP) guardados pelo prazo exigido pela jurisdição da sede, em sistema separado e cifrado, nunca consultado pelo marketplace. <b>Não existem</b> nome, e-mail, telefone, CPF ou endereço.</dd>
                 <dt>Comunicação ao vendedor</dt><dd>Não permitida neste caso (sigilo determinado na ordem). Registro do motivo na auditoria.</dd>
               </dl>
               <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Cumprimento com o mínimo necessário</span>A resposta informa exatamente o que a plataforma guarda e entrega só o período determinado. Nada é inferido, cruzado ou acrescentado. Texto padrão revisado em 25/10.</div></div>
@@ -192,7 +201,7 @@ Conclusão: aprovar com redação. Sem ressalvas ao modelo (lacre coletivo com l
               </div>
               <div class="stack-sm">
                 <div class="field"><label for="resp">Registro de resposta</label><textarea id="resp" class="textarea" placeholder="Data e hora do protocolo, número do protocolo no tribunal, quem assinou e resumo do que foi entregue…"></textarea></div>
-                <div class="row"><button class="btn btn-primary" data-toast="Resposta registrada · auditoria atualizada · prazo encerrado"><i data-icon="stamp"></i>Registrar resposta</button><button class="btn" data-toast="Comprovante de recebimento (PDF com hash) gerado">Ver registro de recebimento</button><button class="btn btn-ghost" data-toast="Pedido de esclarecimento ao juízo redigido (escopo do período)">Pedir esclarecimento</button></div>
+                <div class="row"><button class="btn btn-primary" data-toast="Resposta registrada · auditoria atualizada · prazo cumprido"><i data-icon="stamp"></i>Registrar resposta</button><button class="btn" data-toast="Comprovante de recebimento (PDF com hash) gerado">Ver registro de recebimento</button><button class="btn btn-ghost" data-toast="Pedido de esclarecimento ao juízo redigido (escopo do período)">Pedir esclarecimento</button></div>
               </div>
             </div>
           </div>

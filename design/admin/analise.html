@@ -45,6 +45,9 @@
     @media (max-width: 600px) { .cmp-grid, .tri-grid { grid-template-columns: 1fr; } }
     .head-badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
     .page-head h1 { font-size: var(--fs-xl); max-width: 60ch; }
+    .what-next > b { display: flex; align-items: center; gap: 6px; }
+    .what-next ul { margin: 6px 0 0; padding-left: 18px; }
+    .what-next li { margin: 3px 0; }
   </style>
 </head>
 <body data-shell="admin" data-page="analise" data-root="../" data-title="Análise · lcr-6b2v7">
@@ -172,9 +175,10 @@
               <dt>Resumo</dt><dd>90 relatórios de inspeção regular de 2024 obtidos via LAI, consolidados em uma base com coordenadas, categoria de risco, dano potencial e todas as autuações públicas de 2019 a 2024.</dd>
               <dt>Categoria</dt><dd>Governo e políticas públicas · risco alto por padrão · dois olhos · jurídico por padrão</dd>
               <dt>País · idioma</dt><dd><span class="tag">BR</span> Brasil · português · avaliado pelas leis do país de origem (Brasil) e da sede</dd>
-              <dt>Modelo e meta</dt><dd>Lacre coletivo · meta US$ 30.000 · tudo ou nada · liberação pública para todos · sem metas estendidas · comissão 10 %</dd>
+              <dt>Modelo e meta</dt><dd>Lacre coletivo · meta US$ 30.000 · tudo ou nada · liberação pública para todos · sem metas estendidas</dd>
+              <dt>Carteira do item</dt><dd><span class="badge badge-outline"><i data-icon="wallet"></i>será criada na aprovação</span> rede e moeda escolhidas pelo vendedor: <b>Polygon · USDT</b> · endereço público na página de prova · um endereço derivado por apoio · se o lacre não bater a meta, cada apoio volta ao endereço de origem e nada é cobrado</dd>
               <dt>Exclusividade</dt><dd>US$ 90.000 (definida pelo vendedor) · encerra o anúncio e devolve todos os apoios · abaixo do mínimo sugerido de 5× a meta (US$ 150.000)</dd>
-              <dt>Prazo</dt><dd>até 20/12/2026 (54 dias após a publicação prevista)</dd>
+              <dt>Prazo</dt><dd>até 20/12/2026 · 54 dias contados da publicação, que acontece na hora da aprovação</dd>
               <dt>Tipo</dt><dd>Pacote · PDF (212 p.) + CSV + XLSX + GeoJSON</dd>
               <dt>Tamanho</dt><dd>51,1 MB</dd>
               <dt>Integridade</dt><dd>hash do cliente = hash do servidor <span class="ico ok"><i data-icon="check-circle"></i></span><div class="hash mt-1"><code>sha256: 7c2e4f90a1b3d5e6f7081920c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8091a9b41</code><button class="btn btn-sm btn-ghost" data-copy="7c2e4f90a1b3d5e6f7081920c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8091a9b41"><i data-icon="copy"></i></button></div></dd>
@@ -300,17 +304,25 @@
         <div class="card card-sm">
           <div class="card-head"><h3>Decisão · 1ª análise</h3></div>
           <div class="card-body stack-sm decide">
-            <button class="btn btn-success btn-block" data-toast="Voto registrado: aprovar. Só vale após a 2ª análise (Bruno M.) e o parecer jurídico (Carla S.)"><i data-icon="check"></i>Aprovar</button>
-            <button class="btn btn-primary btn-block" data-toast="Voto registrado: aprovar com ajustes (título reescrito e tarjas em v2). Aguarda Bruno M. e o jurídico"><i data-icon="edit"></i>Aprovar com ajustes<small>recomendado</small></button>
+            <button class="btn btn-success btn-block" data-toast="Voto registrado: aprovar. Vale após a 2ª análise (Bruno M.) e o parecer jurídico (Carla S.); com os três de acordo, o item é publicado na hora e a carteira do item é criada (Polygon · USDT)"><i data-icon="check"></i>Aprovar</button>
+            <button class="btn btn-primary btn-block" data-toast="Voto registrado: aprovar com ajustes (título reescrito e tarjas em v2). Aguarda Bruno M. e o jurídico; publica na hora em que o vendedor aceitar as edições, criando a carteira do item"><i data-icon="edit"></i>Aprovar com ajustes<small>recomendado</small></button>
             <button class="btn btn-block" data-toast="Lista de pendências enviada ao vendedor com os códigos marcados · prazo da fila pausado"><i data-icon="message-square"></i>Solicitar ajustes</button>
             <button class="btn btn-danger btn-block" data-toast="Rejeição exige código de motivo e texto · reenvio só como novo item · registrada na auditoria"><i data-icon="x"></i>Rejeitar</button>
             <button class="btn btn-outline btn-block" data-toast="Já escalado em 26/10 às 15:20 · parecer de Carla S. previsto até 03/11"><i data-icon="scale"></i>Escalar ao jurídico<small>escalado 26/10</small></button>
+            <div class="panel small what-next"><b><span class="ico ok"><i data-icon="zap"></i></span> O que acontece ao aprovar</b>
+              <ul>
+                <li>Publicado <b>na hora</b>: página do item e prova pública com o hash da versão aprovada (v2). Não existe "agendado" para o item.</li>
+                <li>Carteira do item criada no HSM · Polygon · USDT · endereço público na prova · um endereço derivado por apoio.</li>
+                <li>Post de lançamento entra na fila de publicação (o post pode ser agendado; o item, não).</li>
+                <li>Comissão de 10 % separada só na finalização; nada é cobrado se o lacre falhar.</li>
+              </ul>
+            </div>
             <div class="field mt-1"><label for="codes">Códigos de motivo (ajustes ou rejeição)</label>
               <select id="codes" class="select" multiple size="5" aria-label="Códigos de motivo">
                 <option selected>R01 · dados pessoais de terceiros</option><option>R02 · direitos autorais</option><option>R03 · conteúdo íntimo/sexual</option><option>R04 · credenciais/acesso</option><option>R05 · sigilo legal</option><option>R06 · informação privilegiada de mercado</option><option>R07 · difamação sem suporte</option><option>R08 · fabricação/falsificação</option><option>R09 · duplicidade</option><option>R10 · qualidade insuficiente</option><option selected>R11 · prévia enganosa</option><option>R12 · fora do escopo</option><option>R13 · outro (texto obrigatório)</option>
               </select><span class="hint">Ctrl/Cmd + clique para vários. R01 e R11 marcados: tarjas e título.</span></div>
             <div class="field"><label for="msg">Mensagem ao vendedor</label><textarea id="msg" class="textarea" aria-label="Mensagem ao vendedor">Aprovamos com ajustes. (1) Tarjamos 11 nomes de responsáveis técnicos e representantes em 7 páginas; mantivemos servidores da ANM no exercício da função, por fonte pública. (2) Reescrevemos o título: os relatórios são públicos via LAI e o original sugeria sigilo e colapso iminente. (3) Sugerimos elevar o valor de exclusividade para US$ 150.000 (5× a meta); a decisão é sua. Confirme as edições em 72 h ou responda por aqui. A prévia mostrará a p. 1 tarjada e 10 linhas da base sem a coluna de responsável técnico.</textarea></div>
-            <div class="alert alert-ok"><i data-icon="eye"></i><div><span class="alert-title">O que o vendedor verá</span><span class="badge st-aprovado">Aprovado com ajustes</span> · diff do título (antes/depois) · "11 trechos tarjados em uma nova versão" · códigos R01, R11 · botões "Aceitar edição" e "Responder" · prazo de 72 h. Enquanto o jurídico não conclui, ele vê apenas <b>"Em análise adicional"</b>.</div></div>
+            <div class="alert alert-ok"><i data-icon="eye"></i><div><span class="alert-title">O que o vendedor verá</span><span class="badge st-aprovado">Aprovado com ajustes</span> · diff do título (antes/depois) · "11 trechos tarjados em uma nova versão" · códigos R01, R11 · botões "Aceitar edição" e "Responder" · prazo de 72 h · "ao aceitar, o item é publicado na hora e a carteira do item é criada (Polygon · USDT)". Enquanto o jurídico não conclui, ele vê apenas <b>"Em análise adicional"</b>.</div></div>
           </div>
         </div>
       </aside>
