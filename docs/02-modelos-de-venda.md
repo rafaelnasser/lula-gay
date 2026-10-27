@@ -61,7 +61,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Variantes.**
 - *Preço fixo*: "Comprar exclusividade por US$ X".
-- *Faça uma oferta*: o comprador propõe um valor (acima de um mínimo opcional); o vendedor aceita, recusa ou contrapropõe em até 48 h. As ofertas são vinculantes e o valor fica reservado na carteira do comprador até a resposta.
+- *Faça uma oferta*: o comprador propõe um valor (acima de um mínimo opcional); o vendedor aceita, recusa ou contrapropõe em até 48 h. As ofertas são vinculantes: o valor é pago na hora a um endereço derivado do item e volta ao endereço de origem se a oferta for recusada ou superada.
 - *Compre agora ou oferte*: combina os dois.
 
 **Regras.**
@@ -120,7 +120,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 3. **Cobrir:** qualquer conta, nova ou já participante, sobe o valor para V' ≥ V + 10 %. Paga V' (ou só a diferença, se já participa). V' vira o valor por interessado.
 4. **Igualar ou sair:** quando o valor sobe, cada participante tem 48 h (nunca além do prazo do pedido) para igualar (pagar V' − V) ou sair. Quem não iguala sai automaticamente e recebe de volta o que pagou, ao endereço de origem, menos a taxa de rede. Quem cobre de novo reinicia a janela para os outros.
 5. A qualquer momento todos os interessados ativos pagaram o mesmo valor. Se um interessado cobre e ninguém iguala, ele fica sozinho: exclusividade de fato.
-6. **Atender:** o vendedor envia o conteúdo à curadoria. Da entrada em curadoria até a decisão, o pedido fica travado (sem entradas, coberturas ou saídas). Validado o atendimento, cada interessado recebe acesso no cofre; a plataforma separa 10 % e entrega a carteira do pedido a quem atendeu. Atendimento rejeitado destrava o pedido. Se dois vendedores entregarem, vale o primeiro validado.
+6. **Atender:** o vendedor envia o conteúdo à curadoria. Da entrada em curadoria até a decisão, o pedido fica travado (sem entradas, coberturas ou saídas). Validado o atendimento, cada interessado recebe acesso no cofre; a plataforma separa 10 % e entrega a carteira do pedido a quem atendeu. Atendimento rejeitado, ou com ajustes solicitados, destrava o pedido até o reenvio. Se dois vendedores entregarem, vale o primeiro validado.
 7. **Expirar:** sem atendimento validado até o prazo, cada interessado recebe de volta o que pagou.
 8. Interessados são públicos (pseudônimo e data de entrada). Janela de 48 h e incremento de 10 % são parâmetros da administração.
 
@@ -171,8 +171,8 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Regras.**
 - Cada edição passa pela curadoria como um item normal, com SLA menor (24 h) para não atrasar a periodicidade.
-- Se o vendedor atrasar mais de um período, os assinantes recebem crédito proporcional.
-- Cobrança por débito da carteira no início de cada período; sem saldo, a assinatura pausa.
+- Se o vendedor atrasar mais de um período, o período seguinte não é cobrado.
+- Cada período é um pagamento da própria carteira do assinante para um endereço derivado; sem pagamento, a assinatura pausa. Cada edição tem carteira própria, finalizada 72 h após a publicação.
 
 **Interface.** Página da fonte com histórico de edições, periodicidade, preço por período, número de assinantes, botão "Assinar", amostra de uma edição.
 

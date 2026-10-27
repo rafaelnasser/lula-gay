@@ -116,7 +116,7 @@
             <ul>
               <li>Vendedores e compradores nunca sabem quem é o outro. A plataforma também não precisa saber quem são.</li>
               <li>Nenhuma conta exige nome, e-mail, telefone, CPF ou documento. Em nenhuma tela.</li>
-              <li>Não armazenamos identidade. Se o banco de dados vazar, vazam pseudônimos, saldos e históricos de itens.</li>
+              <li>Não armazenamos identidade nem saldo. Se o banco de dados vazar, vazam pseudônimos, históricos de itens e de pagamentos.</li>
               <li>Arquivos enviados têm metadados removidos antes de qualquer pessoa da equipe ver.</li>
               <li>A curadoria vê o conteúdo, mas não vê quem enviou além do pseudônimo e do histórico dele. Todo acesso da equipe fica em log imutável.</li>
             </ul>
@@ -127,25 +127,43 @@
               <li><b>Impossibilidade de captura de tela.</b> Marca d’água e termos desencorajam; nada impede.</li>
             </ul>
             <h3>Dinheiro e identidade</h3>
-            <p>Nenhuma moeda fiduciária (real, dólar, euro) entra ou sai da plataforma. Não há PIX, cartão, boleto, parceiro de pagamento nem voucher, e a plataforma não faz KYC. Você obtém cripto por conta própria, em uma corretora ou P2P, fora do Lacre, e deposita USDT, USDC ou Bitcoin na carteira. Saques saem só em cripto, para um endereço que você informa na hora e que apagamos após a confirmação na rede.</p>
-            <p>Cada depósito usa um endereço novo, nunca reutilizado e nunca vinculado a identidade; registramos apenas “crédito de X USDT na carteira Y”. O limite antifraude de saque para contas novas (US$ 2.000 por dia nos primeiros 7 dias ou até o primeiro item aprovado) não é KYC: ele não pede nem verifica nada sobre você.</p>
+            <p>Nenhuma moeda fiduciária (real, dólar, euro) entra ou sai da plataforma. Não há PIX, cartão, boleto, parceiro de pagamento nem voucher, e a plataforma não faz KYC. Você obtém cripto por conta própria, em uma corretora ou P2P, fora do Lacre, e paga da sua própria carteira para a carteira do item. A plataforma não guarda saldo de ninguém: não existe carteira interna, depósito nem saque.</p>
+            <p>Cada item ou pedido aprovado ganha uma carteira própria, criada em hardware seguro (HSM), com o endereço público na página de prova. Cada pagamento usa um endereço derivado novo, com valor exato, nunca reutilizado e nunca vinculado a identidade. Na finalização, a plataforma separa a comissão, executa reembolsos pendentes, entrega a carteira ao vendedor (frase de recuperação, uma única vez, após senha e TOTP) e destrói a própria cópia da chave. Reembolsos voltam ao endereço de origem do pagamento; por isso pague sempre de uma carteira que você controla, nunca direto de uma corretora.</p>
+            <div class="grid cols-2 mt-2">
+              <div class="card">
+                <div class="card-head"><i data-icon="database"></i><h3>O que guardamos sobre dinheiro</h3></div>
+                <div class="card-body"><ul class="yes-no yes">
+                  <li><i data-icon="check"></i>A chave da carteira do item, no HSM, só até a entrega ao vendedor. Depois, destruída, com registro na auditoria.</li>
+                  <li><i data-icon="check"></i>O endereço de origem de cada pagamento, só até a finalização, para poder reembolsar.</li>
+                  <li><i data-icon="check"></i>O histórico de pagamentos por item: valor, rede, txid e confirmações, para a prova pública e para disputas.</li>
+                </ul></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><i data-icon="x-circle"></i><h3>O que não guardamos</h3></div>
+                <div class="card-body"><ul class="yes-no no">
+                  <li><i data-icon="x"></i>Nenhum saldo de usuário. Não existe carteira interna, crédito, depósito nem saque.</li>
+                  <li><i data-icon="x"></i>Nenhum endereço de carteira seu depois da finalização do item.</li>
+                  <li><i data-icon="x"></i>Nenhum vínculo entre o seu pseudônimo e a corretora onde você comprou a cripto.</li>
+                </ul></div>
+              </div>
+            </div>
             <h3>Registros de acesso e jurisdição da sede</h3>
             <p>A plataforma é global, mas a entidade que a opera terá uma sede, e é a lei da sede que define a guarda de registros de acesso, a resposta a autoridades e o tratamento de ativos virtuais. A jurisdição da sede está a definir; quando for escolhida, esta seção dirá exatamente o que ela implica. Exemplos do que muda:</p>
             <ul>
               <li><b>Brasil:</b> o Marco Civil (Lei 12.965/2014, art. 15) exige guardar registros de acesso (data, hora e IP) por 6 meses, entregues por ordem judicial; a Lei 14.478/2022 rege os ativos virtuais.</li>
-              <li><b>União Europeia:</b> GDPR (dados pessoais, inclusive de terceiros citados nos itens), DSA (moderação, denúncias e transparência) e MiCA (custódia de cripto exige licença).</li>
-              <li><b>Estados Unidos:</b> DMCA (notificação e retirada por direitos autorais), regras de valores mobiliários e sanções (OFAC), com bloqueio de países sancionados em depósitos e saques.</li>
+              <li><b>União Europeia:</b> GDPR (dados pessoais, inclusive de terceiros citados nos itens), DSA (moderação, denúncias e transparência) e MiCA (guardar cripto de terceiros, mesmo temporariamente, pode exigir licença).</li>
+              <li><b>Estados Unidos:</b> DMCA (notificação e retirada por direitos autorais), regras de valores mobiliários e sanções (OFAC), com bloqueio de países sancionados nos pagamentos.</li>
             </ul>
-            <p>Seja qual for a sede, o compromisso é o mesmo: registros de acesso, quando exigidos, ficam em um sistema separado do marketplace, cifrados, com a chave sob custódia de duas pessoas, retenção exata pelo prazo legal e destruição automática. O marketplace nunca os consulta; eles só saem por ordem judicial, por procedimento registrado no log de auditoria. Independentemente da sede, a curadoria avalia cada item também pelas leis do país de origem da informação.</p>
+            <p>Seja qual for a sede, o compromisso é o mesmo: registros de acesso, quando exigidos, ficam em um sistema separado do marketplace, cifrados, com a chave dividida entre duas pessoas, retenção exata pelo prazo legal e destruição automática. O marketplace nunca os consulta; eles só saem por ordem judicial, por procedimento registrado no log de auditoria. Independentemente da sede, a curadoria avalia cada item também pelas leis do país de origem da informação.</p>
             <h3>O que existe sobre a sua conta</h3>
-            <p>Pseudônimo (imutável), hash da senha ou chave pública da passkey, hash da frase de recuperação (serve para validar, não para recuperar), segredo TOTP cifrado, data de criação, preferências, saldo via ledger em USDT e reputação. Nada mais.</p>
+            <p>Pseudônimo (imutável), hash da senha ou chave pública da passkey, hash da frase de recuperação (serve para validar, não para recuperar), segredo TOTP cifrado, data de criação, preferências, histórico de pagamentos por item e reputação. Nenhum saldo. Nada mais.</p>
             <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">Em uma frase</span>Não temos como dizer quem você é. Temos como dizer o que o seu pseudônimo fez, e a lei da sede pode nos obrigar a guardar quando e de onde ele acessou, por um prazo fixo, em cofre separado.</div></div>
           </section>
 
           <!-- Curadoria -->
           <section class="pol-section" id="curadoria">
             <h2>Curadoria</h2>
-            <p>A curadoria é o produto. Nada vai ao ar sem uma pessoa da equipe ler, ver ou ouvir todo o conteúdo. A esteira: enviado, triagem automática, fila, análise humana, decisão, agendamento, publicação com prova pública.</p>
+            <p>A curadoria é o produto. Nada vai ao ar sem uma pessoa da equipe ler, ver ou ouvir todo o conteúdo. A esteira: enviado, triagem automática, fila, análise humana, decisão, publicação imediata com prova pública e carteira do item.</p>
             <h3>Triagem automática</h3>
             <p>Antivírus (executáveis são rejeitados); bloqueio imediato de nudez, indícios de menores, credenciais e dados de cartão; alerta de duplicidade por hash; varredura de dados pessoais com amostras tarjadas para a curadoria; OCR e transcrição apenas para busca interna; limite de 20 GB por item.</p>
             <h3>Análise humana em 7 blocos</h3>
@@ -165,12 +183,12 @@
               <table class="table compact">
                 <thead><tr><th>Decisão</th><th>Efeito</th><th>O vendedor recebe</th></tr></thead>
                 <tbody>
-                  <tr><td><span class="badge st-aprovado">Aprovado</span></td><td>Vai para agendamento de publicação</td><td>Data prevista</td></tr>
+                  <tr><td><span class="badge st-aprovado">Aprovado</span></td><td>Publicado na hora, com prova pública; carteira do item criada</td><td>Link da prova e endereço da carteira do item</td></tr>
                   <tr><td><span class="badge st-aprovado">Aprovado com ajustes</span></td><td>Curadoria altera título, descrição ou prévia</td><td>Diff para confirmar em 72 h</td></tr>
                   <tr><td><span class="badge st-ajustes">Ajustes solicitados</span></td><td>Volta ao vendedor</td><td>Lista de pendências com códigos</td></tr>
                   <tr><td><span class="badge st-rejeitado">Rejeitado</span></td><td>Encerra; reenvio só como novo item</td><td>Código de motivo e texto</td></tr>
                   <tr><td><span class="badge st-escalado">Escalado</span></td><td>Fila jurídica; o prazo pausa</td><td>“Em análise adicional”</td></tr>
-                  <tr><td><span class="badge st-rejeitado">Conta banida</span></td><td>Violação grave: menores, credenciais, fraude</td><td>Aviso final; saldo retido para análise</td></tr>
+                  <tr><td><span class="badge st-rejeitado">Conta banida</span></td><td>Violação grave: menores, credenciais, fraude</td><td>Aviso final; a finalização dos itens em curso fica suspensa para análise</td></tr>
                 </tbody>
               </table>
             </div>
@@ -183,28 +201,30 @@
           <section class="pol-section" id="disputas">
             <h2>Disputas e reembolsos</h2>
             <h3>Disputa do comprador</h3>
-            <p>Janela de 72 h após o primeiro acesso ao conteúdo. Motivos: conteúdo diferente da prévia, arquivo corrompido, duplicidade, autenticidade, outro. A curadoria compara prévia e conteúdo (já tem os dois) e decide em até 5 dias: reembolso total, parcial ou manutenção da compra. O reembolso volta como créditos na carteira, em USDT, no mesmo valor pago.</p>
+            <p>Janela de 72 h após o primeiro acesso ao conteúdo. Motivos: conteúdo diferente da prévia, arquivo corrompido, duplicidade, autenticidade, outro. A curadoria compara prévia e conteúdo (já tem os dois) e decide em até 5 dias: reembolso total, parcial ou manutenção da compra. O reembolso sai da carteira do item para o endereço de origem do pagamento, no mesmo valor pago, descontada só a taxa de rede.</p>
             <p>Reincidência do vendedor rebaixa a reputação. Reincidência do comprador em disputas improcedentes limita o direito de disputa.</p>
             <h3>Reembolsos automáticos</h3>
             <ul>
-              <li><b>Lacre coletivo que não bateu a meta</b>: cada apoio volta para a carteira de origem no fim do prazo, sem taxa.</li>
-              <li><b>Pedido não atendido até o prazo</b>: toda a recompensa volta para as carteiras dos contribuidores.</li>
-              <li><b>Oferta recusada ou lance perdido</b>: o valor reservado é liberado na carteira imediatamente.</li>
-              <li><b>Compra com exclusividade em lacre coletivo</b>: todos os apoios são devolvidos automaticamente às carteiras e os apoiadores são notificados; em cópias e camadas, quem já comprou mantém o acesso.</li>
-              <li><b>Item cancelado pelo vendedor com dinheiro em custódia</b>: todos os compradores são reembolsados integralmente e o vendedor recebe penalidade de reputação.</li>
+              <li><b>Lacre coletivo que não bateu a meta</b>: cada apoio volta ao endereço de origem no fim do prazo, a partir da carteira do item, descontada só a taxa de rede. Nada é cobrado.</li>
+              <li><b>Pedido não atendido até o prazo</b>: cada interessado recebe de volta o que pagou, ao endereço de origem, a partir da carteira do pedido. Quem sai de um pedido depois de uma cobertura do valor recebe o mesmo reembolso.</li>
+              <li><b>Oferta recusada ou lance perdido</b>: o valor pago ao endereço derivado do item volta ao endereço de origem assim que o vendedor responde ou o leilão encerra.</li>
+              <li><b>Compra com exclusividade em lacre coletivo</b>: todos os apoios voltam automaticamente aos endereços de origem e os apoiadores são notificados; em cópias e camadas, quem já comprou mantém o acesso.</li>
+              <li><b>Item retirado pelo vendedor antes da finalização</b>: todos os pagamentos voltam aos endereços de origem e o vendedor recebe penalidade de reputação.</li>
             </ul>
             <h3>Reversão de vendas</h3>
-            <p>Se um item for retirado por violação depois de vendas, os compradores são reembolsados em créditos. O valor em custódia do vendedor cobre o reembolso; a diferença, se houver, é absorvida pelo fundo de garantia, formado por 2 % de cada comissão.</p>
+            <p>Se um item for retirado por violação depois de vendas, os compradores são reembolsados ao endereço de origem. Antes da finalização, o reembolso sai da carteira do item. Depois da finalização, os fundos já estão com o vendedor: o reembolso sai do fundo de garantia da plataforma, formado por 2 % de cada comissão.</p>
           </section>
 
           <!-- Taxas -->
           <section class="pol-section" id="taxas">
             <h2>Taxas</h2>
-            <p>Uma única comissão, de <b>10 %</b>, descontada do vendedor em toda venda, apoio liberado e recompensa paga, em todos os modelos. Você fica com 90 %. Não há mensalidade, taxa de listagem, taxa de depósito nem taxa de compra.</p>
-            <p>Nada é cobrado se um lacre coletivo falhar ou um pedido expirar. No saque, só a taxa da rede é repassada.</p>
-            <h3>Moedas e liquidação</h3>
-            <p>Nenhuma moeda fiduciária entra ou sai da plataforma. Os preços são em dólar (US$) e a carteira guarda USDT, que vale 1:1 com o dólar, sem conversão. Depósitos em USDT e USDC (Polygon, Tron, Base) são creditados 1:1 após as confirmações da rede. Depósitos em Bitcoin (Lightning, on-chain) são convertidos para USDT na hora, com cotação travada por 10 minutos (1 BTC = US$ 68.400 em 27/10/2026, mediana de três corretoras). O vendedor recebe o USDT retido na custódia, menos a comissão.</p>
-            <p>Você obtém cripto por conta própria, em corretora ou P2P, fora do Lacre. A plataforma não faz KYC e não intermedeia moeda fiduciária. 2 % de cada comissão vai para o fundo de garantia descrito em Disputas e reembolsos.</p>
+            <p>Uma única comissão, de <b>10 %</b>, separada da carteira do item na <b>finalização</b>, em todos os modelos. O vendedor fica com 90 %. Não há mensalidade, taxa de listagem, taxa de pagamento nem taxa de compra.</p>
+            <p>Nada é cobrado se um lacre coletivo falhar, um pedido expirar ou um item for retirado antes da finalização. Nos reembolsos, a taxa da rede é descontada do valor devolvido; a plataforma não cobra nada sobre eles. Ao pagar, você paga só a taxa da rede, que o seu aplicativo de carteira mostra.</p>
+            <h3>Moedas e redes</h3>
+            <p>Nenhuma moeda fiduciária entra ou sai da plataforma. Os preços são em dólar (US$). USDT e USDC em Polygon, Tron e Base valem 1:1 com o dólar, sem conversão, e são aceitos em todos os modelos. Bitcoin on-chain é aceito só em Exclusivo e Cópias, pelo valor em US$ no momento do pagamento. Lightning não é aceito, porque uma invoice não é reembolsável à origem. O acesso é liberado ao atingir as confirmações da rede: Polygon 12, Tron 19, Base 12, Bitcoin 2.</p>
+            <h3>Finalização</h3>
+            <p>A finalização acontece quando a venda se conclui e a janela de disputa de 72 h vence (Exclusivo), quando o lacre rompe e as 72 h vencem (Lacre coletivo), quando o atendimento é validado (Pedido) ou quando o vendedor encerra as vendas, após a última janela de disputa (Cópias). Nela, a plataforma transfere a comissão da carteira do item para a carteira da plataforma, executa os reembolsos pendentes e entrega a carteira ao vendedor: a frase de recuperação é exibida uma única vez, na tela, após senha e TOTP, e a plataforma destrói a própria cópia da chave, com registro na auditoria. 2 % de cada comissão vai para o fundo de garantia descrito em Disputas e reembolsos.</p>
+            <p>Você obtém cripto por conta própria, em corretora ou P2P, fora do Lacre. A plataforma não faz KYC e não intermedeia moeda fiduciária.</p>
           </section>
 
           <!-- Jurídico -->
@@ -213,9 +233,9 @@
             <h3>Pedidos de titulares de dados (LGPD, GDPR ou equivalente)</h3>
             <p>Quem afirma estar identificado em um item pode usar o formulário público na página de prova, marcando “Sou a pessoa citada”. O pedido é tratado pela lei do país de origem da informação (LGPD no Brasil, GDPR na União Europeia, CCPA na Califórnia ou equivalente) e pela da sede. O jurídico analisa em até 15 dias e responde de forma documentada, pelo protocolo. Saídas possíveis: redação de uma nova versão, retirada do item ou manutenção com fundamento (interesse público, fonte pública, exercício de função pública). O item pode ser suspenso preventivamente durante a análise.</p>
             <h3>Ordens judiciais e notificações</h3>
-            <p>Mantemos um canal jurídico dedicado, registramos o recebimento de cada ordem e cumprimos com o mínimo necessário. Comunicamos o vendedor quando a ordem permitir. O que pode existir para entregar: pseudônimo, data de criação da conta, itens, apoios e compras, lançamentos do ledger em USDT e os registros de acesso do sistema separado, pelo prazo que a lei da sede exigir. O que não existe para entregar: nome, e-mail, telefone, documento, endereço de saque após a confirmação na rede, conteúdo de itens exclusivos já vendidos.</p>
+            <p>Mantemos um canal jurídico dedicado, registramos o recebimento de cada ordem e cumprimos com o mínimo necessário. Comunicamos o vendedor quando a ordem permitir. O que pode existir para entregar: pseudônimo, data de criação da conta, itens, apoios e compras, o histórico de pagamentos por item (valor, rede, txid, confirmações) e os registros de acesso do sistema separado, pelo prazo que a lei da sede exigir. O que não existe para entregar: nome, e-mail, telefone, documento, endereços de origem depois da finalização, a chave de uma carteira já entregue, conteúdo de itens exclusivos já vendidos.</p>
             <h3>Ativos virtuais</h3>
-            <p>Guardar cripto de usuários e intermediar pagamentos pode exigir autorização conforme a sede: no Brasil, a Lei 14.478/2022 e a regulamentação do Banco Central; na União Europeia, o MiCA; nos Estados Unidos, regras federais e estaduais. A operação segue parecer jurídico sobre esse enquadramento, e esta seção será atualizada quando a sede for definida, inclusive se a custódia migrar para contratos de escrow on-chain, em que a plataforma só assina liberações e reembolsos e nunca detém os fundos.</p>
+            <p>A plataforma não guarda saldo de usuários, mas controla a chave da carteira de cada item entre a aprovação e a finalização. Conforme a sede, isso pode ser lido como guarda temporária de ativos de terceiros e exigir autorização: no Brasil, a Lei 14.478/2022 e a regulamentação do Banco Central; na União Europeia, o MiCA; nos Estados Unidos, regras federais e estaduais. A operação segue parecer jurídico sobre esse enquadramento, e esta seção será atualizada quando a sede for definida, inclusive se a fase 2 migrar para contratos de escrow on-chain, em que os fundos ficam no contrato, a plataforma só assina liberações e reembolsos e o contrato paga o vendedor em um endereço dele.</p>
             <h3>Transparência</h3>
             <p>Publicamos a cada seis meses o número de ordens judiciais, notificações e pedidos de titulares recebidos, e quantos foram cumpridos total ou parcialmente. Sem detalhes que identifiquem casos.</p>
           </section>
@@ -226,15 +246,15 @@
             <p>Resumo em linguagem simples. O texto completo dos termos de uso é anexo a esta política e prevalece em caso de conflito.</p>
             <ul>
               <li>A conta é um pseudônimo. Você é responsável pela senha, pela passkey e pela frase de recuperação. Sem a frase, não há como recuperar a conta; não temos e-mail para enviar nada.</li>
-              <li>Ao enviar um item, você faz seis declarações que ficam registradas: origem lícita, titularidade ou direito de venda, sem dados pessoais de terceiros sem base legal, sem conteúdo íntimo ou de menores, sem credenciais, sem informação privilegiada ou sigilo legal. Declaração falsa é motivo de banimento e retenção do saldo para análise.</li>
+              <li>Ao enviar um item, você faz seis declarações que ficam registradas: origem lícita, titularidade ou direito de venda, sem dados pessoais de terceiros sem base legal, sem conteúdo íntimo ou de menores, sem credenciais, sem informação privilegiada ou sigilo legal. Declaração falsa é motivo de banimento e de suspensão da finalização dos itens em curso para análise.</li>
               <li>A curadoria decide o que publica e pode reescrever título, resumo e prévia com o seu aceite. Pode recusar sem precisar provar nada.</li>
-              <li>O dinheiro do comprador fica em custódia até o fim da janela de disputa. A comissão é de 10 %. Reembolsos são em créditos.</li>
+              <li>O pagamento fica na carteira do item até a finalização, depois da janela de disputa. A comissão de 10 % é separada só na finalização. Reembolsos voltam ao endereço de origem, descontada a taxa de rede.</li>
               <li>O acesso a um conteúdo é pessoal e intransferível, com marca d’água por conta. Revender ou publicar conteúdo comprado viola os termos e identifica a conta, não a pessoa.</li>
               <li>Mensagens só dentro da plataforma, com filtro de contatos externos; expiram 90 dias após o encerramento do item. A curadoria pode ler conversas em disputas ou denúncias, com registro.</li>
               <li>Pagamentos só em cripto. Transações em blockchain são irreversíveis; conferir endereço e rede é responsabilidade de quem envia.</li>
               <li>Itens de Cópias, Lacre coletivo e Camadas podem ter um valor de exclusividade. Quem pagar encerra o anúncio e leva o item só para si; apoios de lacre coletivo são devolvidos e compradores anteriores de cópias e camadas mantêm o acesso.</li>
               <li>Lei aplicável: a da jurisdição da sede (a definir) para a plataforma; para o conteúdo de cada item, também as leis do país de origem da informação. Interface e políticas em português, inglês e espanhol; em caso de conflito entre versões, prevalece a da sede.</li>
-              <li>Maiores de 18 anos. Podemos suspender contas e itens por violação, com registro em auditoria. Exclusão de conta exige saldo zero; o ledger é mantido.</li>
+              <li>Maiores de 18 anos. Podemos suspender contas e itens por violação, com registro em auditoria. Exclusão de conta exige nenhum item com carteira em curso; o histórico de pagamentos é mantido.</li>
             </ul>
           </section>
 
@@ -246,7 +266,7 @@
               <table class="table compact">
                 <thead><tr><th>Versão</th><th>Em vigor desde</th><th>O que mudou</th></tr></thead>
                 <tbody>
-                  <tr><td><span class="badge badge-brass">v1.2</span></td><td class="num">01/10/2026</td><td>Comissão única de 10 % em todos os modelos. Pagamentos só em cripto (USDT, USDC, BTC), preços em US$ com liquidação em USDT 1:1; texto de anonimato e jurisdição revisado. País e idioma por item; compra com exclusividade em Cópias, Lacre coletivo e Camadas. Regra de dois olhos estendida a Saúde. Limite antifraude de saque para contas novas.</td></tr>
+                  <tr><td><span class="badge badge-brass">v1.2</span></td><td class="num">01/10/2026</td><td>Comissão única de 10 % em todos os modelos, separada na finalização. Uma carteira cripto por item e nenhum saldo guardado: pagamentos da carteira do comprador para a carteira do item (USDT, USDC; Bitcoin em Exclusivo e Cópias), preços em US$, carteira entregue ao vendedor na finalização; texto de anonimato e jurisdição revisado. País e idioma por item; compra com exclusividade em Cópias, Lacre coletivo e Camadas. Regra de dois olhos estendida a Saúde.</td></tr>
                   <tr><td><span class="badge badge-outline">v1.1</span></td><td class="num">15/07/2026</td><td>Pedidos de titulares (LGPD) com prazo de 15 dias. Denúncia pública sem login. Suspensão preventiva durante reanálise. Códigos de rejeição R01–R13 publicados.</td></tr>
                   <tr><td><span class="badge badge-outline">v1.0</span></td><td class="num">10/03/2026</td><td>Lançamento: política de conteúdo (pode/não pode), checklist em 7 blocos, quatro níveis de autenticidade, janela de disputa de 72 h, registros de acesso em sistema separado.</td></tr>
                 </tbody>
