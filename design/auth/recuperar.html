@@ -11,7 +11,7 @@
   <style>
     main { width: 100%; max-width: 560px; }
     .auth-card { max-width: 560px; }
-    [data-wizard] > [data-step]:not(.active) { display: none; }
+    [data-wizard] > [data-step].stack.active { display: flex; }
     .words .w { position: relative; counter-increment: w; display: block; }
     .words .w::before { content: counter(w); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted-2); font-size: var(--fs-xs); z-index: 1; }
     .words .w .input { padding-left: 30px; font-family: var(--font-mono); font-size: var(--fs-sm); }

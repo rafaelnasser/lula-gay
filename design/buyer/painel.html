@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    .split > * { min-width: 0; }
+    @media (max-width: 600px) { .list-item { flex-wrap: wrap; } .list-item .li-body { flex: 1 1 calc(100% - 48px); } }
     .greet { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .pledge { display: flex; flex-direction: column; gap: 8px; padding: 14px 0; border-bottom: 1px solid var(--border); }
     .pledge:last-child { border-bottom: 0; padding-bottom: 0; }

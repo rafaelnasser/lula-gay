@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Visualizador seguro · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* layout do visualizador */
+    .viewer { border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--surface); overflow: hidden; }
+    .v-bar { display: flex; align-items: center; gap: 10px 14px; padding: 10px 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .v-bar .v-title { font-family: var(--font-display); font-weight: 600; min-width: 0; flex: 1 1 260px; font-size: var(--fs-md); line-height: 1.25; }
+    .v-bar .v-title small { display: block; font-family: var(--font-mono); font-weight: 400; font-size: var(--fs-xs); color: var(--muted); margin-top: 2px; }
+    .v-tools { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+    .v-tools .pageno { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--fg-2); padding: 0 4px; white-space: nowrap; }
+    .v-tools .sep { width: 1px; height: 22px; background: var(--border-2); margin: 0 6px; }
+    .v-tools .search { flex: 1 1 160px; max-width: 240px; }
+    .v-tools [data-variant].active { display: inline-flex; }
+    .viewer .tabs { padding: 0 14px; background: var(--surface-2); }
+    .viewer .tabs .tab svg { width: 14px; height: 14px; }
+    .viewer .tab-panel { padding-top: 0; }
+    .v-body { display: grid; grid-template-columns: 150px minmax(0, 1fr); }
+    .v-pages { border-right: 1px solid var(--border); background: var(--bg-2); padding: 12px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; max-height: 760px; }
+    .thumb { background: #f7f5ef; border-radius: 3px; aspect-ratio: 3 / 4; position: relative; border: 2px solid transparent; padding: 10px 8px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
+    .thumb span { display: block; height: 3px; background: #d9d4c7; border-radius: 1px; }
+    .thumb span.s { width: 55%; }
+    .thumb.active { border-color: var(--brass); }
+    .thumb::after { content: attr(data-n); position: absolute; right: 5px; bottom: 3px; font-size: 9px; color: #777; font-family: var(--font-mono); }
+    .v-stage { background: var(--bg); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; overflow-y: auto; max-height: 760px; }
+    .v-stage > *, .v-pages > * { flex-shrink: 0; }
+    .v-stage .doc-mock { width: 100%; max-width: 660px; padding: 36px 42px 40px; }
+    .v-stage .doc-mock.current { box-shadow: 0 0 0 2px var(--brass), var(--shadow); }
+    .doc-mock h6 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #666; margin: 14px 0 6px; font-family: inherit; }
+    .doc-mock p { margin: 0 0 6px; }
+    .doc-mock table { width: 100%; border-collapse: collapse; font-size: 11px; margin: 8px 0 10px; }
+    .doc-mock td, .doc-mock th { border: 1px solid #d9d4c7; padding: 3px 6px; text-align: left; vertical-align: top; }
+    .doc-mock mark { background: #f5df8a; color: inherit; }
+    .doc-mock .wm-tile { position: absolute; font-family: var(--font-mono); font-size: 22px; color: rgba(0,0,0,.07); transform: rotate(-28deg); white-space: nowrap; pointer-events: none; user-select: none; }
+    .doc-mock .pn { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); font-size: 10px; color: #777; }
+    .v-panel { padding: 16px; }
+    .player { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface-2); font-size: var(--fs-sm); flex-wrap: wrap; }
+    .player .progress { flex: 1 1 160px; }
+    .player .time { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); white-space: nowrap; }
+    .player .p-title { flex: 1 1 100%; font-weight: 600; }
+    .gallery figure { margin: 0; }
+    .gallery .preview.unlocked { aspect-ratio: 4 / 3; border-radius: var(--r-sm); }
+    .gallery figcaption { font-size: var(--fs-xs); color: var(--muted); margin-top: 6px; }
+    .preview .wm-img { position: absolute; left: 8px; bottom: 6px; font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.6); }
+    .v-foot { padding: 12px 14px; border-top: 1px solid var(--border); display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; font-size: var(--fs-xs); color: var(--muted); }
+    .v-foot b { color: var(--fg); font-variant-numeric: tabular-nums; }
+    @media (max-width: 900px) { .v-body { grid-template-columns: 1fr; } .v-pages { display: none; } .v-stage { padding: 12px; } .v-stage .doc-mock { padding: 24px 20px 32px; } }
+  </style>
+</head>
+<body data-shell="buyer" data-page="cofre" data-title="Visualizador seguro" data-root="../">
+  <main>
+    <div class="crumbs mb-2"><a href="../buyer/cofre.html">Cofre</a><i data-icon="chevron-right"></i><span>lcr-9f2k7</span><i data-icon="chevron-right"></i><span>Visualizador seguro</span></div>
+
+    <div data-variants="download">
+      <div class="variant-switch"><span class="vs-label">Direitos</span><button data-show="download">Download com marca d'água</button><button data-show="leitura">Somente leitura</button></div>
+
+      <div class="viewer">
+        <!-- Barra superior -->
+        <div class="v-bar">
+          <div class="v-title">12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas<small>lcr-9f2k7 · ENT-3F9A · anexo-metodologico.pdf · página 12 de 212</small></div>
+          <div class="v-tools">
+            <button class="icon-btn" data-toast="Página 11" aria-label="Página anterior"><i data-icon="chevron-left"></i></button>
+            <span class="pageno">12 / 212</span>
+            <button class="icon-btn" data-toast="Página 13" aria-label="Próxima página"><i data-icon="chevron-right"></i></button>
+            <span class="sep"></span>
+            <button class="icon-btn" data-toast="Zoom 90 %" aria-label="Diminuir zoom"><i data-icon="minus"></i></button>
+            <span class="pageno">100 %</span>
+            <button class="icon-btn" data-toast="Zoom 110 %" aria-label="Aumentar zoom"><i data-icon="plus"></i></button>
+            <span class="sep"></span>
+            <div class="search"><i data-icon="search"></i><input class="input" value="consórcio" aria-label="Buscar no documento"></div>
+            <span class="pageno">3 / 14</span>
+            <span class="sep"></span>
+            <span data-variant="download"><button class="btn btn-sm" data-toast="Preparando download com marca d'água ENT-3F9A (48 MB)…"><i data-icon="download"></i>Baixar</button></span>
+            <span data-variant="leitura"><button class="btn btn-sm" disabled title="Item somente leitura: sem download"><i data-icon="download"></i>Baixar</button></span>
+            <a class="btn btn-sm btn-outline" href="../buyer/disputa.html"><i data-icon="flag"></i>Abrir disputa</a>
+            <button class="icon-btn" data-toast="Tela cheia" aria-label="Tela cheia"><i data-icon="maximize"></i></button>
+          </div>
+        </div>
+
+        <div data-tabs>
+          <div class="tabs">
+            <a class="tab active" data-tab="pdf" href="#"><i data-icon="file-text"></i>anexo-metodologico.pdf <span class="count">212 p.</span></a>
+            <a class="tab" data-tab="planilha" href="#"><i data-icon="table"></i>licitacoes_2019_2025.csv <span class="count">12.400 linhas</span></a>
+            <a class="tab" data-tab="audio" href="#"><i data-icon="audio"></i>sessoes-publicas <span class="count">3 MP3</span></a>
+            <a class="tab" data-tab="imagens" href="#"><i data-icon="image"></i>capturas-portais <span class="count">36 JPG</span></a>
+          </div>
+
+          <!-- PDF -->
+          <div class="tab-panel active" data-panel="pdf">
+            <div class="v-body">
+              <aside class="v-pages" aria-label="Páginas">
+                <div class="thumb" data-n="9" data-toast="Página 9"><span></span><span class="s"></span><span></span><span></span><span class="s"></span></div>
+                <div class="thumb" data-n="10" data-toast="Página 10"><span class="s"></span><span></span><span></span><span class="s"></span><span></span></div>
+                <div class="thumb" data-n="11" data-toast="Página 11"><span></span><span></span><span class="s"></span><span></span><span></span></div>
+                <div class="thumb active" data-n="12"><span class="s"></span><span></span><span></span><span></span><span class="s"></span></div>
+                <div class="thumb" data-n="13" data-toast="Página 13"><span></span><span class="s"></span><span></span><span class="s"></span><span></span></div>
+                <div class="thumb" data-n="14" data-toast="Página 14"><span></span><span></span><span></span><span class="s"></span><span></span></div>
+                <div class="thumb" data-n="15" data-toast="Página 15"><span class="s"></span><span></span><span class="s"></span><span></span><span></span></div>
+              </aside>
+              <div class="v-stage">
+                <div class="doc-mock">
+                  <span class="wm-tile" style="left:12%;top:38%">@coruja-7f3a · ENT-3F9A</span>
+                  <h6>3.3 Paraíba (continuação)</h6>
+                  <div class="line"></div><div class="line"></div><div class="line short"></div>
+                  <p>Campina Grande — Portal da transparência e diário oficial eletrônico (2019–2025). As 118 licitações de 2021 foram conferidas contra o TCE-PB. Coleta encerrada em 02/09/2025.</p>
+                  <div class="line"></div><div class="line"></div><div class="line short"></div>
+                  <span class="pn">11</span><span class="wm">@coruja-7f3a · ENT-3F9A</span>
+                </div>
+                <div class="doc-mock current">
+                  <span class="wm-tile" style="left:10%;top:22%">@coruja-7f3a · ENT-3F9A</span>
+                  <span class="wm-tile" style="left:34%;top:58%">@coruja-7f3a · ENT-3F9A</span>
+                  <h5>Anexo metodológico · 3. Fontes por município</h5>
+                  <h6>3.4 Pernambuco</h6>
+                  <p>Caruaru — Portal da transparência municipal; diário oficial eletrônico (2019–2025); TCE-PE (Tome Conta). Coleta em 12 lotes, última em 14/09/2025. Licitações de <mark>consórcio</mark>s intermunicipais estão marcadas na coluna <code>tipo_ente</code>.</p>
+                  <table>
+                    <tr><th>Município</th><th>Fonte</th><th>Período</th><th>Registros</th><th>Status</th></tr>
+                    <tr><td>Caruaru</td><td>Portal + DOE</td><td>2019–2025</td><td>412</td><td>completo</td></tr>
+                    <tr><td>Garanhuns</td><td>DOE + TCE-PE</td><td>2019–2024</td><td>187</td><td>parcial (2025 em coleta)</td></tr>
+                    <tr><td>Petrolina</td><td>Portal</td><td>2019–2025</td><td>603</td><td>completo</td></tr>
+                    <tr><td><mark>Consórcio</mark> CIMPAJEÚ</td><td>DOE</td><td>2020–2025</td><td>96</td><td>completo</td></tr>
+                  </table>
+                  <p>Responsável pela coleta nos portais: <span class="redacted">xxxxxxxxxxxxxx</span>. Servidor consultado por telefone em 03/2025: <span class="redacted">xxxxxxxxxx</span>, matrícula <span class="redacted">xxxxxx</span>.</p>
+                  <div class="line"></div><div class="line"></div><div class="line short"></div>
+                  <p>Critério de deduplicação: mesmo número de processo, mesmo ente e mesma data de homologação. 1.207 duplicatas removidas; 44 casos ambíguos mantidos com a flag <code>dup_suspeita</code>.</p>
+                  <div class="line"></div><div class="line short"></div>
+                  <span class="pn">12</span><span class="wm">@coruja-7f3a · ENT-3F9A</span>
+                </div>
+                <div class="doc-mock">
+                  <span class="wm-tile" style="left:18%;top:40%">@coruja-7f3a · ENT-3F9A</span>
+                  <h6>3.5 Piauí</h6>
+                  <p>Parnaíba, Picos e Floriano — diários oficiais dos municípios (2019–2025); TCE-PI para valores homologados. Teresina excluída por já constar em base pública consolidada.</p>
+                  <div class="line"></div><div class="line"></div><div class="line"></div><div class="line short"></div>
+                  <p>Entrevista com ex-pregoeiro: <span class="redacted">xxxxxxxxxxxxxxxxx</span> (nome e cargo tarjados pela curadoria, código R01).</p>
+                  <div class="line"></div><div class="line short"></div>
+                  <span class="pn">13</span><span class="wm">@coruja-7f3a · ENT-3F9A</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Planilha -->
+          <div class="tab-panel" data-panel="planilha">
+            <div class="v-panel stack-sm">
+              <div class="row between"><span class="small muted">Amostra de 8 das 12.400 linhas · 14 colunas · ordenado por id</span><div class="row"><button class="btn btn-sm" data-toast="Filtro por UF, ano e modalidade aplicado na grade"><i data-icon="filter"></i>Filtrar</button><button class="btn btn-sm" data-toast="Colunas: 14 de 14 visíveis"><i data-icon="sliders"></i>Colunas</button></div></div>
+              <div class="table-wrap">
+                <table class="table compact">
+                  <thead><tr><th>id</th><th>UF</th><th>Município</th><th>Ano</th><th>Modalidade</th><th>Objeto</th><th>Vencedor</th><th class="num">Valor homologado (R$)</th></tr></thead>
+                  <tbody>
+                    <tr><td class="mono">NE-2019-000412</td><td>PE</td><td>Caruaru</td><td>2019</td><td>Pregão eletrônico 14/2019</td><td>Medicamentos da atenção básica</td><td>Distribuidora Agreste Ltda.</td><td class="num">1.284.300,00</td></tr>
+                    <tr><td class="mono">NE-2019-000413</td><td>PE</td><td>Caruaru</td><td>2019</td><td>Tomada de preços 03/2019</td><td>Pavimentação da Rua da Matriz (1,2 km)</td><td>Construtora Vale do Ipojuca S.A.</td><td class="num">2.910.512,40</td></tr>
+                    <tr><td class="mono">NE-2020-001877</td><td>BA</td><td>Feira de Santana</td><td>2020</td><td>Dispensa 221/2020</td><td>Testes rápidos COVID-19</td><td>Biolab Nordeste Ltda.</td><td class="num">486.000,00</td></tr>
+                    <tr><td class="mono">NE-2021-004102</td><td>CE</td><td>Sobral</td><td>2021</td><td>Pregão eletrônico 88/2021</td><td>Merenda escolar (lote 2)</td><td>Alimentos Serra Grande ME</td><td class="num">712.880,00</td></tr>
+                    <tr><td class="mono">NE-2022-006390</td><td>MA</td><td>Imperatriz</td><td>2022</td><td>Concorrência 02/2022</td><td>Coleta de resíduos sólidos (36 meses)</td><td>Ambiental Tocantins Ltda.</td><td class="num">18.450.000,00</td></tr>
+                    <tr><td class="mono">NE-2023-008215</td><td>PB</td><td>Campina Grande</td><td>2023</td><td>Pregão eletrônico 41/2023</td><td>Transporte escolar (12 rotas)</td><td>Cooperativa Transbor</td><td class="num">1.058.400,00</td></tr>
+                    <tr><td class="mono">NE-2024-010744</td><td>RN</td><td>Mossoró</td><td>2024</td><td>Pregão presencial 07/2024</td><td>Iluminação LED (4.200 pontos)</td><td>Lumen Potiguar Ltda.</td><td class="num">3.377.900,00</td></tr>
+                    <tr><td class="mono">NE-2025-012398</td><td>PI</td><td>Parnaíba</td><td>2025</td><td>Dispensa 19/2025</td><td>Reforma da UBS Centro</td><td>JM Engenharia Ltda.</td><td class="num">219.750,00</td></tr>
+                  </tbody>
+                </table>
+                <div class="table-foot"><span>Linhas 1–8 de 12.400 · a primeira linha do CSV baixado carrega a marca "ENT-3F9A"</span><div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary" data-toast="Página 1 da grade">1</button><button class="btn btn-sm" data-toast="Página 2 da grade">2</button><button class="btn btn-sm" data-toast="Página 3 da grade">3</button><button class="btn btn-sm" data-toast="Próxima página da grade">›</button></div></div>
+              </div>
+              <p class="xs muted">Colunas ocultas na amostra: cnpj_vencedor, data_homologacao, tipo_ente, fonte_url, dup_suspeita, hash_linha. CNPJs são de empresas; nenhum CPF consta na base (verificado pela curadoria, bloco 2).</p>
+            </div>
+          </div>
+
+          <!-- Áudio -->
+          <div class="tab-panel" data-panel="audio">
+            <div class="v-panel stack-sm">
+              <p class="small muted">Gravações públicas das sessões, usadas como fonte. Reproduzidas em streaming; o download segue os direitos do entitlement.</p>
+              <div class="player"><span class="p-title">Sessão pública · Pregão eletrônico 14/2019 · Caruaru-PE</span><button class="icon-btn" data-toast="Reproduzindo" aria-label="Reproduzir"><i data-icon="pause"></i></button><div class="progress thin"><div class="progress-bar" data-width="35%"></div></div><span class="time">14:52 / 42:10</span><button class="btn btn-sm btn-ghost" data-toast="Transcrição aberta ao lado do áudio"><i data-icon="file-text"></i>Transcrição</button></div>
+              <div class="player"><span class="p-title">Sessão pública · Concorrência 02/2022 · Imperatriz-MA</span><button class="icon-btn" data-toast="Reproduzindo" aria-label="Reproduzir"><i data-icon="play"></i></button><div class="progress thin"><div class="progress-bar" data-width="0%"></div></div><span class="time">00:00 / 1:08:33</span><button class="btn btn-sm btn-ghost" data-toast="Transcrição aberta ao lado do áudio"><i data-icon="file-text"></i>Transcrição</button></div>
+              <div class="player"><span class="p-title">Audiência de esclarecimentos · Edital 41/2023 · Campina Grande-PB</span><button class="icon-btn" data-toast="Reproduzindo" aria-label="Reproduzir"><i data-icon="play"></i></button><div class="progress thin"><div class="progress-bar" data-width="0%"></div></div><span class="time">00:00 / 27:48</span><button class="btn btn-sm btn-ghost" data-toast="Transcrição aberta ao lado do áudio"><i data-icon="file-text"></i>Transcrição</button></div>
+              <p class="xs muted">Marca d'água de áudio: um ruído inaudível codifica ENT-3F9A ao longo da faixa.</p>
+            </div>
+          </div>
+
+          <!-- Imagens -->
+          <div class="tab-panel" data-panel="imagens">
+            <div class="v-panel stack-sm">
+              <div class="row between"><span class="small muted">36 capturas dos portais de transparência · mostrando 8</span><button class="btn btn-sm" data-toast="Mostrando as 36 capturas">Ver todas</button></div>
+              <div class="grid cols-4 gallery">
+                <figure><div class="preview unlocked" data-type="imagem"><span class="wm-img">@coruja-7f3a · ENT-3F9A</span></div><figcaption>Portal da transparência · Caruaru-PE · 14/09/2025</figcaption></figure>
+                <figure><div class="preview unlocked" data-type="imagem"><span class="wm-img">@coruja-7f3a · ENT-3F9A</span></div><figcaption>Diário oficial eletrônico · Garanhuns-PE · 02/08/2025</figcaption></figure>
+                <figure><div class="preview unlocked" data-type="dados"><span class="wm-img">@coruja-7f3a · ENT-3F9A</span></div><figcaption>TCE-PE · Tome Conta · consulta de 11/09/2025</figcaption></figure>
+                <figure><div class="preview unlocked" data-type="imagem"><span class="wm-img">@coruja-7f3a · ENT-3F9A</span></div><figcaption>Portal de compras · Feira de Santana-BA · 20/07/2025</figcaption></figure>
+                <figure><div class="preview unlocked" data-type="documento"><span class="wm-img">@coruja-7f3a · ENT-3F9A</span></div><figcaption>Edital 88/2021 · Sobral-CE · capa digitalizada</figcaption></figure>
+                <figure><div class="preview unlocked" data-type="imagem"><span class="wm-img">@coruja-7f3a · ENT-3F9A</span></div><figcaption>Portal da transparência · Imperatriz-MA · 05/06/2025</figcaption></figure>
+                <figure><div class="preview unlocked" data-type="dados"><span class="wm-img">@coruja-7f3a · ENT-3F9A</span></div><figcaption>Planilha de homologações · Mossoró-RN · 18/08/2025</figcaption></figure>
+                <figure><div class="preview unlocked" data-type="imagem"><span class="wm-img">@coruja-7f3a · ENT-3F9A</span></div><figcaption>Diário oficial · Parnaíba-PI · 29/09/2025</figcaption></figure>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="v-foot">
+          <span><i data-icon="clock" style="width:12px"></i> Sessão de visualização expira em <b id="sessao">15:00</b> (renova automaticamente enquanto esta aba estiver aberta)</span>
+          <span>Acesso registrado: item, entitlement, data e hora. Sem IP no marketplace.</span>
+          <span>Capturas de tela não são bloqueadas; a marca d'água identifica a conta (ENT-3F9A), não a pessoa.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid cols-3 mt-3">
+      <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Conteúdo descriptografado em streaming</span>Cada arquivo é cifrado com a própria chave. O visualizador recebe uma concessão de 15 min, renovável; nada fica em cache no seu navegador.</div></div>
+      <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que o vendedor vê</span>Apenas "1 cópia vendida" e o número de visualizações agregadas. Nunca quem abriu, quando ou de onde.</div></div>
+      <div class="alert alert-warn"><i data-icon="flag"></i><div><span class="alert-title">Algo não bate com a prévia?</span>A janela de disputa deste item vai até 28/10 às 14:20. <a class="link" href="../buyer/disputa.html">Abrir disputa</a> leva a curadoria a comparar prévia e conteúdo em até 5 dias.</div></div>
+    </div>
+
+    <script>
+      (function () {
+        var el = document.getElementById('sessao'), s = 15 * 60;
+        setInterval(function () {
+          s -= 1;
+          if (s <= 0) { s = 15 * 60; if (window.toast) window.toast('Sessão de visualização renovada por mais 15 min', 'refresh'); }
+          el.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+        }, 1000);
+      })();
+    </script>
+  </main>
+</body>
+</html>

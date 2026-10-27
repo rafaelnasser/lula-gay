@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Checkout · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .split > * { min-width: 0; }
+    .split { grid-template-columns: minmax(0, 1.3fr) minmax(300px, 1fr); }
+    @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+    .btn-block { white-space: normal; text-align: center; }
+    .dep-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+    .dep-row > div { flex: 1 1 150px; min-width: 0; }
+    .tl-item .what { color: var(--fg); }
+    .total > span { white-space: nowrap; }
+    .item-sum { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 16px; align-items: start; }
+    .item-sum .preview { aspect-ratio: 4 / 3; border-radius: var(--r-sm); }
+    @media (max-width: 480px) { .item-sum { grid-template-columns: 1fr; } }
+    .total { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .total .price { font-size: var(--fs-2xl); line-height: 1.1; }
+    .conv { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); text-align: right; }
+    .tier { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); flex-wrap: wrap; }
+    .tier:last-child { border-bottom: 0; }
+    .tier .t-price { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .qr { width: 96px; height: 96px; flex: none; border-radius: 6px; background-color: #fff; border: 6px solid #fff; position: relative;
+      background-image: repeating-conic-gradient(#111 0 25%, transparent 0 50%), repeating-conic-gradient(#111 0 25%, #fff 0 50%); background-size: 14px 14px, 10px 10px; background-position: 4px 4px, 0 0; }
+    .qr::before, .qr::after { content: ""; position: absolute; width: 22px; height: 22px; border: 4px solid #111; background: #fff; box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 10px #111; }
+    .qr::before { top: 1px; left: 1px; } .qr::after { top: 1px; right: 1px; }
+    .done-head { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .done-head svg { width: 52px; height: 52px; color: var(--ok); }
+  </style>
+</head>
+<body data-shell="buyer" data-page="checkout" data-title="Checkout" data-root="../">
+  <main class="content narrow">
+    <div data-variants="copia">
+      <div class="variant-switch"><span class="vs-label">Variante</span><button data-show="copia">Cópia</button><button data-show="exclusivo">Exclusivo</button><button data-show="apoio">Apoio</button><button data-show="lance">Lance</button><button data-show="camada">Camada</button><button data-show="licenca">Licença</button><button data-show="assinatura">Assinatura</button><button data-show="sucesso">Sucesso</button></div>
+      <div class="crumbs mb-2"><a href="../public/explorar.html">Catálogo</a><i data-icon="chevron-right"></i><a href="../public/item.html">Item</a><i data-icon="chevron-right"></i><span>Checkout</span></div>
+
+      <!-- ===================== CÓPIA ===================== -->
+      <div data-variant="copia">
+        <div class="page-head"><div><p class="eyebrow">Checkout · cópia</p><h1>Comprar uma cópia</h1><p class="sub">Entrega imediata no cofre. Janela de disputa de 72 h.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · edição limitada</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge">Dados e bases</span></div>
+                <h3>12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</h3>
+                <div class="xs muted">lcr-9f2k7 · CSV/XLSX · 48 MB · 37 de 100 vendidas · 2 curadores</div>
+                <dl class="kv">
+                  <dt>Vendedor</dt><dd><span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 9 itens"></span></dd>
+                  <dt>Direitos</dt><dd>Download permitido, com marca d'água por entitlement</dd>
+                  <dt>Disputa</dt><dd>72 h após o primeiro acesso</dd>
+                  <dt>Prova</dt><dd><a class="link" href="../public/prova.html">sha256 3f9a…c21e · aprovado em 14/10</a></dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">R$ 490,00 (≈ 91,08 USDT) saem da carteira e ficam em custódia do item</div></div>
+                <div class="tl-item ok"><div class="when">em segundos</div><div class="what">Acesso no cofre: visualizador seguro e download com marca d'água "@coruja-7f3a · ENT-…"</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa. Se o conteúdo não corresponder à prévia, a curadoria compara os dois e decide em até 5 dias</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Custódia liberada ao vendedor: R$ 441,00 (90 %). Comissão da plataforma: 10 %, R$ 49,00</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack">
+            <dl class="kv"><dt>Preço</dt><dd>R$ 490,00</dd><dt>Saldo disponível</dt><dd>R$ 1.240,00</dd><dt>Saldo após</dt><dd>R$ 750,00</dd></dl>
+            <div class="total"><span class="small muted">Você paga</span><div><div class="price">R$ 490,00</div><div class="conv">≈ 91,08 USDT · 1 USDT = R$ 5,38</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor em USDT, data e hora, e o entitlement gerado. Nada disso vai ao vendedor: ele vê só "1 cópia vendida".</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Cópias<span class="desc">Uso pessoal, sem revenda ou redistribuição. A marca d'água identifica a conta, não a pessoa.</span></span></label>
+            <button class="btn btn-primary btn-lg btn-block" data-show="sucesso"><i data-icon="lock"></i>Confirmar compra · R$ 490,00</button>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== EXCLUSIVO ===================== -->
+      <div data-variant="exclusivo">
+        <div class="page-head"><div><p class="eyebrow">Checkout · exclusivo</p><h1>Comprar exclusividade</h1><p class="sub">Um único comprador. O item sai do catálogo e o conteúdo é destruído nos servidores após a entrega.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="badge">Negócios e mercado</span></div>
+                <h3>Mercado de energia solar distribuída no Brasil: projeções 2026–2030, 120 páginas</h3>
+                <div class="xs muted">lcr-7q1z3 · PDF · 120 páginas · 2 ofertas recebidas (maior oferta não revelada)</div>
+                <dl class="kv">
+                  <dt>Vendedor</dt><dd><span class="handle" data-handle="bussola-c4e1" data-rep="4,6 · 5 itens"></span></dd>
+                  <dt>Exclusividade</dt><dd>24 meses declarados: o vendedor não vende nem publica o mesmo material em outro lugar</dd>
+                  <dt>Após a venda</dt><dd>Item marcado "Vendido"; a chave do conteúdo é destruída 72 h depois da entrega; fica só o hash na prova</dd>
+                  <dt>Garantia</dt><dd>Opcional: retenção de 20 % do valor por 30 dias contra revenda</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">R$ 25.000,00 (≈ 4.646,84 USDT) saem da carteira para a custódia do item</div></div>
+                <div class="tl-item ok"><div class="when">em segundos</div><div class="what">Acesso no cofre e cessão de direitos padronizada gerada com os pseudônimos e o hash</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa; o item some do catálogo e a prévia sai da página pública</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">R$ 22.500,00 (90 %) liberados ao vendedor · chave do conteúdo destruída nos servidores</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack">
+            <dl class="kv"><dt>Preço</dt><dd>R$ 25.000,00</dd><dt>Saldo disponível</dt><dd>R$ 1.240,00</dd><dt>Faltam</dt><dd class="danger strong">R$ 23.760,00</dd></dl>
+            <div class="alert alert-danger"><i data-icon="alert-circle"></i><div><span class="alert-title">Saldo insuficiente</span>Deposite a diferença em cripto. O item continua disponível a outros compradores até o seu saldo cobrir o valor.</div></div>
+            <div class="panel stack-sm">
+              <div class="row between"><b class="small">Depositar a diferença</b><span class="conv">R$ 23.760,00 ≈ 4.416,36 USDT</span></div>
+              <select class="select" aria-label="Moeda e rede"><option>USDT · Polygon (12 confirmações, ≈ 1 min)</option><option>USDT · Tron (19 confirmações)</option><option>USDC · Base (20 confirmações)</option><option>Bitcoin · Lightning (cotação travada 10 min)</option><option>Bitcoin · on-chain (2 confirmações)</option></select>
+              <div class="dep-row"><div class="qr"></div><div class="stack-sm"><div class="hash"><code>0x2c9D7a1E3f4C2d6B8a9E0f1C3d5B7a9E2f4C6d8B</code><button class="btn btn-sm btn-ghost" data-copy="0x2c9D7a1E3f4C2d6B8a9E0f1C3d5B7a9E2f4C6d8B" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div><span class="xs muted">Endereço novo, só para esta carteira. Nenhum vínculo com identidade.</span></div></div>
+              <button class="btn btn-sm" data-toast="Nenhuma transação encontrada ainda. Verificamos a cada 20 s."><i data-icon="refresh"></i>Já enviei, verificar depósito</button>
+            </div>
+            <div class="total"><span class="small muted">Você paga</span><div><div class="price">R$ 25.000,00</div><div class="conv">≈ 4.646,84 USDT · 1 USDT = R$ 5,38</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor em USDT, data e hora, e a cessão de direitos com os dois pseudônimos. O vendedor não vê quem comprou.</div></div>
+            <label class="check"><input type="checkbox"><span>Aceito os termos do modelo Exclusivo<span class="desc">Compra vinculante; sem devolução fora da janela de disputa.</span></span></label>
+            <button class="btn btn-primary btn-lg btn-block" disabled><i data-icon="crown"></i>Confirmar compra · R$ 25.000,00</button>
+            <button class="btn btn-block" data-toast="Oferta mínima: R$ 15.000,00. O valor fica reservado até a resposta do vendedor (48 h)."><i data-icon="send"></i>Ou fazer uma oferta (mín. R$ 15.000)</button>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== APOIO ===================== -->
+      <div data-variant="apoio">
+        <div class="page-head"><div><p class="eyebrow">Checkout · lacre coletivo</p><h1>Apoiar este lacre</h1><p class="sub">Valor livre a partir de R$ 10. Fica em custódia até o resultado da meta.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="badge">Jornalismo e investigação</span></div>
+                <h3>Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</h3>
+                <div class="xs muted">lcr-4m2x9 · PDF 212 p., 31 áudios, planilhas · vendedor <span class="handle" data-handle="sextante-21c9" data-rep="4,9 · 12 itens · Verificado 9×"></span></div>
+                <div class="goal-head"><span class="raised">R$ 54.120</span><span class="goal">meta R$ 80.000 · 68 %</span></div>
+                <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
+                <div class="xs muted">1.187 apoiadores · encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b> · você já apoiou R$ 250,00</div>
+                <dl class="kv">
+                  <dt>Liberação</dt><dd>Quando bater, fica público para todos. Apoiadores veem 24 h antes.</dd>
+                  <dt>Se falhar</dt><dd>Tudo ou nada: sem meta até 15/11, o valor volta para a sua carteira sozinho</dd>
+                  <dt>Meta estendida</dt><dd>R$ 120.000 libera também os 31 áudios das entrevistas</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">O apoio sai da carteira e fica em custódia do lacre. Aparece em Apoios</div></div>
+                <div class="tl-item info"><div class="when">até 15/11</div><div class="what">Marcos de 75 %, 90 % e meta batida são postados nas redes, sem citar apoiadores</div></div>
+                <div class="tl-item wax"><div class="when">meta batida</div><div class="what">Acesso antecipado de 24 h no cofre e selo "Rompeu este lacre" no perfil. Comissão de 10 % só sobre o arrecadado</div></div>
+                <div class="tl-item"><div class="when">meta não batida</div><div class="what">Reembolso automático em créditos, sem taxa, em até 1 h após o prazo</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack">
+            <div class="field"><label>Valor do apoio</label>
+              <div class="amount-options" data-target="#apoio-valor"><button class="btn" data-amount="20">R$ 20</button><button class="btn active" data-amount="50">R$ 50</button><button class="btn" data-amount="100">R$ 100</button><button class="btn" data-amount="250">R$ 250</button></div>
+              <div class="input-group"><span class="affix">R$</span><input id="apoio-valor" class="input num" value="50" data-amount-input><span class="affix">outro valor</span></div>
+              <span class="hint">Mínimo R$ 10 · máximo o seu saldo disponível</span>
+            </div>
+            <dl class="kv"><dt>Saldo disponível</dt><dd>R$ 1.240,00</dd><dt>Saldo após</dt><dd>R$ 1.190,00</dd><dt>Seu total no lacre</dt><dd>R$ 300,00</dd></dl>
+            <div class="total"><span class="small muted">Você apoia com</span><div><div class="price wax">R$ 50,00</div><div class="conv">≈ 9,29 USDT · 1 USDT = R$ 5,38</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este apoio</span>Item, valor em USDT e data. A página pública mostra só a contagem de apoiadores; seu pseudônimo nunca aparece.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do Lacre coletivo<span class="desc">Valor em custódia até o resultado. Reembolso automático se a meta falhar.</span></span></label>
+            <button class="btn btn-wax btn-lg btn-block" data-toast="Apoio de R$ 50,00 registrado. Em custódia até 15/11."><i data-icon="hand-coins"></i>Apoiar com R$ 50</button>
+            <a class="btn btn-ghost btn-sm btn-block" href="../buyer/apoios.html">Ver meus apoios</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== LANCE ===================== -->
+      <div data-variant="lance">
+        <div class="page-head"><div><p class="eyebrow">Checkout · leilão lacrado</p><h1>Enviar um lance lacrado</h1><p class="sub">Um único lance secreto. Vence o maior; paga o segundo maior mais o incremento.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado · segundo preço</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge">História e acervos</span></div>
+                <h3>400 fotografias inéditas da construção de Brasília (1957–1960), acervo pessoal digitalizado</h3>
+                <div class="xs muted">lcr-1w9s6 · 400 imagens TIFF + JPG · vendedor <span class="handle" data-handle="arquivista-0d2e" data-rep="4,8 · 7 itens"></span></div>
+                <dl class="kv">
+                  <dt>Lances</dt><dd>7 lacrados · reserva não revelada · incremento R$ 50</dd>
+                  <dt>Encerra em</dt><dd><b class="countdown" data-deadline="2026-11-02T20:00:00-03:00"></b> · 02/11 às 20:00</dd>
+                  <dt>Segundo preço</dt><dd>O vencedor paga o segundo maior lance + R$ 50, não o próprio lance. Dar o valor que o item vale para você é a melhor estratégia</dd>
+                  <dt>Reserva</dt><dd>Se nenhum lance alcançar a reserva, não há venda e todos os saldos são liberados</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">O valor do lance fica reservado na carteira até o encerramento. Não pode ser gasto nem alterado</div></div>
+                <div class="tl-item info"><div class="when">02/11 · 20:00</div><div class="what">Abertura dos lances. Ninguém vê quem deu lance, nem o vendedor</div></div>
+                <div class="tl-item ok"><div class="when">se vencer</div><div class="what">Paga o segundo preço + R$ 50; a diferença volta ao saldo; entrega no cofre; disputa de 72 h</div></div>
+                <div class="tl-item"><div class="when">se não vencer</div><div class="what">Reserva liberada em segundos. Nenhuma taxa</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack">
+            <div class="field"><label for="lance">Seu lance único</label><div class="input-group"><span class="affix">R$</span><input id="lance" class="input num" value="1.200,00"></div><span class="hint">Mínimo R$ 500,00 (lance inicial) · máximo o seu saldo disponível, R$ 1.240,00</span></div>
+            <dl class="kv"><dt>Saldo disponível</dt><dd>R$ 1.240,00</dd><dt>Reservado até 02/11</dt><dd>R$ 1.200,00</dd><dt>Livre durante o leilão</dt><dd>R$ 40,00</dd></dl>
+            <div class="total"><span class="small muted">Reserva de saldo</span><div><div class="price">R$ 1.200,00</div><div class="conv">≈ 223,05 USDT · 1 USDT = R$ 5,38</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este lance</span>Item, valor em USDT e data. Os outros participantes veem apenas "8 lances lacrados".</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do Leilão lacrado<span class="desc">Lance vinculante e irreversível. Se vencer, a compra é automática.</span></span></label>
+            <button class="btn btn-primary btn-lg btn-block" data-toast="Lance de R$ 1.200,00 lacrado. Saldo reservado até 02/11 às 20:00."><i data-icon="gavel"></i>Enviar lance lacrado</button>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== CAMADA ===================== -->
+      <div data-variant="camada">
+        <div class="page-head"><div><p class="eyebrow">Checkout · camadas</p><h1>Subir para a camada 2</h1><p class="sub">Você já tem a camada 1. Paga só a diferença para subir.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="badge">Educação e métodos</span></div>
+                <h3>Como uma operação de última milha cortou 31 % do custo: playbook, planilhas e modelo de roteirização</h3>
+                <div class="xs muted">lcr-3c7r8 · pacote · vendedor <span class="handle" data-handle="bussola-c4e1" data-rep="4,6 · 5 itens"></span></div>
+                <div>
+                  <div class="tier"><span><span class="badge badge-ok"><i data-icon="check"></i>Você tem</span> Camada 1 · sumário executivo e 10 gráficos</span><span class="t-price muted">R$ 190 · pago em 23/10</span></div>
+                  <div class="tier"><span><span class="badge badge-brass">Selecionada</span> Camada 2 · playbook completo (PDF, 64 p.)</span><span class="t-price">R$ 890 · diferença R$ 700</span></div>
+                  <div class="tier"><span>Camada 3 · planilhas e modelo de roteirização (XLSX)</span><span class="t-price muted">R$ 1.900 · + R$ 1.010 depois</span></div>
+                  <div class="tier"><span>Pacote completo · tudo com desconto</span><span class="t-price muted">R$ 2.400 · + R$ 2.210 agora</span></div>
+                </div>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">R$ 700,00 (≈ 130,11 USDT) saem da carteira para a custódia do item</div></div>
+                <div class="tl-item ok"><div class="when">em segundos</div><div class="what">O mesmo entitlement (ENT-5K7D) passa a cobrir a camada 2 no cofre</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa da camada 2, independente da camada 1</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">R$ 630,00 (90 %) liberados ao vendedor · comissão 10 %</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack">
+            <dl class="kv"><dt>Camada 2</dt><dd>R$ 890,00</dd><dt>Já pago (camada 1)</dt><dd>− R$ 190,00</dd><dt>Saldo disponível</dt><dd>R$ 1.240,00</dd><dt>Saldo após</dt><dd>R$ 540,00</dd></dl>
+            <div class="total"><span class="small muted">Você paga a diferença</span><div><div class="price">R$ 700,00</div><div class="conv">≈ 130,11 USDT · 1 USDT = R$ 5,38</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, camada, valor em USDT e data. O vendedor vê "1 upgrade para a camada 2".</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Camadas<span class="desc">Cada camada é um asset analisado pela curadoria. Direitos iguais aos da camada 1: download com marca d'água.</span></span></label>
+            <button class="btn btn-primary btn-lg btn-block" data-toast="Camada 2 desbloqueada. Playbook disponível no cofre."><i data-icon="layers"></i>Desbloquear camada 2 · R$ 700,00</button>
+            <a class="btn btn-ghost btn-sm btn-block" href="../buyer/cofre.html">Ver no cofre</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== LICENÇA ===================== -->
+      <div data-variant="licenca">
+        <div class="page-head"><div><p class="eyebrow">Checkout · licença</p><h1>Licenciar as fotografias</h1><p class="sub">Escolha a finalidade. O contrato padrão é gerado na hora com os pseudônimos e o hash do pacote.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge">Fotografia e vídeo</span></div>
+                <h3>340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</h3>
+                <div class="xs muted">lcr-2n8v4 · RAW + JPG · 9,8 GB · vendedor <span class="handle" data-handle="cartografo-5a77" data-rep="4,9 · 8 itens"></span></div>
+                <div class="choice-cards">
+                  <label class="choice"><input type="radio" name="lic" checked><span class="choice-title"><i data-icon="newspaper"></i>Editorial · R$ 900</span><span class="choice-desc">Uso em notícia, uma publicação, 12 meses, Brasil.</span><span class="choice-meta">Dentro do seu saldo</span></label>
+                  <label class="choice"><input type="radio" name="lic"><span class="choice-title"><i data-icon="megaphone"></i>Comercial · R$ 4.500</span><span class="choice-desc">Campanha, prazo e território definidos (12 meses, Brasil).</span><span class="choice-meta">Acima do saldo: faltam R$ 3.260</span></label>
+                  <label class="choice"><input type="radio" name="lic"><span class="choice-title"><i data-icon="crown"></i>Exclusiva · R$ 25.000</span><span class="choice-desc">Ninguém mais licencia; encerra as demais licenças.</span><span class="choice-meta">Acima do saldo: faltam R$ 23.760</span></label>
+                </div>
+                <p class="xs muted">Entrega em alta resolução sem marca d'água após o pagamento. A prévia pública continua com marca d'água.</p>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">R$ 900,00 (≈ 167,29 USDT) saem da carteira para a custódia do item</div></div>
+                <div class="tl-item ok"><div class="when">em segundos</div><div class="what">Contrato LIC-2N8V4-… em PDF e download do pacote no cofre, sem marca d'água</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa (arquivo corrompido, conteúdo diferente da prévia)</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">R$ 810,00 (90 %) liberados ao vendedor · comissão 10 %</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack">
+            <dl class="kv"><dt>Licença editorial</dt><dd>R$ 900,00</dd><dt>Saldo disponível</dt><dd>R$ 1.240,00</dd><dt>Saldo após</dt><dd>R$ 340,00</dd></dl>
+            <div class="total"><span class="small muted">Você paga</span><div><div class="price">R$ 900,00</div><div class="conv">≈ 167,29 USDT · 1 USDT = R$ 5,38</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, finalidade, valor em USDT e data. O contrato cita apenas os pseudônimos das partes e o hash.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos da licença editorial<span class="desc">Uma publicação, 12 meses, Brasil. Crédito ao pseudônimo opcional. Sem sublicenciar.</span></span></label>
+            <button class="btn btn-primary btn-lg btn-block" data-toast="Licença editorial emitida. Contrato LIC-2N8V4-7L4E disponível no cofre."><i data-icon="scale"></i>Confirmar licença · R$ 900,00</button>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== ASSINATURA ===================== -->
+      <div data-variant="assinatura">
+        <div class="page-head"><div><p class="eyebrow">Checkout · assinatura</p><h1>Assinar a fonte</h1><p class="sub">Acesso a todas as edições enquanto a assinatura estiver ativa. Cobrança mensal debitada da carteira.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura · semanal</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="badge">Ciência e pesquisa</span></div>
+                <h3>Monitor semanal de patentes do setor farmacêutico brasileiro</h3>
+                <div class="xs muted">lcr-6d1k5 · texto + planilha toda sexta · 212 assinantes · última edição nº 43 em 24/10 · vendedor <span class="handle" data-handle="prisma-66af" data-rep="4,7 · 44 edições"></span></div>
+                <dl class="kv">
+                  <dt>Período</dt><dd>Mensal · R$ 190 · cobrado no início de cada período</dd>
+                  <dt>Sem saldo</dt><dd>A assinatura pausa, sem cobrança e sem multa</dd>
+                  <dt>Atraso</dt><dd>Se o vendedor pular mais de um período, você recebe crédito proporcional</dd>
+                  <dt>Edições antigas</dt><dd>Avulsas por R$ 90 cada, no cofre</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">R$ 190,00 (≈ 35,32 USDT) saem da carteira. Edição nº 43 liberada no cofre, somente leitura</div></div>
+                <div class="tl-item info"><div class="when">toda sexta</div><div class="what">Nova edição passa pela curadoria (SLA 24 h) e aparece no cofre com notificação</div></div>
+                <div class="tl-item"><div class="when">27/11</div><div class="what">Renovação automática se houver saldo; cancele quando quiser no cofre</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack">
+            <dl class="kv"><dt>1º período</dt><dd>27/10 a 26/11 · R$ 190,00</dd><dt>Saldo disponível</dt><dd>R$ 1.240,00</dd><dt>Saldo após</dt><dd>R$ 1.050,00</dd><dt>Próxima cobrança</dt><dd>27/11 · R$ 190,00</dd></dl>
+            <div class="total"><span class="small muted">Você paga agora</span><div><div class="price">R$ 190,00</div><div class="conv">≈ 35,32 USDT · 1 USDT = R$ 5,38</div></div></div>
+            <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Renovar automaticamente enquanto houver saldo</span></label>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta assinatura</span>Item, período, valor em USDT e data. O vendedor vê só o número de assinantes.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Assinatura<span class="desc">Cobrança por período; cancelamento a qualquer momento, sem reembolso do período corrente.</span></span></label>
+            <button class="btn btn-primary btn-lg btn-block" data-toast="Assinatura ativa. Edição nº 43 já disponível no cofre."><i data-icon="repeat"></i>Assinar · R$ 190,00/mês</button>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== SUCESSO ===================== -->
+      <div data-variant="sucesso">
+        <div class="card" style="max-width:640px;margin:24px auto 0">
+          <div class="card-body stack">
+            <div class="done-head">
+              <i data-icon="check-circle"></i>
+              <p class="eyebrow">Compra concluída</p>
+              <h1>Acesso liberado no cofre</h1>
+              <p class="muted small">12.400 licitações municipais do Nordeste (2019–2025) já está disponível para <span class="handle" data-handle="coruja-7f3a"></span>.</p>
+            </div>
+            <dl class="kv panel">
+              <dt>Entitlement</dt><dd class="mono">ENT-3F9A · marca d'água "@coruja-7f3a · ENT-3F9A"</dd>
+              <dt>Valor</dt><dd>R$ 490,00 · 91,08 USDT · cotação R$ 5,38</dd>
+              <dt>Data</dt><dd>27/10/2026 · 14:12</dd>
+              <dt>Saldo após</dt><dd>R$ 750,00 ≈ 139,4 USDT</dd>
+              <dt>Disputa</dt><dd>aberta até 30/10 · 14:12 (72 h após o primeiro acesso)</dd>
+              <dt>Hash do pacote</dt><dd><a class="link" href="../public/prova.html">sha256 3f9a…c21e · ver prova pública</a></dd>
+            </dl>
+            <div class="grid cols-2">
+              <a class="btn btn-primary btn-lg" href="../buyer/cofre.html"><i data-icon="vault"></i>Abrir no cofre</a>
+              <a class="btn btn-lg" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir no visualizador</a>
+            </div>
+            <div class="row"><a class="btn btn-ghost btn-sm" href="../buyer/apoios.html"><i data-icon="hand-coins"></i>Ver meus apoios</a><a class="btn btn-ghost btn-sm" href="../public/explorar.html"><i data-icon="compass"></i>Continuar explorando</a><a class="btn btn-ghost btn-sm" href="../buyer/carteira.html"><i data-icon="wallet"></i>Extrato</a></div>
+            <div class="alert alert-info"><i data-icon="info"></i><div>Baixou o arquivo? Confira o hash com <code>sha256sum licitacoes-2019-2025.zip</code> e compare com a prova pública. O vendedor recebeu apenas "1 cópia vendida".</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

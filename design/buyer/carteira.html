@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
-    [data-wizard] > [data-step]:not(.active) { display: none; }
+    .split > *, .addr-box > * { min-width: 0; }
+    .tl-item .what { color: var(--fg); }
+    [data-wizard] [data-step]:not(.active) { display: none; }
     .choice { text-align: left; }
     .choice.active { border-color: var(--brass); background: var(--brass-soft); box-shadow: inset 0 0 0 1px var(--brass); }
     .addr-box { display: grid; grid-template-columns: 148px minmax(0, 1fr); gap: 20px; align-items: start; }
@@ -261,7 +263,7 @@
       <div class="tab-panel" data-panel="extrato">
         <div class="toolbar">
           <div class="chips">
-            <button class="chip active">Tudo</button>
+            <button class="chip active" data-toast="Filtro: tudo (10 lançamentos)">Tudo</button>
             <button class="chip" data-toast="Filtro: depósitos (2)">Depósitos</button>
             <button class="chip" data-toast="Filtro: compras (2)">Compras</button>
             <button class="chip" data-toast="Filtro: apoios (2)">Apoios</button>
@@ -286,7 +288,7 @@
               <tr><td class="num">20/10 · 08:51</td><td>Depósito</td><td><b>USDT · Polygon</b><span class="sub">270 USDT · 12 confirmações · txid 0x5a2e…b19c</span></td><td class="num ok">+1.455,00</td><td class="num">+270,00</td><td class="num">1.455,00</td><td><span class="badge st-liquidada">Confirmado</span></td></tr>
             </tbody>
           </table>
-          <div class="table-foot"><span>10 lançamentos em outubro · ledger imutável, partidas dobradas</span><div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">›</button></div></div>
+          <div class="table-foot"><span>10 lançamentos em outubro · ledger imutável, partidas dobradas</span><div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary" data-toast="Página 1 de 1">1</button><button class="btn btn-sm" data-toast="Não há mais lançamentos em outubro">›</button></div></div>
         </div>
         <p class="xs muted mt-2">A coluna USDT é o lançamento real no ledger. O valor em R$ usa a cotação registrada no momento de cada operação, por isso a soma em R$ pode diferir por centavos da conversão do saldo atual.</p>
       </div>

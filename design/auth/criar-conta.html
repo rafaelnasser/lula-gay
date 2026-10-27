@@ -11,7 +11,7 @@
   <style>
     main { width: 100%; max-width: 560px; }
     .auth-card { max-width: 560px; }
-    [data-wizard] > [data-step]:not(.active) { display: none; }
+    [data-wizard] > [data-step].stack.active { display: flex; }
     .pseudo-box { display: flex; align-items: center; gap: 16px; padding: 18px; border: 1px solid var(--border-2); border-radius: var(--r-lg); background: var(--bg-2); flex-wrap: wrap; }
     .pseudo-box .identicon { width: 64px; height: 64px; border-radius: 16px; }
     .pseudo-box .grow { flex: 1 1 200px; }
