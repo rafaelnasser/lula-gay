@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Ganhos e saques · Lacre</title>
+  <title>Carteiras dos itens · Lacre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="../assets/app.css">
@@ -13,186 +13,206 @@
     @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
     /* ao empilhar colunas, app.css usa 1fr (mínimo automático): sem isto, tabelas e hashes dentro de .grid/.split alargam a página no celular */
     .grid > *, .split > * { min-width: 0; }
-    .tabs .tab svg { width: 14px; height: 14px; }
     .otp .input { width: 42px; }
-    .list-item .amount { font-variant-numeric: tabular-nums; text-align: right; flex: none; }
-    .list-item .amount b { display: block; }
-    .list-item .amount .xs { display: block; }
-    .net-table td:first-child { white-space: nowrap; }
+    .wallets td, .hist td { vertical-align: top; }
+    .wallets .title-cell, .hist .title-cell { min-width: 200px; max-width: 320px; }
+    .wallets .hash code, .hist .hash code { font-size: var(--fs-xs); }
+    .wallets td .btn:not(.btn-ghost) { white-space: normal; max-width: 160px; text-align: left; line-height: 1.25; }
+    .wallets td .btn.btn-primary { white-space: nowrap; max-width: none; }
+    .hist td.num .hash { margin-top: 4px; }
+    .nowrap { white-space: nowrap; }
+    .legend-grid .panel { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+    .how-grid .how-step { align-items: flex-start; }
+    .how-grid .how-step p { margin: 4px 0 0; }
+    .model-rules dt { align-self: start; }
+    .phrase-foot { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+    .modal-foot .foot-note { margin-right: auto; }
   </style>
 </head>
-<body data-shell="seller" data-page="ganhos" data-root="../" data-title="Ganhos e saques">
+<body data-shell="seller" data-page="carteiras" data-root="../" data-title="Carteiras dos itens">
   <main>
-    <div class="page-head">
-      <div>
-        <p class="eyebrow">Conta</p>
-        <h1>Ganhos e saques</h1>
-        <p class="sub">Saldo em US$, liquidado em USDT 1:1 (1 USDT = US$ 1), sem conversão · saques em USDT, USDC ou Bitcoin</p>
-      </div>
-      <div class="actions">
-        <button class="btn" data-toast="Extrato exportado em CSV (valores em US$)"><i data-icon="download"></i>Exportar extrato</button>
-        <a class="btn btn-primary" href="#sacar"><i data-icon="wallet"></i>Sacar</a>
-      </div>
-    </div>
-
-    <div class="stat-grid">
-      <div class="stat"><span class="label">Disponível para saque</span><span class="value">US$ 1.240,00</span><span class="delta flat">saldo da carteira · liquidação 1:1 em USDT</span></div>
-      <div class="stat"><span class="label">Em custódia</span><span class="value">US$ 405,00</span><span class="delta flat"><i data-icon="clock"></i>3 vendas · liberam em 48 h</span></div>
-      <div class="stat"><span class="label">Sacado no total</span><span class="value">US$ 9.800</span><span class="delta flat">2 saques em USDT · 1 em processamento</span></div>
-      <div class="stat"><span class="label">Comissões pagas</span><span class="value">US$ 1.320</span><span class="delta flat">10 % de US$ 13.200 brutos</span></div>
-    </div>
-
-    <div class="grid cols-2 mt-3">
-      <div class="card">
-        <div class="card-head"><h3>Em custódia · 3 vendas</h3><span class="muted xs">liberação 72 h após a entrega (janela de disputa)</span></div>
-        <div class="card-body">
-          <div class="list">
-            <div class="list-item"><span class="li-icon"><i data-icon="lock"></i></span><div class="li-body"><div class="li-title">Guia de acesso a dados do SUS · cópia</div><div class="li-sub">lcr-5m8c4 · ord-9c41 · vendida 26/10 21:05 · libera <b>29/10 21:05</b></div></div><div class="amount"><b>US$ 135,00</b></div></div>
-            <div class="list-item"><span class="li-icon"><i data-icon="lock"></i></span><div class="li-body"><div class="li-title">Guia de acesso a dados do SUS · cópia</div><div class="li-sub">lcr-5m8c4 · ord-9b7e · vendida 26/10 13:40 · libera <b>29/10 13:40</b></div></div><div class="amount"><b>US$ 135,00</b></div></div>
-            <div class="list-item"><span class="li-icon"><i data-icon="lock"></i></span><div class="li-body"><div class="li-title">Guia de acesso a dados do SUS · cópia</div><div class="li-sub">lcr-5m8c4 · ord-9a02 · vendida 25/10 08:15 · libera <b>28/10 08:15</b></div></div><div class="amount"><b>US$ 135,00</b></div></div>
-          </div>
-          <p class="xs muted mt-2">O valor retido na custódia já é seu, descontada a comissão; só não pode ser sacado até o fim da janela de disputa. Uma disputa procedente devolve o valor ao comprador.</p>
+    <div data-variants="depois">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Área do vendedor · 27/10/2026</p>
+          <h1>Carteiras dos itens</h1>
+          <p class="sub">Uma carteira cripto por item aprovado. Compradores e apoiadores pagam direto nela, da própria carteira; na finalização, o Lacre separa a comissão e entrega a carteira a você.</p>
+        </div>
+        <div class="actions">
+          <button class="btn" data-toast="Histórico exportado em CSV: pagamentos por item, txids e finalizações"><i data-icon="download"></i>Exportar histórico</button>
+          <a class="btn" href="#como-funciona"><i data-icon="info"></i>Como funciona a finalização</a>
         </div>
       </div>
-      <div class="card">
-        <div class="card-head"><h3>Resumo acumulado</h3><span class="muted xs">desde mar/2026 · 88 vendas</span></div>
-        <div class="card-body">
-          <dl class="kv">
-            <dt>Bruto</dt><dd>US$ 13.200,00 · 88 cópias × US$ 150</dd>
-            <dt>Comissão (10 %)</dt><dd>− US$ 1.320,00</dd>
-            <dt>Líquido</dt><dd><b>US$ 11.880,00</b></dd>
-            <dt>Sacado</dt><dd>− US$ 9.800,00 · 2 saques em USDT</dd>
-            <dt>Saque em processamento</dt><dd>− US$ 1.000,00 · entra no lote das 11:00</dd>
-            <dt>Em custódia</dt><dd>US$ 405,00 · 3 vendas</dd>
-            <dt>Liquidado nesta carteira</dt><dd>US$ 675,00 · o restante do saldo de US$ 1.240,00 vem dos seus depósitos</dd>
-            <dt>Reembolsos</dt><dd>1 · US$ 150,00 devolvidos ao comprador · sem comissão</dd>
-          </dl>
-        </div>
-      </div>
-    </div>
 
-    <h2 class="mt-4 mb-2">Vendas</h2>
-    <div class="toolbar">
-      <select class="select" style="max-width:220px" aria-label="Filtrar por item"><option>Todos os itens</option><option>lcr-5m8c4 · Guia de acesso a dados do SUS</option></select>
-      <select class="select" style="max-width:200px" aria-label="Filtrar por status"><option>Todos os status</option><option>Em custódia</option><option>Liquidado</option><option>Reembolsado</option></select>
-      <div class="right"><select class="select" style="max-width:200px" aria-label="Período"><option>Outubro de 2026</option><option>Setembro de 2026</option><option>Últimos 90 dias</option></select></div>
-    </div>
-    <div class="table-wrap">
-      <table class="table">
-        <thead><tr><th>Data</th><th>Item</th><th>Modelo</th><th class="num">Bruto</th><th class="num">Comissão 10 %</th><th class="num">Líquido</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td class="num">26/10 21:05</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-9c41</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge badge-info">Em custódia</span><span class="sub">libera 29/10 21:05</span></td></tr>
-          <tr><td class="num">26/10 13:40</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-9b7e</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge badge-info">Em custódia</span><span class="sub">libera 29/10 13:40</span></td></tr>
-          <tr><td class="num">25/10 08:15</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-9a02</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge badge-info">Em custódia</span><span class="sub">libera 28/10 08:15</span></td></tr>
-          <tr><td class="num">23/10 17:50</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-98d3</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge st-liquidada">Liquidado</span><span class="sub">26/10 17:50</span></td></tr>
-          <tr><td class="num">23/10 11:12</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-97f0</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge st-liquidada">Liquidado</span><span class="sub">26/10 11:12</span></td></tr>
-          <tr><td class="num">23/10 09:31</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-9711</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge st-liquidada">Liquidado</span><span class="sub">26/10 09:31</span></td></tr>
-          <tr><td class="num">21/10 15:02</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-95c8</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge st-liquidada">Liquidado</span><span class="sub">24/10 15:02</span></td></tr>
-          <tr><td class="num">18/10 10:44</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-93a4</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge st-liquidada">Liquidado</span><span class="sub">21/10 10:44</span></td></tr>
-          <tr><td class="num">15/10 19:20</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-91e6</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">—</td><td class="num">US$ 0,00</td><td><span class="badge badge-warn">Reembolsado</span><span class="sub">arquivo corrompido na entrega · automático</span></td></tr>
-          <tr><td class="num">12/10 08:03</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · ord-8f2b</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span></td><td class="num">US$ 150,00</td><td class="num">US$ 15,00</td><td class="num">US$ 135,00</td><td><span class="badge st-liquidada">Liquidado</span><span class="sub">15/10 08:03</span></td></tr>
-        </tbody>
-      </table>
-      <div class="table-foot"><span>Mostrando 10 de 89 lançamentos · 88 vendas válidas · 1 reembolso</span><div class="pagination"><button class="btn btn-sm" data-toast="Primeira página">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm" data-toast="Página 2">2</button><button class="btn btn-sm" data-toast="Página 3">3</button><button class="btn btn-sm" data-toast="Página 9">9</button><button class="btn btn-sm" data-toast="Página 2">›</button></div></div>
-    </div>
+      <div class="alert alert-anon"><i data-icon="wallet"></i><div><span class="alert-title">Cada item aprovado tem a própria carteira.</span>O Lacre não guarda saldo: na finalização separamos 10 % e entregamos a carteira a você. O dinheiro nunca passa por uma carteira do Lacre, exceto os 10 % de comissão.</div></div>
 
-    <h2 class="mt-4 mb-2" id="sacar">Sacar</h2>
-    <div class="card" data-tabs>
-      <div class="tabs" style="padding:0 20px">
-        <a class="tab active" href="#" data-tab="sacar"><i data-icon="wallet"></i>Sacar em cripto</a>
-        <a class="tab" href="#" data-tab="redes"><i data-icon="globe"></i>Redes e taxas</a>
-        <a class="tab" href="#" data-tab="limites"><i data-icon="shield"></i>Limite antifraude</a>
-        <a class="tab" href="#" data-tab="historico"><i data-icon="clock"></i>Histórico <span class="count">3</span></a>
+      <div class="stat-grid mt-3">
+        <div class="stat"><span class="label">Recebido nas carteiras ativas</span><span class="value">US$ 0,00</span><span class="delta flat"><i data-icon="activity"></i>lcr-4g7h9 · recebendo desde 26/10 · 0 pagamentos</span></div>
+        <div class="stat" data-variant="antes"><span class="label">Carteiras finalizadas a receber</span><span class="value">1</span><span class="delta flat"><i data-icon="key"></i>lcr-5m8c4 · US$ 11.880,00 · receba a frase de recuperação</span></div>
+        <div class="stat" data-variant="depois"><span class="label">Carteiras finalizadas a receber</span><span class="value">0</span><span class="delta flat"><i data-icon="check-circle"></i>última entrega: lcr-5m8c4 em 05/10 · chave destruída</span></div>
+        <div class="stat"><span class="label">Comissões separadas no total</span><span class="value">US$ 1.320,00</span><span class="delta flat">10 % de US$ 13.200 · 1 finalização (05/10)</span></div>
+        <div class="stat"><span class="label">Reembolsos executados</span><span class="value">US$ 150,00</span><span class="delta flat">1 · disputa procedente · ao endereço de origem</span></div>
       </div>
-      <div class="tab-panel active" data-panel="sacar">
-        <form class="card-body stack" data-submit-toast="Saque solicitado · US$ 1.239,96 entram no lote das 11:00">
-          <div class="form-grid">
-            <div class="field">
-              <label for="moeda">Moeda e rede</label>
-              <select id="moeda" class="select">
-                <option selected>USDT · Polygon · taxa de rede ≈ US$ 0,04 · ~2 min</option>
-                <option>USDT · Tron · taxa de rede ≈ US$ 0,20 · ~3 min</option>
-                <option>USDC · Polygon · taxa de rede ≈ US$ 0,04 · ~2 min</option>
-                <option>USDC · Base · taxa de rede ≈ US$ 0,01 · ~1 min</option>
-                <option>Bitcoin · Lightning · taxa de rede ≈ US$ 0,01 · segundos</option>
-                <option>Bitcoin · on-chain · taxa de rede ≈ US$ 2 · 10 a 60 min</option>
-              </select>
-              <span class="hint">A taxa de rede é repassada a você. USDT e USDC saem 1:1, sem conversão; Bitcoin é convertido pela cotação travada por 10 min (1 BTC = US$ 68.400).</span>
-            </div>
-            <div class="field">
-              <label for="valor">Valor</label>
-              <div class="input-group"><span class="affix">US$</span><input id="valor" class="input num" value="1.240,00"><button class="btn" type="button" data-toast="Valor máximo preenchido: US$ 1.240,00">Máximo</button></div>
-              <span class="hint">Máximo disponível · mínimo US$ 50. A custódia (US$ 405,00) só entra quando liberar.</span>
-            </div>
-            <div class="field full">
-              <label for="end">Endereço de destino (Polygon)</label>
-              <input id="end" class="input mono" placeholder="0x…" autocomplete="off" spellcheck="false">
-              <span class="hint">Confira os primeiros e os últimos caracteres. Saques em cripto não podem ser desfeitos.</span>
+
+      <div class="alert alert-warn mt-3" data-variant="antes"><i data-icon="key"></i><div><span class="alert-title">Carteira do lcr-5m8c4 pronta para receber</span>Finalizada em 05/10: comissão de US$ 1.320,00 separada e 1 reembolso executado. Ficaram <b>US$ 11.880,00</b> na carteira do item. Receba a frase de recuperação com senha e TOTP: ela é mostrada uma única vez e a cópia do Lacre é destruída ao fechar. <button class="btn btn-sm btn-primary mt-1" data-modal-open="m-receber"><i data-icon="key"></i>Receber a carteira</button></div></div>
+
+      <div class="row between mt-4 mb-2"><h2>Uma carteira por item</h2><span class="xs muted">última reconciliação on-chain: hoje, 09:00 · 0 divergências</span></div>
+      <div class="table-wrap">
+        <table class="table compact wallets">
+          <thead><tr><th>Item</th><th>Endereço do item · rede</th><th class="num">Recebido · reembolsos</th><th>Status</th><th>Finalização prevista</th><th class="text-right">Ação</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="title-cell"><b><a href="anuncio.html">Tabela de preços de medicamentos oncológicos em 15 países (2020–2026)</a></b><span class="sub">lcr-4g7h9 · Cópias · US$ 350 · aprovado em 26/10 · carteira criada na aprovação</span></td>
+              <td><div class="hash"><code>0x4g7h…e3b9</code><button class="btn btn-sm btn-ghost" data-copy="0x4g7h…e3b9" aria-label="Copiar endereço"><i data-icon="copy"></i></button><a class="btn btn-sm btn-ghost" href="#" data-toast="Abriria o explorador da rede (polygonscan)" aria-label="Abrir no explorador da rede"><i data-icon="external-link"></i></a></div><span class="sub">Polygon · USDT · um endereço derivado por pagamento</span></td>
+              <td class="num"><b>US$ 0,00</b><span class="sub">0 pagamentos</span><span class="sub">sem reembolsos</span></td>
+              <td><a class="badge st-ativo status-link" href="../public/prova.html" data-tip="Ver o endereço na página de prova">Recebendo<i data-icon="chevron-right"></i></a><span class="sub">endereço público na prova</span></td>
+              <td>quando você encerrar as vendas<span class="sub">Cópias: após a última janela de 72 h</span></td>
+              <td class="text-right"><button class="btn btn-sm" data-toast="Confirmação: nenhuma venda ainda · encerrar agora finalizaria a carteira do lcr-4g7h9 com US$ 0,00">Encerrar vendas e finalizar</button></td>
+            </tr>
+            <tr data-variant="antes">
+              <td class="title-cell"><b><a href="anuncio.html">Guia de acesso a dados do SUS: 60 fontes, endpoints e scripts de coleta</a></b><span class="sub">lcr-5m8c4 · Cópias · US$ 150 · 88 vendas válidas · vendas encerradas em 02/10</span></td>
+              <td><div class="hash"><code>0x5m8c…4e2a</code><button class="btn btn-sm btn-ghost" data-copy="0x5m8c…4e2a" aria-label="Copiar endereço"><i data-icon="copy"></i></button><a class="btn btn-sm btn-ghost" href="#" data-toast="Abriria o explorador da rede (polygonscan)" aria-label="Abrir no explorador da rede"><i data-icon="external-link"></i></a></div><span class="sub">Polygon · USDT · 89 endereços derivados</span></td>
+              <td class="num"><b>US$ 13.350,00</b><span class="sub">89 pagamentos</span><span class="sub">− US$ 150,00 · 1 reembolso (disputa procedente)</span></td>
+              <td><span class="badge st-aguardando">Pronta para receber</span><span class="sub">finalizada em 05/10 · US$ 11.880,00 na carteira</span></td>
+              <td>05/10 · concluída<span class="sub">comissão US$ 1.320,00 separada · 1 reembolso executado</span></td>
+              <td class="text-right"><button class="btn btn-sm btn-primary" data-modal-open="m-receber">Receber a carteira</button></td>
+            </tr>
+            <tr data-variant="depois">
+              <td class="title-cell"><b><a href="anuncio.html">Guia de acesso a dados do SUS: 60 fontes, endpoints e scripts de coleta</a></b><span class="sub">lcr-5m8c4 · Cópias · US$ 150 · 88 vendas válidas · vendas encerradas em 02/10</span></td>
+              <td><div class="hash"><code>0x5m8c…4e2a</code><button class="btn btn-sm btn-ghost" data-copy="0x5m8c…4e2a" aria-label="Copiar endereço"><i data-icon="copy"></i></button><a class="btn btn-sm btn-ghost" href="#" data-toast="Abriria o explorador da rede (polygonscan)" aria-label="Abrir no explorador da rede"><i data-icon="external-link"></i></a></div><span class="sub">Polygon · USDT · 89 endereços derivados</span></td>
+              <td class="num"><b>US$ 13.350,00</b><span class="sub">89 pagamentos</span><span class="sub">− US$ 150,00 · 1 reembolso (disputa procedente)</span></td>
+              <td><span class="badge st-finalizado">Finalizado e entregue</span><span class="sub">frase entregue em 05/10 · chave destruída</span></td>
+              <td>05/10 · concluída<span class="sub">comissão US$ 1.320,00 separada · 1 reembolso executado</span></td>
+              <td class="text-right"><a class="btn btn-sm btn-ghost" href="#historico">Ver finalização<i data-icon="chevron-right"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-foot"><span>2 carteiras · 4 itens sem carteira (lcr-0p4m3 em análise · lcr-2z5q7 ajustes solicitados · lcr-8k1n2 rascunho · lcr-9r3t1 rejeitado): a carteira só é criada na aprovação.</span><span class="xs">Endereços abreviados · o endereço completo está na página de prova de cada item.</span></div>
+      </div>
+
+      <div class="grid cols-4 legend-grid mt-3">
+        <div class="panel"><span class="badge st-ativo">Recebendo</span><span class="xs muted">Item publicado. Cada pagamento entra em um endereço derivado da carteira do item e aparece aqui ao atingir as confirmações da rede.</span></div>
+        <div class="panel"><span class="badge st-aguardando">A finalizar</span><span class="xs muted">Venda concluída, lacre rompido ou vendas encerradas: aguardando a última janela de disputa de 72 h. Depois, a carteira fica pronta para você receber.</span></div>
+        <div class="panel"><span class="badge st-finalizado">Finalizado e entregue</span><span class="xs muted">Comissão separada, reembolsos executados, frase de recuperação entregue e chave destruída. O Lacre não tem mais acesso à carteira.</span></div>
+        <div class="panel"><span class="badge st-pendente">Reembolsando</span><span class="xs muted">Lacre que não bateu a meta, pedido expirado ou item retirado antes da finalização: cada pagamento volta ao endereço de origem, menos a taxa de rede.</span></div>
+      </div>
+
+      <section id="como-funciona" class="mt-4">
+        <div class="row between mb-2"><h2>Como funciona a finalização</h2><a class="link small" href="../public/como-funciona.html">Regras completas</a></div>
+        <div class="card">
+          <div class="card-body">
+            <div class="grid cols-4 how-grid">
+              <div class="how-step"><span class="n">1</span><div><b>Aprovação</b><p class="small muted">A curadoria aprova e o Lacre cria a carteira do item em hardware seguro (HSM). O endereço vai para a página de prova: qualquer pessoa confere on-chain quanto entrou.</p></div></div>
+              <div class="how-step"><span class="n">2</span><div><b>Pagamentos direto na carteira</b><p class="small muted">Cada comprador ou apoiador paga da própria carteira para um endereço derivado, com o valor exato. Confirmações: Polygon 12, Tron 19, Base 12, Bitcoin 2. Nada passa por uma carteira do Lacre.</p></div></div>
+              <div class="how-step"><span class="n">3</span><div><b>Finalização</b><p class="small muted">A partir da carteira do item, o Lacre separa os 10 % de comissão para a carteira da plataforma e executa os reembolsos pendentes (disputas procedentes). Cada transação tem txid e fica na auditoria.</p></div></div>
+              <div class="how-step"><span class="n">4</span><div><b>Entrega da frase e destruição da chave</b><p class="small muted">Com senha e TOTP, você vê a frase de recuperação uma única vez, nesta tela, nunca por mensagem. Ao fechar, a cópia do Lacre é destruída e o evento é registrado com hash. Você transfere para onde quiser.</p></div></div>
             </div>
           </div>
-          <div class="alert alert-anon"><i data-icon="eye-off"></i><div><span class="alert-title">Não salvamos o endereço após o envio</span>Ele é usado uma vez e apagado do banco quando a rede confirma a transação. Use um endereço novo por saque: endereços já usados em corretoras com cadastro ligam o saque à sua identidade.</div></div>
-          <div class="grid cols-2">
-            <div class="panel">
-              <dl class="kv">
-                <dt>Débito da carteira</dt><dd>US$ 1.240,00 → 1.240,00 USDT (1:1)</dd>
-                <dt>Taxa de rede estimada</dt><dd>− US$ 0,04 (Polygon)</dd>
-                <dt>Você recebe</dt><dd><b>US$ 1.239,96</b> em USDT, na Polygon</dd>
-                <dt>Tempo</dt><dd>próximo lote às 11:00 (lotes a cada hora) + ~2 min de confirmações</dd>
-                <dt>Conversão</dt><dd>nenhuma em USDT e USDC · Bitcoin: cotação travada por 10 min (1 BTC = US$ 68.400)</dd>
+        </div>
+        <div class="split mt-3">
+          <div class="card">
+            <div class="card-head"><h3>Quando cada modelo finaliza</h3><span class="muted xs">a comissão é separada só neste momento</span></div>
+            <div class="card-body">
+              <dl class="kv model-rules">
+                <dt><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></dt><dd><b>72 h após a entrega</b> ao comprador (janela de disputa). Automático: a carteira fica pronta para você receber.</dd>
+                <dt><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></dt><dd><b>72 h após a liberação</b> do conteúdo (lacre rompido). Se a meta não for batida, cada apoio volta ao endereço de origem e nada é cobrado.</dd>
+                <dt><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></dt><dd><b>Quando você encerra as vendas</b>, após a última janela de 72 h. Clique em “Encerrar vendas e finalizar” na linha do item; quem já comprou mantém o acesso.</dd>
+                <dt><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></dt><dd><b>Quando a curadoria valida o atendimento.</b> Os interessados recebem acesso no cofre e a carteira do pedido fica pronta para quem atendeu receber.</dd>
               </dl>
             </div>
-            <fieldset class="panel stack-sm">
-              <legend>Confirmação em 2 passos</legend>
-              <div class="field"><label for="senha">Senha da conta</label><input id="senha" class="input" type="password" value="••••••••••••••" autocomplete="current-password"></div>
-              <div class="field"><span class="label">Código do autenticador (TOTP)</span><div class="otp"><input class="input" maxlength="1" value="4" aria-label="dígito 1"><input class="input" maxlength="1" value="8" aria-label="dígito 2"><input class="input" maxlength="1" value="1" aria-label="dígito 3"><input class="input" maxlength="1" value="9" aria-label="dígito 4"><input class="input" maxlength="1" aria-label="dígito 5"><input class="input" maxlength="1" aria-label="dígito 6"></div><span class="hint">Obrigatório para todo saque. Sem TOTP ativo, configure em Segurança antes.</span></div>
-            </fieldset>
           </div>
-          <div class="form-actions"><span class="xs muted">Saques saem de uma carteira quente que cobre 48 h de volume; o restante fica em carteira fria com multisig 2-de-3.</span><button class="btn btn-primary btn-lg" type="submit"><i data-icon="send"></i>Solicitar saque</button></div>
-        </form>
-      </div>
-      <div class="tab-panel" data-panel="redes">
-        <div class="card-body stack">
-          <div class="table-wrap">
-            <table class="table compact net-table">
-              <thead><tr><th>Moeda · rede</th><th>Taxa de rede estimada</th><th>Tempo até confirmar</th><th class="num">Mínimo por saque</th><th>Observação</th></tr></thead>
-              <tbody>
-                <tr><td><b>USDT · Polygon</b></td><td>≈ US$ 0,04</td><td>~2 min (12 confirmações)</td><td class="num">US$ 50</td><td>Recomendado: barato e rápido</td></tr>
-                <tr><td><b>USDT · Tron</b></td><td>≈ US$ 0,20</td><td>~3 min (19 confirmações)</td><td class="num">US$ 50</td><td>Comum em corretoras</td></tr>
-                <tr><td><b>USDC · Polygon</b></td><td>≈ US$ 0,04</td><td>~2 min</td><td class="num">US$ 50</td><td>1:1 com os créditos</td></tr>
-                <tr><td><b>USDC · Base</b></td><td>≈ US$ 0,01</td><td>~1 min</td><td class="num">US$ 50</td><td>Mais barato em USDC</td></tr>
-                <tr><td><b>Bitcoin · Lightning</b></td><td>≈ US$ 0,01</td><td>segundos</td><td class="num">US$ 50</td><td>Invoice válida por 10 min · até US$ 5.000 por saque</td></tr>
-                <tr><td><b>Bitcoin · on-chain</b></td><td>≈ US$ 2 (varia com a rede)</td><td>10 a 60 min</td><td class="num">US$ 200</td><td>USDT → BTC pela cotação travada por 10 min (1 BTC = US$ 68.400)</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="xs muted">Taxas estimadas pela mediana da rede nos últimos 30 min, cobradas no valor real no momento do lote. Não há taxa da plataforma no saque: a única cobrança é a comissão de 10 % sobre a venda.</p>
-        </div>
-      </div>
-      <div class="tab-panel" data-panel="limites">
-        <div class="card-body stack">
-          <div class="alert alert-ok"><i data-icon="check-circle"></i><div><span class="alert-title">Sua conta não tem limite diário interno</span>Criada em mar/2026, com 3 itens aprovados. O limite antifraude vale para contas com menos de 7 dias ou sem nenhum item aprovado: até <b>US$ 2.000 por dia</b> em saques.</div></div>
-          <div class="grid cols-2">
-            <div class="panel"><dl class="kv"><dt>Mínimo por saque</dt><dd>US$ 50 (US$ 200 em Bitcoin on-chain)</dd><dt>Máximo por saque</dt><dd>sem máximo · Lightning até US$ 5.000</dd><dt>Lotes</dt><dd>a cada hora, aprovados por 2 pessoas do financeiro (Elisa F.)</dd><dt>Hoje</dt><dd>US$ 1.000,00 solicitados · 1 saque</dd></dl></div>
-            <div class="panel"><p class="small"><b>Não é KYC.</b> O limite serve para conter golpes de conta nova, não para identificar ninguém. Nenhum documento, nome ou CPF é pedido em nenhum momento. Ele cai sozinho quando a conta completa 7 dias e tem um item aprovado.</p><p class="small muted mt-1">O que pode travar um saque: saldo em custódia (não é sacável), endereço inválido para a rede escolhida, senha ou TOTP incorretos, ou um item seu sob denúncia com suspensão preventiva.</p></div>
+          <div class="stack">
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que o Lacre guarda</span>A chave da carteira do item, no HSM, só até a entrega. Os endereços de origem dos pagamentos, só até a finalização, para reembolsos. O histórico de pagamentos por item (valor, rede, txid, confirmações), para a prova pública e para disputas. Nunca um saldo seu.</div></div>
+            <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Se algo der errado</span>Item retirado antes da finalização: cada pagamento volta ao endereço de origem, menos a taxa de rede, e nada é cobrado. Item retirado depois da finalização: os compradores são reembolsados pelo fundo de garantia (2 % de cada comissão), porque a carteira já está com você.</div></div>
           </div>
         </div>
-      </div>
-      <div class="tab-panel" data-panel="historico">
-        <div class="card-body stack">
-          <div class="table-wrap">
-            <table class="table">
-              <thead><tr><th>Solicitado</th><th class="num">Valor</th><th>Moeda · rede</th><th>Status</th><th>Transação</th></tr></thead>
-              <tbody>
-                <tr><td class="num">26/10 18:40</td><td class="num"><b>US$ 1.000,00</b><span class="sub">1.000,00 USDT (1:1) · taxa ≈ US$ 0,04</span></td><td>USDT · Polygon</td><td><span class="badge badge-info">Em processamento</span><span class="sub">lote das 11:00 · senha + TOTP ok</span></td><td><span class="muted">txid disponível após o envio</span></td></tr>
-                <tr><td class="num">02/10 10:05</td><td class="num"><b>US$ 4.800,00</b><span class="sub">4.800,00 USDT (1:1)</span></td><td>USDT · Polygon</td><td><span class="badge st-liquidada">Confirmado</span><span class="sub">02/10 11:03 · 12 confirmações</span></td><td><div class="hash"><code>0x3a9f41c7…e01c</code><button class="btn btn-sm btn-ghost" data-copy="0x3a9f41c7e01c" aria-label="Copiar txid"><i data-icon="copy"></i></button></div></td></tr>
-                <tr><td class="num">15/09 16:22</td><td class="num"><b>US$ 5.000,00</b><span class="sub">5.000,00 USDT (1:1)</span></td><td>USDT · Tron</td><td><span class="badge st-liquidada">Confirmado</span><span class="sub">15/09 17:04 · 19 confirmações</span></td><td><div class="hash"><code>7b2c0d58…d4e9</code><button class="btn btn-sm btn-ghost" data-copy="7b2c0d58d4e9" aria-label="Copiar txid"><i data-icon="copy"></i></button></div></td></tr>
-              </tbody>
-            </table>
-            <div class="table-foot"><span>Total sacado e confirmado: US$ 9.800,00 · endereços de destino apagados após a confirmação</span></div>
+      </section>
+
+      <section id="historico" class="mt-4">
+        <div class="row between mb-2"><h2>Histórico de finalizações</h2><span class="xs muted">1 finalização · comissão e reembolso conferem on-chain</span></div>
+        <div class="table-wrap">
+          <table class="table compact hist">
+            <thead><tr><th>Data</th><th>Item</th><th class="num">Recebido · reembolsos</th><th class="num">Comissão (10 %) · txid</th><th class="num">Líquido entregue</th><th>Entrega</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="num nowrap">05/10 · 09:00</td>
+                <td class="title-cell"><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · Cópias · vendas encerradas em 02/10</span></td>
+                <td class="num"><b class="nowrap">US$ 13.350,00</b><span class="sub">89 pagamentos</span><span class="sub">− US$ 150,00 · 1 reembolso (disputa procedente)</span></td>
+                <td class="num"><span class="nowrap">− US$ 1.320,00</span><span class="sub">10 % de US$ 13.200 · para a carteira do Lacre</span><div class="hash"><code>0x1c3f…8a7d</code><button class="btn btn-sm btn-ghost" data-copy="0x1c3f…8a7d" aria-label="Copiar txid"><i data-icon="copy"></i></button><a class="btn btn-sm btn-ghost" href="#" data-toast="Abriria o explorador da rede (polygonscan)" aria-label="Abrir no explorador da rede"><i data-icon="external-link"></i></a></div></td>
+                <td class="num"><b class="nowrap">US$ 11.880,00</b><span class="sub">ficou na carteira do item</span></td>
+                <td><span class="badge st-finalizado">frase entregue</span><span class="sub">05/10 · 18:42 · chave destruída · auditoria com hash</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>Reembolso executado na finalização: US$ 150,00 ao endereço de origem · txid <span class="mono">0x5m8c…91af</span></span><span class="xs">Líquido entregue = recebido − reembolsos − comissão</span></div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-head"><h3>Linha do tempo · lcr-5m8c4</h3><span class="badge st-finalizado">Finalizado e entregue</span></div>
+          <div class="card-body">
+            <div class="timeline">
+              <div class="tl-item ok"><div class="when">14/07 · 10:20</div><div class="what">Aprovado por Ana R. · carteira do item criada no HSM · endereço <span class="mono">0x5m8c…4e2a</span> publicado na página de prova</div></div>
+              <div class="tl-item ok"><div class="when">14/07 → 02/10</div><div class="what">89 pagamentos confirmados · US$ 13.350,00 · USDT na Polygon · cada um em um endereço derivado próprio</div></div>
+              <div class="tl-item warn"><div class="when">30/09 · 15:12</div><div class="what">Disputa procedente (arquivo corrompido na entrega) · reembolso de US$ 150,00 fica pendente até a finalização</div></div>
+              <div class="tl-item brass"><div class="when">02/10 · 09:00</div><div class="what">Você encerrou as vendas (“Encerrar vendas e finalizar”) · última janela de disputa até 05/10 09:00</div></div>
+              <div class="tl-item ok"><div class="when">05/10 · 09:00</div><div class="what">Finalização automática: comissão de US$ 1.320,00 para a carteira do Lacre (txid 0x1c3f…8a7d) · reembolso de US$ 150,00 ao endereço de origem (txid 0x5m8c…91af)</div></div>
+              <div class="tl-item ok"><div class="when">05/10 · 18:42</div><div class="what">Você recebeu a carteira: senha + TOTP · frase de recuperação exibida uma única vez · cópia da chave destruída · evento registrado na auditoria com hash</div></div>
+              <div class="tl-item ok"><div class="when">05/10 · 19:10</div><div class="what">Saída de US$ 11.880,00 da carteira do item para um endereço seu (confere on-chain) · a carteira do item está vazia desde então</div></div>
+            </div>
           </div>
         </div>
+      </section>
+
+      <div class="variant-switch"><span class="vs-label">lcr-5m8c4</span><button data-show="antes">Antes de receber</button><button data-show="depois">Depois (hoje)</button></div>
+    </div>
+
+    <div class="modal-backdrop" id="m-receber">
+      <div class="modal" data-variants="senha" role="dialog" aria-labelledby="m-receber-title">
+        <div class="modal-head"><h3 id="m-receber-title">Receber a carteira · lcr-5m8c4</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+        <div class="modal-body stack-sm" data-variant="senha">
+          <dl class="kv">
+            <dt>Item</dt><dd>Guia de acesso a dados do SUS · Cópias · 88 vendas válidas</dd>
+            <dt>Carteira</dt><dd><span class="mono">0x5m8c…4e2a</span> · Polygon · USDT</dd>
+            <dt>Na carteira</dt><dd><b>US$ 11.880,00</b> · já descontados a comissão (US$ 1.320,00) e 1 reembolso (US$ 150,00)</dd>
+            <dt>Finalizada em</dt><dd>05/10 · 09:00</dd>
+          </dl>
+          <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">A frase será mostrada uma única vez</span>Transfira imediatamente para uma carteira sua. A cópia da chave guardada pelo Lacre é destruída ao fechar a janela e ninguém, nem a equipe, consegue recuperá-la.</div></div>
+          <div class="field"><label for="rc-senha">Senha da conta</label><input id="rc-senha" class="input" type="password" value="••••••••••••••" autocomplete="current-password"></div>
+          <div class="field"><span class="label">Código do autenticador (TOTP)</span><div class="otp"><input class="input" maxlength="1" value="4" aria-label="dígito 1"><input class="input" maxlength="1" value="8" aria-label="dígito 2"><input class="input" maxlength="1" value="1" aria-label="dígito 3"><input class="input" maxlength="1" value="9" aria-label="dígito 4"><input class="input" maxlength="1" value="0" aria-label="dígito 5"><input class="input" maxlength="1" value="2" aria-label="dígito 6"></div><span class="hint">Obrigatório para receber qualquer carteira. A frase nunca é enviada por mensagem, e-mail ou notificação.</span></div>
+        </div>
+        <div class="modal-foot" data-variant="senha"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-primary" data-show="frase"><i data-icon="key"></i>Confirmar e mostrar a frase</button></div>
+        <div class="modal-body stack-sm" data-variant="frase">
+          <div class="alert alert-danger"><i data-icon="eye-off"></i><div><span class="alert-title">Única exibição · anote ou copie agora</span>Ao fechar, a cópia do Lacre é destruída. A partir daí, só quem tem estas 12 palavras move os US$ 11.880,00.</div></div>
+          <div class="words"><span>lanterna</span><span>ponte</span><span>ferro</span><span>nuvem</span><span>tambor</span><span>areia</span><span>bússola</span><span>vidro</span><span>mapa</span><span>sal</span><span>colina</span><span>rio</span></div>
+          <div class="phrase-foot"><button class="btn btn-sm" data-copy="lanterna ponte ferro nuvem tambor areia bússola vidro mapa sal colina rio"><i data-icon="copy"></i>Copiar as 12 palavras</button><span class="xs muted">Carteira <span class="mono">0x5m8c…4e2a</span> · Polygon · USDT</span></div>
+          <dl class="kv">
+            <dt>Como usar</dt><dd>Importe a frase em uma carteira que você controla (MetaMask, Trust, Ledger, carteira de celular), rede Polygon, token USDT. Depois envie tudo para um endereço novo, seu.</dd>
+            <dt>Por que transferir já</dt><dd>O endereço do item é público na página de prova. Mover os fundos para uma carteira nova separa o seu dinheiro do histórico do item.</dd>
+          </dl>
+          <label class="check"><input type="checkbox" id="rc-ok"><span>Guardei a frase em local seguro e entendi que ela não será mostrada de novo</span></label>
+        </div>
+        <div class="modal-foot" data-variant="frase"><span class="xs muted foot-note">O botão libera depois de marcar a confirmação.</span><button class="btn btn-danger" id="rc-destroy" disabled data-toast="Chave destruída. O Lacre não tem mais acesso a esta carteira"><i data-icon="trash"></i>Fechar e destruir a cópia do Lacre</button></div>
       </div>
     </div>
+
+    <script>
+      // Específico desta tela: libera o botão final após a confirmação, fecha o modal ao destruir a chave e troca a variante para "depois".
+      (function () {
+        var m = document.getElementById('m-receber'), ok = document.getElementById('rc-ok'), btn = document.getElementById('rc-destroy');
+        if (!m || !ok || !btn) return;
+        ok.addEventListener('change', function () { btn.disabled = !ok.checked; });
+        btn.addEventListener('click', function () {
+          m.classList.remove('open');
+          var depois = document.querySelector('.variant-switch [data-show="depois"]');
+          if (depois) depois.click();
+        });
+        document.querySelectorAll('[data-modal-open="m-receber"]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            m.querySelectorAll('[data-variant]').forEach(function (x) { x.classList.toggle('active', x.dataset.variant === 'senha'); });
+            ok.checked = false; btn.disabled = true;
+          });
+        });
+      })();
+    </script>
   </main>
 </body>
 </html>

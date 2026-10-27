@@ -19,6 +19,7 @@
     .status-grid .n { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
     .status-grid .xs { overflow-wrap: anywhere; }
     .list-item .btn { flex: none; }
+    .list-item .li-title { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
     .req-card h4 { line-height: 1.3; }
   </style>
 </head>
@@ -31,63 +32,63 @@
         <p class="sub row"><span class="handle" data-handle="coruja-7f3a" data-rep="4,8 · 3 itens aprovados · desde mar/2026"></span></p>
       </div>
       <div class="actions">
-        <a class="btn" href="../seller/carteiras.html"><i data-icon="coins"></i>Sacar US$ 1.240,00</a>
+        <a class="btn" href="../seller/carteiras.html"><i data-icon="wallet"></i>Carteiras dos itens</a>
         <a class="btn btn-primary" href="../seller/novo-anuncio.html"><i data-icon="plus"></i>Novo anúncio</a>
       </div>
     </div>
 
     <div class="stat-grid">
-      <div class="stat"><span class="label">Disponível para saque</span><span class="value">US$ 1.240,00</span><span class="delta flat">+US$ 405,00 ao liberar a custódia</span></div>
-      <div class="stat"><span class="label">Em custódia</span><span class="value">US$ 405,00</span><span class="delta flat"><i data-icon="clock"></i>3 vendas · US$ 135 líquidos cada · liberam em 48 h</span></div>
-      <div class="stat"><span class="label">Vendas do mês</span><span class="value">US$ 2.250</span><span class="delta up"><i data-icon="trending-up"></i>15 cópias em outubro · US$ 2.025 líquidos</span></div>
-      <div class="stat"><span class="label">Anúncios</span><span class="value">0 ativos</span><span class="delta flat">1 aprovado e agendado · 2 em curadoria</span></div>
+      <div class="stat"><span class="label">Recebido nas carteiras dos itens</span><span class="value">US$ 13.350</span><span class="delta flat">89 pagamentos em 2 carteiras · lcr-4g7h9 recebendo desde 26/10</span></div>
+      <div class="stat"><span class="label">Carteiras finalizadas a receber</span><span class="value">0</span><span class="delta flat"><i data-icon="check-circle"></i>lcr-5m8c4 entregue em 05/10 · chave destruída</span></div>
+      <div class="stat"><span class="label">Vendas do mês</span><span class="value">US$ 600</span><span class="delta flat">4 cópias em 01–02/10 · vendas do lcr-5m8c4 encerradas em 02/10</span></div>
+      <div class="stat"><span class="label">Itens ativos</span><span class="value">1</span><span class="delta flat">lcr-4g7h9 · publicado em 26/10 · 2 em curadoria</span></div>
     </div>
 
     <div class="grid cols-2 mt-3">
       <div class="card">
-        <div class="card-head"><h3>Vendas por semana</h3><span class="muted xs">8 semanas · US$ 6.150 · 41 cópias</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../seller/carteiras.html">Ver ganhos<i data-icon="arrow-right"></i></a></div></div>
+        <div class="card-head"><h3>Vendas por semana</h3><span class="muted xs">8 semanas · US$ 7.050 · 47 cópias</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../seller/carteiras.html">Ver carteiras<i data-icon="arrow-right"></i></a></div></div>
         <div class="card-body">
           <div class="bars labeled">
-            <div class="bar" style="height:67%" data-label="07/09"></div>
+            <div class="bar" style="height:60%" data-label="07/09"></div>
             <div class="bar" style="height:100%" data-label="14/09"></div>
-            <div class="bar" style="height:44%" data-label="21/09"></div>
-            <div class="bar" style="height:78%" data-label="28/09"></div>
-            <div class="bar" style="height:33%" data-label="05/10"></div>
-            <div class="bar" style="height:44%" data-label="12/10"></div>
-            <div class="bar" style="height:56%" data-label="19/10"></div>
-            <div class="bar" style="height:33%" data-label="26/10"></div>
+            <div class="bar" style="height:47%" data-label="21/09"></div>
+            <div class="bar" style="height:80%" data-label="28/09"></div>
+            <div class="bar" style="height:27%" data-label="05/10"></div>
+            <div class="bar muted" style="height:2%" data-label="12/10"></div>
+            <div class="bar muted" style="height:2%" data-label="19/10"></div>
+            <div class="bar muted" style="height:2%" data-label="26/10"></div>
           </div>
-          <div class="legend"><span>Receita bruta por semana (US$) · pico US$ 1.350 em 14/09</span></div>
-          <p class="xs muted mt-1">Semana terminando na data indicada. Todas as vendas são cópias de <b>Guia de acesso a dados do SUS</b> (lcr-5m8c4, US$ 150 · US$ 135 líquidos após a comissão de 10 %), encerrado em 26/10 ao fim do prazo de 90 dias. Quem comprou mantém o acesso.</p>
+          <div class="legend"><span>Pagamentos confirmados por semana (US$) · pico US$ 2.250 (15 cópias) em 14/09 · nenhum desde 02/10</span></div>
+          <p class="xs muted mt-1">Semana terminando na data indicada. Todos os pagamentos são cópias de <b>Guia de acesso a dados do SUS</b> (lcr-5m8c4, US$ 150 cada, direto na carteira do item). Você encerrou as vendas em 02/10; a carteira finalizou em 05/10 e foi entregue a você. Quem comprou mantém o acesso.</p>
         </div>
       </div>
       <div class="card">
-        <div class="card-head"><h3>Pendências</h3><span class="badge badge-warn">3</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../buyer/notificacoes.html">Notificações</a></div></div>
+        <div class="card-head"><h3>Pendências</h3><span class="badge badge-warn">2</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../buyer/notificacoes.html">Notificações</a></div></div>
         <div class="card-body">
           <div class="list">
             <div class="list-item">
               <span class="li-icon"><i data-icon="alert-triangle"></i></span>
               <div class="li-body">
-                <div class="li-title">Ajustes solicitados · <span class="mono">lcr-2z5q7</span> <span class="badge st-ajustes">responda até 29/10 11:05</span></div>
-                <div class="li-sub">Mapeamento de 3.100 feiras livres do estado de SP · Bruno M., 26/10 11:05: “A prévia expõe coordenadas exatas de 40 feiras; reduza a amostra a 10 linhas e arredonde coordenadas.” Sem resposta em 72 h, o item volta para rascunho.</div>
+                <div class="li-title">Ajustes solicitados · <span class="mono">lcr-2z5q7</span> <a class="badge st-ajustes status-link" href="../seller/anuncio.html#curadoria" data-tip="Abrir os ajustes pedidos">responda até 29/10 11:05<i data-icon="chevron-right"></i></a></div>
+                <div class="li-sub">Mapeamento de 3.100 feiras livres do estado de SP · Bruno M., 26/10 11:05: “A prévia expõe coordenadas exatas de 40 feiras; reduza a amostra a 10 linhas e arredonde coordenadas.” Sem resposta em 72 h, o item volta para rascunho. Reenvios não têm limite.</div>
               </div>
-              <a class="btn btn-sm btn-primary" href="../seller/anuncio.html">Responder</a>
+              <a class="btn btn-sm btn-primary" href="../seller/anuncio.html#curadoria">Responder</a>
             </div>
             <div class="list-item">
-              <span class="li-icon"><i data-icon="calendar"></i></span>
+              <span class="li-icon"><i data-icon="edit"></i></span>
               <div class="li-body">
-                <div class="li-title">Aprovado e publicado · <span class="mono">lcr-4g7h9</span> <span class="badge st-agendado">28/10 · 14:00</span></div>
-                <div class="li-sub">Tabela de preços de medicamentos oncológicos em 15 países · Verificado parcialmente · post de lançamento no X, Telegram e Bluesky no mesmo horário, com a página de prova. Você pode adiar uma vez.</div>
+                <div class="li-title">Confirmação de edição · <span class="mono">lcr-0p4m3</span> <a class="badge st-analise status-link" href="../seller/anuncio.html#curadoria" data-tip="Ver o título reescrito pela curadoria">em análise<i data-icon="chevron-right"></i></a></div>
+                <div class="li-sub">Série histórica de tarifas de ônibus em 27 capitais · Bruno M. reescreveu o título e o resumo em 26/10 16:20 para o tom factual do catálogo. Aceite a edição ou mantenha o seu texto; a análise segue enquanto isso.</div>
               </div>
-              <a class="btn btn-sm" href="../seller/anuncios.html">Ver</a>
+              <a class="btn btn-sm" href="../seller/anuncio.html#curadoria">Ver edição</a>
             </div>
             <div class="list-item">
               <span class="li-icon"><i data-icon="wallet"></i></span>
               <div class="li-body">
-                <div class="li-title">Saque em processamento · <span class="mono">US$ 1.000,00</span> <span class="badge badge-info">próximo lote · 11:00</span></div>
-                <div class="li-sub">USDT · rede Polygon · solicitado 26/10 18:40 · confirmado com senha + TOTP · taxa de rede ≈ US$ 0,04. O endereço de destino é apagado após a confirmação na rede.</div>
+                <div class="li-title">Nenhuma carteira aguardando você <span class="badge st-finalizado">lcr-5m8c4 · entregue em 05/10</span></div>
+                <div class="li-sub">A frase de recuperação foi exibida uma única vez em 05/10 e a chave destruída. lcr-4g7h9 está recebendo (0 pagamentos). Quando uma carteira finalizar, ela aparece aqui para você receber a frase.</div>
               </div>
-              <a class="btn btn-sm" href="../seller/carteiras.html">Acompanhar</a>
+              <a class="btn btn-sm" href="../seller/carteiras.html">Carteiras</a>
             </div>
           </div>
         </div>
@@ -99,15 +100,14 @@
         <div class="card-head"><h3>Seus anúncios</h3><span class="muted xs">6 no total</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../seller/anuncios.html">Ver todos<i data-icon="arrow-right"></i></a></div></div>
         <div class="card-body stack-sm">
           <div class="status-grid">
-            <a href="../seller/anuncios.html"><span class="badge st-rascunho">Rascunho</span><span class="n">1</span><span class="xs muted">lcr-8k1n2 · passo 4 de 6</span></a>
-            <a href="../seller/anuncios.html"><span class="badge st-analise">Em análise</span><span class="n">1</span><span class="xs muted">lcr-0p4m3 · Bruno M.</span></a>
-            <a href="../seller/anuncio.html"><span class="badge st-ajustes">Ajustes</span><span class="n">1</span><span class="xs muted">lcr-2z5q7 · até 29/10</span></a>
-            <a href="../seller/anuncios.html"><span class="badge st-aprovado">Aprovado</span><span class="n">1</span><span class="xs muted">lcr-4g7h9 · 28/10 14:00</span></a>
-            <a href="../seller/anuncios.html"><span class="badge st-ativo">Ativo</span><span class="n">0</span><span class="xs muted">nenhum no catálogo</span></a>
-            <a href="../seller/anuncios.html"><span class="badge st-finalizado">Finalizado</span><span class="n">1</span><span class="xs muted">lcr-5m8c4 · 88 vendas</span></a>
-            <a href="../seller/anuncios.html"><span class="badge st-rejeitado">Rejeitado</span><span class="n">1</span><span class="xs muted">lcr-9r3t1 · R01</span></a>
+            <a href="../seller/novo-anuncio.html"><span class="badge st-rascunho">Rascunho</span><span class="n">1</span><span class="xs muted">lcr-8k1n2 · passo 4 de 6</span></a>
+            <a href="../seller/anuncio.html#curadoria"><span class="badge st-analise">Em análise</span><span class="n">1</span><span class="xs muted">lcr-0p4m3 · Bruno M.</span></a>
+            <a href="../seller/anuncio.html#curadoria"><span class="badge st-ajustes">Ajustes</span><span class="n">1</span><span class="xs muted">lcr-2z5q7 · até 29/10</span></a>
+            <a href="../seller/anuncios.html"><span class="badge st-aprovado">Aprovado</span><span class="n">1</span><span class="xs muted">lcr-4g7h9 · publicado 26/10 · recebendo</span></a>
+            <a href="../seller/carteiras.html"><span class="badge st-finalizado">Finalizado</span><span class="n">1</span><span class="xs muted">lcr-5m8c4 · 88 vendas · carteira entregue</span></a>
+            <a href="../seller/anuncio.html#curadoria"><span class="badge st-rejeitado">Rejeitado</span><span class="n">1</span><span class="xs muted">lcr-9r3t1 · R01</span></a>
           </div>
-          <p class="xs muted">Rejeitados não podem ser reenviados: corrija e crie um novo anúncio. O motivo (R01: contém CPFs de sócios) fica registrado no histórico do pseudônimo.</p>
+          <p class="xs muted">Aprovado é publicado na hora, com a carteira do item criada. Rejeitados não podem ser reenviados: corrija e crie um novo anúncio. O motivo (R01: contém CPFs de sócios) fica registrado no histórico do pseudônimo.</p>
         </div>
       </div>
       <div class="card">
@@ -116,7 +116,7 @@
           <div class="list">
             <div class="list-item"><span class="li-icon"><i data-icon="user-x"></i></span><div class="li-body"><div class="li-title">Não cite seu nome dentro dos arquivos</div><div class="li-sub">Assinaturas, cabeçalhos, rodapés, nomes de pastas e comentários em planilhas. A triagem avisa sobre nomes próprios, mas não sabe qual é o seu.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="scan"></i></span><div class="li-body"><div class="li-title">Revise o relatório de metadados</div><div class="li-sub">Removemos EXIF, autor de DOCX e produtor de PDF automaticamente. Confira no passo 2 se algum campo apontava para você e verifique arquivos dentro de ZIPs.</div></div></div>
-            <div class="list-item"><span class="li-icon"><i data-icon="bitcoin"></i></span><div class="li-body"><div class="li-title">Não reutilize carteiras de cripto</div><div class="li-sub">Um endereço novo por saque. Endereços já usados em corretoras com cadastro ligam o saque à sua identidade. Apagamos o endereço de destino após a confirmação na rede.</div></div></div>
+            <div class="list-item"><span class="li-icon"><i data-icon="bitcoin"></i></span><div class="li-body"><div class="li-title">Transfira para uma carteira que só você controla</div><div class="li-sub">Ao receber a frase de recuperação, mova os fundos para uma carteira nova, nunca direto para uma corretora com cadastro. O endereço do item é público na prova: quem olha a rede vê para onde o dinheiro foi.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="eye-off"></i></span><div class="li-body"><div class="li-title">Evite detalhes na descrição que só você saberia</div><div class="li-sub">“Eu trabalhei lá entre 2019 e 2021” identifica. Prefira “fonte com acesso direto ao período 2019–2021”.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="edit"></i></span><div class="li-body"><div class="li-title">Use o título reescrito pela curadoria</div><div class="li-sub">Seu estilo de escrita também identifica. Aceitar a reescrita de título e resumo reduz a estilometria e padroniza o tom factual.</div></div></div>
           </div>
@@ -128,42 +128,42 @@
       <div class="row between mb-2">
         <div>
           <h2>Pedidos abertos que combinam com você</h2>
-          <p class="muted small">Selecionados pelas categorias dos seus itens: Governo e políticas públicas, Dados e bases, Saúde e meio ambiente.</p>
+          <p class="muted small">Pedidos abertos e destravados, ordenados pela afinidade com as categorias dos seus itens (Governo e políticas públicas, Dados e bases, Saúde e meio ambiente). ped-2c8d1 não aparece: você abriu esse pedido.</p>
         </div>
         <a class="btn btn-ghost" href="../seller/pedidos.html">Ver mural completo<i data-icon="arrow-right"></i></a>
       </div>
       <div class="grid cols-3">
         <article class="card req-card">
           <div class="card-body stack-sm">
-            <div class="row between"><span class="row" style="gap:6px"><span class="badge">Saúde e meio ambiente</span><span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div>
-            <h4>Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</h4>
-            <dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">US$ 3.200</dd></div><div><dt>Contribuidores</dt><dd>14</dd></div><div><dt>Prazo</dt><dd>30/11 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div></dl>
-            <p class="xs muted">Combina com lcr-4g7h9 (Saúde) e lcr-0p4m3 (Governo). Seu atendimento de 14/10 foi recusado por faltar 2023; o pedido continua aberto.</p>
-            <div class="row between"><span class="handle" data-handle="farol-3e9b"></span><a class="btn btn-sm btn-primary" href="../seller/pedidos.html">Atender</a></div>
+            <div class="row between"><span class="row" style="gap:6px"><span class="badge">Governo e políticas públicas</span><span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div>
+            <h4>Lista de todos os editais de fomento cultural municipais do RS em 2025</h4>
+            <dl class="kv-row"><div><dt>Recompensa total</dt><dd class="wax">US$ 2.100</dd></div><div><dt>Interessados</dt><dd>7 × US$ 300</dd></div><div><dt>Prazo</dt><dd>10/12 · <span class="countdown" data-deadline="2026-12-10T23:59:00-03:00"></span></dd></div></dl>
+            <p class="xs muted">Combina com lcr-0p4m3 (Governo e políticas públicas). Seu atendimento de 14/10 foi recusado (critério 2: cobertura de 61 %); o pedido destravou em 16/10 e continua aberto.</p>
+            <div class="row between"><span class="handle" data-handle="quartzo-a1f0"></span><a class="btn btn-sm btn-primary" href="../seller/pedidos.html">Atender</a></div>
           </div>
         </article>
         <article class="card req-card">
           <div class="card-body stack-sm">
-            <div class="row between"><span class="row" style="gap:6px"><span class="badge">Governo e políticas públicas</span><span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div>
-            <h4>Lista de todos os editais de fomento cultural municipais do RS em 2025</h4>
-            <dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">US$ 2.100</dd></div><div><dt>Contribuidores</dt><dd>9</dd></div><div><dt>Prazo</dt><dd>10/12 · <span class="countdown" data-deadline="2026-12-10T23:59:00-03:00"></span></dd></div></dl>
-            <p class="xs muted">Combina com lcr-0p4m3 (série histórica com fontes públicas) e com a tag “editais” do seu item encerrado.</p>
-            <div class="row between"><span class="handle" data-handle="quartzo-a1f0"></span><a class="btn btn-sm btn-primary" href="../seller/pedidos.html">Atender</a></div>
+            <div class="row between"><span class="row" style="gap:6px"><span class="badge">Governo e políticas públicas</span><span class="tag">CL</span></span><span class="badge st-ativo">Aberto</span></div>
+            <h4>Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos</h4>
+            <dl class="kv-row"><div><dt>Recompensa total</dt><dd class="wax">US$ 900</dd></div><div><dt>Interessados</dt><dd>3 × US$ 300</dd></div><div><dt>Prazo</dt><dd>20/12 · <span class="countdown" data-deadline="2026-12-20T23:59:00-03:00"></span></dd></div></dl>
+            <p class="xs muted">Material em espanhol. 3 interessados pelo mesmo valor; quem cobrir precisa pagar ≥ US$ 330. Combina com a sua categoria Governo e políticas públicas.</p>
+            <div class="row between"><span class="handle" data-handle="farol-3e9b"></span><a class="btn btn-sm btn-primary" href="../seller/pedidos.html">Atender</a></div>
           </div>
         </article>
         <article class="card req-card">
           <div class="card-body stack-sm">
             <div class="row between"><span class="row" style="gap:6px"><span class="badge">História e acervos</span><span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div>
             <h4>Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)</h4>
-            <dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">US$ 800</dd></div><div><dt>Contribuidores</dt><dd>1</dd></div><div><dt>Prazo</dt><dd>15/12 · <span class="countdown" data-deadline="2026-12-15T23:59:00-03:00"></span></dd></div></dl>
-            <p class="xs muted">Combina com seu atendimento aceito em ped-1b6j8 (acervo fotográfico). Exige 300 dpi e domínio público ou autorização.</p>
+            <dl class="kv-row"><div><dt>Recompensa total</dt><dd class="wax">US$ 800</dd></div><div><dt>Interessados</dt><dd>1 × US$ 800</dd></div><div><dt>Prazo</dt><dd>15/12 · <span class="countdown" data-deadline="2026-12-15T23:59:00-03:00"></span></dd></div></dl>
+            <p class="xs muted">Fora das suas categorias, mas sem nenhum atendimento até agora. Exige 300 dpi e domínio público ou autorização do detentor.</p>
             <div class="row between"><span class="handle" data-handle="tipografo-8e04"></span><a class="btn btn-sm btn-primary" href="../seller/pedidos.html">Atender</a></div>
           </div>
         </article>
       </div>
     </section>
 
-    <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">O que existe sobre esta conta</span>Pseudônimo, data de criação, itens, ledger e reputação. Nenhum nome, e-mail, telefone ou CPF; nenhum endereço de carteira guardado. Compradores veem apenas <span class="handle" data-handle="coruja-7f3a"></span> e a reputação dele.</div></div>
+    <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">O que existe sobre esta conta</span>Pseudônimo, data de criação, itens, histórico de pagamentos por item e reputação. Nenhum nome, e-mail, telefone ou CPF; nenhum saldo seu; a chave de cada carteira de item fica no Lacre só até a entrega. Compradores veem apenas <span class="handle" data-handle="coruja-7f3a"></span> e a reputação dele.</div></div>
   </main>
 </body>
 </html>

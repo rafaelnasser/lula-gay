@@ -19,6 +19,7 @@
     .req .card-body { flex: 1; }
     .req { display: flex; flex-direction: column; }
     .req .card-foot .net { margin-left: auto; }
+    .req .meta { flex-wrap: wrap; gap: 6px 12px; }
     .criteria { margin: 4px 0 0; padding-left: 18px; }
     .criteria li + li { margin-top: 2px; }
     .req.done { opacity: .78; }
@@ -31,7 +32,7 @@
       <div>
         <p class="eyebrow">Vender · demanda primeiro</p>
         <h1>Pedidos abertos</h1>
-        <p class="sub">Compradores publicam o que procuram e somam recompensa. O primeiro atendimento validado pela curadoria recebe 90 % da recompensa; todos os contribuidores recebem acesso.</p>
+        <p class="sub">Quem abre um pedido define o valor por interessado; outros se juntam pagando o mesmo valor na carteira do pedido. Recompensa total = valor × interessados. Validado o atendimento, 10 % são separados e a carteira do pedido é entregue a você.</p>
       </div>
       <div class="actions">
         <a class="btn" href="../public/pedidos.html"><i data-icon="external-link"></i>Ver mural público</a>
@@ -42,55 +43,55 @@
     <div data-tabs>
       <div class="tabs">
         <a class="tab active" href="#" data-tab="mural">Mural <span class="count">6</span></a>
-        <a class="tab" href="#" data-tab="meus">Meus atendimentos <span class="count">3</span></a>
+        <a class="tab" href="#" data-tab="meus">Meus atendimentos <span class="count">1</span></a>
       </div>
 
       <div class="tab-panel active" data-panel="mural">
         <div class="toolbar">
           <select class="select" style="max-width:240px" aria-label="Categoria"><option>Todas as categorias</option><option>Saúde e meio ambiente</option><option>Governo e políticas públicas</option><option>Negócios e mercado</option><option>História e acervos</option><option>Fotografia e vídeo</option></select>
           <select class="select" style="max-width:200px" aria-label="País"><option>Todos os países</option><option>BR · Brasil (5)</option><option>CL · Chile (1)</option><option>Global</option><option>AR · Argentina</option><option>PT · Portugal</option><option>US · Estados Unidos</option></select>
-          <select class="select" style="max-width:200px" aria-label="Recompensa mínima"><option>Qualquer recompensa</option><option>A partir de US$ 500</option><option>A partir de US$ 1.000</option><option>A partir de US$ 2.000</option></select>
-          <select class="select" style="max-width:200px" aria-label="Prazo"><option>Qualquer prazo</option><option>Encerra em até 30 dias</option><option>Encerra em até 60 dias</option><option>Sem prazo</option></select>
-          <label class="check right"><input type="checkbox" checked><span>Só os que combinam com meu histórico</span></label>
+          <select class="select" style="max-width:220px" aria-label="Recompensa total mínima"><option>Qualquer recompensa total</option><option>A partir de US$ 500</option><option>A partir de US$ 1.000</option><option>A partir de US$ 2.000</option></select>
+          <select class="select" style="max-width:200px" aria-label="Status"><option>Abertos e travados</option><option>Só abertos (sem atendimento)</option><option>Travados (atendimento em curadoria)</option><option>Atendidos</option></select>
+          <label class="check right"><input type="checkbox"><span>Só os que combinam com meu histórico</span></label>
         </div>
         <div class="grid cols-2">
           <article class="card req">
             <div class="card-body stack-sm">
               <div class="row between"><span class="eyebrow">Saúde e meio ambiente <span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div>
               <h4>Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</h4>
-              <dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">US$ 3.200</dd></div><div><dt>Contribuidores</dt><dd>14</dd></div><div><dt>Prazo</dt><dd>30/11 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>CSV</dd></div></dl>
+              <dl class="kv-row"><div><dt>Recompensa total</dt><dd class="wax">US$ 3.200</dd></div><div><dt>Interessados</dt><dd>4 × US$ 800</dd></div><div><dt>Prazo</dt><dd>30/11 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>CSV</dd></div></dl>
               <div class="small"><b>Critérios de aceite</b><ol class="criteria small muted"><li>Todas as UPAs municipais (mínimo 20 unidades)</li><li>Meses completos de jan/2023 a dez/2025</li><li>Fonte citada por linha (sistema ou pedido via LAI)</li></ol></div>
-              <div class="row between"><span class="handle" data-handle="farol-3e9b"></span><span class="xs muted">1 atendimento recusado (o seu, 14/10) · 0 em curadoria</span></div>
+              <div class="row between meta"><span class="handle" data-handle="coruja-7f3a"></span><span class="xs muted">ped-2c8d1 · você abriu em 12/10 e igualou em 20/10 · cobrir exige ≥ US$ 880 · 0 atendimentos</span></div>
             </div>
-            <div class="card-foot"><a class="btn btn-primary" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-ghost" href="../public/pedido.html">Ver pedido</a><span class="xs muted net">Você recebe US$ 2.880 líquidos</span></div>
+            <div class="card-foot"><button class="btn" disabled><i data-icon="user-check"></i>Você é interessado neste pedido</button><a class="btn btn-ghost" href="../buyer/pedidos.html">Acompanhar como interessado</a><span class="xs muted net">Não é possível atender o próprio pedido</span></div>
           </article>
           <article class="card req">
             <div class="card-body stack-sm">
               <div class="row between"><span class="eyebrow">Governo e políticas públicas <span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div>
               <h4>Lista de todos os editais de fomento cultural municipais do RS em 2025</h4>
-              <dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">US$ 2.100</dd></div><div><dt>Contribuidores</dt><dd>9</dd></div><div><dt>Prazo</dt><dd>10/12 · <span class="countdown" data-deadline="2026-12-10T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>XLSX ou CSV</dd></div></dl>
+              <dl class="kv-row"><div><dt>Recompensa total</dt><dd class="wax">US$ 2.100</dd></div><div><dt>Interessados</dt><dd>7 × US$ 300</dd></div><div><dt>Prazo</dt><dd>10/12 · <span class="countdown" data-deadline="2026-12-10T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>XLSX ou CSV</dd></div></dl>
               <div class="small"><b>Critérios de aceite</b><ol class="criteria small muted"><li>Município, órgão, objeto, valor, prazo e link do edital</li><li>Cobertura de pelo menos 90 % dos municípios com edital em 2025</li><li>Data de coleta por linha</li></ol></div>
-              <div class="row between"><span class="handle" data-handle="quartzo-a1f0"></span><span class="xs muted">0 atendimentos em curadoria</span></div>
+              <div class="row between meta"><span class="handle" data-handle="farol-3e9b"></span><span class="xs muted">ped-9h2d5 · seu atendimento de 14/10 foi recusado (critério 2) · pedido destravado em 16/10</span></div>
             </div>
             <div class="card-foot"><a class="btn btn-primary" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-ghost" href="../public/pedido.html">Ver pedido</a><span class="xs muted net">Você recebe US$ 1.890 líquidos</span></div>
           </article>
           <article class="card req">
             <div class="card-body stack-sm">
-              <div class="row between"><span class="eyebrow">Negócios e mercado <span class="tag">BR</span></span><span class="badge st-analise">Atendimento em curadoria</span></div>
+              <div class="row between"><span class="eyebrow">Negócios e mercado <span class="tag">BR</span></span><span class="badge st-analise">Travado · atendimento em curadoria</span></div>
               <h4>Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</h4>
-              <dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">US$ 1.450</dd></div><div><dt>Contribuidores</dt><dd>6</dd></div><div><dt>Prazo</dt><dd>20/11 · <span class="countdown" data-deadline="2026-11-20T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>CSV</dd></div></dl>
+              <dl class="kv-row"><div><dt>Recompensa total</dt><dd class="wax">US$ 1.450</dd></div><div><dt>Interessados</dt><dd>5 × US$ 290</dd></div><div><dt>Prazo</dt><dd>20/11 · <span class="countdown" data-deadline="2026-11-20T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>CSV</dd></div></dl>
               <div class="small"><b>Critérios de aceite</b><ol class="criteria small muted"><li>Mediana mensal por bairro (mínimo 100 bairros)</li><li>Série contínua de jan/2015 a set/2026</li><li>Fonte e método de coleta documentados</li></ol></div>
-              <div class="row between"><span class="handle" data-handle="farol-3e9b"></span><span class="xs muted">1 atendimento em curadoria (o seu, desde 24/10)</span></div>
+              <div class="row between meta"><span class="handle" data-handle="relogio-2b7c"></span><span class="xs muted">ped-4k9e2 · travado desde 22/10 · atendimento de <span class="handle" data-handle="bussola-c4e1"></span> em curadoria</span></div>
             </div>
-            <div class="card-foot"><button class="btn" disabled>Você já enviou um atendimento</button><a class="btn btn-ghost" href="#" data-tab="meus">Ver meu atendimento</a><span class="xs muted net">Se aceito: US$ 1.305 líquidos</span></div>
+            <div class="card-foot"><button class="btn" disabled><i data-icon="lock"></i>Pedido travado: atendimento em curadoria</button><a class="btn btn-ghost" href="../public/pedido.html">Ver pedido</a><span class="xs muted net">Se o atendimento for rejeitado, o pedido destrava</span></div>
           </article>
           <article class="card req">
             <div class="card-body stack-sm">
               <div class="row between"><span class="eyebrow">História e acervos <span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div>
               <h4>Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)</h4>
-              <dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">US$ 800</dd></div><div><dt>Contribuidores</dt><dd>1</dd></div><div><dt>Prazo</dt><dd>15/12 · <span class="countdown" data-deadline="2026-12-15T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>PDF ou TIFF</dd></div></dl>
+              <dl class="kv-row"><div><dt>Recompensa total</dt><dd class="wax">US$ 800</dd></div><div><dt>Interessados</dt><dd>1 × US$ 800</dd></div><div><dt>Prazo</dt><dd>15/12 · <span class="countdown" data-deadline="2026-12-15T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>PDF ou TIFF</dd></div></dl>
               <div class="small"><b>Critérios de aceite</b><ol class="criteria small muted"><li>Todas as páginas, inclusive capa e anúncios</li><li>Resolução mínima de 300 dpi</li><li>Domínio público ou autorização do detentor anexada</li></ol></div>
-              <div class="row between"><span class="handle" data-handle="tipografo-8e04"></span><span class="xs muted">0 atendimentos em curadoria</span></div>
+              <div class="row between meta"><span class="handle" data-handle="tipografo-8e04"></span><span class="xs muted">ped-7f1a3 · 1 interessado · quem se juntar paga US$ 800 · 0 atendimentos</span></div>
             </div>
             <div class="card-foot"><a class="btn btn-primary" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-ghost" href="../public/pedido.html">Ver pedido</a><span class="xs muted net">Você recebe US$ 720 líquidos</span></div>
           </article>
@@ -98,32 +99,36 @@
             <div class="card-body stack-sm">
               <div class="row between"><span class="eyebrow">Governo e políticas públicas <span class="tag">CL</span></span><span class="badge st-ativo">Aberto</span></div>
               <h4>Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos</h4>
-              <dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">US$ 900</dd></div><div><dt>Contribuidores</dt><dd>4</dd></div><div><dt>Prazo</dt><dd>20/12 · <span class="countdown" data-deadline="2026-12-20T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>XLSX ou CSV · espanhol</dd></div></dl>
+              <dl class="kv-row"><div><dt>Recompensa total</dt><dd class="wax">US$ 900</dd></div><div><dt>Interessados</dt><dd>3 × US$ 300</dd></div><div><dt>Prazo</dt><dd>20/12 · <span class="countdown" data-deadline="2026-12-20T23:59:00-03:00"></span></dd></div><div><dt>Formato</dt><dd>XLSX ou CSV · espanhol</dd></div></dl>
               <div class="small"><b>Critérios de aceite</b><ol class="criteria small muted"><li>Todas as concessões portuárias vigentes e encerradas desde 2000</li><li>Concessionária, porto, prazo, valor e data de assinatura</li><li>Fonte oficial por linha (MTT, empresas portuárias estatais ou Diario Oficial)</li></ol></div>
-              <div class="row between"><span class="handle" data-handle="farol-3e9b"></span><span class="xs muted">0 atendimentos em curadoria · material em espanhol</span></div>
+              <div class="row between meta"><span class="handle" data-handle="salitre-2e9c"></span><span class="xs muted">ped-5r2k8 · 0 atendimentos · cobrir exige ≥ US$ 330 · material em espanhol</span></div>
             </div>
             <div class="card-foot"><a class="btn btn-primary" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-ghost" href="../public/pedido.html">Ver pedido</a><span class="xs muted net">Você recebe US$ 810 líquidos</span></div>
           </article>
           <article class="card req done">
             <div class="card-body stack-sm">
-              <div class="row between"><span class="eyebrow">Fotografia e vídeo <span class="tag">BR</span></span><span class="badge st-encerrado">Atendido</span></div>
+              <div class="row between"><span class="eyebrow">Fotografia e vídeo <span class="tag">BR</span></span><span class="badge st-finalizado">Atendido</span></div>
               <h4>Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</h4>
-              <dl class="kv-row"><div><dt>Recompensa</dt><dd>US$ 600</dd></div><div><dt>Contribuidores</dt><dd>3</dd></div><div><dt>Prazo</dt><dd>—</dd></div><div><dt>Formato</dt><dd>JPG ou RAW</dd></div></dl>
+              <dl class="kv-row"><div><dt>Recompensa total</dt><dd>US$ 600</dd></div><div><dt>Interessados</dt><dd>3 × US$ 200</dd></div><div><dt>Prazo</dt><dd>—</dd></div><div><dt>Formato</dt><dd>JPG ou RAW</dd></div></dl>
               <div class="small"><b>Critérios de aceite</b><ol class="criteria small muted"><li>Mínimo de 40 fotos de áreas internas</li><li>Data visível nos metadados antes da remoção ou em registro</li><li>Autoria própria ou licença</li></ol></div>
-              <div class="row between"><span class="handle" data-handle="quartzo-a1f0"></span><span class="xs muted">atendido por você · validado em 05/10 por Ana R.</span></div>
+              <div class="row between meta"><span class="handle" data-handle="quartzo-a1f0"></span><span class="xs muted">ped-1b6j8 · atendido por <span class="handle" data-handle="cartografo-5a77"></span> · validado em 08/10 por Ana R.</span></div>
             </div>
-            <div class="card-foot"><a class="btn" href="../seller/carteiras.html"><i data-icon="coins"></i>US$ 540 líquidos pagos em 05/10</a><span class="xs muted net">3 contribuidores com acesso no cofre</span></div>
+            <div class="card-foot"><a class="btn" href="../buyer/cofre.html"><i data-icon="vault"></i>Você é interessado: abrir no cofre</a><span class="xs muted net">10 % separados · carteira do pedido entregue a quem atendeu em 11/10</span></div>
           </article>
-          <div class="card flat">
-            <div class="card-body stack">
-              <h4>Como funciona atender um pedido</h4>
-              <div class="how-step"><span class="n">1</span><div><b>Envie como um anúncio normal</b><br><span class="small muted">O assistente de envio abre com o pedido vinculado; o modelo passa a ser Pedido com recompensa. Mesma triagem e curadoria.</span></div></div>
-              <div class="how-step"><span class="n">2</span><div><b>A curadoria confere os critérios de aceite</b><br><span class="small muted">Um a um, com o conteúdo completo. Se faltar algo, você recebe o critério que não foi atendido e pode reenviar.</span></div></div>
-              <div class="how-step"><span class="n">3</span><div><b>Você recebe em cripto</b><br><span class="small muted">A recompensa sai da custódia: 90 % para você, na sua carteira do Lacre, 72 h após a liberação do acesso aos contribuidores. Se outro vendedor for validado antes, o seu pode ser publicado como item normal.</span></div></div>
+        </div>
+
+        <div class="card flat mt-3">
+          <div class="card-body stack">
+            <div class="row between"><h4>Como funciona para quem atende</h4><a class="link small" href="../public/como-funciona.html">Regras completas</a></div>
+            <div class="grid cols-4">
+              <div class="how-step"><span class="n">1</span><div><b>Quanto mais interessados pelo mesmo valor, maior a recompensa</b><br><span class="small muted">Quem abre define o valor por interessado e paga na carteira do pedido; cada um que se junta paga o mesmo valor. Recompensa total = valor × interessados. Se alguém cobre o valor (mín. +10 %), os outros têm 48 h para igualar ou sair.</span></div></div>
+              <div class="how-step"><span class="n">2</span><div><b>Ao enviar o atendimento, o pedido trava</b><br><span class="small muted">O assistente de envio abre com o pedido vinculado; mesma triagem e curadoria. Da entrada em curadoria até a decisão, ninguém entra, cobre ou sai. A curadoria confere os critérios de aceite um a um, em até 48 h.</span></div></div>
+              <div class="how-step"><span class="n">3</span><div><b>Validado: 10 % são separados e a carteira do pedido é entregue a você</b><br><span class="small muted">Cada interessado recebe acesso no cofre. A frase de recuperação da carteira do pedido aparece uma única vez, após senha e TOTP, em <a class="link" href="../seller/carteiras.html">Carteiras dos itens</a>. Transfira para uma carteira sua.</span></div></div>
+              <div class="how-step"><span class="n">4</span><div><b>Rejeitado ou expirado</b><br><span class="small muted">Atendimento rejeitado destrava o pedido: você recebe o critério não atendido e pode reenviar. Sem atendimento validado até o prazo, cada interessado recebe de volta o que pagou, ao endereço de origem. Nada é cobrado.</span></div></div>
             </div>
           </div>
         </div>
-        <p class="xs muted mt-2">Mostrando 6 pedidos · 5 do Brasil, 1 do Chile. Pedidos também passam pela curadoria antes de ficar públicos: nada de dados pessoais, conteúdo íntimo ou credenciais. A recompensa fica em custódia desde a contribuição e volta às carteiras se ninguém atender no prazo.</p>
+        <p class="xs muted mt-2">Mostrando 6 pedidos · 5 do Brasil, 1 do Chile · 4 abertos, 1 travado, 1 atendido. Pedidos passam pela curadoria antes de ficar públicos: nada de dados pessoais, conteúdo íntimo ou credenciais. Interessados são públicos (pseudônimo e data de entrada); como todos pagam o mesmo valor, o mural mostra só o valor atual, o número de interessados e o total.</p>
       </div>
 
       <div class="tab-panel" data-panel="meus">
@@ -132,35 +137,22 @@
             <thead><tr><th>Pedido</th><th>Seu envio</th><th>Status</th><th>Resultado</th><th class="text-right">Ação</th></tr></thead>
             <tbody>
               <tr>
-                <td><b>Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</b><span class="sub">ped-4k9e2 · US$ 1.450 · 6 contribuidores · prazo 20/11</span></td>
-                <td>atd-7m2p4 · 24/10 16:30<span class="sub">CSV com 132 bairros × 141 meses · 2 arquivos · 4,1 MB</span></td>
-                <td><span class="badge st-analise">Em curadoria</span><span class="sub">desde 24/10 · Bruno M.</span></td>
-                <td>Em 26/10 a curadoria pediu a fonte dos meses de 2015 (critério 3). O prazo pausa até a sua resposta.</td>
-                <td class="text-right"><a class="btn btn-sm btn-primary" href="../buyer/mensagens.html">Responder</a></td>
-              </tr>
-              <tr>
-                <td><b>Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</b><span class="sub">ped-1b6j8 · US$ 600 · 3 contribuidores</span></td>
-                <td>atd-5k1c8 · 02/10 09:12<span class="sub">64 fotos JPG · 1,2 GB · metadados removidos</span></td>
-                <td><span class="badge st-aprovado">Aceito</span><span class="sub">05/10 · Ana R.</span></td>
-                <td><b>US$ 540 líquidos</b> pagos em 05/10 (US$ 600 − 10 %), em cripto, na sua carteira do Lacre. 3 contribuidores receberam acesso no cofre.</td>
-                <td class="text-right"><a class="btn btn-sm" href="../seller/carteiras.html">Ver ganhos</a></td>
-              </tr>
-              <tr>
-                <td><b>Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025)</b><span class="sub">ped-2c8d1 · US$ 3.200 · 14 contribuidores · prazo 30/11</span></td>
-                <td>atd-3f9d2 · 11/10 20:45<span class="sub">CSV com 23 UPAs × 24 meses · 1 arquivo · 860 KB</span></td>
-                <td><span class="badge st-rejeitado">Recusado</span><span class="sub">14/10 · Ana R.</span></td>
-                <td>“Não atende ao critério 2: faltam os meses de 2023.” O pedido continua aberto; você pode enviar um novo atendimento com a série completa.</td>
+                <td><b>Lista de todos os editais de fomento cultural municipais do RS em 2025</b><span class="sub">ped-9h2d5 · recompensa total US$ 2.100 · 7 × US$ 300 · prazo 10/12</span></td>
+                <td>atd-3f9d2 · 14/10 20:45<span class="sub">XLSX com 1.140 editais de 302 municípios · 2 arquivos · 3,8 MB</span></td>
+                <td><span class="badge st-rejeitado">Recusado</span><span class="sub">16/10 · Ana R.</span></td>
+                <td>“Não atende ao critério 2: cobre 61 % dos municípios com edital em 2025.” O pedido ficou travado de 14/10 a 16/10 e continua aberto; você pode enviar um novo atendimento com a cobertura completa.</td>
                 <td class="text-right"><a class="btn btn-sm btn-primary" href="../seller/novo-anuncio.html">Tentar novamente</a></td>
               </tr>
             </tbody>
           </table>
-          <div class="table-foot"><span>3 atendimentos · 1 em curadoria · 1 aceito · 1 recusado</span><span class="xs">Recusas por critério não contam como rejeição na reputação; reincidência conta.</span></div>
+          <div class="table-foot"><span>1 atendimento · 0 em curadoria · 0 aceitos · 1 recusado</span><span class="xs">Recusas por critério não contam como rejeição na reputação; reincidência conta.</span></div>
         </div>
         <div class="grid cols-3 mt-3">
-          <div class="panel"><div class="label"><i data-icon="hourglass"></i> Em curadoria</div><p class="small muted mt-1">A curadoria compara o envio com os critérios de aceite em até 48 h. Pedidos de esclarecimento pausam o prazo e chegam pelas mensagens, sempre pelo pseudônimo.</p></div>
-          <div class="panel"><div class="label"><i data-icon="check-circle"></i> Aceito</div><p class="small muted mt-1">A recompensa sai da custódia e você recebe 90 % em cripto 72 h após a liberação. Os contribuidores veem o item no cofre. O atendimento conta como item aprovado na reputação.</p></div>
-          <div class="panel"><div class="label"><i data-icon="x-circle"></i> Recusado</div><p class="small muted mt-1">Você recebe o critério não atendido. Pode reenviar enquanto o pedido estiver aberto. Se preferir, publique o material como item normal, sem o vínculo com o pedido.</p></div>
+          <div class="panel"><div class="label"><i data-icon="hourglass"></i> Em curadoria</div><p class="small muted mt-1">O pedido fica travado: sem entradas, coberturas ou saídas até a decisão. A curadoria compara o envio com os critérios de aceite em até 48 h; pedidos de esclarecimento chegam pelas mensagens, sempre pelo pseudônimo.</p></div>
+          <div class="panel"><div class="label"><i data-icon="check-circle"></i> Aceito</div><p class="small muted mt-1">Cada interessado recebe acesso no cofre. 10 % são separados e a carteira do pedido é entregue a você em <a class="link" href="../seller/carteiras.html">Carteiras dos itens</a>: frase de recuperação, uma única vez, após senha e TOTP. O atendimento conta como item aprovado na reputação.</p></div>
+          <div class="panel"><div class="label"><i data-icon="x-circle"></i> Recusado</div><p class="small muted mt-1">Você recebe o critério não atendido e o pedido destrava. Pode reenviar enquanto ele estiver aberto. Se preferir, publique o material como item normal, sem o vínculo com o pedido.</p></div>
         </div>
+        <p class="xs muted mt-3">Como comprador, você é interessado em ped-2c8d1 (abriu em 12/10) e teve acesso ao atendimento de ped-1b6j8 no cofre: veja em <a class="link" href="../buyer/pedidos.html">Meus pedidos</a>.</p>
       </div>
     </div>
   </main>

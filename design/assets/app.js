@@ -515,7 +515,7 @@
         return;
       }
       if (t.hasAttribute('data-modal-open')) { e.preventDefault(); const m = document.getElementById(t.dataset.modalOpen); if (m) m.classList.add('open'); return; }
-      if (t.hasAttribute('data-modal-close')) { e.preventDefault(); const m = t.closest('.modal-backdrop'); if (m) m.classList.remove('open'); return; }
+      if (t.hasAttribute('data-modal-close')) { e.preventDefault(); const m = t.closest('.modal-backdrop'); if (m) m.classList.remove('open'); if (t.hasAttribute('data-toast')) window.toast(t.dataset.toast, t.dataset.toastIcon); return; }
       if (t.hasAttribute('data-show')) {
         e.preventDefault();
         const v = t.dataset.show;
