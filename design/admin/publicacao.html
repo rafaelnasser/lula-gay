@@ -25,6 +25,7 @@
     .x-card .x-media .social-card { border-radius: 0; }
     .milestone .li-body p { margin-top: 4px; font-size: var(--fs-sm); color: var(--fg-2); white-space: pre-line; }
     .list > .list-item.milestone { align-items: flex-start; }
+    .card-head .select { width: auto; }
   </style>
 </head>
 <body data-shell="admin" data-page="publicacao" data-root="../" data-title="Publicação">
@@ -43,7 +44,7 @@
     <div data-tabs>
       <div class="tabs">
         <a class="tab active" data-tab="fila" href="#"><i data-icon="inbox"></i>Fila <span class="count">6</span></a>
-        <a class="tab" data-tab="marcos" href="#"><i data-icon="zap"></i>Marcos automáticos <span class="count">3</span></a>
+        <a class="tab" data-tab="marcos" href="#"><i data-icon="zap"></i>Marcos automáticos <span class="count">4</span></a>
         <a class="tab" data-tab="pub" href="#"><i data-icon="bar-chart"></i>Publicados</a>
       </div>
 
@@ -52,51 +53,65 @@
           <table class="table compact">
             <thead><tr><th>Item</th><th>Modelo</th><th>Aprovado</th><th>Autenticidade</th><th>Horário sugerido</th><th>Canais</th><th>Prova</th><th class="acts"></th></tr></thead>
             <tbody>
-              <tr class="selected"><td><span class="title">Tabela de preços de medicamentos oncológicos em 15 países (2020–2026)</span><span class="sub">lcr-4g7h9 · Saúde e meio ambiente · <span class="handle" data-handle="coruja-7f3a"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · R$ 350</span></td><td>26/10 16:30<span class="sub">Ana R. + Bruno M.</span></td><td><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span></td><td class="num">28/10 · 14:00</td><td>X · TG · BS</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><span class="badge badge-brass">em edição abaixo</span></td></tr>
-              <tr><td><span class="title">Acervo de 1.400 cartazes de cinema brasileiro (1950–1990) digitalizados</span><span class="sub">lcr-9a5c2 · História e acervos · <span class="handle" data-handle="tipografo-8e04"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · R$ 160</span></td><td>27/10 09:40<span class="sub">Bruno M.</span></td><td><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></td><td class="num">28/10 · 16:00</td><td>X · TG · BS</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><button class="btn btn-sm" data-toast="Posts de lcr-9a5c2 carregados para edição">Abrir</button></td></tr>
-              <tr><td><span class="title">Base de contratos de publicidade de 26 governos estaduais (2019–2025)</span><span class="sub">lcr-7n3x4 · Governo e políticas públicas · <span class="handle" data-handle="sextante-21c9"></span></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo · meta R$ 20.000</span></td><td>27/10 10:05<span class="sub">Ana R. + Bruno M. · jurídico</span></td><td><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></td><td class="num">28/10 · 18:00</td><td>X · TG · BS</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><button class="btn btn-sm" data-toast="Posts de lcr-7n3x4 carregados para edição">Abrir</button></td></tr>
-              <tr><td><span class="title">Entrevistas com 25 ex-dirigentes de cooperativas de crédito liquidadas (áudio e transcrição)</span><span class="sub">lcr-5k8j1 · Jornalismo e investigação · <span class="handle" data-handle="prisma-66af"></span></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo · meta R$ 9.000</span></td><td>26/10 11:20<span class="sub">Bruno M. + Ana R.</span></td><td><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span></td><td class="num">29/10 · 10:00</td><td>X · TG</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><button class="btn btn-sm" data-toast="Posts de lcr-5k8j1 carregados para edição">Abrir</button></td></tr>
-              <tr><td><span class="title">Levantamento de 600 pontos de ônibus sem acessibilidade em Curitiba, com fotos</span><span class="sub">lcr-2d9f6 · Governo e políticas públicas · <span class="handle" data-handle="cartografo-5a77"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · R$ 75</span></td><td>27/10 10:50<span class="sub">Ana R.</span></td><td><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></td><td class="num">29/10 · 12:00</td><td>X · BS</td><td><span class="badge badge-warn"><i data-icon="clock"></i>gerando</span></td><td class="acts"><button class="btn btn-sm" disabled>Abrir</button></td></tr>
-              <tr><td><span class="title">Modelo de previsão de demanda de energia para o Nordeste, com código e dados de treino</span><span class="sub">lcr-8q4w3 · Tecnologia e segurança · <span class="handle" data-handle="bussola-c4e1"></span></span></td><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas · R$ 120 a R$ 900</span></td><td>27/10 11:05<span class="sub">Bruno M. + Ana R.</span></td><td><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span></td><td class="num">29/10 · 14:00</td><td>X · TG · BS</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><button class="btn btn-sm" data-toast="Posts de lcr-8q4w3 carregados para edição">Abrir</button></td></tr>
+              <tr class="selected"><td><span class="title">Tabela de preços de medicamentos oncológicos em 15 países (2020–2026)</span><span class="sub"><span class="tag">BR</span> lcr-4g7h9 · Saúde e meio ambiente · <span class="handle" data-handle="coruja-7f3a"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · US$ 350</span></td><td>26/10 16:30<span class="sub">Ana R. + Bruno M.</span></td><td><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span></td><td class="num">28/10 · 14:00</td><td>X · TG · BS</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><span class="badge badge-brass">em edição abaixo</span></td></tr>
+              <tr><td><span class="title">Acervo de 1.400 cartazes de cinema brasileiro (1950–1990) digitalizados</span><span class="sub"><span class="tag">BR</span> lcr-9a5c2 · História e acervos · <span class="handle" data-handle="tipografo-8e04"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · US$ 160</span></td><td>27/10 09:40<span class="sub">Bruno M.</span></td><td><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></td><td class="num">28/10 · 16:00</td><td>X · TG · BS</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><button class="btn btn-sm" data-toast="Posts de lcr-9a5c2 carregados para edição">Abrir</button></td></tr>
+              <tr><td><span class="title">Base de contratos de publicidade de 26 governos estaduais (2019–2025)</span><span class="sub"><span class="tag">BR</span> lcr-7n3x4 · Governo e políticas públicas · <span class="handle" data-handle="sextante-21c9"></span></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo · meta US$ 20.000</span></td><td>27/10 10:05<span class="sub">Ana R. + Bruno M. · jurídico</span></td><td><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></td><td class="num">28/10 · 18:00</td><td>X · TG · BS</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><button class="btn btn-sm" data-toast="Posts de lcr-7n3x4 carregados para edição">Abrir</button></td></tr>
+              <tr><td><span class="title">Entrevistas com 25 ex-dirigentes de cooperativas de crédito liquidadas (áudio e transcrição)</span><span class="sub"><span class="tag">BR</span> lcr-5k8j1 · Jornalismo e investigação · <span class="handle" data-handle="prisma-66af"></span></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo · meta US$ 9.000</span></td><td>26/10 11:20<span class="sub">Bruno M. + Ana R.</span></td><td><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span></td><td class="num">29/10 · 10:00</td><td>X · TG</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><button class="btn btn-sm" data-toast="Posts de lcr-5k8j1 carregados para edição">Abrir</button></td></tr>
+              <tr><td><span class="title">Levantamento de 600 pontos de ônibus sem acessibilidade em Curitiba, com fotos</span><span class="sub"><span class="tag">BR</span> lcr-2d9f6 · Governo e políticas públicas · <span class="handle" data-handle="cartografo-5a77"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · US$ 75</span></td><td>27/10 10:50<span class="sub">Ana R.</span></td><td><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></td><td class="num">29/10 · 12:00</td><td>X · BS</td><td><span class="badge badge-warn"><i data-icon="clock"></i>gerando</span></td><td class="acts"><button class="btn btn-sm" disabled>Abrir</button></td></tr>
+              <tr><td><span class="title">Modelo de previsão de demanda de energia para o Nordeste, com código e dados de treino</span><span class="sub"><span class="tag">BR</span> lcr-8q4w3 · Tecnologia e segurança · <span class="handle" data-handle="bussola-c4e1"></span></span></td><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas · US$ 120 a US$ 900</span></td><td>27/10 11:05<span class="sub">Bruno M. + Ana R.</span></td><td><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span></td><td class="num">29/10 · 14:00</td><td>X · TG · BS</td><td><span class="badge badge-ok"><i data-icon="check"></i>publicada</span></td><td class="acts"><button class="btn btn-sm" data-toast="Posts de lcr-8q4w3 carregados para edição">Abrir</button></td></tr>
             </tbody>
           </table>
           <div class="table-foot"><span>Agendados hoje: 12:00 lcr-6d1k5 edição #42 (X, TG, BS) · 18:00 lcr-7q1z3 "faltam 7 dias" (X)</span><span class="muted">próximo slot livre no X: 28/10 às 14:00</span></div>
         </div>
 
-        <h2 class="mt-3 mb-2">lcr-4g7h9 · post de lançamento · <span class="muted">template "Lançamento · Cópias"</span></h2>
+        <h2 class="mt-3 mb-2">lcr-4g7h9 <span class="tag">BR</span> · post de lançamento · <span class="muted">template "Lançamento · Cópias" · idioma do item: português</span></h2>
         <div class="grid cols-3">
           <div class="card post-card">
-            <div class="card-head"><span class="chan x">X</span><h3>X · @lacre</h3><span class="counter" id="c-x">212 / 280</span></div>
+            <div class="card-head"><span class="chan x">X</span><h3>X · @lacre</h3><span class="counter" id="c-x">222 / 280</span></div>
             <div class="card-body stack-sm">
-              <textarea class="textarea" data-max="280" data-urlw="23" data-counter="c-x" aria-label="Texto para o X">Novo no Lacre · Saúde e meio ambiente
+              <textarea class="textarea" data-max="280" data-urlw="23" data-counter="c-x" aria-label="Texto para o X">Novo no Lacre · Saúde e meio ambiente · Brasil
 Tabela de preços de medicamentos oncológicos em 15 países (2020–2026).
 Curadoria: verificado parcialmente. Cópias ilimitadas.
-R$ 350 · prova e prévia: lacre.app/p/4g7h9</textarea>
+US$ 350 · prova e prévia: lacre.app/p/4g7h9</textarea>
               <p class="xs muted">Links contam 23 caracteres. Card de imagem 1600×900 anexado. Respostas não são respondidas pela conta oficial.</p>
             </div>
           </div>
           <div class="card post-card">
-            <div class="card-head"><span class="chan tg">TG</span><h3>Telegram · canal público</h3><span class="counter" id="c-tg">329 / 1024</span></div>
+            <div class="card-head"><span class="chan tg">TG</span><h3>Telegram · canal público</h3><span class="counter" id="c-tg">339 / 1024</span></div>
             <div class="card-body stack-sm">
-              <textarea class="textarea" data-max="1024" data-counter="c-tg" aria-label="Texto para o Telegram">Novo no Lacre · Saúde e meio ambiente
+              <textarea class="textarea" data-max="1024" data-counter="c-tg" aria-label="Texto para o Telegram">Novo no Lacre · Saúde e meio ambiente · Brasil
 
 Tabela de preços de medicamentos oncológicos em 15 países (2020–2026), por princípio ativo, apresentação e ano. Fontes: listas oficiais de preços e compras públicas.
 
 Curadoria: verificado parcialmente. Cópias ilimitadas, entrega imediata no cofre.
-R$ 350
+US$ 350
 
 Prova e prévia: lacre.app/p/4g7h9</textarea>
               <p class="xs muted">Legenda de imagem (limite 1.024). Botão "Ver prova" aponta para a página de prova.</p>
             </div>
           </div>
           <div class="card post-card">
-            <div class="card-head"><span class="chan bs">BS</span><h3>Bluesky · @lacre.app</h3><span class="counter" id="c-bs">206 / 300</span></div>
+            <div class="card-head"><span class="chan bs">BS</span><h3>Bluesky · @lacre.app</h3><span class="counter" id="c-bs">216 / 300</span></div>
             <div class="card-body stack-sm">
-              <textarea class="textarea" data-max="300" data-counter="c-bs" aria-label="Texto para o Bluesky">Novo no Lacre · Saúde e meio ambiente
+              <textarea class="textarea" data-max="300" data-counter="c-bs" aria-label="Texto para o Bluesky">Novo no Lacre · Saúde e meio ambiente · Brasil
 Tabela de preços de medicamentos oncológicos em 15 países (2020–2026).
 Curadoria: verificado parcialmente. Cópias ilimitadas.
-R$ 350 · prova e prévia: lacre.app/p/4g7h9</textarea>
+US$ 350 · prova e prévia: lacre.app/p/4g7h9</textarea>
               <p class="xs muted">Limite 300 caracteres; link vira facet clicável. Mesma imagem do X.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-head"><span class="chan x">X</span><h3>Idioma por país · exemplo em inglês · lcr-7e2m4 <span class="tag">BD</span></h3><span class="counter" id="c-en">241 / 280</span><div class="actions"><select class="select" aria-label="Idioma do post"><option>Idioma: inglês (idioma do item)</option><option>Português</option><option>Espanhol</option></select></div></div>
+          <div class="card-body grid cols-2">
+            <textarea class="textarea" data-max="280" data-urlw="23" data-counter="c-en" aria-label="Texto em inglês para o X">New on Lacre · Data & datasets · Bangladesh
+Registry of 2,300 garment factories in Bangladesh with public safety audit results (2014–2025).
+Curation: verified. Limited edition: 150 copies.
+US$ 320 · proof and preview: lacre.app/p/7e2m4</textarea>
+            <div class="stack-sm small">
+              <p>Cada post sai no idioma do item (português, inglês ou espanhol); itens marcados como Global saem em inglês e em português. O template ganha o país logo depois da categoria: "Novo no Lacre · Dados e bases · Bangladesh".</p>
+              <p class="muted">Este texto é o do lançamento publicado em 12/10 (41 cópias vendidas). O post da nova versão (v2) só entra na fila quando a reanálise de lcr-7e2m4 for concluída.</p>
             </div>
           </div>
         </div>
@@ -107,14 +122,14 @@ R$ 350 · prova e prévia: lacre.app/p/4g7h9</textarea>
             <div class="card-body">
               <div class="x-card">
                 <div class="x-head"><span data-seal style="width:36px;height:36px;display:inline-block"></span><div><div class="x-name">Lacre</div><div class="x-at">@lacre · agendado para 28/10 às 14:00</div></div></div>
-                <div class="x-body">Novo no Lacre · Saúde e meio ambiente
+                <div class="x-body">Novo no Lacre · Saúde e meio ambiente · Brasil
 Tabela de preços de medicamentos oncológicos em 15 países (2020–2026).
 Curadoria: verificado parcialmente. Cópias ilimitadas.
-R$ 350 · prova e prévia: lacre.app/p/4g7h9</div>
+US$ 350 · prova e prévia: lacre.app/p/4g7h9</div>
                 <div class="x-media">
                   <div class="social-card">
                     <div class="preview" data-type="dados"></div>
-                    <div class="row between"><span class="badge">Saúde e meio ambiente</span><span class="badge badge-brass">Cópias · R$ 350</span></div>
+                    <div class="row between"><span class="badge">Saúde e meio ambiente</span><span class="badge badge-brass">Cópias · US$ 350</span></div>
                     <div class="sc-title">Tabela de preços de medicamentos oncológicos em 15 países (2020–2026)</div>
                     <div class="sc-foot"><span>Verificado parcialmente · 2 curadores</span><span>sha256 a81f…3c7d · lacre.app/p/4g7h9</span></div>
                   </div>
@@ -145,19 +160,20 @@ R$ 350 · prova e prévia: lacre.app/p/4g7h9</div>
       </div>
 
       <div class="tab-panel" data-panel="marcos">
-        <p class="small muted mb-2">Gerados automaticamente a partir dos eventos do item (25, 50, 75, 90 e 100 %, vendido, último dia, lacre rompido). Passam pela fila com aprovação em um clique; o texto pode ser ajustado dentro dos limites.</p>
+        <p class="small muted mb-2">Gerados automaticamente a partir dos eventos do item (25, 50, 75, 90 e 100 %, vendido, vendido com exclusividade, último dia, lacre rompido). Passam pela fila com aprovação em um clique; o texto pode ser ajustado dentro dos limites.</p>
         <div class="card">
           <ul class="list" style="padding:0 20px">
-            <li class="list-item milestone"><span class="li-icon"><i data-icon="hand-coins"></i></span><div class="li-body"><div class="li-title">lcr-4m2x9 · Cadeia do ouro ilegal no Pará · chegou a 68 % → próximo marco: 75 % (R$ 60.000)</div><div class="li-sub">Lacre coletivo · R$ 54.120 de R$ 80.000 · 1.187 apoiadores · prazo 15/11 · marco de 50 % publicado em 21/10</div><p>75 % do caminho. R$ 60.000 de R$ 80.000, [apoiadores] apoiadores.
-Faltam [dias] dias para romper o lacre. lacre.app/p/4m2x9</p></div><div class="stack-sm"><span class="badge st-agendado">dispara ao atingir</span><button class="btn btn-sm btn-primary" data-toast="Marco de 75 % pré-aprovado · publica automaticamente ao atingir R$ 60.000">Pré-aprovar</button></div></li>
+            <li class="list-item milestone"><span class="li-icon"><i data-icon="hand-coins"></i></span><div class="li-body"><div class="li-title">lcr-4m2x9 · Cadeia do ouro ilegal no Pará · chegou a 68 % → próximo marco: 75 % (US$ 60.000)</div><div class="li-sub">Lacre coletivo · US$ 54.120 de US$ 80.000 · 1.187 apoiadores · prazo 15/11 · marco de 50 % publicado em 21/10</div><p>75 % do caminho. US$ 60.000 de US$ 80.000, [apoiadores] apoiadores.
+Faltam [dias] dias para romper o lacre. lacre.app/p/4m2x9</p></div><div class="stack-sm"><span class="badge st-agendado">dispara ao atingir</span><button class="btn btn-sm btn-primary" data-toast="Marco de 75 % pré-aprovado · publica automaticamente ao atingir US$ 60.000">Pré-aprovar</button></div></li>
             <li class="list-item milestone"><span class="li-icon"><i data-icon="timer"></i></span><div class="li-body"><div class="li-title">lcr-1w9s6 · 400 fotografias inéditas da construção de Brasília · "Último dia" em 01/11</div><div class="li-sub">Leilão lacrado (segundo preço) · 7 lances · encerra 02/11 às 20:00 · post previsto para 01/11 às 20:00 (X e Telegram)</div><p>Últimas 24 h: 400 fotografias inéditas da construção de Brasília (1957–1960), acervo pessoal digitalizado. Leilão lacrado, 7 lances até agora. lacre.app/p/1w9s6</p></div><div class="stack-sm"><span class="badge badge-warn">aguarda aprovação</span><button class="btn btn-sm btn-primary" data-toast="Post 'Último dia' aprovado · agendado para 01/11 às 20:00">Aprovar</button></div></li>
-            <li class="list-item milestone"><span class="li-icon"><i data-icon="crown"></i></span><div class="li-body"><div class="li-title">lcr-0x8c5 · Estudo de viabilidade de 14 linhas de VLT em capitais médias · Vendido</div><div class="li-sub">Exclusivo · vendido hoje às 09:12 por R$ 18.000 · item saiu do catálogo · conteúdo será destruído dos servidores após a janela de disputa</div><p>Vendido a um único comprador: Estudo de viabilidade de 14 linhas de VLT em capitais médias. O item saiu do catálogo e será destruído dos nossos servidores. A prova permanece: lacre.app/p/0x8c5</p></div><div class="stack-sm"><span class="badge badge-warn">aguarda aprovação</span><button class="btn btn-sm btn-primary" data-toast="Post 'Vendido' aprovado e publicado no X e no Telegram">Aprovar e publicar</button></div></li>
+            <li class="list-item milestone"><span class="li-icon"><i data-icon="crown"></i></span><div class="li-body"><div class="li-title">lcr-6c4t2 <span class="tag">BR</span> · Planilha de preços de leilões de gado em 40 municípios de MT · Vendido com exclusividade</div><div class="li-sub">Lacre coletivo · meta US$ 6.000 · US$ 2.350 de 118 apoiadores · comprado com exclusividade por US$ 15.000 em 16/10 · 118 apoios devolvidos às carteiras · post retido até a destruição do conteúdo (19/10) e a cessão assinada (26/10)</div><p>Vendido com exclusividade: Planilha de preços de leilões de gado em 40 municípios de Mato Grosso (2019–2026). O anúncio encerrou, o item saiu do catálogo e os 118 apoios foram devolvidos às carteiras. A prova permanece: lacre.app/p/6c4t2</p></div><div class="stack-sm"><span class="badge badge-warn">aguarda aprovação</span><button class="btn btn-sm btn-primary" data-toast="Post 'Vendido com exclusividade' de lcr-6c4t2 aprovado e publicado no X e no Telegram · prova marcada como vendido com exclusividade">Aprovar e publicar</button></div></li>
+            <li class="list-item milestone"><span class="li-icon"><i data-icon="crown"></i></span><div class="li-body"><div class="li-title">lcr-0x8c5 · Estudo de viabilidade de 14 linhas de VLT em capitais médias · Vendido</div><div class="li-sub">Exclusivo · vendido hoje às 09:12 por US$ 18.000 · item saiu do catálogo · conteúdo será destruído dos servidores após a janela de disputa</div><p>Vendido a um único comprador: Estudo de viabilidade de 14 linhas de VLT em capitais médias. O item saiu do catálogo e será destruído dos nossos servidores. A prova permanece: lacre.app/p/0x8c5</p></div><div class="stack-sm"><span class="badge badge-warn">aguarda aprovação</span><button class="btn btn-sm btn-primary" data-toast="Post 'Vendido' aprovado e publicado no X e no Telegram">Aprovar e publicar</button></div></li>
           </ul>
         </div>
         <h3 class="mt-3 mb-1">Últimos marcos publicados</h3>
         <div class="table-wrap"><table class="table compact"><thead><tr><th>Quando</th><th>Item</th><th>Marco</th><th>Canais</th><th class="num">Impressões</th><th class="num">Cliques na prova</th></tr></thead><tbody>
-          <tr><td>21/10 · 12:00</td><td>lcr-4m2x9</td><td>50 % · R$ 40.120 · 912 apoiadores</td><td>X · TG · BS</td><td class="num">310.000</td><td class="num">4.812</td></tr>
-          <tr><td>17/10 · 09:00</td><td>lcr-4m2x9</td><td>25 % · R$ 20.300 · 488 apoiadores</td><td>X · TG</td><td class="num">96.400</td><td class="num">1.930</td></tr>
+          <tr><td>21/10 · 12:00</td><td>lcr-4m2x9</td><td>50 % · US$ 40.120 · 912 apoiadores</td><td>X · TG · BS</td><td class="num">310.000</td><td class="num">4.812</td></tr>
+          <tr><td>17/10 · 09:00</td><td>lcr-4m2x9</td><td>25 % · US$ 20.300 · 488 apoiadores</td><td>X · TG</td><td class="num">96.400</td><td class="num">1.930</td></tr>
           <tr><td>30/09 · 18:00</td><td>lcr-5m8c4</td><td>Encerrado · 88 cópias</td><td>X</td><td class="num">8.200</td><td class="num">140</td></tr>
         </tbody></table></div>
       </div>
@@ -180,7 +196,7 @@ Faltam [dias] dias para romper o lacre. lacre.app/p/4m2x9</p></div><div class="s
               <tr><td><span class="chan x">X</span></td><td><b>lcr-6d1k5</b> · edição #41 · Assinatura<span class="sub">Monitor semanal de patentes do setor farmacêutico brasileiro</span></td><td>20/10 · 12:00</td><td class="num">9.400</td><td class="num">310</td><td class="num">12 assinaturas</td><td><span class="badge badge-ok">publicado</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="Post aberto no X"><i data-icon="external-link"></i></button></td></tr>
               <tr><td><span class="chan x">X</span></td><td><b>lcr-1w9s6</b> · lançamento · Leilão lacrado<span class="sub">400 fotografias inéditas da construção de Brasília (1957–1960)</span></td><td>19/10 · 16:00</td><td class="num">27.600</td><td class="num">820</td><td class="num">7 lances</td><td><span class="badge badge-ok">publicado</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="Post aberto no X"><i data-icon="external-link"></i></button></td></tr>
               <tr><td><span class="chan bs">BS</span></td><td><b>lcr-1w9s6</b> · lançamento · Leilão lacrado<span class="sub">400 fotografias inéditas da construção de Brasília (1957–1960)</span></td><td>19/10 · 16:00 → 17:10</td><td class="num">3.100</td><td class="num">74</td><td class="num">0</td><td><span class="badge badge-warn">falhou 1×, republicado</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="Erro registrado: limite de taxa da API às 16:00 · republicado às 17:10"><i data-icon="info"></i></button></td></tr>
-              <tr><td><span class="chan tg">TG</span></td><td><b>lcr-4m2x9</b> · lançamento · Lacre coletivo<span class="sub">Cadeia do ouro ilegal no Pará</span></td><td>15/10 · 10:00</td><td class="num">12.800</td><td class="num">540</td><td class="num">96 apoios</td><td><span class="badge badge-ok">publicado</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="Mensagem aberta no Telegram"><i data-icon="external-link"></i></button></td></tr>
+              <tr><td><span class="chan x">X</span></td><td><b>lcr-7e2m4</b> · lançamento em inglês · Cópias <span class="tag">BD</span><span class="sub">Registry of 2,300 garment factories in Bangladesh with public safety audit results (2014–2025)</span></td><td>12/10 · 15:00</td><td class="num">21.700</td><td class="num">940</td><td class="num">41 cópias</td><td><span class="badge badge-ok">publicado</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="Post aberto no X"><i data-icon="external-link"></i></button></td></tr>
             </tbody>
           </table>
           <div class="table-foot"><span>8 posts mais recentes · métricas coletadas a cada 6 h por 7 dias · última coleta hoje às 10:00</span><div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary" data-toast="Você já está na página 1">1</button><button class="btn btn-sm" data-toast="Página 2: 14 posts de setembro e outubro">2</button><button class="btn btn-sm" data-toast="Página 2">›</button></div></div>

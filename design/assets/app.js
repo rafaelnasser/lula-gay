@@ -270,7 +270,7 @@
       { key: 'painel', label: 'Painel', icon: 'activity', to: 'admin/painel.html' },
       { key: 'fila', label: 'Fila de análise', icon: 'inbox', to: 'admin/fila.html', count: 23 },
       { key: 'analise', label: 'Análise (workbench)', icon: 'clipboard-check', to: 'admin/analise.html' },
-      { key: 'juridico', label: 'Jurídico', icon: 'scale', to: 'admin/juridico.html', count: 4 },
+      { key: 'juridico', label: 'Jurídico', icon: 'scale', to: 'admin/juridico.html', count: 5 },
       { key: 'publicacao', label: 'Publicação', icon: 'megaphone', to: 'admin/publicacao.html', count: 6 },
       { label: 'Operação' },
       { key: 'disputas', label: 'Disputas', icon: 'gavel', to: 'admin/disputas.html', count: 3 },
