@@ -606,7 +606,7 @@
     // barras de progresso animadas
     requestAnimationFrame(() => document.querySelectorAll('.progress-bar[data-width]').forEach(b => { b.style.width = b.dataset.width; }));
     // contagem regressiva
-    const cds = document.querySelectorAll('[data-deadline]');
+    const cds = Array.from(document.querySelectorAll('[data-deadline]')).filter(el => !el.children.length);
     function tick() {
       const now = Date.now();
       cds.forEach(el => {
@@ -639,8 +639,8 @@
     bind();
     document.title = document.title || BRAND;
     // abre a aba indicada no hash (ex.: anuncio.html#curadoria)
-    const h = (location.hash || '').replace('#', '');
-    if (h) { const tabBtn = document.querySelector('.tabs [data-tab="' + h + '"]'); if (tabBtn) tabBtn.click(); }
+    const openHashTab = () => { const h = (location.hash || '').replace('#', ''); if (!h) return; const tabBtn = document.querySelector('.tabs [data-tab="' + h + '"]'); if (tabBtn) tabBtn.click(); };
+    openHashTab(); window.addEventListener('hashchange', openHashTab);
     document.dispatchEvent(new CustomEvent('lacre:ready', { detail: { locale } }));
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

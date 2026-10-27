@@ -69,6 +69,7 @@ design/
 | Toast | `data-toast="Enviado para curadoria"` em qualquer botão |
 | Copiar | `data-copy="#id-do-elemento"` ou `data-copy="texto"` |
 | Variantes (uma tela, vários estados) | `<div class="variant-switch"><span class="vs-label">Variante</span><button data-show="a">A</button>…</div>` + blocos `<div data-variant="a">…</div>` |
+| Sub-estados dentro de uma variante | `data-variants` não aninha: dentro de um bloco `data-variant`, use `data-tabs`/`data-tab` (ex.: Juntar-se / Cobrir / Igualar no checkout). A contagem regressiva só preenche elementos sem filhos (`<span class="countdown" data-deadline>`). |
 | Contagem regressiva | `<span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span>` |
 | Hash | `<div class="hash"><code>3f9a…</code><button class="btn btn-sm btn-ghost" data-copy="…"><i data-icon="copy"></i></button></div>` |
 | Chat | `.chat` > `.threads` (`.thread`) + `.conv` (`.conv-head`, `.conv-body` > `.msg.me/.them/.system/.filtered`, `.conv-foot`) |

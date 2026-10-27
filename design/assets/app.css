@@ -345,10 +345,10 @@ body.nav-open .mobile-nav { display: flex; }
 /* status de item (mapa único para todas as telas)
    regra: ação sua = âmbar · em análise = azul · sucesso = verde · negativo = vermelho · neutro = cinza */
 .st-rascunho, .st-arquivado, .st-expirado { background: var(--surface-3); color: var(--fg-2); }
-.st-finalizado, .st-encerrado { background: var(--surface-3); color: var(--ok); }
+.st-finalizado { background: var(--surface-3); color: var(--ok); }
 .st-enviado, .st-triagem, .st-analise, .st-escalado { background: var(--info-soft); color: var(--info); }
 .st-ajustes, .st-pendente, .st-aguardando { background: var(--warn-soft); color: var(--warn); }
-.st-aprovado, .st-agendado, .st-ativo, .st-liberado, .st-liquidada, .st-entregue, .st-financiado, .st-rompido, .st-vendido { background: var(--ok-soft); color: var(--ok); }
+.st-aprovado, .st-ativo, .st-liberado, .st-liquidada, .st-entregue, .st-financiado, .st-rompido, .st-vendido { background: var(--ok-soft); color: var(--ok); }
 .st-rejeitado, .st-banido, .st-removido, .st-falhou, .st-suspenso { background: var(--danger-soft); color: var(--danger); }
 a.badge.status-link, .badge.status-link { cursor: pointer; text-decoration: none; }
 a.badge.status-link:hover { filter: brightness(1.15); text-decoration: underline; text-underline-offset: 2px; }
@@ -556,6 +556,7 @@ dl.kv-row > div dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-
 .switch input:checked + .track::after { transform: translateX(16px); background: var(--brass-fg); }
 .switch input:focus-visible + .track { box-shadow: var(--ring); }
 .segmented { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 3px; gap: 2px; }
+.segmented.wrap { flex-wrap: wrap; }
 .segmented button, .segmented a { padding: 6px 12px; border-radius: 5px; font-size: var(--fs-sm); font-weight: 500; color: var(--muted); }
 .segmented .active { background: var(--surface); color: var(--fg); box-shadow: var(--shadow-sm); }
 .choice-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
