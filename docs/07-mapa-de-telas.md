@@ -21,6 +21,12 @@ public/politicas.html                                  buyer/disputa            
 
 Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra lateral. Mensagens, notificações e configurações são telas compartilhadas (vivem em `buyer/` por convenção).
 
+## Elementos comuns a todas as telas
+
+- **Seletor de idioma e país** no cabeçalho (ícone de globo com o país e o idioma atuais): idioma em três opções (português, inglês, espanhol) e lista de países com busca e a opção Global. Mostra o que foi detectado pelo navegador (idioma e fuso horário; nunca GPS nem IP guardado). A escolha vale para o dispositivo.
+- **Aviso na primeira visita**: "Mostrando o Lacre em Português com itens de Brasil, detectados pelo seu navegador · Trocar · Entendi".
+- **País padrão**: catálogo e página inicial abrem filtrados pelo país do usuário, com uma faixa "Itens de Brasil · Trocar país · Ver todos os países"; sem itens do país, mostram todos com aviso.
+
 ## Fluxos principais
 
 1. **Comprar uma cópia**: explorar → item → checkout (saldo suficiente ou depositar) → cofre → visualizador → (opcional) disputa em 72 h.

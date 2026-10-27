@@ -41,7 +41,7 @@ design/      protótipo navegável em HTML estático
 
 ## Decisões que o protótipo já toma
 
-- **Global.** Informação de qualquer país, com país e idioma em cada item e filtro de país no catálogo. Preços em dólar (US$), liquidados em USDT. Interface em português no protótipo; produto com pt, en e es.
+- **Global.** Informação de qualquer país, com país e idioma em cada item e filtro de país no catálogo. Preços em dólar (US$), liquidados em USDT. A interface segue o idioma do navegador (pt, en, es) e o catálogo abre no país do usuário, detectado pelo idioma e fuso horário do navegador, sem GPS nem IP guardado; um seletor no cabeçalho troca os dois.
 
 - **Conta sem identidade**: pseudônimo gerado + senha, passkey ou arquivo de acesso (um arquivo-chave que o usuário escolhe para entrar) + frase de recuperação de 12 palavras. Sem e-mail, telefone, CPF.
 - **Só cripto, dos dois lados.** Depósito em USDT/USDC (Polygon, Tron, Base) ou Bitcoin (Lightning, on-chain); saque em cripto. Nenhum real entra ou sai, nenhum parceiro de pagamento, nenhum KYC. A carteira interna guarda créditos em USDT; preços são exibidos em US$ e convertidos na hora.

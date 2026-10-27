@@ -42,16 +42,16 @@
       <div class="hero-grid">
         <div>
           <p class="eyebrow">Marketplace curado de informação</p>
-          <h1 class="display mt-1">Informação com lacre. Anonimato dos dois lados.</h1>
-          <p class="lead mt-2">Documentos, bases de dados, fotografias, áudios e apurações de qualquer país, vendidos por pessoas que não precisam dizer quem são, para pessoas que também não precisam. Nada vai ao ar sem uma equipe humana ler tudo antes.</p>
+          <h1 class="display mt-1" data-i18n>Informação com lacre. Anonimato dos dois lados.</h1>
+          <p class="lead mt-2" data-i18n>Documentos, bases de dados, fotografias, áudios e apurações de qualquer país, vendidos por pessoas que não precisam dizer quem são, para pessoas que também não precisam. Nada vai ao ar sem uma equipe humana ler tudo antes.</p>
           <ul class="guarantees">
-            <li><i data-icon="shield"></i><span><b>Anonimato total entre as partes.</b> Nenhuma conta pede nome, e-mail, telefone ou documento.</span></li>
-            <li><i data-icon="clipboard-check"></i><span><b>Curadoria humana obrigatória.</b> Dois curadores em categorias de risco e revisão jurídica quando há terceiros citados.</span></li>
-            <li><i data-icon="badge-check"></i><span><b>Prova pública de cada item.</b> Hash do pacote e carimbo de tempo publicados antes de qualquer venda.</span></li>
+            <li><i data-icon="shield"></i><span><b data-i18n>Anonimato total entre as partes.</b> Nenhuma conta pede nome, e-mail, telefone ou documento.</span></li>
+            <li><i data-icon="clipboard-check"></i><span><b data-i18n>Curadoria humana obrigatória.</b> Dois curadores em categorias de risco e revisão jurídica quando há terceiros citados.</span></li>
+            <li><i data-icon="badge-check"></i><span><b data-i18n>Prova pública de cada item.</b> Hash do pacote e carimbo de tempo publicados antes de qualquer venda.</span></li>
           </ul>
           <div class="row mt-3">
-            <a class="btn btn-lg btn-primary" href="explorar.html"><i data-icon="compass"></i>Explorar o catálogo</a>
-            <a class="btn btn-lg" href="vendedor.html"><i data-icon="store"></i>Vender informação</a>
+            <a class="btn btn-lg btn-primary" href="explorar.html"><i data-icon="compass"></i><span data-i18n>Explorar o catálogo</span></a>
+            <a class="btn btn-lg" href="vendedor.html"><i data-icon="store"></i><span data-i18n>Vender informação</span></a>
           </div>
           <p class="xs muted mt-2">Hoje, 27/10/2026: 351 itens ativos de 41 países · 5 lacres coletivos em andamento · 5 pedidos abertos.</p>
         </div>
@@ -174,10 +174,10 @@
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <div><p class="eyebrow">Catálogo</p><h2>Novos no catálogo</h2><p>Aprovados nos últimos dias, de vários países. Cada card mostra o país (código ISO), o modelo de venda, o nível de autenticidade atribuído pela curadoria e o pseudônimo do vendedor, quando ele escolheu exibir.</p></div>
-        <a class="btn btn-ghost" href="explorar.html">Ver os 351 itens<i data-icon="arrow-right"></i></a>
+        <div><p class="eyebrow">Catálogo</p><h2><span data-i18n>Novos no catálogo</span> <span class="badge badge-brass" id="novos-pais" hidden></span></h2><p>Aprovados nos últimos dias, de vários países. Cada card mostra o país (código ISO), o modelo de venda, o nível de autenticidade atribuído pela curadoria e o pseudônimo do vendedor, quando ele escolheu exibir.</p></div>
+        <a class="btn btn-ghost" href="explorar.html"><span data-i18n>Ver os 351 itens</span><i data-icon="arrow-right"></i></a>
       </div>
-      <div class="grid cols-3">
+      <div class="grid cols-3" id="novos-grid">
         <article class="card item-card">
           <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Dados e bases</span></div><div class="preview-lock"><span data-seal></span></div></a>
           <div class="item-body">
@@ -349,6 +349,17 @@ Apoie a partir de US$ 10 · lacre.app/p/4m2x9</div>
       </div>
     </div>
   </section>
+  <script>
+    // País padrão: mostra primeiro os itens do país detectado (ou escolhido); sem itens, mostra todos.
+    document.addEventListener('lacre:ready', function () {
+      var L = window.Lacre.locale, t = window.Lacre.t, grid = document.getElementById('novos-grid'), chip = document.getElementById('novos-pais');
+      if (!grid || L.country === 'GLOBAL') return;
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.item-card'));
+      var mine = cards.filter(function (c) { var tg = c.querySelector('.item-meta .tag'); return tg && tg.textContent.trim() === L.country; });
+      if (mine.length) { cards.forEach(function (c) { c.hidden = mine.indexOf(c) < 0; }); chip.textContent = L.countryName(L.country); chip.hidden = false; }
+      else { chip.textContent = t('Nenhum item de {country} ainda. Mostrando todos os países.', { country: L.countryName(L.country) }); chip.className = 'badge badge-outline'; chip.hidden = false; }
+    });
+  </script>
 </main>
 </body>
 </html>

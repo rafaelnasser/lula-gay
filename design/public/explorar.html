@@ -125,14 +125,15 @@
 
         <!-- Grade -->
         <div>
+          <div class="alert alert-anon" id="country-bar" hidden><i data-icon="globe"></i><div class="row between grow"><span id="country-bar-text"></span><span class="row"><button class="btn btn-sm" data-locale-open id="country-bar-change"></button><button class="btn btn-sm btn-ghost" data-country="GLOBAL" id="country-bar-all"></button></span></div></div>
           <div class="toolbar">
-            <span class="small muted">Mostrando 1–12 de 351 itens</span>
+            <span class="small muted" id="grid-count">Mostrando 1–12 de 351 itens</span>
             <div class="right">
               <select class="select" aria-label="Ordenar por"><option>Mais recentes</option><option>Mais apoiados</option><option>Encerrando primeiro</option><option>Menor preço</option><option>Maior preço</option></select>
               <div class="segmented"><button class="active" data-toast="Visualização em grade" aria-label="Grade"><i data-icon="grid"></i></button><button data-toast="Visualização em lista" aria-label="Lista"><i data-icon="list"></i></button></div>
             </div>
           </div>
-          <div class="grid cols-2">
+          <div class="grid cols-2" id="grade">
             <article class="card item-card">
               <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
               <div class="item-body">
@@ -298,6 +299,28 @@
       </div>
     </div>
   </section>
+  <script>
+    // Filtro padrão por país (detectado pelo navegador ou escolhido no seletor do cabeçalho).
+    document.addEventListener('lacre:ready', function () {
+      var L = window.Lacre.locale, t = window.Lacre.t;
+      var bar = document.getElementById('country-bar'), txt = document.getElementById('country-bar-text');
+      document.getElementById('country-bar-change').textContent = t('Trocar país');
+      document.getElementById('country-bar-all').textContent = t('Ver todos os países');
+      if (L.country === 'GLOBAL') return;
+      var name = L.countryName(L.country), namePt = L.countryName(L.country, 'pt');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('#grade .item-card'));
+      var mine = cards.filter(function (c) { var tg = c.querySelector('.item-meta .tag'); return tg && tg.textContent.trim() === L.country; });
+      bar.hidden = false;
+      if (mine.length) {
+        cards.forEach(function (c) { c.hidden = mine.indexOf(c) < 0; });
+        txt.innerHTML = '<b>' + t('Itens de {country}', { country: name }) + '</b> · ' + mine.length + ' / ' + cards.length;
+        document.getElementById('grid-count').textContent = mine.length + ' · ' + name;
+        document.querySelectorAll('.filter-group .check').forEach(function (lb) { var inp = lb.querySelector('input'), nm = lb.querySelector('.grow'); if (inp && nm && lb.closest('.filter-group').querySelector('h4') && lb.closest('.filter-group').querySelector('h4').textContent.trim() === 'País') inp.checked = nm.textContent.trim().indexOf(namePt) === 0; });
+      } else {
+        txt.textContent = t('Nenhum item de {country} ainda. Mostrando todos os países.', { country: name });
+      }
+    });
+  </script>
 </main>
 </body>
 </html>

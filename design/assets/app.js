@@ -17,6 +17,125 @@
   const root = body.dataset.root || './';
   const href = (p) => root + p;
 
+  /* ------------------------------------------------- idioma e país */
+  // Dicionário do shell, indexado pelo texto em português (fallback: o próprio texto).
+  const I18N = {
+    en: {
+      'Explorar': 'Explore', 'Pedidos': 'Requests', 'Como funciona': 'How it works', 'Para vendedores': 'For sellers', 'Políticas': 'Policies',
+      'Entrar': 'Sign in', 'Criar conta anônima': 'Create anonymous account', 'Índice do protótipo': 'Prototype index', 'Sair': 'Sign out', 'Design system': 'Design system',
+      'Marketplace curado de informação. Anonimato total entre as partes, curadoria humana obrigatória e prova pública de cada item.': 'A curated marketplace for information. Full anonymity between parties, mandatory human curation and a public proof for every item.',
+      'Provas públicas': 'Public proofs', 'Feed': 'Feed', 'Marketplace': 'Marketplace', 'Lacres coletivos': 'Collective seals', 'Pedidos com recompensa': 'Requests with rewards',
+      'Sua conta': 'Your account', 'Vender informação': 'Sell information', 'Reputação': 'Reputation', 'Confiança': 'Trust', 'Política de conteúdo': 'Content policy',
+      'Anonimato e seus limites': 'Anonymity and its limits', 'Denunciar um item': 'Report an item', 'Pedidos jurídicos': 'Legal requests',
+      '© 2026 Lacre · Protótipo navegável · Nenhum dado de identidade é coletado.': '© 2026 Lacre · Navigable prototype · No identity data is collected.',
+      'Comprar': 'Buy', 'Painel': 'Dashboard', 'Explorar catálogo': 'Explore catalog', 'Meus pedidos': 'My requests', 'Minha conta': 'My account', 'Cofre': 'Vault', 'Apoios': 'Backings',
+      'Carteira': 'Wallet', 'Mensagens': 'Messages', 'Notificações': 'Notifications', 'Configurações': 'Settings', 'Vender': 'Sell', 'Meus anúncios': 'My listings', 'Novo anúncio': 'New listing',
+      'Pedidos abertos': 'Open requests', 'Conta': 'Account', 'Ganhos e saques': 'Earnings and withdrawals', 'Curadoria': 'Curation', 'Fila de análise': 'Review queue',
+      'Análise (workbench)': 'Review (workbench)', 'Jurídico': 'Legal', 'Publicação': 'Publishing', 'Operação': 'Operations', 'Disputas': 'Disputes', 'Denúncias': 'Reports',
+      'Contas': 'Accounts', 'Financeiro': 'Finance', 'Sistema': 'System', 'Auditoria': 'Audit log', 'Área do vendedor': 'Seller area', 'Área do comprador': 'Buyer area',
+      'mesma conta, outro papel': 'same account, another role', 'Comprador': 'Buyer', 'Vendedor': 'Seller', 'Minhas ações': 'My actions',
+      'Buscar no catálogo…': 'Search the catalog…', 'Buscar item, pseudônimo, hash…': 'Search item, pseudonym, hash…', 'Alternar tema': 'Toggle theme', 'Tema claro': 'Light theme', 'Tema escuro': 'Dark theme',
+      'Idioma': 'Language', 'País': 'Country', 'Buscar país…': 'Search country…', 'Todos os países (Global)': 'All countries (Global)', 'Detectado pelo navegador': 'Detected from your browser',
+      'idioma e fuso horário · sem GPS, sem IP guardado': 'language and time zone · no GPS, no IP stored', 'Trocar': 'Change', 'Entendi': 'Got it', 'Idioma e país': 'Language and country',
+      'Mostrando o Lacre em {lang} com itens de {country}, detectados pelo seu navegador.': 'Showing Lacre in {lang} with items from {country}, detected from your browser.',
+      'Itens de {country}': 'Items from {country}', 'Ver todos os países': 'See all countries', 'Trocar país': 'Change country',
+      'Nenhum item de {country} ainda. Mostrando todos os países.': 'No items from {country} yet. Showing all countries.', 'Novos no catálogo': 'New in the catalog',
+      'Informação com lacre. Anonimato dos dois lados.': 'Sealed information. Anonymity on both sides.',
+      'Explorar o catálogo': 'Explore the catalog', 'Documentos, bases de dados, fotografias, áudios e apurações de qualquer país, vendidos por pessoas que não precisam dizer quem são, para pessoas que também não precisam. Nada vai ao ar sem uma equipe humana ler tudo antes.': 'Documents, datasets, photographs, audio and investigations from any country, sold by people who do not need to say who they are, to people who do not need to either. Nothing goes live before a human team reads all of it.', 'Ver os 351 itens': 'See all 351 items', 'Curadoria humana obrigatória.': 'Mandatory human curation.', 'Anonimato total entre as partes.': 'Full anonymity between parties.', 'Prova pública de cada item.': 'A public proof for every item.'
+    },
+    es: {
+      'Explorar': 'Explorar', 'Pedidos': 'Pedidos', 'Como funciona': 'Cómo funciona', 'Para vendedores': 'Para vendedores', 'Políticas': 'Políticas',
+      'Entrar': 'Entrar', 'Criar conta anônima': 'Crear cuenta anónima', 'Índice do protótipo': 'Índice del prototipo', 'Sair': 'Salir', 'Design system': 'Design system',
+      'Marketplace curado de informação. Anonimato total entre as partes, curadoria humana obrigatória e prova pública de cada item.': 'Marketplace curado de información. Anonimato total entre las partes, curaduría humana obligatoria y prueba pública de cada ítem.',
+      'Provas públicas': 'Pruebas públicas', 'Feed': 'Feed', 'Marketplace': 'Marketplace', 'Lacres coletivos': 'Lacres colectivos', 'Pedidos com recompensa': 'Pedidos con recompensa',
+      'Sua conta': 'Tu cuenta', 'Vender informação': 'Vender información', 'Reputação': 'Reputación', 'Confiança': 'Confianza', 'Política de conteúdo': 'Política de contenido',
+      'Anonimato e seus limites': 'Anonimato y sus límites', 'Denunciar um item': 'Denunciar un ítem', 'Pedidos jurídicos': 'Solicitudes legales',
+      '© 2026 Lacre · Protótipo navegável · Nenhum dado de identidade é coletado.': '© 2026 Lacre · Prototipo navegable · No se recopila ningún dato de identidad.',
+      'Comprar': 'Comprar', 'Painel': 'Panel', 'Explorar catálogo': 'Explorar catálogo', 'Meus pedidos': 'Mis pedidos', 'Minha conta': 'Mi cuenta', 'Cofre': 'Bóveda', 'Apoios': 'Apoyos',
+      'Carteira': 'Billetera', 'Mensagens': 'Mensajes', 'Notificações': 'Notificaciones', 'Configurações': 'Configuración', 'Vender': 'Vender', 'Meus anúncios': 'Mis anuncios', 'Novo anúncio': 'Nuevo anuncio',
+      'Pedidos abertos': 'Pedidos abiertos', 'Conta': 'Cuenta', 'Ganhos e saques': 'Ganancias y retiros', 'Curadoria': 'Curaduría', 'Fila de análise': 'Cola de análisis',
+      'Análise (workbench)': 'Análisis (workbench)', 'Jurídico': 'Jurídico', 'Publicação': 'Publicación', 'Operação': 'Operación', 'Disputas': 'Disputas', 'Denúncias': 'Denuncias',
+      'Contas': 'Cuentas', 'Financeiro': 'Finanzas', 'Sistema': 'Sistema', 'Auditoria': 'Auditoría', 'Área do vendedor': 'Área del vendedor', 'Área do comprador': 'Área del comprador',
+      'mesma conta, outro papel': 'misma cuenta, otro rol', 'Comprador': 'Comprador', 'Vendedor': 'Vendedor', 'Minhas ações': 'Mis acciones',
+      'Buscar no catálogo…': 'Buscar en el catálogo…', 'Buscar item, pseudônimo, hash…': 'Buscar ítem, seudónimo, hash…', 'Alternar tema': 'Cambiar tema', 'Tema claro': 'Tema claro', 'Tema escuro': 'Tema oscuro',
+      'Idioma': 'Idioma', 'País': 'País', 'Buscar país…': 'Buscar país…', 'Todos os países (Global)': 'Todos los países (Global)', 'Detectado pelo navegador': 'Detectado por el navegador',
+      'idioma e fuso horário · sem GPS, sem IP guardado': 'idioma y zona horaria · sin GPS, sin IP guardada', 'Trocar': 'Cambiar', 'Entendi': 'Entendido', 'Idioma e país': 'Idioma y país',
+      'Mostrando o Lacre em {lang} com itens de {country}, detectados pelo seu navegador.': 'Mostrando Lacre en {lang} con ítems de {country}, detectados por tu navegador.',
+      'Itens de {country}': 'Ítems de {country}', 'Ver todos os países': 'Ver todos los países', 'Trocar país': 'Cambiar país',
+      'Nenhum item de {country} ainda. Mostrando todos os países.': 'Aún no hay ítems de {country}. Mostrando todos los países.', 'Novos no catálogo': 'Nuevos en el catálogo',
+      'Informação com lacre. Anonimato dos dois lados.': 'Información con lacre. Anonimato de los dos lados.',
+      'Explorar o catálogo': 'Explorar el catálogo', 'Documentos, bases de dados, fotografias, áudios e apurações de qualquer país, vendidos por pessoas que não precisam dizer quem são, para pessoas que também não precisam. Nada vai ao ar sem uma equipe humana ler tudo antes.': 'Documentos, bases de datos, fotografías, audios e investigaciones de cualquier país, vendidos por personas que no necesitan decir quiénes son, a personas que tampoco lo necesitan. Nada sale al aire sin que un equipo humano lo lea antes.', 'Ver os 351 itens': 'Ver los 351 ítems', 'Curadoria humana obrigatória.': 'Curaduría humana obligatoria.', 'Anonimato total entre as partes.': 'Anonimato total entre las partes.', 'Prova pública de cada item.': 'Prueba pública de cada ítem.'
+    }
+  };
+  const LANGS = { pt: 'Português', en: 'English', es: 'Español' };
+  // nomes dos países em pt / en / es
+  const COUNTRIES = {
+    GLOBAL: ['Global', 'Global', 'Global'], BR: ['Brasil', 'Brazil', 'Brasil'], US: ['Estados Unidos', 'United States', 'Estados Unidos'], AR: ['Argentina', 'Argentina', 'Argentina'],
+    PT: ['Portugal', 'Portugal', 'Portugal'], MX: ['México', 'Mexico', 'México'], GB: ['Reino Unido', 'United Kingdom', 'Reino Unido'], DE: ['Alemanha', 'Germany', 'Alemania'],
+    IN: ['Índia', 'India', 'India'], CL: ['Chile', 'Chile', 'Chile'], BD: ['Bangladesh', 'Bangladesh', 'Bangladesh'], CO: ['Colômbia', 'Colombia', 'Colombia'], ES: ['Espanha', 'Spain', 'España'],
+    FR: ['França', 'France', 'Francia'], IT: ['Itália', 'Italy', 'Italia'], PE: ['Peru', 'Peru', 'Perú'], UY: ['Uruguai', 'Uruguay', 'Uruguay'], CA: ['Canadá', 'Canada', 'Canadá'],
+    AU: ['Austrália', 'Australia', 'Australia'], ZA: ['África do Sul', 'South Africa', 'Sudáfrica'], NG: ['Nigéria', 'Nigeria', 'Nigeria'], KE: ['Quênia', 'Kenya', 'Kenia'],
+    JP: ['Japão', 'Japan', 'Japón'], KR: ['Coreia do Sul', 'South Korea', 'Corea del Sur'], ID: ['Indonésia', 'Indonesia', 'Indonesia'], PH: ['Filipinas', 'Philippines', 'Filipinas'],
+    TR: ['Turquia', 'Turkey', 'Turquía'], PL: ['Polônia', 'Poland', 'Polonia'], NL: ['Países Baixos', 'Netherlands', 'Países Bajos'], AO: ['Angola', 'Angola', 'Angola'], MZ: ['Moçambique', 'Mozambique', 'Mozambique']
+  };
+  // fuso horário → país (sinal sem permissão e sem IP)
+  const TZ = { 'America/Sao_Paulo': 'BR', 'America/Fortaleza': 'BR', 'America/Recife': 'BR', 'America/Bahia': 'BR', 'America/Manaus': 'BR', 'America/Belem': 'BR', 'America/Cuiaba': 'BR', 'America/Campo_Grande': 'BR', 'America/Porto_Velho': 'BR', 'America/Boa_Vista': 'BR', 'America/Rio_Branco': 'BR', 'America/Maceio': 'BR', 'America/Araguaina': 'BR', 'America/Santarem': 'BR', 'America/Noronha': 'BR',
+    'America/Santiago': 'CL', 'America/Punta_Arenas': 'CL', 'America/Montevideo': 'UY', 'America/Lima': 'PE', 'America/Bogota': 'CO', 'America/Mexico_City': 'MX', 'America/Cancun': 'MX', 'America/Monterrey': 'MX', 'America/Tijuana': 'MX', 'America/Chihuahua': 'MX', 'America/Merida': 'MX', 'America/Hermosillo': 'MX', 'America/Mazatlan': 'MX',
+    'America/New_York': 'US', 'America/Chicago': 'US', 'America/Denver': 'US', 'America/Los_Angeles': 'US', 'America/Phoenix': 'US', 'America/Anchorage': 'US', 'Pacific/Honolulu': 'US', 'America/Detroit': 'US',
+    'America/Toronto': 'CA', 'America/Vancouver': 'CA', 'America/Edmonton': 'CA', 'America/Winnipeg': 'CA', 'America/Halifax': 'CA', 'Europe/Lisbon': 'PT', 'Atlantic/Azores': 'PT', 'Atlantic/Madeira': 'PT',
+    'Europe/Madrid': 'ES', 'Atlantic/Canary': 'ES', 'Europe/London': 'GB', 'Europe/Berlin': 'DE', 'Europe/Paris': 'FR', 'Europe/Rome': 'IT', 'Europe/Amsterdam': 'NL', 'Europe/Warsaw': 'PL', 'Europe/Istanbul': 'TR',
+    'Asia/Kolkata': 'IN', 'Asia/Dhaka': 'BD', 'Asia/Tokyo': 'JP', 'Asia/Seoul': 'KR', 'Asia/Jakarta': 'ID', 'Asia/Manila': 'PH', 'Africa/Johannesburg': 'ZA', 'Africa/Lagos': 'NG', 'Africa/Nairobi': 'KE', 'Africa/Luanda': 'AO', 'Africa/Maputo': 'MZ' };
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function detectLang() {
+    const langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en']);
+    for (const l of langs) { const p = String(l).slice(0, 2).toLowerCase(); if (LANGS[p]) return p; }
+    return 'en';
+  }
+  function detectCountry() {
+    const langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']);
+    for (const l of langs) { const m = /^[a-z]{2,3}-([A-Za-z]{2})/.exec(String(l)); if (m && COUNTRIES[m[1].toUpperCase()]) return m[1].toUpperCase(); }
+    try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; if (tz) { if (TZ[tz]) return TZ[tz]; if (tz.startsWith('America/Argentina/')) return 'AR'; if (tz.startsWith('Australia/')) return 'AU'; } } catch (e) {}
+    return 'GLOBAL';
+  }
+  const detected = { lang: detectLang(), country: detectCountry() };
+  const locale = {
+    lang: (lsGet('lacre-lang') && LANGS[lsGet('lacre-lang')]) ? lsGet('lacre-lang') : detected.lang,
+    country: (lsGet('lacre-country') && COUNTRIES[lsGet('lacre-country')]) ? lsGet('lacre-country') : detected.country,
+    detected,
+    countryName(code, lang) { const c = COUNTRIES[code] || COUNTRIES.GLOBAL; return c[{ pt: 0, en: 1, es: 2 }[lang || locale.lang]]; },
+    setLang(l) { lsSet('lacre-lang', l); location.reload(); },
+    setCountry(c) { lsSet('lacre-country', c); location.reload(); }
+  };
+  function t(text, vars) {
+    let out = (I18N[locale.lang] && I18N[locale.lang][text]) || text;
+    if (vars) Object.keys(vars).forEach(k => { out = out.split('{' + k + '}').join(vars[k]); });
+    return out;
+  }
+  // Traduz nós de texto, placeholders e rótulos dentro de um subtree, pelo texto em português.
+  function translateTree(rootEl) {
+    if (!rootEl || locale.lang === 'pt') return;
+    const walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT);
+    const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(n => { const raw = n.nodeValue, k = raw.trim(); if (k && I18N[locale.lang][k]) n.nodeValue = raw.replace(k, I18N[locale.lang][k]); });
+    rootEl.querySelectorAll('[placeholder],[aria-label],[data-tip]').forEach(el => ['placeholder', 'aria-label', 'data-tip'].forEach(a => { const v = el.getAttribute(a); if (v && I18N[locale.lang][v]) el.setAttribute(a, I18N[locale.lang][v]); }));
+  }
+  function localeControl() {
+    const cur = (locale.country === 'GLOBAL' ? '🌐' : locale.country) + ' · ' + locale.lang;
+    let list = '<button data-country="GLOBAL"' + (locale.country === 'GLOBAL' ? ' class="active"' : '') + '>' + t('Todos os países (Global)') + '</button>';
+    Object.keys(COUNTRIES).filter(c => c !== 'GLOBAL').map(c => [c, locale.countryName(c)]).sort((a, b) => a[1].localeCompare(b[1])).forEach(([c, n]) => { list += '<button data-country="' + c + '"' + (locale.country === c ? ' class="active"' : '') + '><span class="tag">' + c + '</span>' + n + '</button>'; });
+    return '<div class="menu-wrap locale-wrap"><button class="locale-btn" data-menu-toggle aria-label="' + t('Idioma e país') + '">' + iconSvg('globe') + '<span>' + cur.replace('🌐', 'Global') + '</span></button>' +
+      '<div class="menu locale-menu">' +
+      '<div class="lm-sec"><div class="lm-label">' + t('Idioma') + '</div><div class="segmented">' + Object.keys(LANGS).map(l => '<button data-lang="' + l + '"' + (l === locale.lang ? ' class="active"' : '') + '>' + LANGS[l] + '</button>').join('') + '</div></div>' +
+      '<div class="lm-sec"><div class="lm-label">' + t('País') + '</div><div class="search"><span class="icon-wrap">' + iconSvg('search') + '</span><input class="input" type="search" data-country-search placeholder="' + t('Buscar país…') + '" aria-label="' + t('Buscar país…') + '"></div><div class="lm-list">' + list + '</div></div>' +
+      '<div class="lm-foot">' + t('Detectado pelo navegador') + ': ' + LANGS[detected.lang] + ' · ' + locale.countryName(detected.country) + '<br><span class="muted">' + t('idioma e fuso horário · sem GPS, sem IP guardado') + '</span></div>' +
+      '</div></div>';
+  }
+  function localeBar() {
+    if (lsGet('lacre-locale-ack')) return '';
+    return '<div class="locale-bar"><div class="container">' + iconSvg('globe') + '<span>' + t('Mostrando o Lacre em {lang} com itens de {country}, detectados pelo seu navegador.', { lang: LANGS[locale.lang], country: locale.countryName(locale.country) }) + '</span><button class="btn btn-sm" data-locale-open>' + t('Trocar') + '</button><button class="btn btn-sm btn-ghost" data-locale-ack>' + t('Entendi') + '</button></div></div>';
+  }
+
   /* ------------------------------------------------------------------ ícones */
   const ICONS = {
     search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
@@ -311,6 +430,7 @@
     if (title) html += '<span class="page-title">' + title + '</span>';
     html += '<div class="search"><span class="icon-wrap">' + iconSvg('search') + '</span><input class="input" type="search" placeholder="' + searchPh + '" aria-label="Buscar"></div><span class="spacer"></span>';
     if (kind !== 'admin') html += '<a class="wallet-chip" href="' + href('buyer/carteira.html') + '">' + iconSvg('wallet') + '<span class="label muted">Carteira</span><b>US$ 1.240,00</b></a>';
+    html += localeControl();
     html += '<button class="icon-btn" data-theme-toggle aria-label="Alternar tema"></button>';
     html += '<a class="icon-btn" href="' + href('buyer/notificacoes.html') + '" aria-label="Notificações">' + iconSvg('bell') + '<span class="dot"></span></a>';
     html += '<div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Conta">' + (kind === 'admin' ? '<span class="identicon" style="width:26px;height:26px;background:var(--brass-soft);display:inline-flex;align-items:center;justify-content:center;color:var(--brass);font-weight:700;font-size:11px">AR</span>' : '<span class="identicon" data-handle="coruja-7f3a"></span>') + '</button>';
@@ -322,7 +442,7 @@
   function buildPublicHeader() {
     let html = '<header class="site-header"><div class="container">' + brandHtml() + '<nav class="site-nav">';
     NAV.public.forEach(it => { html += '<a href="' + href(it.to) + '"' + (it.key === page ? ' class="active"' : '') + '>' + it.label + '</a>'; });
-    html += '</nav><div class="site-actions"><button class="icon-btn" data-theme-toggle aria-label="Alternar tema"></button>';
+    html += '</nav><div class="site-actions">' + localeControl() + '<button class="icon-btn" data-theme-toggle aria-label="Alternar tema"></button>';
     html += '<a class="btn btn-ghost" href="' + href('auth/entrar.html') + '">Entrar</a><a class="btn btn-primary" href="' + href('auth/criar-conta.html') + '">Criar conta anônima</a>';
     html += '<button class="icon-btn menu-btn" data-nav-toggle aria-label="Menu">' + iconSvg('menu') + '</button></div></div>';
     html += '<nav class="mobile-nav">';
@@ -347,17 +467,17 @@
       const app = document.createElement('div'); app.className = 'app';
       app.innerHTML = buildSidebar(shell);
       const wrap = document.createElement('div'); wrap.className = 'main';
-      wrap.innerHTML = buildTopbar(shell);
+      wrap.innerHTML = buildTopbar(shell) + localeBar();
       main.parentNode.insertBefore(app, main);
       wrap.appendChild(main);
       app.appendChild(wrap);
       if (!main.classList.contains('content')) main.classList.add('content');
     } else if (shell === 'public') {
-      main.insertAdjacentHTML('beforebegin', buildPublicHeader());
+      main.insertAdjacentHTML('beforebegin', buildPublicHeader() + localeBar());
       main.insertAdjacentHTML('afterend', buildPublicFooter());
     } else if (shell === 'auth') {
       const wrap = document.createElement('div'); wrap.className = 'auth-layout';
-      wrap.innerHTML = '<div class="auth-top">' + brandHtml() + '<div class="row"><button class="icon-btn" data-theme-toggle aria-label="Alternar tema"></button><a class="btn btn-ghost btn-sm" href="' + href('index.html') + '">Índice do protótipo</a></div></div>';
+      wrap.innerHTML = '<div class="auth-top">' + brandHtml() + '<div class="row">' + localeControl() + '<button class="icon-btn" data-theme-toggle aria-label="Alternar tema"></button><a class="btn btn-ghost btn-sm" href="' + href('index.html') + '">Índice do protótipo</a></div></div>';
       const bodyWrap = document.createElement('div'); bodyWrap.className = 'auth-body';
       main.parentNode.insertBefore(wrap, main);
       bodyWrap.appendChild(main); wrap.appendChild(bodyWrap);
@@ -367,12 +487,16 @@
   /* ---------------------------------------------------------- interações */
   function bind() {
     document.addEventListener('click', (e) => {
-      const t = e.target.closest('[data-theme-toggle],[data-sidebar-toggle],[data-sidebar-close],[data-nav-toggle],[data-menu-toggle],[data-tab],[data-modal-open],[data-modal-close],[data-show],[data-step-go],[data-copy],[data-toast],[data-amount],[data-toggle-class],[data-dismiss]');
+      const t = e.target.closest('[data-theme-toggle],[data-sidebar-toggle],[data-sidebar-close],[data-nav-toggle],[data-menu-toggle],[data-tab],[data-modal-open],[data-modal-close],[data-show],[data-step-go],[data-copy],[data-toast],[data-amount],[data-toggle-class],[data-dismiss],[data-lang],[data-country],[data-locale-ack],[data-locale-open]');
       if (!t) {
-        document.querySelectorAll('.menu.open').forEach(m => m.classList.remove('open'));
+        if (!e.target.closest('.menu')) document.querySelectorAll('.menu.open').forEach(m => m.classList.remove('open'));
         return;
       }
       if (t.hasAttribute('data-theme-toggle')) { toggleTheme(); return; }
+      if (t.hasAttribute('data-lang')) { e.preventDefault(); locale.setLang(t.dataset.lang); return; }
+      if (t.hasAttribute('data-country')) { e.preventDefault(); lsSet('lacre-locale-ack', '1'); locale.setCountry(t.dataset.country); return; }
+      if (t.hasAttribute('data-locale-ack')) { e.preventDefault(); lsSet('lacre-locale-ack', '1'); const bar = t.closest('.locale-bar'); if (bar) bar.remove(); return; }
+      if (t.hasAttribute('data-locale-open')) { e.preventDefault(); const m = document.querySelector('.locale-menu'); if (m) m.classList.add('open'); const inp = m && m.querySelector('[data-country-search]'); if (inp) inp.focus(); return; }
       if (t.hasAttribute('data-sidebar-toggle')) { body.classList.toggle('sidebar-open'); return; }
       if (t.hasAttribute('data-sidebar-close')) { body.classList.remove('sidebar-open'); return; }
       if (t.hasAttribute('data-nav-toggle')) { body.classList.toggle('nav-open'); return; }
@@ -431,6 +555,11 @@
       if (t.hasAttribute('data-dismiss')) { e.preventDefault(); const tgt = t.closest(t.dataset.dismiss || '.alert'); if (tgt) tgt.remove(); return; }
     });
     document.addEventListener('click', (e) => { if (e.target.classList && e.target.classList.contains('modal-backdrop')) e.target.classList.remove('open'); });
+    document.addEventListener('input', (e) => {
+      if (!e.target.matches('[data-country-search]')) return;
+      const q = e.target.value.trim().toLowerCase();
+      e.target.closest('.lm-sec').querySelectorAll('.lm-list button').forEach(b => { b.hidden = !!q && !b.textContent.toLowerCase().includes(q); });
+    });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open')); body.classList.remove('sidebar-open', 'nav-open'); } });
     document.querySelectorAll('form').forEach(f => f.addEventListener('submit', (e) => { e.preventDefault(); window.toast(f.dataset.submitToast || 'Enviado (protótipo)'); }));
     // variantes: ativar a padrão
@@ -463,7 +592,7 @@
 
   /* --------------------------------------------------------- utilitários */
   window.Lacre = {
-    BRAND, icon: iconSvg, identicon: identiconSvg, seal: SEAL,
+    BRAND, icon: iconSvg, identicon: identiconSvg, seal: SEAL, locale, t, countries: COUNTRIES,
     brl: (cents) => (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
     render: (scope) => { renderIcons(scope); renderIdenticons(scope); }
   };
@@ -471,11 +600,15 @@
   /* ---------------------------------------------------------------- init */
   function init() {
     mountShell();
+    document.documentElement.lang = { pt: 'pt-BR', en: 'en', es: 'es' }[locale.lang];
+    ['.sidebar', '.topbar', '.site-header', '.site-footer', '.auth-top', '.locale-bar'].forEach(sel => document.querySelectorAll(sel).forEach(translateTree));
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n') || el.textContent.trim(); const v = I18N[locale.lang] && I18N[locale.lang][k]; if (v) el.textContent = v; });
     renderIcons();
     renderIdenticons();
     applyTheme(document.documentElement.getAttribute('data-theme'));
     bind();
     document.title = document.title || BRAND;
+    document.dispatchEvent(new CustomEvent('lacre:ready', { detail: { locale } }));
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

@@ -91,6 +91,18 @@ Pipeline executado em um worker isolado antes de qualquer humano ver o arquivo:
 
 **Regulação (validar com advogado antes do lançamento).** Guardar cripto de usuários e intermediar pagamentos pode enquadrar a plataforma como prestadora de serviços de ativos virtuais (Lei 14.478/2022 e a regulamentação do Banco Central publicada em 2025, que exige autorização para operar). Duas respostas possíveis: (1) estruturar a operação para obter ou dispensar a autorização, conforme a jurisdição escolhida; (2) migrar a custódia para contratos de escrow on-chain (USDC em Base/Polygon) em que a plataforma só assina liberações e reembolsos e nunca detém os fundos, o que reduz o enquadramento como custodiante. O MVP assume (1); (2) está no roadmap da fase 2.
 
+## 6b. Idioma e país sem pedir localização
+
+A interface segue o idioma do navegador (`Accept-Language` no servidor, `navigator.languages` no cliente): português, inglês ou espanhol, com inglês como padrão para os demais. O catálogo abre, por padrão, nos itens do país do usuário. O país é inferido **sem pedir permissão de localização e sem guardar IP**, nesta ordem:
+
+1. Escolha salva pelo usuário no seletor de idioma e país (armazenada só no dispositivo; opcionalmente nas preferências da conta).
+2. Região do idioma do navegador (`pt-BR` → Brasil, `es-AR` → Argentina, `en-GB` → Reino Unido).
+3. Fuso horário do navegador (`America/Sao_Paulo` → Brasil, `Europe/Lisbon` → Portugal).
+4. Em produção, país do IP calculado na borda (GeoIP) e descartado na mesma requisição: só o código do país chega à aplicação, nunca o IP.
+5. Sem sinal: Global.
+
+Não usamos a API de geolocalização do navegador (GPS): ela exige um pedido de permissão que assusta quem busca anonimato, entrega posição exata (desnecessária para um filtro por país) e não funciona em Tor. O usuário vê sempre o que foi detectado ("Detectado pelo navegador: Português · Brasil") e troca com um clique.
+
 ## 7. Comunicação entre partes
 
 - Mensagens só dentro da plataforma, por item ou pedido.

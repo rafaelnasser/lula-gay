@@ -12,7 +12,7 @@ O Lacre é o marketplace onde informação é negociada com três garantias que 
 2. **Curadoria humana obrigatória.** Nada entra no catálogo sem passar pela nossa equipe. Avaliamos legalidade, autenticidade, qualidade e coerência entre a prévia e o conteúdo.
 3. **Prova pública.** Todo item aprovado recebe uma página de prova com hash criptográfico e carimbo de tempo. A prévia é publicada no X e nas redes. O público sabe que o item existe, que é real e que não foi alterado.
 
-**Escopo global.** O Lacre não é uma plataforma brasileira: aceita informação sobre qualquer país, de vendedores e compradores de qualquer lugar. Cada item declara os países a que se refere (ou "Global") e o idioma do material; o catálogo filtra por país. Preços em dólar (US$), liquidados em USDT. O protótipo está em português; o produto nasce com interface em português, inglês e espanhol.
+**Escopo global.** O Lacre não é uma plataforma brasileira: aceita informação sobre qualquer país, de vendedores e compradores de qualquer lugar. Cada item declara os países a que se refere (ou "Global") e o idioma do material; o catálogo filtra por país. Preços em dólar (US$), liquidados em USDT. A interface segue o idioma do navegador (português, inglês ou espanhol) e o catálogo abre nos itens do país do usuário, inferido sem pedir localização (ver `03 §6b`); um seletor no cabeçalho troca idioma e país. O protótipo está em português, com o cabeçalho, os menus e a página inicial já traduzidos para demonstrar o mecanismo.
 
 ## 2. O que é e o que não é
 

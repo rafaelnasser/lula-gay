@@ -735,6 +735,31 @@ legend { padding: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--fg-
 [data-wizard] [data-step]:not(.active) { display: none; }
 
 /* --------------------------------------------------------------------------
+   Idioma e país
+   -------------------------------------------------------------------------- */
+.locale-btn { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px; border-radius: var(--r-sm); color: var(--fg-2); font-size: var(--fs-xs); font-weight: 600; letter-spacing: .02em; border: 1px solid transparent; white-space: nowrap; }
+.locale-btn:hover { background: var(--surface-2); color: var(--fg); }
+.locale-btn svg { width: 16px; height: 16px; color: var(--brass); }
+.locale-menu { width: 320px; max-width: calc(100vw - 32px); padding: 10px; }
+.locale-menu .lm-sec + .lm-sec { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+.locale-menu .lm-label { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+.locale-menu .segmented { display: flex; width: 100%; }
+.locale-menu .segmented button { flex: 1; }
+.locale-menu .search { margin-bottom: 6px; }
+.locale-menu .lm-list { max-height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 1px; }
+.locale-menu .lm-list button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 7px 8px; border-radius: 6px; font-size: var(--fs-sm); color: var(--fg-2); text-align: left; }
+.locale-menu .lm-list button:hover { background: var(--surface-2); color: var(--fg); }
+.locale-menu .lm-list button.active { background: var(--brass-soft); color: var(--fg); font-weight: 600; }
+.locale-menu .lm-list .tag { min-width: 30px; text-align: center; }
+.locale-menu .lm-foot { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: var(--fs-xs); color: var(--fg-2); line-height: 1.5; }
+.locale-bar { background: var(--brass-soft); border-bottom: 1px solid var(--border); font-size: var(--fs-sm); }
+.locale-bar .container { display: flex; align-items: center; gap: 12px; padding-block: 8px; flex-wrap: wrap; }
+.locale-bar svg { width: 16px; height: 16px; color: var(--brass); flex: none; }
+.locale-bar span { flex: 1 1 280px; }
+.app .locale-bar .container { max-width: none; padding-left: var(--gutter); padding-right: var(--gutter-r); }
+@media (max-width: 600px) { .locale-btn span { display: none; } .locale-btn { padding: 0 8px; } }
+
+/* --------------------------------------------------------------------------
    Público: hero e blocos
    -------------------------------------------------------------------------- */
 .hero { padding-block: 56px 40px; position: relative; overflow: hidden; }

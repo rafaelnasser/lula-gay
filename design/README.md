@@ -127,6 +127,13 @@ design/
 
 **Datas:** hoje é 27/10/2026. Prazos no futuro próximo (nov/dez 2026).
 
+## Idioma e país no protótipo
+
+- `app.js` detecta o idioma (`navigator.languages`) e o país (região do idioma, depois fuso horário) e expõe `Lacre.locale` (`lang`, `country`, `countryName(code)`, `setLang`, `setCountry`) e `Lacre.t(texto)`.
+- O shell (cabeçalho, menus, rodapé) é traduzido automaticamente pelo texto em português (dicionário `I18N` em `app.js`). Para traduzir um texto de página, acrescente `data-i18n` ao elemento e a chave (o próprio texto em português) ao dicionário.
+- Páginas que filtram por país escutam o evento `lacre:ready` e comparam `Lacre.locale.country` com a `.tag` do card (ver `public/explorar.html` e `public/home.html`).
+- Para testar outro idioma ou país no navegador: troque no seletor do cabeçalho (fica salvo no dispositivo) ou limpe `lacre-lang`, `lacre-country` e `lacre-locale-ack` do `localStorage`.
+
 ## Regras do protótipo
 
 1. Nunca peça nome, e-mail, telefone ou CPF em nenhuma tela. Onde um produto comum pediria, mostre o bloco "O que não pedimos".

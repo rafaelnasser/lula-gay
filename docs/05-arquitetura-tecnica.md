@@ -212,7 +212,17 @@ GET    /admin/audit
 GET    /admin/settings  PATCH /admin/settings
 ```
 
-## 10. Segurança: lista mínima antes do lançamento
+## 10. Internacionalização
+
+- **Idiomas**: português, inglês e espanhol no lançamento; arquivos de mensagens por idioma (formato ICU para plurais e variáveis), chaves estáveis, fallback para inglês. Textos de interface nunca ficam no código.
+- **Detecção**: servidor lê `Accept-Language` para renderizar a primeira página no idioma certo (sem "piscar"); cliente confirma com `navigator.languages`. Escolha do usuário em cookie sem identidade (`lang`) e, se logado, em `account.prefs`.
+- **URLs**: prefixo de idioma (`/pt/`, `/en/`, `/es/`) nas páginas públicas, para SEO e compartilhamento; páginas de prova sempre acessíveis em todos os idiomas.
+- **País padrão**: ver `03 §6b`. Cookie sem identidade (`country`); o filtro do catálogo e do mural parte dele; o seletor no cabeçalho troca na hora.
+- **Formatação**: `Intl.NumberFormat` e `Intl.DateTimeFormat` por idioma; preços sempre em US$ (USDT 1:1), com equivalente em moeda local como referência na fase 2.
+- **Conteúdo dos itens**: título e resumo ficam no idioma em que o vendedor escreveu; o campo `languages` do item alimenta o filtro de idioma. Fase 2: tradução automática de título e resumo com rótulo "traduzido automaticamente", nunca do conteúdo vendido.
+- **Equipe**: curadoria por idioma (fila filtra por `languages`); posts nas redes no idioma do item e, para lacres grandes, também em inglês.
+
+## 11. Segurança: lista mínima antes do lançamento
 
 - [ ] Argon2id para senhas; passkeys; arquivo de acesso (Ed25519, chave privada cifrada no cliente, só a pública no servidor, desafio com nonce de uso único); TOTP; rate limit por conta e por token anônimo (sem IP em claro).
 - [ ] CSP estrita, sem scripts de terceiros, sem analytics externos.
