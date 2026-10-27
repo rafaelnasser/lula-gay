@@ -225,8 +225,8 @@
           <div class="card-head"><h3>Leitura</h3></div>
           <div class="card-body stack">
             <div class="row between"><div><b class="small">Densidade</b><div class="xs muted">Tabelas e listas.</div></div><div class="segmented"><button class="active" data-toast="Densidade confortável">Confortável</button><button data-toast="Densidade compacta aplicada">Compacta</button></div></div>
-            <div class="row between"><div><b class="small">Moeda em destaque</b><div class="xs muted">Preços sempre em R$; o equivalente em USDT aparece ao lado.</div></div><div class="segmented"><button class="active" data-toast="R$ em destaque, USDT ao lado">R$</button><button data-toast="USDT em destaque, R$ ao lado">USDT</button></div></div>
-            <div class="field"><label for="idioma">Idioma</label><select id="idioma" class="select"><option>Português (Brasil)</option><option disabled>Español · em breve</option><option disabled>English · em breve</option></select></div>
+            <div class="row between"><div><b class="small">Moeda de referência</b><div class="xs muted">US$ em toda a interface; liquidação em USDT 1:1. Equivalente na moeda local em breve.</div></div><div class="segmented"><button class="active" data-toast="Moeda de referência: US$">US$</button><button data-toast="Equivalente na moeda local: em breve">Local · em breve</button></div></div>
+            <div class="field"><label for="idioma">Idioma da interface</label><select id="idioma" class="select"><option>Português</option><option>English</option><option>Español</option></select><span class="hint">Muda só a interface. Itens e pedidos mantêm o idioma original, indicado em cada card.</span></div>
           </div>
         </div>
       </div>
@@ -245,7 +245,7 @@
               <li>hash da frase de recuperação (não a frase)</li>
               <li>segredo TOTP cifrado</li>
               <li>preferências (tema, notificações, privacidade)</li>
-              <li>extrato completo do ledger em USDT, com a cotação de cada lançamento</li>
+              <li>extrato completo do ledger (US$, liquidado em USDT 1:1)</li>
               <li>itens enviados, versões, declarações aceitas e decisões da curadoria</li>
               <li>compras, apoios, contribuições e entitlements (ENT-…)</li>
               <li>mensagens ainda não expiradas</li>
@@ -262,7 +262,7 @@
           <div class="card-body stack-sm small">
             <p>Condições para excluir:</p>
             <div class="checklist">
-              <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Saldo zero.</b> Hoje: R$ 1.240,00 disponíveis e R$ 250,00 em custódia. Saque o disponível e espere os apoios em andamento terminarem (15/11).</div></div>
+              <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Saldo zero.</b> Hoje: US$ 1.240,00 disponíveis e US$ 250,00 em custódia. Saque o disponível e espere os apoios em andamento terminarem (15/11).</div></div>
               <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Nenhum item à venda.</b> Hoje: 1 agendado, 2 em curadoria, 1 com ajustes pendentes. Encerre ou cancele em Meus anúncios.</div></div>
               <div class="ck"><i data-icon="check-circle" class="ico ok"></i><div><b>Nenhuma disputa aberta.</b></div></div>
             </div>
