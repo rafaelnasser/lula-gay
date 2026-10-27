@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Primeiros passos com cripto · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    [id] { scroll-margin-top: 84px; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .section-head p { color: var(--muted); margin-top: 6px; max-width: 62ch; }
+    .badge.wrap { white-space: normal; height: auto; line-height: 1.35; padding-block: 5px; }
+    .have { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .have li { display: flex; gap: 10px; align-items: flex-start; font-size: var(--fs-sm); color: var(--fg-2); }
+    .have svg { width: 16px; height: 16px; color: var(--ok); flex: none; margin-top: 2px; }
+    .gstep { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px; align-items: start; padding-block: 32px; border-top: 1px solid var(--border); }
+    .gstep:first-of-type { border-top: 0; padding-top: 0; }
+    @media (max-width: 860px) { .gstep { grid-template-columns: 1fr; gap: 18px; } }
+    .step-n { width: 36px; height: 36px; border-radius: 50%; background: var(--brass-soft); color: var(--brass); font-family: var(--font-display); font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .todo { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: var(--fs-sm); color: var(--fg-2); }
+    .see { padding: 10px 14px; border-left: 3px solid var(--brass); background: var(--surface-2); border-radius: 0 var(--r-sm) var(--r-sm) 0; font-size: var(--fs-sm); color: var(--fg-2); }
+    /* Mock de tela: só tokens do tema, sem imagens nem marcas desenhadas */
+    .screen { border: 1px solid var(--border-2); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; width: 100%; max-width: 420px; justify-self: center; }
+    .screen-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    .screen-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-2); flex: none; }
+    .screen-bar .url { flex: 1; min-width: 0; margin-left: 6px; padding: 3px 10px; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .screen-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; font-size: var(--fs-sm); }
+    .screen-title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-md); }
+    .fake-btn { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 99px; background: var(--brass); color: var(--brass-fg); font-weight: 600; }
+    .fake-btn.alt { background: transparent; color: var(--fg); border: 1px solid var(--border-2); }
+    .fake-btn svg { width: 15px; height: 15px; }
+    .fake-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface-2); }
+    .fake-row.hl { border-color: var(--brass); background: var(--brass-soft); box-shadow: inset 0 0 0 1px var(--brass); }
+    .fake-row small { color: var(--muted); font-size: var(--fs-xs); }
+    .fake-acts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; text-align: center; font-size: var(--fs-xs); }
+    .fake-acts span { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .fake-acts svg { width: 32px; height: 32px; padding: 8px; border-radius: 50%; background: var(--brass); color: var(--brass-fg); }
+    .screen .words span { padding-top: 7px; padding-bottom: 7px; letter-spacing: .1em; color: var(--muted); }
+    .screen .words span::before { top: 9px; }
+    .rules { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .rules li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); font-size: var(--fs-sm); color: var(--fg-2); }
+    .rules svg { width: 18px; height: 18px; color: var(--brass); flex: none; margin-top: 1px; }
+    .faq { max-width: 820px; }
+    .faq details { border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); }
+    .faq details + details { margin-top: 8px; }
+    .faq summary { cursor: pointer; padding: 14px 16px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; color: var(--muted); font-family: var(--font-mono); font-size: var(--fs-lg); line-height: 1; flex: none; }
+    .faq details[open] summary::after { content: "−"; }
+    .faq .ans { padding: 0 16px 16px; color: var(--fg-2); font-size: var(--fs-sm); max-width: 72ch; }
+    .cta { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .cta p { max-width: 56ch; color: var(--fg-2); }
+  </style>
+</head>
+<body data-shell="public" data-page="guia-cripto" data-root="../">
+<main>
+  <!-- Cabeçalho -->
+  <section class="hero">
+    <div class="glow"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Primeiros passos com cripto</p>
+          <h1 class="display mt-1">Cripto em 10 minutos: o caminho mais simples para participar</h1>
+          <p class="lead mt-2">Você precisa de três coisas: uma carteira no navegador, um pouco de USDT na rede Polygon e uns centavos de POL para a taxa. Este guia usa a MetaMask, a carteira de navegador mais conhecida.</p>
+          <div class="row mt-3"><span class="badge badge-brass badge-lg wrap"><i data-icon="clock"></i>Leva cerca de 10 minutos · custa menos de US$ 1 em taxas</span></div>
+          <div class="chips mt-3">
+            <a class="chip" href="#passo-1">1 · Instalar</a><a class="chip" href="#passo-2">2 · Criar a carteira</a><a class="chip" href="#passo-3">3 · Rede Polygon</a><a class="chip" href="#passo-4">4 · Colocar USDT</a><a class="chip" href="#passo-5">5 · Pagar</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>No fim, você terá</h3></div>
+          <div class="card-body stack">
+            <ul class="have">
+              <li><i data-icon="check-circle"></i>Uma carteira MetaMask no navegador ou no celular, que só você controla</li>
+              <li><i data-icon="check-circle"></i>A frase de recuperação de 12 palavras anotada no papel</li>
+              <li><i data-icon="check-circle"></i>A rede Polygon ativa na carteira</li>
+              <li><i data-icon="check-circle"></i>USDT para pagar e uns centavos de POL para as taxas</li>
+              <li><i data-icon="check-circle"></i>Um primeiro pagamento confirmado em cerca de 30 segundos</li>
+            </ul>
+            <p class="xs muted">MetaMask é uma sugestão. Qualquer carteira em que só você tenha a frase de recuperação serve: Trust Wallet, Coinbase Wallet, Rabby.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Por que só cripto -->
+  <section class="section tight band">
+    <div class="container">
+      <div class="grid cols-3">
+        <div class="feature"><span class="f-icon"><i data-icon="user-x"></i></span><b>Sem cadastro aqui</b><p class="small muted">O Lacre não pede nome, e-mail nem documento. Cripto é o jeito de pagar sem se cadastrar com a gente.</p></div>
+        <div class="feature"><span class="f-icon"><i data-icon="wallet"></i></span><b>Direto para o item</b><p class="small muted">Cada item tem uma carteira própria. Você paga da sua carteira direto para a dele, com um endereço gerado só para você.</p></div>
+        <div class="feature"><span class="f-icon"><i data-icon="rotate-ccw"></i></span><b>Nenhum saldo com o Lacre</b><p class="small muted">Não guardamos dinheiro de ninguém. Se houver reembolso, ele volta ao endereço de onde o pagamento saiu.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo a passo -->
+  <section class="section" id="passos">
+    <div class="container">
+      <div class="section-head"><div><p class="eyebrow">Passo a passo</p><h2>Cinco passos, na ordem</h2><p>Faça uma vez. Depois, cada pagamento leva menos de um minuto: copiar o endereço, colar na carteira, enviar.</p></div></div>
+
+      <article class="gstep" id="passo-1">
+        <div class="stack-sm">
+          <div class="row nowrap"><span class="step-n">1</span><h3>Instale a MetaMask</h3></div>
+          <ol class="todo">
+            <li>No computador: abra <a class="link" href="#" data-toast="Abriria metamask.io em nova aba (site oficial)">metamask.io</a> no Chrome, Firefox, Brave ou Edge e clique em "Baixar". A extensão aparece ao lado da barra de endereço.</li>
+            <li>No celular: instale o app MetaMask pela loja oficial do aparelho, pelo link que está no próprio metamask.io.</li>
+            <li>Fixe a extensão na barra do navegador para achar fácil depois.</li>
+          </ol>
+          <div class="see"><b>Você vai ver:</b> a página da extensão na loja do navegador, oferecida por "metamask.io", com milhões de usuários.</div>
+          <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Há extensões falsas</span>Instale só a partir do site oficial. Confira o nome exato, o editor e o número de usuários antes de clicar em instalar.</div></div>
+        </div>
+        <div class="screen" role="img" aria-label="Simulação da página da extensão na loja do navegador">
+          <div class="screen-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">loja do navegador › extensões › MetaMask</span></div>
+          <div class="screen-body">
+            <div class="row nowrap"><span class="step-n"><i data-icon="wallet"></i></span><div><div class="screen-title">MetaMask</div><div class="xs muted">oferecido por metamask.io · milhões de usuários</div></div></div>
+            <div class="fake-row"><span>Editor verificado</span><small>metamask.io</small></div>
+            <span class="fake-btn"><i data-icon="download"></i>Usar no navegador</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="gstep" id="passo-2">
+        <div class="stack-sm">
+          <div class="row nowrap"><span class="step-n">2</span><h3>Crie a carteira</h3></div>
+          <ol class="todo">
+            <li>Abra a extensão e escolha "Criar nova carteira".</li>
+            <li>Defina uma senha. Ela só destrava a MetaMask neste aparelho.</li>
+            <li>Revele a frase de recuperação de 12 palavras e anote no papel, na ordem. Guarde fora do computador.</li>
+            <li>Confirme as palavras que a MetaMask pedir.</li>
+          </ol>
+          <div class="see"><b>Você vai ver:</b> a tela "Frase de recuperação secreta", com as 12 palavras escondidas até você clicar para revelar.</div>
+          <div class="alert alert-danger"><i data-icon="key"></i><div><span class="alert-title">A frase é a carteira</span>Ninguém pode recuperá-la para você, nem o Lacre. Nunca digite a frase em site nenhum: o Lacre nunca pede a frase da sua carteira. Ela também não tem nada a ver com a frase da sua conta no Lacre.</div></div>
+        </div>
+        <div class="screen" role="img" aria-label="Simulação da tela da frase de recuperação">
+          <div class="screen-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">MetaMask · criar nova carteira</span></div>
+          <div class="screen-body">
+            <div class="screen-title">Frase de recuperação secreta</div>
+            <div class="xs muted">Anote no papel. Não tire foto e não guarde na nuvem.</div>
+            <div class="words"><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span><span>•••••</span></div>
+            <span class="fake-btn"><i data-icon="eye"></i>Revelar a frase</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="gstep" id="passo-3">
+        <div class="stack-sm">
+          <div class="row nowrap"><span class="step-n">3</span><h3>Ative a rede Polygon</h3></div>
+          <ol class="todo">
+            <li>Clique no seletor de redes, no alto da MetaMask.</li>
+            <li>Em "Redes populares", clique em "Adicionar" ao lado de Polygon e confirme. É um clique: os dados da rede já vêm preenchidos.</li>
+            <li>Alternativa: Base, do mesmo jeito. Tron não funciona na MetaMask; para Tron, use Trust Wallet ou TronLink.</li>
+          </ol>
+          <div class="see"><b>Você vai ver:</b> "Polygon" no seletor de redes. Seu endereço continua o mesmo, começando com 0x, em Polygon e em Base.</div>
+        </div>
+        <div class="screen" role="img" aria-label="Simulação do seletor de redes">
+          <div class="screen-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">MetaMask · selecionar rede</span></div>
+          <div class="screen-body">
+            <div class="fake-row"><span>Ethereum</span><small>ativa agora</small></div>
+            <div class="xs muted">Redes populares</div>
+            <div class="fake-row hl"><span><b>Polygon</b></span><span class="badge badge-brass">Adicionar</span></div>
+            <div class="fake-row"><span>Base</span><span class="badge badge-outline">Adicionar</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="gstep" id="passo-4">
+        <div class="stack-sm">
+          <div class="row nowrap"><span class="step-n">4</span><h3>Coloque saldo na sua carteira</h3></div>
+          <p class="small muted">Três jeitos, do mais simples ao mais privado:</p>
+          <ol class="todo" type="a">
+            <li><b>Botão "Comprar" da própria MetaMask:</b> cartão, transferência ou PIX, conforme o país. O parceiro de compra pede documentos; o Lacre não.</li>
+            <li><b>Corretora:</b> compre USDT e saque para o seu endereço da MetaMask escolhendo a rede Polygon. A mesma rede dos dois lados; senão, o dinheiro se perde.</li>
+            <li><b>De alguém que já tem cripto (P2P):</b> peça para enviar USDT na rede Polygon para o seu endereço.</li>
+          </ol>
+          <div class="see"><b>Compre também uns US$ 1 de POL.</b> É a moeda que paga as taxas na Polygon: cada envio custa centavos. Se o USDT não aparecer na lista, use "Importar tokens" e busque USDT.</div>
+        </div>
+        <div class="screen" role="img" aria-label="Simulação da tela inicial da carteira na rede Polygon">
+          <div class="screen-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">MetaMask · Polygon</span></div>
+          <div class="screen-body">
+            <div class="row between"><span class="strong">Conta 1</span><span class="mono xs muted">0x3b1f…9a7c</span></div>
+            <div class="fake-acts"><span><i data-icon="plus"></i>Comprar</span><span><i data-icon="send"></i>Enviar</span><span><i data-icon="qr-code"></i>Receber</span></div>
+            <div class="fake-row"><span><b>USDT</b> <small>Polygon</small></span><span class="num">50,00</span></div>
+            <div class="fake-row"><span><b>POL</b> <small>para taxas</small></span><span class="num">≈ US$ 1,00</span></div>
+            <span class="xs link">Importar tokens</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="gstep" id="passo-5">
+        <div class="stack-sm">
+          <div class="row nowrap"><span class="step-n">5</span><h3>Pague no Lacre</h3></div>
+          <ol class="todo">
+            <li>No checkout do item, escolha "USDT · Polygon".</li>
+            <li>Copie o endereço gerado para este pagamento, ou leia o QR com o app da MetaMask no celular.</li>
+            <li>Na MetaMask: "Enviar", cole o endereço, escolha USDT e digite o <b>valor exato</b>. Confirme.</li>
+            <li>Aguarde as 12 confirmações, cerca de 30 segundos. O acesso libera sozinho; não precisa ficar na página.</li>
+          </ol>
+          <div class="see"><b>Você vai ver:</b> no checkout, "Visto na rede" e depois "Confirmado · 12/12"; na MetaMask, a transação como confirmada.</div>
+          <div class="row"><a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="qr-code"></i>Ver um checkout</a></div>
+        </div>
+        <div class="screen" role="img" aria-label="Simulação da tela de envio">
+          <div class="screen-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">MetaMask · enviar</span></div>
+          <div class="screen-body">
+            <div class="fake-row"><span>Para</span><span class="mono xs">0x5t6w…c3e1</span></div>
+            <div class="fake-row"><span>Ativo</span><span>USDT · Polygon</span></div>
+            <div class="fake-row hl"><span>Valor exato</span><b class="num">120,00 USDT</b></div>
+            <div class="fake-row"><span>Taxa de rede</span><small>≈ US$ 0,04 em POL</small></div>
+            <span class="fake-btn"><i data-icon="send"></i>Confirmar</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Regras de ouro -->
+  <section class="section band">
+    <div class="container">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Regras de ouro</p>
+          <h2 class="mt-1">Cinco cuidados que evitam quase todo problema</h2>
+          <ul class="rules mt-3">
+            <li><i data-icon="wallet"></i><span><b>Pague sempre da sua carteira, nunca direto da corretora.</b> Reembolsos voltam ao endereço de origem; a corretora não os repassa para você.</span></li>
+            <li><i data-icon="globe"></i><span><b>Confira a rede.</b> USDT na Polygon só chega a um endereço na Polygon. Mesma rede dos dois lados.</span></li>
+            <li><i data-icon="key"></i><span><b>Guarde a frase de recuperação offline, no papel.</b> Quem tem a frase tem a carteira.</span></li>
+            <li><i data-icon="eye-off"></i><span><b>Para mais privacidade, use uma carteira nova só para o Lacre.</b> Assim ela não se liga ao resto do seu histórico on-chain.</span></li>
+            <li><i data-icon="coins"></i><span><b>Comece com um valor pequeno.</b> Um item de US$ 90 ou US$ 120 antes de um apoio grande.</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="alert alert-danger"><i data-icon="shield-alert"></i><div><span class="alert-title">O Lacre nunca pede a frase da sua carteira</span>Nem por mensagem, nem em formulário, nem para "verificar" um pagamento. Quem pede a frase está tentando roubar a carteira.</div></div>
+          <div class="card">
+            <div class="card-head"><h3>Quanto você gasta para começar</h3></div>
+            <div class="card-body">
+              <dl class="kv">
+                <dt>Instalar e criar</dt><dd>grátis</dd>
+                <dt>POL para taxas</dt><dd>≈ US$ 1, dá para dezenas de envios</dd>
+                <dt>Cada pagamento</dt><dd>≈ US$ 0,04 de taxa de rede na Polygon</dd>
+                <dt>Comprar cripto</dt><dd>taxa do parceiro ou da corretora, mostrada antes de você confirmar</dd>
+                <dt>No Lacre</dt><dd>nada para quem compra ou apoia</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perguntas frequentes -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><div><p class="eyebrow">Perguntas frequentes</p><h2>Dúvidas de quem está começando</h2></div></div>
+      <div class="faq">
+        <details open><summary>Preciso de documento?</summary><div class="ans">O Lacre não pede. Quem vende cripto (o parceiro de compra da MetaMask, uma corretora) pode pedir, pela lei do país dele. Esse cadastro fica com eles, não com o Lacre.</div></details>
+        <details><summary>Quanto custa?</summary><div class="ans">A taxa de rede na Polygon é de centavos por envio. A compra de cripto pode ter taxa do parceiro ou da corretora, que aparece antes de você confirmar. O Lacre não cobra nada de quem compra ou apoia.</div></details>
+        <details><summary>E se eu enviar na rede errada?</summary><div class="ans">Entre a corretora e a sua carteira, o dinheiro pode não aparecer ou se perder: por isso, sempre a mesma rede dos dois lados. No Lacre, o checkout só reconhece a rede escolhida; um pagamento em outra rede não libera o acesso. Abra um chamado com o txid e tentamos devolver ao endereço de origem, sem garantia.</div></details>
+        <details><summary>Perdi a frase da MetaMask</summary><div class="ans">Se a MetaMask ainda abre no seu aparelho, crie uma carteira nova, anote a frase dela no papel e transfira tudo para lá agora. Se perdeu o acesso e a frase, ninguém consegue recuperar a carteira. Por isso: papel, fora do computador.</div></details>
+        <details><summary>Posso usar outra carteira?</summary><div class="ans">Sim: Trust Wallet, Coinbase Wallet, Rabby ou qualquer carteira em que só você tenha a frase de recuperação. Para Tron, Trust Wallet ou TronLink. Conta de corretora não serve: o endereço é da corretora, não seu.</div></details>
+        <details><summary>E para receber como vendedor?</summary><div class="ans">Na finalização da venda, você recebe a frase de recuperação da carteira do item, uma única vez, na tela. Na MetaMask, use "Importar carteira" com essa frase e transfira os fundos em seguida para a sua carteira principal.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section tight">
+    <div class="container">
+      <div class="cta">
+        <span data-seal class="seal-lg" style="display:inline-block"></span>
+        <h2>Pronto para o primeiro pagamento</h2>
+        <p>Comece por um item barato do catálogo ou apoie um lacre coletivo com US$ 10. O endereço de pagamento aparece no checkout.</p>
+        <div class="row">
+          <a class="btn btn-lg btn-primary" href="explorar.html"><i data-icon="compass"></i>Explorar itens</a>
+          <a class="btn btn-lg" href="como-funciona.html"><i data-icon="book-open"></i>Ver como funciona</a>
+        </div>
+        <p class="xs muted">Ainda sem conta? <a class="link" href="../auth/criar-conta.html">Crie uma conta anônima</a>: pseudônimo, senha e frase de recuperação, sem e-mail.</p>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
