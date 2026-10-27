@@ -42,7 +42,8 @@ design/      protótipo navegável em HTML estático
 ## Decisões que o protótipo já toma
 
 - **Conta sem identidade**: pseudônimo gerado + senha ou passkey + frase de recuperação de 12 palavras. Sem e-mail, telefone, CPF.
-- **Carteira interna** desacopla pagamento de compra. Depósito por cripto (BTC/Lightning, USDT) ou PIX por código de depósito; saque por cripto ou via parceiro com KYC do lado do parceiro.
+- **Só cripto, dos dois lados.** Depósito em USDT/USDC (Polygon, Tron, Base) ou Bitcoin (Lightning, on-chain); saque em cripto. Nenhum real entra ou sai, nenhum parceiro de pagamento, nenhum KYC. A carteira interna guarda créditos em USDT; preços são exibidos em R$ e convertidos na hora.
+- **Comissão única de 10 %** em todos os modelos. Nada é cobrado se um lacre coletivo falhar.
 - **Nada é publicado sem curadoria**. Checklist em 7 blocos, nível de autenticidade público, regra de dois olhos em categorias de risco alto, escalonamento jurídico.
 - **MVP com 4 modelos**: Cópias, Exclusivo, Lacre coletivo e Pedido com recompensa. Os outros 6 entram nas fases 2 e 3.
 - **Página de prova** por item, destino de todo post nas redes.
@@ -50,9 +51,9 @@ design/      protótipo navegável em HTML estático
 ## Decisões que ainda precisam de vocês
 
 1. **Jurisdição e registros de acesso.** O Marco Civil exige guarda de registros de acesso por 6 meses para provedores brasileiros. O protótipo assume a opção "cumprir com minimização" (`docs/03 §8`). Validar com advogado antes de escrever a promessa pública de anonimato.
-2. **Parceiro de pagamento PIX** com cobrança por identificador e política de limites sem KYC do lado do marketplace.
+2. **Custódia de cripto.** Guardar cripto de usuários pode enquadrar a plataforma como prestadora de serviços de ativos virtuais (Lei 14.478/2022 e regulação do Banco Central). Validar jurisdição e estrutura antes do lançamento; o escrow on-chain da fase 2 reduz esse enquadramento.
 3. **Nome definitivo.** "Lacre" está em um único lugar (`design/assets/app.js`, constante `BRAND`) e nos textos.
-4. **Taxas.** Valores em `docs/09` são ponto de partida.
+4. **Comissão.** 10 % é a decisão atual; `docs/09` mostra o efeito na unidade econômica.
 
 ## Como estender o protótipo
 

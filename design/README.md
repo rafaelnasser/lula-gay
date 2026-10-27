@@ -74,7 +74,9 @@ design/
 
 ## Mundo de dados do protótipo (use sempre os mesmos)
 
-**Conta demonstrada (comprador e vendedor):** `@coruja-7f3a`, reputação 4,8, 3 itens aprovados, desde mar/2026, saldo R$ 1.240,00, em custódia (apoios) R$ 250,00.
+**Conta demonstrada (comprador e vendedor):** `@coruja-7f3a`, reputação 4,8, 3 itens aprovados, desde mar/2026, saldo R$ 1.240,00 (≈ 230,4 USDT; cotação R$ 5,38), em custódia (apoios) R$ 250,00.
+
+**Dinheiro:** só cripto, dos dois lados. Depósito em USDT (Polygon, Tron), USDC (Polygon, Base) ou Bitcoin (Lightning, on-chain); saque em cripto. Sem PIX, parceiro, voucher ou KYC. Créditos guardados em USDT; preços exibidos em R$ e convertidos no momento da operação. **Comissão única de 10 %** em todos os modelos.
 
 **Vendedores:** `@sextante-21c9` (jornalismo, 12 aprovados, Verificado 9×), `@lanterna-b31d` (dados), `@cartografo-5a77` (foto/vídeo), `@arquivista-0d2e` (acervos), `@bussola-c4e1` (negócios), `@prisma-66af` (finanças), `@tipografo-8e04` (história). **Compradores em disputas/mensagens:** `@farol-3e9b`, `@quartzo-a1f0`.
 
@@ -111,9 +113,9 @@ design/
 | ped-1b6j8 | Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020) | R$ 600 · 3 | — | Atendido |
 | ped-9h2d5 | Lista de todos os editais de fomento cultural municipais do RS em 2025 | R$ 2.100 · 9 | 10/12/2026 | Aberto |
 
-**Carteira de @coruja-7f3a (extrato):** 20/10 depósito Lightning +R$ 1.000 · 21/10 compra lcr-9f2k7 −R$ 490 · 22/10 apoio lcr-4m2x9 −R$ 100 · 23/10 compra camada 1 lcr-3c7r8 −R$ 190 · 24/10 depósito PIX código LCR-8K2M-77QX +R$ 500 · 25/10 apoio lcr-4m2x9 −R$ 150 · 25/10 assinatura lcr-6d1k5 −R$ 190 · 26/10 liquidação venda lcr-5m8c4 +R$ 127,50 (×3). Saldo R$ 1.240,00.
+**Carteira de @coruja-7f3a (extrato):** 20/10 depósito USDT Polygon +R$ 1.455,00 (270 USDT) · 21/10 compra lcr-9f2k7 −R$ 490,00 · 22/10 apoio lcr-4m2x9 −R$ 100,00 · 23/10 compra camada 1 lcr-3c7r8 −R$ 190,00 · 24/10 depósito Bitcoin Lightning +R$ 500,00 (0,00142 BTC) · 25/10 apoio lcr-4m2x9 −R$ 150,00 · 25/10 assinatura lcr-6d1k5 −R$ 190,00 · 26/10 liquidação de venda lcr-5m8c4 +R$ 135,00 (×3). Saldo R$ 1.240,00.
 
-**Ganhos de @coruja-7f3a:** bruto R$ 13.200 (88 × R$ 150) · taxa 15 % R$ 1.980 · líquido R$ 11.220 · em custódia R$ 382,50 (3 vendas nas últimas 72 h) · sacado R$ 9.800 (cripto, 2 saques).
+**Ganhos de @coruja-7f3a:** bruto R$ 13.200 (88 × R$ 150) · comissão 10 % R$ 1.320 · líquido R$ 11.880 · em custódia R$ 405,00 (3 vendas de R$ 135 líquidos, liberam em 48 h) · sacado R$ 9.800 (2 saques em USDT: R$ 4.800 em 02/10 e R$ 5.000 em 15/09) · 1 saque em processamento R$ 1.000.
 
 **Datas:** hoje é 27/10/2026. Prazos no futuro próximo (nov/dez 2026).
 

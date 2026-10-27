@@ -7,7 +7,8 @@ Convenções que valem para todos os modelos:
 - O dinheiro do comprador sai da **carteira** e vai para a **custódia** (escrow) do item. Só é liberado ao vendedor após a entrega e o fim da janela de disputa (72 h por padrão).
 - Toda compra gera um **entitlement** (direito de acesso) para a conta compradora. Conteúdo nunca é enviado por fora; é acessado no **cofre**.
 - Todo item tem **prazo**: data de encerramento definida pelo vendedor (mínimo 24 h, máximo 90 dias; renovável para modelos abertos).
-- A **taxa da plataforma** é descontada do valor recebido pelo vendedor. Percentuais sugeridos em `09-monetizacao-e-metricas.md`.
+- A **comissão da plataforma é única: 10 %** sobre o valor recebido pelo vendedor, em todos os modelos. Nada é cobrado se um lacre coletivo falhar. Detalhes em `09-monetizacao-e-metricas.md`.
+- Todo pagamento é em cripto (USDT, USDC, BTC). Preços são exibidos em R$ e convertidos no momento da operação. Ver `03 §6`.
 - Se o vendedor cancelar um item com dinheiro em custódia, todos os compradores são reembolsados integralmente e o vendedor recebe uma penalidade de reputação.
 
 ---
@@ -47,7 +48,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Botão "Comprar por R$ X", contador de unidades (se limitado), faixa de preço escalonado, selo de curadoria, nota de autenticidade.
 
-**Taxa sugerida.** 15 %.
+**Comissão.** 10 %.
 
 **Riscos.** Revenda fora da plataforma. Mitigação: marca d'água por entitlement, termos, visualizador seguro para itens sensíveis.
 
@@ -69,7 +70,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Preço, botão de compra, campo de oferta, tempo restante, histórico de ofertas (apenas quantidade e maior oferta, nunca quem).
 
-**Taxa sugerida.** 15 %.
+**Comissão.** 10 %.
 
 **Riscos.** Vendedor vende o mesmo material em outro lugar. Mitigação: hash público permite provar que o conteúdo é o mesmo; penalidade de banimento; retenção de parte do valor por 30 dias ("garantia de exclusividade") como opção do comprador.
 
@@ -102,7 +103,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (R$ 20, 50, 100, 250, outro), regra de liberação em destaque, metas estendidas em lista, atualizações do vendedor.
 
-**Taxa sugerida.** 10 % sobre o arrecadado (meta batida). Nada é cobrado se falhar.
+**Comissão.** 10 %.
 
 **Riscos.** Vendedor não entrega o combinado após a meta. Mitigação: o conteúdo completo já está enviado e analisado pela curadoria antes de o item ir ao ar. A liberação é automática. Não existe "vou enviar depois".
 
@@ -125,7 +126,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Mural público de pedidos, página do pedido com critérios de aceite, recompensa acumulada, contribuidores (contagem), botão "Somar à recompensa" e botão "Tenho essa informação".
 
-**Taxa sugerida.** 10 % sobre a recompensa.
+**Comissão.** 10 %.
 
 ---
 
@@ -145,7 +146,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Lance atual (ou "lances lacrados: 7"), incremento, tempo restante com prorrogação, campo de lance, histórico anônimo, para holandês: preço atual e próximo degrau com contagem regressiva.
 
-**Taxa sugerida.** 12 %.
+**Comissão.** 10 %.
 
 ---
 
@@ -159,7 +160,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Lista de camadas com o que cada uma contém, preço e botão. Indicador de "você tem até a camada 1".
 
-**Taxa sugerida.** 15 %.
+**Comissão.** 10 %.
 
 ---
 
@@ -174,7 +175,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Página da fonte com histórico de edições, periodicidade, preço por período, número de assinantes, botão "Assinar", amostra de uma edição.
 
-**Taxa sugerida.** 12 %.
+**Comissão.** 10 %.
 
 ---
 
@@ -186,7 +187,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Dois preços lado a lado, contagem regressiva da janela, aviso "aberto para todos a partir de DD/MM".
 
-**Taxa sugerida.** 15 % na janela, 15 % nas cópias.
+**Comissão.** 10 %.
 
 ---
 
@@ -198,7 +199,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Interface.** Seletor de finalidade com preço, resumo do que a licença permite, download do contrato.
 
-**Taxa sugerida.** 20 % (padrão de bancos de imagem é bem maior).
+**Comissão.** 10 %.
 
 ---
 

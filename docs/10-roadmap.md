@@ -1,8 +1,8 @@
 # 10 · Roadmap
 
 ## Fase 0 · Fundamentos (semanas 1–3)
-- Entidade, jurisdição e parecer jurídico sobre: registros de acesso (Marco Civil), pagamentos sem KYC no marketplace, termos de uso, política de conteúdo, declarações do vendedor, contratos de licença e cessão.
-- Contratação do parceiro PIX com cobrança por identificador; BTCPay Server em produção.
+- Entidade, jurisdição e parecer jurídico sobre: registros de acesso (Marco Civil), custódia de cripto de usuários (Lei 14.478/2022 e regulação do Banco Central), termos de uso, política de conteúdo, declarações do vendedor, contratos de licença e cessão.
+- Tesouraria cripto: BTCPay Server em produção, nós/indexadores de Polygon, Tron e Base, carteira quente/fria com multisig, cotação R$/USDT.
 - Infra base: Postgres, Redis, MinIO, Vault, CI/CD, ambientes, backups.
 - Design system implementado como componentes (a partir de `design/assets/`).
 
@@ -10,7 +10,7 @@
 
 **Contas e carteira**
 - Cadastro pseudônimo (handle, senha, frase de recuperação), login, recuperação, TOTP, sessões.
-- Carteira: depósito cripto (BTC/Lightning, USDT), depósito PIX por código, extrato, saque cripto, saque via parceiro.
+- Carteira: depósito em USDT/USDC (Polygon, Tron, Base) e Bitcoin (Lightning, on-chain), extrato em R$ e USDT, saque em cripto com limite antifraude, lotes horários.
 - Ledger de partidas dobradas, reconciliação diária.
 
 **Oferta**
@@ -38,13 +38,13 @@
 - Instagram/Threads; cards por canal; melhores horários.
 - Reputação v2 (selos: Rompeu lacres, Fonte recorrente, Verificado 10×).
 - Espelho `.onion`; cifragem ponta a ponta opcional nas mensagens.
+- Escrow on-chain (USDC em Base/Polygon) para reduzir a custódia pela plataforma; Monero como opção de depósito.
 - Canal de notificação externo opcional (Telegram bot) com aviso de vínculo.
 
 ## Fase 3 · Profundidade (meses 7–12)
 - **Janela exclusiva**, **Licença** com contratos gerados, **Consulta paga**.
 - Âncora de prova em blockchain (OpenTimestamps).
 - API de catálogo e de datasets para compradores institucionais.
-- Vouchers pré-pagos via revendedores.
 - Apps móveis (PWA já cobre o essencial; nativo só se o push anônimo for insuficiente).
 - Curadoria assistida por modelos (sugestão de redação, detecção de duplicidade semântica) sempre com decisão humana.
 
@@ -60,5 +60,6 @@
 | Promessa de anonimato maior do que a lei permite | Texto público exato sobre registros de acesso e parceiros de pagamento; revisão jurídica do copy |
 | Fraude do vendedor (conteúdo falso) | Conteúdo completo analisado antes de publicar; nível de autenticidade público; disputas |
 | Vazamento de conteúdo comprado | Marca d'água por entitlement; somente leitura para itens sensíveis; termos |
-| Dependência de parceiros de pagamento | Cripto auto-hospedado como caminho sempre disponível; dois parceiros PIX |
+| Enquadramento como custodiante de ativos virtuais | Parecer jurídico na fase 0; escrow on-chain na fase 2; tesouraria com multisig e reconciliação diária |
+| Volatilidade e segurança da tesouraria | Créditos em stablecoin; conversão imediata de BTC; carteira quente limitada a 48 h de saques |
 | Equipe de curadoria vira gargalo | Triagem automática, limites de envio por vendedor novo, análise expressa paga, métricas por curador |

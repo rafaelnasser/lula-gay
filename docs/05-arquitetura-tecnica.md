@@ -15,8 +15,9 @@ Recomendação para uma equipe pequena (2 a 4 pessoas) que precisa lançar um MV
 | Gestão de chaves | **HashiCorp Vault** (Transit) ou KMS do provedor | AWS KMS | Cifragem envelope, rotação |
 | Processamento de mídia | Workers Node + `ffmpeg`, `exiftool`, `mat2`, `qpdf`, `tesseract`, `whisper.cpp` | Serviços externos | Nada de conteúdo sai para terceiros |
 | Antivírus | ClamAV + sandbox (Firecracker/gVisor) para arquivos suspeitos | VirusTotal (envia o arquivo para fora: evitar) | Conteúdo não sai da infra |
-| Pagamentos cripto | **BTCPay Server** (BTC on-chain + Lightning), carteira USDT/USDC própria ou via provedor | Coinbase Commerce | Auto-hospedado, sem KYC do lado da plataforma |
-| PIX | Parceiro de pagamento com API de cobrança por identificador (código de depósito) | — | Separação de conhecimento (ver `03 §6`) |
+| Bitcoin | **BTCPay Server** (on-chain + Lightning), auto-hospedado | — | Sem terceiros, sem KYC |
+| Stablecoins (USDT/USDC) | Nó/indexador próprio por rede (Polygon, Tron, Base) com derivação de endereços por xpub e carteira quente/fria multisig | Provedor de custódia (exige KYC do comerciante; evitar) | Nenhum real toca o sistema; ver `03 §6` |
+| Cotação R$/USDT | Mediana de três corretoras via API pública, atualizada a cada minuto | — | Preços em R$, liquidação em USDT |
 | Social | X API v2, Telegram Bot API, Bluesky AT Protocol, Instagram Graph API (imagem) | Buffer/Hootsuite | Controle total do que sai |
 | Infra | Docker Compose no MVP → Kubernetes leve (k3s) na V2; servidores dedicados na UE ou BR | Fly.io / Render | Custo previsível; controle sobre logs |
 | Observabilidade | Prometheus + Grafana + Loki, sem PII nos logs | Datadog | Dados não saem |
@@ -50,7 +51,8 @@ Recomendação para uma equipe pequena (2 a 4 pessoas) que precisa lançar um MV
                      ▼
         ┌────────────────────────┐
         │ Vault/KMS · BTCPay ·   │
-        │ parceiro PIX · X API   │
+        │ indexador on-chain ·   │
+        │ cotação · X API        │
         └────────────────────────┘
 ```
 
@@ -90,34 +92,36 @@ Limites do MVP: 20 GB por item, 200 arquivos por item, formatos listados em `01 
 
 ## 5. Ledger e custódia
 
-Partidas dobradas em `ledger_entries`: cada lançamento tem `debit_account`, `credit_account`, `amount`, `currency` (BRL em centavos), `ref_type`, `ref_id`, `created_at`. Nunca se atualiza ou apaga um lançamento; correções são novos lançamentos.
+Partidas dobradas em `ledger_entries`: cada lançamento tem `debit_account`, `credit_account`, `amount` (USDT com 6 casas decimais, inteiro em micro-USDT), `brl_rate` (cotação usada, para exibição), `ref_type`, `ref_id`, `created_at`. Nunca se atualiza ou apaga um lançamento; correções são novos lançamentos. Os exemplos abaixo estão em R$ equivalentes para leitura.
 
-Tipos de conta: `wallet:<account_id>`, `escrow:<listing_id>`, `escrow:<request_id>`, `reserve:<account_id>` (saldo reservado em lances/ofertas), `platform:fees`, `platform:guarantee_fund`, `payout:pending`, `external:btcpay`, `external:pix`, `refunds`.
+Tipos de conta: `wallet:<account_id>`, `escrow:<listing_id>`, `escrow:<request_id>`, `reserve:<account_id>` (saldo reservado em lances/ofertas), `platform:fees`, `platform:guarantee_fund`, `payout:pending`, `treasury:<moeda>:<rede>` (ex.: `treasury:usdt:polygon`, `treasury:btc:lightning`), `refunds`.
 
 **Fluxos de exemplo**
 
 | Evento | Débito → Crédito |
 |---|---|
-| Depósito PIX confirmado R$ 500 | `external:pix` → `wallet:A` |
+| Depósito de 93 USDT confirmado (≈ R$ 500) | `treasury:usdt:polygon` → `wallet:A` |
 | Compra de cópia R$ 490 | `wallet:A` → `escrow:L1` |
-| Fim da janela de disputa (taxa 15 %) | `escrow:L1` → `wallet:V` (416,50); `escrow:L1` → `platform:fees` (73,50) |
+| Fim da janela de disputa (comissão 10 %) | `escrow:L1` → `wallet:V` (441,00); `escrow:L1` → `platform:fees` (49,00) |
 | Apoio ao lacre coletivo R$ 100 | `wallet:B` → `escrow:L2` |
 | Meta não batida | `escrow:L2` → `wallet:B` (para cada apoiador) |
 | Lance R$ 15.000 | `wallet:C` → `reserve:C` |
 | Lance superado | `reserve:C` → `wallet:C` |
-| Saque cripto R$ 2.000 | `wallet:V` → `payout:pending` → `external:btcpay` |
+| Saque de R$ 2.000 em USDT | `wallet:V` → `payout:pending` → `treasury:usdt:polygon` |
 
 Saldo disponível = soma dos créditos − débitos da `wallet:X`. Materializado em `wallet_balances` por trigger para leitura rápida, com reconciliação noturna contra o ledger.
 
-## 6. Pagamentos
+## 6. Pagamentos (só cripto)
 
-**Depósito cripto (BTCPay):** API cria invoice com valor em BRL convertido; webhook `InvoiceSettled` credita a carteira. Lightning para valores baixos, on-chain para altos. Taxa de câmbio travada 10 min.
+**Depósito em stablecoin (USDT/USDC):** a API deriva um endereço novo da xpub da rede escolhida e o associa à carteira (`crypto_deposit`). O indexador (nó próprio ou RPC + worker) observa o endereço; ao atingir as confirmações (12 Polygon, 19 Tron, 12 Base) credita 1:1 em USDT. Endereços nunca são reutilizados. Depósitos abaixo do mínimo (5 USDT) são creditados sem bônus de taxa.
 
-**Depósito PIX por código:** usuário gera `deposit_code` (expira em 24 h). Parceiro recebe o PIX com o código no campo identificador/txid. Webhook do parceiro → `POST /webhooks/pix` com `{code, amount, txid}` assinado → credita. O parceiro nunca recebe `account_id`.
+**Depósito em Bitcoin (BTCPay):** a API cria uma invoice com o valor em BTC pela cotação travada por 10 min; webhook `InvoiceSettled` credita a carteira com o equivalente em USDT. Lightning para valores até R$ 2.000, on-chain acima (ou escolha do usuário).
 
-**Saque cripto:** pedido na interface, revisão automática (limites, reputação, saldo disponível ≠ custódia), execução por BTCPay payout API em lotes a cada hora. Endereço não é salvo.
+**Cotação:** worker coleta R$/USDT de três corretoras a cada minuto e guarda a mediana em `fx_rates`. Toda operação registra `brl_rate` no ledger. Preço em R$ → débito em USDT no momento da operação.
 
-**Saque via parceiro PIX:** cria um `payout_intent`; o usuário é redirecionado ao parceiro para o KYC dele; o parceiro confirma pagamento por webhook. A plataforma guarda apenas `payout_intent.status`.
+**Saque:** pedido na interface (moeda, rede, endereço, senha + TOTP). Verificações automáticas: saldo disponível ≠ custódia, limite antifraude (R$ 2.000/dia para contas com menos de 7 dias ou sem item aprovado), endereço válido para a rede. Execução em lotes horários a partir da carteira quente (BTCPay payout API para BTC; assinatura própria para stablecoins), com aprovação de 2 pessoas acima de R$ 20.000 por lote. `payout.address` é apagado após a confirmação na rede; fica só o hash da transação.
+
+**Tesouraria:** carteira quente dimensionada para 48 h de saques; o restante em carteira fria multisig 2-de-3. Reconciliação diária: soma dos passivos (carteiras + custódias) ≤ tesouraria total; divergência bloqueia saques e alerta.
 
 ## 7. Máquinas de estado críticas
 
@@ -145,7 +149,8 @@ Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)─
 
 - A cada minuto: encerrar itens/leilões/lacres vencidos; liquidar custódias com janela de disputa vencida.
 - A cada 5 min: publicar posts agendados; checar marcos de lacres coletivos (25/50/75/90/100 %).
-- A cada hora: lote de saques cripto; expirar códigos de depósito; expirar concessões de visualização.
+- A cada hora: lote de saques; expirar endereços de depósito não usados em 72 h (ficam observados por 30 dias); expirar concessões de visualização.
+- A cada minuto: atualizar cotação R$/USDT; varrer confirmações de depósitos pendentes.
 - Diário: reconciliação do ledger; destruição de DEKs de exclusivos vendidos há mais de 72 h; limpeza de mensagens expiradas; destruição de registros de acesso com mais de 6 meses.
 
 ## 9. API (resumo dos endpoints)
@@ -156,9 +161,10 @@ POST   /auth/login               handle + senha (+ TOTP)
 POST   /auth/recover             12 palavras → nova senha
 GET    /me                       conta, reputação, preferências
 GET    /wallet                   saldo, reservado, em custódia
-POST   /wallet/deposits/crypto   cria invoice BTCPay
-POST   /wallet/deposits/pix-code gera código de depósito
-POST   /wallet/payouts           solicita saque
+POST   /wallet/deposits          gera endereço (USDT/USDC por rede) ou invoice BTCPay (BTC)
+GET    /wallet/deposits/:id      status e confirmações
+GET    /wallet/rates             cotação R$/USDT vigente
+POST   /wallet/payouts           solicita saque (moeda, rede, endereço, TOTP)
 GET    /wallet/ledger            extrato paginado
 
 GET    /listings                 catálogo público (filtros: categoria, modelo, tipo, preço, status, autenticidade)
@@ -211,7 +217,8 @@ GET    /admin/settings  PATCH /admin/settings
 - [ ] Uploads só por URL pré-assinada; bucket de quarentena sem leitura pública; varredura antes de mover.
 - [ ] Cifragem envelope de todos os assets; KMS separado; crypto-shredding de exclusivos.
 - [ ] Ledger imutável; reconciliação diária; alertas de divergência.
-- [ ] Webhooks de pagamento com assinatura verificada e idempotência por `txid`.
+- [ ] Webhooks do BTCPay com assinatura verificada; indexador com idempotência por `txid` e reorg handling (recredita só após as confirmações).
+- [ ] Carteira quente com limite; carteira fria multisig 2-de-3; chaves nunca no servidor da API.
 - [ ] Admin em domínio separado, 2FA obrigatório, log de auditoria com hash encadeado.
 - [ ] Registros de acesso (Marco Civil) em sistema separado, cifrados, retenção de 6 meses, destruição automática.
 - [ ] Espelho `.onion`; páginas autenticadas sem CDN; páginas públicas podem usar CDN.

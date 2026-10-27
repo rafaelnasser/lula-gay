@@ -125,13 +125,14 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `buyer/carteira.html`
 - Cartões: saldo disponível, em custódia (apoios ativos), reservado (lances/ofertas).
-- Abas: **Depositar** (cripto: BTC Lightning/on-chain e USDT com QR e endereço; **PIX por código**: gera `LCR-8K2M-77QX`, instruções e explicação de separação de conhecimento; voucher), **Sacar** (cripto com endereço não salvo; via parceiro com aviso de KYC do lado do parceiro), **Extrato** (tabela com tipo, referência, valor, saldo após, status) e **Limites** (limites sem verificação do parceiro e como ampliar).
+- Saldo exibido em R$ com o equivalente em USDT (os créditos são guardados em USDT; preços em R$ são convertidos no momento de cada operação).
+- Abas: **Depositar** (USDT Polygon, USDT Tron, USDC Polygon/Base, Bitcoin Lightning, Bitcoin on-chain; endereço novo por depósito com QR, confirmações exigidas, cotação travada por 10 min para BTC, explicação de que o endereço não é vinculado a identidade), **Sacar** (moeda, rede, endereço informado na hora e apagado após o envio, taxa de rede repassada, senha + TOTP, limite antifraude para contas novas), **Extrato** (tabela com tipo, referência, valor em R$ e USDT, saldo após, status) e **Redes e taxas** (moeda, rede, confirmações, mínimo de depósito, taxa de saque).
 
 ### `buyer/checkout.html` · Checkout (variantes)
 - Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura.
 - Saldo disponível vs. valor; se insuficiente, bloco "Depositar a diferença" inline.
 - O que acontece depois (entrega imediata / custódia / reembolso automático).
-- Transparência: "o que registramos sobre esta compra".
+- Transparência: "o que registramos sobre esta compra". Valor em R$ e o débito equivalente em USDT.
 - Aceite dos termos do modelo e botão de confirmação. Tela de sucesso (variante) com link para o cofre ou apoios.
 
 ### `buyer/cofre.html`
@@ -190,8 +191,8 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `seller/ganhos.html`
 - Cards: disponível, em custódia (com data de liberação por item), sacado no total, taxas pagas.
-- Tabela de vendas (item, modelo, bruto, taxa, líquido, status: custódia/liquidado/reembolsado, data).
-- Sacar: cripto (endereço, aviso "não salvamos o endereço") e via parceiro PIX (aviso de KYC do lado do parceiro), limites, histórico de saques.
+- Tabela de vendas (item, modelo, bruto, comissão de 10 %, líquido, status: custódia/liquidado/reembolsado, data).
+- Sacar: só cripto (USDT/USDC/BTC; moeda, rede, endereço com aviso "não salvamos o endereço após o envio", taxa de rede, senha + TOTP), limite antifraude para contas novas, histórico de saques com txid.
 
 ### `seller/pedidos.html`
 - Mural de pedidos abertos com filtros e cards; botão "Atender este pedido" leva ao assistente com o pedido vinculado; aba "Meus atendimentos" com status (em curadoria / aceito / recusado).
@@ -233,10 +234,10 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Busca por pseudônimo; lista com risco (score), itens, disputas, denúncias, saldo em custódia; detalhe: o que existe sobre a conta (lista explícita: pseudônimo, data de criação, itens, ledger, nenhuma identidade), ações (advertir, restringir envios, restringir saques, banir) com motivo obrigatório e registro em auditoria.
 
 ### `admin/financeiro.html`
-- Saldos: total em carteiras (passivo), em custódia por modelo, taxas do mês, fundo de garantia; fila de saques (cripto em lote, parceiro), reembolsos automáticos (lacres que falharam), reconciliação diária (ledger × saldos materializados, divergência zero), conciliação com BTCPay e parceiro PIX (depósitos por código).
+- Saldos: total em carteiras (passivo), em custódia por modelo, comissões do mês, fundo de garantia, tesouraria por moeda/rede (quente × fria) e cobertura tesouraria ≥ passivo; fila de saques (lotes horários, aprovação de 2 pessoas), reembolsos automáticos (lacres que falharam), reconciliação diária (ledger × saldos materializados, divergência zero), conciliação on-chain (depósitos confirmados = créditos) e com o BTCPay.
 
 ### `admin/auditoria.html`
 - Log imutável: data/hora, pessoa da equipe, ação, alvo, antes/depois (resumo), hash encadeado; filtros por pessoa, ação, período; exportar.
 
 ### `admin/configuracoes.html`
-- Categorias (risco padrão, dois olhos, jurídico por padrão), taxas por modelo, SLAs, textos das declarações e políticas com versionamento, canais sociais conectados, equipe e papéis (RBAC), limites de depósito/saque.
+- Categorias (risco padrão, dois olhos, jurídico por padrão), comissão única de 10 % e fundo de garantia, SLAs, textos das declarações e políticas com versionamento, canais sociais conectados, equipe e papéis (RBAC), limites antifraude, redes e confirmações.

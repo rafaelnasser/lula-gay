@@ -1,6 +1,6 @@
 # 06 · Modelo de dados
 
-PostgreSQL. IDs são UUID v7 (ordenáveis no tempo). Valores monetários em **centavos inteiros** (`bigint`), moeda BRL no MVP. Campos `created_at`/`updated_at` em todas as tabelas (omitidos abaixo).
+PostgreSQL. IDs são UUID v7 (ordenáveis no tempo). Valores monetários em **micro-USDT inteiros** (`bigint`, 6 casas); todo lançamento guarda a cotação R$/USDT usada para exibição. Preços definidos pelo vendedor podem ser em R$ (`price_currency = BRL`) ou USDT. Campos `created_at`/`updated_at` em todas as tabelas (omitidos abaixo).
 
 ## 1. Diagrama
 
@@ -159,9 +159,11 @@ Sem e-mail, telefone, nome, IP.
 `ledger_entry (id, debit_account text, credit_account text, amount bigint, currency, ref_type, ref_id, memo, created_at)` imutável
 `wallet_balance (account_id, available, reserved, in_escrow, updated_at)` materializada
 
-### deposit_code / payout_intent
-`deposit_code (code, account_id, amount_expected null, status (pending|paid|expired), expires_at, paid_txid_hash)`
-`payout_intent (id, account_id, amount, method (crypto|pix_partner), status (requested|approved|sent|confirmed|failed), external_ref)` sem endereço salvo após envio
+### crypto_deposit / payout / fx_rate
+`crypto_deposit (id, account_id, asset (usdt|usdc|btc), network (polygon|tron|base|bitcoin|lightning), address, derivation_index, amount_asset, amount_usdt, brl_rate_locked, status (waiting|seen|confirming|credited|expired), confirmations, txid, created_at, credited_at)` um endereço por depósito, nunca reutilizado
+`payout (id, account_id, amount_usdt, asset, network, address null, status (requested|checked|batched|sent|confirmed|failed), batch_id, txid, network_fee, requested_at, confirmed_at)` `address` é apagado após `confirmed`
+`payout_batch (id, created_at, approved_by uuid[], total, status)`
+`fx_rate (id, pair (BRL/USDT), rate, sources jsonb, fetched_at)`
 
 ### staff / audit_log
 `staff (id, name, role (triage|curator|senior|legal|finance|publisher|admin), totp_enforced, status)`
@@ -218,4 +220,6 @@ closed → archived
 | Registros de acesso (Marco Civil) | 6 meses, sistema separado |
 | Ledger | Permanente |
 | Audit log | Permanente |
+| Endereço de saque | Apagado após confirmação na rede; fica o `txid` |
+| Endereço de depósito | Observado por 30 dias após gerado; depois arquivado |
 | Conta excluída pelo usuário | Pseudônimo marcado como `deleted`, saldo deve ser zero antes, entitlements revogados, ledger mantido |

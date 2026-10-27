@@ -4,48 +4,37 @@
 
 | Fonte | Como | Quando |
 |---|---|---|
-| **Taxa sobre transações** | Percentual descontado do vendedor em cada venda, apoio liberado ou recompensa paga | MVP |
-| **Taxa de saque** | Fixa + percentual pequeno para cobrir custo da rede/parceiro (repasse, não lucro) | MVP |
+| **Comissão de 10 %** | Descontada do vendedor em cada venda, apoio liberado ou recompensa paga, em todos os modelos | MVP |
+| **Taxa de rede no saque** | Repasse do custo da rede (não é receita) | MVP |
 | **Análise expressa** | Vendedor paga para ter SLA de 24 h na curadoria (fila prioritária) | V2 |
 | **Destaque no catálogo** | Posição fixa na vitrine por 7 dias, marcado como "Destaque" | V2 |
 | **Conta Pro (comprador)** | Alertas por categoria, acesso antecipado a lançamentos, API de catálogo, exportações | V2 |
 | **API de dados** | Acesso programático a itens do tipo dataset para compradores institucionais | V3 |
 | **Serviço de verificação** | Curadoria como serviço para terceiros (verificar um documento) | V3 |
 
-## 2. Taxas por modelo (sugestão inicial)
+## 2. Comissão
 
-| Modelo | Taxa | Observação |
-|---|---|---|
-| Cópias | 15 % | |
-| Exclusivo | 15 % | mínimo R$ 50 |
-| Lacre coletivo | 10 % | só se a meta for batida |
-| Pedido com recompensa | 10 % | sobre a recompensa paga |
-| Leilão | 12 % | |
-| Camadas | 15 % | |
-| Assinatura | 12 % | |
-| Janela exclusiva | 15 % | em ambas as fases |
-| Licença | 20 % | |
-| Consulta paga | 20 % | |
+**10 % em todos os modelos.** Uma única regra, fácil de comunicar ("você fica com 90 %"). Nada é cobrado se um lacre coletivo falhar ou se um pedido não for atendido. Taxas de rede do saque são repassadas ao usuário (USDT em Polygon ≈ R$ 0,20; Lightning ≈ R$ 0,05; BTC on-chain variável).
 
-**Custos de pagamento** (repassados): Lightning ~0,1 %, on-chain variável, PIX via parceiro ~1 %, saque via parceiro R$ 3 a 5 + KYC.
+**Custos de pagamento da plataforma:** infraestrutura de nós e indexadores, taxas de rede das consolidações entre carteira quente e fria, spread de conversão BTC → USDT nos depósitos em bitcoin (cotação travada 10 min; hedge imediato na tesouraria). Estimativa: 0,3 % a 0,5 % do volume.
 
 ## 3. Unidade econômica (exemplo)
 
 Lacre coletivo de R$ 80.000 batido:
-- Receita de taxa: R$ 8.000.
-- Custo de pagamento (mix 60 % PIX / 40 % cripto): ~R$ 600.
+- Receita de comissão: R$ 8.000.
+- Custo de pagamento (nós, consolidações, spread BTC): ~R$ 320.
 - Curadoria: 2 curadores × 6 h + jurídico 2 h ≈ R$ 1.400.
 - Publicação e infra alocadas: ~R$ 200.
-- Margem de contribuição: ~R$ 5.800 (72 %).
+- Margem de contribuição: ~R$ 6.080 (76 %).
 
 Cópia de R$ 490 (100 unidades vendidas):
-- GMV R$ 49.000; taxa R$ 7.350; pagamentos ~R$ 400; curadoria única ~R$ 500; margem ~R$ 6.400.
+- GMV R$ 49.000; comissão R$ 4.900; pagamentos ~R$ 200; curadoria única ~R$ 500; margem ~R$ 4.200.
 
 Itens que não vendem custam curadoria. Por isso: triagem automática barata, análise expressa paga e limite de envios simultâneos por vendedor novo (3 itens até a primeira aprovação).
 
 ## 4. Fundo de garantia
 
-2 % de toda taxa vai para um fundo que cobre reembolsos quando o valor em custódia do vendedor não basta (item retirado após liquidação). Meta: fundo equivalente a 1 mês de GMV antes de reduzir a alíquota.
+2 % de toda comissão vai para um fundo que cobre reembolsos quando o valor em custódia do vendedor não basta (item retirado após liquidação). Meta: fundo equivalente a 1 mês de GMV antes de reduzir a alíquota.
 
 ## 5. Precificação orientada
 
@@ -69,7 +58,7 @@ A interface do vendedor mostra faixas de preço de itens aprovados semelhantes (
 - Impressões/cliques dos posts; conversão prova → item; seguidores dos canais.
 
 **Financeiro**
-- Receita de taxas; custo de pagamento; custo de curadoria por item aprovado; margem de contribuição; saldo do fundo de garantia; saldo em custódia (passivo).
+- Receita de comissões; custo de pagamento; custo de curadoria por item aprovado; margem de contribuição; saldo do fundo de garantia; saldo em custódia (passivo); cobertura da tesouraria sobre o passivo das carteiras.
 
 ## 7. Metas dos primeiros 6 meses (hipótese a validar)
 
