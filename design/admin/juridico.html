@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    /* contornos de bugs do CSS compartilhado: .sidebar-backdrop vira célula do grid acima de 1000 px; filhos de grid sem min-width 0 estouram em telas estreitas */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    .grid > *, .split > *, .split-3 > *, .form-grid > * { min-width: 0; }
     .acts { text-align: right; white-space: nowrap; }
     .ico { display: inline-flex; align-items: center; vertical-align: middle; }
     .ico svg { width: 15px; height: 15px; }
@@ -18,6 +21,7 @@
     .points { display: flex; flex-direction: column; gap: 8px; font-size: var(--fs-sm); }
     .points > div { display: flex; gap: 10px; align-items: flex-start; }
     .points .ico { margin-top: 2px; }
+    .req > * { min-width: 0; }
     .req { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px; }
     @media (max-width: 900px) { .req { grid-template-columns: 1fr; } }
   </style>

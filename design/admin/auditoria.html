@@ -14,7 +14,7 @@
     .chain { font-family: var(--font-mono); font-size: var(--fs-xs); white-space: nowrap; color: var(--fg-2); }
     .chain b { color: var(--brass); font-weight: 500; }
     .chain .arr, .diff .arr { color: var(--muted-2); margin: 0 4px; }
-    .diff { font-size: var(--fs-sm); min-width: 220px; }
+    .diff { font-size: var(--fs-sm); min-width: 180px; }
     .steps { display: grid; gap: 10px; }
     .steps .how-step { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; font-size: var(--fs-sm); }
     .steps .how-step .n { width: 28px; height: 28px; border-radius: 50%; background: var(--brass-soft); color: var(--brass); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--fs-xs); }
@@ -57,8 +57,8 @@
     </div>
 
     <div class="table-wrap mb-3">
-      <table class="table">
-        <thead><tr><th>Data/hora</th><th>Pessoa</th><th>Ação</th><th>Alvo</th><th>Antes → depois</th><th>Hash encadeado (prev → hash)</th></tr></thead>
+      <table class="table compact">
+        <thead><tr><th>Data/hora</th><th>Pessoa</th><th>Ação</th><th>Alvo</th><th>Antes → depois</th><th>Hash (prev → atual)</th></tr></thead>
         <tbody>
           <tr>
             <td class="num">27/10 · 09:14:02</td>

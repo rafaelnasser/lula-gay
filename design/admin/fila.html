@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    /* contornos de bugs do CSS compartilhado: .sidebar-backdrop vira célula do grid acima de 1000 px; filhos de grid sem min-width 0 estouram em telas estreitas */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    .grid > *, .split > *, .split-3 > *, .form-grid > * { min-width: 0; }
     .acts { text-align: right; white-space: nowrap; }
     .ico { display: inline-flex; align-items: center; vertical-align: middle; }
     .ico svg { width: 16px; height: 16px; }
@@ -22,6 +25,7 @@
     .table .sub .handle .identicon { width: 16px; height: 16px; border-radius: 4px; }
     tr.exp td { background: var(--surface-2); padding: 16px 18px 18px; }
     tr.exp.collapsed { display: none; }
+    .exp-grid > * { min-width: 0; }
     .exp-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; font-size: var(--fs-sm); }
     .exp-grid h4 { font-size: var(--fs-sm); margin-bottom: 8px; }
     @media (max-width: 800px) { .exp-grid { grid-template-columns: 1fr; } }
@@ -249,7 +253,7 @@
       </table>
       <div class="table-foot">
         <span>Mostrando 12 de 23 itens · 9 sem responsável · atualizado há 2 min</span>
-        <div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm" data-toast="Página 2: 11 itens de risco baixo e médio">2</button><button class="btn btn-sm" data-toast="Página 2: 11 itens de risco baixo e médio">›</button></div>
+        <div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary" data-toast="Você já está na página 1">1</button><button class="btn btn-sm" data-toast="Página 2: 11 itens de risco baixo e médio">2</button><button class="btn btn-sm" data-toast="Página 2: 11 itens de risco baixo e médio">›</button></div>
       </div>
     </div>
   </main>

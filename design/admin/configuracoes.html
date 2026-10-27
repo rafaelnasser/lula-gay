@@ -199,28 +199,27 @@
 
       <!-- ====================== Limites ====================== -->
       <div class="tab-panel" data-panel="limites">
-        <div class="split">
-          <div class="stack">
-            <div class="card"><div class="card-head"><h3>Antifraude de saque</h3></div><div class="card-body">
-              <div class="form-grid">
-                <div class="field"><label for="l1">Limite diário para contas novas</label><div class="input-group"><span class="affix">R$</span><input id="l1" class="input num" value="2.000"><span class="affix">/dia</span></div></div>
-                <div class="field"><label for="l2">Vale nos primeiros</label><div class="input-group"><input id="l2" class="input num w-sm" value="7"><span class="affix">dias</span></div></div>
-                <div class="field full"><label class="switch"><input type="checkbox" checked><span class="track"></span><span>Libera antes do prazo quando a conta tem o primeiro item aprovado</span></label></div>
-                <div class="field"><label for="l3">Revisão manual acima de</label><div class="input-group"><span class="affix">R$</span><input id="l3" class="input num" value="25.000"><span class="affix">/saque</span></div></div>
-                <div class="field"><label for="l4">Risco da conta que força revisão</label><div class="input-group"><input id="l4" class="input num w-sm" value="85"><span class="affix">/100</span></div></div>
-              </div>
+        <div class="grid cols-2 mb-3">
+          <div class="card"><div class="card-head"><h3>Antifraude de saque</h3></div><div class="card-body">
+            <div class="form-grid">
+              <div class="field"><label for="l1">Limite diário para contas novas</label><div class="input-group"><span class="affix">R$</span><input id="l1" class="input num" value="2.000"><span class="affix">/dia</span></div></div>
+              <div class="field"><label for="l2">Vale nos primeiros</label><div class="input-group"><input id="l2" class="input num w-sm" value="7"><span class="affix">dias</span></div></div>
+              <div class="field full"><label class="switch"><input type="checkbox" checked><span class="track"></span><span>Libera antes do prazo quando a conta tem o primeiro item aprovado</span></label></div>
+              <div class="field"><label for="l3">Revisão manual acima de</label><div class="input-group"><span class="affix">R$</span><input id="l3" class="input num" value="25.000"><span class="affix">/saque</span></div></div>
+              <div class="field"><label for="l4">Risco da conta que força revisão</label><div class="input-group"><input id="l4" class="input num w-sm" value="85"><span class="affix">/100</span></div></div>
+            </div>
+          </div></div>
+          <div class="card"><div class="card-head"><h3>Itens e envios</h3></div><div class="card-body">
+            <div class="form-grid">
+              <div class="field"><label for="l5">Tamanho máximo por item</label><div class="input-group"><input id="l5" class="input num w-sm" value="20"><span class="affix">GB</span></div></div>
+              <div class="field"><label for="l6">Arquivos por item</label><div class="input-group"><input id="l6" class="input num w-sm" value="200"><span class="affix">arquivos</span></div></div>
+              <div class="field"><label for="l7">Envios simultâneos · vendedor novo</label><div class="input-group"><input id="l7" class="input num w-sm" value="3"><span class="affix">itens</span></div><span class="hint">Até a primeira aprovação.</span></div>
+              <div class="field"><label for="l8">Janela de disputa</label><div class="input-group"><input id="l8" class="input num w-sm" value="72"><span class="affix">h</span></div></div>
+            </div>
+            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de limites enviada a Marcos L. · settings.limit.update">Salvar limites</button></div>
             </div></div>
-            <div class="card"><div class="card-head"><h3>Itens e envios</h3></div><div class="card-body">
-              <div class="form-grid">
-                <div class="field"><label for="l5">Tamanho máximo por item</label><div class="input-group"><input id="l5" class="input num w-sm" value="20"><span class="affix">GB</span></div></div>
-                <div class="field"><label for="l6">Arquivos por item</label><div class="input-group"><input id="l6" class="input num w-sm" value="200"><span class="affix">arquivos</span></div></div>
-                <div class="field"><label for="l7">Envios simultâneos · vendedor novo</label><div class="input-group"><input id="l7" class="input num w-sm" value="3"><span class="affix">itens</span></div><span class="hint">Até a primeira aprovação.</span></div>
-                <div class="field"><label for="l8">Janela de disputa</label><div class="input-group"><input id="l8" class="input num w-sm" value="72"><span class="affix">h</span></div></div>
-              </div>
-              <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de limites enviada a Marcos L. · settings.limit.update">Salvar limites</button></div>
-            </div></div>
-          </div>
-          <div class="card"><div class="card-head"><h3>Redes e confirmações</h3><span class="badge badge-outline">só cripto</span></div><div class="table-wrap" style="border:0;border-radius:0">
+        </div>
+        <div class="card"><div class="card-head"><h3>Redes e confirmações</h3><span class="badge badge-outline">só cripto</span></div><div class="table-wrap" style="border:0;border-radius:0">
             <table class="table compact">
               <thead><tr><th>Moeda · rede</th><th>Confirmações</th><th>Tempo típico</th><th class="num">Depósito mínimo</th><th>Taxa de saque</th></tr></thead>
               <tbody>
@@ -234,7 +233,6 @@
             </table>
             <div class="table-foot"><span>Cotação travada por 10 min para BTC; USDT/USDC 1:1 com a referência (R$ 5,38), atualizada a cada minuto. Carteira quente mantém ≈ 48 h de saques; alerta abaixo de 24 h.</span><button class="btn btn-sm" data-toast="Proposta de confirmações por rede enviada a Marcos L.">Salvar</button></div>
           </div></div>
-        </div>
       </div>
     </div>
 

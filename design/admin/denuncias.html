@@ -12,6 +12,7 @@
     .split > *, .grid > * { min-width: 0; }
     @media (min-width: 1001px) { .sidebar-backdrop { display: none; } } /* contorno: backdrop vira item do grid .app no desktop (bug em app.css) */
     .card-head .actions { flex-wrap: wrap; }
+    @media (min-width: 701px) { .stat-grid.six { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
     .quote { border-left: 3px solid var(--border-2); padding: 10px 14px; background: var(--surface-2); border-radius: var(--r-sm); font-size: var(--fs-sm); color: var(--fg-2); }
     .switch-row { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r); }
   </style>
@@ -197,7 +198,7 @@
 
       <!-- ====================== SLA e métricas ====================== -->
       <div class="tab-panel" data-panel="sla">
-        <div class="stat-grid mb-3">
+        <div class="stat-grid six mb-3">
           <div class="stat"><span class="label">Tempo médio de resposta</span><span class="value">2,1 dias</span><span class="delta up"><i data-icon="trending-down"></i>−0,4 vs. setembro</span></div>
           <div class="stat"><span class="label">Denúncias no mês</span><span class="value">14</span><span class="delta flat">outubro · 11 encerradas</span></div>
           <div class="stat"><span class="label">Procedentes</span><span class="value">3</span><span class="delta flat">21 % das recebidas</span></div>

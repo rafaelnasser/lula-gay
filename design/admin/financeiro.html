@@ -12,8 +12,10 @@
     .split > *, .grid > * { min-width: 0; }
     @media (min-width: 1001px) { .sidebar-backdrop { display: none; } } /* contorno: backdrop vira item do grid .app no desktop (bug em app.css) */
     .card-head .actions { flex-wrap: wrap; }
-    .checks { display: flex; gap: 4px; flex-wrap: wrap; }
-    .checks .badge { font-size: 11px; }
+    .checks { display: flex; gap: 4px; flex-wrap: wrap; max-width: 300px; }
+    .table td.num, .table td.mono { white-space: nowrap; }
+    @media (min-width: 701px) { .stat-grid.six { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .checks .badge { font-size: 11px; padding: 1px 6px; }
     .table.ledger td { font-family: var(--font-mono); font-size: var(--fs-xs); white-space: nowrap; }
     .table.ledger td.memo { white-space: normal; font-family: var(--font-body); font-size: var(--fs-sm); min-width: 220px; }
     .sign { display: inline-flex; gap: 6px; align-items: center; font-size: var(--fs-sm); }
@@ -33,7 +35,7 @@
       </div>
     </div>
 
-    <div class="stat-grid mb-3">
+    <div class="stat-grid six mb-3">
       <div class="stat"><span class="label">Total em carteiras (passivo)</span><span class="value">R$ 412.380</span><span class="delta flat">≈ 76.650 USDT · 4.312 contas</span></div>
       <div class="stat"><span class="label">Em custódia</span><span class="value">R$ 186.940</span><span class="delta flat">45 % do passivo</span></div>
       <div class="stat"><span class="label">Comissões do mês</span><span class="value">R$ 27.610</span><span class="delta up"><i data-icon="trending-up"></i>+18 % vs. setembro</span></div>

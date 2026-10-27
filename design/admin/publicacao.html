@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    /* contornos de bugs do CSS compartilhado: .sidebar-backdrop vira célula do grid acima de 1000 px; filhos de grid sem min-width 0 estouram em telas estreitas */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    .grid > *, .split > *, .split-3 > *, .form-grid > * { min-width: 0; }
     .acts { text-align: right; white-space: nowrap; }
     .table td .title { font-weight: 600; display: block; max-width: 40ch; }
     .post-card .textarea { min-height: 150px; font-size: var(--fs-sm); }
@@ -180,7 +183,7 @@ Faltam [dias] dias para romper o lacre. lacre.app/p/4m2x9</p></div><div class="s
               <tr><td><span class="chan tg">TG</span></td><td><b>lcr-4m2x9</b> · lançamento · Lacre coletivo<span class="sub">Cadeia do ouro ilegal no Pará</span></td><td>15/10 · 10:00</td><td class="num">12.800</td><td class="num">540</td><td class="num">96 apoios</td><td><span class="badge badge-ok">publicado</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="Mensagem aberta no Telegram"><i data-icon="external-link"></i></button></td></tr>
             </tbody>
           </table>
-          <div class="table-foot"><span>8 posts mais recentes · métricas coletadas a cada 6 h por 7 dias · última coleta hoje às 10:00</span><div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm" data-toast="Página 2: 14 posts de setembro e outubro">2</button><button class="btn btn-sm" data-toast="Página 2">›</button></div></div>
+          <div class="table-foot"><span>8 posts mais recentes · métricas coletadas a cada 6 h por 7 dias · última coleta hoje às 10:00</span><div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary" data-toast="Você já está na página 1">1</button><button class="btn btn-sm" data-toast="Página 2: 14 posts de setembro e outubro">2</button><button class="btn btn-sm" data-toast="Página 2">›</button></div></div>
         </div>
       </div>
     </div>
