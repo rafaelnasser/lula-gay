@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    /* app.css só oculta .sidebar-backdrop no modo celular; fora dele o div vira célula do grid e empurra o conteúdo para a coluna da barra lateral */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    /* ao empilhar colunas, app.css usa 1fr (mínimo automático): sem isto, tabelas e hashes dentro de .grid/.split alargam a página no celular */
+    .grid > *, .split > * { min-width: 0; }
     .status-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 8px; }
     .status-grid a { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface-2); min-width: 0; }
     .status-grid a:hover { border-color: var(--border-2); }
@@ -80,8 +84,8 @@
             <div class="list-item">
               <span class="li-icon"><i data-icon="wallet"></i></span>
               <div class="li-body">
-                <div class="li-title">Saque em processamento · <span class="mono">R$ 1.000,00 ≈ 185,9 USDT</span> <span class="badge badge-info">próximo lote · 11:00</span></div>
-                <div class="li-sub">USDT · rede Polygon · solicitado 26/10 18:40 · confirmado com senha + TOTP · taxa de rede ≈ R$ 0,20. O endereço de destino é apagado após a confirmação na rede.</div>
+                <div class="li-title">Saque em processamento · <span class="mono">R$ 1.000,00</span> <span class="badge badge-info">próximo lote · 11:00</span></div>
+                <div class="li-sub">≈ 185,9 USDT · rede Polygon · solicitado 26/10 18:40 · confirmado com senha + TOTP · taxa de rede ≈ R$ 0,20. O endereço de destino é apagado após a confirmação na rede.</div>
               </div>
               <a class="btn btn-sm" href="../seller/ganhos.html">Acompanhar</a>
             </div>
@@ -159,7 +163,7 @@
       </div>
     </section>
 
-    <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">O que existe sobre esta conta</span>Pseudônimo, data de criação, itens, ledger em USDT e reputação. Nenhum nome, e-mail, telefone ou CPF; nenhum endereço de carteira guardado. Compradores veem apenas <b>@coruja-7f3a</b>, ou “vendedor oculto” se você preferir.</div></div>
+    <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">O que existe sobre esta conta</span>Pseudônimo, data de criação, itens, ledger em USDT e reputação. Nenhum nome, e-mail, telefone ou CPF; nenhum endereço de carteira guardado. Compradores veem apenas <span class="handle" data-handle="coruja-7f3a"></span>, ou “vendedor oculto” se você preferir.</div></div>
   </main>
 </body>
 </html>

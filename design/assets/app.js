@@ -257,7 +257,7 @@
       { key: 'painel', label: 'Painel', icon: 'home', to: 'seller/painel.html' },
       { key: 'anuncios', label: 'Meus anúncios', icon: 'archive', to: 'seller/anuncios.html', count: 6 },
       { key: 'novo-anuncio', label: 'Novo anúncio', icon: 'plus', to: 'seller/novo-anuncio.html' },
-      { key: 'pedidos', label: 'Pedidos abertos', icon: 'file-search', to: 'seller/pedidos.html', count: 12 },
+      { key: 'pedidos', label: 'Pedidos abertos', icon: 'file-search', to: 'seller/pedidos.html', count: 5 },
       { label: 'Conta' },
       { key: 'ganhos', label: 'Ganhos e saques', icon: 'coins', to: 'seller/ganhos.html' },
       { key: 'reputacao', label: 'Reputação', icon: 'award', to: 'seller/reputacao.html' },
@@ -418,7 +418,7 @@
         if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text.trim()).then(done, done); else done();
         return;
       }
-      if (t.hasAttribute('data-toast')) { e.preventDefault(); window.toast(t.dataset.toast, t.dataset.toastIcon); return; }
+      if (t.hasAttribute('data-toast')) { e.preventDefault(); window.toast(t.dataset.toast, t.dataset.toastIcon); document.querySelectorAll('.menu.open').forEach(m => m.classList.remove('open')); return; }
       if (t.hasAttribute('data-amount')) {
         e.preventDefault();
         const group = t.closest('.amount-options');

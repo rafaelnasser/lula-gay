@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    /* app.css só oculta .sidebar-backdrop no modo celular; fora dele o div vira célula do grid e empurra o conteúdo para a coluna da barra lateral */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    /* ao empilhar colunas, app.css usa 1fr (mínimo automático): sem isto, tabelas e hashes dentro de .grid/.split alargam a página no celular */
+    .grid > *, .split > * { min-width: 0; }
+    .tabs .tab svg { width: 14px; height: 14px; }
     /* app.css não define a exibição dos blocos do assistente; regra local */
     [data-wizard] > [data-step] { display: none; }
     [data-wizard] > [data-step].active { display: block; }
@@ -309,14 +314,14 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           </div>
           <div class="grid cols-2">
             <div class="panel stack-sm">
-              <label class="switch"><input type="checkbox"><span class="track"></span><span>Ocultar meu pseudônimo na página pública<span class="desc">A página do item, a prova e os posts mostram “vendedor oculto”. Sua reputação continua contando no pseudônimo @coruja-7f3a.</span></span></label>
+              <label class="switch"><input type="checkbox"><span class="track"></span><span>Ocultar meu pseudônimo na página pública<span class="desc">A página do item, a prova e os posts mostram “vendedor oculto”. Sua reputação continua contando no pseudônimo <span class="handle" data-handle="coruja-7f3a"></span>.</span></span></label>
             </div>
             <div class="panel">
               <div class="label">O que não pedimos</div>
               <p class="small muted mt-1">Nenhuma assinatura, nome, CPF ou documento. A declaração vale pelo pseudônimo, pela data e pela versão do texto. É isso que fica registrado.</p>
             </div>
           </div>
-          <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">As declarações ficam registradas</span>Data e hora, versão do texto (v1.3 · out/2026) e vínculo ao pseudônimo <b>@coruja-7f3a</b>, por item e por versão. Em caso de violação comprovada, o item é retirado, os compradores são reembolsados com o valor em custódia e a conta pode ser banida com o saldo retido para análise.</div></div>
+          <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">As declarações ficam registradas</span>Data e hora, versão do texto (v1.3 · out/2026) e vínculo ao pseudônimo <span class="handle" data-handle="coruja-7f3a"></span>, por item e por versão. Em caso de violação comprovada, o item é retirado, os compradores são reembolsados com o valor em custódia e a conta pode ser banida com o saldo retido para análise.</div></div>
         </div>
         <div class="card-foot"><button class="btn btn-ghost" data-step-go="4"><i data-icon="arrow-left"></i>Voltar</button><div class="foot-actions"><button class="btn btn-primary" data-step-go="6">Continuar<i data-icon="arrow-right"></i></button></div></div>
       </section>

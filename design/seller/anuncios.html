@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    /* app.css só oculta .sidebar-backdrop no modo celular; fora dele o div vira célula do grid e empurra o conteúdo para a coluna da barra lateral */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    /* ao empilhar colunas, app.css usa 1fr (mínimo automático): sem isto, tabelas e hashes dentro de .grid/.split alargam a página no celular */
+    .grid > *, .split > * { min-width: 0; }
+    .panel .label { display: inline-flex; align-items: center; gap: 6px; }
+    .panel .label svg { width: 14px; height: 14px; color: var(--brass); }
     .table td.cell-thumb { width: 76px; padding-right: 0; }
     .thumb { width: 76px; aspect-ratio: 16 / 10; border-radius: var(--r-sm); }
     .table .thumb .preview-lock .seal { width: 22px; height: 22px; }

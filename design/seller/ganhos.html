@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    /* app.css só oculta .sidebar-backdrop no modo celular; fora dele o div vira célula do grid e empurra o conteúdo para a coluna da barra lateral */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    /* ao empilhar colunas, app.css usa 1fr (mínimo automático): sem isto, tabelas e hashes dentro de .grid/.split alargam a página no celular */
+    .grid > *, .split > * { min-width: 0; }
+    .tabs .tab svg { width: 14px; height: 14px; }
     .otp .input { width: 42px; }
     .list-item .amount { font-variant-numeric: tabular-nums; text-align: right; flex: none; }
     .list-item .amount b { display: block; }
@@ -26,7 +31,7 @@
       </div>
       <div class="actions">
         <button class="btn" data-toast="Extrato exportado em CSV (valores em R$ e USDT)"><i data-icon="download"></i>Exportar extrato</button>
-        <a class="btn btn-primary" href="#sacar" data-tab="sacar"><i data-icon="wallet"></i>Sacar</a>
+        <a class="btn btn-primary" href="#sacar"><i data-icon="wallet"></i>Sacar</a>
       </div>
     </div>
 

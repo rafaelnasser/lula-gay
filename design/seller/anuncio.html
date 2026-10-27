@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    /* app.css só oculta .sidebar-backdrop no modo celular; fora dele o div vira célula do grid e empurra o conteúdo para a coluna da barra lateral */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    /* ao empilhar colunas, app.css usa 1fr (mínimo automático): sem isto, tabelas e hashes dentro de .grid/.split alargam a página no celular */
+    .grid > *, .split > * { min-width: 0; }
     .head-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
     .diff { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media (max-width: 700px) { .diff { grid-template-columns: 1fr; } }
@@ -21,7 +25,8 @@
     .staff { width: 28px; height: 28px; border-radius: 8px; background: var(--brass-soft); color: var(--brass); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; flex: none; }
     .tight-list { margin: 0; padding-left: 18px; }
     .tight-list li + li { margin-top: 4px; }
-    .x-card .social-card { padding: 14px 16px; }
+    .x-card .social-card { padding: 14px 16px; aspect-ratio: auto; gap: 10px; }
+    .x-card .social-card .sc-title { font-size: 15px; max-width: none; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   </style>
 </head>
 <body data-shell="seller" data-page="anuncios" data-root="../" data-title="Anúncio">
