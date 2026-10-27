@@ -31,6 +31,14 @@
     .no-ask li span.muted { margin-left: auto; font-size: var(--fs-xs); }
     .cta { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .cta p { max-width: 56ch; color: var(--fg-2); }
+    .pillar .card-body { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+    .pillar h3 { font-size: var(--fs-md); }
+    .cstep { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); color: var(--fg-2); }
+    .cstep:first-child { padding-top: 0; }
+    .cstep:last-child { border-bottom: 0; padding-bottom: 0; }
+    .cstep .ci { width: 32px; height: 32px; border-radius: 50%; background: var(--brass-soft); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .cstep .ci svg { width: 16px; height: 16px; color: var(--brass); }
+    .cstep b { color: var(--fg); }
   </style>
 </head>
 <body data-shell="public" data-page="home" data-root="../">
@@ -67,7 +75,7 @@
               <span class="badge badge-outline"><i data-icon="users"></i>1.187 apoiadores</span>
               <span class="badge badge-outline"><i data-icon="timer"></i>encerra em <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></span>
             </div>
-            <p class="xs muted">Quando bater a meta, fica público para todos ao mesmo tempo. Se não bater até 15/11, cada apoio volta ao endereço de origem.</p>
+            <p class="xs muted">Quando bater a meta, libera em ondas, do maior apoio para o menor; público em 7 dias. Se não bater até 15/11, cada apoio volta ao endereço de origem.</p>
             <div class="item-foot">
               <span class="handle" data-handle="sextante-21c9" data-rep="4,9 · 12 itens"></span>
               <div class="row">
@@ -86,8 +94,8 @@
     <div class="container">
       <div class="stat-grid">
         <div class="stat"><span class="label">Itens curados</span><span class="value">412</span><span class="delta flat"><i data-icon="globe"></i>itens de 41 países</span></div>
-        <div class="stat"><span class="label">Lacres rompidos</span><span class="value">11</span><span class="delta flat">meta batida, conteúdo liberado</span></div>
-        <div class="stat"><span class="label">Liberados ao público</span><span class="value">US$ 612 mil</span><span class="delta flat">em lacres de liberação pública</span></div>
+        <div class="stat"><span class="label">Lacres rompidos</span><span class="value">11</span><span class="delta flat">meta batida · liberados em ondas, do maior apoio para o menor</span></div>
+        <div class="stat"><span class="label">Liberados ao público</span><span class="value">US$ 612 mil</span><span class="delta flat">10 lacres finalizados · 1 em ondas agora, público em 03/11</span></div>
         <div class="stat"><span class="label">Tempo mediano de curadoria</span><span class="value">36 h</span><span class="delta up"><i data-icon="trending-up"></i>91 % dentro de 48 h</span></div>
       </div>
       <div class="row mt-3">
@@ -101,8 +109,22 @@
     </div>
   </section>
 
+  <!-- Missão -->
+  <section class="section" id="missao">
+    <div class="container">
+      <p class="eyebrow">Por que o Lacre existe</p>
+      <h2 class="display mt-1">Para a verdade sempre sair</h2>
+      <p class="lead mt-2">O Lacre existe para que informação de interesse público venha à tona. Quem tem a informação vende sem se expor. Quem quer saber financia, sozinho ou junto. A curadoria garante que nada ilegal seja publicado e que cada item seja o que promete. A prova pública mostra que o conteúdo existe.</p>
+      <div class="grid cols-3 mt-3">
+        <div class="card pillar"><div class="card-body feature"><span class="f-icon"><i data-icon="shield"></i></span><h3>Anonimato dos dois lados</h3><p class="small muted">Quem sabe conta sem se expor; quem paga não precisa dizer por quê. Nenhuma conta pede nome, e-mail, telefone ou documento, e cada um paga da própria carteira.</p></div></div>
+        <div class="card pillar"><div class="card-body feature"><span class="f-icon"><i data-icon="clipboard-check"></i></span><h3>Curadoria antes de publicar</h3><p class="small muted">Uma equipe humana lê tudo antes de ir ao ar: nada ilegal, nenhum dado pessoal sem necessidade, e o item precisa ser o que a prévia promete. Dois curadores nos casos de risco.</p></div></div>
+        <div class="card pillar"><div class="card-body feature"><span class="f-icon"><i data-icon="badge-check"></i></span><h3>Prova pública e dinheiro transparente</h3><p class="small muted">Hash e carimbo de tempo saem antes da venda. Cada item tem carteira própria com endereço público: qualquer pessoa confere quanto entrou. Em lacre coletivo, o conteúdo termina público.</p></div></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Como funciona -->
-  <section class="section">
+  <section class="section band">
     <div class="container">
       <div class="section-head">
         <div><p class="eyebrow">Como funciona</p><h2>Três passos de cada lado. A curadoria fica no meio.</h2><p>O conteúdo completo já está enviado e analisado antes de o item aparecer. Não existe “vou mandar depois”.</p></div>
@@ -113,8 +135,8 @@
           <div class="card-head"><i data-icon="vault"></i><h3>Para quem compra</h3></div>
           <div class="card-body stack">
             <div class="how-step"><span class="n">1</span><div><b>Crie uma conta anônima.</b><p class="small muted">Pseudônimo sorteado, senha ou passkey e uma frase de recuperação de 12 palavras. Nada mais.</p></div></div>
-            <div class="how-step"><span class="n">2</span><div><b>Pague da sua própria carteira cripto.</b><p class="small muted">USDT ou USDC (Polygon, Tron, Base), 1:1 com o dólar; Bitcoin on-chain em itens Exclusivo e Cópias. Cada item aprovado tem uma carteira própria e o pagamento vai direto para ela. Não guardamos saldo de ninguém.</p></div></div>
-            <div class="how-step"><span class="n">3</span><div><b>Compre, apoie ou peça.</b><p class="small muted">Cópia entregue na hora no cofre. Apoio a um lacre fica na carteira do item até a meta; se não bater, volta ao seu endereço de origem. 72 h para abrir disputa se o conteúdo não bater com a prévia.</p></div></div>
+            <div class="how-step"><span class="n">2</span><div><b>Pague da sua própria carteira cripto.</b><p class="small muted">USDT ou USDC (Polygon, Tron, Base), 1:1 com o dólar; Bitcoin on-chain em itens Exclusivo e Cópias. Cada item aprovado tem uma carteira própria e o pagamento vai direto para ela. Não guardamos saldo de ninguém. <a class="link" href="guia-cripto.html">Primeira vez? Guia em 10 minutos</a>.</p></div></div>
+            <div class="how-step"><span class="n">3</span><div><b>Compre, apoie ou peça.</b><p class="small muted">Cópia entregue na hora no cofre. Apoio a um lacre fica na carteira do item até a meta: se bater, o conteúdo sai em ondas e quem apoiou mais recebe antes; se não bater, volta ao seu endereço de origem. 72 h para abrir disputa se o conteúdo não bater com a prévia.</p></div></div>
           </div>
           <div class="card-foot"><a class="btn btn-sm btn-primary" href="../auth/criar-conta.html">Criar conta anônima</a><a class="btn btn-sm btn-ghost" href="explorar.html">Explorar sem conta</a></div>
         </div>
@@ -131,11 +153,33 @@
     </div>
   </section>
 
+  <!-- Primeira vez com cripto -->
+  <section class="section" id="cripto">
+    <div class="container">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Primeira vez com cripto?</p>
+          <h2 class="mt-1">Cinco passos, cerca de 10 minutos</h2>
+          <p class="lead mt-2">Para pagar no Lacre você precisa de uma carteira no navegador, um pouco de USDT na rede Polygon e uns centavos de POL para a taxa. Nenhum cadastro com a gente.</p>
+          <div class="row mt-3"><a class="btn btn-lg btn-primary" href="guia-cripto.html"><i data-icon="book-open"></i>Guia completo em 10 minutos</a></div>
+          <p class="xs muted mt-2">MetaMask é uma sugestão; qualquer carteira que você controle serve. Custa menos de US$ 1 em taxas.</p>
+        </div>
+        <div class="card"><div class="card-body">
+          <div class="cstep"><span class="ci"><i data-icon="download"></i></span><span><b>Instale a MetaMask</b> no navegador ou no celular, só pelo site oficial metamask.io.</span></div>
+          <div class="cstep"><span class="ci"><i data-icon="key"></i></span><span><b>Crie a carteira</b> e anote no papel a frase de 12 palavras. Ninguém a recupera por você, nem o Lacre.</span></div>
+          <div class="cstep"><span class="ci"><i data-icon="globe"></i></span><span><b>Ative a rede Polygon</b>: um clique, ela já vem na lista de redes populares.</span></div>
+          <div class="cstep"><span class="ci"><i data-icon="coins"></i></span><span><b>Coloque USDT</b> pelo botão "Comprar", por uma corretora (saque na rede Polygon) ou de quem já tem, e uns US$ 1 de POL para as taxas.</span></div>
+          <div class="cstep"><span class="ci"><i data-icon="send"></i></span><span><b>Pague no checkout</b>: USDT · Polygon, copie o endereço e envie o valor exato. Em cerca de 30 segundos o acesso libera sozinho.</span></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Lacres coletivos em andamento -->
   <section class="section band">
     <div class="container">
       <div class="section-head">
-        <div><p class="eyebrow">Lacre coletivo</p><h2>Lacres em andamento</h2><p>Uma meta, um prazo e conteúdo já analisado. Quando a soma dos apoios bate a meta, o lacre rompe e o conteúdo é liberado. Se não bater, todo mundo recebe de volta.</p></div>
+        <div><p class="eyebrow">Lacre coletivo</p><h2>Lacres em andamento</h2><p>Uma meta, um prazo e conteúdo já analisado. Quando a soma dos apoios bate a meta, o lacre rompe e o conteúdo sai em ondas, do maior apoio para o menor: onda 1 na hora, onda 2 em 48 h, onda 3 em 96 h, público na finalização. Se não bater, cada apoio volta ao endereço de origem.</p></div>
         <a class="btn btn-ghost" href="explorar.html#coletivos">Todos os lacres<i data-icon="arrow-right"></i></a>
       </div>
       <div class="grid cols-3">
@@ -149,12 +193,12 @@
           </div>
         </article>
         <article class="card item-card">
-          <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Governo e políticas públicas</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Governo e políticas públicas</span><span class="badge badge-wax">Rompido hoje</span></div><div class="preview-lock"><span data-seal></span></div></a>
           <div class="item-body">
-            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
-            <h3 class="item-title"><a href="item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o Plano Diretor (2024–2026)</a></h3>
-            <div class="progress"><div class="progress-bar wax" data-width="63%"></div></div>
-            <div class="item-foot"><div><div class="price wax">US$ 11.340<small>de US$ 18.000</small></div><div class="xs muted">402 apoiadores · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></div></div><span class="handle" data-handle="estenografo-7b3c"></span></div>
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-rompido"><i data-icon="unlock"></i>Liberando em ondas</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">Base de 1.800 contratos de publicidade de prefeituras do interior de SP (2018–2025)</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="100%"></div></div>
+            <div class="item-foot"><div><div class="price wax">US$ 9.120<small>de US$ 9.000</small></div><div class="xs muted">203 apoiadores · onda 2 em 29/10 · público em 03/11</div></div><span class="handle" data-handle="lanterna-b31d"></span></div>
           </div>
         </article>
         <article class="card item-card">
@@ -323,7 +367,7 @@
           <div class="x-head"><span data-seal style="width:36px;height:36px;display:inline-block"></span><div><div class="x-name">Lacre</div><div class="x-at">@lacre · 21 out</div></div></div>
           <div class="x-body">Lacre coletivo aberto · Jornalismo e investigação
 18 meses de apuração sobre a cadeia do ouro ilegal no Pará. Documentos públicos e entrevistas.
-Meta: US$ 80.000. Quando bater, fica público para todo mundo.
+Meta: US$ 80.000. Quando bater, libera em ondas, do maior apoio para o menor; público em 7 dias.
 Apoie a partir de US$ 10 · lacre.app/p/4m2x9</div>
           <div class="x-media">
             <div class="social-card"><div class="preview" data-type="documento"></div><div class="row between"><span class="badge">Jornalismo e investigação</span><span class="badge badge-wax">Lacre coletivo</span></div><div class="sc-title">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</div><div><div class="progress thin" style="background:rgba(255,255,255,.15)"><div class="progress-bar wax" style="width:68%"></div></div><div class="sc-foot mt-1"><span>US$ 54.120 / 80.000 · 1.187 apoiadores</span><span>sha256 3f9a…c21e · lacre.app/p/4m2x9</span></div></div></div>
