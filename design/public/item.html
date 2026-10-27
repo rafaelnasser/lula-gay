@@ -92,9 +92,13 @@
     .ms .ms-foot { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 6px; font-size: var(--fs-xs); color: var(--muted); }
     .flag-btn { color: var(--muted-2); }
     .flag-btn:hover { color: var(--danger); }
-    .fila { display: flex; flex-direction: column; gap: 10px; padding: 12px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface-2); }
+    .fila { display: flex; flex-direction: column; gap: 10px; padding: 12px 10px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface-2); }
     .fila .table-wrap { border-radius: var(--r-sm); }
-    .fila-t th, .fila-t td { padding: 6px 7px; font-size: var(--fs-xs); }
+    .fila-t th, .fila-t td { padding: 6px 5px; font-size: var(--fs-xs); }
+    .fila-t th { text-transform: none; letter-spacing: 0; }
+    .fila-t td { white-space: nowrap; }
+    .fila-t td:first-child { white-space: normal; }
+    .fila-t .nw { white-space: nowrap; }
     .fila-t tr.pub td { color: var(--muted); }
     .mypos { padding: 10px 12px; border: 1px solid var(--wax); border-radius: var(--r-sm); background: var(--wax-soft); font-size: var(--fs-sm); display: flex; flex-direction: column; gap: 4px; }
     .qlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
@@ -338,11 +342,11 @@
                   <div class="row between"><b class="small"><i data-icon="layers"></i> Fila de liberação</b><span class="xs muted">do maior apoio para o menor</span></div>
                   <div class="table-wrap">
                     <table class="table compact fila-t">
-                      <thead><tr><th>Onda · faixa</th><th class="num">Apoiadores</th><th class="num">Total</th><th>Recebe</th></tr></thead>
+                      <thead><tr><th>Onda</th><th class="num">Apoiadores</th><th class="num">Total</th><th>Recebe</th></tr></thead>
                       <tbody>
-                        <tr><td><b>Onda 1</b><span class="sub">≥ US$ 500</span></td><td class="num">31</td><td class="num">US$ 21.400</td><td>na hora</td></tr>
-                        <tr><td><b>Onda 2</b><span class="sub">US$ 100–499</span></td><td class="num">120</td><td class="num">US$ 18.600</td><td>+48 h</td></tr>
-                        <tr><td><b>Onda 3</b><span class="sub">US$ 10–99</span></td><td class="num">1.036</td><td class="num">US$ 14.120</td><td>+96 h</td></tr>
+                        <tr><td><b>Onda 1</b><span class="sub"><span class="nw">≥ US$ 500</span></span></td><td class="num">31</td><td class="num">US$ 19.850</td><td>na hora</td></tr>
+                        <tr><td><b>Onda 2</b><span class="sub">US$ <span class="nw">100–499</span></span></td><td class="num">120</td><td class="num">US$ 20.150</td><td>+48 h</td></tr>
+                        <tr><td><b>Onda 3</b><span class="sub">US$ <span class="nw">10–99</span></span></td><td class="num">1.036</td><td class="num">US$ 14.120</td><td>+96 h</td></tr>
                         <tr class="pub"><td><b>Público</b><span class="sub">na finalização</span></td><td class="num">—</td><td class="num">—</td><td>+7 dias</td></tr>
                       </tbody>
                     </table>
