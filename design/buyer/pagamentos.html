@@ -3,335 +3,232 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Carteira · Lacre</title>
+  <title>Pagamentos · Lacre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
-    .split > *, .addr-box > * { min-width: 0; }
-    .tl-item .what { color: var(--fg); }
-    [data-wizard] [data-step]:not(.active) { display: none; }
-    .choice { text-align: left; }
-    .choice.active { border-color: var(--brass); background: var(--brass-soft); box-shadow: inset 0 0 0 1px var(--brass); }
-    .addr-box { display: grid; grid-template-columns: 148px minmax(0, 1fr); gap: 20px; align-items: start; }
-    @media (max-width: 600px) { .addr-box { grid-template-columns: 1fr; } }
-    /* QR simulado: o código real é gerado pelo servidor a partir do endereço */
-    .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: var(--fs-xs); color: var(--muted); text-align: center; }
-    .qr { width: 148px; height: 148px; flex: none; border-radius: 8px; background-color: #fff; position: relative; border: 8px solid #fff;
-      background-image: repeating-conic-gradient(#111 0 25%, transparent 0 50%), repeating-conic-gradient(#111 0 25%, #fff 0 50%);
-      background-size: 18px 18px, 12px 12px; background-position: 5px 5px, 0 0; }
-    .qr::before, .qr::after, .qr .f { content: ""; position: absolute; width: 30px; height: 30px; border: 5px solid #111; background: #fff; box-shadow: inset 0 0 0 4px #fff, inset 0 0 0 14px #111; }
-    .qr::before { top: 2px; left: 2px; } .qr::after { top: 2px; right: 2px; } .qr .f { bottom: 2px; left: 2px; }
-    .rate { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--fg-2); background: var(--surface-3); border-radius: 6px; padding: 4px 8px; }
-    .rate svg { width: 13px; height: 13px; color: var(--brass); }
-    .otp .input { width: 42px; }
+    .split > * { min-width: 0; }
+    .tbl-pay td { white-space: nowrap; }
+    .tbl-pay td.wrap { white-space: normal; min-width: 200px; }
+    .tbl-pay td.wrap-sm { white-space: normal; min-width: 140px; }
+    .table td.st { white-space: normal; min-width: 170px; }
+    .table a.tx { font-family: var(--font-mono); font-size: var(--fs-xs); display: inline-flex; align-items: center; gap: 4px; color: var(--fg-2); }
+    .table a.tx svg { width: 12px; height: 12px; color: var(--muted); }
+    .table a.tx:hover { color: var(--brass); }
+    .table .badge + .sub { margin-top: 4px; }
+    .how { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; counter-reset: h; }
+    .how > div { padding: 16px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); }
+    .how > div::before { counter-increment: h; content: counter(h); display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; background: var(--brass-soft); color: var(--brass); font-weight: 700; font-size: var(--fs-xs); margin-bottom: 10px; }
+    .how h4 { font-size: var(--fs-md); margin-bottom: 6px; }
+    .how p { font-size: var(--fs-sm); color: var(--muted); }
+    @media (max-width: 480px) { .how { grid-template-columns: 1fr; } }
+    /* QR simulado: o código real é gerado a partir do endereço derivado */
+    .qr-mock { width: 148px; height: 148px; border-radius: 8px; background: repeating-conic-gradient(var(--fg) 0 25%, transparent 0 50%) 0 0/16px 16px; border: 8px solid var(--surface); box-shadow: 0 0 0 1px var(--border); flex: none; }
+    .addr-box { display: flex; gap: 16px; align-items: flex-start; }
+    .addr-box .qr-mock { width: 120px; height: 120px; background-size: 14px 14px; }
+    .addr-box > .stack-sm { flex: 1; min-width: 0; }
+    @media (max-width: 480px) { .addr-box { flex-direction: column; } }
+    .faq details { border-top: 1px solid var(--border); padding: 10px 0; font-size: var(--fs-sm); }
+    .faq details:last-child { border-bottom: 1px solid var(--border); }
+    .faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+    .faq summary::after { content: "+"; color: var(--muted); }
+    .faq details[open] summary::after { content: "–"; }
+    .faq p { color: var(--muted); margin-top: 6px; }
   </style>
 </head>
-<body data-shell="buyer" data-page="carteira" data-title="Carteira" data-root="../">
+<body data-shell="buyer" data-page="pagamentos" data-title="Pagamentos" data-root="../">
   <main>
     <div class="page-head">
       <div>
-        <p class="eyebrow">Carteira · saldo em USDT</p>
-        <h1 class="mt-1">Carteira</h1>
-        <p class="sub">Valores em US$, liquidados em USDT 1:1 (1 USDT = US$ 1), sem conversão. Só depósitos em Bitcoin são convertidos para USDT na hora, com cotação travada por 10 min.</p>
+        <p class="eyebrow">Comprador · pagamentos</p>
+        <h1 class="mt-1">Pagamentos</h1>
+        <p class="sub">Tudo o que esta conta pagou para carteiras de itens e de pedidos, com rede, confirmações e txid. Valores em US$; stablecoins valem 1:1.</p>
       </div>
       <div class="actions">
-        <button class="btn" data-tab="sacar"><i data-icon="arrow-up-right"></i>Sacar</button>
-        <button class="btn btn-primary" data-tab="depositar"><i data-icon="bitcoin"></i>Depositar</button>
+        <button class="btn" data-toast="Histórico exportado em CSV (14 pagamentos, 3 reembolsos)"><i data-icon="download"></i>Exportar CSV</button>
+        <button class="btn btn-primary" data-tab="como-pagar"><i data-icon="qr-code"></i>Como pagar</button>
       </div>
     </div>
 
+    <div class="alert alert-anon mb-3"><i data-icon="shield"></i><div><span class="alert-title">O Lacre não guarda saldo</span>Você paga da sua própria carteira direto para a carteira de cada item. Guardamos por pagamento: valor, rede, txid e confirmações. O seu endereço de origem fica registrado só até a finalização do item, para reembolsos.</div></div>
+
     <div class="stat-grid mb-3">
-      <div class="stat"><span class="label">Disponível · USDT</span><span class="value">US$ 1.240,00</span><span class="delta flat">1.240 USDT · 1 USDT = US$ 1 · pode ser gasto ou sacado</span></div>
-      <div class="stat"><span class="label">Em custódia · apoios ativos</span><span class="value">US$ 250,00</span><span class="delta flat">250 USDT · 2 apoios ao lcr-4m2x9 · volta sozinho se a meta falhar em 15/11</span></div>
-      <div class="stat"><span class="label">Reservado · lances e ofertas</span><span class="value">US$ 0,00</span><span class="delta flat">nenhum lance ou oferta em aberto</span></div>
+      <div class="stat"><span class="label">Pagamentos confirmados</span><span class="value">14 · US$ 3.930</span><span class="delta flat">9 itens e 3 pedidos · Polygon, Base e Tron</span></div>
+      <div class="stat"><span class="label">Aguardando confirmação</span><span class="value">0</span><span class="delta flat">nenhuma transação vista na rede sem confirmar</span></div>
+      <div class="stat"><span class="label">Em lacres ainda abertos</span><span class="value">US$ 250,00</span><span class="delta flat">2 apoios ao lcr-4m2x9 · volta ao seu endereço se a meta não for batida até 15/11</span></div>
+      <div class="stat"><span class="label">Em pedidos abertos</span><span class="value">US$ 800,00</span><span class="delta flat">ped-2c8d1 · 500 + 300 · volta ao seu endereço se o pedido expirar em 30/11</span></div>
+      <div class="stat"><span class="label">Em disputa</span><span class="value">US$ 490,00</span><span class="delta flat">lcr-9f2k7 · DSP-0207 · na carteira do item até a decisão da curadoria</span></div>
     </div>
-    <p class="xs muted mb-3">Fora destes valores: US$ 50,00 somados à recompensa do pedido ped-2c8d1, em custódia do pedido até 30/11 (ver <a class="link" href="../buyer/pedidos.html">Meus pedidos</a>).</p>
 
     <div data-tabs>
       <div class="tabs">
-        <a class="tab active" data-tab="depositar" href="#">Depositar</a>
-        <a class="tab" data-tab="sacar" href="#">Sacar</a>
-        <a class="tab" data-tab="extrato" href="#">Extrato <span class="count">10</span></a>
-        <a class="tab" data-tab="redes" href="#">Redes e taxas</a>
+        <a class="tab active" data-tab="pagamentos" href="#">Pagamentos <span class="count">14</span></a>
+        <a class="tab" data-tab="reembolsos" href="#">Reembolsos recebidos <span class="count">3</span></a>
+        <a class="tab" data-tab="como-pagar" href="#">Como pagar</a>
+        <a class="tab" data-tab="redes" href="#">Redes aceitas</a>
       </div>
 
-      <!-- ================= Depositar ================= -->
-      <div class="tab-panel active" data-panel="depositar">
-        <div data-variants="usdt-polygon">
-          <p class="small muted mb-2">Escolha a moeda e a rede. USDT e USDC creditam 1:1 (1 USDT = US$ 1), sem conversão. Só o Bitcoin é convertido para USDT na hora, com cotação travada por 10 min.</p>
-          <div class="choice-cards mb-3">
-            <button type="button" class="choice" data-show="usdt-polygon"><span class="choice-title"><i data-icon="circle-dollar"></i>USDT · Polygon</span><span class="choice-desc">Crédito 1:1 após 12 confirmações (≈ 1 min).</span><span class="choice-meta">Mínimo 10 USDT · taxa de rede ≈ US$ 0,04</span></button>
-            <button type="button" class="choice" data-show="usdt-tron"><span class="choice-title"><i data-icon="circle-dollar"></i>USDT · Tron</span><span class="choice-desc">Crédito 1:1 após 19 confirmações (≈ 1 min).</span><span class="choice-meta">Mínimo 10 USDT · taxa de rede ≈ US$ 1,50</span></button>
-            <button type="button" class="choice" data-show="usdc"><span class="choice-title"><i data-icon="circle-dollar"></i>USDC · Polygon ou Base</span><span class="choice-desc">Crédito 1:1 após 12 (Polygon) ou 20 (Base) confirmações.</span><span class="choice-meta">Mínimo 10 USDC · taxa ≈ US$ 0,02–0,04</span></button>
-            <button type="button" class="choice" data-show="lightning"><span class="choice-title"><i data-icon="zap"></i>Bitcoin · Lightning</span><span class="choice-desc">Instantâneo. Convertido para USDT na hora.</span><span class="choice-meta">Mínimo 1.000 sats · taxa ≈ US$ 0,01</span></button>
-            <button type="button" class="choice" data-show="onchain"><span class="choice-title"><i data-icon="bitcoin"></i>Bitcoin · on-chain</span><span class="choice-desc">2 confirmações (≈ 20 min). Convertido na hora.</span><span class="choice-meta">Mínimo 0,0002 BTC · taxa da rede ≈ US$ 2</span></button>
-          </div>
-          <div class="alert alert-anon mb-3"><i data-icon="shield"></i><div><span class="alert-title">Endereço novo a cada depósito</span>Cada depósito gera um endereço novo. O endereço não é vinculado a nenhuma identidade; o marketplace registra apenas o crédito na sua carteira. Quem olha a blockchain vê um depósito, nunca o que foi comprado.</div></div>
-
-          <div data-variant="usdt-polygon">
-            <div class="card">
-              <div class="card-head"><h3>Depositar USDT pela rede Polygon</h3><span class="badge badge-ok">Crédito 1:1 · sem conversão</span></div>
-              <div class="card-body addr-box">
-                <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Escaneie com sua carteira</span></div>
-                <div class="stack-sm">
-                  <div class="field"><label>Endereço de depósito · Polygon (ERC-20)</label><div class="hash"><code>0x7f3a9C0e1D4b8A2f6E5c9D0b7a1E3f4C2d6Bc21e</code><button class="btn btn-sm btn-ghost" data-copy="0x7f3a9C0e1D4b8A2f6E5c9D0b7a1E3f4C2d6Bc21e" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div><span class="hint">Gerado às 14:02 só para esta carteira. Envie apenas USDT na rede Polygon: outros tokens ou outras redes são perdidos.</span></div>
-                  <dl class="kv">
-                    <dt>Confirmações</dt><dd>12 (≈ 1 min)</dd>
-                    <dt>Mínimo</dt><dd>10 USDT (US$ 10,00)</dd>
-                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ US$ 0,04)</dd>
-                    <dt>Status</dt><dd><span class="badge st-triagem">Aguardando transação</span></dd>
-                  </dl>
-                  <div class="row"><button class="btn btn-sm" data-toast="Endereço marcado como usado. Um novo foi gerado."><i data-icon="refresh"></i>Gerar outro endereço</button><span class="xs muted">O crédito aparece em US$ assim que as confirmações chegam.</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div data-variant="usdt-tron">
-            <div class="card">
-              <div class="card-head"><h3>Depositar USDT pela rede Tron</h3><span class="badge badge-ok">Crédito 1:1 · sem conversão</span></div>
-              <div class="card-body addr-box">
-                <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Escaneie com sua carteira</span></div>
-                <div class="stack-sm">
-                  <div class="field"><label>Endereço de depósito · Tron (TRC-20)</label><div class="hash"><code>TQ8kZf3aLm9Xq2Wv7Yb1Nc4Rd6Pe8S9xA2</code><button class="btn btn-sm btn-ghost" data-copy="TQ8kZf3aLm9Xq2Wv7Yb1Nc4Rd6Pe8S9xA2" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div><span class="hint">Gerado às 14:02 só para esta carteira. Envie apenas USDT TRC-20.</span></div>
-                  <dl class="kv">
-                    <dt>Confirmações</dt><dd>19 (≈ 1 min)</dd>
-                    <dt>Mínimo</dt><dd>10 USDT (US$ 10,00)</dd>
-                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ US$ 1,50, varia com a energia da rede)</dd>
-                    <dt>Status</dt><dd><span class="badge st-triagem">Aguardando transação</span></dd>
-                  </dl>
-                  <div class="row"><button class="btn btn-sm" data-toast="Endereço marcado como usado. Um novo foi gerado."><i data-icon="refresh"></i>Gerar outro endereço</button></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div data-variant="usdc">
-            <div class="card">
-              <div class="card-head"><h3>Depositar USDC</h3><div class="segmented"><button class="active" data-toast="Rede selecionada: Polygon">Polygon</button><button data-toast="Rede selecionada: Base · endereço 0x4b8A…9e0f">Base</button></div><span class="badge badge-ok">Crédito 1:1 · sem conversão</span></div>
-              <div class="card-body addr-box">
-                <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Escaneie com sua carteira</span></div>
-                <div class="stack-sm">
-                  <div class="field"><label>Endereço de depósito · Polygon (ERC-20)</label><div class="hash"><code>0x9c2D4b8A2f6E5c9D0b7a1E3f4C2d6B8a9E0f1C3d</code><button class="btn btn-sm btn-ghost" data-copy="0x9c2D4b8A2f6E5c9D0b7a1E3f4C2d6B8a9E0f1C3d" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div><span class="hint">Em Base, o endereço é outro (0x4b8A…9e0f). Nunca envie USDC de uma rede para o endereço da outra.</span></div>
-                  <dl class="kv">
-                    <dt>Confirmações</dt><dd>12 em Polygon (≈ 1 min) · 20 em Base (≈ 40 s)</dd>
-                    <dt>Mínimo</dt><dd>10 USDC (US$ 10,00)</dd>
-                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ US$ 0,04 Polygon · ≈ US$ 0,02 Base)</dd>
-                    <dt>Status</dt><dd><span class="badge st-triagem">Aguardando transação</span></dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div data-variant="lightning">
-            <div class="card">
-              <div class="card-head"><h3>Depositar Bitcoin pela Lightning</h3><span class="rate"><i data-icon="lock"></i>1 BTC = US$ 68.400 · travada por 09:58</span></div>
-              <div class="card-body addr-box">
-                <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Invoice válida por 10 min</span></div>
-                <div class="stack-sm">
-                  <div class="form-grid">
-                    <div class="field"><label for="ln-valor">Valor a creditar</label><div class="input-group"><span class="affix">US$</span><input id="ln-valor" class="input num" value="500,00"></div><span class="hint">= 731.000 sats (0,00731 BTC) · creditados como 500 USDT</span></div>
-                    <div class="field"><label>&nbsp;</label><button class="btn btn-block" data-toast="Nova invoice gerada com a cotação travada por 10 min"><i data-icon="zap"></i>Gerar nova invoice</button></div>
-                  </div>
-                  <div class="field"><label>Invoice (BOLT11)</label><div class="hash"><code>lnbc7310u1pj9f2k7pp5x7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3aqdqqcqzzsxqyz5vqsp5m0jn4h2u8d6c3ta5lw9g2k7r4e6y1q0s8p5x3v2n9c7d4m1k8f0qq9qyyssq</code><button class="btn btn-sm btn-ghost" data-copy="lnbc7310u1pj9f2k7pp5x7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3aqdqqcqzzsxqyz5vqsp5m0jn4h2u8d6c3ta5lw9g2k7r4e6y1q0s8p5x3v2n9c7d4m1k8f0qq9qyyssq" aria-label="Copiar invoice"><i data-icon="copy"></i></button></div></div>
-                  <dl class="kv">
-                    <dt>Crédito</dt><dd>instantâneo, convertido para USDT pela cotação travada</dd>
-                    <dt>Taxa de rede</dt><dd>≈ US$ 0,01, paga por quem envia</dd>
-                    <dt>Status</dt><dd><span class="badge st-triagem">Aguardando pagamento · 09:58</span></dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div data-variant="onchain">
-            <div class="card">
-              <div class="card-head"><h3>Depositar Bitcoin on-chain</h3><span class="rate"><i data-icon="lock"></i>1 BTC = US$ 68.400 · travada por 09:58</span></div>
-              <div class="card-body addr-box">
-                <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Escaneie com sua carteira</span></div>
-                <div class="stack-sm">
-                  <div class="form-grid">
-                    <div class="field"><label for="btc-valor">Valor a creditar</label><div class="input-group"><span class="affix">US$</span><input id="btc-valor" class="input num" value="500,00"></div><span class="hint">Envie exatamente 0,00731 BTC. Valores diferentes são creditados pela cotação do momento da confirmação.</span></div>
-                    <div class="field"><label>&nbsp;</label><button class="btn btn-block" data-toast="Novo endereço gerado com a cotação travada por 10 min"><i data-icon="refresh"></i>Gerar novo endereço</button></div>
-                  </div>
-                  <div class="field"><label>Endereço de depósito · Bitcoin (bech32)</label><div class="hash"><code>bc1qx7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3a</code><button class="btn btn-sm btn-ghost" data-copy="bc1qx7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3a" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div></div>
-                  <dl class="kv">
-                    <dt>Confirmações</dt><dd>2 (≈ 20 min)</dd>
-                    <dt>Mínimo</dt><dd>0,0002 BTC (≈ US$ 13,68)</dd>
-                    <dt>Taxa de rede</dt><dd>definida por você na sua carteira; ≈ US$ 2 hoje</dd>
-                    <dt>Status</dt><dd><span class="badge st-triagem">Aguardando transação</span></dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ================= Sacar ================= -->
-      <div class="tab-panel" data-panel="sacar">
-        <div class="split">
-          <div class="card" data-wizard>
-            <div class="card-head"><h3>Sacar em cripto</h3><span class="xs muted">disponível US$ 1.240,00 · custódia e reservas não podem ser sacadas</span></div>
-            <div class="card-body stack">
-              <div class="stepper">
-                <div class="step active"><span class="n">1</span><span class="t">Destino e valor</span></div>
-                <div class="step"><span class="n">2</span><span class="t">Senha + TOTP</span></div>
-                <div class="step"><span class="n">3</span><span class="t">Enviado</span></div>
-              </div>
-
-              <div data-step="1" class="active stack">
-                <div class="form-grid">
-                  <div class="field"><label for="moeda">Moeda</label><select id="moeda" class="select"><option>USDT</option><option>USDC</option><option>BTC</option></select></div>
-                  <div class="field"><label for="rede">Rede</label><select id="rede" class="select"><option>Polygon · taxa ≈ US$ 0,04 · ≈ 2 min</option><option>Tron (TRC-20) · taxa ≈ US$ 1,50 · ≈ 2 min</option><option>Base · taxa ≈ US$ 0,02 · ≈ 1 min</option><option>Lightning · taxa ≈ US$ 0,01 · segundos</option><option>Bitcoin on-chain · taxa ≈ US$ 2 · ≈ 30 min</option></select></div>
-                  <div class="field full"><label for="addr">Endereço de destino</label><input id="addr" class="input mono" value="0x4B8a2F6e5C9d0B7a1e3F4c2D6b8A9e0F1c3D5b7A" spellcheck="false"><span class="hint">Confira os 6 primeiros e os 6 últimos caracteres. Saques em cripto não podem ser desfeitos.</span></div>
-                  <div class="field"><label for="val">Valor</label><div class="input-group"><span class="affix">US$</span><input id="val" class="input num" value="500,00"><button class="btn" data-toast="Valor máximo aplicado: US$ 1.240,00">Máx.</button></div><span class="hint">= 500 USDT · disponível US$ 1.240,00 (1.240 USDT)</span></div>
-                  <div class="field"><label>Resumo</label>
-                    <dl class="kv">
-                      <dt>Taxa de rede</dt><dd>≈ US$ 0,04 (0,04 USDT), repassada</dd>
-                      <dt>Você recebe</dt><dd>499,96 USDT</dd>
-                      <dt>Tempo estimado</dt><dd>próximo lote às 15:00 · ≈ 2 min na rede</dd>
-                    </dl>
-                  </div>
-                </div>
-                <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Não salvamos o endereço após o envio</span>Ele é usado uma vez e apagado do banco assim que a rede confirma. No próximo saque você informa de novo. Nada liga este endereço ao seu pseudônimo fora do momento do envio.</div></div>
-                <div class="form-actions">
-                  <span class="xs muted"><i data-icon="check" style="width:12px"></i> Sem limite interno: conta de mar/2026 com 3 itens aprovados.</span>
-                  <button class="btn btn-primary" data-step-go="2">Continuar<i data-icon="arrow-right"></i></button>
-                </div>
-              </div>
-
-              <div data-step="2" class="stack">
-                <div class="alert alert-info"><i data-icon="lock-keyhole"></i><div>Confirmação em 2 passos: senha e código do app autenticador. Sem TOTP ativo, o saque fica 24 h em espera por segurança.</div></div>
-                <dl class="kv panel">
-                  <dt>Saque</dt><dd>US$ 500,00 = 500 USDT</dd>
-                  <dt>Rede</dt><dd>Polygon · taxa ≈ 0,04 USDT</dd>
-                  <dt>Destino</dt><dd class="mono">0x4B8a2F…3D5b7A</dd>
-                  <dt>Recebe</dt><dd>499,96 USDT</dd>
-                </dl>
-                <div class="form-grid">
-                  <div class="field"><label for="sq-senha">Senha</label><input id="sq-senha" type="password" class="input" value="moinho-tinta-farol-quartzo-2026" autocomplete="current-password"></div>
-                  <div class="field"><label>Código do autenticador</label><div class="otp"><input class="input" inputmode="numeric" maxlength="1" value="7" aria-label="Dígito 1"><input class="input" inputmode="numeric" maxlength="1" value="1" aria-label="Dígito 2"><input class="input" inputmode="numeric" maxlength="1" value="9" aria-label="Dígito 3"><input class="input" inputmode="numeric" maxlength="1" aria-label="Dígito 4"><input class="input" inputmode="numeric" maxlength="1" aria-label="Dígito 5"><input class="input" inputmode="numeric" maxlength="1" aria-label="Dígito 6"></div></div>
-                </div>
-                <div class="form-actions">
-                  <button class="btn btn-ghost" data-step-go="1"><i data-icon="arrow-left"></i>Voltar</button>
-                  <button class="btn btn-primary" data-step-go="3"><i data-icon="check"></i>Confirmar saque</button>
-                </div>
-              </div>
-
-              <div data-step="3" class="stack">
-                <div class="alert alert-ok"><i data-icon="check-circle"></i><div><span class="alert-title">Saque na fila do lote das 15:00</span>US$ 500,00 (500 USDT) saíram do saldo disponível. Você recebe uma notificação com o txid assim que a rede confirmar.</div></div>
-                <div class="timeline">
-                  <div class="tl-item ok"><div class="when">27/10 · 14:07</div><div class="what">Solicitado · senha e TOTP confirmados</div></div>
-                  <div class="tl-item ok"><div class="when">27/10 · 14:07</div><div class="what">Verificações automáticas: saldo, endereço válido, limite antifraude</div></div>
-                  <div class="tl-item info"><div class="when">27/10 · 15:00</div><div class="what">Entra no lote horário da carteira quente</div></div>
-                  <div class="tl-item"><div class="when">≈ 15:02</div><div class="what">Confirmação na rede · endereço apagado do banco</div></div>
-                </div>
-                <div class="row"><button class="btn btn-ghost" data-step-go="1"><i data-icon="rotate-ccw"></i>Novo saque</button><a class="btn" href="../buyer/notificacoes.html"><i data-icon="bell"></i>Acompanhar em Notificações</a></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="stack">
-            <div class="card">
-              <div class="card-head"><h3>Saques anteriores</h3></div>
-              <div class="card-body" style="padding-top:4px;padding-bottom:4px">
-                <div class="list">
-                  <div class="list-item"><span class="li-icon"><i data-icon="circle-dollar"></i></span><div class="li-body"><div class="li-title">US$ 4.800,00 · 4.800 USDT · Polygon</div><div class="li-sub">02/10 · txid 0x9e1c…4f2a · taxa US$ 0,04</div></div><span class="badge st-liquidada">Confirmado</span></div>
-                  <div class="list-item"><span class="li-icon"><i data-icon="circle-dollar"></i></span><div class="li-body"><div class="li-title">US$ 5.000,00 · 5.000 USDT · Polygon</div><div class="li-sub">15/09 · txid 0x3b7d…c08e · taxa US$ 0,05</div></div><span class="badge st-liquidada">Confirmado</span></div>
-                </div>
-              </div>
-              <div class="card-foot"><span class="xs muted">Os endereços de destino destes saques já foram apagados. Fica só o txid, que é público na rede.</span></div>
-            </div>
-            <div class="card">
-              <div class="card-head"><h3>Como o saque funciona</h3></div>
-              <div class="card-body stack-sm small">
-                <div class="anon-note"><i data-icon="clock"></i><span>Saques saem em lotes a cada hora, de uma carteira quente que cobre 48 h de volume. O restante fica em carteira fria com multisig 2-de-3.</span></div>
-                <div class="anon-note"><i data-icon="percent"></i><span>A taxa de rede é repassada pelo custo real. A plataforma não cobra nada de quem compra: a comissão de 10 % é descontada do vendedor na venda.</span></div>
-                <div class="anon-note"><i data-icon="shield"></i><span>Contas com menos de 7 dias ou sem item aprovado sacam até US$ 2.000 por dia. Não é identificação: é um freio contra golpes com contas novas.</span></div>
-                <div class="anon-note"><i data-icon="alert-triangle"></i><span>Reutilizar um endereço que você já usou em uma corretora com cadastro cria um vínculo fora da plataforma. Prefira endereços novos.</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ================= Extrato ================= -->
-      <div class="tab-panel" data-panel="extrato">
+      <!-- ================= Pagamentos ================= -->
+      <div class="tab-panel active" data-panel="pagamentos">
         <div class="toolbar">
           <div class="chips">
-            <button class="chip active" data-toast="Filtro: tudo (10 lançamentos)">Tudo</button>
-            <button class="chip" data-toast="Filtro: depósitos (2)">Depósitos</button>
-            <button class="chip" data-toast="Filtro: compras (2)">Compras</button>
-            <button class="chip" data-toast="Filtro: apoios (2)">Apoios</button>
-            <button class="chip" data-toast="Filtro: vendas liquidadas (3)">Vendas</button>
-            <button class="chip" data-toast="Filtro: saques (0 em outubro)">Saques</button>
+            <button class="chip active" data-toast="Filtro: tudo (14 pagamentos)">Tudo</button>
+            <button class="chip" data-toast="Filtro: itens (10 pagamentos)">Itens</button>
+            <button class="chip" data-toast="Filtro: pedidos (4 pagamentos)">Pedidos</button>
+            <button class="chip" data-toast="Filtro: em carteiras ainda abertas (5 pagamentos · US$ 1.540,00)">Em carteiras abertas</button>
+            <button class="chip" data-toast="Filtro: reembolsados (3 pagamentos · US$ 490,00)">Reembolsados</button>
           </div>
-          <div class="right"><select class="select" style="width:auto" aria-label="Período"><option>Outubro de 2026</option><option>Setembro de 2026</option><option>Tudo</option></select><button class="btn btn-sm" data-toast="Extrato exportado em CSV (10 lançamentos)"><i data-icon="download"></i>Exportar CSV</button></div>
+          <div class="right"><select class="select" style="width:auto" aria-label="Período"><option>Desde setembro</option><option>Outubro de 2026</option><option>Setembro de 2026</option><option>Tudo</option></select></div>
         </div>
         <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Data</th><th>Tipo</th><th>Referência</th><th class="num">Valor (US$ = USDT)</th><th class="num">Saldo após</th><th>Status</th></tr></thead>
+          <table class="table compact tbl-pay">
+            <thead><tr><th>Data</th><th>Item ou pedido</th><th>O que foi pago</th><th class="num">Valor</th><th>Status</th><th>Rede · endereço</th><th class="num">Conf.</th><th>Txid</th></tr></thead>
             <tbody>
-              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 3 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">1.240,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
-              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 2 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">1.105,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
-              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 1 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">970,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
-              <tr><td class="num">25/10 · 19:30</td><td>Assinatura</td><td><b>Monitor semanal de patentes do setor farmacêutico</b><span class="sub">lcr-6d1k5 · período 25/10–24/11 · renova em 25/11</span></td><td class="num">−190,00</td><td class="num">835,00</td><td><span class="badge st-liquidada">Paga</span></td></tr>
-              <tr><td class="num">25/10 · 11:48</td><td>Apoio</td><td><b>Cadeia do ouro ilegal no Pará</b><span class="sub">lcr-4m2x9 · lacre coletivo · meta US$ 80.000 até 15/11</span></td><td class="num">−150,00</td><td class="num">1.025,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
-              <tr><td class="num">24/10 · 09:15</td><td>Depósito</td><td><b>Bitcoin · Lightning</b><span class="sub">0,00731 BTC · 1 BTC = US$ 68.400 · convertido para USDT</span></td><td class="num ok">+500,00</td><td class="num">1.175,00</td><td><span class="badge st-liquidada">Confirmado</span></td></tr>
-              <tr><td class="num">23/10 · 17:22</td><td>Compra</td><td><b>Como uma operação de última milha cortou 31 % do custo</b><span class="sub">lcr-3c7r8 · camada 1 · sumário executivo</span></td><td class="num">−190,00</td><td class="num">675,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
-              <tr><td class="num">22/10 · 20:05</td><td>Apoio</td><td><b>Cadeia do ouro ilegal no Pará</b><span class="sub">lcr-4m2x9 · lacre coletivo · meta US$ 80.000 até 15/11</span></td><td class="num">−100,00</td><td class="num">865,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
-              <tr><td class="num">21/10 · 10:02</td><td>Compra</td><td><b>12.400 licitações municipais do Nordeste (2019–2025)</b><span class="sub">lcr-9f2k7 · cópia 38 de 100 · disputa aberta até 28/10 14:20</span></td><td class="num">−490,00</td><td class="num">965,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
-              <tr><td class="num">20/10 · 08:51</td><td>Depósito</td><td><b>USDT · Polygon</b><span class="sub">1.455 USDT · 12 confirmações · txid 0x5a2e…b19c</span></td><td class="num ok">+1.455,00</td><td class="num">1.455,00</td><td><span class="badge st-liquidada">Confirmado</span></td></tr>
+              <tr><td class="num">25/10 · 19:30</td><td class="wrap"><b><a href="../public/item.html">Monitor semanal de patentes do setor farmacêutico brasileiro</a></b><span class="sub">lcr-6d1k5 · assinatura</span></td><td class="wrap-sm">Assinatura<span class="sub">período 25/10 a 24/11</span></td><td class="num">190,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">edições liberadas até 24/11</span></td><td>Tron<span class="sub mono">TQ6d…1k5P</span></td><td class="num">19/19</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (tronscan)">7b2c…d4e9<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">25/10 · 11:48</td><td class="wrap"><b><a href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></b><span class="sub">lcr-4m2x9 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">2º apoio ao mesmo lacre</span></td><td class="num">150,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">na carteira do lacre até 15/11</span></td><td>Polygon<span class="sub mono">0x4m2x…b7e1</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x8d14…e0b9<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">23/10 · 17:22</td><td class="wrap"><b><a href="../public/item.html">Como uma operação de última milha cortou 31 % do custo: playbook, planilhas e modelo de roteirização</a></b><span class="sub">lcr-3c7r8 · camadas</span></td><td class="wrap-sm">Camada 1<span class="sub">sumário executivo</span></td><td class="num">190,00 USDC</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">acesso no cofre · ENT-5K7D</span></td><td>Base<span class="sub mono">0x3c7r…8a2d</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (basescan)">0x5c7e…9a02<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">22/10 · 20:05</td><td class="wrap"><b><a href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></b><span class="sub">lcr-4m2x9 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">liberação pública ao bater a meta</span></td><td class="num">100,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">na carteira do lacre até 15/11</span></td><td>Polygon<span class="sub mono">0x4m2x…5f09</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2a9c…41f7<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">21/10 · 10:02</td><td class="wrap"><b><a href="../public/item.html">12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</a></b><span class="sub">lcr-9f2k7 · cópias · edição limitada</span></td><td class="wrap-sm">Cópia<span class="sub">38 de 100 · ENT-3F9A</span></td><td class="num">490,00 USDT</td><td class="st"><a class="badge st-analise status-link" href="../buyer/disputa.html" data-tip="Acompanhar a disputa">Em disputa<i data-icon="chevron-right"></i></a><span class="sub">DSP-0207 · aberta em 25/10 · na carteira do item até a decisão</span></td><td>Polygon<span class="sub mono">0x9f2k…b8e3</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…7a31<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">20/10 · 11:15</td><td class="wrap"><b><a href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></b><span class="sub">ped-2c8d1 · pedido com recompensa</span></td><td class="wrap-sm">Igualou o valor<span class="sub">de US$ 500 para US$ 800 por interessado</span></td><td class="num">300,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">na carteira do pedido até 30/11</span></td><td>Polygon<span class="sub mono">0x2c8d…6e3b</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9b47…2e1c<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">12/10 · 09:40</td><td class="wrap"><b><a href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></b><span class="sub">ped-2c8d1 · pedido com recompensa</span></td><td class="wrap-sm">Abriu o pedido<span class="sub">US$ 500 por interessado</span></td><td class="num">500,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">na carteira do pedido até 30/11</span></td><td>Polygon<span class="sub mono">0x2c8d…1a4e</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x6e02…b4d7<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">08/10 · 15:30</td><td class="wrap"><b><a href="../public/item.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></b><span class="sub">lcr-2n8v4 · licença</span></td><td class="wrap-sm">Licença editorial<span class="sub">12 meses · Brasil · LIC-2N8V4-7L4E</span></td><td class="num">900,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">contrato e pacote no cofre</span></td><td>Polygon<span class="sub mono">0x2n8v…4a61</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2n8v…c3a0<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">03/10 · 10:12</td><td class="wrap"><b><a href="../public/item.html">Planilha de preços de leilões de gado em 40 municípios de Mato Grosso (2019–2026)</a></b><span class="sub">lcr-6c4t2 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">meta US$ 6.000</span></td><td class="num">40,00 USDT</td><td class="st"><span class="badge st-arquivado">Reembolsado</span><span class="sub">item vendido com exclusividade em 16/10 · devolvido ao endereço de origem</span></td><td>Polygon<span class="sub mono">0x6c4t…2b7d</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x61c9…0d4b<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">02/10 · 18:40</td><td class="wrap"><b><a href="../public/item.html">1.200 páginas de jornais operários de São Paulo (1917–1930) digitalizadas em 600 dpi</a></b><span class="sub">lcr-5t6w1 · cópias ilimitadas</span></td><td class="wrap-sm">Cópia<span class="sub">ENT-5T6W</span></td><td class="num">120,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">acesso no cofre</span></td><td>Polygon<span class="sub mono">0x5t6w…9e27</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x5t6w…b1c8<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">01/10 · 09:05</td><td class="wrap"><b><a href="../public/item.html">Acervo de 300 cartazes de cinema de rua de Recife (1960–1990)</a></b><span class="sub">lcr-2d9r4 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">lacre rompido em 03/10</span></td><td class="num">50,00 USDT</td><td class="st"><span class="badge st-arquivado">Reembolsado</span><span class="sub">reclamação aceita em 10/10 · devolvido pelo fundo de garantia</span></td><td>Polygon<span class="sub mono">0x2d9r…4c1a</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x4d0e…a9c3<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">28/09 · 16:05</td><td class="wrap"><b><a href="../public/pedido.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></b><span class="sub">ped-1b6j8 · pedido com recompensa</span></td><td class="wrap-sm">Juntou-se ao pedido<span class="sub">US$ 200 por interessado</span></td><td class="num">200,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">atendido em 08/10 · acesso no cofre</span></td><td>Polygon<span class="sub mono">0x1b6j…c42d</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xa31b…6f8e<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">20/09 · 12:20</td><td class="wrap"><b><a href="../public/item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</a></b><span class="sub">lcr-7w3n8 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">meta US$ 18.000</span></td><td class="num">300,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">lacre rompido em 12/10 · finalizado em 15/10 · acesso no cofre (ENT-7C1D)</span></td><td>Polygon<span class="sub mono">0x7w3n…8f41</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xc7d2…58e1<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">02/09 · 11:00</td><td class="wrap"><b><a href="../public/pedido.html">Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)</a></b><span class="sub">ped-7f1a3 · pedido com recompensa</span></td><td class="wrap-sm">Juntou-se ao pedido<span class="sub">US$ 400 por interessado</span></td><td class="num">400,00 USDT</td><td class="st"><span class="badge st-arquivado">Reembolsado</span><span class="sub">valor subiu para US$ 800 em 18/09 · você saiu em 19/09 · devolvido em 20/09</span></td><td>Polygon<span class="sub mono">0x7f1a…3d58</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x7f1a…92b6<i data-icon="external-link"></i></a></td></tr>
             </tbody>
           </table>
-          <div class="table-foot"><span>10 lançamentos em outubro · ledger imutável, partidas dobradas</span><div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary" data-toast="Página 1 de 1">1</button><button class="btn btn-sm" data-toast="Não há mais lançamentos em outubro">›</button></div></div>
+          <div class="table-foot"><span>14 pagamentos · US$ 3.930,00 confirmados · 3 reembolsados depois (US$ 490,00) · 1 em disputa</span><span>Reconciliação on-chain: 27/10 · 14:10</span></div>
         </div>
-        <p class="xs muted mt-2">Cada valor em US$ corresponde 1:1 ao lançamento em USDT no ledger (partidas dobradas, imutável). Depósitos em Bitcoin entram já convertidos pela cotação travada no momento.</p>
+        <p class="anon-note mt-2"><i data-icon="eye-off"></i><span>Quem olha a rede vê um pagamento para um endereço derivado, nunca o que foi comprado nem por quem. O vendedor vê só "1 cópia vendida" ou "1 apoio". O endereço da carteira de cada item é público na página de prova; os endereços derivados, não.</span></p>
       </div>
 
-      <!-- ================= Redes e taxas ================= -->
-      <div class="tab-panel" data-panel="redes">
+      <!-- ================= Reembolsos recebidos ================= -->
+      <div class="tab-panel" data-panel="reembolsos">
         <div class="table-wrap">
           <table class="table">
-            <thead><tr><th>Moeda</th><th>Rede</th><th>Confirmações para creditar</th><th class="num">Mínimo de depósito</th><th class="num">Taxa de saque (rede)</th><th>Tempo típico do saque</th></tr></thead>
+            <thead><tr><th>Data</th><th>Item ou pedido</th><th>Motivo</th><th class="num">Devolvido</th><th>Status</th><th>Rede · devolvido para</th><th>Txid</th></tr></thead>
             <tbody>
-              <tr><td><b>USDT</b></td><td>Polygon</td><td>12 (≈ 1 min)</td><td class="num">10 USDT</td><td class="num">≈ US$ 0,04</td><td>≈ 2 min após o lote</td></tr>
-              <tr><td><b>USDT</b></td><td>Tron (TRC-20)</td><td>19 (≈ 1 min)</td><td class="num">10 USDT</td><td class="num">≈ US$ 1,50</td><td>≈ 2 min após o lote</td></tr>
-              <tr><td><b>USDC</b></td><td>Polygon</td><td>12 (≈ 1 min)</td><td class="num">10 USDC</td><td class="num">≈ US$ 0,04</td><td>≈ 2 min após o lote</td></tr>
-              <tr><td><b>USDC</b></td><td>Base</td><td>20 (≈ 40 s)</td><td class="num">10 USDC</td><td class="num">≈ US$ 0,02</td><td>≈ 1 min após o lote</td></tr>
-              <tr><td><b>BTC</b></td><td>Lightning</td><td>instantâneo</td><td class="num">1.000 sats</td><td class="num">≈ US$ 0,01</td><td>segundos após o lote</td></tr>
-              <tr><td><b>BTC</b></td><td>Bitcoin on-chain</td><td>2 (≈ 20 min)</td><td class="num">0,0002 BTC</td><td class="num">≈ US$ 2,00 (varia)</td><td>≈ 30 min após o lote</td></tr>
+              <tr><td class="num">16/10 · 17:20</td><td><b><a href="../public/item.html">Planilha de preços de leilões de gado em 40 municípios de Mato Grosso (2019–2026)</a></b><span class="sub">lcr-6c4t2 · lacre coletivo · apoio de 40,00 USDT em 03/10</span></td><td><span class="badge st-vendido">Vendido com exclusividade</span><span class="sub">outro comprador levou o item por US$ 15.000; os 118 apoios voltaram</span></td><td class="num">40,00 USDT<span class="sub">da carteira do lacre</span></td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">12/12</span></td><td>Polygon<span class="sub mono">0x7d2e…40b9 · seu endereço de origem</span></td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xb04d…3f1a<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">10/10 · 16:40</td><td><b><a href="../public/item.html">Acervo de 300 cartazes de cinema de rua de Recife (1960–1990)</a></b><span class="sub">lcr-2d9r4 · lacre coletivo · apoio de 50,00 USDT em 01/10 · rompido em 03/10</span></td><td><span class="badge badge-ok">Reclamação aceita</span><span class="sub">conteúdo liberado não correspondia à prévia · decisão da curadoria em 10/10</span></td><td class="num">50,00 USDT<span class="sub">do fundo de garantia · item já finalizado</span></td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">12/12</span></td><td>Polygon<span class="sub mono">0x7d2e…40b9 · seu endereço de origem</span></td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2d9r…51fe<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">20/09 · 09:30</td><td><b><a href="../public/pedido.html">Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)</a></b><span class="sub">ped-7f1a3 · pedido com recompensa · você se juntou em 02/09 por US$ 400</span></td><td><span class="badge st-arquivado">Saiu do pedido</span><span class="sub">o valor por interessado subiu para US$ 800 em 18/09; você não igualou nas 48 h</span></td><td class="num">400,00 USDT<span class="sub">da carteira do pedido</span></td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">12/12</span></td><td>Polygon<span class="sub mono">0x7d2e…40b9 · seu endereço de origem</span></td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x0f5e…7a21<i data-icon="external-link"></i></a></td></tr>
             </tbody>
           </table>
-          <div class="table-foot"><span>Taxas de rede são repassadas pelo custo real do dia. Lotes de saque saem a cada hora cheia.</span><span>Atualizado em 27/10 · 14:00</span></div>
+          <div class="table-foot"><span>3 reembolsos · US$ 490,00 · sempre ao endereço de origem do pagamento, descontada só a taxa de rede (≈ US$ 0,04 em Polygon)</span><span>Depois do reembolso, o endereço de origem é apagado do nosso banco; fica só o txid, público na rede.</span></div>
         </div>
         <div class="grid cols-3 mt-3">
           <div class="card">
-            <div class="card-head"><h3>Limite interno antifraude</h3></div>
+            <div class="card-head"><h3>Quando há reembolso</h3></div>
             <div class="card-body stack-sm small">
-              <p>Contas com menos de 7 dias ou sem nenhum item aprovado sacam até <b>US$ 2.000 por dia</b>. Não é identificação: serve para conter golpes com contas novas.</p>
-              <div class="alert alert-ok"><i data-icon="check-circle"></i><div>Sua conta: criada em mar/2026, 3 itens aprovados. <b>Sem limite interno.</b></div></div>
+              <div class="anon-note"><i data-icon="hand-coins"></i><span>Lacre que não bate a meta até o prazo, ou comprado com exclusividade por outra pessoa: cada apoio volta sozinho, em até 24 h.</span></div>
+              <div class="anon-note"><i data-icon="file-search"></i><span>Pedido que expira sem atendimento validado, ou do qual você sai quando o valor por interessado sobe.</span></div>
+              <div class="anon-note"><i data-icon="gavel"></i><span>Lance que não vence, oferta recusada, disputa ou reclamação aceita, item retirado antes da finalização.</span></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-head"><h3>Moedas e redes</h3></div>
+            <div class="card-head"><h3>De onde sai o dinheiro</h3></div>
             <div class="card-body stack-sm small">
-              <p>USDT e USDC creditam e liquidam 1:1: <b>1 USDT = US$ 1</b>, sem conversão nem spread. Saldo, compras, apoios e saques são sempre em USDT, na rede que você escolher.</p>
-              <p>Só o Bitcoin é convertido: a cotação (mediana de três corretoras) fica travada por 10 min a partir da geração do endereço ou da invoice. Hoje: <b>1 BTC = US$ 68.400</b> (0,00731 BTC = US$ 500).</p>
+              <p>Antes da finalização, da própria <b>carteira do item</b>: a plataforma assina a devolução a partir dela. Nada passa por um saldo nosso.</p>
+              <p>Depois da finalização (item já entregue ao vendedor, como o lcr-2d9r4), do <b>fundo de garantia</b>: 2 % de cada comissão fica reservado para isso.</p>
             </div>
           </div>
           <div class="card">
-            <div class="card-head"><h3>Comissão</h3></div>
+            <div class="card-head"><h3>O que é descontado</h3></div>
             <div class="card-body stack-sm small">
-              <p><b>10 % em todos os modelos</b>, descontados do vendedor em cada venda, apoio liberado ou recompensa paga. Nada é cobrado de quem compra ou apoia.</p>
-              <p>Nada é cobrado se um lacre coletivo falhar: os apoios voltam integralmente para as carteiras.</p>
+              <p>Só a <b>taxa de rede</b> do envio de volta (≈ US$ 0,04 em Polygon). Nada é cobrado por lacre que falha, pedido que expira ou lance que não vence.</p>
+              <p>Por isso a insistência: pague de uma carteira que você controla. O que volta para o endereço de uma corretora não chega até você.</p>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- ================= Como pagar ================= -->
+      <div class="tab-panel" data-panel="como-pagar">
+        <div class="split">
+          <div class="stack">
+            <div class="how">
+              <div><h4>Escolha a rede</h4><p>USDT ou USDC em Polygon, Tron ou Base. Bitcoin on-chain só em itens Exclusivo e Cópias. O checkout mostra as confirmações e a taxa típica de cada rede.</p></div>
+              <div><h4>Copie o endereço ou leia o QR</h4><p>Cada pagamento recebe um endereço derivado da carteira do item, gerado só para você, com o valor exato. Ele vale por 24 h; depois disso, gere outro no checkout.</p></div>
+              <div><h4>Envie o valor exato de uma carteira que você controla</h4><p>MetaMask, Trust, Ledger ou a carteira do celular. Nunca direto de uma corretora: reembolsos voltam ao endereço de origem, e a corretora não os repassa para você. A taxa de rede é paga na sua carteira.</p></div>
+              <div><h4>Aguarde as confirmações</h4><p>Polygon 12 · Tron 19 · Base 12 · Bitcoin 2. Ao atingir o número, o acesso é liberado sozinho (cópia, camada, licença, assinatura) ou o valor é somado ao lacre ou ao pedido. Você recebe uma notificação com o txid.</p></div>
+            </div>
+            <div class="alert alert-danger"><i data-icon="alert-triangle"></i><div><span class="alert-title">Token ou rede errados não chegam</span>USDT enviado por outra rede, ou outro token enviado ao endereço, não entra na carteira do item e não pode ser recuperado. Confira moeda e rede na sua carteira antes de enviar.</div></div>
+            <div class="faq">
+              <details><summary>Enviei um valor diferente do exato</summary><p>A menos: o pagamento fica "aguardando" e você completa a diferença no mesmo endereço dentro das 24 h; sem o complemento, o que entrou volta ao endereço de origem. A mais: o excedente fica na carteira do item e segue para o vendedor na finalização.</p></details>
+              <details><summary>O endereço venceu antes de eu pagar</summary><p>Volte ao checkout e gere outro. Um pagamento que chega a um endereço vencido é devolvido ao endereço de origem, descontada a taxa de rede.</p></details>
+              <details><summary>Paguei direto de uma corretora</summary><p>O acesso é liberado normalmente. O problema é só o reembolso: se o lacre falhar ou a disputa for procedente, o valor volta ao endereço da corretora, e ela não o repassa para você. Abra um chamado na corretora com o txid; o Lacre não tem como interferir.</p></details>
+              <details><summary>Quanto tempo até o acesso?</summary><p>Polygon e Tron ≈ 1 min, Base ≈ 30 s, Bitcoin ≈ 20 min. O checkout acompanha a transação e libera sozinho; não precisa ficar na página.</p></details>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>Como aparece no checkout</h3><span class="badge st-aguardando">Aguardando pagamento</span></div>
+              <div class="card-body addr-box">
+                <div class="qr-mock" aria-label="QR code do endereço"></div>
+                <div class="stack-sm">
+                  <div class="xs muted">Endereço derivado da carteira do item lcr-4g7h9 · USDT · Polygon</div>
+                  <div class="hash"><code>0x4g7h…1d4a</code><button class="btn btn-sm btn-ghost" data-copy="0x4g7h…1d4a" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div>
+                  <dl class="kv"><dt>Valor</dt><dd><b>350,00 USDT</b> · exato</dd><dt>Validade</dt><dd>24 h · vence em <span class="countdown" data-deadline="2026-10-28T14:10:00-03:00"></span></dd><dt>Libera</dt><dd>12 confirmações · ≈ 1 min</dd></dl>
+                  <a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="external-link"></i>Abrir um checkout</a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>Reembolsos</h3></div>
+              <div class="card-body stack-sm small">
+                <div class="anon-note"><i data-icon="rotate-ccw"></i><span>Voltam sempre ao endereço de origem do pagamento, a partir da carteira do item.</span></div>
+                <div class="anon-note"><i data-icon="percent"></i><span>Nada é cobrado: só a taxa de rede do envio de volta.</span></div>
+                <div class="anon-note"><i data-icon="clock"></i><span>Lacre que falha: em até 24 h após o prazo. Disputa procedente: na decisão da curadoria. Pedido expirado: no dia seguinte ao prazo.</span></div>
+                <a class="link xs" href="#" data-tab="reembolsos">Ver reembolsos recebidos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Redes aceitas ================= -->
+      <div class="tab-panel" data-panel="redes">
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Moeda</th><th>Rede</th><th class="num">Confirmações</th><th>Tempo típico</th><th>Taxa típica de rede</th><th>Onde é aceita</th></tr></thead>
+            <tbody>
+              <tr><td><b>USDT</b></td><td>Polygon</td><td class="num">12</td><td>≈ 1 min</td><td>≈ US$ 0,04, paga em POL na sua carteira</td><td>todos os modelos</td></tr>
+              <tr><td><b>USDC</b></td><td>Polygon</td><td class="num">12</td><td>≈ 1 min</td><td>≈ US$ 0,04 em POL</td><td>todos os modelos</td></tr>
+              <tr><td><b>USDT</b></td><td>Tron (TRC-20)</td><td class="num">19</td><td>≈ 1 min</td><td>≈ US$ 1,50 em TRX · varia com a energia da rede</td><td>todos os modelos</td></tr>
+              <tr><td><b>USDT</b></td><td>Base</td><td class="num">12</td><td>≈ 30 s</td><td>≈ US$ 0,02 em ETH</td><td>todos os modelos</td></tr>
+              <tr><td><b>USDC</b></td><td>Base</td><td class="num">12</td><td>≈ 30 s</td><td>≈ US$ 0,02 em ETH</td><td>todos os modelos</td></tr>
+              <tr><td><b>BTC</b></td><td>Bitcoin on-chain</td><td class="num">2</td><td>≈ 20 min</td><td>≈ US$ 2,00 · varia com a rede</td><td>só Exclusivo e Cópias</td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>Stablecoins valem 1:1: 1 USDT = 1 USDC = US$ 1. Em Bitcoin, o valor exato é fixado na cotação do momento em que o endereço é gerado e vale pelas mesmas 24 h.</span><span>Atualizado em 27/10 · 14:00</span></div>
+        </div>
+        <div class="grid cols-3 mt-3">
+          <div class="card">
+            <div class="card-head"><h3>Por que estas redes</h3></div>
+            <div class="card-body stack-sm small">
+              <p>Taxas baixas. Um lacre com 1.187 apoios pode precisar de 1.187 reembolsos, e cada um paga uma taxa de rede a partir da carteira do item.</p>
+              <p>Bitcoin on-chain entra só onde há poucos pagamentos e poucos reembolsos: Exclusivo e Cópias.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Lightning não é aceito</h3></div>
+            <div class="card-body stack-sm small">
+              <p>Uma invoice Lightning paga não pode ser reembolsada ao endereço de origem: não existe "origem" para devolver. Como lacres, pedidos e lances dependem de reembolso automático, o Lacre aceita Bitcoin só on-chain.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>O que confere on-chain</h3></div>
+            <div class="card-body stack-sm small">
+              <p>O endereço público da carteira de cada item está na página de prova. Qualquer pessoa confere quanto entrou: o lcr-4m2x9 mostra <span class="mono">0x4m2x…c21e</span> · Polygon · US$ 54.120 em 1.187 pagamentos.</p>
+              <a class="link xs" href="../public/prova.html">Ver uma página de prova</a>
+            </div>
+          </div>
+        </div>
+        <p class="xs muted mt-2">USDC em Tron não é aceito: a emissora encerrou o suporte à rede em 2024. Em Tron, use USDT.</p>
       </div>
     </div>
   </main>

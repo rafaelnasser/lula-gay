@@ -29,25 +29,27 @@
       <div>
         <p class="eyebrow">Comprador · segunda-feira, 27/10/2026</p>
         <div class="greet mt-1"><h1>Olá,</h1><span class="handle lg" data-handle="coruja-7f3a" data-rep="4,8 · desde mar/2026"></span></div>
-        <p class="sub">2 apoios ativos · 7 acessos no cofre · 2 pedidos acompanhados · 1 leilão encerrando</p>
+        <p class="sub">1 apoio em andamento · 7 acessos no cofre · 2 pedidos (1 aberto, 1 atendido) · 1 disputa em análise · 1 leilão encerrando</p>
       </div>
       <div class="actions">
         <a class="btn" href="../public/explorar.html"><i data-icon="compass"></i>Explorar catálogo</a>
-        <a class="btn btn-primary" href="../buyer/pagamentos.html"><i data-icon="wallet"></i>Depositar</a>
+        <a class="btn btn-primary" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Pagamentos</a>
       </div>
     </div>
 
-    <div class="stat-grid mb-3">
-      <div class="stat"><span class="label">Saldo disponível</span><span class="value">US$ 1.240,00</span><span class="delta flat">1.240 USDT · 1 USDT = US$ 1</span></div>
-      <div class="stat"><span class="label">Em custódia · apoios</span><span class="value">US$ 250,00</span><span class="delta flat">2 apoios ao mesmo lacre</span></div>
-      <div class="stat"><span class="label">Reservado · lances</span><span class="value">US$ 0,00</span><span class="delta flat">nenhum lance ativo</span></div>
-      <div class="stat"><span class="label">Gasto em outubro</span><span class="value">US$ 1.120,00</span><span class="delta flat">2 compras · 2 apoios · 1 assinatura</span></div>
+    <div class="stat-grid mb-2">
+      <div class="stat"><span class="label">Pagamentos confirmados</span><span class="value">14 · US$ 3.930</span><span class="delta flat">9 itens e 3 pedidos · <a class="link" href="../buyer/pagamentos.html">ver pagamentos</a></span></div>
+      <div class="stat"><span class="label">Aguardando confirmação</span><span class="value">0</span><span class="delta flat">nenhuma transação vista na rede sem confirmar</span></div>
+      <div class="stat"><span class="label">Em lacres ainda abertos</span><span class="value">US$ 250,00</span><span class="delta flat">2 apoios ao lcr-4m2x9 · volta ao seu endereço se a meta falhar em 15/11</span></div>
+      <div class="stat"><span class="label">Em pedidos abertos</span><span class="value">US$ 800,00</span><span class="delta flat">ped-2c8d1 · 4 interessados × US$ 800 · prazo 30/11</span></div>
+      <div class="stat"><span class="label">Em disputa</span><span class="value">US$ 490,00</span><span class="delta flat">lcr-9f2k7 · DSP-0207 · na carteira do item até a decisão</span></div>
     </div>
+    <p class="xs muted mb-3">Sem saldo: o Lacre não guarda dinheiro de ninguém. Você paga da sua própria carteira direto para a carteira de cada item; o que está em lacres e pedidos abertos volta sozinho ao seu endereço de origem se a meta falhar ou o prazo vencer.</p>
 
     <!-- Alertas -->
     <div class="stack-sm mb-3">
-      <div class="alert alert-warn"><i data-icon="hourglass"></i><div><span class="alert-title">Janela de disputa encerra em <span class="countdown" data-deadline="2026-10-28T14:20:00-03:00"></span></span>12.400 licitações municipais do Nordeste (lcr-9f2k7). Se o conteúdo não corresponder à prévia, abra a disputa antes de 28/10 às 14:20. Depois, o pagamento é liberado ao vendedor.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/disputa.html">Abrir disputa</a></div></div>
-      <div class="alert alert-info"><i data-icon="repeat"></i><div><span class="alert-title">Assinatura renova em 25/11</span>Monitor semanal de patentes do setor farmacêutico (lcr-6d1k5): US$ 190,00 serão debitados da carteira. Sem saldo, a assinatura pausa sem cobrança.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/cofre.html">Gerenciar</a></div></div>
+      <div class="alert alert-info"><i data-icon="scale"></i><div><span class="alert-title">Disputa DSP-0207 em análise · decisão até <span class="countdown" data-deadline="2026-10-30T14:20:00-03:00"></span></span>12.400 licitações municipais do Nordeste (lcr-9f2k7): você abriu a disputa em 25/10 às 14:20. Os US$ 490,00 ficam na carteira do item até a decisão da curadoria; se for procedente, voltam ao seu endereço de origem.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/disputa.html">Acompanhar disputa</a></div></div>
+      <div class="alert alert-info"><i data-icon="repeat"></i><div><span class="alert-title">Assinatura vence em 25/11</span>Monitor semanal de patentes do setor farmacêutico (lcr-6d1k5): em 22/11 você recebe um endereço derivado para pagar os US$ 190,00 do próximo período, da sua carteira. Sem pagamento até 25/11, a assinatura pausa, sem multa.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/cofre.html">Gerenciar</a></div></div>
       <div class="alert alert-wax"><i data-icon="gavel"></i><div><span class="alert-title">Leilão encerra em 6 dias · 02/11 às 20:00</span>400 fotografias inéditas da construção de Brasília (lcr-1w9s6). 7 lances lacrados, reserva não revelada. Você ainda não deu lance.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/checkout.html">Dar lance</a></div></div>
     </div>
 
@@ -55,7 +57,7 @@
       <div class="stack">
         <!-- Apoios em andamento -->
         <div class="card">
-          <div class="card-head"><h3>Apoios em andamento</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="../buyer/apoios.html">Ver todos (3)</a></div></div>
+          <div class="card-head"><h3>Apoios</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="../buyer/apoios.html">Ver todos (4)</a></div></div>
           <div class="card-body">
             <div class="pledge">
               <div class="row between">
@@ -65,19 +67,19 @@
               <a class="title" href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a>
               <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
               <div class="nums"><span><b>US$ 54.120</b> de US$ 80.000 · 68 %</span><span>1.187 apoiadores</span><span>encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b></span></div>
-              <div class="nums"><span>Você apoiou <b>US$ 250,00</b> (22/10 e 25/10) · liberação pública</span></div>
+              <div class="nums"><span>Você apoiou <b>US$ 250,00</b> (22/10 e 25/10) · na carteira do lacre até 15/11 · liberação pública</span></div>
               <div class="row"><a class="btn btn-wax btn-sm" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Apoiar mais</a><button class="btn btn-sm btn-ghost" data-toast="Link anônimo copiado: lacre.app/p/4m2x9?r=k7"><i data-icon="share"></i>Compartilhar</button><span class="xs muted">Vendedor: <span class="handle" data-handle="sextante-21c9"></span></span></div>
             </div>
             <div class="pledge">
               <div class="row between">
                 <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
-                <span class="badge st-financiado">Financiado · libera em 24 h</span>
+                <span class="badge st-financiado">Rompido em 12/10 · finalizado em 15/10</span>
               </div>
-              <a class="title" href="../public/item.html">Contratos de publicidade de 12 prefeituras de Minas Gerais (2021–2024), com notas fiscais e empenhos</a>
+              <a class="title" href="../public/item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</a>
               <div class="progress thick"><div class="progress-bar wax" data-width="100%"></div></div>
-              <div class="nums"><span><b>US$ 18.640</b> de US$ 18.000 · meta batida em 26/10</span><span>403 apoiadores</span><span>liberação pública hoje às 18:00</span></div>
-              <div class="nums"><span>Você apoiou <b>US$ 40,00</b> (09/10) · liberação pública em 28/10 · selo "Rompeu este lacre" no seu perfil</span></div>
-              <div class="row"><a class="btn btn-sm" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre às 18:00</a><a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a></div>
+              <div class="nums"><span><b>US$ 19.240</b> de US$ 18.000 · meta batida em 12/10</span><span>612 apoiadores</span><span>conteúdo liberado publicamente em 12/10</span></div>
+              <div class="nums"><span>Você apoiou <b>US$ 300,00</b> (20/09) · acesso no cofre (ENT-7C1D) · selo "Rompeu este lacre" no seu perfil · carteira do lacre entregue ao vendedor em 15/10</span></div>
+              <div class="row"><a class="btn btn-sm" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a><a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a></div>
             </div>
           </div>
         </div>
@@ -91,7 +93,7 @@
                 <span class="li-icon"><i data-icon="database"></i></span>
                 <div class="li-body">
                   <div class="li-title"><a href="../buyer/visualizador.html">12.400 licitações municipais do Nordeste (2019–2025)</a></div>
-                  <div class="li-sub">Compra · 21/10 · CSV/XLSX 48 MB · download com marca d'água · ENT-3F9A</div>
+                  <div class="li-sub">Compra · 21/10 · CSV/XLSX 48 MB · download com marca d'água · ENT-3F9A · disputa DSP-0207 em análise</div>
                 </div>
                 <span class="badge st-liberado">Disponível</span>
                 <a class="btn btn-sm" href="../buyer/visualizador.html">Abrir</a>
@@ -138,7 +140,7 @@
                   <div class="li-title"><a href="../public/item.html">Mercado de energia solar distribuída no Brasil: projeções 2026–2030</a></div>
                   <div class="li-sub">Exclusivo · US$ 25.000 ou oferta a partir de US$ 15.000 · 2 ofertas recebidas · <span class="handle" data-handle="bussola-c4e1"></span></div>
                 </div>
-                <span class="badge badge-outline">Acima do saldo</span>
+                <span class="badge badge-outline">2 ofertas</span>
                 <a class="btn btn-sm" href="../buyer/checkout.html">Fazer oferta</a>
               </div>
               <div class="list-item">
@@ -161,20 +163,20 @@
           <div class="card-head"><h3>Pedidos que você fez</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="../buyer/pedidos.html">Meus pedidos</a></div></div>
           <div class="card-body stack">
             <div class="stack-sm">
-              <div class="row between"><span class="badge badge-brass">Contribuidor</span><span class="badge st-ativo">Aberto</span></div>
+              <div class="row between"><span class="badge badge-brass">Você abriu</span><span class="badge st-ativo">Aberto</span></div>
               <a class="strong" href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a>
-              <div class="xs muted">ped-2c8d1 · recompensa <b class="num">US$ 3.200</b> · 14 contribuidores · prazo 30/11</div>
-              <div class="xs muted">Você somou <b>US$ 50,00</b> em 12/10. Fica em custódia até o pedido ser atendido ou vencer.</div>
-              <div class="row"><a class="btn btn-sm" href="../public/pedido.html"><i data-icon="plus"></i>Somar mais</a><span class="xs muted">0 atendimentos em curadoria</span></div>
+              <div class="xs muted">ped-2c8d1 · valor por interessado <b class="num">US$ 800</b> · 4 interessados · recompensa total <b class="num">US$ 3.200</b> · prazo 30/11</div>
+              <div class="xs muted">Você abriu em 12/10 com US$ 500; o valor subiu em 18/10 e você igualou em 20/10 (+US$ 300). Seus US$ 800 ficam na carteira do pedido até o atendimento ser validado; se o prazo vencer, voltam ao seu endereço de origem.</div>
+              <div class="row"><a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="trending-up"></i>Cobrir o valor (mín. US$ 880)</a><span class="xs muted">0 atendimentos em curadoria</span></div>
             </div>
             <hr style="margin:0">
             <div class="stack-sm">
-              <div class="row between"><span class="badge badge-brass">Contribuidor</span><span class="badge st-entregue">Atendido</span></div>
+              <div class="row between"><span class="badge badge-brass">Interessado</span><span class="badge st-entregue">Atendido</span></div>
               <a class="strong" href="../public/pedido.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a>
-              <div class="xs muted">ped-1b6j8 · recompensa US$ 600 · 3 contribuidores · atendido em 14/10</div>
+              <div class="xs muted">ped-1b6j8 · você se juntou em 28/09 por US$ 200 · 3 interessados · atendido em 08/10 por <span class="handle" data-handle="cartografo-5a77"></span></div>
               <div class="row"><a class="btn btn-sm" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a></div>
             </div>
-            <div class="anon-note"><i data-icon="shield"></i><span>Contribuições e pedidos aparecem para o público apenas como contagens. Seu pseudônimo nunca é listado como contribuidor.</span></div>
+            <div class="anon-note"><i data-icon="users"></i><span>Interessados de um pedido são públicos: pseudônimo e data de entrada aparecem na página do pedido. Apoios a lacres continuam só como contagem.</span></div>
           </div>
         </div>
 
@@ -182,7 +184,8 @@
         <div class="card">
           <div class="card-head"><h3>Atalhos</h3></div>
           <div class="card-body stack-sm">
-            <a class="btn btn-block" href="../buyer/pagamentos.html"><i data-icon="bitcoin"></i>Depositar cripto</a>
+            <a class="btn btn-block" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Pagamentos</a>
+            <a class="btn btn-block" href="../buyer/pagamentos.html#como-pagar"><i data-icon="qr-code"></i>Como pagar</a>
             <a class="btn btn-block" href="../buyer/mensagens.html"><i data-icon="message-square"></i>Mensagens <span class="badge badge-brass">2</span></a>
             <a class="btn btn-block" href="../buyer/notificacoes.html"><i data-icon="bell"></i>Notificações <span class="badge badge-brass">4</span></a>
             <a class="btn btn-block" href="../seller/painel.html"><i data-icon="repeat"></i>Área do vendedor</a>
@@ -223,7 +226,7 @@
       </article>
     </div>
 
-    <p class="anon-note mt-4"><i data-icon="shield"></i><span>Este painel mostra tudo o que existe sobre a sua conta: pseudônimo, saldo, acessos, apoios e pedidos. Não há nome, e-mail, telefone nem localização em lugar nenhum.</span></p>
+    <p class="anon-note mt-4"><i data-icon="shield"></i><span>Este painel mostra tudo o que existe sobre a sua conta: pseudônimo, pagamentos feitos, acessos, apoios e pedidos. Nenhum saldo: você paga da sua carteira direto para a carteira de cada item. Não há nome, e-mail, telefone nem localização em lugar nenhum.</span></p>
   </main>
 </body>
 </html>
