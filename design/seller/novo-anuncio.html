@@ -284,15 +284,10 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
             </div>
             <aside class="card flat sim">
               <div class="card-body stack-sm">
-                <h3>Simulação</h3>
-                <span class="xs muted">Lacre coletivo · comissão 10 % só se a meta for batida</span>
-                <dl class="kv"><dt>Meta</dt><dd id="s-meta">R$ 12.000,00</dd><dt>Comissão</dt><dd id="s-taxa">− R$ 1.200,00</dd></dl>
-                <div><div class="xs muted">Você recebe se bater a meta</div><div class="big ok" id="s-liq">R$ 10.800,00</div><div class="xs muted" id="s-liq-usdt">≈ 2.007,4 USDT à cotação de hoje (R$ 5,38)</div></div>
-                <p class="xs muted">Em cripto, na sua carteira do Lacre, 72 h após a liberação do conteúdo, descontados reembolsos procedentes. Meta estendida de R$ 18.000 → R$ 16.200 líquidos. Se falhar: R$ 0 e nada é cobrado.</p>
-                <hr style="margin:4px 0">
-                <span class="xs muted">Se escolher Cópias · comissão 10 %</span>
-                <dl class="kv"><dt>Preço × unidades</dt><dd id="s-bruto">R$ 60,00 × 150 = R$ 9.000,00</dd><dt>Comissão</dt><dd id="s-taxa2">− R$ 900,00</dd><dt>Líquido se esgotar</dt><dd><b id="s-liq2">R$ 8.100,00</b></dd><dt>Por cópia</dt><dd id="s-unit">R$ 54,00 líquidos</dd></dl>
-                <p class="xs muted">Cada venda cai na sua carteira 72 h após a entrega (janela de disputa). A conversão R$ → USDT acontece a cada venda.</p>
+                <h3>Você recebe 90 %</h3>
+                <span class="xs muted">Comissão única de 10 %, em todos os modelos</span>
+                <div><div class="xs muted" id="s-meta-label">Meta de R$ 12.000,00 batida</div><div class="big ok" id="s-liq">R$ 10.800,00</div></div>
+                <p class="xs muted">Cai na sua carteira em cripto 72 h após a liberação do conteúdo. Se a meta não bater, nada é cobrado e os apoios voltam aos apoiadores.</p>
               </div>
             </aside>
           </div>
@@ -390,9 +385,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
 
     <script>
       (function () {
-        var RATE = 5.38;
         var brl = function (n) { return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
-        var usdt = function (n) { return (n / RATE).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' USDT'; };
         var num = function (id) { var el = document.getElementById(id); return parseFloat((el.value || '0').replace(/\./g, '').replace(',', '.')) || 0; };
         var set = function (id, txt) { document.getElementById(id).textContent = txt; };
         document.querySelectorAll('[data-count]').forEach(function (el) {
@@ -401,11 +394,9 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           el.addEventListener('input', upd); upd();
         });
         function sim() {
-          var meta = num('meta'), preco = num('preco'), unid = num('lim'), bruto = preco * unid;
-          set('s-meta', brl(meta)); set('s-taxa', '− ' + brl(meta * 0.10)); set('s-liq', brl(meta * 0.90));
-          set('s-liq-usdt', '≈ ' + usdt(meta * 0.90) + ' à cotação de hoje (R$ 5,38)');
-          set('s-bruto', brl(preco) + ' × ' + unid + ' = ' + brl(bruto)); set('s-taxa2', '− ' + brl(bruto * 0.10));
-          set('s-liq2', brl(bruto * 0.90)); set('s-unit', brl(preco * 0.90) + ' líquidos');
+          var meta = num('meta');
+          var label = document.getElementById('s-meta-label'); if (label) label.textContent = 'Meta de ' + brl(meta) + ' batida';
+          set('s-liq', brl(meta * 0.90));
         }
         document.querySelectorAll('[data-sim]').forEach(function (el) { el.addEventListener('input', sim); });
         sim();

@@ -22,8 +22,6 @@
     .yes-no li:first-child { border-top: 0; padding-top: 0; }
     .yes-no svg { width: 16px; height: 16px; flex: none; margin-top: 2px; }
     .yes-no.yes svg { color: var(--ok); } .yes-no.no svg { color: var(--danger); }
-    .sim-out { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-    .sim-out .stat.hl { border-color: var(--brass); background: var(--brass-soft); }
     .readonly { background: var(--surface-3); color: var(--fg-2); }
     .cta { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .cta p { max-width: 56ch; color: var(--fg-2); }
@@ -39,22 +37,15 @@
         <div>
           <p class="eyebrow">Para vendedores</p>
           <h1 class="display mt-1">Você define o preço. Nós garantimos o pagamento e o anonimato.</h1>
-          <p class="lead mt-2">Envie documentos, bases, fotos, vídeos, áudios ou apurações. A curadoria analisa em até 48 h, emite uma prova pública e divulga nas redes. O dinheiro fica em custódia e cai na sua carteira em cripto, menos 10 %. Ninguém sabe quem você é. Nem nós.</p>
-          <div class="row mt-3"><a class="btn btn-lg btn-primary" href="../auth/criar-conta.html"><i data-icon="user-x"></i>Criar conta anônima</a><a class="btn btn-lg" href="#simulador"><i data-icon="percent"></i>Simular ganhos</a></div>
+          <p class="lead mt-2">Envie documentos, bases, fotos, vídeos, áudios ou apurações. A curadoria analisa em até 48 h, emite uma prova pública e divulga nas redes. O dinheiro fica em custódia e cai na sua carteira em cripto. Ninguém sabe quem você é. Nem nós.</p>
+          <div class="row mt-3"><a class="btn btn-lg btn-primary" href="../auth/criar-conta.html"><i data-icon="user-x"></i>Criar conta anônima</a><a class="btn btn-lg" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Ver o assistente de envio</a></div>
           <div class="row mt-3"><span class="badge badge-brass"><i data-icon="percent"></i>Comissão única de 10 %</span><span class="badge badge-outline"><i data-icon="bitcoin"></i>Saque em USDT, USDC ou BTC</span><span class="badge badge-outline"><i data-icon="eye-off"></i>Pseudônimo pode ficar oculto</span></div>
         </div>
         <div class="card raised">
-          <div class="card-head"><i data-icon="coins"></i><h3>Um vendedor do Lacre</h3><div class="actions"><span class="badge st-encerrado">Item encerrado</span></div></div>
-          <div class="card-body stack-sm">
-            <span class="handle lg" data-handle="coruja-7f3a" data-rep="4,8 · 3 itens aprovados · desde mar/2026"></span>
-            <p class="small"><b>Guia de acesso a dados do SUS: 60 fontes, endpoints e scripts de coleta</b> · Cópias · R$ 150 · 88 vendidas · Verificado</p>
-            <dl class="kv">
-              <dt>Bruto</dt><dd>R$ 13.200,00 (88 × R$ 150)</dd>
-              <dt>Comissão 10 %</dt><dd>− R$ 1.320,00</dd>
-              <dt>Líquido</dt><dd><b>R$ 11.880,00</b> ≈ 2.208 USDT</dd>
-              <dt>Sacado</dt><dd>R$ 9.800 em 2 saques em USDT · 1 saque de R$ 1.000 em processamento</dd>
-            </dl>
-            <div class="anon-note"><i data-icon="shield"></i><span>Números da conta demonstrada no protótipo. O pseudônimo é tudo o que existe sobre essa conta.</span></div>
+          <div class="card-body stack">
+            <div class="how-step"><span class="n"><i data-icon="percent"></i></span><div><b>Comissão única de 10 %</b><p class="small muted">Você fica com 90 % do que vender, em qualquer modelo. Nada é cobrado se um lacre coletivo não bater a meta.</p></div></div>
+            <div class="how-step"><span class="n"><i data-icon="wallet"></i></span><div><b>Cai na sua carteira em cripto</b><p class="small muted">72 h após a entrega, em USDT. Saque em USDT, USDC ou Bitcoin quando quiser.</p></div></div>
+            <div class="how-step"><span class="n"><i data-icon="eye-off"></i></span><div><b>Ninguém sabe quem você é</b><p class="small muted">Nem o comprador, nem a curadoria, nem a plataforma. Só o seu pseudônimo.</p></div></div>
           </div>
         </div>
       </div>
@@ -77,25 +68,25 @@
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <div><p class="eyebrow">Modelos de venda</p><h2>Nove jeitos de vender, uma comissão</h2><p>Você escolhe no passo 4 do envio. A curadoria pode sugerir outro modelo ou preço; nunca impõe.</p></div>
+        <div><p class="eyebrow">Modelos de venda</p><h2>Nove jeitos de vender</h2><p>Você escolhe no passo 4 do envio. A curadoria pode sugerir outro modelo ou preço; nunca impõe.</p></div>
         <a class="btn btn-ghost" href="como-funciona.html">Regras de cada modelo<i data-icon="arrow-right"></i></a>
       </div>
       <div class="table-wrap">
         <table class="table">
-          <thead><tr><th>Modelo</th><th>Quem compra</th><th>Quando você recebe</th><th class="num">Comissão</th><th>Fase</th></tr></thead>
+          <thead><tr><th>Modelo</th><th>Quem compra</th><th>Quando você recebe</th><th>Fase</th></tr></thead>
           <tbody>
-            <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">Preço fixo; limite de unidades e preço escalonado opcionais</span></td><td>Muitos</td><td>72 h após cada entrega</td><td class="num"><b>10 %</b></td><td><span class="badge st-ativo">Disponível</span></td></tr>
-            <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="sub">Preço fixo, oferta ou ambos; exclusividade declarada por 24 meses</span></td><td>Um</td><td>72 h após a entrega; conteúdo destruído dos servidores depois</td><td class="num"><b>10 %</b></td><td><span class="badge st-ativo">Disponível</span></td></tr>
-            <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">Meta, prazo e regra de liberação; metas estendidas</span></td><td>Multidão, a partir de R$ 10</td><td>72 h após a liberação do conteúdo, se a meta bater</td><td class="num"><b>10 %</b><span class="sub">0 se falhar</span></td><td><span class="badge st-ativo">Disponível</span></td></tr>
-            <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Atender um pedido</span><span class="sub">Você entrega o que alguém pediu e leva a recompensa acumulada</span></td><td>Quem contribuiu</td><td>Na validação pela curadoria</td><td class="num"><b>10 %</b></td><td><span class="badge st-ativo">Disponível</span></td></tr>
-            <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span><span class="sub">Lances secretos, segundo preço, reserva opcional</span></td><td>Um</td><td>72 h após a entrega ao vencedor</td><td class="num"><b>10 %</b></td><td><span class="badge st-ativo">Disponível</span></td></tr>
-            <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="sub">Sumário, relatório, planilhas, pacote; o comprador paga só a diferença para subir</span></td><td>Muitos</td><td>72 h após cada camada entregue</td><td class="num"><b>10 %</b></td><td><span class="badge st-ativo">Disponível</span></td></tr>
-            <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="sub">Fonte semanal, quinzenal ou mensal; edições avulsas</span></td><td>Muitos, por período</td><td>72 h após cada edição publicada</td><td class="num"><b>10 %</b></td><td><span class="badge st-ativo">Disponível</span></td></tr>
-            <tr><td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="sub">Editorial, comercial ou exclusiva, com contrato gerado</span></td><td>Muitos, por finalidade</td><td>72 h após cada licença</td><td class="num"><b>10 %</b></td><td><span class="badge st-ativo">Disponível</span></td></tr>
-            <tr><td><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span><span class="sub">Exclusividade por N dias, depois abre como Cópias</span></td><td>Um, depois muitos</td><td>72 h após a janela e após cada cópia</td><td class="num"><b>10 %</b></td><td><span class="badge st-agendado">Em breve</span></td></tr>
+            <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">Preço fixo; limite de unidades e preço escalonado opcionais</span></td><td>Muitos</td><td>72 h após cada entrega</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="sub">Preço fixo, oferta ou ambos; exclusividade declarada por 24 meses</span></td><td>Um</td><td>72 h após a entrega; conteúdo destruído dos servidores depois</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">Meta, prazo e regra de liberação; metas estendidas</span></td><td>Multidão, a partir de R$ 10</td><td>72 h após a liberação do conteúdo, se a meta bater</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Atender um pedido</span><span class="sub">Você entrega o que alguém pediu e leva a recompensa acumulada</span></td><td>Quem contribuiu</td><td>Na validação pela curadoria</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span><span class="sub">Lances secretos, segundo preço, reserva opcional</span></td><td>Um</td><td>72 h após a entrega ao vencedor</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="sub">Sumário, relatório, planilhas, pacote; o comprador paga só a diferença para subir</span></td><td>Muitos</td><td>72 h após cada camada entregue</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="sub">Fonte semanal, quinzenal ou mensal; edições avulsas</span></td><td>Muitos, por período</td><td>72 h após cada edição publicada</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="sub">Editorial, comercial ou exclusiva, com contrato gerado</span></td><td>Muitos, por finalidade</td><td>72 h após cada licença</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span><span class="sub">Exclusividade por N dias, depois abre como Cópias</span></td><td>Um, depois muitos</td><td>72 h após a janela e após cada cópia</td><td><span class="badge st-agendado">Em breve</span></td></tr>
           </tbody>
         </table>
-        <div class="table-foot"><span>Comissão única de 10 % sobre o valor recebido, em todos os modelos. Nada é cobrado se um lacre falhar ou um pedido expirar. No saque, só a taxa de rede é repassada (USDT em Polygon ≈ R$ 0,20).</span></div>
+        <div class="table-foot"><span>Comissão única de 10 % em todos os modelos.</span></div>
       </div>
     </div>
   </section>
@@ -112,7 +103,7 @@
         <div class="card"><div class="card-body"><div class="how-step"><span class="n">1</span><div><b>Tipo e categoria</b><p>Documento, dados, imagem, vídeo, áudio, texto, código ou pacote. A categoria mostra o nível de risco: alto significa dois curadores e, se houver terceiros, jurídico. Vincule a um pedido aberto, se for o caso.</p></div></div></div></div>
         <div class="card"><div class="card-body"><div class="how-step"><span class="n">2</span><div><b>Arquivos</b><p>Até 20 GB por item. O hash SHA-256 é calculado no seu navegador. Metadados são removidos antes de qualquer humano ver (EXIF com GPS e dispositivo, autor em DOCX e PDF, tags de áudio) e você recebe o relatório.</p></div></div></div></div>
         <div class="card"><div class="card-body"><div class="how-step"><span class="n">3</span><div><b>Prévia e descrição</b><p>Título até 120 caracteres, resumo até 280, descrição em Markdown restrito. Escolha as prévias geradas (borradas, tarjadas, 10 linhas, 30 s) e marque o que a curadoria pode mostrar.</p></div></div></div></div>
-        <div class="card"><div class="card-body"><div class="how-step"><span class="n">4</span><div><b>Modelo e preço</b><p>Preço, limite, meta, prazo, regra de liberação, reserva, camadas ou período. Veja faixas de preço de itens semelhantes aprovados e o seu líquido com a comissão de 10 % antes de enviar.</p></div></div></div></div>
+        <div class="card"><div class="card-body"><div class="how-step"><span class="n">4</span><div><b>Modelo e preço</b><p>Preço, limite, meta, prazo e regra de liberação. Veja faixas de preço de itens semelhantes aprovados antes de enviar.</p></div></div></div></div>
         <div class="card"><div class="card-body"><div class="how-step"><span class="n">5</span><div><b>Declarações</b><p>Seis declarações com texto completo: origem lícita, direito de venda, sem dados pessoais de terceiros, sem conteúdo íntimo ou de menores, sem credenciais, sem informação privilegiada ou sigilo legal. Opção de ocultar o pseudônimo.</p></div></div></div></div>
         <div class="card"><div class="card-body"><div class="how-step"><span class="n">6</span><div><b>Revisão e envio</b><p>Resumo de tudo e prazo estimado (48 h). Depois: triagem em minutos, análise humana, decisão com códigos, prova pública, post nas redes. Você acompanha em “Meus anúncios”.</p></div></div></div></div>
       </div>
@@ -154,36 +145,6 @@
     </div>
   </section>
 
-  <!-- Simulador -->
-  <section class="section band" id="simulador">
-    <div class="container">
-      <div class="split">
-        <div>
-          <p class="eyebrow">Simulador</p>
-          <h2 class="mt-1">Quanto fica com você</h2>
-          <p class="lead mt-2">Preço vezes unidades, menos a comissão de 10 %. É a mesma conta em todos os modelos. Para um lacre coletivo, use a meta como preço e 1 como unidade.</p>
-          <div class="card mt-3">
-            <div class="card-body form-grid">
-              <div class="field"><label for="sim-modelo">Modelo</label><select id="sim-modelo" class="select"><option data-unit="cópias vendidas">Cópias</option><option data-unit="meta batida (use 1)">Lacre coletivo</option><option data-unit="venda única (use 1)">Exclusivo</option><option data-unit="camadas vendidas">Camadas</option><option data-unit="assinaturas no período">Assinatura</option><option data-unit="licenças vendidas">Licença</option><option data-unit="pedido atendido (use 1)">Atender um pedido</option></select></div>
-              <div class="field"><label for="sim-preco">Preço por unidade</label><div class="input-group"><span class="affix">R$</span><input id="sim-preco" class="input num" type="number" min="0" step="1" value="150"></div></div>
-              <div class="field"><label for="sim-unidades">Unidades</label><input id="sim-unidades" class="input num" type="number" min="0" step="1" value="88"><span class="hint" id="sim-unit-label">cópias vendidas</span></div>
-              <div class="field"><label for="sim-comissao-in">Comissão</label><input id="sim-comissao-in" class="input readonly" value="10 % · todos os modelos" readonly></div>
-            </div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="sim-out">
-            <div class="stat"><span class="label">Bruto</span><span class="value" id="sim-bruto">R$ 13.200,00</span></div>
-            <div class="stat"><span class="label">Comissão 10 %</span><span class="value" id="sim-comissao">− R$ 1.320,00</span></div>
-            <div class="stat hl"><span class="label">Líquido para você</span><span class="value" id="sim-liquido">R$ 11.880,00</span><span class="delta flat" id="sim-usdt">≈ 2.208,2 USDT</span></div>
-          </div>
-          <div class="alert alert-info"><i data-icon="info"></i><div>Cotação de referência R$ 5,38 por USDT (mediana de três corretoras, atualizada a cada minuto). O valor cai na carteira 72 h após cada entrega. No saque, só a taxa de rede é repassada.</div></div>
-          <div class="alert alert-wax"><i data-icon="hand-coins"></i><div>Lacre coletivo: se a meta não bater, você não recebe nada e nada é cobrado. Os apoios voltam para as carteiras dos apoiadores.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA -->
   <section class="section">
     <div class="container">
@@ -197,25 +158,6 @@
     </div>
   </section>
 
-  <script>
-    (function () {
-      var p = document.getElementById('sim-preco'), u = document.getElementById('sim-unidades'), m = document.getElementById('sim-modelo');
-      var RATE = 5.38;
-      var brl = function (v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
-      function calc() {
-        var preco = parseFloat(p.value) || 0, un = parseInt(u.value, 10) || 0;
-        var bruto = preco * un, com = bruto * 0.10, liq = bruto - com;
-        document.getElementById('sim-bruto').textContent = brl(bruto);
-        document.getElementById('sim-comissao').textContent = '− ' + brl(com);
-        document.getElementById('sim-liquido').textContent = brl(liq);
-        document.getElementById('sim-usdt').textContent = '≈ ' + (liq / RATE).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' USDT';
-        document.getElementById('sim-unit-label').textContent = m.options[m.selectedIndex].dataset.unit;
-      }
-      [p, u].forEach(function (el) { el.addEventListener('input', calc); });
-      m.addEventListener('change', calc);
-      calc();
-    })();
-  </script>
 </main>
 </body>
 </html>
