@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
     a.preview { display: block; }
     .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
     .thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
@@ -32,11 +35,13 @@
     .layer:first-of-type { border-top: 0; }
     .dev-note { font-size: var(--fs-xs); color: var(--muted); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
     .side .card-body { padding: 18px; }
+    .side .amount-options { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .side-foot { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
     .updates .up { font-size: var(--fs-sm); padding: 8px 0; border-top: 1px solid var(--border); }
     .updates .up .when { font-size: var(--fs-xs); color: var(--muted); }
     .big-count { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; }
     @media (max-width: 900px) { .split .sticky { position: static; } }
+    @media (max-width: 600px) { .file-row { flex-wrap: wrap; } .file-row .grow { flex-basis: calc(100% - 48px); } .file-row .badge { margin-left: 48px; } }
   </style>
 </head>
 <body data-shell="public" data-page="explorar" data-root="../">
@@ -152,7 +157,7 @@
             <div class="grid cols-3">
               <article class="card item-card">
                 <a class="preview" data-type="video" href="item.html"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></a>
-                <div class="item-body"><div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div><h3 class="item-title"><a href="item.html">Filmagem aérea 4K das queimadas no Pantanal, agosto de 2025: 6 horas de material bruto</a></h3><div class="item-foot"><div class="price">R$ 2.400<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div></div>
+                <div class="item-body"><div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div><h3 class="item-title"><a href="item.html">Filmagem aérea 4K das queimadas no Pantanal, agosto de 2025: 6 horas de material bruto</a></h3><div class="item-foot"><div class="price">R$ 2.400</div><span class="handle" data-handle="cartografo-5a77"></span></div></div>
               </article>
               <article class="card item-card">
                 <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Dados e bases</span></div><div class="preview-lock"><span data-seal></span></div></a>
@@ -160,7 +165,7 @@
               </article>
               <article class="card item-card">
                 <a class="preview" data-type="imagem" href="item.html"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></a>
-                <div class="item-body"><div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div><h3 class="item-title"><a href="item.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></h3><div class="item-foot"><div class="price">R$ 900<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div></div>
+                <div class="item-body"><div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div><h3 class="item-title"><a href="item.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></h3><div class="item-foot"><div class="price">R$ 900</div><span class="handle" data-handle="cartografo-5a77"></span></div></div>
               </article>
             </div>
           </div>

@@ -436,7 +436,7 @@
     // variantes: ativar a padrão
     document.querySelectorAll('[data-variants]').forEach(scope => {
       const def = scope.dataset.variants || (scope.querySelector('[data-variant]') || {}).dataset?.variant;
-      if (def) { scope.querySelectorAll('[data-variant]').forEach(x => x.classList.toggle('active', x.dataset.variant === def)); scope.querySelectorAll('[data-show]').forEach(b => b.classList.toggle('active', b.dataset.show === def)); }
+      if (def) { scope.querySelectorAll('[data-variant]').forEach(x => x.classList.toggle('active', x.dataset.variant === def)); document.querySelectorAll('.variant-switch [data-show], [data-show]').forEach(b => { if (!b.closest('[data-variants]') || b.closest('[data-variants]') === scope) b.classList.toggle('active', b.dataset.show === def); }); }
     });
     if (!document.querySelector('[data-variants]')) {
       const first = document.querySelector('[data-variant]');

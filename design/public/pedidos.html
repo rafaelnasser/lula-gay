@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
     .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
     .req { display: flex; flex-direction: column; }
     .req .card-body { flex: 1; display: flex; flex-direction: column; gap: 12px; }
@@ -16,6 +19,8 @@
     .crit { margin: 0; padding-left: 18px; font-size: var(--fs-sm); color: var(--fg-2); }
     .crit li + li { margin-top: 3px; }
     .toolbar .select { width: auto; }
+    .rules { margin: 0; padding-left: 20px; font-size: var(--fs-sm); color: var(--fg-2); }
+    .rules li + li { margin-top: 8px; }
     .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
     .section-head p { color: var(--muted); margin-top: 6px; max-width: 60ch; }
   </style>
@@ -124,6 +129,37 @@
         <div class="card"><div class="card-body stack-sm"><div class="how-step"><span class="n">3</span><div><b>Um vendedor atende e a curadoria valida</b><p class="small muted">O atendimento é um envio normal, com os 7 blocos de análise. O primeiro validado recebe a recompensa (menos 10 % de comissão). Se dois entregarem, o segundo pode publicar o dele como item normal.</p></div></div></div></div>
       </div>
       <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">Anonimato nos dois lados</span>O autor do pedido, os contribuidores e quem atende só se veem por pseudônimo. Perguntas públicas ao autor passam por moderação. Nenhum valor é pago fora da plataforma.</div></div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><i data-icon="file-search"></i><h3>Regras para quem pede</h3></div>
+          <div class="card-body">
+            <ul class="rules">
+              <li>Recompensa inicial a partir de R$ 50, debitada da carteira e mantida em custódia até o atendimento ou o prazo.</li>
+              <li>Prazo entre 7 e 90 dias. Pode ser estendido uma vez, antes de vencer, se ninguém tiver atendido.</li>
+              <li>Critérios de aceite objetivos: a curadoria confere cada um no atendimento e recusa pedidos vagos.</li>
+              <li>Nada de pedir dados pessoais, conteúdo íntimo, credenciais, material protegido ou sob sigilo. O pedido passa pela mesma política de conteúdo dos itens.</li>
+              <li>Quem contribuir recebe acesso ao resultado no cofre. Se o pedido for aberto ao público depois, a receita das cópias devolve as contribuições.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><i data-icon="upload"></i><h3>Regras para quem atende</h3></div>
+          <div class="card-body">
+            <ul class="rules">
+              <li>O atendimento é um envio normal: arquivos completos, metadados removidos, seis declarações e análise em 7 blocos.</li>
+              <li>A curadoria confere os critérios de aceite um a um. Se faltar algum, você recebe a lista e tem 7 dias para reenviar.</li>
+              <li>Vale o primeiro atendimento validado. Um segundo atendimento pode ser publicado como item normal, sem a recompensa.</li>
+              <li>A recompensa, menos a comissão de 10 %, cai na sua carteira na validação, em USDT. Nada é cobrado se o pedido expirar.</li>
+              <li>Você nunca vê quem pediu nem quem contribuiu; eles nunca veem quem atendeu. Só pseudônimos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </main>

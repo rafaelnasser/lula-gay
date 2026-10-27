@@ -286,7 +286,8 @@ body.nav-open .mobile-nav { display: flex; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-lg); letter-spacing: -.01em; color: var(--fg); }
 .brand .seal { width: 28px; height: 28px; }
 .brand small { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-xs); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-left: 2px; }
-.seal-lg { width: 72px; height: 72px; }
+.seal-lg { width: 72px; height: 72px; display: inline-block; }
+.seal-lg .seal { width: 100%; height: 100%; }
 
 /* --------------------------------------------------------------------------
    Botões
@@ -686,6 +687,9 @@ legend { padding: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--fg-
 .handle.lg { font-size: var(--fs-md); } .handle.lg .identicon { width: 36px; height: 36px; border-radius: 9px; }
 .handle.xl .identicon { width: 56px; height: 56px; border-radius: 14px; }
 .handle .rep { font-family: var(--font-body); font-size: var(--fs-xs); color: var(--muted); }
+.handle > span:not(.rep) { white-space: nowrap; }
+.handle { flex-wrap: wrap; }
+.item-card .item-foot .handle { flex: none; }
 .identicon { display: inline-block; width: 24px; height: 24px; border-radius: 6px; overflow: hidden; background: var(--surface-3); }
 .identicon svg { width: 100%; height: 100%; }
 .hash { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--fg-2); background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 8px 10px; display: flex; gap: 10px; align-items: center; min-width: 0; }

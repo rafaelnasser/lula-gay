@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Como funciona · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
+    [id] { scroll-margin-top: 84px; }
+    .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
+    .how-step p { color: var(--muted); font-size: var(--fs-sm); margin-top: 2px; }
+    .how-step .links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .flow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: var(--fs-sm); }
+    .flow .st { padding: 6px 10px; border: 1px solid var(--border-2); border-radius: var(--r-sm); background: var(--surface); font-weight: 500; }
+    .flow .st.hl { border-color: var(--brass); background: var(--brass-soft); }
+    .flow svg { width: 14px; height: 14px; color: var(--muted); flex: none; }
+    .level { display: grid; grid-template-columns: max-content 1fr; gap: 12px; align-items: start; padding: 10px 0; border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--fg-2); }
+    .level:first-child { border-top: 0; padding-top: 0; }
+    .blocks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    @media (max-width: 600px) { .blocks { grid-template-columns: 1fr; } }
+    .block { padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); font-size: var(--fs-sm); }
+    .block b { display: block; }
+    .block span { color: var(--muted); font-size: var(--fs-xs); }
+    .block.veto { border-left: 3px solid var(--danger); }
+    .faq { max-width: 820px; }
+    .faq details { border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); }
+    .faq details + details { margin-top: 8px; }
+    .faq summary { cursor: pointer; padding: 14px 16px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; color: var(--muted); font-family: var(--font-mono); font-size: var(--fs-lg); line-height: 1; flex: none; }
+    .faq details[open] summary::after { content: "−"; }
+    .faq .ans { padding: 0 16px 16px; color: var(--fg-2); font-size: var(--fs-sm); max-width: 72ch; }
+    .faq .ans p + p { margin-top: 8px; }
+    .cta { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .cta p { max-width: 56ch; color: var(--fg-2); }
+  </style>
+</head>
+<body data-shell="public" data-page="como-funciona" data-root="../">
+<main>
+  <section class="section tight">
+    <div class="container">
+      <p class="eyebrow">Como funciona</p>
+      <h1 class="display mt-1">Um mercado de informação com três garantias</h1>
+      <p class="lead mt-2">Ninguém precisa dizer quem é. Nada vai ao ar sem uma equipe humana analisar todo o conteúdo. Todo item nasce com uma prova pública. Esta página explica como isso funciona para quem compra, para quem vende, na curadoria e no dinheiro.</p>
+      <div class="flow mt-3">
+        <span class="st">Vendedor envia o conteúdo completo</span><i data-icon="arrow-right"></i><span class="st">Triagem automática</span><i data-icon="arrow-right"></i><span class="st hl">Curadoria humana · até 48 h</span><i data-icon="arrow-right"></i><span class="st">Prova pública e post</span><i data-icon="arrow-right"></i><span class="st">Compras, apoios e pedidos</span><i data-icon="arrow-right"></i><span class="st">Acesso no cofre</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container" data-tabs>
+      <div class="tabs">
+        <a class="tab active" data-tab="compra" href="#">Para quem compra</a>
+        <a class="tab" data-tab="venda" href="#">Para quem vende</a>
+        <a class="tab" data-tab="curadoria" href="#">Curadoria</a>
+        <a class="tab" data-tab="dinheiro" href="#">Dinheiro</a>
+        <a class="tab" data-tab="faq" href="#">Perguntas frequentes</a>
+      </div>
+
+      <!-- Para quem compra -->
+      <div class="tab-panel active" data-panel="compra">
+        <div class="grid cols-2">
+          <div class="stack">
+            <div class="how-step"><span class="n">1</span><div><b>Crie uma conta anônima</b><p>Um pseudônimo sorteado (ex.: coruja-7f3a), uma senha de 12 ou mais caracteres ou uma passkey, e uma frase de recuperação de 12 palavras que mostramos uma única vez. Sem e-mail, sem telefone, sem documento.</p><div class="links"><a class="btn btn-sm" href="../auth/criar-conta.html">Criar conta</a></div></div></div>
+            <div class="how-step"><span class="n">2</span><div><b>Deposite cripto na carteira</b><p>USDT ou USDC (Polygon, Tron, Base) creditados 1:1, ou Bitcoin (Lightning, on-chain) convertido na hora. A carteira guarda créditos em USDT; os preços aparecem em R$ e são convertidos no momento da compra.</p><div class="links"><a class="btn btn-sm" href="../buyer/carteira.html">Ver a carteira</a></div></div></div>
+            <div class="how-step"><span class="n">3</span><div><b>Escolha como pagar pela informação</b><p>Compre uma cópia (entrega imediata), apoie um lacre coletivo (custódia até a meta), faça um lance lacrado, assine uma fonte ou some a um pedido com recompensa.</p><div class="links"><a class="btn btn-sm" href="explorar.html">Explorar</a><a class="btn btn-sm" href="pedidos.html">Pedidos</a></div></div></div>
+            <div class="how-step"><span class="n">4</span><div><b>Acesse no cofre</b><p>Visualizador seguro com marca d’água da sua conta. Download quando o item permite. Nada é enviado por e-mail ou link externo.</p><div class="links"><a class="btn btn-sm" href="../buyer/cofre.html">Cofre</a><a class="btn btn-sm" href="../buyer/visualizador.html">Visualizador</a></div></div></div>
+            <div class="how-step"><span class="n">5</span><div><b>72 horas para disputar</b><p>Se o conteúdo não corresponder à prévia, estiver corrompido ou duplicado, abra uma disputa. A curadoria compara prévia e conteúdo (ela já tem os dois) e decide em até 5 dias. Reembolso em créditos na carteira.</p><div class="links"><a class="btn btn-sm" href="../buyer/disputa.html">Como é uma disputa</a></div></div></div>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><i data-icon="lock"></i><h3>Formas de comprar</h3></div>
+              <div class="card-body">
+                <div class="level"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span>Preço fixo e entrega imediata. Pode ter edição limitada ou preço escalonado.</span></div>
+                <div class="level"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span>Apoie com qualquer valor a partir de R$ 10. Quando a soma bate a meta, o conteúdo é liberado. Se não bater, o apoio volta.</span></div>
+                <div class="level"><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span>Um único comprador. Compre pelo preço ou faça uma oferta vinculante acima do mínimo.</span></div>
+                <div class="level"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span><span>Um lance secreto. Vence o maior e paga o segundo maior mais o incremento.</span></div>
+                <div class="level"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span>Compre o sumário e depois suba pagando só a diferença.</span></div>
+                <div class="level"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span>Fonte recorrente. Cobrança na carteira por período; sem saldo, pausa.</span></div>
+                <div class="level"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span>Fotos, vídeos e áudios por finalidade: editorial, comercial ou exclusiva, com contrato gerado.</span></div>
+                <div class="level"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span><span>Descreva o que procura e junte uma recompensa com outras pessoas.</span></div>
+              </div>
+            </div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre uma compra</span>Item, valor e data, vinculados ao seu pseudônimo. O vendedor nunca vê quem comprou. A blockchain mostra seus depósitos e saques, nunca o que você comprou.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Para quem vende -->
+      <div class="tab-panel" data-panel="venda">
+        <div class="grid cols-2">
+          <div class="stack">
+            <div class="how-step"><span class="n">1</span><div><b>Tipo e categoria</b><p>Documento, dados, imagem, vídeo, áudio, texto, código ou pacote. A categoria define o nível de risco e se o item passa por dois curadores e pelo jurídico. Você pode vincular o envio a um pedido aberto.</p></div></div>
+            <div class="how-step"><span class="n">2</span><div><b>Arquivos</b><p>Até 20 GB. Metadados (autor, GPS, dispositivo, software) são removidos antes de qualquer pessoa da equipe ver o arquivo; você recebe o relatório do que foi removido. O hash é calculado no seu navegador e conferido no servidor.</p></div></div>
+            <div class="how-step"><span class="n">3</span><div><b>Prévia e descrição</b><p>Título (até 120 caracteres), resumo e descrição. Escolha entre prévias geradas automaticamente, borradas ou tarjadas. A curadoria pode reescrever título e resumo, com o seu aceite.</p></div></div>
+            <div class="how-step"><span class="n">4</span><div><b>Modelo de venda e preço</b><p>Cópias, exclusivo, lacre coletivo, leilão lacrado, camadas, assinatura ou licença. Simulação do líquido com a comissão de 10 % antes de enviar. Modificadores: marca d’água, somente leitura, acesso antecipado, garantia de exclusividade.</p></div></div>
+            <div class="how-step"><span class="n">5</span><div><b>Seis declarações</b><p>Origem lícita; titularidade ou direito de venda; sem dados pessoais de terceiros sem base legal; sem conteúdo íntimo ou de menores; sem credenciais; não é informação privilegiada de mercado nem está sob sigilo legal. Ficam registradas e vinculadas ao pseudônimo.</p></div></div>
+            <div class="how-step"><span class="n">6</span><div><b>Revisão e envio</b><p>Resumo de tudo e prazo estimado da curadoria (48 h). Você acompanha em “Meus anúncios” e recebe a decisão com códigos de motivo.</p><div class="links"><a class="btn btn-sm btn-primary" href="../seller/novo-anuncio.html">Abrir o assistente de envio</a><a class="btn btn-sm" href="vendedor.html">Modelos e simulador</a></div></div></div>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><i data-icon="clock"></i><h3>Depois do envio</h3></div>
+              <div class="card-body">
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">minutos</div><div class="what">Triagem automática: antivírus, metadados, varredura de dados pessoais e conteúdo proibido, hash, prévias</div></div>
+                  <div class="tl-item info"><div class="when">até 48 h</div><div class="what">Análise humana em 7 blocos. Categorias de risco alto: dois curadores independentes. Terceiros citados: jurídico, em até 5 dias úteis</div></div>
+                  <div class="tl-item brass"><div class="when">decisão</div><div class="what">Aprovar · Aprovar com ajustes (você confirma o diff em 72 h) · Solicitar ajustes · Rejeitar com código R01–R13</div></div>
+                  <div class="tl-item ok"><div class="when">publicação</div><div class="what">Prova pública emitida, post nas redes, item no catálogo</div></div>
+                  <div class="tl-item wax"><div class="when">venda ou meta</div><div class="what">Valor fica em custódia por 72 h (janela de disputa) e então cai na sua carteira, menos 10 %</div></div>
+                  <div class="tl-item"><div class="when">saque</div><div class="what">USDT, USDC ou BTC para um endereço que você informa na hora e que apagamos após a confirmação na rede</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><i data-icon="eye-off"></i><h3>Anonimato do vendedor</h3></div>
+              <div class="card-body stack-sm small">
+                <p>Você pode ocultar o pseudônimo nas páginas públicas. A curadoria pode reescrever título e descrição para reduzir pistas de estilo. Mensagens com compradores passam por um filtro que bloqueia e-mails, telefones, links e endereços de carteira.</p>
+                <p class="muted">O que só você controla: não escrever o próprio nome dentro do documento, não reutilizar carteiras de cripto ligadas ao seu nome em uma corretora e não dar detalhes que identifiquem você na descrição.</p>
+                <a class="link small" href="politicas.html#anonimato">Anonimato e seus limites</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curadoria -->
+      <div class="tab-panel" data-panel="curadoria">
+        <div class="grid cols-2">
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><i data-icon="clipboard-check"></i><h3>Checklist em 7 blocos</h3><div class="actions"><span class="badge badge-outline">todos obrigatórios</span></div></div>
+              <div class="card-body">
+                <div class="blocks">
+                  <div class="block veto"><b>1 · Legalidade</b><span>Veto. Dados pessoais de terceiros, conteúdo íntimo, credenciais, direitos autorais, informação privilegiada, sigilo legal, difamação, incitação.</span></div>
+                  <div class="block veto"><b>2 · Autenticidade</b><span>Veto parcial. Define o nível público em quatro graus.</span></div>
+                  <div class="block"><b>3 · Qualidade e completude</b><span>Entrega o que promete; legível e completo; datas e volumes batem.</span></div>
+                  <div class="block"><b>4 · Prévia e descrição</b><span>Prévia permite julgar sem entregar; título sem sensacionalismo; nada revela terceiros ou o vendedor.</span></div>
+                  <div class="block"><b>5 · Preço e modelo</b><span>Coerência com volume e raridade; regras do modelo bem configuradas.</span></div>
+                  <div class="block"><b>6 · Terceiros e redação</b><span>Pessoas identificáveis listadas e decididas uma a uma; tarjas aplicadas em nova versão.</span></div>
+                  <div class="block"><b>7 · Duplicidade e interesse</b><span>Hash inédito; não é cópia de material livre; categoria e tags corretas.</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><i data-icon="users"></i><h3>Regra de dois olhos e jurídico</h3></div>
+              <div class="card-body small stack-sm">
+                <p>Jornalismo e investigação, Governo, Finanças, Tecnologia e segurança e Saúde exigem dois curadores independentes. A segunda análise não vê as notas da primeira até concluir a própria.</p>
+                <p>Qualquer item que cite pessoa identificável, empresa em contexto negativo ou documento de origem institucional vai ao jurídico antes de aprovar. O parecer (aprovar, aprovar com redação, rejeitar) fica registrado com o fundamento.</p>
+                <p class="muted">SLA: triagem em minutos; primeira análise humana em até 48 h (24 h para edições de assinatura); jurídico em até 5 dias úteis. Hoje: 91 % dentro de 48 h, mediana de 36 h.</p>
+              </div>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><i data-icon="shield-check"></i><h3>Níveis de autenticidade</h3></div>
+              <div class="card-body">
+                <div class="level"><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span>Origem e integridade confirmadas: documento conferido na fonte oficial, imagem com cadeia de custódia, dados reproduzíveis.</span></div>
+                <div class="level"><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span>Parte do material conferida; o restante é consistente com o que foi conferido.</span></div>
+                <div class="level"><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span>Não foi possível verificar, mas não há sinais de fabricação. O histórico do vendedor pesa.</span></div>
+                <div class="level"><span class="badge auth-nao"><i data-icon="shield-alert"></i>Não verificado</span><span>Sem como confirmar. Só em categorias de baixo risco, com aviso em destaque no item e no post.</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><i data-icon="scroll-text"></i><h3>Decisões e códigos</h3></div>
+              <div class="card-body small stack-sm">
+                <div class="row"><span class="badge st-aprovado">Aprovado</span><span class="badge st-ajustes">Ajustes solicitados</span><span class="badge st-rejeitado">Rejeitado</span><span class="badge st-escalado">Escalado ao jurídico</span></div>
+                <p class="muted">Códigos de rejeição: R01 dados pessoais · R02 direitos autorais · R03 conteúdo íntimo · R04 credenciais · R05 sigilo legal · R06 informação privilegiada · R07 difamação sem suporte · R08 fabricação · R09 duplicidade · R10 qualidade · R11 prévia enganosa · R12 fora do escopo · R13 outro.</p>
+                <p>Depois de publicado, qualquer pessoa pode denunciar pela página de prova. O item pode ser suspenso preventivamente enquanto é reanalisado. Taxa de reversão hoje: 0,7 % dos itens aprovados.</p>
+                <a class="link small" href="politicas.html#curadoria">Política de curadoria completa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dinheiro -->
+      <div class="tab-panel" data-panel="dinheiro">
+        <div class="alert alert-anon mb-2"><i data-icon="bitcoin"></i><div><span class="alert-title">Só cripto, dos dois lados</span>Nenhum real entra ou sai do Lacre. Não há PIX, cartão, boleto, parceiro de pagamento nem voucher, e a plataforma não faz KYC. Você obtém cripto por conta própria, em uma corretora ou P2P, fora do Lacre; traz para a carteira; e saca em cripto para um endereço seu.</div></div>
+        <div class="grid cols-2">
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><i data-icon="wallet"></i><h3>Carteira e preços</h3></div>
+              <div class="card-body small stack-sm">
+                <p>A carteira guarda créditos em <b>USDT</b>. Os preços continuam em R$ porque é assim que o público brasileiro pensa; cada operação converte pela cotação do momento (mediana de três corretoras, atualizada a cada minuto). Hoje: R$ 5,38 por USDT.</p>
+                <dl class="kv"><dt>Exemplos</dt><dd>Cópia de R$ 490 ≈ 91 USDT · apoio de R$ 50 ≈ 9,3 USDT</dd><dt>Saldo exibido</dt><dd>“R$ 1.240,00 ≈ 230,4 USDT”</dd><dt>Preço do vendedor</dt><dd>Em R$, convertido a cada venda, ou direto em USDT</dd></dl>
+                <p class="muted">A plataforma não carrega risco cambial: o vendedor recebe o USDT retido na custódia, menos a comissão.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><i data-icon="download"></i><h3>Depósito</h3></div>
+              <div class="card-body">
+                <div class="table-wrap">
+                  <table class="table compact">
+                    <thead><tr><th>Moeda · rede</th><th>Crédito</th><th>Confirmações</th></tr></thead>
+                    <tbody>
+                      <tr><td><b>USDT</b> · Polygon</td><td>1:1</td><td>12</td></tr>
+                      <tr><td><b>USDT</b> · Tron</td><td>1:1</td><td>19</td></tr>
+                      <tr><td><b>USDC</b> · Polygon ou Base</td><td>1:1</td><td>12</td></tr>
+                      <tr><td><b>Bitcoin</b> · Lightning</td><td>convertido em USDT · cotação travada por 10 min</td><td>imediato</td></tr>
+                      <tr><td><b>Bitcoin</b> · on-chain</td><td>convertido em USDT · cotação travada por 10 min</td><td>2</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="xs muted mt-2">Cada depósito gera um endereço novo, nunca reutilizado e nunca vinculado a identidade. Mínimo 5 USDT. Invoice Lightning vale 10 minutos.</p>
+              </div>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><i data-icon="percent"></i><h3>Comissão e custódia</h3></div>
+              <div class="card-body">
+                <div class="table-wrap">
+                  <table class="table compact">
+                    <thead><tr><th>Operação</th><th class="num">Comissão</th><th>Quando</th></tr></thead>
+                    <tbody>
+                      <tr><td>Venda (cópia, exclusivo, leilão, camada, assinatura, licença)</td><td class="num"><b>10 %</b></td><td>No fim da janela de disputa (72 h)</td></tr>
+                      <tr><td>Apoio liberado (lacre rompido)</td><td class="num"><b>10 %</b></td><td>72 h após a liberação do conteúdo</td></tr>
+                      <tr><td>Recompensa paga (pedido atendido)</td><td class="num"><b>10 %</b></td><td>Na validação do atendimento</td></tr>
+                      <tr><td>Lacre que falhou · pedido que expirou</td><td class="num"><b>0</b></td><td>Tudo volta às carteiras</td></tr>
+                      <tr><td>Depósito · compra · disputa · conta</td><td class="num"><b>0</b></td><td>Só a taxa da rede, paga por você ao enviar</td></tr>
+                      <tr><td>Saque</td><td class="num">taxa de rede</td><td>Repasse: Polygon ≈ R$ 0,20 · Lightning ≈ R$ 0,05 · BTC on-chain variável</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="xs muted mt-2">Uma única regra em todos os modelos: o vendedor fica com 90 %. 2 % de cada comissão vai para um fundo de garantia que cobre reembolsos quando a custódia do vendedor não basta.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><i data-icon="upload"></i><h3>Saque</h3></div>
+              <div class="card-body small stack-sm">
+                <p>USDT, USDC ou BTC para um endereço que você informa na hora. Verificações: saldo disponível (nunca o que está em custódia), endereço válido para a rede, senha + código TOTP. Saques saem em lotes a cada hora. O endereço é apagado dos nossos servidores após a confirmação na rede; fica só o hash da transação.</p>
+                <p><b>Limite antifraude, não KYC:</b> contas com menos de 7 dias ou sem nenhum item aprovado sacam até R$ 2.000 por dia. Serve para conter golpes de conta nova; não identifica ninguém.</p>
+                <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div>Saques em cripto não podem ser desfeitos. Confira o endereço e a rede. Evite reutilizar uma carteira ligada ao seu nome em uma corretora.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="tab-panel" data-panel="faq">
+        <div class="faq">
+          <details open><summary>Preciso de e-mail ou telefone para criar uma conta?</summary><div class="ans"><p>Não. A conta é um pseudônimo sorteado, uma senha (ou passkey) e uma frase de recuperação de 12 palavras. Não pedimos nome, e-mail, telefone, CPF ou documento em nenhuma tela.</p><p>Como não há e-mail, não existe “esqueci minha senha” por fora: a frase de recuperação é a única saída. Avisamos isso em cada passo.</p></div></details>
+          <details><summary>Como pago, se não há PIX nem cartão?</summary><div class="ans"><p>Só com cripto: USDT ou USDC (Polygon, Tron, Base) ou Bitcoin (Lightning, on-chain). Você compra a cripto em uma corretora ou P2P, fora do Lacre, e deposita na carteira. Os preços aparecem em R$ e são convertidos na hora, pela cotação de referência.</p></div></details>
+          <details><summary>O que acontece se um lacre coletivo não bater a meta?</summary><div class="ans"><p>Tudo ou nada: cada apoio volta automaticamente para a carteira de origem no fim do prazo, sem taxa. Nada é cobrado do vendedor.</p></div></details>
+          <details><summary>O vendedor pode sumir depois de receber?</summary><div class="ans"><p>Não existe “vou enviar depois”. O conteúdo completo já está nos nossos servidores e já foi analisado antes de o item aparecer. A liberação é automática. O pagamento só chega ao vendedor 72 h após a entrega, descontados reembolsos procedentes.</p></div></details>
+          <details><summary>Como sei que o conteúdo é verdadeiro?</summary><div class="ans"><p>Cada item traz um nível de autenticidade atribuído pela curadoria (Verificado, Verificado parcialmente, Plausível ou Não verificado) com a explicação do que foi conferido. A página de prova registra o hash e a data; a reputação do vendedor registra o histórico.</p></div></details>
+          <details><summary>Posso baixar os arquivos?</summary><div class="ans"><p>Depende do item. Alguns permitem download com marca d’água da sua conta; outros são somente leitura no visualizador seguro. Isso aparece no painel de compra antes de pagar.</p></div></details>
+          <details><summary>Alguém pode descobrir quem eu sou?</summary><div class="ans"><p>Não pelo Lacre: não guardamos identidade. Mas a corretora onde você comprou a cripto conhece você, transações on-chain são públicas, e a lei nos obriga a guardar registros de acesso por 6 meses em sistema separado, entregues só por ordem judicial. Quem coloca o nome dentro do documento se identifica sozinho. <a class="link" href="politicas.html#anonimato">Leia os limites.</a></p></div></details>
+          <details><summary>O que é a página de prova?</summary><div class="ans"><p>Uma página pública e estável com o hash SHA-256 do pacote, o carimbo de tempo da aprovação, o nível de autenticidade e os curadores. Todo post nas redes aponta para ela, nunca para a compra. <a class="link" href="prova.html">Veja um exemplo.</a></p></div></details>
+          <details><summary>Quanto o Lacre cobra?</summary><div class="ans"><p>Comissão única de 10 % sobre vendas, apoios liberados e recompensas pagas, em todos os modelos. Nada se o lacre falhar ou o pedido expirar. Depósito e compra não têm taxa da plataforma; no saque, repassamos só a taxa da rede.</p></div></details>
+          <details><summary>Fui citado em um item. O que faço?</summary><div class="ans"><p>Use “Denunciar” na página de prova e marque “Sou a pessoa citada”. O jurídico analisa em até 15 dias e responde de forma documentada: redação de nova versão, retirada ou manutenção com fundamento. <a class="link" href="politicas.html#juridico">Pedidos de titulares.</a></p></div></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reputação -->
+  <section class="section band" id="reputacao">
+    <div class="container">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Reputação</p>
+          <h2 class="mt-1">Como a reputação é calculada</h2>
+          <p class="lead mt-2">A reputação pertence ao pseudônimo e é a única coisa que acumula valor com o tempo. Por isso o pseudônimo não pode ser trocado. A nota vai de 0 a 5 e combina quatro componentes.</p>
+          <div class="stat-grid mt-3">
+            <div class="stat"><span class="label">Aprovações · peso 40 %</span><span class="value">12 / 13</span><span class="delta flat">itens aprovados sobre enviados, com peso maior para os últimos 12 meses</span></div>
+            <div class="stat"><span class="label">Autenticidade média · 30 %</span><span class="value">0,94</span><span class="delta flat">Verificado 1,0 · Parcial 0,75 · Plausível 0,5 · Não verificado 0,25</span></div>
+            <div class="stat"><span class="label">Disputas perdidas · 20 %</span><span class="value">0</span><span class="delta flat">cada disputa procedente desconta; reincidência desconta em dobro</span></div>
+            <div class="stat"><span class="label">Tempo de resposta · 10 %</span><span class="value">~6 h</span><span class="delta flat">mediana para responder perguntas públicas e pedidos de ajuste</span></div>
+          </div>
+          <p class="xs muted mt-2">Valores do exemplo ao lado. Contas novas começam sem nota; a nota aparece após o primeiro item aprovado.</p>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><i data-icon="award"></i><h3>Exemplo</h3></div>
+            <div class="card-body">
+              <span class="handle lg" data-handle="sextante-21c9" data-rep="4,9 · 12 itens aprovados"></span>
+              <dl class="kv mt-2"><dt>Aprovações</dt><dd>12 de 13 enviados (1 rejeição R10 em 2025)</dd><dt>Autenticidade</dt><dd>9 Verificado · 3 Verificado parcialmente</dd><dt>Disputas perdidas</dt><dd>0 em 1.420 compras e apoios</dd><dt>Responde em</dt><dd>~6 h</dd></dl>
+              <div class="row mt-2"><span class="badge badge-brass"><i data-icon="badge-check"></i>Verificado 9×</span><span class="badge badge-wax"><i data-icon="unlock"></i>Rompeu 3 lacres</span><span class="badge badge-outline"><i data-icon="repeat"></i>Fonte recorrente</span></div>
+            </div>
+          </div>
+          <div class="alert alert-info"><i data-icon="info"></i><div>Compradores também têm histórico: disputas improcedentes repetidas limitam o direito de abrir disputa. Nada disso é público; só a reputação do vendedor aparece no catálogo, e só se ele exibir o pseudônimo.</div></div>
+          <a class="btn" href="../seller/reputacao.html"><i data-icon="award"></i>Ver a tela de reputação do vendedor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <h2 class="display">Pronto para começar?</h2>
+        <p>A mesma conta anônima compra e vende. Dois minutos para criar, nenhum dado pessoal.</p>
+        <div class="row"><a class="btn btn-lg btn-primary" href="../auth/criar-conta.html"><i data-icon="user-x"></i>Criar conta anônima</a><a class="btn btn-lg" href="explorar.html"><i data-icon="compass"></i>Explorar sem conta</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

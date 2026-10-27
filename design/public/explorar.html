@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../assets/app.css">
   <script src="../assets/app.js" defer></script>
   <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
     a.preview { display: block; }
     .catalog { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 24px; align-items: start; }
     @media (max-width: 900px) { .catalog { grid-template-columns: 1fr; } .catalog .sticky { position: static; } }
@@ -104,7 +107,7 @@
               <div class="segmented"><button class="active" data-toast="Visualização em grade" aria-label="Grade"><i data-icon="grid"></i></button><button data-toast="Visualização em lista" aria-label="Lista"><i data-icon="list"></i></button></div>
             </div>
           </div>
-          <div class="grid cols-3">
+          <div class="grid cols-2">
             <article class="card item-card">
               <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
               <div class="item-body">
@@ -127,7 +130,7 @@
               <div class="item-body">
                 <div class="item-meta"><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span></div>
                 <h3 class="item-title"><a href="item.html">Mercado de energia solar distribuída no Brasil: projeções 2026–2030, 120 páginas</a></h3>
-                <div class="item-foot"><div class="price">R$ 25.000<small>ou oferta a partir de R$ 15.000 · 2 ofertas</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
+                <div class="item-foot"><div class="price">R$ 25.000<small>ou oferta · mín. R$ 15.000</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
               </div>
             </article>
             <article class="card item-card">
@@ -135,7 +138,7 @@
               <div class="item-body">
                 <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
                 <h3 class="item-title"><a href="item.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></h3>
-                <div class="item-foot"><div class="price">R$ 900<small>editorial · comercial R$ 4.500 · exclusiva R$ 25.000</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+                <div class="item-foot"><div class="price">R$ 900<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
               </div>
             </article>
             <article class="card item-card">
@@ -151,7 +154,7 @@
               <div class="item-body">
                 <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
                 <h3 class="item-title"><a href="item.html">Filmagem aérea 4K das queimadas no Pantanal, agosto de 2025: 6 horas de material bruto</a></h3>
-                <div class="item-foot"><div class="price">R$ 2.400<small>editorial · comercial R$ 12.000</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+                <div class="item-foot"><div class="price">R$ 2.400<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
               </div>
             </article>
             <article class="card item-card">
@@ -159,7 +162,7 @@
               <div class="item-body">
                 <div class="item-meta"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span></div>
                 <h3 class="item-title"><a href="item.html">Como uma operação de última milha cortou 31% do custo: playbook, planilhas e modelo de roteirização</a></h3>
-                <div class="item-foot"><div class="price">R$ 190<small>a R$ 2.400 · 4 camadas</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
+                <div class="item-foot"><div class="price">R$ 190<small>4 camadas</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
               </div>
             </article>
             <article class="card item-card">
@@ -167,7 +170,7 @@
               <div class="item-body">
                 <div class="item-meta"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span></div>
                 <h3 class="item-title"><a href="item.html">Monitor semanal de patentes do setor farmacêutico brasileiro</a></h3>
-                <div class="item-foot"><div class="price">R$ 190<small>/mês · 212 assinantes · avulsa R$ 90</small></div><span class="handle" data-handle="prisma-66af"></span></div>
+                <div class="item-foot"><div class="price">R$ 190<small>/mês</small></div><span class="handle" data-handle="prisma-66af"></span></div>
               </div>
             </article>
             <article class="card item-card">
@@ -175,7 +178,7 @@
               <div class="item-body">
                 <div class="item-meta"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
                 <h3 class="item-title"><a href="item.html">400 fotografias inéditas da construção de Brasília (1957–1960), acervo pessoal digitalizado</a></h3>
-                <div class="item-foot"><div><div class="price">7 lances<small>segundo preço · reserva não revelada</small></div><div class="xs muted">encerra em <span class="countdown" data-deadline="2026-11-02T20:00:00-03:00"></span></div></div><span class="handle" data-handle="arquivista-0d2e"></span></div>
+                <div class="item-foot"><div><div class="price">7 lances<small>lacrados</small></div><div class="xs muted">encerra em <span class="countdown" data-deadline="2026-11-02T20:00:00-03:00"></span></div></div><span class="handle" data-handle="arquivista-0d2e"></span></div>
               </div>
             </article>
           </div>
@@ -202,7 +205,7 @@
             <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="badge badge-outline">Liberação pública</span></div>
             <h3 class="item-title"><a href="item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
             <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
-            <div class="item-foot"><div><div class="price wax">R$ 54.120<small>de R$ 80.000 · 68 %</small></div><div class="xs muted">1.187 apoiadores · <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></div></div><span class="handle" data-handle="sextante-21c9"></span></div>
+            <div class="item-foot"><div><div class="price wax">R$ 54.120<small>de R$ 80.000</small></div><div class="xs muted">1.187 apoiadores · <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></div></div><span class="handle" data-handle="sextante-21c9"></span></div>
           </div>
         </article>
         <article class="card item-card">
@@ -211,7 +214,7 @@
             <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge badge-outline">Liberação pública</span></div>
             <h3 class="item-title"><a href="item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o Plano Diretor (2024–2026)</a></h3>
             <div class="progress"><div class="progress-bar wax" data-width="63%"></div></div>
-            <div class="item-foot"><div><div class="price wax">R$ 11.340<small>de R$ 18.000 · 63 %</small></div><div class="xs muted">402 apoiadores · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></div></div><span class="badge badge-outline"><i data-icon="eye-off"></i>Vendedor oculto</span></div>
+            <div class="item-foot"><div><div class="price wax">R$ 11.340<small>de R$ 18.000</small></div><div class="xs muted">402 apoiadores · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></div></div><span class="badge badge-outline"><i data-icon="eye-off"></i>Vendedor oculto</span></div>
           </div>
         </article>
         <article class="card item-card">
@@ -220,7 +223,7 @@
             <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="badge badge-outline">Só apoiadores</span></div>
             <h3 class="item-title"><a href="item.html">Pesquisa com 1.200 motoristas de aplicativo em 5 capitais: renda, jornada e custos (2026)</a></h3>
             <div class="progress"><div class="progress-bar wax" data-width="27%"></div></div>
-            <div class="item-foot"><div><div class="price wax">R$ 6.750<small>de R$ 25.000 · 27 %</small></div><div class="xs muted">188 apoiadores · <span class="countdown" data-deadline="2026-12-20T23:59:00-03:00"></span></div></div><span class="handle" data-handle="lanterna-b31d"></span></div>
+            <div class="item-foot"><div><div class="price wax">R$ 6.750<small>de R$ 25.000</small></div><div class="xs muted">188 apoiadores · <span class="countdown" data-deadline="2026-12-20T23:59:00-03:00"></span></div></div><span class="handle" data-handle="lanterna-b31d"></span></div>
           </div>
         </article>
       </div>
