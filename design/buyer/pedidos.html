@@ -28,6 +28,10 @@
     .quem .handle, .timeline .handle, .alert .handle { vertical-align: middle; font-size: var(--fs-xs); }
     .segmented.vs button svg { width: 13px; height: 13px; vertical-align: -2px; }
     .pedido .timeline .tl-item { padding-bottom: 12px; }
+    .extras { border: 1px dashed var(--border-2); border-radius: var(--r); padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+    .extra { background: var(--surface-2); border-radius: var(--r-sm); padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+    .extra.proposta { border-left: 3px solid var(--brass); }
+    .extras .handle, .modal .handle { vertical-align: middle; font-size: var(--fs-xs); }
     /* rótulos longos ("Sair do pedido (reembolso de US$ 800 ao endereço de origem)") quebram linha no celular */
     @media (max-width: 600px) { .pedido .row > .btn, .modal-foot .btn { white-space: normal; text-align: left; } }
   </style>
@@ -125,6 +129,34 @@
               <div class="tl-item ok"><div class="when">20/10 · 11:20</div><div class="what">Você igualou (+US$ 300) · 3 interessados × US$ 800 = US$ 2.400</div></div>
               <div class="tl-item ok"><div class="when">24/10 · 16:15</div><div class="what"><span class="handle" data-handle="relogio-2b7c"></span> juntou-se por US$ 800 · recompensa total US$ 3.200</div></div>
             </div>
+            <div class="extras">
+              <div class="row between"><b class="small"><i data-icon="layers" class="ico brass"></i> Extras deste pedido</b><span class="xs muted">1 aberto · 1 proposta pendente · até 5 abertos por pedido</span></div>
+              <p class="xs muted">Um extra é um bônus opcional: um sub-item para algo próximo ou complementar ao pedido, com valor por interessado e carteira próprios. Só interessados ativos do pedido entram. Não entrar no extra não muda sua participação no pedido.</p>
+              <div class="extra">
+                <div class="row"><span class="badge st-ativo">Aberto</span><span class="tag">ext-2c8d1-a</span><span class="badge badge-outline">Você não entrou</span><span class="xs muted">aprovado pela curadoria em 22/10 (Bruno M.)</span></div>
+                <b class="small">Reclamações registradas na ouvidoria por UPA (2023–2025), por mês</b>
+                <div class="xs muted">Criado por <span class="handle" data-handle="quartzo-a1f0"></span> em 22/10 a partir da proposta de <span class="handle" data-handle="lanterna-b31d"></span> (21/10: "tenho a base da ouvidoria, não os tempos de espera"). Critérios: por unidade e mês; número de reclamações e tema; CSV.</div>
+                <dl class="kv-row">
+                  <div><dt>Valor por interessado</dt><dd>US$ 150,00</dd></div>
+                  <div><dt>Interessados</dt><dd>2</dd></div>
+                  <div><dt>Total</dt><dd>US$ 300,00</dd></div>
+                  <div><dt>Prazo</dt><dd>30/11/2026 · o do pedido</dd></div>
+                  <div><dt>Carteira do extra</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2c8e…7b40</a> · Polygon · USDT · 2 pagamentos</dd></div>
+                </dl>
+                <div class="quem"><span><i data-icon="users" class="ico brass"></i> No extra:</span><span><span class="handle" data-handle="quartzo-a1f0"></span> criou · 22/10</span><span><span class="handle" data-handle="relogio-2b7c"></span> entrou · 25/10</span><span>você e <span class="handle" data-handle="farol-3e9b"></span> continuam só no pedido principal</span></div>
+                <div class="row">
+                  <a class="btn btn-sm btn-primary" href="../buyer/checkout.html"><i data-icon="plus"></i>Entrar no extra por US$ 150</a>
+                  <span class="xs muted">Não entrar no extra não muda sua participação no pedido.</span>
+                </div>
+              </div>
+              <div class="extra proposta">
+                <div class="row"><span class="badge badge-outline"><i data-icon="lightbulb"></i>Proposta de extra</span><span class="xs muted"><span class="handle" data-handle="prisma-66af"></span> · 26/10 · valor sugerido US$ 200 · aguardando um interessado criar o extra</span></div>
+                <b class="small">Tempo de espera nas UBS da capital nos mesmos meses</b>
+                <div class="xs muted">A proposta fica pública no pedido. Ela só vira extra quando um interessado a cria e paga; quem propôs não tem exclusividade para atender.</div>
+                <div class="row"><button class="btn btn-sm" data-modal-open="novo-extra"><i data-icon="sparkles"></i>Criar extra a partir desta proposta</button></div>
+              </div>
+              <div class="row"><button class="btn btn-sm btn-ghost" data-modal-open="novo-extra"><i data-icon="plus"></i>Adicionar um extra</button></div>
+            </div>
             <div class="row">
               <a class="btn btn-sm btn-primary" href="../buyer/checkout.html"><i data-icon="arrow-up-right"></i>Cobrir o valor (mín. US$ 880)</a>
               <button class="btn btn-sm" data-modal-open="m-sair"><i data-icon="log-out"></i>Sair do pedido (reembolso de US$ 800 ao endereço de origem)</button>
@@ -172,6 +204,7 @@
               <span>08/10</span><span>Atendimento validado · acesso liberado no cofre para os 3 interessados (ENT-2P9Q)</span><b>—</b>
               <span>11/10</span><span>Carteira do pedido finalizada: comissão de 10 % (US$ 60) separada e carteira entregue a quem atendeu</span><b>—</b>
             </div>
+            <p class="xs muted mt-1"><i data-icon="layers" class="ico brass"></i> 1 extra atendido (você não entrou): "Plantas e cortes do Pacaembu usados na reforma (2020)" · criado por <span class="handle" data-handle="quartzo-a1f0"></span> em 30/09 · US$ 100 × 2 interessados (<span class="handle" data-handle="quartzo-a1f0"></span> e <span class="handle" data-handle="farol-3e9b"></span>) = US$ 200 · atendido por <span class="handle" data-handle="cartografo-5a77"></span> em 08/10, junto com o principal · carteira do extra entregue em 11/10.</p>
           </div>
           <div class="row">
             <a class="btn btn-sm btn-primary" href="../buyer/cofre.html"><i data-icon="vault"></i>Abrir no cofre</a>
@@ -222,6 +255,9 @@
           <div class="how-step"><span class="n">5</span><div><b>Sempre o mesmo valor.</b> A qualquer momento todos os interessados ativos pagaram a mesma quantia. Quem cobre e não é igualado fica sozinho: exclusividade de fato.</div></div>
           <div class="how-step"><span class="n">6</span><div><b>Atender.</b> Um vendedor envia o conteúdo à curadoria e o pedido trava até a decisão. Validado: acesso no cofre para cada interessado; a plataforma separa 10 % e entrega a carteira do pedido a quem atendeu (frase de recuperação, uma única vez). Rejeitado: o pedido destrava.</div></div>
           <div class="how-step"><span class="n">7</span><div><b>Expirar.</b> Sem atendimento validado até o prazo, cada interessado recebe de volta o que pagou, ao endereço de origem.</div></div>
+          <div class="how-step"><span class="n">8</span><div><b>Extras.</b> Qualquer interessado ativo pode adicionar um extra: um bônus opcional para algo próximo ou complementar ao pedido, com título, critérios curtos, valor por interessado próprio (mínimo US$ 10), prazo até o do pedido e carteira própria. Passa pela curadoria e é pago ao criar. Vendedores podem propor um extra; ele só existe quando um interessado o cria e paga.</div></div>
+          <div class="how-step"><span class="n">9</span><div><b>Entrar em um extra.</b> Só interessados ativos do pedido, pagando o mesmo valor do extra. Valem as mesmas regras: cobrir exige +10 % e, se o valor subir, 48 h para igualar ou sair. Até 5 extras abertos por pedido.</div></div>
+          <div class="how-step"><span class="n">10</span><div><b>Independência.</b> Não entrar no extra não muda sua participação no pedido; sair de um extra não afeta o principal; sair do pedido retira também dos extras, tudo reembolsado ao endereço de origem. Um extra é atendido como um pedido (curadoria, acesso no cofre dos interessados do extra, 10 % separados, carteira entregue a quem atendeu), por qualquer vendedor e em outro momento que o principal.</div></div>
           <p class="xs muted">A janela de 48 h e o incremento mínimo de 10 % são parâmetros da plataforma.</p>
         </div>
       </div>
@@ -247,10 +283,39 @@
       <div class="modal-head"><h3>Sair do pedido ped-2c8d1?</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
       <div class="modal-body stack-sm small">
         <p>Você recebe de volta os 800 USDT que pagou: 500 USDT (12/10) e 300 USDT (20/10), cada um no endereço de origem do respectivo pagamento, descontada só a taxa de rede (≈ US$ 0,04 por transação na Polygon).</p>
-        <p>Os outros 3 interessados continuam e a recompensa total passa a US$ 2.400. Você pode voltar depois, pagando o valor por interessado vigente.</p>
+        <p>Os outros 3 interessados continuam e a recompensa total passa a US$ 2.400. Você pode voltar depois, pagando o valor por interessado vigente. Sair do pedido retira também dos extras; você não está em nenhum extra deste pedido.</p>
         <div class="alert alert-anon"><i data-icon="shield"></i><div>O reembolso vai para o endereço de origem, não para uma conta: por isso pedimos pagar sempre de uma carteira que você controla.</div></div>
       </div>
       <div class="modal-foot"><button class="btn" data-modal-close>Continuar no pedido</button><button class="btn btn-danger" data-modal-close data-toast="Você saiu do ped-2c8d1. US$ 800,00 (800 USDT) a caminho dos endereços de origem."><i data-icon="log-out"></i>Sair e receber o reembolso</button></div>
+    </div>
+  </div>
+
+  <!-- modal: adicionar um extra ao ped-2c8d1 -->
+  <div class="modal-backdrop" id="novo-extra">
+    <div class="modal wide">
+      <div class="modal-head"><h3>Adicionar um extra ao ped-2c8d1</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+      <form class="modal-body stack" data-submit-toast="Extra enviado para curadoria. Abriria o checkout: US$ 200,00 (200 USDT) para a carteira do extra, endereço derivado válido por 24 h.">
+        <div class="alert alert-info"><i data-icon="clipboard-check"></i><div><span class="alert-title">Passa pela curadoria e é pago ao criar</span>O extra só fica visível depois da curadoria (mesmas regras de conteúdo do pedido). Ao criar, você paga o valor por interessado do extra, da sua carteira cripto, para a carteira própria do extra. Se a curadoria recusar, o pagamento volta ao endereço de origem.</div></div>
+        <div class="row small"><span class="badge badge-outline"><i data-icon="lightbulb"></i>A partir da proposta de <span class="handle" data-handle="prisma-66af"></span> · 26/10</span><span class="xs muted">valor sugerido US$ 200 · quem propôs não tem exclusividade para atender</span></div>
+        <div class="form-grid">
+          <div class="field full"><label for="ne-titulo">Título</label><input id="ne-titulo" class="input" maxlength="120" value="Tempo de espera nas UBS da capital nos mesmos meses"><span class="hint">Algo próximo ou complementar ao pedido. Sem nomes de pessoas.</span></div>
+          <div class="field full"><label for="ne-desc">Descrição</label><textarea id="ne-desc" class="textarea">Tempo médio de espera nas UBS do município de São Paulo, por unidade e mês, de janeiro de 2023 a dezembro de 2025, na mesma estrutura do pedido principal. Servem dados da Secretaria Municipal de Saúde ou levantamento próprio com metodologia descrita.</textarea></div>
+          <div class="field full">
+            <label>Critérios de aceite (curtos)</label>
+            <div class="criteria">
+              <div class="input-group"><span class="affix">1</span><input class="input" value="Por unidade e mês, sem meses faltantes"></div>
+              <div class="input-group"><span class="affix">2</span><input class="input" value="Fonte de cada número em coluna própria · CSV"></div>
+            </div>
+          </div>
+          <div class="field"><label for="ne-valor">Valor por interessado</label><div class="input-group"><span class="affix">US$</span><input id="ne-valor" class="input num" value="200,00" inputmode="decimal"></div><span class="hint">Mínimo US$ 10. Só interessados ativos do pedido entram, pagando o mesmo valor; cobrir exige +10 % e, se o valor subir, 48 h para igualar ou sair.</span></div>
+          <div class="field"><label for="ne-prazo">Prazo</label><input id="ne-prazo" class="input" type="date" value="2026-11-30" min="2026-10-29" max="2026-11-30"><span class="hint">Por padrão o do pedido (30/11/2026); nunca além dele. Extra expirado devolve cada pagamento ao endereço de origem.</span></div>
+          <label class="check full"><input type="checkbox" required><span>Declaro que o extra não pede dados pessoais de terceiros, credenciais, conteúdo íntimo nem material sob sigilo legal.<span class="desc">Até 5 extras abertos por pedido. Não entrar no extra não muda a participação de ninguém no pedido.</span></span></label>
+        </div>
+        <div class="form-actions">
+          <span class="xs muted">Registramos extra, valor e data. Nada mais.</span>
+          <div class="row"><button type="button" class="btn" data-modal-close>Cancelar</button><button type="submit" class="btn btn-primary"><i data-icon="send"></i>Enviar para curadoria e pagar US$ 200</button></div>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -308,8 +373,8 @@
 
   <script>
     // fecha o modal quando o formulário é enviado (o app.js já mostra o toast e impede o envio real)
-    document.querySelector('#novo-pedido form').addEventListener('submit', function () {
-      document.getElementById('novo-pedido').classList.remove('open');
+    document.querySelectorAll('#novo-pedido form, #novo-extra form').forEach(function (f) {
+      f.addEventListener('submit', function () { f.closest('.modal-backdrop').classList.remove('open'); });
     });
   </script>
 </main>

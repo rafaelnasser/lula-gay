@@ -381,7 +381,7 @@
       <!-- ===================== PEDIDO COM RECOMPENSA (juntar-se · cobrir · igualar) ===================== -->
       <div data-variant="pedido">
         <div data-tabs>
-          <div class="page-head"><div><p class="eyebrow">Checkout · pedido com recompensa</p><h1>Entrar no pedido</h1><p class="sub">Todos os interessados pagam o mesmo valor e recebem o mesmo acesso. Recompensa total = valor por interessado × interessados.</p></div><div class="actions"><div class="segmented"><button type="button" class="active" data-tab="juntar">Juntar-se</button><button type="button" data-tab="cobrir">Cobrir o valor</button><button type="button" data-tab="igualar">Igualar</button></div></div></div>
+          <div class="page-head"><div><p class="eyebrow">Checkout · pedido com recompensa</p><h1>Entrar no pedido</h1><p class="sub">Todos os interessados pagam o mesmo valor e recebem o mesmo acesso. Recompensa total = valor por interessado × interessados. Extras são bônus opcionais dentro do pedido, com valor e carteira próprios.</p></div><div class="actions"><div class="segmented wrap"><button type="button" class="active" data-tab="juntar">Juntar-se</button><button type="button" data-tab="cobrir">Cobrir o valor</button><button type="button" data-tab="igualar">Igualar</button><button type="button" data-tab="extra">Entrar no extra</button><button type="button" data-tab="criar-extra">Criar um extra</button></div></div></div>
           <div class="split">
             <div class="stack">
               <div class="card"><div class="card-body item-sum">
@@ -402,7 +402,15 @@
                     <div class="list-item"><span class="handle" data-handle="relogio-2b7c"></span><span class="xs muted">juntou-se em 24/10 · US$ 800</span></div>
                   </div>
                 </div>
+              </div>
+              <div class="card-foot"><div class="stack-sm grow">
+                <div class="row between"><b class="small">Extras deste pedido</b><span class="xs muted">bônus opcionais · 1 aberto · 1 proposta · limite 5</span></div>
+                <div class="list people">
+                  <div class="list-item"><span class="li-icon"><i data-icon="plus"></i></span><div class="li-body"><div class="li-title">Reclamações registradas na ouvidoria por UPA (2023–2025), por mês</div><div class="li-sub">ext-2c8d1-a · US$ 150 por interessado · 2 interessados · total US$ 300 · aberto · você não entrou</div></div><button type="button" class="btn btn-sm" data-tab="extra">Entrar no extra</button></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="lightbulb"></i></span><div class="li-body"><div class="li-title">Tempo de espera nas UBS da capital nos mesmos meses</div><div class="li-sub">Proposta de extra · <span class="handle" data-handle="prisma-66af"></span> · 26/10 · valor sugerido US$ 200 · aguardando um interessado criar o extra</div></div><button type="button" class="btn btn-sm" data-tab="criar-extra">Criar um extra</button></div>
+                </div>
               </div></div>
+            </div>
               <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
                 <div class="timeline">
                   <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga para o endereço derivado deste pagamento, na carteira do pedido. Seu pseudônimo e a data entram na lista pública de interessados</div></div>
@@ -443,6 +451,49 @@
                 <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
                 <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="300,00" data-polygon="0x2c8d…6e3b" data-tron="TQ2c…8d6E" data-base="0x2c8d…3b1c" data-valid="até 20/10 · 14:00, fim da janela para igualar" data-txid="0x9b47…2e1c" data-done="Você igualou o valor" data-done-note="Seus US$ 800,00 continuam na carteira do pedido. Se o valor subir de novo, você terá outras 48 h para igualar ou sair."></div>
                 <button class="btn btn-ghost btn-sm btn-block" data-toast="Você sairia do pedido: US$ 500,00 voltariam ao seu endereço de origem, descontada a taxa de rede"><i data-icon="log-out"></i>Sair do pedido (reembolso ao endereço de origem)</button>
+              </div></div>
+              <div class="tab-panel" data-panel="extra"><div class="stack" data-gate>
+                <p class="xs muted">Extra: bônus opcional dentro do pedido, com valor por interessado e carteira próprios. Só interessados ativos do pedido principal entram.</p>
+                <div class="panel stack-sm">
+                  <div class="row between"><span class="badge badge-brass">Extra · ext-2c8d1-a</span><span class="badge st-ativo">Aberto</span></div>
+                  <b>Reclamações registradas na ouvidoria por UPA (2023–2025), por mês</b>
+                  <div class="xs muted">Proposto por <span class="handle" data-handle="lanterna-b31d"></span> em 21/10 ("tenho a base da ouvidoria, não os tempos de espera") · criado por <span class="handle" data-handle="quartzo-a1f0"></span> em 22/10 · aprovado pela curadoria em 22/10 (Bruno M.)</div>
+                  <div class="xs muted">Critérios: por unidade e mês · número de reclamações e tema · CSV · prazo 30/11, o mesmo do pedido</div>
+                </div>
+                <dl class="kv"><dt>Valor por interessado</dt><dd>US$ 150,00 · igual para todos no extra</dd><dt>Interessados</dt><dd>2 · <span class="handle" data-handle="quartzo-a1f0"></span> (22/10) · <span class="handle" data-handle="relogio-2b7c"></span> (25/10)</dd><dt>Com você</dt><dd>3 interessados · total US$ 450,00</dd><dt>Carteira do extra</dt><dd><a class="link" href="../public/pedido.html">0x2c8e…7b40 · Polygon · USDT · 2 pagamentos</a> · separada da carteira do pedido</dd></dl>
+                <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Não entrar no extra não muda sua participação no pedido</span>Seus US$ 800 continuam na carteira do pedido principal. Sair do extra não afeta o principal; sair do pedido principal retira também dos extras, com reembolso ao endereço de origem.</div></div>
+                <div class="total"><span class="small muted">Entrar no extra por</span><div><div class="price">US$ 150,00</div><div class="conv">= 150,00 USDT · 1:1</div></div></div>
+                <label class="check"><input type="checkbox" checked><span>Aceito os termos do extra<span class="desc">Mesmas regras do pedido: cobrir exige +10 %; se o valor subir, 48 h para igualar ou sair. Validado o atendimento, acesso no cofre só para os interessados do extra.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="extra ext-2c8d1-a" data-usd="150,00" data-polygon="0x2c8e…a91d" data-tron="TQ2c…8eA3" data-base="0x2c8e…5f02" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x2c8e…c47b" data-done="Você entrou no extra" data-done-note="Extra com 3 interessados · total US$ 450,00. Fica na carteira do extra até o atendimento ser validado ou o prazo vencer (30/11)."></div>
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga para o endereço derivado deste pagamento, na carteira do extra. Seu pseudônimo entra na lista de interessados do extra</div></div>
+                  <div class="tl-item info"><div class="when">enquanto aberto</div><div class="what">Qualquer interessado do pedido pode entrar ou cobrir o valor (mínimo +10 %); quando subir, 48 h para igualar ou sair</div></div>
+                  <div class="tl-item wax"><div class="when">atendimento</div><div class="what">Pode ser atendido por outro vendedor e em outro momento que o principal. Validado: acesso no cofre dos interessados do extra, 10 % separados, carteira do extra entregue a quem atendeu</div></div>
+                  <div class="tl-item"><div class="when">30/11</div><div class="what">Extra expirado: cada pagamento volta ao endereço de origem, descontada só a taxa de rede</div></div>
+                </div>
+                <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
+              </div></div>
+              <div class="tab-panel" data-panel="criar-extra"><div class="stack" data-gate>
+                <p class="xs muted">Você está criando um extra a partir da proposta de <span class="handle" data-handle="prisma-66af"></span> (26/10, valor sugerido US$ 200). Quem propôs não tem exclusividade para atender.</p>
+                <div class="panel stack-sm">
+                  <div class="row between"><span class="badge badge-brass">Novo extra · ped-2c8d1</span><span class="badge st-triagem">Vai à curadoria</span></div>
+                  <b>Tempo de espera nas UBS da capital nos mesmos meses</b>
+                  <div class="xs muted">Critérios: por unidade e mês · minutos médios e medianos · CSV · prazo 30/11 (o do pedido, nunca além dele) · 2º extra aberto do pedido (limite 5)</div>
+                </div>
+                <div class="field"><label for="extra-valor">Valor por interessado</label><div class="input-group"><span class="affix">US$</span><input id="extra-valor" class="input num" value="200,00"></div><span class="hint">Mínimo US$ 10. É o que cada interessado do pedido paga para entrar no extra; você paga o mesmo agora.</span></div>
+                <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Passa pela curadoria antes de aparecer para os outros interessados</span>Você paga agora e, se a curadoria recusar, o valor volta ao seu endereço de origem. Aprovado, o extra entra em "Extras deste pedido" com você como 1º interessado.</div></div>
+                <div class="total"><span class="small muted">Você paga</span><div><div class="price" data-usd-view>US$ 200,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
+                <label class="check"><input type="checkbox" checked><span>Entendo que o extra é independente do pedido principal<span class="desc">Não entrar no extra não muda a participação de ninguém no pedido. Sair do pedido principal retira também dos extras.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="extra novo do ped-2c8d1" data-usd="200,00" data-usd-from="#extra-valor" data-polygon="0x2c8f…31e6" data-tron="TQ2c…8fB7" data-base="0x2c8f…d904" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x2c8f…6a2e" data-done="Extra enviado à curadoria" data-done-note="Carteira do extra criada para o seu pagamento. Recusado pela curadoria: volta ao seu endereço de origem. Aprovado: aparece em Extras deste pedido, com você como 1º interessado."></div>
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga para o endereço derivado da carteira nova do extra; o extra entra na fila da curadoria, ainda invisível para os outros</div></div>
+                  <div class="tl-item info"><div class="when">em análise</div><div class="what">Mesmas regras de conteúdo do pedido. Recusado: reembolso ao endereço de origem, nada é cobrado</div></div>
+                  <div class="tl-item wax"><div class="when">aprovado</div><div class="what">Visível em "Extras deste pedido": os outros interessados podem entrar por US$ 200 e vendedores podem atender, inclusive quem propôs</div></div>
+                  <div class="tl-item"><div class="when">30/11</div><div class="what">Sem atendimento validado até o prazo, cada pagamento volta ao endereço de origem</div></div>
+                </div>
+                <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
               </div></div>
             </div></div>
           </div>
