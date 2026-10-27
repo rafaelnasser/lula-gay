@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Protótipo Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/app.css">
+  <script src="assets/app.js" defer></script>
+  <style>
+    .hub-head { padding-block: 40px 24px; }
+    .area { padding-block: 28px; border-top: 1px solid var(--border); }
+    .area-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .area-head .n { font-family: var(--font-mono); color: var(--muted); font-size: var(--fs-sm); }
+    .screens { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+    .screen { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); }
+    .screen:hover { border-color: var(--brass); }
+    .screen .s-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--surface-3); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .screen .s-icon svg { width: 17px; height: 17px; color: var(--brass); }
+    .screen .s-title { font-weight: 600; font-size: var(--fs-sm); }
+    .screen .s-desc { font-size: var(--fs-xs); color: var(--muted); margin-top: 2px; }
+    .screen .s-file { font-family: var(--font-mono); font-size: 11px; color: var(--muted-2); margin-top: 4px; }
+    .flow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: var(--fs-sm); }
+    .flow a { padding: 6px 10px; border: 1px solid var(--border-2); border-radius: 6px; background: var(--surface); }
+    .flow a:hover { border-color: var(--brass); }
+    .flow .arr { color: var(--muted-2); }
+    .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+    .docs a { padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-sm); font-size: var(--fs-sm); background: var(--surface); display: flex; gap: 8px; align-items: center; }
+    .docs a svg { width: 15px; height: 15px; color: var(--muted); }
+    .docs a:hover { border-color: var(--brass); }
+  </style>
+</head>
+<body data-shell="public" data-page="index" data-root="./">
+<main>
+  <div class="container hub-head">
+    <p class="eyebrow">Protótipo navegável · v0.1 · 27/10/2026</p>
+    <h1 class="display">Todas as telas do Lacre</h1>
+    <p class="lead mt-2">Marketplace curado de informação com anonimato dos dois lados. Este índice lista as 43 telas do protótipo, agrupadas por área, e os fluxos principais. A especificação de cada tela está em <code>docs/07-mapa-de-telas.md</code>; as convenções de código em <code>design/README.md</code>.</p>
+    <div class="row mt-3">
+      <a class="btn btn-primary" href="public/home.html"><i data-icon="compass"></i>Começar pela página inicial</a>
+      <a class="btn" href="styleguide.html"><i data-icon="layers"></i>Design system</a>
+      <a class="btn btn-ghost" href="admin/analise.html"><i data-icon="clipboard-check"></i>Ver o workbench da curadoria</a>
+    </div>
+  </div>
+
+  <section class="area"><div class="container">
+    <div class="area-head"><h2>Fluxos principais</h2><span class="n">clique para percorrer</span></div>
+    <div class="stack-sm">
+      <div class="flow"><b class="small" style="min-width:150px">Comprar uma cópia</b><a href="public/explorar.html">Explorar</a><span class="arr">→</span><a href="public/item.html">Item</a><span class="arr">→</span><a href="buyer/checkout.html">Checkout</a><span class="arr">→</span><a href="buyer/cofre.html">Cofre</a><span class="arr">→</span><a href="buyer/visualizador.html">Visualizador</a><span class="arr">→</span><a href="buyer/disputa.html">Disputa (72 h)</a></div>
+      <div class="flow"><b class="small" style="min-width:150px">Apoiar um lacre</b><a href="public/item.html">Item (coletivo)</a><span class="arr">→</span><a href="buyer/checkout.html">Checkout</a><span class="arr">→</span><a href="buyer/apoios.html">Apoios</a><span class="arr">→</span><a href="buyer/notificacoes.html">Lacre rompido</a><span class="arr">→</span><a href="buyer/cofre.html">Cofre</a></div>
+      <div class="flow"><b class="small" style="min-width:150px">Vender</b><a href="auth/criar-conta.html">Criar conta</a><span class="arr">→</span><a href="seller/novo-anuncio.html">Novo anúncio (6 passos)</a><span class="arr">→</span><a href="seller/anuncios.html">Em curadoria</a><span class="arr">→</span><a href="seller/anuncio.html">Aprovado</a><span class="arr">→</span><a href="seller/ganhos.html">Ganhos e saque</a></div>
+      <div class="flow"><b class="small" style="min-width:150px">Pedir informação</b><a href="public/pedidos.html">Mural</a><span class="arr">→</span><a href="buyer/pedidos.html">Novo pedido</a><span class="arr">→</span><a href="public/pedido.html">Público soma recompensa</a><span class="arr">→</span><a href="seller/pedidos.html">Vendedor atende</a><span class="arr">→</span><a href="admin/analise.html">Curadoria valida</a></div>
+      <div class="flow"><b class="small" style="min-width:150px">Curadoria</b><a href="admin/fila.html">Fila</a><span class="arr">→</span><a href="admin/analise.html">Análise</a><span class="arr">→</span><a href="admin/juridico.html">Jurídico</a><span class="arr">→</span><a href="admin/publicacao.html">Publicação</a><span class="arr">→</span><a href="public/prova.html">Prova pública</a></div>
+    </div>
+  </div></section>
+
+  <section class="area"><div class="container">
+    <div class="area-head"><h2>Público</h2><span class="n">9 telas · sem login</span></div>
+    <div class="screens">
+      <a class="screen" href="public/home.html"><span class="s-icon"><i data-icon="home"></i></span><div><div class="s-title">Página inicial</div><div class="s-desc">Tese, garantias, lacres em andamento, novos itens, prova pública</div><div class="s-file">public/home.html</div></div></a>
+      <a class="screen" href="public/explorar.html"><span class="s-icon"><i data-icon="compass"></i></span><div><div class="s-title">Explorar (catálogo)</div><div class="s-desc">Busca, filtros, grade/lista, lacres coletivos</div><div class="s-file">public/explorar.html</div></div></a>
+      <a class="screen" href="public/item.html"><span class="s-icon"><i data-icon="lock"></i></span><div><div class="s-title">Página do item</div><div class="s-desc">6 variantes de painel: coletivo, cópias, exclusivo, leilão, camadas, assinatura</div><div class="s-file">public/item.html</div></div></a>
+      <a class="screen" href="public/prova.html"><span class="s-icon"><i data-icon="badge-check"></i></span><div><div class="s-title">Prova pública</div><div class="s-desc">Hash, carimbo de tempo, status, como verificar, denunciar</div><div class="s-file">public/prova.html</div></div></a>
+      <a class="screen" href="public/pedidos.html"><span class="s-icon"><i data-icon="file-search"></i></span><div><div class="s-title">Mural de pedidos</div><div class="s-desc">Pedidos com recompensa acumulada</div><div class="s-file">public/pedidos.html</div></div></a>
+      <a class="screen" href="public/pedido.html"><span class="s-icon"><i data-icon="target"></i></span><div><div class="s-title">Página do pedido</div><div class="s-desc">Critérios de aceite, somar à recompensa, "tenho essa informação"</div><div class="s-file">public/pedido.html</div></div></a>
+      <a class="screen" href="public/como-funciona.html"><span class="s-icon"><i data-icon="book-open"></i></span><div><div class="s-title">Como funciona</div><div class="s-desc">Compradores, vendedores, curadoria, dinheiro, FAQ</div><div class="s-file">public/como-funciona.html</div></div></a>
+      <a class="screen" href="public/vendedor.html"><span class="s-icon"><i data-icon="store"></i></span><div><div class="s-title">Para vendedores</div><div class="s-desc">Modelos comparados, passo a passo, simulador de ganhos</div><div class="s-file">public/vendedor.html</div></div></a>
+      <a class="screen" href="public/politicas.html"><span class="s-icon"><i data-icon="scale"></i></span><div><div class="s-title">Políticas</div><div class="s-desc">Conteúdo, anonimato e limites, disputas, taxas, jurídico</div><div class="s-file">public/politicas.html</div></div></a>
+    </div>
+  </div></section>
+
+  <section class="area"><div class="container">
+    <div class="area-head"><h2>Conta anônima</h2><span class="n">3 telas</span></div>
+    <div class="screens">
+      <a class="screen" href="auth/criar-conta.html"><span class="s-icon"><i data-icon="fingerprint"></i></span><div><div class="s-title">Criar conta</div><div class="s-desc">Pseudônimo gerado, senha ou passkey, frase de recuperação</div><div class="s-file">auth/criar-conta.html</div></div></a>
+      <a class="screen" href="auth/entrar.html"><span class="s-icon"><i data-icon="key"></i></span><div><div class="s-title">Entrar</div><div class="s-desc">Pseudônimo + senha, passkey, TOTP</div><div class="s-file">auth/entrar.html</div></div></a>
+      <a class="screen" href="auth/recuperar.html"><span class="s-icon"><i data-icon="refresh"></i></span><div><div class="s-title">Recuperar</div><div class="s-desc">12 palavras, nova senha</div><div class="s-file">auth/recuperar.html</div></div></a>
+    </div>
+  </div></section>
+
+  <section class="area"><div class="container">
+    <div class="area-head"><h2>Comprador</h2><span class="n">11 telas · mensagens, notificações e configurações são compartilhadas com o vendedor</span></div>
+    <div class="screens">
+      <a class="screen" href="buyer/painel.html"><span class="s-icon"><i data-icon="home"></i></span><div><div class="s-title">Painel</div><div class="s-desc">Apoios, cofre, acompanhando, pedidos, alertas</div><div class="s-file">buyer/painel.html</div></div></a>
+      <a class="screen" href="buyer/carteira.html"><span class="s-icon"><i data-icon="wallet"></i></span><div><div class="s-title">Carteira</div><div class="s-desc">Depositar (cripto, PIX por código, voucher), sacar, extrato, limites</div><div class="s-file">buyer/carteira.html</div></div></a>
+      <a class="screen" href="buyer/checkout.html"><span class="s-icon"><i data-icon="credit-card"></i></span><div><div class="s-title">Checkout</div><div class="s-desc">Variantes: cópia, exclusivo, apoio, lance, camada, licença, assinatura, sucesso</div><div class="s-file">buyer/checkout.html</div></div></a>
+      <a class="screen" href="buyer/cofre.html"><span class="s-icon"><i data-icon="vault"></i></span><div><div class="s-title">Cofre</div><div class="s-desc">Itens desbloqueados, direitos, disputa, prova</div><div class="s-file">buyer/cofre.html</div></div></a>
+      <a class="screen" href="buyer/visualizador.html"><span class="s-icon"><i data-icon="maximize"></i></span><div><div class="s-title">Visualizador seguro</div><div class="s-desc">Documento com marca d'água, planilha, vídeo, galeria</div><div class="s-file">buyer/visualizador.html</div></div></a>
+      <a class="screen" href="buyer/apoios.html"><span class="s-icon"><i data-icon="hand-coins"></i></span><div><div class="s-title">Apoios</div><div class="s-desc">Lacres apoiados, recompensas de pedidos, selos</div><div class="s-file">buyer/apoios.html</div></div></a>
+      <a class="screen" href="buyer/pedidos.html"><span class="s-icon"><i data-icon="file-search"></i></span><div><div class="s-title">Meus pedidos</div><div class="s-desc">Novo pedido (modal), status, atendimentos</div><div class="s-file">buyer/pedidos.html</div></div></a>
+      <a class="screen" href="buyer/mensagens.html"><span class="s-icon"><i data-icon="message-square"></i></span><div><div class="s-title">Mensagens</div><div class="s-desc">Conversas por item, filtro de anonimato</div><div class="s-file">buyer/mensagens.html</div></div></a>
+      <a class="screen" href="buyer/disputa.html"><span class="s-icon"><i data-icon="gavel"></i></span><div><div class="s-title">Disputa</div><div class="s-desc">Abrir e acompanhar</div><div class="s-file">buyer/disputa.html</div></div></a>
+      <a class="screen" href="buyer/notificacoes.html"><span class="s-icon"><i data-icon="bell"></i></span><div><div class="s-title">Notificações</div><div class="s-desc">Por tipo e por dia, preferências de push</div><div class="s-file">buyer/notificacoes.html</div></div></a>
+      <a class="screen" href="buyer/configuracoes.html"><span class="s-icon"><i data-icon="settings"></i></span><div><div class="s-title">Configurações</div><div class="s-desc">Segurança, recuperação, privacidade, aparência, conta</div><div class="s-file">buyer/configuracoes.html</div></div></a>
+    </div>
+  </div></section>
+
+  <section class="area"><div class="container">
+    <div class="area-head"><h2>Vendedor</h2><span class="n">7 telas</span></div>
+    <div class="screens">
+      <a class="screen" href="seller/painel.html"><span class="s-icon"><i data-icon="home"></i></span><div><div class="s-title">Painel</div><div class="s-desc">Saldo, custódia, vendas, pendências, pedidos que combinam</div><div class="s-file">seller/painel.html</div></div></a>
+      <a class="screen" href="seller/novo-anuncio.html"><span class="s-icon"><i data-icon="upload"></i></span><div><div class="s-title">Novo anúncio (6 passos)</div><div class="s-desc">Tipo, arquivos, prévia, modelo de venda, declarações, envio</div><div class="s-file">seller/novo-anuncio.html</div></div></a>
+      <a class="screen" href="seller/anuncios.html"><span class="s-icon"><i data-icon="archive"></i></span><div><div class="s-title">Meus anúncios</div><div class="s-desc">Por status, métricas, ações</div><div class="s-file">seller/anuncios.html</div></div></a>
+      <a class="screen" href="seller/anuncio.html"><span class="s-icon"><i data-icon="file-text"></i></span><div><div class="s-title">Detalhe do anúncio</div><div class="s-desc">Métricas, curadoria, conteúdo, publicação, perguntas</div><div class="s-file">seller/anuncio.html</div></div></a>
+      <a class="screen" href="seller/ganhos.html"><span class="s-icon"><i data-icon="coins"></i></span><div><div class="s-title">Ganhos e saques</div><div class="s-desc">Custódia, vendas, saque cripto ou via parceiro</div><div class="s-file">seller/ganhos.html</div></div></a>
+      <a class="screen" href="seller/pedidos.html"><span class="s-icon"><i data-icon="file-search"></i></span><div><div class="s-title">Pedidos abertos</div><div class="s-desc">Atender pedidos, meus atendimentos</div><div class="s-file">seller/pedidos.html</div></div></a>
+      <a class="screen" href="seller/reputacao.html"><span class="s-icon"><i data-icon="award"></i></span><div><div class="s-title">Reputação</div><div class="s-desc">Nota, componentes, selos, histórico</div><div class="s-file">seller/reputacao.html</div></div></a>
+    </div>
+  </div></section>
+
+  <section class="area"><div class="container">
+    <div class="area-head"><h2>Curadoria (equipe)</h2><span class="n">11 telas · domínio separado, 2FA obrigatório</span></div>
+    <div class="screens">
+      <a class="screen" href="admin/painel.html"><span class="s-icon"><i data-icon="activity"></i></span><div><div class="s-title">Painel</div><div class="s-desc">KPIs, SLA, fila prioritária, alertas</div><div class="s-file">admin/painel.html</div></div></a>
+      <a class="screen" href="admin/fila.html"><span class="s-icon"><i data-icon="inbox"></i></span><div><div class="s-title">Fila de análise</div><div class="s-desc">Prioridade, risco, triagem, responsáveis</div><div class="s-file">admin/fila.html</div></div></a>
+      <a class="screen" href="admin/analise.html"><span class="s-icon"><i data-icon="clipboard-check"></i></span><div><div class="s-title">Análise (workbench)</div><div class="s-desc">Visualizador, redação, checklist 7 blocos, decisão</div><div class="s-file">admin/analise.html</div></div></a>
+      <a class="screen" href="admin/juridico.html"><span class="s-icon"><i data-icon="scale"></i></span><div><div class="s-title">Jurídico</div><div class="s-desc">Escalonamentos, pareceres, LGPD, ordens judiciais</div><div class="s-file">admin/juridico.html</div></div></a>
+      <a class="screen" href="admin/publicacao.html"><span class="s-icon"><i data-icon="megaphone"></i></span><div><div class="s-title">Publicação</div><div class="s-desc">Posts gerados por canal, card, agendamento, marcos</div><div class="s-file">admin/publicacao.html</div></div></a>
+      <a class="screen" href="admin/disputas.html"><span class="s-icon"><i data-icon="gavel"></i></span><div><div class="s-title">Disputas</div><div class="s-desc">Prévia × conteúdo, resolução</div><div class="s-file">admin/disputas.html</div></div></a>
+      <a class="screen" href="admin/denuncias.html"><span class="s-icon"><i data-icon="flag"></i></span><div><div class="s-title">Denúncias</div><div class="s-desc">Denúncias públicas, pedidos de titulares, suspensão</div><div class="s-file">admin/denuncias.html</div></div></a>
+      <a class="screen" href="admin/contas.html"><span class="s-icon"><i data-icon="users"></i></span><div><div class="s-title">Contas</div><div class="s-desc">Risco, o que existe sobre a conta, ações</div><div class="s-file">admin/contas.html</div></div></a>
+      <a class="screen" href="admin/financeiro.html"><span class="s-icon"><i data-icon="banknote"></i></span><div><div class="s-title">Financeiro</div><div class="s-desc">Custódia, saques, reembolsos, reconciliação</div><div class="s-file">admin/financeiro.html</div></div></a>
+      <a class="screen" href="admin/auditoria.html"><span class="s-icon"><i data-icon="scroll-text"></i></span><div><div class="s-title">Auditoria</div><div class="s-desc">Log imutável com hash encadeado</div><div class="s-file">admin/auditoria.html</div></div></a>
+      <a class="screen" href="admin/configuracoes.html"><span class="s-icon"><i data-icon="settings"></i></span><div><div class="s-title">Configurações</div><div class="s-desc">Categorias, taxas, SLAs, políticas, equipe, canais</div><div class="s-file">admin/configuracoes.html</div></div></a>
+    </div>
+  </div></section>
+
+  <section class="area"><div class="container">
+    <div class="area-head"><h2>Documentação</h2><span class="n">pasta docs/ do repositório</span></div>
+    <div class="docs">
+      <a href="../docs/01-visao-e-conceito.md"><i data-icon="book-open"></i>01 · Visão e conceito</a>
+      <a href="../docs/02-modelos-de-venda.md"><i data-icon="layers"></i>02 · Modelos de venda</a>
+      <a href="../docs/03-anonimato-e-seguranca.md"><i data-icon="shield"></i>03 · Anonimato e segurança</a>
+      <a href="../docs/04-curadoria-e-politica-de-conteudo.md"><i data-icon="clipboard-check"></i>04 · Curadoria e política</a>
+      <a href="../docs/05-arquitetura-tecnica.md"><i data-icon="code"></i>05 · Arquitetura técnica</a>
+      <a href="../docs/06-modelo-de-dados.md"><i data-icon="database"></i>06 · Modelo de dados</a>
+      <a href="../docs/07-mapa-de-telas.md"><i data-icon="grid"></i>07 · Mapa de telas</a>
+      <a href="../docs/08-publicacao-social.md"><i data-icon="megaphone"></i>08 · Publicação social</a>
+      <a href="../docs/09-monetizacao-e-metricas.md"><i data-icon="coins"></i>09 · Monetização e métricas</a>
+      <a href="../docs/10-roadmap.md"><i data-icon="calendar"></i>10 · Roadmap</a>
+    </div>
+  </div></section>
+</main>
+</body>
+</html>
