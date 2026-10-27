@@ -4,8 +4,8 @@
 
 | Fonte | Como | Quando |
 |---|---|---|
-| **Comissão de 10 %** | Descontada do vendedor em cada venda, apoio liberado ou recompensa paga, em todos os modelos | MVP |
-| **Taxa de rede no saque** | Repasse do custo da rede (não é receita) | MVP |
+| **Comissão de 10 %** | Separada da carteira do item na finalização, em todos os modelos | MVP |
+| **Taxa de rede dos reembolsos** | Descontada do valor devolvido (não é receita) | MVP |
 | **Análise expressa** | Vendedor paga para ter SLA de 24 h na curadoria (fila prioritária) | V2 |
 | **Destaque no catálogo** | Posição fixa na vitrine por 7 dias, marcado como "Destaque" | V2 |
 | **Conta Pro (comprador)** | Alertas por categoria, acesso antecipado a lançamentos, API de catálogo, exportações | V2 |
@@ -14,9 +14,9 @@
 
 ## 2. Comissão
 
-**10 % em todos os modelos.** Uma única regra, fácil de comunicar ("você fica com 90 %"). Nada é cobrado se um lacre coletivo falhar ou se um pedido não for atendido. Taxas de rede do saque são repassadas ao usuário (USDT em Polygon ≈ US$ 0,20; Lightning ≈ US$ 0,05; BTC on-chain variável).
+**10 % em todos os modelos.** Uma única regra, fácil de comunicar ("você fica com 90 %"), cobrada só na finalização, por transferência da carteira do item para a carteira da plataforma. Nada é cobrado se um lacre coletivo falhar ou se um pedido não for atendido. Taxas de rede de reembolsos saem do valor devolvido.
 
-**Custos de pagamento da plataforma:** infraestrutura de nós e indexadores, taxas de rede das consolidações entre carteira quente e fria, spread de conversão BTC → USDT nos depósitos em bitcoin (cotação travada 10 min; hedge imediato na tesouraria). Estimativa: 0,3 % a 0,5 % do volume.
+**Custos de pagamento da plataforma:** HSM, nós e indexadores por rede, taxas de rede das transferências de comissão (uma por item finalizado). Estimativa: 0,2 % a 0,4 % do volume.
 
 ## 3. Unidade econômica (exemplo)
 
@@ -34,7 +34,7 @@ Itens que não vendem custam curadoria. Por isso: triagem automática barata, an
 
 ## 4. Fundo de garantia
 
-2 % de toda comissão vai para um fundo que cobre reembolsos quando o valor em custódia do vendedor não basta (item retirado após liquidação). Meta: fundo equivalente a 1 mês de GMV antes de reduzir a alíquota.
+2 % de toda comissão vai para um fundo que cobre reembolsos quando o dinheiro já saiu da carteira do item (item retirado após a finalização, quando a carteira já foi entregue ao vendedor). Meta: fundo equivalente a 1 mês de GMV antes de reduzir a alíquota.
 
 ## 5. Precificação orientada
 
@@ -49,7 +49,7 @@ A interface do vendedor mostra faixas de preço de itens aprovados semelhantes (
 - Envios por semana; taxa de aprovação; tempo até aprovação; vendedores com ≥ 1 aprovação; vendedores recorrentes (≥ 3 itens).
 
 **Demanda**
-- Contas criadas; contas com depósito; depósito médio; compradores recorrentes; apoiadores por lacre.
+- Contas criadas; contas com ao menos um pagamento; pagamento médio; compradores recorrentes; apoiadores por lacre.
 
 **Confiança**
 - Taxa de disputa; disputas procedentes; taxa de reversão pós-publicação; tempo de resposta a denúncias; incidentes de segurança.
@@ -58,7 +58,7 @@ A interface do vendedor mostra faixas de preço de itens aprovados semelhantes (
 - Impressões/cliques dos posts; conversão prova → item; seguidores dos canais.
 
 **Financeiro**
-- Receita de comissões; custo de pagamento; custo de curadoria por item aprovado; margem de contribuição; saldo do fundo de garantia; saldo em custódia (passivo); cobertura da tesouraria sobre o passivo das carteiras.
+- Receita de comissões; custo de pagamento; custo de curadoria por item aprovado; margem de contribuição; saldo do fundo de garantia; valor em carteiras de itens ativas (não é passivo da plataforma); carteiras finalizadas ainda não recebidas pelos vendedores.
 
 ## 7. Metas dos primeiros 6 meses (hipótese a validar)
 

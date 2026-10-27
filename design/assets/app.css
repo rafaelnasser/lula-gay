@@ -341,14 +341,17 @@ body.nav-open .mobile-nav { display: flex; }
 .badge-wax { background: var(--wax-soft); color: var(--wax-2); }
 .badge-outline { background: transparent; border-color: var(--border-2); color: var(--fg-2); }
 .badge-lg { padding: 5px 12px; font-size: var(--fs-sm); }
-/* status de item (mapa único para todas as telas) */
-.st-rascunho, .st-encerrado, .st-arquivado, .st-expirado { background: var(--surface-3); color: var(--fg-2); }
-.st-enviado, .st-triagem, .st-analise, .st-agendado, .st-escalado { background: var(--info-soft); color: var(--info); }
-.st-ajustes, .st-suspenso { background: var(--warn-soft); color: var(--warn); }
-.st-aprovado, .st-ativo, .st-liberado, .st-liquidada, .st-entregue { background: var(--ok-soft); color: var(--ok); }
-.st-financiado, .st-rompido { background: var(--wax-soft); color: var(--wax-2); }
-.st-vendido { background: var(--brass-soft); color: var(--brass); }
-.st-rejeitado, .st-banido, .st-removido, .st-falhou { background: var(--danger-soft); color: var(--danger); }
+/* status de item (mapa único para todas as telas)
+   regra: ação sua = âmbar · em análise = azul · sucesso = verde · negativo = vermelho · neutro = cinza */
+.st-rascunho, .st-arquivado, .st-expirado { background: var(--surface-3); color: var(--fg-2); }
+.st-finalizado, .st-encerrado { background: var(--surface-3); color: var(--ok); }
+.st-enviado, .st-triagem, .st-analise, .st-escalado { background: var(--info-soft); color: var(--info); }
+.st-ajustes, .st-pendente, .st-aguardando { background: var(--warn-soft); color: var(--warn); }
+.st-aprovado, .st-agendado, .st-ativo, .st-liberado, .st-liquidada, .st-entregue, .st-financiado, .st-rompido, .st-vendido { background: var(--ok-soft); color: var(--ok); }
+.st-rejeitado, .st-banido, .st-removido, .st-falhou, .st-suspenso { background: var(--danger-soft); color: var(--danger); }
+a.badge.status-link, .badge.status-link { cursor: pointer; text-decoration: none; }
+a.badge.status-link:hover { filter: brightness(1.15); text-decoration: underline; text-underline-offset: 2px; }
+.status-link svg { width: 12px; height: 12px; }
 /* autenticidade */
 .auth-verificado { background: var(--ok-soft); color: var(--ok); }
 .auth-parcial { background: var(--info-soft); color: var(--info); }
@@ -616,6 +619,11 @@ legend { padding: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--fg-
 .tl-item::before { content: ""; position: absolute; left: -19px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--muted-2); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--border); }
 .tl-item.ok::before { background: var(--ok); } .tl-item.warn::before { background: var(--warn); } .tl-item.danger::before { background: var(--danger); } .tl-item.brass::before { background: var(--brass); } .tl-item.wax::before { background: var(--wax); } .tl-item.info::before { background: var(--info); }
 .tl-item.ok, .tl-item.warn, .tl-item.danger, .tl-item.brass, .tl-item.wax, .tl-item.info { color: inherit; }
+.tl-item.current { background: var(--warn-soft); border: 1px solid var(--warn); border-radius: var(--r); padding: 10px 12px; margin-left: -12px; }
+.tl-item.current::before { background: var(--warn); left: -7px; top: 15px; }
+.tl-item.current .what { font-weight: 600; }
+.tl-item.current .step-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--warn); margin-bottom: 2px; }
+.tl-item.future { opacity: .55; }
 .tl-item .when { color: var(--muted); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
 .tl-item .what { font-weight: 500; }
 .list { display: flex; flex-direction: column; }

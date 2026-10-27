@@ -9,15 +9,15 @@ Recomendação para uma equipe pequena (2 a 4 pessoas) que precisa lançar um MV
 | Web (público, comprador, vendedor) | **Next.js 15 (React, App Router), TypeScript, PWA** | SvelteKit | SSR para páginas públicas (SEO das páginas de prova), PWA para push anônimo |
 | Painel de curadoria | App Next.js separado, domínio separado | Mesmo app com RBAC | Isolamento de superfície de ataque |
 | API | **NestJS (Node, TypeScript)** com REST + webhooks | Go (chi/echo) | Mesma linguagem do front, módulos claros, fácil de contratar |
-| Banco | **PostgreSQL 16** | — | Transações para o ledger, JSONB para configs de modelo, RLS se quiser |
+| Banco | **PostgreSQL 16** | — | Transações para o livro de pagamentos, JSONB para configs de modelo, RLS se quiser |
 | Cache / filas | **Redis + BullMQ** | RabbitMQ | Fila de processamento de uploads, agendamentos, publicação social |
 | Armazenamento de objetos | **S3-compatível** (MinIO auto-hospedado ou Backblaze B2/Wasabi) | AWS S3 | Blobs cifrados; evitar provedores que fazem scan de conteúdo |
 | Gestão de chaves | **HashiCorp Vault** (Transit) ou KMS do provedor | AWS KMS | Cifragem envelope, rotação |
 | Processamento de mídia | Workers Node + `ffmpeg`, `exiftool`, `mat2`, `qpdf`, `tesseract`, `whisper.cpp` | Serviços externos | Nada de conteúdo sai para terceiros |
 | Antivírus | ClamAV + sandbox (Firecracker/gVisor) para arquivos suspeitos | VirusTotal (envia o arquivo para fora: evitar) | Conteúdo não sai da infra |
-| Bitcoin | **BTCPay Server** (on-chain + Lightning), auto-hospedado | — | Sem terceiros, sem KYC |
-| Stablecoins (USDT/USDC) | Nó/indexador próprio por rede (Polygon, Tron, Base) com derivação de endereços por xpub e carteira quente/fria multisig | Provedor de custódia (exige KYC do comerciante; evitar) | Nenhum real toca o sistema; ver `03 §6` |
-| Cotação BTC/USDT | Mediana de três corretoras via API pública, atualizada a cada minuto | — | Só para depósitos em Bitcoin; USDT = US$ 1:1 |
+| Bitcoin | Indexador on-chain próprio (sem Lightning: invoice não é reembolsável à origem) | BTCPay Server | Só para Exclusivo e Cópias |
+| Carteiras de itens | HSM (ou módulo de chaves do provedor) gerando uma carteira HD por item; indexador próprio por rede (Polygon, Tron, Base; Bitcoin on-chain) para atribuir pagamentos por endereço derivado | Provedor de custódia (exige KYC do comerciante; evitar) | Nenhum saldo de usuário; chave apagada na entrega; ver `03 §6` |
+| Cotação BTC/USD | Mediana de três corretoras via API pública, atualizada a cada minuto | — | Só para mostrar pagamentos em Bitcoin em US$; stablecoins 1:1 |
 | Social | X API v2, Telegram Bot API, Bluesky AT Protocol, Instagram Graph API (imagem) | Buffer/Hootsuite | Controle total do que sai |
 | Infra | Docker Compose no MVP → Kubernetes leve (k3s) na V2; servidores dedicados na UE ou BR | Fly.io / Render | Custo previsível; controle sobre logs |
 | Observabilidade | Prometheus + Grafana + Loki, sem PII nos logs | Datadog | Dados não saem |
@@ -44,19 +44,19 @@ Recomendação para uma equipe pequena (2 a 4 pessoas) que precisa lançar um MV
          │ workers                │◄──────┘
          │ · ingest (AV, metadata,│
          │   hash, previews, OCR) │
-         │ · ledger/escrow jobs   │
+         │ · finalizações/reembolsos   │
          │ · social publisher     │
          │ · watermark/delivery   │
          └───────────┬───────────┘
                      ▼
         ┌────────────────────────┐
-        │ Vault/KMS · BTCPay ·   │
+        │ Vault/KMS · HSM ·   │
         │ indexador on-chain ·   │
         │ cotação · X API        │
         └────────────────────────┘
 ```
 
-**Módulos da API (NestJS):** `auth`, `accounts`, `wallet` (ledger), `listings`, `assets`, `models` (um submódulo por modelo de venda), `orders`, `entitlements`, `curation`, `proofs`, `social`, `requests` (pedidos), `messages`, `disputes`, `reports`, `audit`, `admin`.
+**Módulos da API (NestJS):** `auth`, `accounts`, `itemwallets` (carteiras por item, pagamentos, finalização, reembolsos), `listings`, `assets`, `models` (um submódulo por modelo de venda), `orders`, `entitlements`, `curation`, `proofs`, `social`, `requests` (pedidos), `messages`, `disputes`, `reports`, `audit`, `admin`.
 
 ## 3. Fluxo do conteúdo
 
@@ -75,7 +75,7 @@ Recomendação para uma equipe pequena (2 a 4 pessoas) que precisa lançar um MV
 5. Item entra na fila de curadoria
 6. Curador acessa pelo visualizador seguro (streaming descriptografado, concessão de 15 min)
 7. Aprovado → gera ProofCertificate (hash do pacote, timestamp, versão da política)
-8. Agendado → publicado → post social com link da prova
+8. Aprovado → publicado na hora (carteira do item criada) → post social com link da prova
 9. Compra → Entitlement → acesso via visualizador / download com marca d'água
 10. Exclusivo vendido → após 72 h, DEK destruída
 ```
@@ -90,38 +90,30 @@ Limites do MVP: 20 GB por item, 200 arquivos por item, formatos listados em `01 
 - Visualizador: o backend descriptografa em streaming e serve chunks via HTTP range com URL assinada (TTL 5 min). O cliente nunca recebe a DEK.
 - Download permitido: o worker gera uma cópia com marca d'água (visível: pseudônimo + ID do entitlement no rodapé; invisível: esteganografia leve em imagens/PDF), cifra com chave efêmera, URL de uso único.
 
-## 5. Ledger e custódia
+## 5. Carteiras de itens e livro de pagamentos
 
-Partidas dobradas em `ledger_entries`: cada lançamento tem `debit_account`, `credit_account`, `amount` (USDT com 6 casas decimais, inteiro em micro-USDT), `ref_type`, `ref_id`, `created_at`. Nunca se atualiza ou apaga um lançamento; correções são novos lançamentos. 1 USDT = US$ 1; os exemplos abaixo estão em US$.
+Não há ledger de saldos de usuários. O que existe é um **livro de pagamentos por item**, espelho do que está on-chain:
 
-Tipos de conta: `wallet:<account_id>`, `escrow:<listing_id>`, `escrow:<request_id>`, `reserve:<account_id>` (saldo reservado em lances/ofertas), `platform:fees`, `platform:guarantee_fund`, `payout:pending`, `treasury:<moeda>:<rede>` (ex.: `treasury:usdt:polygon`, `treasury:btc:lightning`), `refunds`.
+- `item_wallet`: uma por item ou pedido aprovado; `xpub` para derivar endereços; chave privada só no HSM; estados `receiving → settling → delivered` (ou `refunding → closed`).
+- `payment`: um por endereço derivado; `expected_amount`, `received_amount`, `confirmations`, `txid`, `origin_address` (apagado na finalização), estados `waiting → seen → confirmed → settled | refunded`.
+- `settlement`: a finalização do item: comissão transferida (txid), reembolsos executados, `seed_revealed_at`, `key_shredded_at`, hash do evento na auditoria.
+- `refund`: reembolso de um `payment` ao `origin_address`, com txid e taxa de rede.
 
-**Fluxos de exemplo**
+Reconciliação diária: soma dos `payment.received_amount` confirmados por carteira = saldo on-chain do endereço do item (menos reembolsos e comissão já transferidos). Divergência bloqueia finalizações e alerta.
 
-| Evento | Débito → Crédito |
-|---|---|
-| Depósito de 93 USDT confirmado (≈ US$ 500) | `treasury:usdt:polygon` → `wallet:A` |
-| Compra de cópia US$ 490 | `wallet:A` → `escrow:L1` |
-| Fim da janela de disputa (comissão 10 %) | `escrow:L1` → `wallet:V` (441,00); `escrow:L1` → `platform:fees` (49,00) |
-| Apoio ao lacre coletivo US$ 100 | `wallet:B` → `escrow:L2` |
-| Meta não batida | `escrow:L2` → `wallet:B` (para cada apoiador) |
-| Lance US$ 15.000 | `wallet:C` → `reserve:C` |
-| Lance superado | `reserve:C` → `wallet:C` |
-| Saque de US$ 2.000 em USDT | `wallet:V` → `payout:pending` → `treasury:usdt:polygon` |
+## 6. Fluxos de pagamento
 
-Saldo disponível = soma dos créditos − débitos da `wallet:X`. Materializado em `wallet_balances` por trigger para leitura rápida, com reconciliação noturna contra o ledger.
+**Aprovação do item:** o worker pede ao HSM uma carteira HD nova por rede aceita no item; grava o `xpub`; publica o endereço raiz na página de prova.
 
-## 6. Pagamentos (só cripto)
+**Checkout:** a API deriva o próximo endereço do item para aquele comprador (`payment.waiting`, valor exato, validade 24 h) e mostra endereço, QR e rede. O indexador observa; ao atingir as confirmações (12 Polygon, 19 Tron, 12 Base, 2 Bitcoin), marca `confirmed`, emite o `entitlement` (Cópias, Exclusivo, Camada) ou soma ao arrecadado (Lacre, Pedido). Pagamento parcial espera complemento por 24 h; excedente fica no item.
 
-**Depósito em stablecoin (USDT/USDC):** a API deriva um endereço novo da xpub da rede escolhida e o associa à carteira (`crypto_deposit`). O indexador (nó próprio ou RPC + worker) observa o endereço; ao atingir as confirmações (12 Polygon, 19 Tron, 12 Base) credita 1:1 em USDT. Endereços nunca são reutilizados. Depósitos abaixo do mínimo são creditados sem bônus de taxa.
+**Finalização:** job verifica a condição (ver `03 §6`), transfere 10 % para a carteira da plataforma, executa reembolsos pendentes, marca `settling`. O vendedor abre "Carteiras dos itens", confirma senha + TOTP e vê a frase de recuperação uma única vez; a API registra `seed_revealed_at`, ordena ao HSM a destruição da chave e grava `key_shredded_at`. Depois disso a plataforma não consegue mais movimentar a carteira.
 
-**Depósito em Bitcoin (BTCPay):** a API cria uma invoice com o valor em BTC pela cotação travada por 10 min; webhook `InvoiceSettled` credita a carteira com o equivalente em USDT. Lightning para valores até US$ 2.000, on-chain acima (ou escolha do usuário).
+**Falha ou retirada antes da finalização:** job de reembolso envia cada `payment` de volta ao `origin_address`, em lotes por rede, descontando a taxa de rede; registra `refund` com txid; notifica o comprador.
 
-**Cotação:** worker coleta BTC/USDT de três corretoras a cada minuto e guarda a mediana em `fx_rates`; usada só para converter depósitos em Bitcoin e travada por 10 min por depósito. Preços em US$ debitam o mesmo valor em USDT. Fase 2: tabela de câmbio para exibir equivalentes em moeda local (BRL, EUR, ARS) como referência.
+**Disputa após a finalização:** reembolso pago pela carteira do fundo de garantia da plataforma.
 
-**Saque:** pedido na interface (moeda, rede, endereço, senha + TOTP). Verificações automáticas: saldo disponível ≠ custódia, limite antifraude (US$ 2.000/dia para contas com menos de 7 dias ou sem item aprovado), endereço válido para a rede. Execução em lotes horários a partir da carteira quente (BTCPay payout API para BTC; assinatura própria para stablecoins), com aprovação de 2 pessoas acima de US$ 20.000 por lote. `payout.address` é apagado após a confirmação na rede; fica só o hash da transação.
-
-**Tesouraria:** carteira quente dimensionada para 48 h de saques; o restante em carteira fria multisig 2-de-3. Reconciliação diária: soma dos passivos (carteiras + custódias) ≤ tesouraria total; divergência bloqueia saques e alerta.
+**Taxa de rede dos reembolsos** sai do valor devolvido. Por isso as redes aceitas para lacres coletivos são as baratas (Polygon, Tron, Base).
 
 ## 7. Máquinas de estado críticas
 
@@ -129,19 +121,19 @@ Saldo disponível = soma dos créditos − débitos da `wallet:X`. Materializado
 ```
 Ativo ──(soma ≥ meta)──► Financiado ──(liberação automática)──► Liberado ──(72 h)──► Pago ao vendedor
   │
-  └──(prazo vence, soma < meta)──► Falhou ──► Reembolsos automáticos ──► Encerrado
+  └──(prazo vence, soma < meta)──► Falhou ──► Reembolsos à origem ──► Finalizado
 ```
 
 **Compra (cópias/exclusivo)**
 ```
-Criada ──(débito ok)──► Paga ──(entitlement emitido)──► Entregue ──(72 h sem disputa)──► Liquidada
+Criada ──(pagamento confirmado on-chain)──► Paga ──(entitlement emitido)──► Entregue ──(72 h sem disputa)──► Liquidada
                                                           │
                                                           └──(disputa)──► Em disputa ──► Reembolsada | Liquidada | Parcial
 ```
 
 **Leilão aberto**
 ```
-Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)──► Encerrado ──► Vencedor paga (saldo já reservado) ──► Entregue
+Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)──► Encerrado ──► Lance vencedor fica no item; demais reembolsados à origem ──► Entregue
                                                                       └──(sem reserva atingida)──► Sem venda
 ```
 
@@ -149,9 +141,9 @@ Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)─
 
 - A cada minuto: encerrar itens/leilões/lacres vencidos; liquidar custódias com janela de disputa vencida.
 - A cada 5 min: publicar posts agendados; checar marcos de lacres coletivos (25/50/75/90/100 %).
-- A cada hora: lote de saques; expirar endereços de depósito não usados em 72 h (ficam observados por 30 dias); expirar concessões de visualização.
-- A cada minuto: atualizar cotação BTC/USDT; varrer confirmações de depósitos pendentes.
-- Diário: reconciliação do ledger; destruição de DEKs de exclusivos vendidos há mais de 72 h; limpeza de mensagens expiradas; destruição de registros de acesso com mais de 6 meses.
+- A cada hora: finalizações elegíveis (comissão + reembolsos pendentes); lotes de reembolso por rede; expirar pagamentos não recebidos em 24 h; expirar concessões de visualização.
+- A cada minuto: varrer confirmações de pagamentos pendentes.
+- Diário: reconciliação on-chain das carteiras de itens; apagar endereços de origem de itens finalizados; destruição de DEKs de exclusivos vendidos há mais de 72 h; limpeza de mensagens expiradas; destruição de registros de acesso com mais de 6 meses.
 
 ## 9. API (resumo dos endpoints)
 
@@ -163,12 +155,10 @@ POST   /auth/keyfile/verify      nonce assinado com a chave do arquivo → sess�
 POST   /auth/keyfile             gera novo par; retorna o arquivo .lacre uma vez e revoga o anterior
 POST   /auth/recover             12 palavras → nova senha
 GET    /me                       conta, reputação, preferências
-GET    /wallet                   saldo, reservado, em custódia
-POST   /wallet/deposits          gera endereço (USDT/USDC por rede) ou invoice BTCPay (BTC)
-GET    /wallet/deposits/:id      status e confirmações
-GET    /wallet/rates             cotação BTC/USDT vigente
-POST   /wallet/payouts           solicita saque (moeda, rede, endereço, TOTP)
-GET    /wallet/ledger            extrato paginado
+GET    /payments                 pagamentos feitos por esta conta (item, endereço, valor, confirmações, status, reembolso)
+GET    /listings/:id/wallet      carteira do item (endereço público, recebido, reembolsos, estado) — vendedor
+POST   /listings/:id/wallet/reveal   senha + TOTP → frase de recuperação, uma única vez; chave destruída no HSM
+POST   /listings/:id/close-sales     vendedor encerra as vendas (Cópias) e pede a finalização
 
 GET    /listings                 catálogo público (filtros: categoria, país, idioma, modelo, tipo, preço, status, autenticidade)
 GET    /listings/:slug           prévia pública
@@ -179,8 +169,8 @@ PATCH  /listings/:id             edita rascunho / responde ajustes
 POST   /listings/:id/submit      envia para curadoria
 GET    /listings/:id/review      feedback da curadoria (vendedor)
 
-POST   /orders                   compra (cópias/exclusivo/camada/licença/exclusividade=buyout)
-POST   /pledges                  apoio a lacre coletivo
+POST   /orders                   compra (cópias/exclusivo/camada/licença/exclusividade=buyout) → endereço derivado para pagar
+POST   /pledges                  apoio a lacre coletivo → endereço derivado para pagar
 POST   /bids                     lance em leilão
 POST   /offers                   oferta em exclusivo
 POST   /subscriptions            assina fonte
@@ -207,7 +197,7 @@ POST   /admin/social/posts       cria/agenda post por canal
 GET    /admin/disputes  POST /admin/disputes/:id/resolve
 GET    /admin/accounts/:handle   risco, denúncias, histórico (sem PII)
 POST   /admin/accounts/:handle/actions   warn | restrict | ban
-GET    /admin/finance/escrow /payouts /reconciliation
+GET    /admin/finance/item-wallets /settlements /refunds /reconciliation
 GET    /admin/audit
 GET    /admin/settings  PATCH /admin/settings
 ```
@@ -229,9 +219,9 @@ GET    /admin/settings  PATCH /admin/settings
 - [ ] Cookies `HttpOnly`, `Secure`, `SameSite=Strict`; sessão de 24 h (8 h no admin).
 - [ ] Uploads só por URL pré-assinada; bucket de quarentena sem leitura pública; varredura antes de mover.
 - [ ] Cifragem envelope de todos os assets; KMS separado; crypto-shredding de exclusivos.
-- [ ] Ledger imutável; reconciliação diária; alertas de divergência.
-- [ ] Webhooks do BTCPay com assinatura verificada; indexador com idempotência por `txid` e reorg handling (recredita só após as confirmações).
-- [ ] Carteira quente com limite; carteira fria multisig 2-de-3; chaves nunca no servidor da API.
+- [ ] Livro de pagamentos por item imutável; reconciliação on-chain diária; alertas de divergência bloqueiam finalizações.
+- [ ] Indexador com idempotência por `txid` e tratamento de reorganização de blocos (confirma só após as confirmações exigidas).
+- [ ] Chaves das carteiras de itens só no HSM; entrega da frase exige senha + TOTP e destrói a chave; carteira da plataforma (comissões) com multisig 2-de-3.
 - [ ] Admin em domínio separado, 2FA obrigatório, log de auditoria com hash encadeado.
 - [ ] Registros de acesso (Marco Civil) em sistema separado, cifrados, retenção de 6 meses, destruição automática.
 - [ ] Espelho `.onion`; páginas autenticadas sem CDN; páginas públicas podem usar CDN.

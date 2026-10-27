@@ -15,7 +15,7 @@ Este repositório contém a especificação completa do produto e um protótipo 
 | Modelos de venda (cópias, exclusivo, lacre coletivo, pedido, leilão, camadas, assinatura, janela, licença) | `docs/02-modelos-de-venda.md` |
 | Como o anonimato funciona e onde ele termina | `docs/03-anonimato-e-seguranca.md` |
 | Esteira de curadoria e política de conteúdo | `docs/04-curadoria-e-politica-de-conteudo.md` |
-| Stack, serviços, pipeline de conteúdo, ledger, API | `docs/05-arquitetura-tecnica.md` |
+| Stack, serviços, pipeline de conteúdo, carteiras de itens, API | `docs/05-arquitetura-tecnica.md` |
 | Entidades e máquinas de estado | `docs/06-modelo-de-dados.md` |
 | Especificação tela a tela | `docs/07-mapa-de-telas.md` |
 | Posts automáticos no X e redes | `docs/08-publicacao-social.md` |
@@ -44,7 +44,7 @@ design/      protótipo navegável em HTML estático
 - **Global.** Informação de qualquer país, com país e idioma em cada item e filtro de país no catálogo. Preços em dólar (US$), liquidados em USDT. A interface segue o idioma do navegador (pt, en, es) e o catálogo abre no país do usuário, detectado pelo idioma e fuso horário do navegador, sem GPS nem IP guardado; um seletor no cabeçalho troca os dois.
 
 - **Conta sem identidade**: pseudônimo gerado + senha, passkey ou arquivo de acesso (um arquivo-chave que o usuário escolhe para entrar) + frase de recuperação de 12 palavras. Sem e-mail, telefone, CPF.
-- **Só cripto, dos dois lados.** Depósito em USDT/USDC (Polygon, Tron, Base) ou Bitcoin (Lightning, on-chain); saque em cripto. Nenhum real entra ou sai, nenhum parceiro de pagamento, nenhum KYC. A carteira interna guarda créditos em USDT; preços são exibidos em US$ e convertidos na hora.
+- **Só cripto, sem guardar saldo de ninguém.** Cada item aprovado ganha uma carteira cripto própria; compradores e apoiadores pagam direto nela, da própria carteira. Na finalização, a plataforma separa os 10 % de comissão, executa reembolsos pendentes e entrega a carteira ao vendedor (frase de recuperação, uma única vez), destruindo a própria cópia da chave. Nenhum real, nenhum parceiro de pagamento, nenhum KYC.
 - **Comissão única de 10 %** em todos os modelos. Nada é cobrado se um lacre coletivo falhar.
 - **Compra com exclusividade.** Em Cópias, Lacre coletivo e Camadas, o vendedor pode definir um valor pelo qual um único comprador leva o item e o anúncio encerra (apoios devolvidos).
 - **Nada é publicado sem curadoria**. Checklist em 7 blocos, nível de autenticidade público, regra de dois olhos em categorias de risco alto, escalonamento jurídico.
@@ -54,7 +54,7 @@ design/      protótipo navegável em HTML estático
 ## Decisões que ainda precisam de vocês
 
 1. **Sede e jurisdição.** A plataforma é global, mas a entidade operadora tem uma sede, e é ela que define guarda de registros de acesso, regras de ativos virtuais e sanções (`docs/03 §8` compara Brasil, UE e EUA). Validar com advogado antes de escrever a promessa pública de anonimato.
-2. **Custódia de cripto.** Guardar cripto de usuários pode enquadrar a plataforma como prestadora de serviços de ativos virtuais (Lei 14.478/2022 e regulação do Banco Central). Validar jurisdição e estrutura antes do lançamento; o escrow on-chain da fase 2 reduz esse enquadramento.
+2. **Custódia temporária.** A plataforma controla a chave da carteira do item durante a campanha, o que pode ser lido como custódia temporária (Lei 14.478/2022 no Brasil, MiCA na UE). Validar com advogado; o escrow on-chain da fase 2 elimina essa custódia.
 3. **Nome definitivo.** "Lacre" está em um único lugar (`design/assets/app.js`, constante `BRAND`) e nos textos.
 4. **Comissão.** 10 % é a decisão atual; `docs/09` mostra o efeito na unidade econômica.
 

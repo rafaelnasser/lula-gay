@@ -7,10 +7,10 @@ Todas as telas estão prototipadas em HTML navegável em `design/` (abra `design
 ```
 PÚBLICO (sem login)              AUTH                  COMPRADOR                 VENDEDOR                   CURADORIA (equipe)
 public/home.html                 auth/criar-conta      buyer/painel              seller/painel              admin/painel
-public/explorar.html             auth/entrar           buyer/carteira            seller/novo-anuncio        admin/fila
+public/explorar.html             auth/entrar           buyer/pagamentos          seller/novo-anuncio        admin/fila
 public/item.html (6 variantes)   auth/recuperar        buyer/checkout (variantes) seller/anuncios           admin/analise (workbench)
 public/prova.html                                      buyer/cofre               seller/anuncio             admin/juridico
-public/pedidos.html                                    buyer/visualizador        seller/ganhos              admin/publicacao
+public/pedidos.html                                    buyer/visualizador        seller/carteiras           admin/publicacao
 public/pedido.html                                     buyer/apoios              seller/pedidos             admin/disputas
 public/como-funciona.html                              buyer/pedidos             seller/reputacao           admin/denuncias
 public/vendedor.html                                   buyer/mensagens (compartilhada)                      admin/contas
@@ -29,9 +29,9 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 
 ## Fluxos principais
 
-1. **Comprar uma cópia**: explorar → item → checkout (saldo suficiente ou depositar) → cofre → visualizador → (opcional) disputa em 72 h.
+1. **Comprar uma cópia**: explorar → item → checkout (pagar da própria carteira cripto para o endereço do item) → confirmações na rede → cofre → visualizador → (opcional) disputa em 72 h.
 2. **Apoiar um lacre coletivo**: item (variante coletivo) → checkout (valor do apoio) → apoios (acompanhar) → notificação "lacre rompido" → cofre.
-3. **Vender**: criar conta → área do vendedor → novo anúncio (6 passos) → anúncios (em análise) → notificação da curadoria (ajustes ou aprovado) → anúncio (publicado) → ganhos → saque.
+3. **Vender**: criar conta → área do vendedor → novo anúncio (6 passos) → anúncios (em análise) → notificação da curadoria (ajustes ou aprovado) → anúncio publicado com carteira do item → finalização → carteiras dos itens (receber a frase de recuperação) → transferir para a própria carteira.
 4. **Pedir informação**: pedidos → novo pedido (modal) → curadoria aprova → público soma recompensa → vendedor atende → curadoria valida → contribuidores recebem acesso.
 5. **Curadoria**: fila → análise (checklist 7 blocos, autenticidade, redação) → decisão → (jurídico) → publicação (post gerado) → prova pública.
 6. **Disputa**: cofre → abrir disputa → curadoria compara prévia e conteúdo → resolução → reembolso em créditos.
@@ -63,7 +63,7 @@ Coluna lateral (painel fixo) com uma variante por modelo. Um seletor de desenvol
 1. **Lacre coletivo**: arrecadado em destaque, meta, barra, apoiadores, prazo com contagem, liberação ("Quando bater, fica público para todos ao mesmo tempo."), botões de valor (US$ 20 / 50 / 100 / 250 / outro), botão "Apoiar", metas estendidas, atualizações do vendedor, marcos postados. Abaixo, bloco **Comprar com exclusividade** (valor, consequência: encerra o anúncio e devolve os apoios).
 2. **Cópias**: preço, "37 de 100 restantes", preço escalonado se houver, botão "Comprar cópia", "entrega imediata no cofre", direitos (download permitido / somente leitura), janela de disputa 72 h. Bloco **Comprar com exclusividade** (valor; quem já comprou mantém; ninguém mais recebe).
 3. **Exclusivo**: preço, "um único comprador", botão "Comprar exclusividade", "Fazer uma oferta" (campo com mínimo), exclusividade declarada de 24 meses, destruição do conteúdo após a venda.
-4. **Leilão lacrado**: "7 lances lacrados", reserva não revelada, encerra em (contagem), campo de lance único, explicação do segundo preço, saldo reservado.
+4. **Leilão lacrado**: "7 lances lacrados", reserva não revelada, encerra em (contagem), campo de lance único, explicação do segundo preço, lance pago na hora para um endereço do item e devolvido à origem a quem não vencer.
 5. **Camadas**: lista de camadas com conteúdo, preço e botão; indicador do que o usuário já tem.
 6. **Assinatura**: preço por período, periodicidade, nº de assinantes, última edição, botão "Assinar", edições anteriores avulsas.
 Rodapé do painel em todas: "Compra anônima. Registramos item, valor e data. Nada mais." e botão "Denunciar este item".
@@ -125,19 +125,19 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 ## COMPRADOR
 
 ### `buyer/painel.html`
-- Saudação com pseudônimo, saldo e botão depositar.
+- Saudação com pseudônimo e resumo de pagamentos: confirmados, aguardando confirmação, em lacres ainda abertos.
 - Blocos: "Apoios em andamento" (progresso de cada lacre), "Novidades no cofre" (itens recentes com acesso), "Acompanhando" (favoritos com alertas: preço, encerrando, financiado), "Pedidos que você fez", "Recomendados" por categorias seguidas.
 - Alertas: disputa em andamento, assinatura a renovar, lacre encerrando em 24 h.
 
-### `buyer/carteira.html`
-- Cartões: saldo disponível, em custódia (apoios ativos), reservado (lances/ofertas).
-- Saldo em US$, liquidado em USDT 1:1 (1 USDT = US$ 1), sem conversão. Só depósitos em Bitcoin são convertidos para USDT, com cotação travada por 10 min.
-- Abas: **Depositar** (USDT Polygon, USDT Tron, USDC Polygon/Base, Bitcoin Lightning, Bitcoin on-chain; endereço novo por depósito com QR, confirmações exigidas, cotação travada por 10 min para BTC, explicação de que o endereço não é vinculado a identidade), **Sacar** (moeda, rede, endereço informado na hora e apagado após o envio, taxa de rede repassada, senha + TOTP, limite antifraude para contas novas), **Extrato** (tabela com tipo, referência, valor em US$ e USDT, saldo após, status) e **Redes e taxas** (moeda, rede, confirmações, mínimo de depósito, taxa de saque).
+### `buyer/pagamentos.html` · Pagamentos
+- Não existe carteira interna, saldo, depósito nem saque. A tela lista os pagamentos que esta conta fez para carteiras de itens: item, o que foi pago (cópia, apoio, camada, assinatura, contribuição), valor, rede, endereço derivado, confirmações, status (aguardando, confirmado, reembolsado ao endereço de origem) e txid com link para o explorador.
+- Reembolsos recebidos (lacres que falharam, disputas procedentes, buyout em lacre coletivo) com txid.
+- Guia "Como pagar": use uma carteira que você controla (MetaMask, Trust, Ledger, carteira de celular), nunca direto de uma corretora; envie o valor exato; reembolsos voltam ao endereço de origem; redes aceitas e confirmações exigidas.
 
 ### `buyer/checkout.html` · Checkout (variantes)
 - Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura, **exclusividade (buyout)** com as consequências e um aceite explícito.
-- Saldo disponível vs. valor; se insuficiente, bloco "Depositar a diferença" inline.
-- O que acontece depois (entrega imediata / custódia / reembolso automático).
+- Pagamento direto: escolha da rede, endereço derivado só para este pagamento, QR, valor exato, aviso "pague de uma carteira que você controla; reembolsos voltam ao endereço de origem", contador de confirmações e liberação automática do acesso.
+- O que acontece depois (acesso ao confirmar / fica na carteira do item até a finalização / reembolso automático à origem se o lacre falhar).
 - Transparência: "o que registramos sobre esta compra". Valor em US$ e o débito equivalente em USDT.
 - Aceite dos termos do modelo e botão de confirmação. Tela de sucesso (variante) com link para o cofre ou apoios.
 
@@ -165,19 +165,19 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `buyer/disputa.html`
 - Abrir disputa: item, motivo (conteúdo diferente da prévia / corrompido / duplicado / autenticidade / outro), descrição, anexos (capturas), prazo restante.
-- Acompanhar: linha do tempo (aberta → em análise → resolvida), resposta da curadoria, resultado (reembolso total/parcial/mantida) e saldo devolvido.
+- Acompanhar: linha do tempo (aberta → em análise → resolvida), resposta da curadoria, resultado (reembolso total/parcial/mantida) e valor devolvido ao endereço de origem, com txid.
 
 ### `buyer/notificacoes.html` (compartilhada)
-- Lista agrupada por dia; tipos: curadoria (aprovado/ajustes), lacre (marco/rompido/falhou), compra, mensagem, disputa, saque, segurança (novo login). Filtro por tipo e "marcar todas como lidas". Preferências de push.
+- Lista agrupada por dia; tipos: curadoria (aprovado/ajustes), lacre (marco/rompido/falhou), pagamento (confirmado/reembolsado), mensagem, disputa, carteira do item (finalizada, frase disponível), segurança (novo login). Filtro por tipo e "marcar todas como lidas". Preferências de push.
 
 ### `buyer/configuracoes.html` (compartilhada)
-- Abas: **Segurança** (senha, passkeys, arquivo de acesso com gerar novo / trocar PIN / revogar, TOTP, sessões ativas com dispositivo, data e método usado, PIN do cofre, encerrar todas), **Recuperação** (ver frase exige senha; status "confirmada em dd/mm"), **Privacidade** (ocultar pseudônimo em páginas públicas, apagar mensagens ao encerrar, permitir marca d'água invisível), **Notificações** (push por tipo), **Aparência** (tema), **Conta** (exportar dados que existem sobre a conta, excluir conta com condição de saldo zero).
+- Abas: **Segurança** (senha, passkeys, arquivo de acesso com gerar novo / trocar PIN / revogar, TOTP, sessões ativas com dispositivo, data e método usado, PIN do cofre, encerrar todas), **Recuperação** (ver frase exige senha; status "confirmada em dd/mm"), **Privacidade** (apagar mensagens ao encerrar, permitir marca d'água invisível; o pseudônimo é sempre público), **Notificações** (push por tipo), **Aparência** (tema), **Conta** (exportar dados que existem sobre a conta, excluir conta com condição de nenhum item com carteira em andamento).
 
 ## VENDEDOR
 
 ### `seller/painel.html`
-- Resumo: saldo disponível, em custódia, vendas do mês, itens ativos; gráfico de barras de vendas por semana (uma série).
-- "Pendências": item com ajustes solicitados, item aguardando confirmação de edição da curadoria, saque pendente.
+- Resumo: recebido nas carteiras dos itens, carteiras finalizadas a receber, vendas do mês, itens ativos; gráfico de barras de vendas por semana (uma série).
+- "Pendências": item com ajustes solicitados, item aguardando confirmação de edição da curadoria, carteira finalizada aguardando você receber a frase.
 - "Seus anúncios" (resumo por status), "Pedidos abertos que combinam com você" (3 cards), "Dicas de anonimato para vendedores".
 
 ### `seller/novo-anuncio.html` · Assistente de envio (6 passos em uma tela)
@@ -189,16 +189,18 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 6. **Revisão e envio**: resumo completo em quatro blocos com "editar" (conteúdo: tipos, categoria, país e idioma, arquivos com tamanho e hash, triagem; prévia: título, resumo, prévias públicas, tags; modelo: meta e prazo, arrecadação, liberação, os cinco marcos com a prévia que cada um libera, meta estendida, exclusividade, modificadores, quanto você recebe; declarações e pseudônimo), prazo estimado da curadoria (48 h), "o que acontece agora", botão "Enviar para curadoria". Tela de sucesso.
 
 ### `seller/anuncios.html`
-- Abas por status (Todos, Rascunhos, Em curadoria, Ajustes solicitados, Agendados, Ativos, Encerrados, Rejeitados) com contagens.
+- Abas por status (Todos, Rascunhos, Em análise, Ajustes solicitados, Aprovados, Ativos, Finalizados, Rejeitados) com contagens. Não existe "Agendado": item aprovado é publicado na hora.
+- O status é **clicável** e abre o anúncio ou a ação pendente: Rascunho abre o assistente onde parou; Ajustes solicitados abre a aba Curadoria; Rejeitado abre o motivo; Aprovado/Ativo abre o anúncio; Finalizado abre a carteira do item. Cores por tipo: âmbar = depende do vendedor, azul = em análise, verde = aprovado, ativo ou finalizado, vermelho = rejeitado.
 - Tabela: prévia pequena, título, modelo, status, métrica principal (vendas / arrecadado / lances), prazo, ações (editar, ver feedback, encerrar, duplicar).
 
 ### `seller/anuncio.html` · Detalhe do anúncio (visão do vendedor)
-- Cabeçalho com status e ações. Abas: **Visão geral** (métricas: visitas, favoritos, conversão, arrecadado/vendas, gráfico), **Curadoria** (linha do tempo da análise, feedback com códigos, diffs do título reescrito, botão "Aceitar edição" / "Responder ajustes"), **Conteúdo** (arquivos, hashes, versões redigidas), **Publicação** (posts feitos nas redes com métricas), **Perguntas** (Q&A público para responder), **Compradores** (apenas contagens e pseudônimos quando permitido; nunca dados pessoais).
+- Cabeçalho com status e ações. Abas: **Visão geral** (métricas: visitas, favoritos, conversão, arrecadado/vendas, gráfico), **Curadoria** (linha do tempo com a etapa atual destacada e as próximas em cinza, feedback com códigos, diffs do título reescrito, botão "Aceitar edição" / "Responder ajustes"; reenvios sem limite enquanto a curadoria pedir), **Conteúdo** (arquivos, hashes, versões redigidas), **Publicação** (posts feitos nas redes com métricas), **Carteira do item** (endereço público, recebido, reembolsos, finalização e entrega da frase de recuperação), **Perguntas** (Q&A público para responder), **Compradores** (apenas contagens; nunca dados pessoais).
 
-### `seller/ganhos.html`
-- Cards: disponível, em custódia (com data de liberação por item), sacado no total, taxas pagas.
-- Tabela de vendas (item, modelo, bruto, comissão de 10 %, líquido, status: custódia/liquidado/reembolsado, data).
-- Sacar: só cripto (USDT/USDC/BTC; moeda, rede, endereço com aviso "não salvamos o endereço após o envio", taxa de rede, senha + TOTP), limite antifraude para contas novas, histórico de saques com txid.
+### `seller/carteiras.html` · Carteiras dos itens
+- Uma linha por item com carteira: endereço público (link para o explorador), rede, recebido até agora, reembolsos, status (recebendo · a finalizar · finalizado e entregue · reembolsando), data prevista de finalização, ação.
+- Para Cópias ativas: botão "Encerrar vendas e finalizar" (disponível após a última janela de disputa de 72 h).
+- Item finalizado: comissão separada (valor e txid), reembolsos executados, líquido na carteira e o botão **"Receber a carteira"**: pede senha + TOTP e mostra a frase de recuperação uma única vez, com instrução para transferir imediatamente para uma carteira própria e o aviso de que a cópia da plataforma é destruída ao fechar. Depois, a linha mostra "frase entregue em dd/mm · chave destruída".
+- Sem saldo, sem saque: o dinheiro nunca passa por uma carteira da plataforma, exceto os 10 % de comissão.
 
 ### `seller/pedidos.html`
 - Mural de pedidos abertos com filtros e cards; botão "Atender este pedido" leva ao assistente com o pedido vinculado; aba "Meus atendimentos" com status (em curadoria / aceito / recusado).
@@ -237,10 +239,10 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Denúncias públicas e pedidos de titulares: item, motivo, descrição, status, suspensão preventiva (toggle), decisão e comunicação; SLA de 15 dias para LGPD.
 
 ### `admin/contas.html`
-- Busca por pseudônimo; lista com risco (score), itens, disputas, denúncias, saldo em custódia; detalhe: o que existe sobre a conta (lista explícita: pseudônimo, data de criação, itens, ledger, nenhuma identidade), ações (advertir, restringir envios, restringir saques, banir) com motivo obrigatório e registro em auditoria.
+- Busca por pseudônimo; lista com risco (score), itens, disputas, denúncias, valor em carteiras de itens em andamento; detalhe: o que existe sobre a conta (lista explícita: pseudônimo, data de criação, itens, pagamentos, nenhuma identidade), ações (advertir, restringir envios, bloquear finalizações, banir) com motivo obrigatório e registro em auditoria.
 
 ### `admin/financeiro.html`
-- Saldos: total em carteiras (passivo), em custódia por modelo, comissões do mês, fundo de garantia, tesouraria por moeda/rede (quente × fria) e cobertura tesouraria ≥ passivo; fila de saques (lotes horários, aprovação de 2 pessoas), reembolsos automáticos (lacres que falharam), reconciliação diária (ledger × saldos materializados, divergência zero), conciliação on-chain (depósitos confirmados = créditos) e com o BTCPay.
+- Carteiras de itens: total em carteiras ativas (não é passivo da plataforma), por modelo e por rede; finalizações do dia (comissão separada, reembolsos executados, frase entregue, chave destruída); comissões recebidas na carteira da plataforma (multisig) por mês; fundo de garantia; reembolsos executados e na fila (lacres que falharam, itens retirados, disputas); reconciliação on-chain diária (livro de pagamentos × saldo das carteiras, divergência zero); registro de chaves (criadas no HSM, destruídas na entrega).
 
 ### `admin/auditoria.html`
 - Log imutável: data/hora, pessoa da equipe, ação, alvo, antes/depois (resumo), hash encadeado; filtros por pessoa, ação, período; exportar.

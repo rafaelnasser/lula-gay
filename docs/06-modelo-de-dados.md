@@ -1,6 +1,6 @@
 # 06 · Modelo de dados
 
-PostgreSQL. IDs são UUID v7 (ordenáveis no tempo). Valores monetários em **micro-USDT inteiros** (`bigint`, 6 casas); 1 USDT = US$ 1, sem conversão. Depósitos em Bitcoin guardam a cotação BTC/USDT usada. Campos `created_at`/`updated_at` em todas as tabelas (omitidos abaixo).
+PostgreSQL. IDs são UUID v7 (ordenáveis no tempo). Valores monetários em **micro-USD inteiros** (`bigint`, 6 casas); stablecoins valem 1:1. Pagamentos em Bitcoin guardam a cotação BTC/USD da confirmação. Campos `created_at`/`updated_at` em todas as tabelas (omitidos abaixo).
 
 ## 1. Diagrama
 
@@ -12,7 +12,9 @@ erDiagram
     ACCOUNT ||--o{ BID : lanca
     ACCOUNT ||--o{ ENTITLEMENT : possui
     ACCOUNT ||--o{ REQUEST : pede
-    ACCOUNT ||--o{ LEDGER_ENTRY : movimenta
+    LISTING ||--o| ITEM_WALLET : recebe_em
+    ITEM_WALLET ||--o{ PAYMENT : atribui
+    ITEM_WALLET ||--o| SETTLEMENT : finaliza
     LISTING ||--|{ ASSET : contem
     LISTING ||--|| SALE_CONFIG : configurado_por
     LISTING ||--o{ PREVIEW : exibe
@@ -51,6 +53,7 @@ erDiagram
 | roles | text[] | `buyer`, `seller` (toda conta pode ser ambos) |
 | status | enum | `active`, `restricted`, `banned`, `deleted` |
 | reputation | jsonb | `{score, approved, rejected, disputes_lost, since}` |
+| (sem saldo) | — | a conta não tem saldo; pagamentos e recebimentos vivem nas carteiras dos itens |
 | prefs | jsonb | tema, notificações, idioma, país padrão |
 | last_seen_bucket | date | granularidade de dia; nunca timestamp exato |
 
@@ -128,13 +131,13 @@ Sem e-mail, telefone, nome, IP.
 `id, listing_id null, request_id null, backer_id, amount, status (held|released|refunded), created_at`
 
 ### bid / offer
-`id, listing_id, bidder_id, amount, kind (open|sealed|dutch_accept|offer), status (active|outbid|won|lost|withdrawn|accepted|rejected|countered), reserved_entry_id → ledger_entry`
+`id, listing_id, bidder_id, amount, kind (open|sealed|dutch_accept|offer), status (active|outbid|won|lost|withdrawn|accepted|rejected|countered), payment_id → payment (lance pago na hora; reembolsado se não vencer)`
 
 ### subscription
 `id, listing_id, subscriber_id, period_start, period_end, status (active|paused|cancelled), price_locked`
 
 ### entitlement
-`id, account_id, listing_id, source (order|pledge|subscription|request|public_release), asset_scope (all|tier:t1|stretch:...), can_download bool, watermark_id text, expires_at null, revoked_at null`
+`id, account_id, listing_id, source (order|pledge|subscription|request|public_release), payment_id, asset_scope (all|tier:t1|stretch:...), can_download bool, watermark_id text, expires_at null, revoked_at null`
 
 ### review / review_check / decision
 `review (id, listing_id, listing_version, reviewer_id, role (first|second|legal), started_at, finished_at, authenticity_proposed, notes, status)`
@@ -159,15 +162,13 @@ Sem e-mail, telefone, nome, IP.
 ### report (denúncia pública)
 `id, listing_id, reason (personal_data|copyright|forgery|illegal|other), description, contact_optional (nunca obrigatório), status (new|triaged|suspended_item|dismissed|actioned), handled_by`
 
-### ledger_entry / wallet_balance
-`ledger_entry (id, debit_account text, credit_account text, amount bigint, currency, ref_type, ref_id, memo, created_at)` imutável
-`wallet_balance (account_id, available, reserved, in_escrow, updated_at)` materializada
+### item_wallet / payment / settlement / refund
+`item_wallet (id, listing_id null, request_id null, asset (usdt|usdc|btc), network, xpub, root_address (público, na prova), state (receiving|settling|delivered|refunding|closed), received_total, refunded_total, created_at, delivered_at, key_shredded_at)` chave privada só no HSM
+`payment (id, item_wallet_id, account_id, kind (copy|exclusive|buyout|tier|license|pledge|contribution), derivation_index, address, expected_amount, received_amount, confirmations, txid, origin_address (apagado na finalização), state (waiting|seen|confirmed|settled|refunded|expired), created_at, confirmed_at)`
+`settlement (id, item_wallet_id, commission_amount, commission_txid, refunds_count, seller_net, seed_revealed_at, key_shredded_at, audit_hash)`
+`refund (id, payment_id, amount, network_fee, txid, reason (failed_goal|expired_request|dispute|removed_item|buyout), state (queued|sent|confirmed), created_at)`
 
-### crypto_deposit / payout / fx_rate
-`crypto_deposit (id, account_id, asset (usdt|usdc|btc), network (polygon|tron|base|bitcoin|lightning), address, derivation_index, amount_asset, amount_usdt, brl_rate_locked, status (waiting|seen|confirming|credited|expired), confirmations, txid, created_at, credited_at)` um endereço por depósito, nunca reutilizado
-`payout (id, account_id, amount_usdt, asset, network, address null, status (requested|checked|batched|sent|confirmed|failed), batch_id, txid, network_fee, requested_at, confirmed_at)` `address` é apagado após `confirmed`
-`payout_batch (id, created_at, approved_by uuid[], total, status)`
-`fx_rate (id, pair (BTC/USDT), rate, sources jsonb, fetched_at)`
+Não existe saldo de usuário nem ledger de carteiras: o livro de pagamentos por item é o espelho do que está on-chain.
 
 ### staff / audit_log
 `staff (id, name, role (triage|curator|senior|legal|finance|publisher|admin), totp_enforced, status)`
@@ -182,11 +183,11 @@ Sem e-mail, telefone, nome, IP.
 ```
 draft → submitted → triage → in_review → (changes_requested ⇄ submitted)
 in_review → escalated → in_review
-in_review → approved → scheduled → active
+in_review → approved → active (publicação imediata; carteira do item criada)
 in_review → rejected
 active → funded (crowdfund) → released → closed
-active → sold (exclusive/auction/window, ou buyout em copies/crowdfund/tiers: apoios reembolsados) → closed
-active → closed (deadline ou vendedor encerra)
+active → sold (exclusive/auction/window, ou buyout em copies/crowdfund/tiers: apoios reembolsados) → settled (comissão separada, carteira entregue) → closed
+active → closed (deadline ou vendedor encerra as vendas) → settled (finalização)
 active → suspended (denúncia) → active | removed
 closed → archived
 ```
@@ -208,7 +209,7 @@ closed → archived
 - `listing (status, category_id, model, published_at desc)` e índice GIN em `countries` para o catálogo.
 - `listing (status, risk_level, submitted_at)` para a fila.
 - `entitlement (account_id, listing_id)` único por escopo.
-- `ledger_entry (debit_account, created_at)`, `(credit_account, created_at)`.
+- `payment (item_wallet_id, state)`, `(account_id, created_at)`, `(address)` único.
 - `pledge (listing_id, status)` para somatórios; `sale_config.raised` atualizado por trigger.
 - `asset (sha256_server)` para duplicidade.
 - Busca pública: `tsvector` em título + resumo + tags (pt-BR). Busca interna da curadoria inclui OCR.
@@ -219,11 +220,11 @@ closed → archived
 |---|---|
 | Conteúdo de exclusivo vendido | DEK destruída 72 h após entrega |
 | Conteúdo de item rejeitado | 30 dias (para recurso), depois DEK destruída |
-| Conteúdo de item encerrado (cópias) | Enquanto houver entitlements ativos + 12 meses |
+| Conteúdo de item finalizado (cópias) | Enquanto houver entitlements ativos + 12 meses |
 | Mensagens | 90 dias após encerramento do item |
 | Registros de acesso (Marco Civil) | 6 meses, sistema separado |
-| Ledger | Permanente |
+| Livro de pagamentos por item (sem endereços de origem) | Permanente |
 | Audit log | Permanente |
-| Endereço de saque | Apagado após confirmação na rede; fica o `txid` |
-| Endereço de depósito | Observado por 30 dias após gerado; depois arquivado |
-| Conta excluída pelo usuário | Pseudônimo marcado como `deleted`, saldo deve ser zero antes, entitlements revogados, ledger mantido |
+| Chave da carteira do item | Destruída no HSM no momento da entrega ao vendedor |
+| Endereço de origem dos pagamentos | Apagado na finalização do item (serve só para reembolsos) |
+| Conta excluída pelo usuário | Pseudônimo marcado como `deleted`, sem itens com carteira em andamento, entitlements revogados, livro de pagamentos mantido |

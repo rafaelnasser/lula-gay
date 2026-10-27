@@ -316,7 +316,6 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                       </div>
                     </fieldset>
                     <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">Declaração de exclusividade</span>Ao vender, você declara que não venderá nem publicará o mesmo conteúdo em outro lugar por 24 meses. A declaração fica registrada no pseudônimo e o hash público permite provar qualquer violação.</div></div>
-                    <label class="switch"><input type="checkbox"><span class="track"></span><span>Garantia de exclusividade<span class="desc">Retém 20 % do valor por 30 dias contra revenda. O comprador vê isso como garantia e tende a pagar mais.</span></span></label>
                   </div>
                 </div>
                 <div data-config="pedido">
@@ -344,7 +343,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <div class="card-body stack-sm">
                 <h3>Você recebe 90 %</h3>
                 <div><div class="xs muted" id="s-meta-label">Meta de US$ 12.000,00 batida</div><div class="big ok" id="s-liq">US$ 10.800,00</div></div>
-                <p class="xs muted" id="s-note">Cai na sua carteira em cripto 72 h após a liberação do conteúdo. Se a meta não bater, nada é cobrado e os apoios voltam aos apoiadores.</p>
+                <p class="xs muted" id="s-note">Os apoios entram direto na carteira deste item. Na finalização (72 h após a liberação), separamos 10 % e entregamos a carteira a você. Se a meta não bater, nada é cobrado e os apoios voltam aos endereços de origem.</p>
                 <hr style="margin:4px 0">
                 <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 36.000,00</b></p>
                 <p class="xs muted">Comissão de 10 % sobre <span id="s-excl-base">US$ 40.000,00</span>. O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</p>
@@ -430,7 +429,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                   <dt>Meta estendida</dt><dd>US$ 18.000 · libera também os áudios brutos sem edição (40 WAV, 9,2 GB)</dd>
                   <dt>Exclusividade</dt><dd>US$ 40.000 · quem pagar leva o item só para si; o anúncio encerra e os apoios são devolvidos · declaração de exclusividade de 24 meses</dd>
                   <dt>Modificadores</dt><dd>Marca d'água por entitlement · download permitido</dd>
-                  <dt>Você recebe</dt><dd><b>US$ 10.800</b> se a meta bater (90 %) · <b>US$ 36.000</b> se alguém comprar a exclusividade · em cripto, na sua carteira do Lacre, 72 h após a liberação</dd>
+                  <dt>Você recebe</dt><dd><b>US$ 10.800</b> se a meta bater (90 %) · <b>US$ 36.000</b> se alguém comprar a exclusividade · a carteira do item é entregue a você na finalização, com a frase de recuperação, para transferir como quiser</dd>
                 </dl></div>
               </div>
               <div class="card">
@@ -448,7 +447,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                 <div class="card-body stack">
                   <div class="how-step"><span class="n">1</span><div><b>Triagem automática</b> · minutos<br><span class="small muted">Antivírus, remoção de metadados, varredura de dados pessoais, duplicidade e hash do pacote selado.</span></div></div>
                   <div class="how-step"><span class="n">2</span><div><b>Análise humana</b> · até 48 h<br><span class="small muted">Checklist de 7 blocos e nível de autenticidade. Resultado: aprovado, aprovado com ajustes, ajustes solicitados ou rejeitado, sempre com código e texto.</span></div></div>
-                  <div class="how-step"><span class="n">3</span><div><b>Publicação e recebimento</b><br><span class="small muted">Página de prova com hash e carimbo de tempo; post no X, Telegram e Bluesky; marcos automáticos. Batida a meta, você recebe em cripto, na sua carteira do Lacre, 72 h após a entrega.</span></div></div>
+                  <div class="how-step"><span class="n">3</span><div><b>Publicação e recebimento</b><br><span class="small muted">Página de prova com hash, carimbo de tempo e o endereço da carteira do item; post no X, Telegram e Bluesky; marcos automáticos. Na finalização, separamos 10 % e entregamos a carteira do item a você.</span></div></div>
                 </div>
               </div>
             </div>
@@ -498,17 +497,17 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           if (m === 'coletivo') {
             var meta = num('meta'), excl = num('excl');
             label.textContent = 'Meta de ' + usd(meta) + ' batida'; set('s-liq', usd(meta * 0.90));
-            note.textContent = 'Cai na sua carteira em cripto 72 h após a liberação do conteúdo. Se a meta não bater, nada é cobrado e os apoios voltam aos apoiadores.';
+            note.textContent = 'Os apoios entram direto na carteira deste item. Na finalização (72 h após a liberação), separamos 10 % e entregamos a carteira a você. Se a meta não bater, nada é cobrado e os apoios voltam aos endereços de origem.';
             set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl)); exclRow.hidden = false; exclNote.hidden = false;
           } else if (m === 'copias') {
             var preco = num('preco'), lim = num('lim') || 0, excl2 = num('excl2');
             label.textContent = usd(preco) + ' × ' + (lim || '∞') + ' cópias'; set('s-liq', lim ? usd(preco * lim * 0.90) : usd(preco * 0.90) + ' por cópia');
-            note.textContent = 'Cada venda cai na sua carteira 72 h após a entrega (janela de disputa).';
+            note.textContent = 'Cada venda entra na carteira deste item. Quando você encerrar as vendas, separamos 10 % e entregamos a carteira a você.';
             set('s-excl', usd(excl2 * 0.90)); set('s-excl-base', usd(excl2)); exclRow.hidden = false; exclNote.hidden = false;
           } else if (m === 'exclusivo') {
             var pe = num('preco-ex');
             label.textContent = 'Venda exclusiva por ' + usd(pe); set('s-liq', usd(pe * 0.90));
-            note.textContent = 'Cai na sua carteira 72 h após a entrega ao comprador. Ofertas abaixo do preço passam por você.';
+            note.textContent = 'O pagamento entra na carteira deste item; 72 h após a entrega, separamos 10 % e entregamos a carteira a você.';
             exclRow.hidden = true; exclNote.hidden = true;
           } else {
             label.textContent = 'Recompensa do pedido · US$ 2.100,00 hoje'; set('s-liq', usd(2100 * 0.90));

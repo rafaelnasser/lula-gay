@@ -22,7 +22,7 @@ Conteúdo:
 - **Hash SHA-256 do pacote** e dos arquivos (com botão copiar).
 - **Carimbo de tempo** da aprovação e versão da política de curadoria aplicada.
 - Nível de autenticidade e número de curadores (ex.: "2 curadores independentes + jurídico").
-- Status atual do item: ativo / financiado / vendido / encerrado, com progresso quando aplicável.
+- Status atual do item: ativo / financiado / vendido / finalizado, com progresso quando aplicável.
 - Prévia aprovada (borrada/tarjada).
 - Pseudônimo do vendedor (se ele permitiu) e reputação.
 - Como verificar: instruções para conferir o hash do arquivo recebido.

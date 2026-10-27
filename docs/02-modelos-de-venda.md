@@ -4,13 +4,13 @@ Cada item do catálogo é vendido por **um modelo principal** e pode ter **modif
 
 Convenções que valem para todos os modelos:
 
-- O dinheiro do comprador sai da **carteira** e vai para a **custódia** (escrow) do item. Só é liberado ao vendedor após a entrega e o fim da janela de disputa (72 h por padrão).
+- O comprador paga da própria carteira cripto direto para a **carteira do item** (uma por item, criada na aprovação). O dinheiro fica lá até a **finalização**: venda concluída e janela de disputa de 72 h vencida, lacre rompido, atendimento validado ou vendedor encerra as vendas. Na finalização a plataforma separa 10 % e entrega a carteira do item ao vendedor (frase de recuperação, uma única vez). Ver `03 §6`.
 - Toda compra gera um **entitlement** (direito de acesso) para a conta compradora. Conteúdo nunca é enviado por fora; é acessado no **cofre**.
 - Todo item tem **prazo**: data de encerramento definida pelo vendedor (mínimo 24 h, máximo 90 dias; renovável para modelos abertos).
-- A **comissão da plataforma é única: 10 %** sobre o valor recebido pelo vendedor, em todos os modelos. Nada é cobrado se um lacre coletivo falhar. Detalhes em `09-monetizacao-e-metricas.md`.
-- Todo pagamento é em cripto (USDT, USDC, BTC). Preços em US$, liquidados em USDT (1:1). Ver `03 §6`.
+- A **comissão da plataforma é única: 10 %**, separada só na finalização, em todos os modelos. Nada é cobrado se um lacre coletivo falhar. Detalhes em `09-monetizacao-e-metricas.md`.
+- Todo pagamento é em cripto (USDT e USDC em Polygon, Tron e Base; Bitcoin on-chain em Exclusivo e Cópias). Preços em US$; stablecoins 1:1.
 - Itens de muitos compradores (Cópias, Lacre coletivo, Camadas) podem ter um **valor de exclusividade**: quem pagar leva o item só para si e o anúncio encerra. Ver "Compra com exclusividade" abaixo.
-- Se o vendedor cancelar um item com dinheiro em custódia, todos os compradores são reembolsados integralmente e o vendedor recebe uma penalidade de reputação.
+- Se o vendedor cancelar um item antes da finalização, cada pagamento volta ao endereço de origem a partir da carteira do item (descontada a taxa de rede) e o vendedor recebe uma penalidade de reputação.
 
 ---
 
@@ -73,7 +73,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Comissão.** 10 %.
 
-**Riscos.** Vendedor vende o mesmo material em outro lugar. Mitigação: hash público permite provar que o conteúdo é o mesmo; penalidade de banimento; retenção de parte do valor por 30 dias ("garantia de exclusividade") como opção do comprador.
+**Riscos.** Vendedor vende o mesmo material em outro lugar. Mitigação: hash público permite provar que o conteúdo é o mesmo; penalidade de banimento e reembolso pelo fundo de garantia.
 
 ---
 
@@ -98,7 +98,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 - Marcos automáticos postados nas redes: 25 %, 50 %, 75 %, 90 %, meta batida, cada um com a prévia correspondente.
 - Compartilhamento com link de referência anônimo (contador por link, sem identificar quem compartilhou).
 
-**Regras de custódia.** Apoios ficam em custódia até o resultado. Se a meta for batida, o valor vai para a custódia do item e é liberado ao vendedor 72 h após a liberação do conteúdo, descontados pedidos de reembolso procedentes.
+**Regras de custódia.** Os apoios ficam na carteira do item até o resultado. Se a meta for batida, 72 h após a liberação do conteúdo a plataforma separa a comissão, executa reembolsos procedentes e entrega a carteira ao vendedor. Se falhar, cada apoio volta ao endereço de origem.
 
 **Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, outro), regra de liberação em destaque, metas estendidas em lista, atualizações do vendedor.
 
@@ -120,7 +120,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Regras.**
 - Pedidos também passam pela curadoria antes de ficar públicos (nada de pedir dado pessoal, conteúdo íntimo, credenciais etc.).
-- A recompensa fica em custódia desde a contribuição. Pedido sem atendimento no prazo devolve tudo.
+- Cada contribuição vai para a carteira do pedido. Pedido sem atendimento no prazo devolve cada contribuição ao endereço de origem.
 - Se dois vendedores entregarem, vale o primeiro validado; o segundo pode publicar o dele como item normal.
 
 **Interface.** Mural público de pedidos, página do pedido com critérios de aceite, recompensa acumulada, contribuidores (contagem), botão "Somar à recompensa" e botão "Tenho essa informação".
@@ -140,8 +140,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Regras.**
 - Preço de reserva opcional (não revelado). Se não for atingido, não há venda.
-- O valor do lance é reservado na carteira do participante (não pode gastar em outra coisa) e liberado quando é superado ou o leilão termina.
-- Vencedor que não tem saldo não existe: o saldo já estava reservado.
+- Lance lacrado é pago na hora para um endereço derivado do item; quem não vence é reembolsado ao endereço de origem no encerramento (por isso leilões só em redes baratas). V2.
 
 **Interface.** Lance atual (ou "lances lacrados: 7"), incremento, tempo restante com prorrogação, campo de lance, histórico anônimo, para holandês: preço atual e próximo degrau com contagem regressiva.
 
@@ -240,7 +239,6 @@ Um item publicado para muitos compradores pode trazer, ao lado do preço normal 
 | Compra em grupo | Preço fixo de exclusividade dividido entre N compradores que entram juntos; fecha ao completar N | Exclusivo |
 | Marca d'água | Visível ou invisível, por entitlement | Todos |
 | Somente leitura | Sem download; só visualizador seguro | Documento, imagem, vídeo |
-| Garantia de exclusividade | Retenção de 20 % do valor por 30 dias contra revenda | Exclusivo, Janela |
 | Renovação automática | Reabre o prazo ao vencer | Cópias, Assinatura |
 
 ## Combinações que fazem sentido
@@ -252,14 +250,14 @@ Um item publicado para muitos compradores pode trazer, ao lado do preço normal 
 
 ## Decisão de MVP
 
-Lançar com **Cópias, Exclusivo, Lacre coletivo e Pedido com recompensa**. Os quatro cobrem os três fluxos de dinheiro (um para um, um para muitos, muitos para um) e já permitem a história completa nas redes. Leilão e Assinatura entram na V2 porque dependem de carteira madura (reserva de saldo) e de SLA de curadoria mais curto.
+Lançar com **Cópias, Exclusivo, Lacre coletivo e Pedido com recompensa**. Os quatro cobrem os três fluxos de dinheiro (um para um, um para muitos, muitos para um) e já permitem a história completa nas redes. Leilão e Assinatura entram na V2 porque dependem de reembolsos em massa (lances não vencedores) e de SLA de curadoria mais curto.
 
 ## Estados comuns de um item
 
 ```
-Rascunho → Enviado → Em triagem → Em análise → Aprovado → Agendado → Ativo
+Rascunho → Enviado → Em triagem → Em análise → Aprovado (publicado na hora) → Ativo
                           ↓            ↓                                ↓
-                       Rejeitado   Ajustes solicitados          Financiado | Vendido | Encerrado | Expirado
+                       Rejeitado   Ajustes solicitados          Financiado | Vendido | Finalizado | Expirado
                                         ↓                                ↓
                                    (reenvio)                         Arquivado
 ```

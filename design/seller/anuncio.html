@@ -52,6 +52,7 @@
         <a class="tab" href="#" data-tab="curadoria">Curadoria <span class="count">2</span></a>
         <a class="tab" href="#" data-tab="conteudo">Conteúdo</a>
         <a class="tab" href="#" data-tab="publicacao">Publicação</a>
+        <a class="tab" href="#" data-tab="carteira">Carteira do item</a>
         <a class="tab" href="#" data-tab="perguntas">Perguntas <span class="count">2</span></a>
         <a class="tab" href="#" data-tab="compradores">Compradores</a>
       </div>
@@ -111,8 +112,9 @@
                   <div class="tl-item ok"><div class="when">24/10 · 09:12</div><div class="what">Enviado para curadoria · versão 1 · 4 arquivos · 36 MB</div></div>
                   <div class="tl-item ok"><div class="when">24/10 · 09:14</div><div class="what">Triagem automática concluída · metadados removidos (GeoJSON: autor; PDF: autor e produtor) · 0 CPFs · duplicidade 0 · antivírus ok</div></div>
                   <div class="tl-item info"><div class="when">25/10 · 14:40</div><div class="what">Em análise · Bruno M., curador · risco baixo: um curador, sem jurídico</div></div>
-                  <div class="tl-item warn"><div class="when">26/10 · 11:05</div><div class="what">Ajustes solicitados · 1 obrigatório, 1 sugestão · prazo de resposta 72 h</div></div>
-                  <div class="tl-item"><div class="when">aguardando você</div><div class="what">Reenvio → nova análise em até 24 h</div></div>
+                  <div class="tl-item warn current"><span class="step-tag">Etapa atual · depende de você</span><div class="when">desde 26/10 · 11:05 · responda até 29/10 · 11:05</div><div class="what">Ajustes solicitados por Bruno M.: 1 obrigatório e 1 sugestão. Corrija e reenvie pelo formulário abaixo.</div></div>
+                  <div class="tl-item future"><div class="when">depois do seu reenvio</div><div class="what">Nova análise pelo mesmo curador, em até 24 h</div></div>
+                  <div class="tl-item future"><div class="when">em seguida</div><div class="what">Aprovado: publicação imediata, prova pública, post nas redes e carteira do item criada</div></div>
                 </div>
               </div>
             </div>
@@ -148,7 +150,7 @@
               <h4>Quem analisa</h4>
               <div class="row"><span class="staff">BM</span><div><b>Bruno M.</b><div class="xs muted">Curador · Dados e bases</div></div></div>
               <p class="small muted">Risco baixo: um curador, sem revisão jurídica. A curadoria vê o conteúdo completo e o seu histórico de decisões, não quem você é.</p>
-              <dl class="kv"><dt>SLA após reenvio</dt><dd>até 24 h</dd><dt>Reenvios</dt><dd>0 de 3 permitidos</dd><dt>Dúvidas</dt><dd><a class="link" href="../buyer/mensagens.html">Perguntar à curadoria</a></dd></dl>
+              <dl class="kv"><dt>SLA após reenvio</dt><dd>até 24 h</dd><dt>Reenvios</dt><dd>0 até agora · sem limite: você reenvia quantas vezes a curadoria pedir</dd><dt>Dúvidas</dt><dd><a class="link" href="../buyer/mensagens.html">Perguntar à curadoria</a></dd></dl>
             </div></div>
             <div class="card"><div class="card-body stack-sm">
               <h4>Checklist · o que já foi verificado</h4>
@@ -229,6 +231,36 @@ US$ 240 · prova e prévia: lacre.app/p/2z5q7</div><div class="x-media"><div cla
         </div>
       </div>
 
+      <div class="tab-panel" data-panel="carteira">
+        <div class="split">
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>Carteira deste item</h3><span class="badge st-aguardando">criada na aprovação</span></div>
+              <div class="card-body stack-sm">
+                <p class="small">Cada item tem uma carteira cripto própria, criada quando a curadoria aprova. Compradores e apoiadores pagam direto nela, da própria carteira. O Lacre não guarda saldo de ninguém.</p>
+                <div class="how-step"><span class="n">1</span><div><b>Aprovação</b><p class="small muted">Geramos a carteira do item em hardware seguro (HSM) e publicamos o endereço na página de prova, para qualquer pessoa conferir on-chain o que entrou.</p></div></div>
+                <div class="how-step"><span class="n">2</span><div><b>Vendas e apoios</b><p class="small muted">Cada pagamento vai para um endereço derivado da carteira do item. Disputas procedentes e lacres que falham são reembolsados a partir dela, ao endereço de origem.</p></div></div>
+                <div class="how-step"><span class="n">3</span><div><b>Finalização</b><p class="small muted">Quando o item finaliza (venda concluída e janela de disputa vencida, lacre rompido ou você encerra as vendas), separamos os 10 % de comissão e os reembolsos pendentes.</p></div></div>
+                <div class="how-step"><span class="n">4</span><div><b>Entrega da carteira</b><p class="small muted">Mostramos a frase de recuperação da carteira do item uma única vez, nesta tela, após senha e TOTP. Você transfere os fundos para onde quiser. Apagamos a nossa cópia da chave no mesmo instante e registramos na auditoria.</p></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>Exemplo: lcr-5m8c4 (finalizado)</h3><span class="badge st-finalizado">carteira entregue</span></div>
+              <div class="card-body"><dl class="kv">
+                <dt>Endereço</dt><dd><span class="mono">0x5m8c…4e2a</span> · Polygon · USDT</dd>
+                <dt>Recebido</dt><dd>US$ 13.200,00 · 88 pagamentos confirmados</dd>
+                <dt>Reembolsos</dt><dd>1 · US$ 150,00 ao endereço de origem (disputa procedente)</dd>
+                <dt>Comissão</dt><dd>US$ 1.320,00 separada em 05/10 para a carteira do Lacre</dd>
+                <dt>Entregue a você</dt><dd>05/10 · frase de recuperação exibida uma vez · chave apagada dos nossos sistemas</dd>
+                <dt>Hoje</dt><dd>saldo 0 · você transferiu em 05/10 · <a class="link" href="carteiras.html">ver todas as carteiras</a></dd>
+              </dl></div>
+            </div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que guardamos</span>A chave da carteira do item só até a entrega. Os endereços de origem dos pagamentos só até a finalização, para reembolsos. Nunca um saldo seu.</div></div>
+          </div>
+        </div>
+      </div>
       <div class="tab-panel" data-panel="perguntas">
         <div class="split">
           <div class="stack">

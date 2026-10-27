@@ -2,7 +2,7 @@
 
 ## Fase 0 · Fundamentos (semanas 1–3)
 - Entidade, jurisdição e parecer jurídico sobre: registros de acesso (Marco Civil), custódia de cripto de usuários (Lei 14.478/2022 e regulação do Banco Central), termos de uso, política de conteúdo, declarações do vendedor, contratos de licença e cessão.
-- Tesouraria cripto: BTCPay Server em produção, nós/indexadores de Polygon, Tron e Base, carteira quente/fria com multisig, cotação US$/USDT.
+- Carteiras de itens: HSM, nós e indexadores de Polygon, Tron, Base e Bitcoin, carteira da plataforma (comissões) com multisig, fluxo de entrega da frase de recuperação e destruição da chave.
 - Infra base: Postgres, Redis, MinIO, Vault, CI/CD, ambientes, backups.
 - Design system implementado como componentes (a partir de `design/assets/`).
 
@@ -10,8 +10,8 @@
 
 **Contas e carteira**
 - Cadastro pseudônimo (handle, senha, frase de recuperação), login, recuperação, TOTP, sessões.
-- Carteira: depósito em USDT/USDC (Polygon, Tron, Base) e Bitcoin (Lightning, on-chain), extrato em US$ e USDT, saque em cripto com limite antifraude, lotes horários.
-- Ledger de partidas dobradas, reconciliação diária.
+- Pagamentos diretos: endereço derivado por compra ou apoio, confirmações, liberação automática; finalização com comissão, reembolsos à origem e entrega da carteira ao vendedor; página de pagamentos do comprador e carteiras dos itens do vendedor.
+- Livro de pagamentos por item, reconciliação on-chain diária.
 
 **Oferta**
 - Assistente de envio em 6 passos; upload direto ao S3; pipeline de ingestão (AV, metadados, hash, prévias, varreduras, OCR).
@@ -26,7 +26,7 @@
 **Curadoria**
 - Fila, workbench com checklist em 7 blocos, autenticidade, redação de assets, regra de dois olhos, escalonamento jurídico, decisões com códigos.
 - Publicação: fila de posts, geração de card, X + Telegram + Bluesky + RSS, marcos automáticos.
-- Disputas, denúncias públicas, contas (risco, restrição, banimento), financeiro (custódia, saques, reconciliação), auditoria, configurações.
+- Disputas, denúncias públicas, contas (risco, restrição, banimento), financeiro (carteiras de itens, finalizações, reembolsos, reconciliação), auditoria, configurações.
 
 **Lançamento**
 - Pentest externo. Convidar 30 vendedores selecionados para popular o catálogo antes de abrir ao público (catálogo não pode nascer vazio).
@@ -40,7 +40,7 @@
 - Reputação v2 (selos: Rompeu lacres, Fonte recorrente, Verificado 10×).
 - Espelho `.onion`; cifragem ponta a ponta opcional nas mensagens.
 - Equivalente em moeda local (BRL, EUR, ARS) como referência de exibição; exclusividade também em Assinatura.
-- Escrow on-chain (USDC em Base/Polygon) para reduzir a custódia pela plataforma; Monero como opção de depósito.
+- Escrow on-chain (USDC em Base/Polygon): os fundos ficam em um contrato e vão direto ao endereço do vendedor na finalização, sem a plataforma controlar chaves nem entregar frase.
 - Canal de notificação externo opcional (Telegram bot) com aviso de vínculo.
 
 ## Fase 3 · Profundidade (meses 7–12)
@@ -62,6 +62,6 @@
 | Promessa de anonimato maior do que a lei permite | Texto público exato sobre registros de acesso e parceiros de pagamento; revisão jurídica do copy |
 | Fraude do vendedor (conteúdo falso) | Conteúdo completo analisado antes de publicar; nível de autenticidade público; disputas |
 | Vazamento de conteúdo comprado | Marca d'água por entitlement; somente leitura para itens sensíveis; termos |
-| Enquadramento como custodiante de ativos virtuais | Parecer jurídico na fase 0; escrow on-chain na fase 2; tesouraria com multisig e reconciliação diária |
-| Volatilidade e segurança da tesouraria | Créditos em stablecoin; conversão imediata de BTC; carteira quente limitada a 48 h de saques |
+| Custódia temporária das chaves das carteiras de itens | Parecer jurídico na fase 0; chaves só no HSM e destruídas na entrega; escrow on-chain na fase 2 |
+| Reembolsos em massa (lacre que falha) | Só redes baratas em lacres coletivos; lotes por rede; taxa de rede descontada do valor devolvido |
 | Equipe de curadoria vira gargalo | Triagem automática, limites de envio por vendedor novo, análise expressa paga, métricas por curador |

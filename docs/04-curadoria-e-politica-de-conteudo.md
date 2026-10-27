@@ -5,7 +5,7 @@ A curadoria é o produto. Sem ela, o Lacre é um bucket de arquivos com um botã
 ## 1. Esteira de análise
 
 ```
-Enviado ──► Triagem automática ──► Fila ──► Em análise ──► Decisão ──► Agendado ──► Publicado
+Enviado ──► Triagem automática ──► Fila ──► Em análise ──► Decisão ──► Aprovado ──► Publicado (na hora, com carteira do item)
                │                              │                 │
                ▼                              ▼                 ├── Aprovado
          Bloqueio imediato             Escalado ao jurídico     ├── Aprovado com ajustes (curadoria edita prévia/título)
@@ -86,7 +86,7 @@ Técnicas: comparação com fontes oficiais, análise de metadados antes da remo
 | Solicitar ajustes | Volta ao vendedor com lista de pendências | Lista com códigos |
 | Rejeitar | Encerra. Reenvio só como novo item | Código de motivo + texto |
 | Escalar | Vai à fila jurídica; prazo pausa | "Em análise adicional" |
-| Banir conta | Em caso de violação grave (menores, credenciais, fraude) | Aviso final; saldo retido para análise |
+| Banir conta | Em caso de violação grave (menores, credenciais, fraude) | Aviso final; carteiras de itens em andamento ficam bloqueadas para finalização até a análise |
 
 **Códigos de rejeição:** `R01` dados pessoais de terceiros · `R02` direitos autorais · `R03` conteúdo íntimo/sexual · `R04` credenciais/acesso · `R05` sigilo legal · `R06` informação privilegiada de mercado · `R07` difamação sem suporte · `R08` fabricação/falsificação · `R09` duplicidade · `R10` qualidade insuficiente · `R11` prévia enganosa · `R12` fora do escopo da plataforma · `R13` outro (texto obrigatório).
 
@@ -131,7 +131,7 @@ Técnicas: comparação com fontes oficiais, análise de metadados antes da remo
 
 **Ordens judiciais e notificações.** Canal dedicado (`juridico@`), registro de recebimento, cumprimento com o mínimo necessário, comunicação ao vendedor quando permitido.
 
-**Reversão de vendas.** Se um item for retirado por violação após vendas, os compradores são reembolsados em créditos; o valor em custódia do vendedor cobre o reembolso; a diferença, se houver, é absorvida pelo fundo de garantia da plataforma (ver `09`).
+**Reversão de vendas.** Se um item for retirado por violação antes da finalização, cada pagamento volta ao endereço de origem a partir da carteira do item. Se for retirado depois da finalização (o dinheiro já está com o vendedor), os compradores são reembolsados pelo fundo de garantia da plataforma (ver `09`).
 
 **Disputas de compradores.** Janela de 72 h após o acesso. Motivos: conteúdo diferente da prévia, arquivo corrompido, duplicidade, autenticidade. A curadoria compara prévia e conteúdo (já tem ambos) e decide em até 5 dias: reembolso total, parcial ou manutenção. Reincidência do vendedor rebaixa reputação; reincidência do comprador em disputas improcedentes limita o direito de disputa.
 

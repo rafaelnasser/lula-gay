@@ -29,7 +29,7 @@
       'Anonimato e seus limites': 'Anonymity and its limits', 'Denunciar um item': 'Report an item', 'Pedidos jurídicos': 'Legal requests',
       '© 2026 Lacre · Protótipo navegável · Nenhum dado de identidade é coletado.': '© 2026 Lacre · Navigable prototype · No identity data is collected.',
       'Comprar': 'Buy', 'Painel': 'Dashboard', 'Explorar catálogo': 'Explore catalog', 'Meus pedidos': 'My requests', 'Minha conta': 'My account', 'Cofre': 'Vault', 'Apoios': 'Backings',
-      'Carteira': 'Wallet', 'Mensagens': 'Messages', 'Notificações': 'Notifications', 'Configurações': 'Settings', 'Vender': 'Sell', 'Meus anúncios': 'My listings', 'Novo anúncio': 'New listing',
+      'Carteira': 'Wallet', 'Pagamentos': 'Payments', 'Carteiras dos itens': 'Item wallets', 'Mensagens': 'Messages', 'Notificações': 'Notifications', 'Configurações': 'Settings', 'Vender': 'Sell', 'Meus anúncios': 'My listings', 'Novo anúncio': 'New listing',
       'Pedidos abertos': 'Open requests', 'Conta': 'Account', 'Ganhos e saques': 'Earnings and withdrawals', 'Curadoria': 'Curation', 'Fila de análise': 'Review queue',
       'Análise (workbench)': 'Review (workbench)', 'Jurídico': 'Legal', 'Publicação': 'Publishing', 'Operação': 'Operations', 'Disputas': 'Disputes', 'Denúncias': 'Reports',
       'Contas': 'Accounts', 'Financeiro': 'Finance', 'Sistema': 'System', 'Auditoria': 'Audit log', 'Área do vendedor': 'Seller area', 'Área do comprador': 'Buyer area',
@@ -52,7 +52,7 @@
       'Anonimato e seus limites': 'Anonimato y sus límites', 'Denunciar um item': 'Denunciar un ítem', 'Pedidos jurídicos': 'Solicitudes legales',
       '© 2026 Lacre · Protótipo navegável · Nenhum dado de identidade é coletado.': '© 2026 Lacre · Prototipo navegable · No se recopila ningún dato de identidad.',
       'Comprar': 'Comprar', 'Painel': 'Panel', 'Explorar catálogo': 'Explorar catálogo', 'Meus pedidos': 'Mis pedidos', 'Minha conta': 'Mi cuenta', 'Cofre': 'Bóveda', 'Apoios': 'Apoyos',
-      'Carteira': 'Billetera', 'Mensagens': 'Mensajes', 'Notificações': 'Notificaciones', 'Configurações': 'Configuración', 'Vender': 'Vender', 'Meus anúncios': 'Mis anuncios', 'Novo anúncio': 'Nuevo anuncio',
+      'Carteira': 'Billetera', 'Pagamentos': 'Pagos', 'Carteiras dos itens': 'Billeteras de los ítems', 'Mensagens': 'Mensajes', 'Notificações': 'Notificaciones', 'Configurações': 'Configuración', 'Vender': 'Vender', 'Meus anúncios': 'Mis anuncios', 'Novo anúncio': 'Nuevo anuncio',
       'Pedidos abertos': 'Pedidos abiertos', 'Conta': 'Cuenta', 'Ganhos e saques': 'Ganancias y retiros', 'Curadoria': 'Curaduría', 'Fila de análise': 'Cola de análisis',
       'Análise (workbench)': 'Análisis (workbench)', 'Jurídico': 'Jurídico', 'Publicação': 'Publicación', 'Operação': 'Operación', 'Disputas': 'Disputas', 'Denúncias': 'Denuncias',
       'Contas': 'Cuentas', 'Financeiro': 'Finanzas', 'Sistema': 'Sistema', 'Auditoria': 'Auditoría', 'Área do vendedor': 'Área del vendedor', 'Área do comprador': 'Área del comprador',
@@ -366,7 +366,7 @@
       { label: 'Minha conta' },
       { key: 'cofre', label: 'Cofre', icon: 'vault', to: 'buyer/cofre.html', count: 7 },
       { key: 'apoios', label: 'Apoios', icon: 'hand-coins', to: 'buyer/apoios.html', count: 3 },
-      { key: 'carteira', label: 'Carteira', icon: 'wallet', to: 'buyer/carteira.html' },
+      { key: 'pagamentos', label: 'Pagamentos', icon: 'receipt', to: 'buyer/pagamentos.html' },
       { key: 'mensagens', label: 'Mensagens', icon: 'message-square', to: 'buyer/mensagens.html', count: 2 },
       { key: 'notificacoes', label: 'Notificações', icon: 'bell', to: 'buyer/notificacoes.html', count: 4 },
       { key: 'configuracoes', label: 'Configurações', icon: 'settings', to: 'buyer/configuracoes.html' }
@@ -378,7 +378,7 @@
       { key: 'novo-anuncio', label: 'Novo anúncio', icon: 'plus', to: 'seller/novo-anuncio.html' },
       { key: 'pedidos', label: 'Pedidos abertos', icon: 'file-search', to: 'seller/pedidos.html', count: 6 },
       { label: 'Conta' },
-      { key: 'ganhos', label: 'Ganhos e saques', icon: 'coins', to: 'seller/ganhos.html' },
+      { key: 'carteiras', label: 'Carteiras dos itens', icon: 'wallet', to: 'seller/carteiras.html' },
       { key: 'reputacao', label: 'Reputação', icon: 'award', to: 'seller/reputacao.html' },
       { key: 'mensagens', label: 'Mensagens', icon: 'message-square', to: 'buyer/mensagens.html', count: 1 },
       { key: 'notificacoes', label: 'Notificações', icon: 'bell', to: 'buyer/notificacoes.html', count: 4 },
@@ -429,12 +429,11 @@
     html += '<button class="icon-btn menu-btn" data-sidebar-toggle aria-label="Abrir menu">' + iconSvg('menu') + '</button>';
     if (title) html += '<span class="page-title">' + title + '</span>';
     html += '<div class="search"><span class="icon-wrap">' + iconSvg('search') + '</span><input class="input" type="search" placeholder="' + searchPh + '" aria-label="Buscar"></div><span class="spacer"></span>';
-    if (kind !== 'admin') html += '<a class="wallet-chip" href="' + href('buyer/carteira.html') + '">' + iconSvg('wallet') + '<span class="label muted">Carteira</span><b>US$ 1.240,00</b></a>';
     html += localeControl();
     html += '<button class="icon-btn" data-theme-toggle aria-label="Alternar tema"></button>';
     html += '<a class="icon-btn" href="' + href('buyer/notificacoes.html') + '" aria-label="Notificações">' + iconSvg('bell') + '<span class="dot"></span></a>';
     html += '<div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Conta">' + (kind === 'admin' ? '<span class="identicon" style="width:26px;height:26px;background:var(--brass-soft);display:inline-flex;align-items:center;justify-content:center;color:var(--brass);font-weight:700;font-size:11px">AR</span>' : '<span class="identicon" data-handle="coruja-7f3a"></span>') + '</button>';
-    html += '<div class="menu">' + (kind === 'admin' ? '<a href="' + href('admin/auditoria.html') + '">' + iconSvg('scroll-text') + 'Minhas ações</a>' : '<a href="' + href('buyer/configuracoes.html') + '">' + iconSvg('settings') + 'Configurações</a><a href="' + href('buyer/carteira.html') + '">' + iconSvg('wallet') + 'Carteira</a>') + '<div class="sep"></div><a href="' + href('auth/entrar.html') + '">' + iconSvg('log-out') + 'Sair</a></div></div>';
+    html += '<div class="menu">' + (kind === 'admin' ? '<a href="' + href('admin/auditoria.html') + '">' + iconSvg('scroll-text') + 'Minhas ações</a>' : '<a href="' + href('buyer/configuracoes.html') + '">' + iconSvg('settings') + 'Configurações</a><a href="' + href('buyer/pagamentos.html') + '">' + iconSvg('receipt') + 'Pagamentos</a>') + '<div class="sep"></div><a href="' + href('auth/entrar.html') + '">' + iconSvg('log-out') + 'Sair</a></div></div>';
     html += '</header>';
     return html;
   }
@@ -639,6 +638,9 @@
     applyTheme(document.documentElement.getAttribute('data-theme'));
     bind();
     document.title = document.title || BRAND;
+    // abre a aba indicada no hash (ex.: anuncio.html#curadoria)
+    const h = (location.hash || '').replace('#', '');
+    if (h) { const tabBtn = document.querySelector('.tabs [data-tab="' + h + '"]'); if (tabBtn) tabBtn.click(); }
     document.dispatchEvent(new CustomEvent('lacre:ready', { detail: { locale } }));
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

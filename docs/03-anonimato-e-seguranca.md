@@ -5,7 +5,7 @@
 **Prometemos:**
 - Vendedores e compradores nunca sabem quem é o outro. Nem a plataforma precisa saber quem são.
 - Nenhuma conta exige nome, e-mail, telefone, CPF ou documento.
-- O marketplace não armazena identidade de ninguém. Se o banco de dados vazar, o que vaza são pseudônimos, saldos e históricos de itens.
+- O marketplace não armazena identidade de ninguém. Se o banco de dados vazar, o que vaza são pseudônimos, históricos de itens e endereços de pagamento de itens em andamento.
 - Arquivos enviados têm metadados removidos antes de qualquer pessoa da equipe ver.
 - A equipe de curadoria vê o conteúdo, mas não vê quem enviou além do pseudônimo e do histórico dele.
 
@@ -24,7 +24,7 @@ A promessa pública fica assim: **"Anonimato total entre as partes e para o púb
 | Público (redes) | Prévia, prova, pseudônimo do vendedor | O pseudônimo é sempre exibido (é a reputação); nada além dele existe |
 | Equipe de curadoria | Conteúdo completo, pseudônimo, histórico | Acesso registrado em log imutável, 2FA, regra de dois olhos, sem download do conteúdo bruto |
 | Operador da infraestrutura | Banco de dados, arquivos cifrados | Arquivos cifrados com chave por item; chaves em KMS separado; dados do marketplace sem PII |
-| Análise de blockchain | Endereço de depósito ↔ carteira de origem do usuário | Endereço novo por depósito, nunca reutilizado; Lightning para valores baixos; endereço de saque apagado após o envio; orientação para não reutilizar carteiras |
+| Análise de blockchain | Endereço derivado do item ↔ carteira de origem do comprador | Endereço novo por pagamento; endereços de origem apagados na finalização; orientação para pagar de uma carteira própria e não reutilizada |
 | Observador de rede | IP, horário, volume | TLS, suporte a Tor (espelho .onion), sem rastreadores de terceiros, sem CDN para páginas autenticadas |
 | Estado com ordem judicial | Registros de acesso (obrigatórios por lei, ver §8) + registros da corretora onde o usuário comprou cripto | Registros de acesso cifrados, com retenção mínima legal e acesso restrito a procedimento jurídico |
 | Comprador que vaza o conteúdo | O conteúdo em si | Marca d'água por entitlement; termos; não identifica pessoa, identifica a conta |
@@ -40,7 +40,7 @@ A promessa pública fica assim: **"Anonimato total entre as partes e para o púb
 
 **Segurança adicional (opcional):** TOTP (app autenticador), sessões com expiração curta, lista de sessões ativas, PIN para abrir o cofre.
 
-**O que a conta armazena:** pseudônimo, hash da senha, chave pública da passkey, chave pública e impressão digital do arquivo de acesso, hash da frase de recuperação (para validar, não para recuperar), segredo TOTP cifrado, data de criação, preferências, saldo (via ledger), reputação. **Nada mais.**
+**O que a conta armazena:** pseudônimo, hash da senha, chave pública da passkey, chave pública e impressão digital do arquivo de acesso, hash da frase de recuperação (para validar, não para recuperar), segredo TOTP cifrado, data de criação, preferências, reputação. Nenhum saldo: o dinheiro fica nas carteiras dos itens. **Nada mais.**
 
 **Arquivo de acesso: o que avisar ao usuário.** Quem tem o arquivo (e o PIN, se houver) entra na conta; sem PIN o arquivo é uma chave pura. A interface recomenda o PIN, pede confirmação de guarda segura e permite revogar. Mitigação adicional: limite de 5 tentativas de PIN por hora por arquivo (o desafio é por arquivo), e aviso in-app a cada entrada com um método ainda não usado naquele dispositivo.
 
@@ -66,30 +66,25 @@ Pipeline executado em um worker isolado antes de qualquer humano ver o arquivo:
 - **Exclusivo vendido**: após a janela de disputa, a DEK é destruída (crypto-shredding). O blob vira lixo irrecuperável. O hash permanece na prova.
 - **Backups**: cifrados com chave separada, retenção de 30 dias, teste de restauração mensal.
 
-## 6. Dinheiro: só cripto, dos dois lados
+## 6. Dinheiro: uma carteira cripto por item, nenhum saldo guardado
 
-**Decisão de produto: todo pagamento entra e sai em cripto.** Não há PIX, cartão, boleto, parceiro de pagamento, voucher nem KYC na plataforma. Quem compra traz cripto; quem vende recebe cripto. Nenhum real toca o sistema.
+**Decisão de produto: a plataforma não guarda saldo de ninguém.** Não existe carteira interna, crédito, depósito nem saque. Todo pagamento entra e sai em cripto, direto entre a carteira do pagador e a **carteira do item**.
 
-**Princípio: a carteira desacopla pagamento de compra.** O usuário deposita cripto e recebe créditos na carteira interna; compras, apoios, lances e liberações são lançamentos internos entre carteiras e custódias. Quem olha a blockchain vê depósitos e saques, nunca o que foi comprado.
+**Carteira do item.** Quando a curadoria aprova um item (ou um pedido com recompensa), a plataforma gera uma carteira nova para ele, em hardware seguro (HSM), e publica o endereço na página de prova. É uma carteira hierárquica (HD): cada comprador ou apoio recebe um endereço derivado próprio, com valor exato, o que permite atribuir cada pagamento e reembolsá-lo à origem. Qualquer pessoa pode conferir on-chain quanto entrou.
 
-**Moedas e redes (MVP):**
-- **USDT e USDC** nas redes Polygon e Tron (USDC também em Base). Creditados 1:1 após as confirmações exigidas (12 em Polygon, 19 em Tron). São a unidade de conta da carteira.
-- **Bitcoin** on-chain e Lightning (BTCPay Server auto-hospedado). Convertido para créditos em USDT na hora, com cotação travada por 10 min no momento em que o endereço ou a invoice é gerado.
-- V2: Monero (XMR) para quem quer privacidade on-chain mais forte, com aviso de que poucas corretoras o oferecem.
+**Pagar.** O comprador paga da própria carteira cripto (MetaMask, Trust, Ledger, carteira de celular) para o endereço derivado dele no item. A interface insiste: pagar de uma carteira que a pessoa controla, nunca direto de uma corretora, porque reembolsos voltam ao endereço de origem. O acesso é liberado automaticamente ao atingir as confirmações da rede.
 
-**Unidade de conta e preços.** A plataforma é global: preços em **dólar (US$)**, carteira em **USDT** (1 USDT = US$ 1, sem conversão). Depósitos em USDT e USDC creditam 1:1; depósitos em Bitcoin são convertidos para USDT na hora pela cotação travada (fonte: mediana de três corretoras, atualizada a cada minuto). O vendedor recebe o USDT retido na custódia, menos a comissão; a plataforma não carrega risco cambial. Na fase 2, a interface pode mostrar o equivalente na moeda local escolhida pelo usuário (BRL, EUR, ARS…) apenas como referência.
+**Finalizar.** O item finaliza quando a venda se conclui e a janela de disputa de 72 h vence (Exclusivo), quando o lacre rompe e as 72 h vencem (Lacre coletivo), quando o atendimento é validado (Pedido) ou quando o vendedor encerra as vendas (Cópias, após a última janela de disputa). Na finalização, a plataforma, a partir da carteira do item: (1) transfere a **comissão de 10 %** para a carteira da plataforma; (2) executa reembolsos pendentes de disputas procedentes; (3) **entrega a carteira ao vendedor**: a frase de recuperação é exibida uma única vez, na tela, após senha e TOTP, nunca enviada por mensagem; (4) apaga a própria cópia da chave (crypto-shredding) e registra o evento na auditoria com hash. O vendedor transfere os fundos para onde quiser. A interface pede que ele transfira imediatamente para uma carteira própria.
 
-**Depósito.** Cada depósito gera um endereço novo (derivado de uma xpub por rede, nunca reutilizado). O indexador on-chain observa o endereço; ao atingir as confirmações, credita a carteira. Lightning: invoice com validade de 10 min. Nenhum endereço é vinculado a identidade; o marketplace registra apenas "crédito de X USDT na carteira Y".
+**Falhar.** Lacre que não bate a meta, pedido que expira ou item retirado antes da finalização: cada pagamento volta ao endereço de origem a partir da carteira do item, descontada só a taxa de rede. Item retirado depois da finalização: os compradores são reembolsados pelo **fundo de garantia** da plataforma (2 % de cada comissão), porque os fundos já estão com o vendedor.
 
-**Saque.** O usuário informa moeda, rede e endereço na hora. Verificações automáticas: saldo disponível (nunca o que está em custódia), limite antifraude, endereço válido, senha + TOTP. Saques saem em lotes a cada hora de uma carteira quente que cobre 48 h de volume; o restante fica em carteira fria com multisig 2-de-3. O endereço de destino é apagado do banco após a confirmação na rede. A taxa de rede é repassada ao usuário.
+**Moedas e redes.** USDT e USDC em Polygon, Tron e Base, por terem taxas baixas: um lacre com 1.187 apoios pode precisar de 1.187 reembolsos. Bitcoin on-chain só em Exclusivo e Cópias (poucos pagamentos, poucos reembolsos). Lightning não, porque uma invoice não é reembolsável à origem. Preços em US$; stablecoins valem 1:1.
 
-**Limite antifraude (não é KYC).** Contas com menos de 7 dias ou sem nenhum item aprovado sacam até US$ 2.000 por dia. Serve para conter golpes de conta nova, não para identificar ninguém.
+**Comissão.** Única: **10 %**, separada só na finalização. Nada é cobrado se um lacre falhar ou um pedido expirar.
 
-**Comissão.** Única: **10 %** sobre toda venda, apoio liberado e recompensa paga, em todos os modelos. Nada é cobrado se um lacre coletivo falhar.
+**O que a plataforma guarda.** A chave da carteira do item, no HSM, só até a entrega. Os endereços de origem dos pagamentos, só até a finalização, para reembolsos. O histórico de pagamentos por item (valor, rede, txid, confirmações), para a prova pública e para disputas. **Nunca um saldo de usuário.**
 
-**Ledger.** Partidas dobradas, imutável (append-only), em USDT com 6 casas, com contas: carteira do usuário, custódia por item/pedido, reserva (lances e ofertas), comissões, saques pendentes, reembolsos, tesouraria por moeda/rede. Ver `05`.
-
-**Regulação (validar com advogado antes do lançamento).** Guardar cripto de usuários e intermediar pagamentos pode enquadrar a plataforma como prestadora de serviços de ativos virtuais (Lei 14.478/2022 e a regulamentação do Banco Central publicada em 2025, que exige autorização para operar). Duas respostas possíveis: (1) estruturar a operação para obter ou dispensar a autorização, conforme a jurisdição escolhida; (2) migrar a custódia para contratos de escrow on-chain (USDC em Base/Polygon) em que a plataforma só assina liberações e reembolsos e nunca detém os fundos, o que reduz o enquadramento como custodiante. O MVP assume (1); (2) está no roadmap da fase 2.
+**Regulação (validar com advogado antes do lançamento).** Sem saldos nem saques de usuários, a plataforma deixa de se parecer com uma corretora ou custodiante permanente. Ainda assim, ela controla as chaves da carteira do item durante a campanha, o que pode ser lido como custódia temporária em algumas jurisdições (Lei 14.478/2022 no Brasil; MiCA na UE). Duas respostas: (1) parecer sobre a sede e o enquadramento dessa custódia temporária; (2) fase 2: contrato de escrow on-chain (USDC em Base ou Polygon) em que os fundos ficam no contrato, a plataforma só assina a liberação ou o reembolso e o contrato paga o vendedor em um endereço dele, o que elimina a custódia temporária e a entrega de frase.
 
 ## 6b. Idioma e país sem pedir localização
 
@@ -119,9 +114,9 @@ A plataforma é global, mas a entidade que a opera tem uma jurisdição, e é el
 |---|---|---|
 | Brasil | Marco Civil (Lei 12.965/2014, art. 15): guarda de registros de acesso (data, hora, IP) por 6 meses, entregues por ordem judicial; Lei 14.478/2022 para ativos virtuais | Registros de acesso cifrados em sistema separado, retenção mínima, acesso só por procedimento jurídico |
 | União Europeia | GDPR (dados pessoais, inclusive de terceiros citados nos itens), DSA (moderação, denúncias, transparência), MiCA (cripto) | Fluxo de denúncias e transparência já previstos; custódia de cripto exige licença |
-| Estados Unidos | DMCA (direitos autorais, notificação e retirada), regras de valores mobiliários, sanções (OFAC) | Takedown formal; triagem de países sancionados nos depósitos e saques |
+| Estados Unidos | DMCA (direitos autorais, notificação e retirada), regras de valores mobiliários, sanções (OFAC) | Takedown formal; triagem de países sancionados nos pagamentos |
 
-Decisões de negócio e jurídicas, não técnicas: (1) escolher a sede e documentar publicamente o que ela implica; (2) cumprir a guarda de registros com minimização (sistema separado, cifrado, retenção exata, destruição automática, nunca consultado pelo marketplace); (3) manter uma lista de países bloqueados para depósitos e saques conforme sanções aplicáveis à sede. A promessa pública deve dizer exatamente qual opção foi escolhida: prometer o que a lei da sede não permite destrói a confiança no primeiro incidente.
+Decisões de negócio e jurídicas, não técnicas: (1) escolher a sede e documentar publicamente o que ela implica; (2) cumprir a guarda de registros com minimização (sistema separado, cifrado, retenção exata, destruição automática, nunca consultado pelo marketplace); (3) manter uma lista de países bloqueados para pagamentos conforme sanções aplicáveis à sede. A promessa pública deve dizer exatamente qual opção foi escolhida: prometer o que a lei da sede não permite destrói a confiança no primeiro incidente.
 
 Independentemente da sede, o conteúdo dos itens se refere a muitos países: a curadoria avalia dados pessoais, direitos autorais e sigilo pelas regras do país de origem da informação e pelas da sede (ver `04`).
 
@@ -143,4 +138,4 @@ Toda tela que toca em identidade deve:
 - [ ] Exibir pseudônimos sempre com o mesmo componente (`.handle`), com avatar gerado deterministicamente (identicon).
 - [ ] Avisar antes de qualquer ação que crie vínculo externo (reutilizar endereço de cripto, canal de notificação externo).
 - [ ] Mostrar o relatório de metadados removidos ao vendedor após o upload.
-- [ ] Mostrar no checkout o que a plataforma registra sobre a compra (item, valor, data) e o que não registra.
+- [ ] Mostrar no checkout o que a plataforma registra sobre a compra (item, valor, data, endereço de origem até a finalização) e o que não registra.

@@ -27,7 +27,7 @@ O Lacre é o marketplace onde informação é negociada com três garantias que 
 
 1. **Anonimato por padrão, não por opção.** Não existe campo de nome. O identificador é um pseudônimo gerado pela plataforma. Ver `03-anonimato-e-seguranca.md`.
 2. **Nada entra sem curadoria.** Um item só fica visível ao público depois de aprovado. Nem a prévia aparece antes.
-3. **Dinheiro em custódia, só em cripto.** O pagamento do comprador fica retido pela plataforma até a entrega ser confirmada ou o prazo de disputa vencer. Em lacres coletivos, os apoios ficam retidos até a meta ser batida ou devolvidos se não for. Todo valor entra e sai em cripto (USDT, USDC, BTC); a comissão é única, de 10 %.
+3. **Uma carteira cripto por item, nenhum saldo guardado.** Cada item aprovado ganha uma carteira própria; compradores e apoiadores pagam direto nela, da própria carteira, em cripto (USDT, USDC, BTC). O dinheiro fica lá até a finalização (entrega confirmada e janela de disputa vencida; lacre rompido; ou reembolso automático se a meta não for batida). Na finalização a plataforma separa a comissão única de 10 % e entrega a carteira ao vendedor: a frase de recuperação, uma única vez.
 4. **A prévia nunca entrega o valor.** A curadoria garante que a prévia é suficiente para julgar o item e insuficiente para dispensar a compra.
 5. **Prova antes da promoção.** Nenhum post nas redes sai sem a página de prova publicada.
 6. **O vendedor assina declarações.** Em cada envio o vendedor declara origem lícita, titularidade ou direito de venda e ausência de dados pessoais de terceiros sem base legal. A declaração fica registrada e vinculada ao pseudônimo.
@@ -126,7 +126,7 @@ Cada item aprovado é uma peça de marketing. Cada lacre rompido é uma notícia
 | **Curadoria** | Equipe interna que analisa e aprova itens. |
 | **Prova** | Página pública com hash, carimbo de tempo e status do item. |
 | **Cofre** | Área do comprador com os itens desbloqueados. |
-| **Carteira** | Saldo interno em créditos (USDT; 1 USDT = US$ 1) usado para comprar e receber. Entra e sai só em cripto. |
+| **Carteira do item** | Carteira cripto criada na aprovação de cada item. Recebe os pagamentos, guarda-os até a finalização e é entregue ao vendedor (frase de recuperação) depois de separada a comissão. |
 | **Exclusividade (buyout)** | Valor opcional definido pelo vendedor em itens de muitos compradores: quem pagar leva o item só para si e o anúncio encerra. |
 | **País** | Código(s) ISO do(s) país(es) a que a informação se refere, ou Global. |
 | **Apoio** | Contribuição a um lacre coletivo ou a uma recompensa. |
