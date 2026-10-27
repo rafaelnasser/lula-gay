@@ -29,7 +29,7 @@
       'Anonimato e seus limites': 'Anonymity and its limits', 'Denunciar um item': 'Report an item', 'Pedidos jurídicos': 'Legal requests',
       '© 2026 Lacre · Protótipo navegável · Nenhum dado de identidade é coletado.': '© 2026 Lacre · Navigable prototype · No identity data is collected.',
       'Comprar': 'Buy', 'Painel': 'Dashboard', 'Explorar catálogo': 'Explore catalog', 'Meus pedidos': 'My requests', 'Minha conta': 'My account', 'Cofre': 'Vault', 'Apoios': 'Backings',
-      'Carteira': 'Wallet', 'Pagamentos': 'Payments', 'Carteiras dos itens': 'Item wallets', 'Mensagens': 'Messages', 'Notificações': 'Notifications', 'Configurações': 'Settings', 'Vender': 'Sell', 'Meus anúncios': 'My listings', 'Novo anúncio': 'New listing',
+      'Carteira': 'Wallet', 'Pagamentos': 'Payments', 'Primeiros passos com cripto': 'Getting started with crypto', 'Carteiras dos itens': 'Item wallets', 'Mensagens': 'Messages', 'Notificações': 'Notifications', 'Configurações': 'Settings', 'Vender': 'Sell', 'Meus anúncios': 'My listings', 'Novo anúncio': 'New listing',
       'Pedidos abertos': 'Open requests', 'Conta': 'Account', 'Ganhos e saques': 'Earnings and withdrawals', 'Curadoria': 'Curation', 'Fila de análise': 'Review queue',
       'Análise (workbench)': 'Review (workbench)', 'Jurídico': 'Legal', 'Publicação': 'Publishing', 'Operação': 'Operations', 'Disputas': 'Disputes', 'Denúncias': 'Reports',
       'Contas': 'Accounts', 'Financeiro': 'Finance', 'Sistema': 'System', 'Auditoria': 'Audit log', 'Área do vendedor': 'Seller area', 'Área do comprador': 'Buyer area',
@@ -52,7 +52,7 @@
       'Anonimato e seus limites': 'Anonimato y sus límites', 'Denunciar um item': 'Denunciar un ítem', 'Pedidos jurídicos': 'Solicitudes legales',
       '© 2026 Lacre · Protótipo navegável · Nenhum dado de identidade é coletado.': '© 2026 Lacre · Prototipo navegable · No se recopila ningún dato de identidad.',
       'Comprar': 'Comprar', 'Painel': 'Panel', 'Explorar catálogo': 'Explorar catálogo', 'Meus pedidos': 'Mis pedidos', 'Minha conta': 'Mi cuenta', 'Cofre': 'Bóveda', 'Apoios': 'Apoyos',
-      'Carteira': 'Billetera', 'Pagamentos': 'Pagos', 'Carteiras dos itens': 'Billeteras de los ítems', 'Mensagens': 'Mensajes', 'Notificações': 'Notificaciones', 'Configurações': 'Configuración', 'Vender': 'Vender', 'Meus anúncios': 'Mis anuncios', 'Novo anúncio': 'Nuevo anuncio',
+      'Carteira': 'Billetera', 'Pagamentos': 'Pagos', 'Primeiros passos com cripto': 'Primeros pasos con cripto', 'Carteiras dos itens': 'Billeteras de los ítems', 'Mensagens': 'Mensajes', 'Notificações': 'Notificaciones', 'Configurações': 'Configuración', 'Vender': 'Vender', 'Meus anúncios': 'Mis anuncios', 'Novo anúncio': 'Nuevo anuncio',
       'Pedidos abertos': 'Pedidos abiertos', 'Conta': 'Cuenta', 'Ganhos e saques': 'Ganancias y retiros', 'Curadoria': 'Curaduría', 'Fila de análise': 'Cola de análisis',
       'Análise (workbench)': 'Análisis (workbench)', 'Jurídico': 'Jurídico', 'Publicação': 'Publicación', 'Operação': 'Operación', 'Disputas': 'Disputas', 'Denúncias': 'Denuncias',
       'Contas': 'Cuentas', 'Financeiro': 'Finanzas', 'Sistema': 'Sistema', 'Auditoria': 'Auditoría', 'Área do vendedor': 'Área del vendedor', 'Área do comprador': 'Área del comprador',
@@ -446,7 +446,7 @@
     html += '<button class="icon-btn menu-btn" data-nav-toggle aria-label="Menu">' + iconSvg('menu') + '</button></div></div>';
     html += '<nav class="mobile-nav">';
     NAV.public.forEach(it => { html += '<a href="' + href(it.to) + '"' + (it.key === page ? ' class="active"' : '') + '>' + it.label + '</a>'; });
-    html += '<a href="' + href('auth/entrar.html') + '">Entrar</a><a href="' + href('auth/criar-conta.html') + '">Criar conta anônima</a><a href="' + href('index.html') + '">Índice do protótipo</a></nav></header>';
+    html += '<a href="' + href('auth/entrar.html') + '">Entrar</a><a href="' + href('auth/criar-conta.html') + '">Criar conta anônima</a><a href="' + href('public/guia-cripto.html') + '">Primeiros passos com cripto</a><a href="' + href('index.html') + '">Índice do protótipo</a></nav></header>';
     return html;
   }
   function buildPublicFooter() {

@@ -35,6 +35,12 @@
     .flow svg { width: 14px; height: 14px; color: var(--muted-2); flex: none; }
     .flow .badge { cursor: pointer; }
     .pay.locked > .card-body { opacity: .4; pointer-events: none; }
+    .waves { display: flex; flex-direction: column; gap: 6px; }
+    .wave { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); font-size: var(--fs-sm); }
+    .wave > b { font-family: var(--font-display); }
+    .wave.on { border-color: var(--wax); background: var(--wax-soft); box-shadow: inset 0 0 0 1px var(--wax); }
+    .wave.on > b { color: var(--wax-2); }
+    .wave.pub { background: transparent; border-style: dashed; color: var(--muted); }
     .done-head { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .done-head svg { width: 52px; height: 52px; color: var(--ok); }
   </style>
@@ -68,7 +74,7 @@
             <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
               <div class="timeline">
                 <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 490,00 USDT da sua carteira para o endereço derivado deste pagamento, na carteira do item</div></div>
-                <div class="tl-item ok"><div class="when">≈ 1 min</div><div class="what">12 confirmações: acesso no cofre, visualizador seguro e download com marca d'água "@coruja-7f3a · ENT-…"</div></div>
+                <div class="tl-item ok"><div class="when">≈ 30 s</div><div class="what">12 confirmações: acesso no cofre, visualizador seguro e download com marca d'água "@coruja-7f3a · ENT-…"</div></div>
                 <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa. Se o conteúdo não corresponder à prévia, a curadoria compara os dois e decide em até 5 dias; o reembolso sai da carteira do item para o seu endereço de origem</div></div>
                 <div class="tl-item"><div class="when">finalização</div><div class="what">Quando o vendedor encerra as vendas, a plataforma separa 10 % (US$ 49,00 desta cópia) e entrega a carteira do item a ele. Nada passa por um saldo nosso</div></div>
               </div>
@@ -171,7 +177,7 @@
 
       <!-- ===================== APOIO ===================== -->
       <div data-variant="apoio">
-        <div class="page-head"><div><p class="eyebrow">Checkout · lacre coletivo</p><h1>Apoiar este lacre</h1><p class="sub">Valor livre a partir de US$ 10. Fica na carteira do lacre até o resultado da meta.</p></div></div>
+        <div class="page-head"><div><p class="eyebrow">Checkout · lacre coletivo</p><h1>Apoiar este lacre</h1><p class="sub">Valor livre a partir de US$ 10. Fica na carteira do lacre até o resultado da meta. Quando o lacre rompe, quem apoiou mais recebe antes.</p></div></div>
         <div class="split">
           <div class="stack">
             <div class="card"><div class="card-body item-sum">
@@ -182,10 +188,11 @@
                 <div class="xs muted">lcr-4m2x9 · PDF 212 p., 31 áudios, planilhas · vendedor <span class="handle" data-handle="sextante-21c9" data-rep="4,9 · 12 itens · Verificado 9×"></span></div>
                 <div class="goal-head"><span class="raised">US$ 54.120</span><span class="goal">meta US$ 80.000 · 68 %</span></div>
                 <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
-                <div class="xs muted">1.187 apoiadores · encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b> · você já apoiou US$ 250,00</div>
+                <div class="xs muted">1.187 apoiadores · encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b></div>
                 <dl class="kv">
                   <dt>Carteira do lacre</dt><dd><a class="link" href="../public/prova.html">0x4m2x…c21e · Polygon · USDT · 1.187 pagamentos</a> · confere on-chain</dd>
-                  <dt>Liberação</dt><dd>Quando bater, fica público para todos ao mesmo tempo</dd>
+                  <dt>Liberação</dt><dd>Em ondas, do maior apoio para o menor: onda 1 (a partir de US$ 500) na hora do rompimento, onda 2 (US$ 100 a 499) 48 h depois, onda 3 (US$ 10 a 99) 96 h depois. Público na finalização, 7 dias depois do rompimento</dd>
+                  <dt>Fila de liberação</dt><dd>Pública na página do item: posição, pseudônimo, total apoiado e onda. Empate: quem apoiou antes vem primeiro</dd>
                   <dt>Se falhar</dt><dd>Tudo ou nada: sem meta até 15/11, o apoio volta sozinho ao seu endereço de origem, descontada só a taxa de rede</dd>
                   <dt>Meta estendida</dt><dd>US$ 120.000 libera também os 31 áudios das entrevistas</dd>
                 </dl>
@@ -193,25 +200,38 @@
             </div></div>
             <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
               <div class="timeline">
-                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia o apoio para o endereço derivado deste pagamento, na carteira do lacre. Após 12 confirmações, aparece em Apoios e soma ao arrecadado</div></div>
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia o apoio para o endereço derivado deste pagamento, na carteira do lacre. Após 12 confirmações, soma ao arrecadado e ao seu total na fila de liberação</div></div>
                 <div class="tl-item info"><div class="when">até 15/11</div><div class="what">Marcos de 75 %, 90 % e meta batida são postados nas redes, sem citar apoiadores</div></div>
-                <div class="tl-item wax"><div class="when">meta batida</div><div class="what">Acesso no cofre e selo "Rompeu este lacre" no perfil. 72 h depois, finalização: 10 % do arrecadado para a plataforma e carteira entregue ao vendedor</div></div>
-                <div class="tl-item"><div class="when">meta não batida</div><div class="what">Cada apoio volta ao endereço de origem a partir da carteira do lacre, descontada só a taxa de rede, em até 24 h após o prazo</div></div>
+                <div class="tl-item wax"><div class="when">meta batida</div><div class="what">O lacre rompe e libera em ondas, do maior apoio para o menor: onda 1 na hora, onda 2 em 48 h, onda 3 em 96 h. Cada apoiador tem 72 h para abrir disputa a partir do próprio acesso. Selo "Rompeu este lacre" no perfil</div></div>
+                <div class="tl-item ok"><div class="when">+7 dias</div><div class="what">Finalização: o conteúdo fica público, a plataforma separa 10 % do arrecadado e entrega a carteira do lacre ao vendedor</div></div>
+                <div class="tl-item"><div class="when">meta não batida</div><div class="what">Sem ondas: cada apoio volta ao endereço de origem a partir da carteira do lacre, descontada só a taxa de rede, em até 24 h após o prazo</div></div>
               </div>
             </div></div>
           </div>
           <div class="card"><div class="card-body stack" data-gate>
+            <div class="alert alert-wax"><i data-icon="trending-up"></i><div><span class="alert-title">Sua posição na fila de liberação</span>Você já apoiou US$ 250 · 127º de 1.187 · onda 2; +US$ 250 leva você à onda 1.</div></div>
             <div class="field"><label>Valor do apoio</label>
-              <div class="amount-options" data-target="#apoio-valor"><button class="btn" data-amount="20">US$ 20</button><button class="btn active" data-amount="50">US$ 50</button><button class="btn" data-amount="100">US$ 100</button><button class="btn" data-amount="250">US$ 250</button></div>
+              <div class="amount-options" data-target="#apoio-valor"><button class="btn active" data-amount="50">US$ 50</button><button class="btn" data-amount="100">US$ 100</button><button class="btn" data-amount="250">US$ 250</button><button class="btn" data-amount="500">US$ 500</button></div>
               <div class="input-group"><span class="affix">US$</span><input id="apoio-valor" class="input num" value="50" data-amount-input><span class="affix">outro valor</span></div>
-              <span class="hint">Mínimo US$ 10 · sem máximo: você paga da sua carteira</span>
+              <span class="hint">Mínimo US$ 10 · sem máximo: você paga da sua carteira · apoie mais para subir na fila</span>
             </div>
-            <dl class="kv"><dt>Seu total no lacre</dt><dd>US$ 250,00 já na carteira do lacre + este apoio</dd><dt>Taxas</dt><dd>Nenhuma para quem apoia; só a taxa de rede, na sua carteira</dd></dl>
+            <div class="panel stack-sm" data-waves data-already="250">
+              <div class="row between"><b class="small">Em que onda você entra</b><span class="xs muted">o total apoiado conta</span></div>
+              <div class="waves">
+                <div class="wave" data-wave="1"><b>Onda 1</b><span>a partir de US$ 500 · na hora do rompimento<br><span class="xs muted">31 apoiadores · US$ 21.400</span></span></div>
+                <div class="wave" data-wave="2"><b>Onda 2</b><span>US$ 100 a 499 · 48 h depois do rompimento<br><span class="xs muted">120 apoiadores · US$ 18.600</span></span></div>
+                <div class="wave" data-wave="3"><b>Onda 3</b><span>US$ 10 a 99 · 96 h depois do rompimento<br><span class="xs muted">1.036 apoiadores · US$ 14.120</span></span></div>
+                <div class="wave pub"><b>Público</b><span>todo mundo, na finalização · 7 dias depois do rompimento</span></div>
+              </div>
+              <p class="small" data-wave-msg>Com US$ 50,00, seu total no lacre passa a US$ 300,00: onda 2, acesso 48 h depois do rompimento. Faltam US$ 200,00 para a onda 1.</p>
+              <p class="xs muted">Primeiro apoio: com US$ 50 você entra na onda 3; com US$ 100, onda 2; com US$ 500, onda 1. Janela de 48 h entre ondas, escolhida pelo vendedor.</p>
+            </div>
+            <dl class="kv"><dt>Seu total no lacre</dt><dd>US$ 250,00 já pagos + este apoio = <b data-wave-total>US$ 300,00</b></dd><dt>Taxas</dt><dd>Nenhuma para quem apoia; só a taxa de rede, na sua carteira</dd></dl>
             <div class="total"><span class="small muted">Você apoia com</span><div><div class="price wax" data-usd-view>US$ 50,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
-            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este apoio</span>Item, valor, data, rede e txid. A página pública mostra só a contagem de apoiadores; seu pseudônimo nunca aparece.</div></div>
-            <label class="check"><input type="checkbox" checked><span>Aceito os termos do Lacre coletivo<span class="desc">Fica na carteira do lacre até o resultado. Reembolso automático ao endereço de origem se a meta falhar.</span></span></label>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este apoio</span>Item, valor, data, rede e txid. A fila de liberação é pública na página do item: posição, pseudônimo, total apoiado e onda. Nada além do pseudônimo identifica você.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do Lacre coletivo<span class="desc">Fica na carteira do lacre até o resultado. Liberação em ondas pelo total apoiado; público na finalização. Reembolso automático ao endereço de origem se a meta falhar.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-            <div class="card pay" data-pay data-item="lacre lcr-4m2x9" data-usd="50,00" data-usd-from="#apoio-valor" data-polygon="0x4m2x…7c02" data-tron="TQ4m…2x9W" data-base="0x4m2x…51be" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x4m2x…6f1e" data-done="Apoio registrado" data-done-note="Somado ao arrecadado do lacre. Fica na carteira do lacre até 15/11: meta batida, acesso no cofre; meta não batida, volta ao seu endereço de origem."></div>
+            <div class="card pay" data-pay data-item="lacre lcr-4m2x9" data-usd="50,00" data-usd-from="#apoio-valor" data-polygon="0x4m2x…7c02" data-tron="TQ4m…2x9W" data-base="0x4m2x…51be" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x4m2x…6f1e" data-done="Apoio registrado" data-done-note="Somado ao arrecadado e ao seu total na fila de liberação. Fica na carteira do lacre até 15/11: meta batida, acesso na sua onda; meta não batida, volta ao seu endereço de origem."></div>
             <a class="btn btn-ghost btn-sm btn-block" href="../buyer/apoios.html">Ver meus apoios</a>
           </div></div>
         </div>
@@ -545,6 +565,7 @@
           </div>
         </div>
         <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div>Pague de uma carteira que você controla (MetaMask, Trust, Ledger, carteira de celular), nunca direto de uma corretora: reembolsos voltam ao endereço de origem.</div></div>
+        <a class="link xs" href="../public/guia-cripto.html"><i data-icon="book-open"></i> Primeira vez com cripto? Guia em 10 minutos</a>
         <div class="flow"><button type="button" class="badge st-aguardando" data-pay-state="1">Aguardando pagamento</button><i data-icon="arrow-right"></i><button type="button" class="badge st-rascunho" data-pay-state="2">Visto na rede</button><i data-icon="arrow-right"></i><button type="button" class="badge st-rascunho" data-pay-state="3">Confirmado</button><i data-icon="arrow-right"></i><button type="button" class="badge st-rascunho" data-pay-state="4">Acesso liberado</button></div>
         <p class="xs muted" data-pay-note></p>
         <div class="row between"><button type="button" class="btn btn-primary" data-pay-check><i data-icon="refresh"></i>Já enviei, verificar na rede</button><span class="xs muted">Verificamos a rede a cada 20 s. Protótipo: clique nos estados para simular.</span></div>
@@ -555,7 +576,7 @@
       (function () {
         // Pagamento direto: estampa o <template> em cada [data-pay], troca a rede, segue o valor livre e simula os estados da transação.
         var NETS = {
-          polygon: { label: 'USDT · Polygon', unit: 'USDT', conf: 12, time: '≈ 1 min', explorer: 'polygonscan' },
+          polygon: { label: 'USDT · Polygon', unit: 'USDT', conf: 12, time: '≈ 30 s', explorer: 'polygonscan' },
           tron: { label: 'USDT · Tron', unit: 'USDT', conf: 19, time: '≈ 1 min', explorer: 'tronscan' },
           base: { label: 'USDC · Base', unit: 'USDC', conf: 12, time: '≈ 30 s', explorer: 'basescan' },
           bitcoin: { label: 'Bitcoin', unit: 'BTC', conf: 2, time: '≈ 20 min', explorer: 'mempool.space' }
@@ -607,6 +628,21 @@
           var sync = function () { var ok = Array.prototype.every.call(boxes, function (c) { return c.checked; }); pay.classList.toggle('locked', !ok); if (note) note.hidden = ok; };
           boxes.forEach(function (c) { c.addEventListener('change', sync); }); sync();
         });
+        // Fila de liberação do lacre: a onda segue o total da conta (o que já apoiou + este apoio), do maior apoio para o menor.
+        var wv = document.querySelector('[data-waves]');
+        if (wv) {
+          var inpA = document.getElementById('apoio-valor'), already = parse(wv.dataset.already), msgW = q(wv, '[data-wave-msg]');
+          var WAVES = [[500, 1, 'na hora do rompimento'], [100, 2, '48 h depois do rompimento'], [10, 3, '96 h depois do rompimento']];
+          var syncW = function () {
+            var v = parse(inpA.value), tot = already + v, hit = WAVES.filter(function (w) { return tot >= w[0]; })[0] || WAVES[2], up = WAVES[hit[1] - 2];
+            wv.querySelectorAll('[data-wave]').forEach(function (r) { r.classList.toggle('on', +r.dataset.wave === hit[1]); });
+            document.querySelectorAll('[data-wave-total]').forEach(function (el) { el.textContent = 'US$ ' + fmt(tot, 2); });
+            msgW.textContent = v < 10 ? 'O apoio mínimo é US$ 10.' : 'Com US$ ' + fmt(v, 2) + ', seu total no lacre passa a US$ ' + fmt(tot, 2) + ': onda ' + hit[1] + ', acesso ' + hit[2] + '.' + (up ? ' Faltam US$ ' + fmt(up[0] - tot, 2) + ' para a onda ' + up[1] + '.' : ' Você recebe junto com os maiores apoios.');
+          };
+          inpA.addEventListener('input', syncW);
+          document.addEventListener('click', function (e) { if (e.target.closest('.amount-options[data-target="#apoio-valor"] [data-amount]')) setTimeout(syncW, 0); });
+          syncW();
+        }
       })();
     </script>
   </main>
