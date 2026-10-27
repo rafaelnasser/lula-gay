@@ -12,6 +12,8 @@ O Lacre é o marketplace onde informação é negociada com três garantias que 
 2. **Curadoria humana obrigatória.** Nada entra no catálogo sem passar pela nossa equipe. Avaliamos legalidade, autenticidade, qualidade e coerência entre a prévia e o conteúdo.
 3. **Prova pública.** Todo item aprovado recebe uma página de prova com hash criptográfico e carimbo de tempo. A prévia é publicada no X e nas redes. O público sabe que o item existe, que é real e que não foi alterado.
 
+**Escopo global.** O Lacre não é uma plataforma brasileira: aceita informação sobre qualquer país, de vendedores e compradores de qualquer lugar. Cada item declara os países a que se refere (ou "Global") e o idioma do material; o catálogo filtra por país. Preços em dólar (US$), liquidados em USDT. O protótipo está em português; o produto nasce com interface em português, inglês e espanhol.
+
 ## 2. O que é e o que não é
 
 | É | Não é |
@@ -81,6 +83,8 @@ O Lacre é o marketplace onde informação é negociada com três garantias que 
 
 Cada categoria tem um **nível de risco padrão** (baixo, médio, alto) que define o rigor da curadoria. Ver `04-curadoria-e-politica-de-conteudo.md`.
 
+Além da categoria, todo item tem **país** (um ou mais códigos ISO 3166-1, ou `GLOBAL`) e **idioma**. São filtros de primeira classe no catálogo e no mural de pedidos.
+
 ## 7. Proposta de valor
 
 **Para quem vende:** um canal para monetizar informação sem expor identidade, com preço definido por quem vende, vários modelos de venda, pagamento garantido por custódia e um selo de curadoria que valoriza o item.
@@ -122,7 +126,9 @@ Cada item aprovado é uma peça de marketing. Cada lacre rompido é uma notícia
 | **Curadoria** | Equipe interna que analisa e aprova itens. |
 | **Prova** | Página pública com hash, carimbo de tempo e status do item. |
 | **Cofre** | Área do comprador com os itens desbloqueados. |
-| **Carteira** | Saldo interno em créditos (USDT, exibido em R$) usado para comprar e receber. Entra e sai só em cripto. |
+| **Carteira** | Saldo interno em créditos (USDT; 1 USDT = US$ 1) usado para comprar e receber. Entra e sai só em cripto. |
+| **Exclusividade (buyout)** | Valor opcional definido pelo vendedor em itens de muitos compradores: quem pagar leva o item só para si e o anúncio encerra. |
+| **País** | Código(s) ISO do(s) país(es) a que a informação se refere, ou Global. |
 | **Apoio** | Contribuição a um lacre coletivo ou a uma recompensa. |
 | **Pedido** | Demanda publicada por compradores com recompensa para quem entregar. |
 | **Entitlement** | Direito de acesso de uma conta a um item (termo técnico). |

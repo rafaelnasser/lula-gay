@@ -8,7 +8,8 @@ Convenções que valem para todos os modelos:
 - Toda compra gera um **entitlement** (direito de acesso) para a conta compradora. Conteúdo nunca é enviado por fora; é acessado no **cofre**.
 - Todo item tem **prazo**: data de encerramento definida pelo vendedor (mínimo 24 h, máximo 90 dias; renovável para modelos abertos).
 - A **comissão da plataforma é única: 10 %** sobre o valor recebido pelo vendedor, em todos os modelos. Nada é cobrado se um lacre coletivo falhar. Detalhes em `09-monetizacao-e-metricas.md`.
-- Todo pagamento é em cripto (USDT, USDC, BTC). Preços são exibidos em R$ e convertidos no momento da operação. Ver `03 §6`.
+- Todo pagamento é em cripto (USDT, USDC, BTC). Preços em US$, liquidados em USDT (1:1). Ver `03 §6`.
+- Itens de muitos compradores (Cópias, Lacre coletivo, Camadas) podem ter um **valor de exclusividade**: quem pagar leva o item só para si e o anúncio encerra. Ver "Compra com exclusividade" abaixo.
 - Se o vendedor cancelar um item com dinheiro em custódia, todos os compradores são reembolsados integralmente e o vendedor recebe uma penalidade de reputação.
 
 ---
@@ -28,7 +29,7 @@ Convenções que valem para todos os modelos:
 | 9 | **Licença** | Direitos de uso por finalidade (editorial, comercial, exclusiva) | Muitos | V3 |
 | 10 | **Consulta paga** | Comprador faz uma pergunta e paga pela resposta verificada | Um | V3 |
 
-Modificadores (combináveis): edição limitada, preço escalonado por volume, metas estendidas, pague o que quiser com mínimo, tudo-ou-nada vs. flexível, compra em grupo, acesso antecipado para apoiadores, marca d'água obrigatória, somente leitura (sem download).
+Modificadores (combináveis): **compra com exclusividade (buyout)**, edição limitada, preço escalonado por volume, metas estendidas, pague o que quiser com mínimo, tudo-ou-nada vs. flexível, compra em grupo, acesso antecipado para apoiadores, marca d'água obrigatória, somente leitura (sem download).
 
 ---
 
@@ -39,14 +40,14 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 **Variantes.**
 - *Ilimitado*: sem teto de unidades.
 - *Edição limitada*: N unidades (ex.: 50). Cria escassez e justifica preço mais alto. O catálogo mostra "37 de 50 restantes".
-- *Preço escalonado*: as primeiras X unidades a um preço, as seguintes a outro (ex.: 10 a R$ 290, depois R$ 490). Recompensa quem compra cedo e cria urgência.
+- *Preço escalonado*: as primeiras X unidades a um preço, as seguintes a outro (ex.: 10 a US$ 290, depois US$ 490). Recompensa quem compra cedo e cria urgência.
 
 **Regras.**
 - Entrega instantânea após o pagamento.
 - Janela de disputa de 72 h: o comprador pode alegar que o conteúdo não corresponde à prévia. Ver `04`.
 - O vendedor pode encerrar a venda a qualquer momento; quem já comprou mantém o acesso.
 
-**Interface.** Botão "Comprar por R$ X", contador de unidades (se limitado), faixa de preço escalonado, selo de curadoria, nota de autenticidade.
+**Interface.** Botão "Comprar por US$ X", contador de unidades (se limitado), faixa de preço escalonado, selo de curadoria, nota de autenticidade.
 
 **Comissão.** 10 %.
 
@@ -59,7 +60,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 **Como funciona.** Um único comprador adquire o item. Após a venda, o item é marcado como "Vendido" e a prévia sai do catálogo (fica apenas o registro na página de prova, sem a prévia).
 
 **Variantes.**
-- *Preço fixo*: "Comprar exclusividade por R$ X".
+- *Preço fixo*: "Comprar exclusividade por US$ X".
 - *Faça uma oferta*: o comprador propõe um valor (acima de um mínimo opcional); o vendedor aceita, recusa ou contrapropõe em até 48 h. As ofertas são vinculantes e o valor fica reservado na carteira do comprador até a resposta.
 - *Compre agora ou oferte*: combina os dois.
 
@@ -80,18 +81,18 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 É o modelo mais característico da plataforma e o que gera mais conversa nas redes.
 
-**Como funciona.** O vendedor define uma **meta** em R$ e um **prazo**. Qualquer pessoa pode apoiar com qualquer valor a partir de um mínimo (R$ 10). Quando a soma atinge a meta, o lacre é rompido e o conteúdo é liberado conforme a regra de liberação escolhida.
+**Como funciona.** O vendedor define uma **meta** em US$ e um **prazo**. Qualquer pessoa pode apoiar com qualquer valor a partir de um mínimo (US$ 10). Quando a soma atinge a meta, o lacre é rompido e o conteúdo é liberado conforme a regra de liberação escolhida.
 
 **Regras de liberação (o vendedor escolhe uma).**
 - *Público*: todo mundo passa a ter acesso, inclusive quem não apoiou. Os apoiadores ganham acesso 24 h antes e um selo "Rompeu este lacre" no perfil. É o modelo de bem público.
 - *Apoiadores*: só quem apoiou recebe acesso. Depois da liberação, quem chegou atrasado pode comprar por um preço fixo definido pelo vendedor (modelo passa a Cópias).
-- *Apoiadores com piso*: só quem apoiou a partir de um valor mínimo (ex.: R$ 50) recebe acesso completo; valores menores recebem um resumo ou agradecimento.
+- *Apoiadores com piso*: só quem apoiou a partir de um valor mínimo (ex.: US$ 50) recebe acesso completo; valores menores recebem um resumo ou agradecimento.
 
 **Regras de arrecadação.**
 - *Tudo ou nada* (padrão): se a meta não for atingida no prazo, todos os apoios voltam para as carteiras automaticamente.
 - *Flexível*: o vendedor pode optar por liberar com o que arrecadou se tiver passado de um piso (ex.: 70 % da meta). Deve ser declarado antes de publicar.
 
-**Metas estendidas.** O vendedor pode definir níveis acima da meta que destravam material adicional (ex.: R$ 80 mil libera o relatório; R$ 120 mil libera também as entrevistas em áudio). Cada nível é um asset separado no envio.
+**Metas estendidas.** O vendedor pode definir níveis acima da meta que destravam material adicional (ex.: US$ 80 mil libera o relatório; US$ 120 mil libera também as entrevistas em áudio). Cada nível é um asset separado no envio.
 
 **Mecânicas de engajamento.**
 - Barra de progresso pública, número de apoiadores e tempo restante.
@@ -101,7 +102,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Regras de custódia.** Apoios ficam em custódia até o resultado. Se a meta for batida, o valor vai para a custódia do item e é liberado ao vendedor 72 h após a liberação do conteúdo, descontados pedidos de reembolso procedentes.
 
-**Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (R$ 20, 50, 100, 250, outro), regra de liberação em destaque, metas estendidas em lista, atualizações do vendedor.
+**Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, outro), regra de liberação em destaque, metas estendidas em lista, atualizações do vendedor.
 
 **Comissão.** 10 %.
 
@@ -154,7 +155,7 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 **Como funciona.** O vendedor divide o conteúdo em camadas: a prévia é gratuita, a camada 1 custa X, a camada 2 custa Y, o pacote completo custa Z (com desconto). O comprador prova antes de comprometer o valor total.
 
-**Exemplo.** Estudo de mercado: camada 1 = sumário executivo e 10 gráficos (R$ 190); camada 2 = relatório completo (R$ 890); camada 3 = planilhas e modelo (R$ 1.900); pacote = R$ 2.400.
+**Exemplo.** Estudo de mercado: camada 1 = sumário executivo e 10 gráficos (US$ 190); camada 2 = relatório completo (US$ 890); camada 3 = planilhas e modelo (US$ 1.900); pacote = US$ 2.400.
 
 **Regras.** Quem compra uma camada paga só a diferença para subir. Cada camada é um asset separado, analisado pela curadoria.
 
@@ -213,10 +214,26 @@ Modificadores (combináveis): edição limitada, preço escalonado por volume, m
 
 ---
 
+## Compra com exclusividade (buyout)
+
+Um item publicado para muitos compradores pode trazer, ao lado do preço normal ou da meta, um **valor de exclusividade** definido pelo vendedor. Quem pagar esse valor leva o item só para si e o anúncio encerra na hora.
+
+**Regras.**
+- Opcional, definido no passo 4 do envio. Sugestão de mínimo: 5× a meta (lacre coletivo) ou 20× o preço unitário (cópias). A curadoria pode sugerir outro valor.
+- Disponível enquanto o item está ativo. Em lacre coletivo, só até a meta ser batida; depois do rompimento não existe mais exclusividade a vender.
+- **Cópias e Camadas:** quem já comprou mantém o acesso (já recebeu). O comprador da exclusividade vê, antes de pagar, quantas cópias já foram vendidas. A partir da compra, ninguém mais recebe.
+- **Lacre coletivo:** todos os apoios são devolvidos automaticamente às carteiras e os apoiadores são notificados. O conteúdo não é liberado ao público.
+- O vendedor assina a mesma declaração de exclusividade do modelo Exclusivo (24 meses), e o conteúdo é destruído dos servidores após a janela de disputa.
+- Comissão de 10 % sobre o valor pago. A página de prova registra "vendido com exclusividade" e a prévia sai do catálogo.
+- Assinatura e Licença: fase 2 (a licença exclusiva já cobre o caso de fotos e vídeos).
+
+**Interface.** No painel do item, abaixo da ação principal: "Comprar com exclusividade · US$ 250.000 · encerra o anúncio; os 1.187 apoios são devolvidos". No checkout, uma tela própria com as consequências e um aceite explícito. Nas redes, o post "Vendido com exclusividade" avisa que o item saiu do catálogo.
+
 ## Modificadores
 
 | Modificador | O que faz | Aplica-se a |
 |---|---|---|
+| Compra com exclusividade | Valor que encerra o anúncio e entrega o item a um único comprador | Cópias, Lacre coletivo, Camadas |
 | Edição limitada | Teto de unidades | Cópias, Camadas, Licença |
 | Preço escalonado | Preço sobe conforme vende | Cópias |
 | Metas estendidas | Níveis acima da meta destravam extras | Lacre coletivo, Pedido |

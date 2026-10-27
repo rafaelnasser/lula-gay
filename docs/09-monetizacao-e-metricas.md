@@ -14,21 +14,21 @@
 
 ## 2. Comissão
 
-**10 % em todos os modelos.** Uma única regra, fácil de comunicar ("você fica com 90 %"). Nada é cobrado se um lacre coletivo falhar ou se um pedido não for atendido. Taxas de rede do saque são repassadas ao usuário (USDT em Polygon ≈ R$ 0,20; Lightning ≈ R$ 0,05; BTC on-chain variável).
+**10 % em todos os modelos.** Uma única regra, fácil de comunicar ("você fica com 90 %"). Nada é cobrado se um lacre coletivo falhar ou se um pedido não for atendido. Taxas de rede do saque são repassadas ao usuário (USDT em Polygon ≈ US$ 0,20; Lightning ≈ US$ 0,05; BTC on-chain variável).
 
 **Custos de pagamento da plataforma:** infraestrutura de nós e indexadores, taxas de rede das consolidações entre carteira quente e fria, spread de conversão BTC → USDT nos depósitos em bitcoin (cotação travada 10 min; hedge imediato na tesouraria). Estimativa: 0,3 % a 0,5 % do volume.
 
 ## 3. Unidade econômica (exemplo)
 
-Lacre coletivo de R$ 80.000 batido:
-- Receita de comissão: R$ 8.000.
-- Custo de pagamento (nós, consolidações, spread BTC): ~R$ 320.
-- Curadoria: 2 curadores × 6 h + jurídico 2 h ≈ R$ 1.400.
-- Publicação e infra alocadas: ~R$ 200.
-- Margem de contribuição: ~R$ 6.080 (76 %).
+Lacre coletivo de US$ 80.000 batido:
+- Receita de comissão: US$ 8.000.
+- Custo de pagamento (nós, consolidações, spread BTC): ~US$ 320.
+- Curadoria: 2 curadores × 6 h + jurídico 2 h ≈ US$ 1.400.
+- Publicação e infra alocadas: ~US$ 200.
+- Margem de contribuição: ~US$ 6.080 (76 %).
 
-Cópia de R$ 490 (100 unidades vendidas):
-- GMV R$ 49.000; comissão R$ 4.900; pagamentos ~R$ 200; curadoria única ~R$ 500; margem ~R$ 4.200.
+Cópia de US$ 490 (100 unidades vendidas):
+- GMV US$ 49.000; comissão US$ 4.900; pagamentos ~US$ 200; curadoria única ~US$ 500; margem ~US$ 4.200.
 
 Itens que não vendem custam curadoria. Por isso: triagem automática barata, análise expressa paga e limite de envios simultâneos por vendedor novo (3 itens até a primeira aprovação).
 
@@ -64,6 +64,6 @@ A interface do vendedor mostra faixas de preço de itens aprovados semelhantes (
 
 | Mês | Itens ativos | GMV | Lacres rompidos |
 |---|---|---|---|
-| 1 | 30 | R$ 60 mil | 1 |
-| 3 | 150 | R$ 400 mil | 6 |
-| 6 | 500 | R$ 1,5 mi | 20 |
+| 1 | 30 | US$ 60 mil | 1 |
+| 3 | 150 | US$ 400 mil | 6 |
+| 6 | 500 | US$ 1,5 mi | 20 |

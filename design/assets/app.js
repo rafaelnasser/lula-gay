@@ -310,7 +310,7 @@
     html += '<button class="icon-btn menu-btn" data-sidebar-toggle aria-label="Abrir menu">' + iconSvg('menu') + '</button>';
     if (title) html += '<span class="page-title">' + title + '</span>';
     html += '<div class="search"><span class="icon-wrap">' + iconSvg('search') + '</span><input class="input" type="search" placeholder="' + searchPh + '" aria-label="Buscar"></div><span class="spacer"></span>';
-    if (kind !== 'admin') html += '<a class="wallet-chip" href="' + href('buyer/carteira.html') + '">' + iconSvg('wallet') + '<span class="label muted">Carteira</span><b>R$ 1.240,00</b></a>';
+    if (kind !== 'admin') html += '<a class="wallet-chip" href="' + href('buyer/carteira.html') + '">' + iconSvg('wallet') + '<span class="label muted">Carteira</span><b>US$ 1.240,00</b></a>';
     html += '<button class="icon-btn" data-theme-toggle aria-label="Alternar tema"></button>';
     html += '<a class="icon-btn" href="' + href('buyer/notificacoes.html') + '" aria-label="Notificações">' + iconSvg('bell') + '<span class="dot"></span></a>';
     html += '<div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Conta">' + (kind === 'admin' ? '<span class="identicon" style="width:26px;height:26px;background:var(--brass-soft);display:inline-flex;align-items:center;justify-content:center;color:var(--brass);font-weight:700;font-size:11px">AR</span>' : '<span class="identicon" data-handle="coruja-7f3a"></span>') + '</button>';

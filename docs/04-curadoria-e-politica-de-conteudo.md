@@ -35,11 +35,11 @@ Enviado ──► Triagem automática ──► Fila ──► Em análise ─�
 Cada bloco tem itens de marcar e um campo de nota. O item só pode ser aprovado com todos os blocos concluídos. Blocos 1 e 2 têm peso de veto.
 
 **Bloco 1 · Legalidade (veto)**
-- [ ] Não contém dados pessoais de terceiros sem base legal (LGPD). Dados de pessoas públicas no exercício da função pública são aceitáveis quando de fonte pública.
+- [ ] Não contém dados pessoais de terceiros sem base legal (GDPR, LGPD e equivalentes do país de origem). Dados de pessoas públicas no exercício da função pública são aceitáveis quando de fonte pública.
 - [ ] Não contém conteúdo íntimo, imagens de menores em qualquer contexto sensível, ou material sexual.
 - [ ] Não contém credenciais, senhas, chaves, dados bancários ou de cartão.
 - [ ] Não viola direitos autorais de terceiros: o vendedor é autor, tem licença ou o material é de domínio público / fonte pública reutilizável.
-- [ ] Não é informação privilegiada sobre valores mobiliários (fato relevante não divulgado de companhia aberta).
+- [ ] Não é informação privilegiada sobre valores mobiliários (fato relevante não divulgado de companhia listada em qualquer mercado).
 - [ ] Não viola sigilo legal (segredo de justiça, sigilo fiscal, bancário, médico, de defesa).
 - [ ] Não configura crime contra a honra: afirmações sobre pessoas identificáveis são sustentadas por documentos ou são claramente opinião.
 - [ ] Não incita, não instrui crime, não é material de ódio.
@@ -75,7 +75,7 @@ Técnicas: comparação com fontes oficiais, análise de metadados antes da remo
 
 **Bloco 7 · Duplicidade e interesse**
 - [ ] Não é cópia de item já publicado ou de material livremente disponível (se for compilação de material público, o valor está no trabalho de compilar e isso está claro na descrição).
-- [ ] Categoria e tags corretas.
+- [ ] Categoria, país(es) e idioma corretos.
 
 ## 4. Decisões e códigos de motivo
 
@@ -111,8 +111,8 @@ Técnicas: comparação com fontes oficiais, análise de metadados antes da remo
 - Conteúdo íntimo ou sexual de qualquer pessoa; qualquer conteúdo envolvendo menores em contexto sensível.
 - Credenciais, senhas, chaves, acessos, exploits ativos, instruções para invasão.
 - Material protegido por direitos autorais sem autorização (livros, filmes, software, cursos de terceiros).
-- Informação privilegiada sobre companhias abertas ou que permita manipulação de mercado.
-- Documentos sob sigilo legal (judicial, fiscal, bancário, médico, de defesa) obtidos sem autorização.
+- Informação privilegiada sobre companhias listadas em qualquer mercado, ou que permita manipulação de mercado.
+- Documentos sob sigilo legal (judicial, fiscal, bancário, médico, de defesa) obtidos sem autorização, em qualquer país.
 - Acusações contra pessoas identificáveis sem documentação que as sustente.
 - Segredos comerciais obtidos por violação de dever de confidencialidade.
 - Qualquer coisa que a nossa equipe não consiga avaliar com segurança. Na dúvida, não publicamos.
@@ -127,7 +127,7 @@ Técnicas: comparação com fontes oficiais, análise de metadados antes da remo
 
 **Denúncias.** Qualquer pessoa (logada ou não) pode denunciar um item pela página pública. Motivos: dados pessoais, direitos autorais, falsificação, conteúdo ilegal, outro. A denúncia entra na fila com prioridade alta e o item pode ser **suspenso preventivamente** (sai do catálogo, compras pausam) enquanto é reanalisado.
 
-**Pedidos de titulares (LGPD).** Fluxo para alguém que afirma estar identificado em um item: formulário público, análise jurídica em até 15 dias, resposta documentada. Possíveis saídas: redação de nova versão, retirada do item, manutenção com fundamento (interesse público / fonte pública).
+**Pedidos de titulares (GDPR, LGPD e equivalentes).** Fluxo para alguém que afirma estar identificado em um item: formulário público, análise jurídica em até 15 dias, resposta documentada. Possíveis saídas: redação de nova versão, retirada do item, manutenção com fundamento (interesse público / fonte pública).
 
 **Ordens judiciais e notificações.** Canal dedicado (`juridico@`), registro de recebimento, cumprimento com o mínimo necessário, comunicação ao vendedor quando permitido.
 

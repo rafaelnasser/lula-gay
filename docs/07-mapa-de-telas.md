@@ -36,7 +36,7 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 
 ### `public/home.html` · Página inicial
 - **Hero**: título ("Informação com lacre. Anonimato dos dois lados."), subtítulo com as 3 garantias, botões "Explorar o catálogo" e "Vender informação"; ao lado, um card de item em destaque (lacre coletivo em andamento com barra de progresso ao vivo).
-- **Faixa de confiança**: números (itens curados, lacres rompidos, R$ liberados ao público, tempo mediano de curadoria) e os 4 nomes de modelos.
+- **Faixa de confiança**: números (itens curados, lacres rompidos, US$ liberados ao público, tempo mediano de curadoria) e os 4 nomes de modelos.
 - **Como funciona** em 3 passos para quem compra e 3 para quem vende.
 - **Lacres coletivos em andamento** (3 cards com progresso).
 - **Novos no catálogo** (grade de 6 cards de item).
@@ -46,7 +46,7 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 - CTA final: criar conta anônima.
 
 ### `public/explorar.html` · Catálogo
-- Barra de busca, chips de categoria, filtros laterais (modelo de venda, tipo de conteúdo, nível de autenticidade, faixa de preço, status: ativo / financiado / encerrando em 24 h), ordenação (recentes, mais apoiados, encerrando, preço).
+- Barra de busca, chips de categoria, filtros laterais (**país** com contagens e busca, idioma, modelo de venda, tipo de conteúdo, nível de autenticidade, faixa de preço, status: ativo / financiado / encerrando em 24 h), ordenação (recentes, mais apoiados, encerrando, preço). Cada card mostra o código do país.
 - Alternância grade/lista. Grade de cards de item: prévia selada, categoria, chip do modelo, título, autenticidade, vendedor (ou "vendedor oculto"), preço ou progresso + prazo.
 - Seção ancorada `#coletivos` com os lacres coletivos.
 - Paginação. Estado vazio para busca sem resultados (mostrar como exemplo em uma aba ou nota).
@@ -54,8 +54,8 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 ### `public/item.html` · Página do item (6 variantes do painel de compra)
 Coluna principal: prévia grande selada (com seletor de miniaturas: capa, página tarjada, amostra de dados), título curado, categoria, tags, selo de curadoria com nível de autenticidade e número de curadores, descrição, "O que você recebe" (lista de arquivos com tamanho e tipo, sem nomes sensíveis), "O que a curadoria verificou" (resumo por bloco), avisos (ex.: "contém nomes de agentes públicos no exercício da função"), hash do pacote (abreviado, link para a prova), vendedor (pseudônimo, reputação, itens aprovados, desde) ou "vendedor optou por não exibir o pseudônimo", perguntas públicas respondidas (Q&A moderado), itens relacionados.
 Coluna lateral (painel fixo) com uma variante por modelo. Um seletor de desenvolvimento no canto permite alternar:
-1. **Lacre coletivo**: arrecadado em destaque, meta, barra, apoiadores, prazo com contagem, regra de liberação ("Quando bater, fica público para todos. Apoiadores veem 24 h antes."), botões de valor (R$ 20 / 50 / 100 / 250 / outro), botão "Apoiar", metas estendidas, atualizações do vendedor, marcos postados.
-2. **Cópias**: preço, "37 de 100 restantes", preço escalonado se houver, botão "Comprar cópia", "entrega imediata no cofre", direitos (download permitido / somente leitura), janela de disputa 72 h.
+1. **Lacre coletivo**: arrecadado em destaque, meta, barra, apoiadores, prazo com contagem, regra de liberação ("Quando bater, fica público para todos. Apoiadores veem 24 h antes."), botões de valor (US$ 20 / 50 / 100 / 250 / outro), botão "Apoiar", metas estendidas, atualizações do vendedor, marcos postados. Abaixo, bloco **Comprar com exclusividade** (valor, consequência: encerra o anúncio e devolve os apoios).
+2. **Cópias**: preço, "37 de 100 restantes", preço escalonado se houver, botão "Comprar cópia", "entrega imediata no cofre", direitos (download permitido / somente leitura), janela de disputa 72 h. Bloco **Comprar com exclusividade** (valor; quem já comprou mantém; ninguém mais recebe).
 3. **Exclusivo**: preço, "um único comprador", botão "Comprar exclusividade", "Fazer uma oferta" (campo com mínimo), exclusividade declarada de 24 meses, destruição do conteúdo após a venda.
 4. **Leilão lacrado**: "7 lances lacrados", reserva não revelada, encerra em (contagem), campo de lance único, explicação do segundo preço, saldo reservado.
 5. **Camadas**: lista de camadas com conteúdo, preço e botão; indicador do que o usuário já tem.
@@ -75,7 +75,7 @@ Rodapé do painel em todas: "Compra anônima. Registramos item, valor e data. Na
 
 ### `public/pedidos.html` · Mural de pedidos
 - Explicação em uma linha + botão "Fazer um pedido" (leva ao login se deslogado).
-- Filtros (categoria, recompensa mínima, status) e cards de pedido: título, recompensa acumulada, contribuidores, prazo, status (aberto / em curadoria / atendido), critérios de aceite resumidos, botões "Somar à recompensa" e "Tenho essa informação".
+- Filtros (categoria, país, recompensa mínima, status) e cards de pedido: título, recompensa acumulada, contribuidores, prazo, status (aberto / em curadoria / atendido), critérios de aceite resumidos, botões "Somar à recompensa" e "Tenho essa informação".
 
 ### `public/pedido.html` · Página do pedido
 - Título, autor (pseudônimo), categoria, descrição, critérios de aceite (lista numerada), formato esperado, prazo.
@@ -125,14 +125,14 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `buyer/carteira.html`
 - Cartões: saldo disponível, em custódia (apoios ativos), reservado (lances/ofertas).
-- Saldo exibido em R$ com o equivalente em USDT (os créditos são guardados em USDT; preços em R$ são convertidos no momento de cada operação).
-- Abas: **Depositar** (USDT Polygon, USDT Tron, USDC Polygon/Base, Bitcoin Lightning, Bitcoin on-chain; endereço novo por depósito com QR, confirmações exigidas, cotação travada por 10 min para BTC, explicação de que o endereço não é vinculado a identidade), **Sacar** (moeda, rede, endereço informado na hora e apagado após o envio, taxa de rede repassada, senha + TOTP, limite antifraude para contas novas), **Extrato** (tabela com tipo, referência, valor em R$ e USDT, saldo após, status) e **Redes e taxas** (moeda, rede, confirmações, mínimo de depósito, taxa de saque).
+- Saldo exibido em US$ com o equivalente em USDT (os créditos são guardados em USDT; preços em US$ são convertidos no momento de cada operação).
+- Abas: **Depositar** (USDT Polygon, USDT Tron, USDC Polygon/Base, Bitcoin Lightning, Bitcoin on-chain; endereço novo por depósito com QR, confirmações exigidas, cotação travada por 10 min para BTC, explicação de que o endereço não é vinculado a identidade), **Sacar** (moeda, rede, endereço informado na hora e apagado após o envio, taxa de rede repassada, senha + TOTP, limite antifraude para contas novas), **Extrato** (tabela com tipo, referência, valor em US$ e USDT, saldo após, status) e **Redes e taxas** (moeda, rede, confirmações, mínimo de depósito, taxa de saque).
 
 ### `buyer/checkout.html` · Checkout (variantes)
-- Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura.
+- Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura, **exclusividade (buyout)** com as consequências e um aceite explícito.
 - Saldo disponível vs. valor; se insuficiente, bloco "Depositar a diferença" inline.
 - O que acontece depois (entrega imediata / custódia / reembolso automático).
-- Transparência: "o que registramos sobre esta compra". Valor em R$ e o débito equivalente em USDT.
+- Transparência: "o que registramos sobre esta compra". Valor em US$ e o débito equivalente em USDT.
 - Aceite dos termos do modelo e botão de confirmação. Tela de sucesso (variante) com link para o cofre ou apoios.
 
 ### `buyer/cofre.html`
@@ -175,10 +175,10 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - "Seus anúncios" (resumo por status), "Pedidos abertos que combinam com você" (3 cards), "Dicas de anonimato para vendedores".
 
 ### `seller/novo-anuncio.html` · Assistente de envio (6 passos em uma tela)
-1. **Tipo e categoria**: cards de tipo (documento, dados, imagem, vídeo, áudio, texto, código, pacote), categoria (select) com nível de risco exibido, vinculação opcional a um pedido existente.
+1. **Tipo e categoria**: cards de tipo (documento, dados, imagem, vídeo, áudio, texto, código, pacote), categoria (select) com nível de risco exibido, **país(es) a que a informação se refere (ou Global) e idioma do material**, vinculação opcional a um pedido existente.
 2. **Arquivos**: dropzone, lista de arquivos com progresso e hash local, relatório de metadados removidos (ex.: "EXIF: GPS, dispositivo; DOCX: autor"), alertas da triagem automática (ex.: "detectamos 12 nomes próprios"), limite 20 GB.
 3. **Prévia e descrição**: título (até 120), resumo (até 280), descrição (markdown restrito), seleção de prévias geradas (borradas/tarjadas) com opção de marcar o que a curadoria pode mostrar, tags, aviso "a curadoria pode reescrever título e resumo".
-4. **Modelo de venda**: cards dos modelos (Cópias, Exclusivo, Lacre coletivo, Pedido, Leilão, Camadas, Assinatura, Janela, Licença) com os da V2/V3 marcados "em breve"; configuração do modelo escolhido (campos específicos: preço, limite, meta, prazo, regra de liberação, metas estendidas, reserva, incremento, camadas, período); simulação de ganho líquido com a taxa; modificadores (marca d'água, somente leitura, acesso antecipado, garantia de exclusividade).
+4. **Modelo de venda**: cards dos modelos (Cópias, Exclusivo, Lacre coletivo, Pedido, Leilão, Camadas, Assinatura, Janela, Licença) com os da V2/V3 marcados "em breve"; configuração do modelo escolhido (campos específicos: preço, limite, meta, prazo, regra de liberação, metas estendidas, reserva, incremento, camadas, período); **valor de exclusividade (opcional) em Cópias, Lacre coletivo e Camadas**, com explicação do que acontece ao ser pago; simulação de ganho líquido com a taxa; modificadores (marca d'água, somente leitura, acesso antecipado, garantia de exclusividade).
 5. **Declarações**: 6 checkboxes com texto completo (origem lícita; titularidade ou direito de venda; sem dados pessoais de terceiros sem base legal; sem conteúdo íntimo/menores; sem credenciais; não é informação privilegiada de mercado nem sob sigilo legal), opção "ocultar meu pseudônimo na página pública", aviso de que as declarações ficam registradas.
 6. **Revisão e envio**: resumo de tudo, prazo estimado da curadoria (48 h), "o que acontece agora", botão "Enviar para curadoria". Tela de sucesso.
 
@@ -208,7 +208,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Fila prioritária (5 itens de risco alto), alertas (triagem bloqueou 2 envios hoje; 1 ordem judicial recebida), atividade recente da equipe.
 
 ### `admin/fila.html`
-- Tabela com filtros (status, risco, categoria, modelo, responsável, idade) e ordenação por prioridade; colunas: prioridade, item, categoria, modelo, risco, tempo na fila, triagem (ícones: AV ok, PII n, duplicado), responsável(is), dois olhos, ações (Assumir, Abrir).
+- Tabela com filtros (status, risco, categoria, país, modelo, responsável, idade) e ordenação por prioridade; colunas: prioridade, item, categoria, país, modelo, risco, tempo na fila, triagem (ícones: AV ok, PII n, duplicado), responsável(is), dois olhos, ações (Assumir, Abrir).
 - Linha expandida com resumo da triagem.
 
 ### `admin/analise.html` · Workbench de análise (3 colunas)

@@ -2,7 +2,7 @@
 
 ## Fase 0 · Fundamentos (semanas 1–3)
 - Entidade, jurisdição e parecer jurídico sobre: registros de acesso (Marco Civil), custódia de cripto de usuários (Lei 14.478/2022 e regulação do Banco Central), termos de uso, política de conteúdo, declarações do vendedor, contratos de licença e cessão.
-- Tesouraria cripto: BTCPay Server em produção, nós/indexadores de Polygon, Tron e Base, carteira quente/fria com multisig, cotação R$/USDT.
+- Tesouraria cripto: BTCPay Server em produção, nós/indexadores de Polygon, Tron e Base, carteira quente/fria com multisig, cotação US$/USDT.
 - Infra base: Postgres, Redis, MinIO, Vault, CI/CD, ambientes, backups.
 - Design system implementado como componentes (a partir de `design/assets/`).
 
@@ -10,12 +10,13 @@
 
 **Contas e carteira**
 - Cadastro pseudônimo (handle, senha, frase de recuperação), login, recuperação, TOTP, sessões.
-- Carteira: depósito em USDT/USDC (Polygon, Tron, Base) e Bitcoin (Lightning, on-chain), extrato em R$ e USDT, saque em cripto com limite antifraude, lotes horários.
+- Carteira: depósito em USDT/USDC (Polygon, Tron, Base) e Bitcoin (Lightning, on-chain), extrato em US$ e USDT, saque em cripto com limite antifraude, lotes horários.
 - Ledger de partidas dobradas, reconciliação diária.
 
 **Oferta**
 - Assistente de envio em 6 passos; upload direto ao S3; pipeline de ingestão (AV, metadados, hash, prévias, varreduras, OCR).
-- Modelos: **Cópias, Exclusivo (preço fixo + oferta), Lacre coletivo, Pedido com recompensa**.
+- Modelos: **Cópias, Exclusivo (preço fixo + oferta), Lacre coletivo, Pedido com recompensa**, com o modificador **compra com exclusividade** em Cópias e Lacre coletivo.
+- País e idioma em todo item e pedido; filtro de país no catálogo e no mural; interface em português, inglês e espanhol.
 - Painel do vendedor, lista de anúncios, feedback da curadoria, ganhos, reputação v1.
 
 **Demanda**
@@ -38,6 +39,7 @@
 - Instagram/Threads; cards por canal; melhores horários.
 - Reputação v2 (selos: Rompeu lacres, Fonte recorrente, Verificado 10×).
 - Espelho `.onion`; cifragem ponta a ponta opcional nas mensagens.
+- Equivalente em moeda local (BRL, EUR, ARS) como referência de exibição; exclusividade também em Assinatura.
 - Escrow on-chain (USDC em Base/Polygon) para reduzir a custódia pela plataforma; Monero como opção de depósito.
 - Canal de notificação externo opcional (Telegram bot) com aviso de vínculo.
 

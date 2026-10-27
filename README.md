@@ -41,16 +41,19 @@ design/      protótipo navegável em HTML estático
 
 ## Decisões que o protótipo já toma
 
+- **Global.** Informação de qualquer país, com país e idioma em cada item e filtro de país no catálogo. Preços em dólar (US$), liquidados em USDT. Interface em português no protótipo; produto com pt, en e es.
+
 - **Conta sem identidade**: pseudônimo gerado + senha ou passkey + frase de recuperação de 12 palavras. Sem e-mail, telefone, CPF.
-- **Só cripto, dos dois lados.** Depósito em USDT/USDC (Polygon, Tron, Base) ou Bitcoin (Lightning, on-chain); saque em cripto. Nenhum real entra ou sai, nenhum parceiro de pagamento, nenhum KYC. A carteira interna guarda créditos em USDT; preços são exibidos em R$ e convertidos na hora.
+- **Só cripto, dos dois lados.** Depósito em USDT/USDC (Polygon, Tron, Base) ou Bitcoin (Lightning, on-chain); saque em cripto. Nenhum real entra ou sai, nenhum parceiro de pagamento, nenhum KYC. A carteira interna guarda créditos em USDT; preços são exibidos em US$ e convertidos na hora.
 - **Comissão única de 10 %** em todos os modelos. Nada é cobrado se um lacre coletivo falhar.
+- **Compra com exclusividade.** Em Cópias, Lacre coletivo e Camadas, o vendedor pode definir um valor pelo qual um único comprador leva o item e o anúncio encerra (apoios devolvidos).
 - **Nada é publicado sem curadoria**. Checklist em 7 blocos, nível de autenticidade público, regra de dois olhos em categorias de risco alto, escalonamento jurídico.
 - **MVP com 4 modelos**: Cópias, Exclusivo, Lacre coletivo e Pedido com recompensa. Os outros 6 entram nas fases 2 e 3.
 - **Página de prova** por item, destino de todo post nas redes.
 
 ## Decisões que ainda precisam de vocês
 
-1. **Jurisdição e registros de acesso.** O Marco Civil exige guarda de registros de acesso por 6 meses para provedores brasileiros. O protótipo assume a opção "cumprir com minimização" (`docs/03 §8`). Validar com advogado antes de escrever a promessa pública de anonimato.
+1. **Sede e jurisdição.** A plataforma é global, mas a entidade operadora tem uma sede, e é ela que define guarda de registros de acesso, regras de ativos virtuais e sanções (`docs/03 §8` compara Brasil, UE e EUA). Validar com advogado antes de escrever a promessa pública de anonimato.
 2. **Custódia de cripto.** Guardar cripto de usuários pode enquadrar a plataforma como prestadora de serviços de ativos virtuais (Lei 14.478/2022 e regulação do Banco Central). Validar jurisdição e estrutura antes do lançamento; o escrow on-chain da fase 2 reduz esse enquadramento.
 3. **Nome definitivo.** "Lacre" está em um único lugar (`design/assets/app.js`, constante `BRAND`) e nos textos.
 4. **Comissão.** 10 % é a decisão atual; `docs/09` mostra o efeito na unidade econômica.

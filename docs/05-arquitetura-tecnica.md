@@ -17,7 +17,7 @@ Recomendação para uma equipe pequena (2 a 4 pessoas) que precisa lançar um MV
 | Antivírus | ClamAV + sandbox (Firecracker/gVisor) para arquivos suspeitos | VirusTotal (envia o arquivo para fora: evitar) | Conteúdo não sai da infra |
 | Bitcoin | **BTCPay Server** (on-chain + Lightning), auto-hospedado | — | Sem terceiros, sem KYC |
 | Stablecoins (USDT/USDC) | Nó/indexador próprio por rede (Polygon, Tron, Base) com derivação de endereços por xpub e carteira quente/fria multisig | Provedor de custódia (exige KYC do comerciante; evitar) | Nenhum real toca o sistema; ver `03 §6` |
-| Cotação R$/USDT | Mediana de três corretoras via API pública, atualizada a cada minuto | — | Preços em R$, liquidação em USDT |
+| Cotação BTC/USDT | Mediana de três corretoras via API pública, atualizada a cada minuto | — | Só para depósitos em Bitcoin; USDT = US$ 1:1 |
 | Social | X API v2, Telegram Bot API, Bluesky AT Protocol, Instagram Graph API (imagem) | Buffer/Hootsuite | Controle total do que sai |
 | Infra | Docker Compose no MVP → Kubernetes leve (k3s) na V2; servidores dedicados na UE ou BR | Fly.io / Render | Custo previsível; controle sobre logs |
 | Observabilidade | Prometheus + Grafana + Loki, sem PII nos logs | Datadog | Dados não saem |
@@ -92,7 +92,7 @@ Limites do MVP: 20 GB por item, 200 arquivos por item, formatos listados em `01 
 
 ## 5. Ledger e custódia
 
-Partidas dobradas em `ledger_entries`: cada lançamento tem `debit_account`, `credit_account`, `amount` (USDT com 6 casas decimais, inteiro em micro-USDT), `brl_rate` (cotação usada, para exibição), `ref_type`, `ref_id`, `created_at`. Nunca se atualiza ou apaga um lançamento; correções são novos lançamentos. Os exemplos abaixo estão em R$ equivalentes para leitura.
+Partidas dobradas em `ledger_entries`: cada lançamento tem `debit_account`, `credit_account`, `amount` (USDT com 6 casas decimais, inteiro em micro-USDT), `ref_type`, `ref_id`, `created_at`. Nunca se atualiza ou apaga um lançamento; correções são novos lançamentos. 1 USDT = US$ 1; os exemplos abaixo estão em US$.
 
 Tipos de conta: `wallet:<account_id>`, `escrow:<listing_id>`, `escrow:<request_id>`, `reserve:<account_id>` (saldo reservado em lances/ofertas), `platform:fees`, `platform:guarantee_fund`, `payout:pending`, `treasury:<moeda>:<rede>` (ex.: `treasury:usdt:polygon`, `treasury:btc:lightning`), `refunds`.
 
@@ -100,26 +100,26 @@ Tipos de conta: `wallet:<account_id>`, `escrow:<listing_id>`, `escrow:<request_i
 
 | Evento | Débito → Crédito |
 |---|---|
-| Depósito de 93 USDT confirmado (≈ R$ 500) | `treasury:usdt:polygon` → `wallet:A` |
-| Compra de cópia R$ 490 | `wallet:A` → `escrow:L1` |
+| Depósito de 93 USDT confirmado (≈ US$ 500) | `treasury:usdt:polygon` → `wallet:A` |
+| Compra de cópia US$ 490 | `wallet:A` → `escrow:L1` |
 | Fim da janela de disputa (comissão 10 %) | `escrow:L1` → `wallet:V` (441,00); `escrow:L1` → `platform:fees` (49,00) |
-| Apoio ao lacre coletivo R$ 100 | `wallet:B` → `escrow:L2` |
+| Apoio ao lacre coletivo US$ 100 | `wallet:B` → `escrow:L2` |
 | Meta não batida | `escrow:L2` → `wallet:B` (para cada apoiador) |
-| Lance R$ 15.000 | `wallet:C` → `reserve:C` |
+| Lance US$ 15.000 | `wallet:C` → `reserve:C` |
 | Lance superado | `reserve:C` → `wallet:C` |
-| Saque de R$ 2.000 em USDT | `wallet:V` → `payout:pending` → `treasury:usdt:polygon` |
+| Saque de US$ 2.000 em USDT | `wallet:V` → `payout:pending` → `treasury:usdt:polygon` |
 
 Saldo disponível = soma dos créditos − débitos da `wallet:X`. Materializado em `wallet_balances` por trigger para leitura rápida, com reconciliação noturna contra o ledger.
 
 ## 6. Pagamentos (só cripto)
 
-**Depósito em stablecoin (USDT/USDC):** a API deriva um endereço novo da xpub da rede escolhida e o associa à carteira (`crypto_deposit`). O indexador (nó próprio ou RPC + worker) observa o endereço; ao atingir as confirmações (12 Polygon, 19 Tron, 12 Base) credita 1:1 em USDT. Endereços nunca são reutilizados. Depósitos abaixo do mínimo (5 USDT) são creditados sem bônus de taxa.
+**Depósito em stablecoin (USDT/USDC):** a API deriva um endereço novo da xpub da rede escolhida e o associa à carteira (`crypto_deposit`). O indexador (nó próprio ou RPC + worker) observa o endereço; ao atingir as confirmações (12 Polygon, 19 Tron, 12 Base) credita 1:1 em USDT. Endereços nunca são reutilizados. Depósitos abaixo do mínimo são creditados sem bônus de taxa.
 
-**Depósito em Bitcoin (BTCPay):** a API cria uma invoice com o valor em BTC pela cotação travada por 10 min; webhook `InvoiceSettled` credita a carteira com o equivalente em USDT. Lightning para valores até R$ 2.000, on-chain acima (ou escolha do usuário).
+**Depósito em Bitcoin (BTCPay):** a API cria uma invoice com o valor em BTC pela cotação travada por 10 min; webhook `InvoiceSettled` credita a carteira com o equivalente em USDT. Lightning para valores até US$ 2.000, on-chain acima (ou escolha do usuário).
 
-**Cotação:** worker coleta R$/USDT de três corretoras a cada minuto e guarda a mediana em `fx_rates`. Toda operação registra `brl_rate` no ledger. Preço em R$ → débito em USDT no momento da operação.
+**Cotação:** worker coleta BTC/USDT de três corretoras a cada minuto e guarda a mediana em `fx_rates`; usada só para converter depósitos em Bitcoin e travada por 10 min por depósito. Preços em US$ debitam o mesmo valor em USDT. Fase 2: tabela de câmbio para exibir equivalentes em moeda local (BRL, EUR, ARS) como referência.
 
-**Saque:** pedido na interface (moeda, rede, endereço, senha + TOTP). Verificações automáticas: saldo disponível ≠ custódia, limite antifraude (R$ 2.000/dia para contas com menos de 7 dias ou sem item aprovado), endereço válido para a rede. Execução em lotes horários a partir da carteira quente (BTCPay payout API para BTC; assinatura própria para stablecoins), com aprovação de 2 pessoas acima de R$ 20.000 por lote. `payout.address` é apagado após a confirmação na rede; fica só o hash da transação.
+**Saque:** pedido na interface (moeda, rede, endereço, senha + TOTP). Verificações automáticas: saldo disponível ≠ custódia, limite antifraude (US$ 2.000/dia para contas com menos de 7 dias ou sem item aprovado), endereço válido para a rede. Execução em lotes horários a partir da carteira quente (BTCPay payout API para BTC; assinatura própria para stablecoins), com aprovação de 2 pessoas acima de US$ 20.000 por lote. `payout.address` é apagado após a confirmação na rede; fica só o hash da transação.
 
 **Tesouraria:** carteira quente dimensionada para 48 h de saques; o restante em carteira fria multisig 2-de-3. Reconciliação diária: soma dos passivos (carteiras + custódias) ≤ tesouraria total; divergência bloqueia saques e alerta.
 
@@ -150,7 +150,7 @@ Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)─
 - A cada minuto: encerrar itens/leilões/lacres vencidos; liquidar custódias com janela de disputa vencida.
 - A cada 5 min: publicar posts agendados; checar marcos de lacres coletivos (25/50/75/90/100 %).
 - A cada hora: lote de saques; expirar endereços de depósito não usados em 72 h (ficam observados por 30 dias); expirar concessões de visualização.
-- A cada minuto: atualizar cotação R$/USDT; varrer confirmações de depósitos pendentes.
+- A cada minuto: atualizar cotação BTC/USDT; varrer confirmações de depósitos pendentes.
 - Diário: reconciliação do ledger; destruição de DEKs de exclusivos vendidos há mais de 72 h; limpeza de mensagens expiradas; destruição de registros de acesso com mais de 6 meses.
 
 ## 9. API (resumo dos endpoints)
@@ -163,11 +163,11 @@ GET    /me                       conta, reputação, preferências
 GET    /wallet                   saldo, reservado, em custódia
 POST   /wallet/deposits          gera endereço (USDT/USDC por rede) ou invoice BTCPay (BTC)
 GET    /wallet/deposits/:id      status e confirmações
-GET    /wallet/rates             cotação R$/USDT vigente
+GET    /wallet/rates             cotação BTC/USDT vigente
 POST   /wallet/payouts           solicita saque (moeda, rede, endereço, TOTP)
 GET    /wallet/ledger            extrato paginado
 
-GET    /listings                 catálogo público (filtros: categoria, modelo, tipo, preço, status, autenticidade)
+GET    /listings                 catálogo público (filtros: categoria, país, idioma, modelo, tipo, preço, status, autenticidade)
 GET    /listings/:slug           prévia pública
 GET    /proofs/:hash             página de prova (pública, sem auth)
 POST   /listings                 cria rascunho (vendedor)
@@ -176,7 +176,7 @@ PATCH  /listings/:id             edita rascunho / responde ajustes
 POST   /listings/:id/submit      envia para curadoria
 GET    /listings/:id/review      feedback da curadoria (vendedor)
 
-POST   /orders                   compra (cópias/exclusivo/camada/licença)
+POST   /orders                   compra (cópias/exclusivo/camada/licença/exclusividade=buyout)
 POST   /pledges                  apoio a lacre coletivo
 POST   /bids                     lance em leilão
 POST   /offers                   oferta em exclusivo

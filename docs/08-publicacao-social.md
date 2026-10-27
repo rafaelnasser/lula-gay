@@ -37,16 +37,16 @@ Os posts são gerados automaticamente a partir do item e revisados por um humano
 > Novo no Lacre · Dados e bases
 > 12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas.
 > Curadoria: verificado parcialmente. Edição limitada: 100 cópias.
-> R$ 490 · prova e prévia: lacre.app/p/9f2k7
+> US$ 490 · prova e prévia: lacre.app/p/9f2k7
 
 **Lançamento · Lacre coletivo**
 > Lacre coletivo aberto · Jornalismo e investigação
 > 18 meses de apuração sobre a cadeia do ouro ilegal no Pará. Documentos públicos e entrevistas.
-> Meta: R$ 80.000. Quando bater, fica público para todo mundo.
-> Apoie a partir de R$ 10 · lacre.app/p/4m2x9
+> Meta: US$ 80.000. Quando bater, fica público para todo mundo.
+> Apoie a partir de US$ 10 · lacre.app/p/4m2x9
 
 **Marco (50 %)**
-> Metade do caminho. R$ 40.120 de R$ 80.000 em 6 dias, 912 apoiadores.
+> Metade do caminho. US$ 40.120 de US$ 80.000 em 6 dias, 912 apoiadores.
 > Faltam 15 dias para romper o lacre. lacre.app/p/4m2x9
 
 **Lacre rompido**
@@ -57,18 +57,18 @@ Os posts são gerados automaticamente a partir do item e revisados por um humano
 > Vendido a um único comprador: [título]. O item saiu do catálogo e será destruído dos nossos servidores. A prova permanece: lacre.app/p/7q1z3
 
 **Último dia**
-> Últimas 24 h: [título]. R$ 61.400 de R$ 80.000. lacre.app/p/4m2x9
+> Últimas 24 h: [título]. US$ 61.400 de US$ 80.000. lacre.app/p/4m2x9
 
 **Pedido aberto**
 > Alguém procura: dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025).
-> Recompensa acumulada: R$ 3.200 (14 pessoas). Tem essa informação? lacre.app/r/2c8d1
+> Recompensa acumulada: US$ 3.200 (14 pessoas). Tem essa informação? lacre.app/r/2c8d1
 
 ## 4. Card de imagem
 
 Gerado pelo worker (HTML → PNG via Playwright/Chromium) a partir de um template único:
 - Fundo escuro, selo do Lacre, categoria em etiqueta.
 - Título em até 3 linhas.
-- Faixa com o modelo (ex.: "Lacre coletivo · R$ 0 / 80.000") e barra de progresso quando houver.
+- Faixa com o modelo (ex.: "Lacre coletivo · US$ 0 / 80.000") e barra de progresso quando houver.
 - Prévia borrada ao fundo, nunca legível.
 - Hash abreviado (`sha256: 3f9a…c21e`) e URL da prova.
 - Dimensões: 1600×900 (X, Bluesky, Telegram), 1080×1080 (Instagram).

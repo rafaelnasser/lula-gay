@@ -1,6 +1,6 @@
 # 06 · Modelo de dados
 
-PostgreSQL. IDs são UUID v7 (ordenáveis no tempo). Valores monetários em **micro-USDT inteiros** (`bigint`, 6 casas); todo lançamento guarda a cotação R$/USDT usada para exibição. Preços definidos pelo vendedor podem ser em R$ (`price_currency = BRL`) ou USDT. Campos `created_at`/`updated_at` em todas as tabelas (omitidos abaixo).
+PostgreSQL. IDs são UUID v7 (ordenáveis no tempo). Valores monetários em **micro-USDT inteiros** (`bigint`, 6 casas); 1 USDT = US$ 1, sem conversão. Depósitos em Bitcoin guardam a cotação BTC/USDT usada. Campos `created_at`/`updated_at` em todas as tabelas (omitidos abaixo).
 
 ## 1. Diagrama
 
@@ -62,6 +62,8 @@ Sem e-mail, telefone, nome, IP.
 | seller_id | uuid → account | |
 | title, summary, description | text | descrição em Markdown restrito |
 | category_id | int → category | |
+| countries | text[] | códigos ISO 3166-1 alpha-2 ou `GLOBAL`; filtro de primeira classe |
+| languages | text[] | idiomas do material (ISO 639-1) |
 | tags | text[] | |
 | content_type | enum | `document`, `dataset`, `image`, `video`, `audio`, `text`, `code`, `bundle` |
 | risk_level | enum | `low`, `medium`, `high` (herda da categoria, curador pode subir) |
@@ -79,15 +81,16 @@ Sem e-mail, telefone, nome, IP.
 ### sale_config (1:1 com listing, JSONB validado por modelo)
 ```jsonc
 // copies
-{ "price": 49000, "limit": 100, "sold": 37, "tiers": [{"upto": 10, "price": 29000}, {"upto": null, "price": 49000}] }
+{ "price": 49000, "limit": 100, "sold": 37, "tiers": [{"upto": 10, "price": 29000}, {"upto": null, "price": 49000}], "buyout_price": 3500000 }
 // exclusive
 { "price": 2500000, "accept_offers": true, "min_offer": 1500000, "exclusivity_months": 24, "guarantee_holdback_pct": 20 }
 // crowdfund
-{ "goal": 8000000, "raised": 5412000, "backers": 1187, "release": "public" | "backers" | "backers_floor", "floor": 5000, "all_or_nothing": true, "flexible_min_pct": null, "early_access_hours": 24, "stretch": [{"goal": 12000000, "asset_ids": ["..."], "label": "Áudios das entrevistas"}] }
+{ "goal": 8000000, "raised": 5412000, "backers": 1187, "buyout_price": 25000000, "release": "public" | "backers" | "backers_floor", "floor": 5000, "all_or_nothing": true, "flexible_min_pct": null, "early_access_hours": 24, "stretch": [{"goal": 12000000, "asset_ids": ["..."], "label": "Áudios das entrevistas"}] }
 // auction
 { "kind": "open" | "sealed_first" | "sealed_second" | "dutch", "start_price": 1500000, "reserve": 2000000, "increment": 50000, "anti_snipe_min": 10, "dutch": {"step": 100000, "every_min": 60, "floor": 800000} }
 // tiers
-{ "tiers": [{"id": "t1", "label": "Sumário executivo", "price": 19000, "asset_ids": []}, {"id": "t2", "label": "Relatório completo", "price": 89000}, {"id": "bundle", "price": 240000}] }
+{ "tiers": [{"id": "t1", "label": "Sumário executivo", "price": 19000, "asset_ids": []}, {"id": "t2", "label": "Relatório completo", "price": 89000}, {"id": "bundle", "price": 240000}], "buyout_price": 2000000 }
+// buyout_price (opcional em copies, crowdfund e tiers): valor que encerra o anúncio e entrega o item a um único comprador
 // subscription
 { "period": "weekly" | "biweekly" | "monthly", "price": 19000, "back_issue_price": 9000, "subscribers": 212 }
 // window
@@ -118,7 +121,7 @@ Sem e-mail, telefone, nome, IP.
 `id, listing_id, package_sha256, assets_sha256 jsonb, issued_at, policy_version, authenticity, curated_by_count, anchor (opcional: txid OpenTimestamps), public_url`
 
 ### order
-`id, listing_id, buyer_id, kind (copy|exclusive|tier|license|window|back_issue), amount, fee, status (created|paid|delivered|settled|disputed|refunded|partially_refunded), tier_id null, license_kind null, dispute_deadline_at, settled_at`
+`id, listing_id, buyer_id, kind (copy|exclusive|buyout|tier|license|window|back_issue), amount, fee, status (created|paid|delivered|settled|disputed|refunded|partially_refunded), tier_id null, license_kind null, dispute_deadline_at, settled_at`
 
 ### pledge (lacre coletivo e pedidos)
 `id, listing_id null, request_id null, backer_id, amount, status (held|released|refunded), anchor bool, created_at`
@@ -141,7 +144,7 @@ Sem e-mail, telefone, nome, IP.
 `id, listing_id, channel (x|telegram|bluesky|instagram|threads|rss), kind (launch|milestone_25|milestone_50|milestone_75|milestone_90|funded|sold|closing_soon|released), body, media_key, scheduled_at, posted_at, external_id, status (draft|scheduled|posted|failed), metrics jsonb`
 
 ### request / contribution / fulfillment
-`request (id, author_id, title, description, acceptance_criteria, category_id, reward_total, deadline_at, status (draft|in_review|open|fulfilled|expired|rejected), release (contributors|public_after))`
+`request (id, author_id, title, description, acceptance_criteria, category_id, countries text[], languages text[], reward_total, deadline_at, status (draft|in_review|open|fulfilled|expired|rejected), release (contributors|public_after))`
 `contribution (id, request_id, account_id, amount, status (held|paid_out|refunded))`
 `fulfillment (id, request_id, seller_id, listing_id, status (submitted|in_review|accepted|rejected))`
 
@@ -163,7 +166,7 @@ Sem e-mail, telefone, nome, IP.
 `crypto_deposit (id, account_id, asset (usdt|usdc|btc), network (polygon|tron|base|bitcoin|lightning), address, derivation_index, amount_asset, amount_usdt, brl_rate_locked, status (waiting|seen|confirming|credited|expired), confirmations, txid, created_at, credited_at)` um endereço por depósito, nunca reutilizado
 `payout (id, account_id, amount_usdt, asset, network, address null, status (requested|checked|batched|sent|confirmed|failed), batch_id, txid, network_fee, requested_at, confirmed_at)` `address` é apagado após `confirmed`
 `payout_batch (id, created_at, approved_by uuid[], total, status)`
-`fx_rate (id, pair (BRL/USDT), rate, sources jsonb, fetched_at)`
+`fx_rate (id, pair (BTC/USDT), rate, sources jsonb, fetched_at)`
 
 ### staff / audit_log
 `staff (id, name, role (triage|curator|senior|legal|finance|publisher|admin), totp_enforced, status)`
@@ -181,7 +184,7 @@ in_review → escalated → in_review
 in_review → approved → scheduled → active
 in_review → rejected
 active → funded (crowdfund) → released → closed
-active → sold (exclusive/auction/window) → closed
+active → sold (exclusive/auction/window, ou buyout em copies/crowdfund/tiers: apoios reembolsados) → closed
 active → closed (deadline ou vendedor encerra)
 active → suspended (denúncia) → active | removed
 closed → archived
@@ -201,7 +204,7 @@ closed → archived
 
 ## 4. Índices e consultas quentes
 
-- `listing (status, category_id, model, published_at desc)` para o catálogo.
+- `listing (status, category_id, model, published_at desc)` e índice GIN em `countries` para o catálogo.
 - `listing (status, risk_level, submitted_at)` para a fila.
 - `entitlement (account_id, listing_id)` único por escopo.
 - `ledger_entry (debit_account, created_at)`, `(credit_account, created_at)`.

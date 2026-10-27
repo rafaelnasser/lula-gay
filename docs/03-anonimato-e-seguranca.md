@@ -75,13 +75,13 @@ Pipeline executado em um worker isolado antes de qualquer humano ver o arquivo:
 - **Bitcoin** on-chain e Lightning (BTCPay Server auto-hospedado). Convertido para créditos em USDT na hora, com cotação travada por 10 min no momento em que o endereço ou a invoice é gerado.
 - V2: Monero (XMR) para quem quer privacidade on-chain mais forte, com aviso de que poucas corretoras o oferecem.
 
-**Unidade de conta e preços.** A carteira guarda créditos em USDT. Os preços continuam exibidos em R$ porque é como o público brasileiro pensa; cada operação converte R$ → USDT pela cotação do momento (fonte: mediana de três corretoras, atualizada a cada minuto). O vendedor recebe o USDT retido na custódia, menos a comissão; a plataforma não carrega risco cambial. O saldo aparece como "R$ 1.240,00 ≈ 230,4 USDT". O vendedor pode, se preferir, definir o preço diretamente em USDT.
+**Unidade de conta e preços.** A plataforma é global: preços em **dólar (US$)**, carteira em **USDT** (1 USDT = US$ 1, sem conversão). Depósitos em USDT e USDC creditam 1:1; depósitos em Bitcoin são convertidos para USDT na hora pela cotação travada (fonte: mediana de três corretoras, atualizada a cada minuto). O vendedor recebe o USDT retido na custódia, menos a comissão; a plataforma não carrega risco cambial. Na fase 2, a interface pode mostrar o equivalente na moeda local escolhida pelo usuário (BRL, EUR, ARS…) apenas como referência.
 
 **Depósito.** Cada depósito gera um endereço novo (derivado de uma xpub por rede, nunca reutilizado). O indexador on-chain observa o endereço; ao atingir as confirmações, credita a carteira. Lightning: invoice com validade de 10 min. Nenhum endereço é vinculado a identidade; o marketplace registra apenas "crédito de X USDT na carteira Y".
 
 **Saque.** O usuário informa moeda, rede e endereço na hora. Verificações automáticas: saldo disponível (nunca o que está em custódia), limite antifraude, endereço válido, senha + TOTP. Saques saem em lotes a cada hora de uma carteira quente que cobre 48 h de volume; o restante fica em carteira fria com multisig 2-de-3. O endereço de destino é apagado do banco após a confirmação na rede. A taxa de rede é repassada ao usuário.
 
-**Limite antifraude (não é KYC).** Contas com menos de 7 dias ou sem nenhum item aprovado sacam até R$ 2.000 por dia. Serve para conter golpes de conta nova, não para identificar ninguém.
+**Limite antifraude (não é KYC).** Contas com menos de 7 dias ou sem nenhum item aprovado sacam até US$ 2.000 por dia. Serve para conter golpes de conta nova, não para identificar ninguém.
 
 **Comissão.** Única: **10 %** sobre toda venda, apoio liberado e recompensa paga, em todos os modelos. Nada é cobrado se um lacre coletivo falhar.
 
@@ -97,17 +97,19 @@ Pipeline executado em um worker isolado antes de qualquer humano ver o arquivo:
 - A curadoria pode ler conversas quando há disputa ou denúncia; o acesso é registrado.
 - Opção V2: cifragem de ponta a ponta com chaves derivadas da senha, abrindo mão da leitura em disputas (o usuário escolhe).
 
-## 8. Registros de acesso e a lei brasileira
+## 8. Jurisdição e registros de acesso
 
-O Marco Civil da Internet (Lei 12.965/2014, art. 15) obriga provedores de aplicação constituídos como pessoa jurídica no Brasil a guardar **registros de acesso** (data, hora e IP de cada acesso) por **6 meses**, em sigilo, e a entregá-los mediante ordem judicial. Isso conflita com "não registramos IP".
+A plataforma é global, mas a entidade que a opera tem uma jurisdição, e é ela que define as obrigações de guarda de registros, de resposta a autoridades e de ativos virtuais. Exemplos do que muda conforme a sede:
 
-Opções (decisão de negócio e jurídica, não técnica):
-1. **Cumprir com minimização**: guardar os registros em um sistema separado, cifrados com chave sob custódia de duas pessoas, com retenção exata de 6 meses e destruição automática. O marketplace nunca os consulta. Só saem por ordem judicial. É a opção recomendada se a operação for brasileira.
-2. **Estrutura em outra jurisdição**: altera as obrigações de registros e também as de ativos virtuais. Exige assessoria.
+| Jurisdição | O que exige | Impacto na promessa de anonimato |
+|---|---|---|
+| Brasil | Marco Civil (Lei 12.965/2014, art. 15): guarda de registros de acesso (data, hora, IP) por 6 meses, entregues por ordem judicial; Lei 14.478/2022 para ativos virtuais | Registros de acesso cifrados em sistema separado, retenção mínima, acesso só por procedimento jurídico |
+| União Europeia | GDPR (dados pessoais, inclusive de terceiros citados nos itens), DSA (moderação, denúncias, transparência), MiCA (cripto) | Fluxo de denúncias e transparência já previstos; custódia de cripto exige licença |
+| Estados Unidos | DMCA (direitos autorais, notificação e retirada), regras de valores mobiliários, sanções (OFAC) | Takedown formal; triagem de países sancionados nos depósitos e saques |
 
-A documentação pública da plataforma deve dizer exatamente qual opção foi escolhida. Prometer o que a lei não permite destrói a confiança no primeiro incidente.
+Decisões de negócio e jurídicas, não técnicas: (1) escolher a sede e documentar publicamente o que ela implica; (2) cumprir a guarda de registros com minimização (sistema separado, cifrado, retenção exata, destruição automática, nunca consultado pelo marketplace); (3) manter uma lista de países bloqueados para depósitos e saques conforme sanções aplicáveis à sede. A promessa pública deve dizer exatamente qual opção foi escolhida: prometer o que a lei da sede não permite destrói a confiança no primeiro incidente.
 
-Outras normas que moldam o produto (detalhadas em `04`): LGPD (dados pessoais de terceiros dentro dos itens), Lei 9.610 (direitos autorais), Lei 6.385 art. 27-D (informação privilegiada de mercado), Código Penal (crimes contra a honra, violação de sigilo), Lei 9.613 (lavagem de dinheiro, relevante para custódia de cripto), Lei 14.478/2022 (ativos virtuais), ECA.
+Independentemente da sede, o conteúdo dos itens se refere a muitos países: a curadoria avalia dados pessoais, direitos autorais e sigilo pelas regras do país de origem da informação e pelas da sede (ver `04`).
 
 ## 9. Segurança operacional da equipe
 
