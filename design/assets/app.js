@@ -612,7 +612,7 @@
       cds.forEach(el => {
         const d = new Date(el.dataset.deadline).getTime() - now;
         if (isNaN(d)) return;
-        if (d <= 0) { el.textContent = 'encerrado'; return; }
+        if (d <= 0) { el.textContent = 'prazo vencido'; return; }
         const days = Math.floor(d / 864e5), h = Math.floor(d % 864e5 / 36e5), m = Math.floor(d % 36e5 / 6e4), s = Math.floor(d % 6e4 / 1e3);
         el.textContent = days > 0 ? days + 'd ' + String(h).padStart(2, '0') + 'h ' + String(m).padStart(2, '0') + 'm' : String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
       });

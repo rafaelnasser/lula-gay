@@ -332,6 +332,7 @@ body.nav-open .mobile-nav { display: flex; }
   font-size: var(--fs-xs); font-weight: 600; line-height: 1.5; white-space: nowrap;
   background: var(--surface-3); color: var(--fg-2); border: 1px solid transparent;
 }
+.btn.wrap, .badge.wrap { white-space: normal; height: auto; text-align: left; line-height: 1.35; }
 .badge svg { width: 12px; height: 12px; }
 .badge-ok, .badge-success { background: var(--ok-soft); color: var(--ok); }
 .badge-warn, .badge-warning { background: var(--warn-soft); color: var(--warn); }
