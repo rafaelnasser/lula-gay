@@ -129,8 +129,8 @@ Cada item aprovado é uma peça de marketing. Cada lacre rompido é uma notícia
 | **Carteira do item** | Carteira cripto criada na aprovação de cada item. Recebe os pagamentos, guarda-os até a finalização e é entregue ao vendedor (frase de recuperação) depois de separada a comissão. |
 | **Exclusividade (buyout)** | Valor opcional definido pelo vendedor em itens de muitos compradores: quem pagar leva o item só para si e o anúncio encerra. |
 | **País** | Código(s) ISO do(s) país(es) a que a informação se refere, ou Global. |
-| **Apoio** | Contribuição a um lacre coletivo ou a uma recompensa. |
-| **Pedido** | Demanda publicada por compradores com recompensa para quem entregar. |
+| **Apoio** | Pagamento a um lacre coletivo. |
+| **Pedido** | Demanda publicada por um comprador com um valor por interessado; quem quer a mesma informação se junta pagando o mesmo valor (ou cobre, e os outros igualam ou saem); quem entregar recebe o total. |
 | **Entitlement** | Direito de acesso de uma conta a um item (termo técnico). |
 | **Pseudônimo** | Identificador gerado da conta, ex. `coruja-7f3a`. |
 | **Arquivo de acesso** | Arquivo `pseudonimo.lacre` que funciona como chave de entrada: o usuário escolhe o arquivo (e digita o PIN) para entrar. |

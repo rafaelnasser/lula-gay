@@ -29,7 +29,8 @@ erDiagram
     ORDER ||--o| DISPUTE : contesta
     REVIEW ||--|{ REVIEW_CHECK : itens
     REVIEW ||--o{ DECISION : resulta
-    REQUEST ||--o{ CONTRIBUTION : soma
+    REQUEST ||--o{ PARTICIPATION : interessados
+    REQUEST ||--o{ REQUEST_EVENT : historico
     REQUEST ||--o{ FULFILLMENT : atendido_por
     FULFILLMENT }o--|| LISTING : via
     THREAD ||--|{ MESSAGE : tem
@@ -127,8 +128,8 @@ Sem e-mail, telefone, nome, IP.
 ### order
 `id, listing_id, buyer_id, kind (copy|exclusive|buyout|tier|license|window|back_issue), amount, fee, status (created|paid|delivered|settled|disputed|refunded|partially_refunded), tier_id null, license_kind null, dispute_deadline_at, settled_at`
 
-### pledge (lacre coletivo e pedidos)
-`id, listing_id null, request_id null, backer_id, amount, status (held|released|refunded), created_at`
+### pledge (lacre coletivo)
+`id, listing_id, backer_id, amount, status (held|released|refunded), created_at`
 
 ### bid / offer
 `id, listing_id, bidder_id, amount, kind (open|sealed|dutch_accept|offer), status (active|outbid|won|lost|withdrawn|accepted|rejected|countered), payment_id → payment (lance pago na hora; reembolsado se não vencer)`
@@ -148,8 +149,9 @@ Sem e-mail, telefone, nome, IP.
 `id, listing_id, channel (x|telegram|bluesky|instagram|threads|rss), kind (launch|milestone_25|milestone_50|milestone_75|milestone_90|funded|sold|closing_soon|released), body, media_key, scheduled_at, posted_at, external_id, status (draft|scheduled|posted|failed), metrics jsonb`
 
 ### request / contribution / fulfillment
-`request (id, author_id, title, description, acceptance_criteria, category_id, countries text[], languages text[], reward_total, deadline_at, status (draft|in_review|open|fulfilled|expired|rejected), release (contributors|public_after))`
-`contribution (id, request_id, account_id, amount, status (held|paid_out|refunded))`
+`request (id, author_id, title, description, acceptance_criteria, category_id, countries text[], languages text[], price_per_party (valor por interessado atual), parties_active, reward_total (= price_per_party × parties_active), deadline_at, match_until null (fim da janela de igualar), status (draft|in_review|open|raised|locked|fulfilled|expired|rejected), allow_copies_after bool default false, created_at)`
+`participation (id, request_id, account_id, paid_total, status (active|must_match|left|refunded|delivered), joined_at, matched_at null, left_at null)` todos os ativos pagaram o mesmo valor
+`request_event (id, request_id, account_id, kind (open|join|raise|match|leave|auto_leave|lock|unlock|fulfill|expire), amount null, created_at)` linha do tempo pública
 `fulfillment (id, request_id, seller_id, listing_id, status (submitted|in_review|accepted|rejected))`
 
 ### thread / message
@@ -164,9 +166,9 @@ Sem e-mail, telefone, nome, IP.
 
 ### item_wallet / payment / settlement / refund
 `item_wallet (id, listing_id null, request_id null, asset (usdt|usdc|btc), network, xpub, root_address (público, na prova), state (receiving|settling|delivered|refunding|closed), received_total, refunded_total, created_at, delivered_at, key_shredded_at)` chave privada só no HSM
-`payment (id, item_wallet_id, account_id, kind (copy|exclusive|buyout|tier|license|pledge|contribution), derivation_index, address, expected_amount, received_amount, confirmations, txid, origin_address (apagado na finalização), state (waiting|seen|confirmed|settled|refunded|expired), created_at, confirmed_at)`
+`payment (id, item_wallet_id, account_id, kind (copy|exclusive|buyout|tier|license|pledge|request_join|request_raise|request_match), derivation_index, address, expected_amount, received_amount, confirmations, txid, origin_address (apagado na finalização), state (waiting|seen|confirmed|settled|refunded|expired), created_at, confirmed_at)`
 `settlement (id, item_wallet_id, commission_amount, commission_txid, refunds_count, seller_net, seed_revealed_at, key_shredded_at, audit_hash)`
-`refund (id, payment_id, amount, network_fee, txid, reason (failed_goal|expired_request|dispute|removed_item|buyout), state (queued|sent|confirmed), created_at)`
+`refund (id, payment_id, amount, network_fee, txid, reason (failed_goal|expired_request|left_request|dispute|removed_item|buyout), state (queued|sent|confirmed), created_at)`
 
 Não existe saldo de usuário nem ledger de carteiras: o livro de pagamentos por item é o espelho do que está on-chain.
 

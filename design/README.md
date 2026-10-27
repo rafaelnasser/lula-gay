@@ -84,7 +84,7 @@ design/
 
 **Exclusividade (buyout):** valor opcional em Cópias, Lacre coletivo e Camadas que encerra o anúncio e entrega o item a um único comprador (em lacre coletivo, os apoios são devolvidos; em cópias, quem já comprou mantém). Valores do protótipo: lcr-4m2x9 US$ 250.000 · lcr-9f2k7 US$ 35.000 · lcr-3c7r8 US$ 20.000 · lcr-8k1n2 (assistente) US$ 40.000.
 
-**Vendedores:** `@sextante-21c9` (jornalismo, 12 aprovados, Verificado 9×), `@lanterna-b31d` (dados), `@cartografo-5a77` (foto/vídeo), `@arquivista-0d2e` (acervos), `@bussola-c4e1` (negócios), `@prisma-66af` (finanças), `@tipografo-8e04` (história). **Compradores em disputas/mensagens:** `@farol-3e9b`, `@quartzo-a1f0`.
+**Vendedores:** `@sextante-21c9` (jornalismo, 12 aprovados, Verificado 9×), `@lanterna-b31d` (dados), `@cartografo-5a77` (foto/vídeo), `@arquivista-0d2e` (acervos), `@bussola-c4e1` (negócios), `@prisma-66af` (finanças), `@tipografo-8e04` (história). **Compradores em disputas/mensagens/pedidos:** `@farol-3e9b`, `@quartzo-a1f0`, `@relogio-2b7c`.
 
 **Equipe (não anônima):** Ana R. (curadora sênior), Bruno M. (curador), Carla S. (jurídico), Diego T. (publicação), Elisa F. (financeiro), Marcos L. (administrador).
 
@@ -114,18 +114,22 @@ design/
 
 **Pedidos com recompensa**
 
-| Slug | Pedido | Recompensa | Prazo | Status |
+| Slug | Pedido | Valor por interessado · interessados · total | Prazo | Status |
 |---|---|---|---|---|
-| ped-2c8d1 | Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV | US$ 3.200 · 14 contribuidores | 30/11/2026 | Aberto |
-| ped-7f1a3 | Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951) | US$ 800 · 1 | 15/12/2026 | Aberto |
-| ped-4k9e2 | Série de preços de aluguel por bairro em Belo Horizonte (2015–2026) | US$ 1.450 · 6 | 20/11/2026 | Atendimento em curadoria |
-| ped-1b6j8 | Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020) | US$ 600 · 3 | — | Atendido |
-| ped-9h2d5 | Lista de todos os editais de fomento cultural municipais do RS em 2025 | US$ 2.100 · 9 | 10/12/2026 | Aberto |
-| ped-5r2k8 | Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos · `CL · espanhol` | US$ 900 · 4 | 20/12/2026 | Aberto |
+| ped-2c8d1 | Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV | US$ 800 · 4 · US$ 3.200 | 30/11/2026 | Aberto (cobrir exige ≥ US$ 880) |
+| ped-7f1a3 | Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951) | US$ 800 · 1 · US$ 800 | 15/12/2026 | Aberto |
+| ped-4k9e2 | Série de preços de aluguel por bairro em Belo Horizonte (2015–2026) | US$ 290 · 5 · US$ 1.450 | 20/11/2026 | Travado: atendimento em curadoria desde 22/10 (@bussola-c4e1) |
+| ped-1b6j8 | Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020) | US$ 200 · 3 · US$ 600 | — | Atendido em 08/10 por @cartografo-5a77 (comissão US$ 60; carteira entregue em 11/10) |
+| ped-9h2d5 | Lista de todos os editais de fomento cultural municipais do RS em 2025 | US$ 300 · 7 · US$ 2.100 | 10/12/2026 | Aberto |
+| ped-5r2k8 | Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos · `CL · espanhol` | US$ 300 · 3 · US$ 900 | 20/12/2026 | Aberto |
 
-**Pagamentos feitos por @coruja-7f3a (tela Pagamentos):** 21/10 lcr-9f2k7 cópia · 490 USDT · Polygon · confirmado (12/12) · 22/10 lcr-4m2x9 apoio · 100 USDT · Polygon · confirmado (fica na carteira do lacre até 15/11) · 23/10 lcr-3c7r8 camada 1 · 190 USDT · Base · confirmado · 25/10 lcr-4m2x9 apoio · 150 USDT · Polygon · confirmado · 25/10 lcr-6d1k5 assinatura · 190 USDT · Tron · confirmado · 12/10 ped-2c8d1 contribuição · 100 USDT · Polygon · confirmado · reembolsos recebidos: 16/10 lcr-6c4t2 (lacre falhou) 40 USDT ao endereço de origem · 10/10 lcr-2d9r4 (disputa procedente) 50 USDT.
+**Modelo do pedido ("mesmo valor para todos os interessados"):** quem abre define o **valor por interessado** e paga; quem quer a mesma informação **se junta pelo mesmo valor** (recompensa total = valor × interessados, todos recebem o mesmo acesso); qualquer um pode **cobrir** (≥ +10 %) e aí cada interessado tem **48 h** para **igualar** (paga a diferença) ou **sair** (reembolso ao endereço de origem); quem cobre e não é igualado fica sozinho. Durante um atendimento em curadoria o pedido fica **travado**. Validado o atendimento: acesso no cofre de cada interessado, 10 % separados, carteira do pedido entregue a quem atendeu. Sem atendimento até o prazo: reembolso a todos. Nunca "contribuição"/"contribuidores".
 
-**Carteiras dos itens de @coruja-7f3a (tela Carteiras dos itens):** lcr-5m8c4 · Polygon · USDT · `0x5m8c…4e2a` · recebido US$ 13.200 (88 pagamentos) · 1 reembolso US$ 150 · comissão US$ 1.320 separada em 05/10 · **frase entregue em 05/10, chave destruída** · saldo hoje 0 (vendedor transferiu). lcr-4g7h9 · aprovado 26/10 · carteira criada em Polygon · recebendo (0 pagamentos). Demais itens sem carteira (ainda não aprovados).
+**Histórico do ped-2c8d1:** 12/10 `@coruja-7f3a` abriu · US$ 500 por interessado → 14/10 `@farol-3e9b` juntou-se · US$ 500 → 18/10 `@quartzo-a1f0` cobriu · US$ 800 (janela até 20/10 14:00) → 19/10 `@farol-3e9b` igualou (+US$ 300) → 20/10 `@coruja-7f3a` igualou (+US$ 300) → 24/10 `@relogio-2b7c` juntou-se · US$ 800 → hoje: 4 × US$ 800 = US$ 3.200. Carteira do pedido: `0x2c8d…91af` · Polygon · USDT · 6 pagamentos.
+
+**Pagamentos feitos por @coruja-7f3a (tela Pagamentos):** 28/09 ped-1b6j8 juntou-se ao pedido · 200 USDT · Polygon · confirmado · atendido em 08/10 (acesso no cofre) · 12/10 ped-2c8d1 abriu o pedido · 500 USDT · Polygon · 20/10 ped-2c8d1 igualou o valor · 300 USDT · Polygon · 21/10 lcr-9f2k7 cópia · 490 USDT · Polygon · confirmado (12/12) · 22/10 lcr-4m2x9 apoio · 100 USDT · Polygon (fica na carteira do lacre até 15/11) · 23/10 lcr-3c7r8 camada 1 · 190 USDT · Base · 25/10 lcr-4m2x9 apoio · 150 USDT · Polygon · 25/10 lcr-6d1k5 assinatura · 190 USDT · Tron. **Total confirmado US$ 2.120 em 8 pagamentos** · em lacres abertos US$ 250 (lcr-4m2x9) · em pedidos abertos US$ 800 (ped-2c8d1). Reembolsos recebidos: 16/10 lcr-6c4t2 (lacre falhou) 40 USDT ao endereço de origem · 10/10 lcr-2d9r4 (disputa procedente) 50 USDT.
+
+**Carteiras dos itens de @coruja-7f3a (tela Carteiras dos itens):** lcr-5m8c4 · Polygon · USDT · `0x5m8c…4e2a` · recebido US$ 13.350 (89 pagamentos) · 1 reembolso US$ 150 (disputa procedente) · 88 vendas válidas = US$ 13.200 · comissão US$ 1.320 separada em 05/10 · líquido entregue US$ 11.880 · **frase entregue em 05/10, chave destruída** · saldo hoje 0 (vendedor transferiu). lcr-4g7h9 · aprovado 26/10 · carteira criada em Polygon · recebendo (0 pagamentos). Demais itens sem carteira (ainda não aprovados).
 
 **Carteira pública do lcr-4m2x9 (na página de prova):** `0x4m2x…c21e` · Polygon · USDT · recebido US$ 54.120 em 1.187 pagamentos (confere on-chain).
 

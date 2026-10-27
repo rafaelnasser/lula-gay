@@ -21,7 +21,7 @@ Convenções que valem para todos os modelos:
 | 1 | **Cópias** | Preço fixo, vários compradores, com ou sem limite de unidades | Muitos | MVP |
 | 2 | **Exclusivo** | Um único comprador leva, item sai do catálogo | Um | MVP |
 | 3 | **Lacre coletivo** | Meta de arrecadação; batida a meta, o conteúdo é liberado | Multidão | MVP |
-| 4 | **Pedido com recompensa** | Compradores publicam o que querem e juntam a recompensa; quem entregar leva | Demanda primeiro | MVP |
+| 4 | **Pedido com recompensa** | Um comprador publica o que quer e o valor que paga; quem quer a mesma informação se junta pelo mesmo valor (ou cobre); quem entregar leva o total | Demanda primeiro | MVP |
 | 5 | **Leilão** | Maior lance leva (aberto, lacrado ou holandês) | Um | V2 |
 | 6 | **Camadas** | Conteúdo dividido em níveis com preços crescentes | Muitos | V2 |
 | 7 | **Assinatura** | Fonte recorrente; acesso enquanto pagar | Muitos | V2 |
@@ -110,22 +110,25 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 ## 4. Pedido com recompensa (demanda primeiro)
 
-**Como funciona.** Um comprador publica um pedido: "procuro X", com descrição, critérios de aceite e uma recompensa inicial. Outros compradores podem **somar valor** à recompensa. Vendedores enviam propostas de atendimento (um envio normal, que passa pela curadoria). Quando a curadoria confirma que a entrega atende aos critérios, o primeiro vendedor validado recebe a recompensa e todos os que contribuíram recebem acesso.
+**Como funciona.** Um comprador publica um pedido: "procuro X", com descrição, critérios de aceite, prazo e o **valor por interessado** que aceita pagar. Esse valor vai para a carteira do pedido. Quem quiser a mesma informação **se junta pagando o mesmo valor**: a recompensa total é o valor por interessado vezes o número de interessados, e todos recebem o mesmo acesso. Quem quiser pode **cobrir** o valor (oferecer mais); aí cada interessado iguala ou sai. Vendedores atendem o pedido enviando o conteúdo à curadoria; validado, cada interessado recebe acesso e quem atendeu recebe a carteira do pedido.
 
-**Variantes.**
-- *Recompensa individual*: um só comprador paga e só ele recebe.
-- *Recompensa coletiva*: vários somam e todos recebem (padrão).
-- *Leilão reverso*: vendedores propõem preços para atender; o comprador escolhe a proposta.
-- *Pedido aberto ao público*: depois de atendido, o item pode ser liberado como Cópias para quem não contribuiu, com parte da receita indo aos contribuidores originais (até reembolsar o que pagaram). Isso incentiva pedidos.
+**Por que assim.** Não é justo alguém pagar US$ 50 e ter, em privado, a mesma informação pela qual outro pagou US$ 1 milhão. Com valor igual para todos: quem se junta aumenta a recompensa (dois interessados = o dobro para quem tem a informação); quem quer exclusividade paga mais e, se ninguém igualar, fica sozinho.
 
 **Regras.**
-- Pedidos também passam pela curadoria antes de ficar públicos (nada de pedir dado pessoal, conteúdo íntimo, credenciais etc.).
-- Cada contribuição vai para a carteira do pedido. Pedido sem atendimento no prazo devolve cada contribuição ao endereço de origem.
-- Se dois vendedores entregarem, vale o primeiro validado; o segundo pode publicar o dele como item normal.
+1. **Abrir:** quem abre define o valor por interessado (V), paga V na carteira do pedido e define o prazo (até 90 dias). O pedido passa pela curadoria antes de ficar público (nada de pedir dado pessoal, conteúdo íntimo, credenciais etc.).
+2. **Juntar-se:** qualquer conta entra pagando exatamente V. Recompensa total = V × interessados.
+3. **Cobrir:** qualquer conta, nova ou já participante, sobe o valor para V' ≥ V + 10 %. Paga V' (ou só a diferença, se já participa). V' vira o valor por interessado.
+4. **Igualar ou sair:** quando o valor sobe, cada participante tem 48 h (nunca além do prazo do pedido) para igualar (pagar V' − V) ou sair. Quem não iguala sai automaticamente e recebe de volta o que pagou, ao endereço de origem, menos a taxa de rede. Quem cobre de novo reinicia a janela para os outros.
+5. A qualquer momento todos os interessados ativos pagaram o mesmo valor. Se um interessado cobre e ninguém iguala, ele fica sozinho: exclusividade de fato.
+6. **Atender:** o vendedor envia o conteúdo à curadoria. Da entrada em curadoria até a decisão, o pedido fica travado (sem entradas, coberturas ou saídas). Validado o atendimento, cada interessado recebe acesso no cofre; a plataforma separa 10 % e entrega a carteira do pedido a quem atendeu. Atendimento rejeitado destrava o pedido. Se dois vendedores entregarem, vale o primeiro validado.
+7. **Expirar:** sem atendimento validado até o prazo, cada interessado recebe de volta o que pagou.
+8. Interessados são públicos (pseudônimo e data de entrada). Janela de 48 h e incremento de 10 % são parâmetros da administração.
 
-**Interface.** Mural público de pedidos, página do pedido com critérios de aceite, recompensa acumulada, contribuidores (contagem), botão "Somar à recompensa" e botão "Tenho essa informação".
+**Opção de quem abre.** "Depois de atendido, o vendedor pode vender o mesmo conteúdo como Cópias, nunca por menos que o valor por interessado final." Desligada por padrão: o normal é o conteúdo ficar só com os interessados.
 
-**Comissão.** 10 %.
+**Interface.** Mural público de pedidos; página do pedido com critérios de aceite, valor por interessado, interessados (pseudônimos e datas), recompensa total, prazo, botões "Juntar-se por US$ V", "Cobrir o valor (mín. V + 10 %)" e "Tenho essa informação"; linha do tempo das entradas, coberturas e igualadas; estados: aberto, valor subiu (iguale até…), travado (atendimento em curadoria), atendido, expirado.
+
+**Comissão.** 10 %, separada na finalização (validação do atendimento).
 
 ---
 
@@ -244,7 +247,7 @@ Um item publicado para muitos compradores pode trazer, ao lado do preço normal 
 ## Combinações que fazem sentido
 
 - **Janela exclusiva (leilão lacrado) → Lacre coletivo público.** Uma redação compra a dianteira; depois o público financia a abertura total. Gera duas ondas de divulgação.
-- **Pedido com recompensa → Cópias.** Pedido atendido vira item aberto; contribuidores originais recebem parte da receita.
+- **Pedido com recompensa → Cópias.** Só se quem abriu permitir: o conteúdo entregue vira item de Cópias, nunca mais barato que o valor por interessado final.
 - **Camadas + Lacre coletivo.** A camada 1 é liberada pelo lacre coletivo; as camadas superiores são vendidas.
 - **Assinatura + Edições avulsas.** A fonte recorrente vende edições antigas como Cópias.
 

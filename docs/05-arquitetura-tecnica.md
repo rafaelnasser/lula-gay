@@ -131,6 +131,15 @@ Criada ──(pagamento confirmado on-chain)──► Paga ──(entitlement em
                                                           └──(disputa)──► Em disputa ──► Reembolsada | Liquidada | Parcial
 ```
 
+**Pedido com recompensa**
+```
+Aberto ──(juntar-se: paga V)──► Aberto (n+1)
+Aberto ──(cobrir: paga V' ≥ V+10 %)──► Valor subiu (janela 48 h) ──(cada um iguala ou sai)──► Aberto (todos em V')
+Aberto ──(vendedor envia atendimento)──► Travado ──(curadoria valida)──► Atendido ──(acesso aos interessados; 10 %; carteira entregue)──► Finalizado
+                                                └──(curadoria rejeita)──► Aberto
+Aberto ──(prazo vence)──► Expirado ──► Reembolsos à origem ──► Finalizado
+```
+
 **Leilão aberto**
 ```
 Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)──► Encerrado ──► Lance vencedor fica no item; demais reembolsados à origem ──► Entregue
@@ -141,7 +150,7 @@ Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)─
 
 - A cada minuto: encerrar itens/leilões/lacres vencidos; liquidar custódias com janela de disputa vencida.
 - A cada 5 min: publicar posts agendados; checar marcos de lacres coletivos (25/50/75/90/100 %).
-- A cada hora: finalizações elegíveis (comissão + reembolsos pendentes); lotes de reembolso por rede; expirar pagamentos não recebidos em 24 h; expirar concessões de visualização.
+- A cada hora: finalizações elegíveis (comissão + reembolsos pendentes); lotes de reembolso por rede; expirar pagamentos não recebidos em 24 h; fechar janelas de igualar vencidas (quem não igualou sai, com reembolso à origem); expirar pedidos sem atendimento; expirar concessões de visualização.
 - A cada minuto: varrer confirmações de pagamentos pendentes.
 - Diário: reconciliação on-chain das carteiras de itens; apagar endereços de origem de itens finalizados; destruição de DEKs de exclusivos vendidos há mais de 72 h; limpeza de mensagens expiradas; destruição de registros de acesso com mais de 6 meses.
 
@@ -181,7 +190,10 @@ POST   /disputes                 abre disputa
 
 GET    /requests                 mural de pedidos
 POST   /requests                 cria pedido (vai à curadoria)
-POST   /requests/:id/contribute  soma à recompensa
+POST   /requests/:id/join        junta-se pagando o valor por interessado atual → endereço derivado
+POST   /requests/:id/raise       cobre o valor (≥ atual + 10 %) → endereço derivado; abre janela de 48 h para os demais
+POST   /requests/:id/match       iguala a diferença dentro da janela → endereço derivado
+POST   /requests/:id/leave       sai do pedido → reembolso ao endereço de origem
 POST   /requests/:id/fulfill     vendedor envia atendimento (cria listing vinculado)
 
 GET    /threads /threads/:id/messages  POST /threads/:id/messages

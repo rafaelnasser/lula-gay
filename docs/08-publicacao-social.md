@@ -62,7 +62,7 @@ Os posts são gerados automaticamente a partir do item e revisados por um humano
 
 **Pedido aberto**
 > Alguém procura: dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025).
-> Recompensa acumulada: US$ 3.200 (14 pessoas). Tem essa informação? lacre.app/r/2c8d1
+> Recompensa: US$ 3.200 (4 interessados × US$ 800). Quer a mesma informação? Junte-se pelo mesmo valor. Tem essa informação? lacre.app/r/2c8d1
 
 ## 4. Card de imagem
 

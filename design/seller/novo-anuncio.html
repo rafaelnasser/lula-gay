@@ -98,9 +98,9 @@
               <label for="ped">Vincular a um pedido com recompensa (opcional)</label>
               <select id="ped" class="select">
                 <option selected>Nenhum · anúncio avulso</option>
-                <option>ped-2c8d1 · Tempo de espera em UPAs de SP (2023–2025) · US$ 3.200 · até 30/11</option>
-                <option>ped-9h2d5 · Editais de fomento cultural do RS em 2025 · US$ 2.100 · até 10/12</option>
-                <option>ped-7f1a3 · Catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 · até 15/12</option>
+                <option>ped-2c8d1 · Tempo de espera em UPAs de SP (2023–2025) · US$ 3.200 (4 interessados × US$ 800) · até 30/11</option>
+                <option>ped-9h2d5 · Editais de fomento cultural do RS em 2025 · US$ 2.100 (7 × US$ 300) · até 10/12</option>
+                <option>ped-7f1a3 · Catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 (1 × US$ 800) · até 15/12</option>
               </select>
               <span class="hint">Ao vincular, o modelo passa a ser Pedido com recompensa e os critérios de aceite do pedido entram no checklist da curadoria.</span>
             </div>
@@ -321,13 +321,13 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                 <div data-config="pedido">
                   <div class="stack">
                     <div class="row"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Atender um pedido</span></div>
-                    <div class="field"><label for="pedido-sel">Pedido que você está atendendo</label><select id="pedido-sel" class="select"><option>ped-9h2d5 · Lista de todos os editais de fomento cultural municipais do RS em 2025 · recompensa US$ 2.100 · 9 contribuidores</option><option>ped-2c8d1 · Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025) · US$ 3.200 · 14</option><option>ped-7f1a3 · Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 · 1</option><option>ped-5r2k8 · Contratos de concessão de portos no Chile (2000–2026) · US$ 900 · 4</option></select><span class="hint">A recompensa acumulada até a validação é o seu preço. Quem contribuiu recebe o acesso; você não define valor.</span></div>
+                    <div class="field"><label for="pedido-sel">Pedido que você está atendendo</label><select id="pedido-sel" class="select"><option>ped-9h2d5 · Lista de todos os editais de fomento cultural municipais do RS em 2025 · US$ 2.100 · 7 interessados × US$ 300</option><option>ped-2c8d1 · Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025) · US$ 3.200 · 4 × US$ 800</option><option>ped-7f1a3 · Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 · 1 × US$ 800</option><option>ped-5r2k8 · Contratos de concessão de portos no Chile (2000–2026) · US$ 900 · 3 × US$ 300</option></select><span class="hint">Seu preço é a recompensa total no momento da validação: valor por interessado × interessados. Todos os interessados pagaram o mesmo valor e recebem o mesmo acesso; você não define valor. Ao enviar o atendimento, o pedido trava: ninguém entra, cobre ou sai até a decisão da curadoria.</span></div>
                     <div class="panel">
                       <div class="label">Critérios de aceite do pedido</div>
                       <ol class="small mt-1" style="margin:0;padding-left:20px"><li>Todos os municípios do RS com edital publicado em 2025.</li><li>Link ou cópia do edital, valor total e prazo de inscrição.</li><li>Formato CSV ou XLSX, uma linha por edital.</li></ol>
-                      <p class="xs muted mt-1">A curadoria confere cada critério antes de liberar a recompensa. Se dois vendedores entregarem, vale o primeiro validado.</p>
+                      <p class="xs muted mt-1">A curadoria confere cada critério antes de validar o atendimento. Se dois vendedores entregarem, vale o primeiro validado; o segundo pode publicar o dele como item normal.</p>
                     </div>
-                    <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Depois de atendido, abrir como Cópias para quem não contribuiu<span class="desc">Parte da receita das cópias vai aos contribuidores originais até reembolsar o que pagaram.</span></span></label>
+                    <div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">Só para os interessados</span>Quem abriu este pedido não permitiu venda posterior como Cópias: o conteúdo entregue fica só com os 7 interessados. Quando o autor permite, você pode vendê-lo depois como Cópias, nunca por menos que o valor por interessado final.</div></div>
                   </div>
                 </div>
               </div>
@@ -376,7 +376,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <p class="small muted mt-1">Nenhuma assinatura, nome, CPF ou documento. A declaração vale pelo pseudônimo, pela data e pela versão do texto. É isso que fica registrado.</p>
             </div>
           </div>
-          <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">As declarações ficam registradas</span>Data e hora, versão do texto (v1.3 · out/2026) e vínculo ao pseudônimo <span class="handle" data-handle="coruja-7f3a"></span>, por item e por versão. Em caso de violação comprovada, o item é retirado, os compradores são reembolsados com o valor em custódia e a conta pode ser banida com o saldo retido para análise.</div></div>
+          <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">As declarações ficam registradas</span>Data e hora, versão do texto (v1.3 · out/2026) e vínculo ao pseudônimo <span class="handle" data-handle="coruja-7f3a"></span>, por item e por versão. Em caso de violação comprovada, o item é retirado, os compradores são reembolsados a partir da carteira do item (ou do fundo de garantia, se a carteira já tiver sido entregue) e a conta pode ser banida.</div></div>
         </div>
         <div class="card-foot"><button class="btn btn-ghost" data-step-go="4"><i data-icon="arrow-left"></i>Voltar</button><div class="foot-actions"><button class="btn btn-primary" data-step-go="6">Continuar<i data-icon="arrow-right"></i></button></div></div>
       </section>
@@ -510,8 +510,8 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
             note.textContent = 'O pagamento entra na carteira deste item; 72 h após a entrega, separamos 10 % e entregamos a carteira a você.';
             exclRow.hidden = true; exclNote.hidden = true;
           } else {
-            label.textContent = 'Recompensa do pedido · US$ 2.100,00 hoje'; set('s-liq', usd(2100 * 0.90));
-            note.textContent = 'A recompensa pode crescer até a validação. Paga na validação pela curadoria.';
+            label.textContent = 'Recompensa do pedido · US$ 2.100,00 hoje (7 interessados × US$ 300)'; set('s-liq', usd(2100 * 0.90));
+            note.textContent = 'Novos interessados podem se juntar até você enviar o atendimento; aí o pedido trava. Validado pela curadoria, separamos 10 % e entregamos a carteira do pedido a você.';
             exclRow.hidden = true; exclNote.hidden = true;
           }
         }

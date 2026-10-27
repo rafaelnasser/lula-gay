@@ -32,7 +32,7 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 1. **Comprar uma cópia**: explorar → item → checkout (pagar da própria carteira cripto para o endereço do item) → confirmações na rede → cofre → visualizador → (opcional) disputa em 72 h.
 2. **Apoiar um lacre coletivo**: item (variante coletivo) → checkout (valor do apoio) → apoios (acompanhar) → notificação "lacre rompido" → cofre.
 3. **Vender**: criar conta → área do vendedor → novo anúncio (6 passos) → anúncios (em análise) → notificação da curadoria (ajustes ou aprovado) → anúncio publicado com carteira do item → finalização → carteiras dos itens (receber a frase de recuperação) → transferir para a própria carteira.
-4. **Pedir informação**: pedidos → novo pedido (modal) → curadoria aprova → público soma recompensa → vendedor atende → curadoria valida → contribuidores recebem acesso.
+4. **Pedir informação**: pedidos → novo pedido (modal, com o valor por interessado) → curadoria aprova → outros interessados se juntam pelo mesmo valor (ou cobrem, e os demais igualam ou saem) → vendedor atende → curadoria valida → interessados recebem acesso; quem atendeu recebe a carteira do pedido.
 5. **Curadoria**: fila → análise (checklist 7 blocos, autenticidade, redação) → decisão → (jurídico) → publicação (post gerado) → prova pública.
 6. **Disputa**: cofre → abrir disputa → curadoria compara prévia e conteúdo → resolução → reembolso em créditos.
 
@@ -81,11 +81,13 @@ Rodapé do painel em todas: "Compra anônima. Registramos item, valor e data. Na
 
 ### `public/pedidos.html` · Mural de pedidos
 - Explicação em uma linha + botão "Fazer um pedido" (leva ao login se deslogado).
-- Filtros (categoria, país, recompensa mínima, status) e cards de pedido: título, recompensa acumulada, contribuidores, prazo, status (aberto / em curadoria / atendido), critérios de aceite resumidos, botões "Somar à recompensa" e "Tenho essa informação".
+- Filtros (categoria, país, valor por interessado mínimo, status) e cards de pedido: título, valor por interessado, nº de interessados, recompensa total, prazo, status (aberto / valor subiu / travado: atendimento em curadoria / atendido / expirado), critérios resumidos, botões "Juntar-se" e "Tenho essa informação".
 
 ### `public/pedido.html` · Página do pedido
 - Título, autor (pseudônimo), categoria, descrição, critérios de aceite (lista numerada), formato esperado, prazo.
-- Painel lateral: recompensa acumulada, nº de contribuidores, botões de valor, "Somar à recompensa", regra ("Quem contribuir recebe acesso. Se ninguém atender até o prazo, tudo volta para as carteiras."), botão "Tenho essa informação" (leva ao assistente de envio com o pedido vinculado).
+- Painel lateral: valor por interessado, nº de interessados, recompensa total, botões "Juntar-se por US$ V" e "Cobrir o valor (mín. V + 10 %)", regra em uma linha ("Todos pagam o mesmo valor e recebem o mesmo acesso. Se ninguém atender até o prazo, cada um recebe o seu de volta."), carteira do pedido (endereço público, pagamentos), botão "Tenho essa informação" (leva ao assistente de envio com o pedido vinculado).
+- Lista pública de interessados (pseudônimo, data de entrada, "igualou em") e linha do tempo (abertura, entradas, coberturas, igualadas, saídas).
+- Estados (variantes): aberto; valor subiu, "iguale até dd/mm hh:mm (+US$ X) ou saia" para quem participa; travado (atendimento em curadoria).
 - Atendimentos: contagem de atendimentos em curadoria (sem detalhes).
 - Perguntas públicas ao autor (Q&A moderado).
 
@@ -130,12 +132,12 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Alertas: disputa em andamento, assinatura a renovar, lacre encerrando em 24 h.
 
 ### `buyer/pagamentos.html` · Pagamentos
-- Não existe carteira interna, saldo, depósito nem saque. A tela lista os pagamentos que esta conta fez para carteiras de itens: item, o que foi pago (cópia, apoio, camada, assinatura, contribuição), valor, rede, endereço derivado, confirmações, status (aguardando, confirmado, reembolsado ao endereço de origem) e txid com link para o explorador.
+- Não existe carteira interna, saldo, depósito nem saque. A tela lista os pagamentos que esta conta fez para carteiras de itens: item, o que foi pago (cópia, apoio, camada, assinatura, entrada em pedido, igualar valor), valor, rede, endereço derivado, confirmações, status (aguardando, confirmado, reembolsado ao endereço de origem) e txid com link para o explorador.
 - Reembolsos recebidos (lacres que falharam, disputas procedentes, buyout em lacre coletivo) com txid.
 - Guia "Como pagar": use uma carteira que você controla (MetaMask, Trust, Ledger, carteira de celular), nunca direto de uma corretora; envie o valor exato; reembolsos voltam ao endereço de origem; redes aceitas e confirmações exigidas.
 
 ### `buyer/checkout.html` · Checkout (variantes)
-- Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura, **exclusividade (buyout)** com as consequências e um aceite explícito.
+- Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura, **pedido** (juntar-se pelo valor por interessado / cobrir com mínimo de +10 % / igualar a diferença dentro da janela), **exclusividade (buyout)** com as consequências e um aceite explícito.
 - Pagamento direto: escolha da rede, endereço derivado só para este pagamento, QR, valor exato, aviso "pague de uma carteira que você controla; reembolsos voltam ao endereço de origem", contador de confirmações e liberação automática do acesso.
 - O que acontece depois (acesso ao confirmar / fica na carteira do item até a finalização / reembolso automático à origem se o lacre falhar).
 - Transparência: "o que registramos sobre esta compra". Valor em US$ e o débito equivalente em USDT.
@@ -152,12 +154,12 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `buyer/apoios.html`
 - Lista de lacres apoiados com progresso, valor apoiado, status (em andamento / rompido / falhou e reembolsado), prazo, botão "Apoiar mais", "Compartilhar" (link anônimo), "Ver no cofre" quando liberado.
-- Aba "Recompensas de pedidos" com contribuições a pedidos.
+- Aba "Pedidos" com os pedidos de que o usuário participa (valor por interessado pago, recompensa total, status).
 - Total apoiado e selos ("Rompeu 3 lacres").
 
 ### `buyer/pedidos.html`
-- Botão "Novo pedido" abre modal: título, categoria, descrição, critérios de aceite (lista), formato esperado, recompensa inicial, prazo, regra de liberação; aviso de curadoria.
-- Lista de pedidos do usuário com status (em curadoria / aberto / atendimento em análise / atendido / expirado), recompensa acumulada e contribuidores.
+- Botão "Novo pedido" abre modal: título, categoria, descrição, critérios de aceite (lista), formato esperado, valor por interessado, prazo, opção "permitir venda posterior como Cópias, nunca abaixo do valor por interessado"; aviso de curadoria.
+- Lista de pedidos do usuário (abertos por ele ou em que se juntou) com status (em curadoria / aberto / valor subiu: iguale até… / travado: atendimento em curadoria / atendido / expirado / saiu), valor por interessado, nº de interessados e recompensa total; ações: Cobrir, Igualar, Sair (reembolso ao endereço de origem), Abrir no cofre.
 - Detalhe expandido do pedido "em análise": "1 atendimento aguardando curadoria".
 
 ### `buyer/mensagens.html` (compartilhada)
