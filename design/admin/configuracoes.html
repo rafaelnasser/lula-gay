@@ -100,7 +100,7 @@
                 <tbody>
                   <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas, após a última janela de 72 h</td></tr>
                   <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="num">10 %</td><td class="small">72 h após a venda, sem disputa aberta</td></tr>
-                  <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">72 h após o lacre romper · nada se a meta não bater</td></tr>
+                  <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">72 h após a última onda (7 dias após o rompimento, com 48 h entre ondas) · público na finalização · nada se a meta não bater</td></tr>
                   <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td class="num">10 %</td><td class="small">Quando o atendimento é validado · sobre a recompensa total (valor por interessado × interessados)</td></tr>
                   <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão</span></td><td class="num">10 %</td><td class="small">72 h após o pagamento do vencedor · sobre o segundo preço</td></tr>
                   <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas · sobre todas as camadas vendidas</td></tr>
@@ -257,6 +257,7 @@
               <div class="field"><label for="l16">Pedido · valor mínimo do extra</label><div class="input-group"><span class="affix">US$</span><input id="l16" class="input num w-sm" value="10"></div><span class="hint">Prazo do extra: o do pedido por padrão, nunca além dele.</span></div>
             </div>
           </div></div>
+          <div class="stack">
           <div class="card"><div class="card-head"><h3>Itens e envios</h3></div><div class="card-body">
             <div class="form-grid">
               <div class="field"><label for="l5">Tamanho máximo por item</label><div class="input-group"><input id="l5" class="input num w-sm" value="20"><span class="affix">GB</span></div></div>
@@ -267,6 +268,18 @@
             <div class="alert alert-info mt-2"><i data-icon="info"></i><div>Não existe limite de saque nem de depósito porque não existe saldo: o que entra vai para a carteira do item e só sai como reembolso ao endereço de origem ou na finalização.</div></div>
             <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de limites enviada a Marcos L. · settings.limit.update">Salvar limites</button></div>
           </div></div>
+          <div class="card"><div class="card-head"><h3>Lacre coletivo · fila de liberação</h3><span class="badge badge-outline">do maior apoio para o menor</span></div><div class="card-body">
+            <div class="form-grid">
+              <div class="field"><label for="l17">Onda 1 · faixa sugerida</label><div class="input-group"><span class="affix">a partir de US$</span><input id="l17" class="input num w-sm" value="500"></div><span class="hint">Recebe na hora do rompimento.</span></div>
+              <div class="field"><label for="l18">Onda 2 · faixa sugerida</label><div class="input-group"><span class="affix">a partir de US$</span><input id="l18" class="input num w-sm" value="100"></div><span class="hint">Onda 3: abaixo disso (apoio mínimo US$ 10).</span></div>
+              <div class="field"><label for="l19">Janela entre ondas</label><select id="l19" class="select"><option selected>48 h (padrão)</option><option>72 h</option></select><span class="hint">Escolha do vendedor ao criar o anúncio.</span></div>
+              <div class="field"><label for="l20">Número de ondas</label><div class="input-group"><input id="l20" class="input num w-sm" value="3" readonly><span class="affix">ondas</span></div></div>
+              <div class="field full"><label for="l21">Público</label><input id="l21" class="input" value="na finalização: 72 h após a última onda" readonly><span class="hint">Com 48 h entre ondas, 7 dias após o rompimento. É quando a comissão é separada e a carteira vai ao vendedor.</span></div>
+            </div>
+            <p class="xs muted mt-2">As faixas são sugestões: o vendedor ajusta no anúncio. Empate na fila: quem apoiou antes vem primeiro. Quem apoia mais sobe de onda. Compra com exclusividade continua devolvendo todos os apoios.</p>
+            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de fila de liberação enviada a Marcos L. · settings.release.update">Salvar fila de liberação</button></div>
+          </div></div>
+          </div>
         </div>
         <div class="grid cols-2">
           <div class="card"><div class="card-head"><h3>Redes e confirmações</h3><span class="badge badge-outline">só cripto</span></div><div class="table-wrap" style="border:0;border-radius:0">
