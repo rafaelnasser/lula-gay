@@ -24,20 +24,22 @@
     .quote { border-left: 3px solid var(--border-2); padding: 4px 0 4px 14px; color: var(--fg-2); font-size: var(--fs-sm); }
     .reviewer { display: flex; align-items: center; gap: 10px; }
     .reviewer .av { width: 32px; height: 32px; border-radius: 8px; background: var(--brass-soft); color: var(--brass); font-weight: 700; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; }
+    .mono { font-family: var(--font-mono); }
+    .timeline .handle { vertical-align: middle; font-size: var(--fs-xs); }
   </style>
 </head>
 <body data-shell="buyer" data-page="cofre" data-root="../" data-title="Disputa">
 <main>
   <div data-variants="abrir">
 
-    <!-- ===================== VARIANTE: ABRIR ===================== -->
+    <!-- ===================== VARIANTE: ABRIR (DSP-0207) ===================== -->
     <div data-variant="abrir">
       <div class="crumbs mb-2"><a href="../buyer/cofre.html">Cofre</a><i data-icon="chevron-right"></i><a href="../public/item.html">lcr-9f2k7</a><i data-icon="chevron-right"></i><span>Abrir disputa</span></div>
       <div class="page-head">
         <div>
           <p class="eyebrow">Janela de disputa · 72 h após o primeiro acesso</p>
           <h1>Abrir disputa</h1>
-          <p class="sub">Você abriu este item pela primeira vez em 26/10 às 11:30. A janela termina em 29/10 às 11:30: restam <span class="countdown brass" data-deadline="2026-10-29T11:30:00-03:00"></span>.</p>
+          <p class="sub">O vendedor entregou a versão 2 do pacote em 25/10 às 14:20 e a janela de 72 h reabriu. Ela termina em 28/10 às 14:20: restam <span class="countdown brass" data-deadline="2026-10-28T14:20:00-03:00"></span>.</p>
         </div>
         <div class="actions"><a class="btn btn-ghost" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Reabrir no visualizador</a></div>
       </div>
@@ -45,7 +47,7 @@
       <div class="split">
         <form class="card" data-submit-toast="Disputa DSP-0207 aberta. A curadoria responde em até 5 dias.">
           <div class="card-body stack">
-            <div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">O valor fica retido enquanto a disputa estiver aberta</span>US$ 490,00 continuam na custódia do item e não são liberados ao vendedor até a decisão. A curadoria já tem a prévia pública e o conteúdo entregue; o seu papel é apontar a diferença.</div></div>
+            <div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">O pagamento fica marcado na carteira do item enquanto a disputa estiver aberta</span>Os 490 USDT que você pagou continuam na carteira do lcr-9f2k7, marcados como em disputa. Enquanto a disputa estiver aberta, o item não pode ser finalizado: a carteira só é entregue ao vendedor sem disputa aberta. A curadoria já tem a prévia pública e o conteúdo entregue; o seu papel é apontar a diferença.</div></div>
 
             <fieldset class="field">
               <legend>Motivo</legend>
@@ -74,14 +76,14 @@
             <div class="panel">
               <b class="small">O que acontece depois</b>
               <div class="after mt-1 small">
-                <div class="how-step"><span class="n">1</span><div>A disputa recebe um número (DSP-…) e o vendedor é notificado do motivo, sem saber quem abriu.</div></div>
+                <div class="how-step"><span class="n">1</span><div>A disputa recebe um número (DSP-…) e o vendedor é notificado do motivo, sem saber quem abriu. A finalização do item fica adiada até a decisão.</div></div>
                 <div class="how-step"><span class="n">2</span><div>A curadoria compara a prévia pública com o conteúdo entregue e pode ler a conversa do item. O vendedor pode responder em 48 h.</div></div>
-                <div class="how-step"><span class="n">3</span><div>Decisão em até 5 dias: reembolso total, parcial ou disputa mantida. Reembolsos voltam para a carteira no mesmo dia.</div></div>
-                <div class="how-step"><span class="n">4</span><div>Você mantém o acesso ao item até a decisão. Em reembolso total, o acesso é revogado.</div></div>
+                <div class="how-step"><span class="n">3</span><div>Decisão em até 5 dias: reembolso total, parcial ou disputa mantida. O reembolso sai da carteira do item para o endereço de origem do seu pagamento no mesmo dia, descontada só a taxa de rede.</div></div>
+                <div class="how-step"><span class="n">4</span><div>Você mantém o acesso ao item até a decisão. Em reembolso total de uma compra, o acesso é revogado. Depois da finalização de um item, só reclamações excepcionais são aceitas, pagas pelo fundo de garantia.</div></div>
               </div>
             </div>
 
-            <label class="check"><input type="checkbox" required><span>Confirmo que as informações são verdadeiras e que comparei o conteúdo com a prévia.<span class="desc">Disputas improcedentes repetidas limitam o direito de abrir novas disputas. Esta é a sua 2ª disputa; a anterior (DSP-0192) foi procedente.</span></span></label>
+            <label class="check"><input type="checkbox" required><span>Confirmo que as informações são verdadeiras e que comparei o conteúdo com a prévia.<span class="desc">Disputas improcedentes repetidas limitam o direito de abrir novas disputas. Esta é a sua 2ª; a anterior (DSP-0203) foi aceita.</span></span></label>
 
             <div class="form-actions">
               <a class="btn btn-ghost" href="../buyer/cofre.html">Cancelar</a>
@@ -104,11 +106,14 @@
               </div>
               <dl class="kv">
                 <dt>Slug</dt><dd>lcr-9f2k7</dd>
-                <dt>Pago</dt><dd>US$ 490,00 · 21/10</dd>
+                <dt>Pagamento</dt><dd>490 USDT · Polygon · 21/10 · confirmado (12 de 12)</dd>
+                <dt>txid</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…7a31</a></dd>
+                <dt>Carteira do item</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…c0d4</a> · Polygon · USDT · item ativo, não finalizado</dd>
                 <dt>Entitlement</dt><dd>ENT-3F9A · download com marca d'água</dd>
-                <dt>Primeiro acesso</dt><dd>26/10 · 11:30</dd>
+                <dt>Versão 2 entregue</dt><dd>25/10 · 14:20</dd>
                 <dt>Hash do pacote</dt><dd><a class="link" href="../public/prova.html">3f9a…c21e</a></dd>
               </dl>
+              <p class="xs muted">Um reembolso volta ao endereço de origem deste pagamento. Por isso pedimos pagar de uma carteira que você controla, nunca direto de uma corretora.</p>
             </div>
           </div>
           <div class="alert alert-anon"><i data-icon="eye-off"></i><div><span class="alert-title">Anônimo dos dois lados</span>O vendedor vê o número da disputa, o motivo e a descrição. Não vê o seu pseudônimo nem o seu histórico. Registramos item, valor, data e decisão.</div></div>
@@ -125,81 +130,83 @@
       </div>
     </div>
 
-    <!-- ===================== VARIANTE: ACOMPANHAR ===================== -->
+    <!-- ===================== VARIANTE: ACOMPANHAR (DSP-0203 · reclamação após a finalização) ===================== -->
     <div data-variant="acompanhar">
-      <div class="crumbs mb-2"><a href="../buyer/cofre.html">Cofre</a><i data-icon="chevron-right"></i><a href="../public/item.html">lcr-5t6w1</a><i data-icon="chevron-right"></i><span>Disputa DSP-0192</span></div>
+      <div class="crumbs mb-2"><a href="../buyer/apoios.html">Apoios</a><i data-icon="chevron-right"></i><a href="../public/item.html">lcr-2d9r4</a><i data-icon="chevron-right"></i><span>Reclamação DSP-0203</span></div>
       <div class="page-head">
         <div>
-          <p class="eyebrow">Disputa · aberta em 19/10 · resolvida em 22/10</p>
-          <h1>Disputa DSP-0192</h1>
-          <p class="sub">1.200 páginas de jornais operários de São Paulo (1917–1930) digitalizadas em 600 dpi · lcr-5t6w1 · comprado por US$ 120,00 em 17/10</p>
+          <p class="eyebrow">Reclamação · enviada em 08/10, fora das 72 h · resolvida em 10/10</p>
+          <h1>Reclamação DSP-0203</h1>
+          <p class="sub">Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos · lcr-2d9r4 · lacre coletivo rompido em 03/10 e finalizado em 06/10 · você apoiou com 50 USDT em 01/10</p>
         </div>
-        <div class="actions"><span class="badge badge-lg badge-ok"><i data-icon="check-circle"></i>Resolvida · reembolso parcial</span></div>
+        <div class="actions"><span class="badge badge-lg badge-ok"><i data-icon="check-circle"></i>Aceita · reembolso total pelo fundo de garantia</span></div>
       </div>
 
       <div class="split">
         <div class="stack">
           <div class="card">
-            <div class="card-head"><h3>Linha do tempo</h3><span class="badge badge-outline">decidida em 3 dias · prazo 5</span></div>
+            <div class="card-head"><h3>Linha do tempo</h3><span class="badge badge-outline">decidida em 2 dias · prazo 5</span></div>
             <div class="card-body">
               <div class="timeline">
-                <div class="tl-item ok"><div class="when">17/10 · 15:12</div><div class="what">Compra entregue no cofre · ENT-5B2C · primeiro acesso em 18/10 às 20:05</div></div>
-                <div class="tl-item warn"><div class="when">19/10 · 10:12</div><div class="what">Disputa aberta · motivo: arquivo corrompido ou incompleto · 2 anexos · US$ 120,00 retidos na custódia</div></div>
-                <div class="tl-item info"><div class="when">20/10 · 09:30</div><div class="what">Em análise · Bruno M. (Curador) · prévia pública e pacote entregue comparados no visualizador seguro</div></div>
-                <div class="tl-item info"><div class="when">20/10 · 17:48</div><div class="what">Vendedor respondeu: reconhece a resolução menor nas páginas 611 a 740 e propõe substituir o lote</div></div>
-                <div class="tl-item ok"><div class="when">22/10 · 16:05</div><div class="what">Resolvida · reembolso parcial de US$ 60,00 · descrição pública do item corrigida · acesso mantido</div></div>
-                <div class="tl-item ok"><div class="when">22/10 · 16:05</div><div class="what">US$ 60,00 creditados na carteira</div></div>
+                <div class="tl-item ok"><div class="when">01/10 · 09:40</div><div class="what">Apoio de 50 USDT confirmado · Polygon · txid <span class="mono">0x4d0e…a9c3</span> · fica na carteira do lacre até o resultado</div></div>
+                <div class="tl-item wax"><div class="when">03/10 · 22:10</div><div class="what">Lacre rompido · meta batida · conteúdo liberado publicamente · acesso no seu cofre (ENT-5B2C) · janela de disputa de 72 h aberta para todos os apoiadores</div></div>
+                <div class="tl-item ok"><div class="when">06/10 · 22:10</div><div class="what">Finalização, sem disputa aberta nas 72 h: comissão separada e carteira do lacre entregue a <span class="handle" data-handle="estenografo-7b3c"></span> · chave destruída</div></div>
+                <div class="tl-item warn"><div class="when">08/10 · 18:25</div><div class="what">Sua reclamação, 2 dias depois do fim da janela · motivo: conteúdo diferente da prova pública (1.500 obras anunciadas, 1.200 entregues) · 2 anexos · nada pode ser retido: a carteira já foi entregue</div></div>
+                <div class="tl-item info"><div class="when">09/10 · 10:10</div><div class="what">Aceita excepcionalmente para análise · Bruno M. (Curador) · prova pública e pacote comparados</div></div>
+                <div class="tl-item ok"><div class="when">10/10 · 11:05</div><div class="what">Resolvida · reembolso total de 50 USDT pelo fundo de garantia · descrição pública corrigida para 1.200 obras</div></div>
+                <div class="tl-item ok"><div class="when">10/10 · 11:08</div><div class="what">50 USDT enviados ao endereço de origem do seu apoio, a partir do fundo de garantia · Polygon · txid <span class="mono">0x2d9r…51fe</span> · 12 confirmações</div></div>
               </div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-head"><h3>Sua alegação</h3><span class="badge badge-outline">19/10 · 10:12</span></div>
+            <div class="card-head"><h3>Sua reclamação</h3><span class="badge badge-outline">08/10 · 18:25</span></div>
             <div class="card-body stack-sm">
-              <div class="row"><span class="badge badge-warn"><i data-icon="alert-triangle"></i>Arquivo corrompido ou incompleto</span></div>
-              <div class="quote">As páginas 611 a 740 (jornal A Plebe, 1919–1921) estão em 300 dpi, não nos 600 dpi declarados, e 38 delas estão ilegíveis por falha na digitalização (texto cortado na dobra). O restante das 1.200 páginas confere com a prévia e a descrição.</div>
-              <div class="row"><div class="file-row grow"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">pagina-702-dobra.png</div><div class="file-meta">388 KB</div></div></div><div class="file-row grow"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">propriedades-dpi-lote-2.png</div><div class="file-meta">96 KB</div></div></div></div>
+              <div class="row"><span class="badge badge-warn"><i data-icon="file-search"></i>Conteúdo diferente da prova pública</span><span class="badge badge-outline"><i data-icon="clock"></i>fora das 72 h</span></div>
+              <div class="quote">A prova pública e a página do lacre anunciam 1.500 obras paradas em 9 estados, com fotos e empenhos, e a amostra pública mostra 40 obras de Pernambuco. O pacote liberado tem 1.200 obras e nenhuma de Pernambuco: faltam as 300 anunciadas. Só percebi ao cruzar o índice com a amostra, depois do fim da janela.</div>
+              <div class="row"><div class="file-row grow"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">prova-publica-1500-obras.png</div><div class="file-meta">402 KB</div></div></div><div class="file-row grow"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">indice-do-pacote-1200.png</div><div class="file-meta">88 KB</div></div></div></div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-head"><h3>Resposta da curadoria</h3><span class="badge badge-outline">22/10 · 16:05</span></div>
+            <div class="card-head"><h3>Resposta da curadoria</h3><span class="badge badge-outline">10/10 · 11:05</span></div>
             <div class="card-body stack">
-              <div class="reviewer"><span class="av">BM</span><div><b class="small">Bruno M.</b><div class="xs muted">Curador · análise de disputa · acesso ao conteúdo registrado em auditoria</div></div></div>
-              <p class="small">Conferimos o pacote entregue contra a prévia aprovada. 130 páginas (611 a 740) estão em 300 dpi em vez dos 600 dpi declarados, e 38 delas têm perda de legibilidade na margem interna. As outras 1.070 páginas correspondem à prévia e à descrição, em 600 dpi, com OCR íntegro. O item não é duplicado nem há indício de fabricação.</p>
-              <p class="small">Decisão: <b>reembolso parcial de 50 %</b> (US$ 60,00), proporcional à parte afetada e ao valor de uso do restante. A descrição pública foi corrigida para informar a resolução dessas 130 páginas, e o vendedor foi orientado a enviar um lote substituto como nova versão; se for aprovado, você recebe a atualização no cofre sem custo. Os demais compradores foram notificados.</p>
+              <div class="reviewer"><span class="av">BM</span><div><b class="small">Bruno M.</b><div class="xs muted">Curador · análise de reclamação · acesso ao conteúdo registrado em auditoria</div></div></div>
+              <p class="small">A janela de disputa deste lacre terminou em 06/10 e a carteira já foi entregue ao vendedor, por isso a reclamação não podia reter nada na carteira do item. Aceitamos excepcionalmente porque a divergência é verificável contra a prova pública: o hash do pacote confere, mas o índice tem 1.200 obras, enquanto a prova e a descrição aprovada anunciavam 1.500, com as 300 de Pernambuco na amostra. Enquadra-se em prévia enganosa (R11).</p>
+              <p class="small">Decisão: <b>aceita, reembolso total</b> (50 USDT), pago pelo fundo de garantia da plataforma ao endereço de origem do seu apoio. A descrição pública foi corrigida para 1.200 obras, o vendedor recebeu a penalidade prevista e os demais apoiadores que reclamarem até 03/11 têm o mesmo tratamento. O conteúdo continua liberado publicamente, como em todo lacre rompido; nada é revogado.</p>
               <div class="resolution">
-                <div class="row between"><b>Resultado: reembolso parcial</b><span class="price ok">US$ 60,00</span></div>
-                <div class="xs muted mt-1">US$ 60,00 creditados em 22/10 às 16:05 · você mantém o acesso ao item · a reputação do vendedor registra 1 disputa parcialmente procedente</div>
+                <div class="row between"><b>Resultado: reembolso total pelo fundo de garantia</b><span class="price ok">US$ 50,00</span></div>
+                <div class="xs muted mt-1">50 USDT enviados ao endereço de origem do seu apoio em 10/10 às 11:08 · txid <span class="mono">0x2d9r…51fe</span> · só a taxa de rede descontada · a reputação do vendedor registra 1 reclamação aceita</div>
               </div>
             </div>
           </div>
         </div>
 
         <aside class="stack">
-          <div class="stat"><span class="label">Saldo devolvido</span><span class="value">US$ 60,00</span><span class="delta up"><i data-icon="wallet"></i>na carteira desde 22/10</span></div>
+          <div class="stat"><span class="label">Reembolsado ao endereço de origem</span><span class="value">US$ 50,00</span><span class="delta up"><i data-icon="check-circle"></i>50 USDT · Polygon · 10/10 · fundo de garantia · txid 0x2d9r…51fe</span></div>
           <div class="card">
             <div class="card-head"><h3>Resumo</h3></div>
             <div class="card-body">
               <dl class="kv">
-                <dt>Disputa</dt><dd>DSP-0192</dd>
-                <dt>Item</dt><dd>lcr-5t6w1 · <span class="handle" data-handle="arquivista-0d2e"></span></dd>
-                <dt>Valor pago</dt><dd>US$ 120,00</dd>
-                <dt>Devolvido</dt><dd>US$ 60,00</dd>
-                <dt>Liberado ao vendedor</dt><dd>US$ 60,00 menos 10 % de comissão</dd>
-                <dt>Acesso</dt><dd>mantido · ENT-5B2C</dd>
+                <dt>Caso</dt><dd>DSP-0203 · reclamação fora das 72 h</dd>
+                <dt>Item</dt><dd>lcr-2d9r4 · lacre coletivo · <span class="handle" data-handle="estenografo-7b3c"></span></dd>
+                <dt>Apoio</dt><dd>50 USDT · Polygon · 01/10 · txid <span class="mono">0x4d0e…a9c3</span></dd>
+                <dt>Reembolso</dt><dd>50 USDT (100 %) ao endereço de origem · taxa de rede ≈ US$ 0,04</dd>
+                <dt>De onde saiu</dt><dd>do fundo de garantia: a carteira do lacre foi entregue ao vendedor em 06/10</dd>
+                <dt>Acesso</dt><dd>mantido · conteúdo público desde 03/10</dd>
               </dl>
-              <div class="row mt-2"><a class="btn btn-sm" href="../buyer/pagamentos.html"><i data-icon="wallet"></i>Ver no extrato</a><a class="btn btn-sm btn-ghost" href="../buyer/cofre.html"><i data-icon="vault"></i>Abrir no cofre</a></div>
+              <div class="row mt-2"><a class="btn btn-sm" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Ver em Pagamentos</a><a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Registro na prova</a></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-head"><h3>Discorda da decisão?</h3></div>
+            <div class="card-head"><h3>De onde sai um reembolso</h3></div>
             <div class="card-body stack-sm small">
-              <p>Você pode pedir uma revisão, uma única vez, até 29/10. Uma curadora sênior (Ana R.) reanalisa sem ver as notas da primeira decisão.</p>
-              <button class="btn btn-outline" data-toast="Pedido de revisão registrado. Ana R. responde em até 5 dias."><i data-icon="rotate-ccw"></i>Pedir revisão</button>
+              <div class="row start"><i data-icon="wallet" class="ico brass"></i><div><b>Antes da finalização:</b> uma disputa aberta dentro das 72 h adia a finalização do item até a decisão, e o reembolso sai da carteira do item para o endereço de origem do seu pagamento.</div></div>
+              <div class="row start"><i data-icon="shield-check" class="ico brass"></i><div><b>Depois da finalização:</b> a carteira já foi entregue ao vendedor, então só reclamações excepcionais são aceitas, pagas pelo fundo de garantia da plataforma (2 % de cada comissão), também ao endereço de origem. Foi o caso aqui.</div></div>
+              <div class="row start"><i data-icon="alert-triangle" class="ico brass"></i><div>Nos dois casos o valor volta ao endereço que pagou. Pague de uma carteira que você controla, nunca direto de uma corretora.</div></div>
             </div>
           </div>
-          <div class="alert alert-anon"><i data-icon="shield"></i><div>Disputas procedentes não afetam a sua conta. Esta foi a sua 1ª disputa. O vendedor não sabe quem a abriu.</div></div>
+          <div class="alert alert-anon"><i data-icon="shield"></i><div>Reclamações aceitas não afetam a sua conta. Esta foi a sua 1ª. O vendedor não sabe quem reclamou.</div></div>
         </aside>
       </div>
     </div>

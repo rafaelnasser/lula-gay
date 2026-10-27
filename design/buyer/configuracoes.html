@@ -85,7 +85,7 @@
         <div class="card">
           <div class="card-head"><h3>Autenticação em duas etapas (TOTP)</h3><span class="badge badge-ok"><i data-icon="shield-check"></i>ativo desde 12/03/2026</span></div>
           <div class="card-body stack-sm small">
-            <p>App autenticador no celular. Exigido para entrar com senha, sacar, ver a frase de recuperação e excluir a conta.</p>
+            <p>App autenticador no celular. Exigido para entrar com senha, receber a carteira de um item finalizado (frase de recuperação do item), ver a frase de recuperação da conta e excluir a conta.</p>
             <div class="row"><button class="btn btn-sm" data-toast="8 códigos de backup restantes. Exibidos uma vez."><i data-icon="list"></i>Códigos de backup</button><button class="btn btn-sm" data-toast="Novo QR gerado. O app antigo deixa de valer ao confirmar."><i data-icon="qr-code"></i>Trocar de app</button><button class="btn btn-sm btn-danger" data-modal-open="m-totp"><i data-icon="x"></i>Desativar</button></div>
           </div>
         </div>
@@ -119,9 +119,10 @@
     <div class="tab-panel" data-panel="rec">
       <div class="grid cols-2">
         <form class="card" data-submit-toast="Senha e TOTP conferidos. A frase fica visível por 60 s (protótipo).">
-          <div class="card-head"><h3>Frase de recuperação</h3><span class="badge badge-ok"><i data-icon="check"></i>Frase confirmada em 12/03/2026</span></div>
+          <div class="card-head"><h3>Frase de recuperação da conta</h3><span class="badge badge-ok"><i data-icon="check"></i>Frase confirmada em 12/03/2026</span></div>
           <div class="card-body stack-sm">
             <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">É a única saída</span>Sem e-mail ou telefone, não existe "esqueci minha senha". Quem tiver as 12 palavras controla a conta. Guarde fora do computador.</div></div>
+            <p class="xs muted">Esta é a frase da sua <b>conta</b>. Ela não é a frase de recuperação de uma carteira de item: essa é entregue uma única vez, na finalização, em Carteiras dos itens, e não fica guardada aqui nem em lugar nenhum da plataforma.</p>
             <div class="form-grid">
               <div class="field"><label for="r-senha">Senha para ver a frase</label><input id="r-senha" class="input" type="password" autocomplete="current-password"></div>
               <div class="field"><label for="r-totp">Código TOTP</label><input id="r-totp" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div>
@@ -175,7 +176,7 @@
               <div class="row between"><span>No catálogo, no item e na prova</span><span class="handle" data-handle="coruja-7f3a"></span></div>
               <div class="row between"><span>Para a curadoria</span><span class="muted">pseudônimo, histórico e conteúdo enviado</span></div>
               <div class="row between"><span>Para o público nas redes</span><span class="muted">só o que a prova pública mostra</span></div>
-              <p class="xs muted">O pseudônimo aparece sempre: é a sua reputação. Não há nome, e-mail ou documento por trás dele.</p>
+              <p class="xs muted">O pseudônimo aparece sempre: é a sua reputação. Não existe opção de ocultá-lo. Não há nome, e-mail ou documento por trás dele.</p>
             </div>
           </div>
         </div>
@@ -188,12 +189,13 @@
         <div class="card">
           <div class="card-head"><h3>Push por tipo</h3><span class="badge badge-ok">push ativo em 2 dispositivos</span></div>
           <div class="card-body">
-            <div class="pref"><div><b>Curadoria</b><div class="d">aprovado, ajustes solicitados, rejeitado, publicado</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Curadoria</b><div class="d">aprovado e publicado, ajustes solicitados, rejeitado</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
             <div class="pref"><div><b>Lacres</b><div class="d">marcos de 25/50/75/90 %, rompido, falhou, atualizações do vendedor</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
-            <div class="pref"><div><b>Compras</b><div class="d">entrega no cofre, renovação de assinatura, lance superado</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Pagamentos</b><div class="d">aguardando confirmação, confirmado, renovação de assinatura, reembolso enviado ao endereço de origem</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Pedidos</b><div class="d">o valor subiu (iguale ou saia), novo interessado, atendido (acesso no cofre), você saiu (reembolso enviado)</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
             <div class="pref"><div><b>Mensagens</b><div class="d">novas mensagens e perguntas nos seus pedidos</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
-            <div class="pref"><div><b>Disputas</b><div class="d">abertura, resposta do vendedor, decisão</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
-            <div class="pref"><div><b>Saques</b><div class="d">solicitado, enviado, confirmado na rede</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Disputas</b><div class="d">janela terminando, abertura, resposta do vendedor, decisão</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Carteiras dos itens</b><div class="d">para quem vende: carteira finalizada, frase de recuperação disponível, chave destruída</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
             <div class="pref"><div><b>Segurança</b><div class="d">novo acesso, passkey, alteração de senha · sempre ativo</div></div><label class="switch"><input type="checkbox" checked disabled><span class="track"></span></label></div>
             <div class="pref"><div><b>Resumo diário</b><div class="d">um único aviso às 09:00 em vez de notificações individuais (exceto segurança)</div></div><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
             <div class="row between mt-2"><a class="link xs" href="../buyer/notificacoes.html">Ver notificações</a><button class="btn btn-primary btn-sm" data-toast="Preferências de notificação salvas"><i data-icon="check"></i>Salvar</button></div>
@@ -236,7 +238,7 @@
           <div class="card-head"><h3>Leitura</h3></div>
           <div class="card-body stack">
             <div class="row between"><div><b class="small">Densidade</b><div class="xs muted">Tabelas e listas.</div></div><div class="segmented"><button class="active" data-toast="Densidade confortável">Confortável</button><button data-toast="Densidade compacta aplicada">Compacta</button></div></div>
-            <div class="row between"><div><b class="small">Moeda de referência</b><div class="xs muted">US$ em toda a interface; liquidação em USDT 1:1. Equivalente na moeda local em breve.</div></div><div class="segmented"><button class="active" data-toast="Moeda de referência: US$">US$</button><button data-toast="Equivalente na moeda local: em breve">Local · em breve</button></div></div>
+            <div class="row between"><div><b class="small">Moeda de referência</b><div class="xs muted">US$ em toda a interface; USDT e USDC valem 1:1. Equivalente na moeda local em breve.</div></div><div class="segmented"><button class="active" data-toast="Moeda de referência: US$">US$</button><button data-toast="Equivalente na moeda local: em breve">Local · em breve</button></div></div>
             <div class="field"><label for="idioma">Idioma da interface</label><select id="idioma" class="select"><option>Português</option><option>English</option><option>Español</option></select><span class="hint">Muda só a interface. Itens e pedidos mantêm o idioma original, indicado em cada card.</span></div>
           </div>
         </div>
@@ -249,22 +251,24 @@
         <div class="card">
           <div class="card-head"><h3>Exportar o que existe sobre a conta</h3></div>
           <div class="card-body stack-sm">
-            <p class="small">Tudo o que o Lacre guarda sobre <span class="handle" data-handle="coruja-7f3a"></span>, em JSON assinado e CSV. Esta lista é completa:</p>
+            <p class="small">Tudo o que o Lacre guarda sobre <span class="handle" data-handle="coruja-7f3a"></span>, em JSON assinado e CSV. Esta lista é completa, e não inclui nenhum saldo: a plataforma não guarda saldo de ninguém.</p>
             <ol class="exists">
               <li>pseudônimo e data de criação (mar/2026)</li>
               <li>hash da senha, chaves públicas das 2 passkeys e do arquivo de acesso (não as privadas)</li>
               <li>hash da frase de recuperação (não a frase)</li>
               <li>segredo TOTP cifrado</li>
               <li>preferências (tema, notificações, privacidade)</li>
-              <li>extrato completo do ledger (US$, liquidado em USDT 1:1)</li>
+              <li>pagamentos feitos (item, valor, rede, txid, confirmações) e reembolsos recebidos</li>
+              <li>endereços de origem dos pagamentos em itens ainda não finalizados (apagados na finalização)</li>
               <li>itens enviados, versões, declarações aceitas e decisões da curadoria</li>
-              <li>compras, apoios, contribuições e entitlements (ENT-…)</li>
+              <li>para itens seus: histórico de pagamentos recebidos na carteira de cada item e registro da finalização (comissão separada, frase entregue, chave destruída)</li>
+              <li>compras, apoios, pedidos (abriu, juntou-se, igualou, saiu) e entitlements (ENT-…)</li>
               <li>mensagens ainda não expiradas</li>
               <li>disputas e denúncias feitas ou recebidas</li>
               <li>reputação e selos</li>
               <li>dispositivos de push (endereço aleatório, sem identificador)</li>
             </ol>
-            <p class="xs muted">Não existe e, portanto, não é exportado: nome, e-mail, telefone, CPF, IP das sessões, endereço de cripto após o saque confirmado. Registros de acesso ficam em sistema separado (6 meses, Marco Civil) e só saem por ordem judicial.</p>
+            <p class="xs muted">Não existe e, portanto, não é exportado: nome, e-mail, telefone, CPF, IP das sessões, saldo, endereço de origem depois da finalização do item, chave de carteira de item depois da entrega (destruída). Registros de acesso ficam em sistema separado (6 meses, Marco Civil) e só saem por ordem judicial.</p>
             <div class="row between"><span class="xs muted">Fica disponível aqui por 24 h.</span><button class="btn btn-sm" data-toast="Exportação em preparo. Pronta em até 10 min, protegida pela sua senha."><i data-icon="download"></i>Gerar exportação</button></div>
           </div>
         </div>
@@ -273,19 +277,20 @@
           <div class="card-body stack-sm small">
             <p>Condições para excluir:</p>
             <div class="checklist">
-              <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Saldo zero.</b> Hoje: US$ 1.240,00 disponíveis e US$ 250,00 em custódia. Saque o disponível e espere os apoios em andamento terminarem (15/11).</div></div>
-              <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Nenhum item à venda.</b> Hoje: 1 agendado, 2 em curadoria, 1 com ajustes pendentes. Encerre ou cancele em Meus anúncios.</div></div>
+              <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Nenhum item com carteira em andamento.</b> Hoje: lcr-4g7h9 (aprovado em 26/10, carteira recebendo pagamentos). Encerre as vendas e finalize, ou retire o item, em <a class="link" href="../seller/carteiras.html">Carteiras dos itens</a>.</div></div>
+              <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Nenhum item em curadoria ou com ajustes pendentes.</b> Hoje: lcr-0p4m3 em análise e lcr-2z5q7 com ajustes solicitados. Retire-os em Meus anúncios.</div></div>
               <div class="ck"><i data-icon="check-circle" class="ico ok"></i><div><b>Nenhuma disputa aberta.</b></div></div>
+              <div class="ck"><i data-icon="check-circle" class="ico ok"></i><div><b>Nenhum saldo a devolver</b>, porque não existe saldo. Seus pagamentos em lacres e pedidos abertos (US$ 250,00 no lcr-4m2x9 e US$ 800,00 no ped-2c8d1) não impedem a exclusão: se falharem, o reembolso vai ao endereço de origem mesmo sem conta; se derem certo, você perde o acesso.</div></div>
             </div>
-            <p>O que acontece: o pseudônimo é marcado como excluído e nunca mais pode ser usado; acessos no cofre são revogados; mensagens são apagadas; itens encerrados saem do catálogo (a prova pública mantém só o hash). O ledger é mantido sem identidade, por obrigação contábil. A frase de recuperação deixa de valer. Não há como desfazer.</p>
-            <div class="row between"><span class="xs muted">Exige senha + TOTP.</span><button class="btn btn-danger btn-sm" aria-disabled="true" data-toast="Indisponível: saldo precisa ser zero e itens à venda precisam ser encerrados"><i data-icon="trash"></i>Excluir conta</button></div>
+            <p>O que acontece: o pseudônimo é marcado como excluído e nunca mais pode ser usado; acessos no cofre são revogados; mensagens são apagadas; itens finalizados saem do catálogo (a prova pública mantém só o hash e o endereço da carteira). O histórico de pagamentos por item (valor, rede, txid) é mantido sem identidade, para a prova pública e por obrigação contábil. A frase de recuperação da conta deixa de valer; as frases de carteiras de itens já entregues continuam suas, fora da plataforma. Não há como desfazer.</p>
+            <div class="row between"><span class="xs muted">Exige senha + TOTP.</span><button class="btn btn-danger btn-sm" aria-disabled="true" data-toast="Indisponível: nenhum item pode ter carteira em andamento, em curadoria ou com ajustes pendentes"><i data-icon="trash"></i>Excluir conta</button></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal-backdrop" id="m-totp"><div class="modal"><div class="modal-head"><h3>Desativar TOTP?</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Sem a segunda etapa, quem tiver a sua senha entra na conta e pode sacar. Passkeys continuam valendo.</p><div class="field"><label for="t-code">Código TOTP atual</label><input id="t-code" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div></div><div class="modal-foot"><button class="btn" data-modal-close>Manter ativo</button><button class="btn btn-danger" data-modal-close data-toast="TOTP desativado. Recomendamos reativar.">Desativar</button></div></div></div>
+  <div class="modal-backdrop" id="m-totp"><div class="modal"><div class="modal-head"><h3>Desativar TOTP?</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Sem a segunda etapa, quem tiver a sua senha entra na conta e pode receber a carteira de um item finalizado. Passkeys continuam valendo.</p><div class="field"><label for="t-code">Código TOTP atual</label><input id="t-code" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div></div><div class="modal-foot"><button class="btn" data-modal-close>Manter ativo</button><button class="btn btn-danger" data-modal-close data-toast="TOTP desativado. Recomendamos reativar.">Desativar</button></div></div></div>
 
   <script>
     // seletor de tema (sistema / claro / escuro): usa a mesma chave de armazenamento do app.js

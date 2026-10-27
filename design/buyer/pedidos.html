@@ -21,6 +21,15 @@
     .criteria .input-group .affix { min-width: 36px; justify-content: center; }
     .how { display: flex; flex-direction: column; gap: 10px; }
     .how .how-step .n { width: 26px; height: 26px; font-size: var(--fs-xs); }
+    .pay-ledger { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content; gap: 4px 12px; font-size: var(--fs-xs); color: var(--muted); font-variant-numeric: tabular-nums; }
+    .pay-ledger b { color: var(--fg-2); font-weight: 500; }
+    .pay-ledger .mono { font-family: var(--font-mono); }
+    .quem { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: var(--fs-xs); color: var(--muted); }
+    .quem .handle, .timeline .handle, .alert .handle { vertical-align: middle; font-size: var(--fs-xs); }
+    .segmented.vs button svg { width: 13px; height: 13px; vertical-align: -2px; }
+    .pedido .timeline .tl-item { padding-bottom: 12px; }
+    /* rótulos longos ("Sair do pedido (reembolso de US$ 800 ao endereço de origem)") quebram linha no celular */
+    @media (max-width: 600px) { .pedido .row > .btn, .modal-foot .btn { white-space: normal; text-align: left; } }
   </style>
 </head>
 <body data-shell="buyer" data-page="pedidos" data-root="../" data-title="Meus pedidos">
@@ -29,7 +38,7 @@
     <div>
       <p class="eyebrow">Comprar</p>
       <h1>Meus pedidos</h1>
-      <p class="sub">Pedidos com recompensa que você criou ou aos quais contribuiu. Todo pedido passa pela curadoria antes de ficar público.</p>
+      <p class="sub">Pedidos com recompensa que você abriu ou a que se juntou. Todos os interessados pagam o mesmo valor; a recompensa total é o valor por interessado vezes o número de interessados.</p>
     </div>
     <div class="actions">
       <a class="btn" href="../public/pedidos.html"><i data-icon="compass"></i>Mural público</a>
@@ -38,153 +47,165 @@
   </div>
 
   <div class="stat-grid mb-3">
-    <div class="stat"><span class="label">Criados por você</span><span class="value">3</span><span class="delta flat">1 aberto · 1 em curadoria · 1 expirado</span></div>
-    <div class="stat"><span class="label">Contribuições</span><span class="value">3</span><span class="delta flat">1 em análise · 1 aberto · 1 atendido</span></div>
-    <div class="stat"><span class="label">Em custódia</span><span class="value">US$ 850,00</span><span class="delta flat"><i data-icon="lock"></i>volta se ninguém atender</span></div>
+    <div class="stat"><span class="label">Abertos por você</span><span class="value">2</span><span class="delta flat">1 aberto (ped-2c8d1) · 1 em curadoria (ped-3n7q1)</span></div>
+    <div class="stat"><span class="label">Você participa</span><span class="value">2</span><span class="delta flat">1 aberto · 1 atendido</span></div>
+    <div class="stat"><span class="label">Nas carteiras dos pedidos</span><span class="value">US$ 800,00</span><span class="delta flat"><i data-icon="lock"></i>ped-2c8d1 · volta ao endereço de origem se expirar ou se você sair</span></div>
     <div class="stat"><span class="label">Acessos recebidos</span><span class="value">1</span><span class="delta up"><i data-icon="vault"></i>ped-1b6j8 no cofre</span></div>
   </div>
 
   <div class="split">
     <div class="stack">
       <div class="chips">
-        <button class="chip active" data-toast="Mostrando todos os 6 pedidos">Todos <b>6</b></button>
-        <button class="chip" data-toast="Filtro: criados por você">Criados por você <b>3</b></button>
-        <button class="chip" data-toast="Filtro: contribuições">Contribuições <b>3</b></button>
+        <button class="chip active" data-toast="Mostrando os 4 pedidos">Todos <b>4</b></button>
+        <button class="chip" data-toast="Filtro: abertos por você">Abertos por você <b>2</b></button>
+        <button class="chip" data-toast="Filtro: você se juntou">Você se juntou <b>1</b></button>
         <button class="chip" data-toast="Filtro: em curadoria">Em curadoria <b>1</b></button>
-        <button class="chip" data-toast="Filtro: abertos">Abertos <b>2</b></button>
-        <button class="chip" data-toast="Filtro: atendimento em análise">Em análise <b>1</b></button>
+        <button class="chip" data-toast="Filtro: abertos">Abertos <b>1</b></button>
+        <button class="chip" data-toast="Filtro: travados (atendimento em curadoria)">Travados <b>1</b></button>
         <button class="chip" data-toast="Filtro: atendidos">Atendidos <b>1</b></button>
-        <button class="chip" data-toast="Filtro: expirados">Expirados <b>1</b></button>
+        <button class="chip" data-toast="Nenhum pedido seu expirou">Expirados <b>0</b></button>
       </div>
 
-      <!-- em curadoria · criado hoje -->
+      <!-- ped-3n7q1 · em curadoria · aberto hoje, ainda sem pagamento -->
       <article class="card pedido brass-edge">
         <div class="card-body">
-          <div class="row"><span class="badge st-analise"><i data-icon="hourglass"></i>Em curadoria</span><span class="badge badge-outline">Criado por você</span><span class="tag">ped-3n7q1</span><span class="tag">BR</span><span class="xs muted">Enviado hoje às 09:14</span></div>
+          <div class="row"><span class="badge st-analise"><i data-icon="hourglass"></i>Em curadoria</span><span class="badge badge-outline">Aberto por você</span><span class="tag">ped-3n7q1</span><span class="tag">BR</span><span class="xs muted">Enviado hoje às 09:14</span></div>
           <h3>Planilha de ocupação hoteleira de Florianópolis por mês, 2018–2026</h3>
           <dl class="kv-row">
-            <div><dt>Recompensa inicial</dt><dd>US$ 300,00</dd></div>
-            <div><dt>Em custódia</dt><dd>US$ 300,00</dd></div>
+            <div><dt>Valor por interessado</dt><dd>US$ 300,00</dd></div>
+            <div><dt>Interessados</dt><dd>0 · você entra ao pagar</dd></div>
             <div><dt>Prazo pedido</dt><dd>20/12/2026</dd></div>
-            <div><dt>Liberação</dt><dd>público depois</dd></div>
             <div><dt>Resposta até</dt><dd>29/10 · 09:14</dd></div>
           </dl>
-          <div class="alert alert-info"><i data-icon="info"></i><div>A curadoria confere se o pedido é lícito e claro (nada de dados pessoais, credenciais ou conteúdo íntimo) e pode reescrever o título. Enquanto isso, ele não aparece no mural.</div></div>
+          <div class="alert alert-info"><i data-icon="info"></i><div>A curadoria confere se o pedido é lícito e claro (nada de dados pessoais, credenciais ou conteúdo íntimo) e pode reescrever o título. Se aprovar, ela cria a carteira do pedido e você recebe um endereço derivado para pagar os US$ 300,00 em até 24 h. Só então o pedido entra no mural.</div></div>
           <div class="row">
             <button class="btn btn-sm" data-toast="Edição reabre a análise; o prazo de 48 h recomeça"><i data-icon="edit"></i>Editar</button>
-            <button class="btn btn-sm btn-ghost" data-toast="Pedido cancelado. US$ 300,00 voltam para a carteira."><i data-icon="x"></i>Cancelar pedido</button>
+            <button class="btn btn-sm btn-ghost" data-toast="Pedido cancelado. Nada foi pago ainda."><i data-icon="x"></i>Cancelar pedido</button>
           </div>
         </div>
       </article>
 
-      <!-- aberto · criado por coruja -->
-      <article class="card pedido">
+      <!-- ped-2c8d1 · aberto por você · 4 interessados × US$ 800 -->
+      <article class="card pedido" id="ped-2c8d1" data-variants="hoje">
         <div class="card-body">
-          <div class="row"><span class="badge st-ativo">Aberto</span><span class="badge badge-outline">Criado por você · 05/10</span><span class="tag">ped-9h2d5</span><span class="tag">BR</span><span class="xs muted">Governo e políticas públicas</span></div>
-          <h3><a href="../public/pedido.html">Lista de todos os editais de fomento cultural municipais do RS em 2025</a></h3>
-          <dl class="kv-row">
-            <div><dt>Recompensa</dt><dd>US$ 2.100,00</dd></div>
-            <div><dt>Contribuidores</dt><dd>9 (você: US$ 300,00)</dd></div>
-            <div><dt>Prazo</dt><dd>10/12/2026 · <span class="countdown" data-deadline="2026-12-10T23:59:00-03:00"></span></dd></div>
-            <div><dt>Atendimentos</dt><dd>0 em curadoria</dd></div>
-          </dl>
-          <div>
-            <div class="xs muted mb-1">Critérios de aceite (resumo)</div>
-            <ol class="crit">
-              <li>Todos os 497 municípios do RS, com indicação dos que não publicaram edital.</li>
-              <li>Para cada edital: órgão, objeto, valor total, data de publicação e link para a fonte oficial.</li>
-              <li>Formato CSV e XLSX, codificação UTF-8, uma linha por edital.</li>
-            </ol>
+          <div class="row between">
+            <div class="row"><span class="badge st-ativo">Aberto</span><span class="badge badge-outline">Aberto por você · 12/10</span><span class="tag">ped-2c8d1</span><span class="tag">BR</span><span class="xs muted">Saúde e meio ambiente</span></div>
+            <div class="segmented vs"><button data-show="hoje"><i data-icon="calendar"></i> Hoje</button><button data-show="subiu"><i data-icon="trending-up"></i> Quando o valor subiu (18/10)</button></div>
           </div>
-          <div class="row start small"><i data-icon="message-square" class="ico brass"></i><div>2 perguntas públicas aguardando sua resposta · <span class="handle" data-handle="prisma-66af"></span> perguntou se fundações municipais entram</div></div>
-          <div class="row">
-            <a class="btn btn-sm btn-primary" href="../public/pedido.html"><i data-icon="message-square"></i>Responder perguntas</a>
-            <a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="plus"></i>Somar à recompensa</a>
-            <button class="btn btn-sm" data-copy="https://lacre.app/r/9h2d5"><i data-icon="link"></i>Copiar link</button>
-            <button class="btn btn-sm btn-ghost" data-toast="Prazo estendido para 10/01/2027. Contribuidores foram avisados."><i data-icon="calendar"></i>Estender prazo</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- contribuidor · atendimento em curadoria · detalhe expandido -->
-      <article class="card pedido" id="ped-4k9e2">
-        <div class="card-body">
-          <div class="row"><span class="badge st-analise"><i data-icon="hourglass"></i>Atendimento em curadoria</span><span class="badge badge-outline">Você contribuiu · US$ 150,00</span><span class="tag">ped-4k9e2</span><span class="tag">BR</span><span class="xs muted">Negócios e mercado</span></div>
-          <h3><a href="../public/pedido.html">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</a></h3>
-          <dl class="kv-row">
-            <div><dt>Recompensa</dt><dd>US$ 1.450,00</dd></div>
-            <div><dt>Contribuidores</dt><dd>6</dd></div>
-            <div><dt>Prazo</dt><dd>20/11/2026</dd></div>
-            <div><dt>Autor</dt><dd><span class="handle" data-handle="quartzo-a1f0"></span></dd></div>
-          </dl>
-          <div class="panel stack-sm">
-            <div class="row between"><b class="small"><i data-icon="clipboard-check" class="ico brass"></i> 1 atendimento aguardando curadoria desde 24/10</b><span class="badge st-analise">em análise · Bruno M.</span></div>
-            <div class="timeline mt-1">
-              <div class="tl-item ok"><div class="when">02/10 · 11:20</div><div class="what">Pedido aprovado pela curadoria e publicado no mural</div></div>
-              <div class="tl-item ok"><div class="when">08/10 · 19:02</div><div class="what">Você somou US$ 150,00 à recompensa (custódia)</div></div>
-              <div class="tl-item info"><div class="when">24/10 · 16:48</div><div class="what">Um vendedor enviou um atendimento (dataset, 12 MB). Triagem automática concluída: metadados removidos, 0 alertas</div></div>
-              <div class="tl-item info"><div class="when">25/10 · 09:30</div><div class="what">Em análise · Bruno M. confere os 4 critérios de aceite e a autenticidade</div></div>
-              <div class="tl-item"><div class="when">até 29/10</div><div class="what muted">Decisão prevista. Se aprovado, acesso no seu cofre e recompensa paga ao vendedor (menos 10 %). Se recusado, o pedido volta a aberto.</div></div>
-            </div>
-            <p class="xs muted">Você não vê o conteúdo nem o pseudônimo do vendedor até a validação. Se outro vendedor entregar antes, vale o primeiro validado.</p>
-          </div>
-          <div class="row">
-            <a class="btn btn-sm" href="../public/pedido.html"><i data-icon="external-link"></i>Página pública</a>
-            <a class="btn btn-sm btn-ghost" href="../buyer/notificacoes.html"><i data-icon="bell"></i>Avisar quando decidir</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- contribuidor · aberto -->
-      <article class="card pedido">
-        <div class="card-body">
-          <div class="row"><span class="badge st-ativo">Aberto</span><span class="badge badge-outline">Você contribuiu · US$ 100,00</span><span class="tag">ped-2c8d1</span><span class="tag">BR</span><span class="xs muted">Saúde e meio ambiente</span></div>
           <h3><a href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></h3>
-          <dl class="kv-row">
-            <div><dt>Recompensa</dt><dd>US$ 3.200,00</dd></div>
-            <div><dt>Contribuidores</dt><dd>14</dd></div>
-            <div><dt>Prazo</dt><dd>30/11/2026</dd></div>
-            <div><dt>Atendimentos</dt><dd>0 em curadoria</dd></div>
-          </dl>
-          <div class="row">
-            <a class="btn btn-sm btn-primary" href="../buyer/checkout.html"><i data-icon="plus"></i>Somar à recompensa</a>
-            <a class="btn btn-sm" href="../public/pedido.html"><i data-icon="arrow-right"></i>Ver pedido</a>
+
+          <div data-variant="hoje" class="stack-sm">
+            <dl class="kv-row">
+              <div><dt>Valor por interessado</dt><dd>US$ 800,00</dd></div>
+              <div><dt>Interessados</dt><dd>4</dd></div>
+              <div><dt>Recompensa total</dt><dd class="wax">US$ 3.200,00</dd></div>
+              <div><dt>Prazo</dt><dd>30/11/2026 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div>
+              <div><dt>Carteira do pedido</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2c8d…91af</a> · Polygon · USDT · 6 pagamentos</dd></div>
+            </dl>
+            <div class="panel stack-sm">
+              <div class="row between"><b class="small">Você pagou US$ 800,00 em 2 pagamentos</b><span class="badge badge-wax"><i data-icon="lock"></i>na carteira do pedido</span></div>
+              <div class="pay-ledger">
+                <span>12/10</span><span>Abriu o pedido a US$ 500 por interessado · 500 USDT · Polygon · txid <span class="mono">0x6e02…b4d7</span> · confirmado (12 de 12)</span><b>US$ 500,00</b>
+                <span>20/10</span><span>Igualou o valor (+US$ 300) · 300 USDT · Polygon · txid <span class="mono">0x9b47…2e1c</span> · confirmado (12 de 12)</span><b>US$ 300,00</b>
+              </div>
+              <p class="xs muted">Fica na carteira do pedido até um atendimento ser validado. Se o pedido expirar ou você sair, cada pagamento volta ao seu endereço de origem, descontada só a taxa de rede.</p>
+            </div>
+            <div class="quem">
+              <span><i data-icon="users" class="ico brass"></i> Interessados (públicos):</span>
+              <span><span class="handle" data-handle="coruja-7f3a"></span> abriu · 12/10 · igualou 20/10</span>
+              <span><span class="handle" data-handle="farol-3e9b"></span> juntou-se · 14/10 · igualou 19/10</span>
+              <span><span class="handle" data-handle="quartzo-a1f0"></span> cobriu · 18/10 (US$ 500 → US$ 800)</span>
+              <span><span class="handle" data-handle="relogio-2b7c"></span> juntou-se · 24/10</span>
+            </div>
+            <div class="timeline mt-1">
+              <div class="tl-item ok"><div class="when">12/10 · 10:05</div><div class="what">Pedido aprovado pela curadoria e publicado · carteira do pedido criada · você pagou 500 USDT</div></div>
+              <div class="tl-item ok"><div class="when">14/10 · 19:40</div><div class="what"><span class="handle" data-handle="farol-3e9b"></span> juntou-se por US$ 500 · recompensa total US$ 1.000</div></div>
+              <div class="tl-item warn"><div class="when">18/10 · 14:00</div><div class="what"><span class="handle" data-handle="quartzo-a1f0"></span> cobriu o valor: US$ 800 por interessado · janela para igualar até 20/10 · 14:00</div></div>
+              <div class="tl-item ok"><div class="when">19/10 · 08:52</div><div class="what"><span class="handle" data-handle="farol-3e9b"></span> igualou (+US$ 300)</div></div>
+              <div class="tl-item ok"><div class="when">20/10 · 11:20</div><div class="what">Você igualou (+US$ 300) · 3 interessados × US$ 800 = US$ 2.400</div></div>
+              <div class="tl-item ok"><div class="when">24/10 · 16:15</div><div class="what"><span class="handle" data-handle="relogio-2b7c"></span> juntou-se por US$ 800 · recompensa total US$ 3.200</div></div>
+            </div>
+            <div class="row">
+              <a class="btn btn-sm btn-primary" href="../buyer/checkout.html"><i data-icon="arrow-up-right"></i>Cobrir o valor (mín. US$ 880)</a>
+              <button class="btn btn-sm" data-modal-open="m-sair"><i data-icon="log-out"></i>Sair do pedido (reembolso de US$ 800 ao endereço de origem)</button>
+              <a class="btn btn-sm btn-ghost" href="../public/pedido.html"><i data-icon="external-link"></i>Página pública</a>
+              <button class="btn btn-sm btn-ghost" data-copy="https://lacre.app/r/2c8d1"><i data-icon="link"></i>Copiar link</button>
+            </div>
+            <p class="xs muted">Cobrir sobe o valor para todos (mínimo +10 %): quem já está dentro tem 48 h para igualar ou sair. Se ninguém igualar, você fica sozinho e compra com exclusividade de fato.</p>
+          </div>
+
+          <div data-variant="subiu" class="stack-sm">
+            <div class="alert alert-warn"><i data-icon="trending-up"></i><div><span class="alert-title">Valor subiu: iguale até 20/10 14:00 (+US$ 300) ou saia</span><span class="handle" data-handle="quartzo-a1f0"></span> cobriu o valor em 18/10 às 14:00: de US$ 500 para US$ 800 por interessado. Você pagou US$ 500. Sem resposta até 20/10 às 14:00, você sai automaticamente e recebe os 500 USDT de volta no endereço de origem, menos a taxa de rede.</div></div>
+            <dl class="kv-row">
+              <div><dt>Valor por interessado</dt><dd>US$ 800,00 <span class="xs muted">(antes US$ 500,00)</span></dd></div>
+              <div><dt>Interessados</dt><dd>3 · 2 precisam igualar</dd></div>
+              <div><dt>Recompensa se todos igualarem</dt><dd class="wax">US$ 2.400,00</dd></div>
+              <div><dt>Você pagou</dt><dd>US$ 500,00</dd></div>
+              <div><dt>Falta</dt><dd>US$ 300,00</dd></div>
+            </dl>
+            <div class="row">
+              <a class="btn btn-sm btn-primary" href="../buyer/checkout.html"><i data-icon="check"></i>Igualar (+US$ 300)</a>
+              <button class="btn btn-sm" data-toast="Você saiu do ped-2c8d1. US$ 500,00 (500 USDT) a caminho do endereço de origem, taxa de rede descontada."><i data-icon="log-out"></i>Sair do pedido (reembolso ao endereço de origem)</button>
+              <a class="btn btn-sm btn-ghost" href="../buyer/checkout.html"><i data-icon="arrow-up-right"></i>Cobrir acima de US$ 880</a>
+            </div>
+            <p class="xs muted">Igualar paga só a diferença (300 USDT) com um novo endereço derivado, válido por 24 h. Quem cobrir de novo, acima de US$ 800, reinicia a janela de 48 h para os outros; a janela nunca passa do prazo do pedido (30/11).</p>
           </div>
         </div>
       </article>
 
-      <!-- atendido -->
+      <!-- ped-1b6j8 · você se juntou · atendido -->
       <article class="card pedido">
         <div class="card-body">
-          <div class="row"><span class="badge st-liberado"><i data-icon="check"></i>Atendido</span><span class="badge badge-outline">Você contribuiu · US$ 200,00</span><span class="tag">ped-1b6j8</span><span class="tag">BR</span><span class="xs muted">Fotografia e vídeo</span></div>
+          <div class="row"><span class="badge st-liberado"><i data-icon="check"></i>Atendido</span><span class="badge badge-outline">Você se juntou · 28/09</span><span class="tag">ped-1b6j8</span><span class="tag">BR</span><span class="xs muted">Fotografia e vídeo</span></div>
           <h3><a href="../public/pedido.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></h3>
           <dl class="kv-row">
-            <div><dt>Recompensa paga</dt><dd>US$ 600,00 · 24/09</dd></div>
-            <div><dt>Contribuidores</dt><dd>3</dd></div>
+            <div><dt>Valor por interessado</dt><dd>US$ 200,00</dd></div>
+            <div><dt>Interessados</dt><dd>3</dd></div>
+            <div><dt>Recompensa total</dt><dd>US$ 600,00</dd></div>
+            <div><dt>Atendido</dt><dd>08/10 · <span class="handle" data-handle="cartografo-5a77"></span></dd></div>
             <div><dt>Validação</dt><dd>Ana R. · Curadora sênior</dd></div>
-            <div><dt>Entrega</dt><dd>212 fotos · 3,1 GB · <span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></dd></div>
+            <div><dt>Entrega</dt><dd>86 JPG · 1,4 GB · <span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></dd></div>
           </dl>
+          <div class="panel">
+            <div class="pay-ledger">
+              <span>28/09</span><span>Juntou-se por US$ 200 · 200 USDT · Polygon · txid <span class="mono">0xa31b…6f8e</span> · confirmado (12 de 12)</span><b>US$ 200,00</b>
+              <span>08/10</span><span>Atendimento validado · acesso liberado no cofre para os 3 interessados (ENT-2P9Q)</span><b>—</b>
+              <span>11/10</span><span>Carteira do pedido finalizada: comissão de 10 % (US$ 60) separada e carteira entregue a quem atendeu</span><b>—</b>
+            </div>
+          </div>
           <div class="row">
-            <a class="btn btn-sm btn-primary" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a>
+            <a class="btn btn-sm btn-primary" href="../buyer/cofre.html"><i data-icon="vault"></i>Abrir no cofre</a>
             <a class="btn btn-sm" href="../public/prova.html"><i data-icon="badge-check"></i>Prova pública</a>
           </div>
         </div>
       </article>
 
-      <!-- expirado -->
-      <article class="card pedido">
+      <!-- ped-4k9e2 · você acompanha · travado: atendimento em curadoria -->
+      <article class="card pedido" id="ped-4k9e2">
         <div class="card-body">
-          <div class="row"><span class="badge st-expirado"><i data-icon="clock"></i>Expirado · reembolsado</span><span class="badge badge-outline">Criado por você · 01/08</span><span class="tag">ped-6v2m8</span><span class="tag">BR</span><span class="xs muted">Educação e métodos</span></div>
-          <h3>Custo por refeição da merenda escolar em 50 municípios de Minas Gerais (2023–2024)</h3>
+          <div class="row"><span class="badge st-analise"><i data-icon="lock"></i>Pedido travado: atendimento em curadoria</span><span class="badge badge-outline">Você acompanha · sem participar</span><span class="tag">ped-4k9e2</span><span class="tag">BR</span><span class="xs muted">Negócios e mercado</span></div>
+          <h3><a href="../public/pedido.html">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</a></h3>
           <dl class="kv-row">
-            <div><dt>Recompensa</dt><dd>US$ 400,00</dd></div>
-            <div><dt>Contribuidores</dt><dd>2 (você: US$ 250,00)</dd></div>
-            <div><dt>Prazo</dt><dd>30/09/2026 · sem atendimento</dd></div>
-            <div><dt>Devolvido</dt><dd>+US$ 250,00 em 01/10</dd></div>
+            <div><dt>Valor por interessado</dt><dd>US$ 290,00</dd></div>
+            <div><dt>Interessados</dt><dd>5</dd></div>
+            <div><dt>Recompensa total</dt><dd>US$ 1.450,00</dd></div>
+            <div><dt>Prazo</dt><dd>20/11/2026</dd></div>
+            <div><dt>Atendimento</dt><dd><span class="handle" data-handle="bussola-c4e1"></span> · 22/10</dd></div>
           </dl>
+          <div class="panel stack-sm">
+            <div class="row between"><b class="small"><i data-icon="clipboard-check" class="ico brass"></i> 1 atendimento aguardando curadoria desde 22/10</b><span class="badge st-analise">em análise · Bruno M.</span></div>
+            <div class="timeline mt-1">
+              <div class="tl-item ok"><div class="when">02/10 · 11:20</div><div class="what">Pedido aprovado pela curadoria e publicado no mural · US$ 290 por interessado</div></div>
+              <div class="tl-item info"><div class="when">22/10 · 16:48</div><div class="what">Atendimento enviado (dataset, 12 MB). Triagem automática: metadados removidos, 0 alertas. Pedido travado: sem entradas, coberturas ou saídas até a decisão</div></div>
+              <div class="tl-item info"><div class="when">23/10 · 09:30</div><div class="what">Em análise · Bruno M. confere os 4 critérios de aceite e a autenticidade</div></div>
+              <div class="tl-item"><div class="when">até 29/10</div><div class="what muted">Decisão prevista. Validado: cada interessado recebe acesso no cofre e a carteira do pedido é finalizada e entregue a quem atendeu. Rejeitado: o pedido destrava e volta a aberto.</div></div>
+            </div>
+            <p class="xs muted">Enquanto o pedido estiver travado, ninguém entra. Se o atendimento for rejeitado, você poderá se juntar por US$ 290.</p>
+          </div>
           <div class="row">
-            <button class="btn btn-sm" data-toast="Novo pedido criado a partir deste. Revise prazo e recompensa antes de enviar."><i data-icon="refresh"></i>Republicar com novo prazo</button>
-            <a class="btn btn-sm btn-ghost" href="../buyer/pagamentos.html"><i data-icon="wallet"></i>Ver no extrato</a>
+            <button class="btn btn-sm" disabled title="Pedido travado: atendimento em curadoria"><i data-icon="users"></i>Juntar-se por US$ 290 · travado</button>
+            <a class="btn btn-sm" href="../public/pedido.html"><i data-icon="external-link"></i>Página pública</a>
+            <button class="btn btn-sm btn-ghost" data-toast="Você deixou de acompanhar o ped-4k9e2"><i data-icon="bell"></i>Deixar de acompanhar</button>
           </div>
         </div>
       </article>
@@ -194,35 +215,50 @@
       <div class="card">
         <div class="card-head"><h3>Como funciona um pedido</h3></div>
         <div class="card-body how small">
-          <div class="how-step"><span class="n">1</span><div>Você descreve o que procura, define critérios de aceite e paga a recompensa inicial (mínimo US$ 100). O valor fica em custódia.</div></div>
-          <div class="how-step"><span class="n">2</span><div>A curadoria aprova o pedido em até 48 h. Nada de dados pessoais, credenciais ou conteúdo íntimo.</div></div>
-          <div class="how-step"><span class="n">3</span><div>O pedido vai ao mural. Outras pessoas somam valor à recompensa.</div></div>
-          <div class="how-step"><span class="n">4</span><div>Um vendedor atende com um envio normal, que passa pela curadoria.</div></div>
-          <div class="how-step"><span class="n">5</span><div>Validado: todos os contribuidores recebem acesso no cofre; o vendedor recebe a recompensa menos 10 %.</div></div>
-          <div class="how-step"><span class="n">6</span><div>Sem atendimento no prazo: tudo volta para as carteiras, sem taxa.</div></div>
+          <div class="how-step"><span class="n">1</span><div><b>Abrir.</b> Você define o valor por interessado (mínimo US$ 100), o prazo (até 90 dias) e o que quer. A curadoria aprova em até 48 h e cria a carteira do pedido; você paga o valor da sua carteira cripto.</div></div>
+          <div class="how-step"><span class="n">2</span><div><b>Juntar-se.</b> Qualquer conta entra pagando exatamente o mesmo valor. Recompensa total = valor por interessado × interessados. Todos recebem o mesmo acesso.</div></div>
+          <div class="how-step"><span class="n">3</span><div><b>Cobrir.</b> Qualquer conta, nova ou já dentro, pode subir o valor em pelo menos 10 %. Paga o novo valor (ou só a diferença, se já participa). Ele vira o valor por interessado.</div></div>
+          <div class="how-step"><span class="n">4</span><div><b>Igualar ou sair.</b> Quando o valor sobe, cada participante tem 48 h (nunca além do prazo) para pagar a diferença ou sair. Quem não iguala sai sozinho e recebe de volta o que pagou, ao endereço de origem, menos a taxa de rede. Uma nova cobertura reinicia a janela.</div></div>
+          <div class="how-step"><span class="n">5</span><div><b>Sempre o mesmo valor.</b> A qualquer momento todos os interessados ativos pagaram a mesma quantia. Quem cobre e não é igualado fica sozinho: exclusividade de fato.</div></div>
+          <div class="how-step"><span class="n">6</span><div><b>Atender.</b> Um vendedor envia o conteúdo à curadoria e o pedido trava até a decisão. Validado: acesso no cofre para cada interessado; a plataforma separa 10 % e entrega a carteira do pedido a quem atendeu (frase de recuperação, uma única vez). Rejeitado: o pedido destrava.</div></div>
+          <div class="how-step"><span class="n">7</span><div><b>Expirar.</b> Sem atendimento validado até o prazo, cada interessado recebe de volta o que pagou, ao endereço de origem.</div></div>
+          <p class="xs muted">A janela de 48 h e o incremento mínimo de 10 % são parâmetros da plataforma.</p>
         </div>
       </div>
-      <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Pedido anônimo</span>O mural mostra o seu pseudônimo como autor. Se preferir, marque "ocultar autor" ao criar: aparece "autor oculto". Vendedores nunca sabem quem contribuiu.</div></div>
+      <div class="alert alert-anon"><i data-icon="users"></i><div><span class="alert-title">Interessados são públicos</span>O mural mostra o pseudônimo e a data de entrada de cada interessado. Como todos pagam o mesmo valor, a página mostra só o valor atual, o número de interessados e o total. Quem atende vê pseudônimos, nunca uma identidade.</div></div>
       <div class="card">
-        <div class="card-head"><h3>Em custódia</h3></div>
-        <div class="card-body">
+        <div class="card-head"><h3>Nas carteiras dos pedidos</h3></div>
+        <div class="card-body stack-sm">
           <dl class="kv">
-            <dt>ped-9h2d5</dt><dd>US$ 300,00</dd>
-            <dt>ped-3n7q1</dt><dd>US$ 300,00</dd>
-            <dt>ped-4k9e2</dt><dd>US$ 150,00</dd>
-            <dt>ped-2c8d1</dt><dd>US$ 100,00</dd>
-            <dt><b>Total</b></dt><dd><b>US$ 850,00</b> <span class="xs muted"></span></dd>
+            <dt>ped-2c8d1</dt><dd>US$ 800,00 <span class="xs muted">· 500 + 300 USDT · Polygon</span></dd>
+            <dt>ped-3n7q1</dt><dd><span class="muted">— · paga após a aprovação</span></dd>
+            <dt><b>Total</b></dt><dd><b>US$ 800,00</b></dd>
           </dl>
+          <p class="xs muted">Pague de uma carteira que você controla, nunca direto de uma corretora: reembolsos voltam ao endereço de origem.</p>
+          <a class="link xs" href="../buyer/pagamentos.html">Ver em Pagamentos</a>
         </div>
       </div>
     </aside>
+  </div>
+
+  <!-- modal: sair do pedido -->
+  <div class="modal-backdrop" id="m-sair">
+    <div class="modal">
+      <div class="modal-head"><h3>Sair do pedido ped-2c8d1?</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+      <div class="modal-body stack-sm small">
+        <p>Você recebe de volta os 800 USDT que pagou: 500 USDT (12/10) e 300 USDT (20/10), cada um no endereço de origem do respectivo pagamento, descontada só a taxa de rede (≈ US$ 0,04 por transação na Polygon).</p>
+        <p>Os outros 3 interessados continuam e a recompensa total passa a US$ 2.400. Você pode voltar depois, pagando o valor por interessado vigente.</p>
+        <div class="alert alert-anon"><i data-icon="shield"></i><div>O reembolso vai para o endereço de origem, não para uma conta: por isso pedimos pagar sempre de uma carteira que você controla.</div></div>
+      </div>
+      <div class="modal-foot"><button class="btn" data-modal-close>Continuar no pedido</button><button class="btn btn-danger" data-modal-close data-toast="Você saiu do ped-2c8d1. US$ 800,00 (800 USDT) a caminho dos endereços de origem."><i data-icon="log-out"></i>Sair e receber o reembolso</button></div>
+    </div>
   </div>
 
   <!-- modal: novo pedido -->
   <div class="modal-backdrop" id="novo-pedido">
     <div class="modal wide">
       <div class="modal-head"><h3>Novo pedido com recompensa</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
-      <form class="modal-body stack" data-submit-toast="Pedido enviado para curadoria. Resposta em até 48 h.">
+      <form class="modal-body stack" data-submit-toast="Pedido enviado para curadoria. Resposta em até 48 h; você paga o valor por interessado depois da aprovação.">
         <div class="alert alert-info"><i data-icon="clipboard-check"></i><div><span class="alert-title">Passa pela curadoria antes de ficar público</span>Em até 48 h conferimos se o pedido é lícito e claro. A curadoria pode reescrever o título. Não aceitamos pedidos de dados pessoais, credenciais, conteúdo íntimo ou material sob sigilo legal.</div></div>
         <div class="form-grid">
           <div class="field full"><label for="np-titulo">Título</label><input id="np-titulo" class="input" maxlength="120" placeholder="O que você procura, em uma frase" value="Planilha de ocupação hoteleira de Florianópolis por mês, 2018–2026"><span class="hint">Até 120 caracteres. Sem nomes de pessoas.</span></div>
@@ -252,20 +288,19 @@
             </div>
             <div class="row between mt-1"><span class="hint">A curadoria usa estes critérios para validar o atendimento. Seja objetivo.</span><button type="button" class="btn btn-sm btn-ghost" data-toast="Até 6 critérios por pedido"><i data-icon="plus"></i>Adicionar critério</button></div>
           </div>
-          <div class="field"><label for="np-valor">Recompensa inicial</label><div class="input-group"><span class="affix">US$</span><input id="np-valor" class="input num" value="300,00" inputmode="decimal"></div><span class="hint">Mínimo US$ 100. Sai da carteira agora e fica em custódia. Saldo disponível: US$ 1.240,00.</span></div>
-          <div class="field"><label for="np-prazo">Prazo para atendimento</label><input id="np-prazo" class="input" type="date" value="2026-12-20" min="2026-10-29" max="2027-01-25"><span class="hint">Entre 2 e 90 dias. Sem atendimento até lá, tudo volta às carteiras.</span></div>
-          <fieldset class="field full">
-            <legend>Regra de liberação</legend>
-            <div class="choice-cards">
-              <label class="choice"><input type="radio" name="np-lib"><span class="choice-title"><i data-icon="users"></i>Só contribuidores</span><span class="choice-desc">Quem somou valor recebe acesso. Ninguém mais.</span><span class="choice-meta">Padrão</span></label>
-              <label class="choice"><input type="radio" name="np-lib" checked><span class="choice-title"><i data-icon="globe"></i>Público depois de atendido</span><span class="choice-desc">Após a validação, o item abre como Cópias. Parte da receita volta aos contribuidores até reembolsar o que pagaram.</span><span class="choice-meta">Atrai mais vendedores</span></label>
+          <div class="field"><label for="np-valor">Valor por interessado</label><div class="input-group"><span class="affix">US$</span><input id="np-valor" class="input num" value="300,00" inputmode="decimal"></div><span class="hint">Mínimo US$ 100. Você paga este valor depois da aprovação, da sua carteira cripto (USDT ou USDC em Polygon, Tron ou Base). Quem se juntar paga exatamente o mesmo.</span></div>
+          <div class="field"><label for="np-prazo">Prazo para atendimento</label><input id="np-prazo" class="input" type="date" value="2026-12-20" min="2026-10-29" max="2027-01-25"><span class="hint">Entre 2 e 90 dias. Sem atendimento validado até lá, cada interessado recebe de volta o que pagou, ao endereço de origem.</span></div>
+          <div class="field full">
+            <div class="panel small stack-sm">
+              <div class="row start"><i data-icon="users" class="ico brass"></i><div><b>Acesso igual para todos os interessados.</b> Quem entrar paga o mesmo valor que você e recebe o mesmo conteúdo no cofre, ao mesmo tempo. Ninguém entra pagando menos.</div></div>
+              <div class="row start"><i data-icon="trending-up" class="ico brass"></i><div><b>O valor pode subir.</b> Qualquer conta pode cobrir o valor (mínimo +10 %); aí cada interessado, você inclusive, tem 48 h para igualar ou sair com reembolso ao endereço de origem.</div></div>
             </div>
-          </fieldset>
+          </div>
           <label class="check full"><input type="checkbox" required><span>Declaro que não estou pedindo dados pessoais de terceiros, credenciais, conteúdo íntimo nem material sob sigilo legal.<span class="desc">A declaração fica registrada e vinculada ao seu pseudônimo.</span></span></label>
         </div>
         <div class="form-actions">
           <span class="xs muted">Registramos pedido, valor e data. Nada mais.</span>
-          <div class="row"><button type="button" class="btn" data-modal-close>Cancelar</button><button type="submit" class="btn btn-primary"><i data-icon="send"></i>Pagar US$ 300 e enviar para curadoria</button></div>
+          <div class="row"><button type="button" class="btn" data-modal-close>Cancelar</button><button type="submit" class="btn btn-primary"><i data-icon="send"></i>Enviar para curadoria</button></div>
         </div>
       </form>
     </div>

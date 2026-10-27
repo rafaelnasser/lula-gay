@@ -21,7 +21,7 @@
     .wm-note svg { width: 12px; height: 12px; color: var(--brass); flex: none; }
     .ent-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding-top: 4px; }
     .alert .alert-actions { margin-left: auto; flex: none; }
-    @media (max-width: 600px) { .alert { flex-wrap: wrap; } .alert .alert-actions { margin-left: 0; } }
+    @media (max-width: 600px) { .alert { flex-wrap: wrap; } .alert .alert-actions { margin-left: 0; } .ent .badge { white-space: normal; } }
   </style>
 </head>
 <body data-shell="buyer" data-page="cofre" data-title="Cofre" data-root="../">
@@ -39,7 +39,7 @@
     </div>
 
     <div class="stat-grid mb-3">
-      <div class="stat"><span class="label">Acessos</span><span class="value">7</span><span class="delta flat">2 compras · 1 camada · 1 assinatura · 1 apoio · 1 pedido · 1 licença</span></div>
+      <div class="stat"><span class="label">Acessos</span><span class="value">7</span><span class="delta flat">2 compras · 1 camada · 1 assinatura · 1 apoio · 1 pedido atendido · 1 licença</span></div>
       <div class="stat"><span class="label">Disponíveis agora</span><span class="value">6</span><span class="delta up"><i data-icon="trending-up"></i>+1 esta semana</span></div>
       <div class="stat"><span class="label">Aguardando liberação</span><span class="value">1</span><span class="delta flat">lacre coletivo em 68 %</span></div>
       <div class="stat"><span class="label">Janela de disputa aberta</span><span class="value">1</span><span class="delta flat">encerra em <span class="countdown" data-deadline="2026-10-28T14:20:00-03:00"></span></span></div>
@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div class="alert alert-warn mb-3"><i data-icon="hourglass"></i><div><span class="alert-title">Janela de disputa aberta · 12.400 licitações municipais do Nordeste</span>Se o conteúdo entregue não corresponder à prévia aprovada, abra a disputa até 28/10 às 14:20. Depois disso o pagamento é liberado ao vendedor.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/disputa.html"><i data-icon="flag"></i>Abrir disputa</a></div></div>
+    <div class="alert alert-warn mb-3"><i data-icon="hourglass"></i><div><span class="alert-title">Janela de disputa aberta · 12.400 licitações municipais do Nordeste</span>Se o conteúdo entregue não corresponder à prévia aprovada, abra a disputa até 28/10 às 14:20. Depois disso o pagamento fica definitivo na carteira do item.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/disputa.html"><i data-icon="flag"></i>Abrir disputa</a></div></div>
 
     <div class="stack">
       <!-- 1 · compra com download -->
@@ -94,7 +94,7 @@
           <div class="meta"><span>lcr-5t6w1</span><span>PDF · 1.200 páginas · 2,1 GB</span><span class="handle" data-handle="arquivista-0d2e"></span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
           <dl class="kv">
             <dt>Direitos</dt><dd>Somente leitura: sem download, só no visualizador seguro</dd>
-            <dt>Disputa</dt><dd>Janela encerrada em 05/10 · pagamento liberado ao vendedor</dd>
+            <dt>Disputa</dt><dd>Janela terminada em 05/10 · pagamento definitivo na carteira do item</dd>
           </dl>
           <span class="wm-note"><i data-icon="stamp"></i>Marca d'água visível no visualizador: @coruja-7f3a · ENT-8C21</span>
           <div class="ent-actions">
@@ -138,7 +138,7 @@
           <dl class="kv">
             <dt>Edições</dt><dd>nº 43 (24/10) disponível · nº 42 (17/10) avulsa por US$ 90 · próxima em 31/10</dd>
             <dt>Direitos</dt><dd>Somente leitura; planilha da edição pode ser baixada com marca d'água</dd>
-            <dt>Cobrança</dt><dd>US$ 190,00 por mês, debitados da carteira. Sem saldo, pausa sem multa</dd>
+            <dt>Cobrança</dt><dd>US$ 190,00 por mês, pagos da sua carteira cripto a cada renovação (endereço derivado novo, válido por 24 h). Sem pagamento até a data, pausa sem multa</dd>
           </dl>
           <span class="wm-note"><i data-icon="stamp"></i>Marca d'água: @coruja-7f3a · ENT-9A2M em cada edição</span>
           <div class="ent-actions">
@@ -161,7 +161,7 @@
           <div class="meta"><span><b class="wax">US$ 54.120</b> de US$ 80.000 · 68 %</span><span>1.187 apoiadores</span><span>encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b></span></div>
           <dl class="kv">
             <dt>Liberação</dt><dd>Quando a meta bater, o acesso aparece aqui, ao mesmo tempo que para o público. O conteúdo já está enviado e analisado: a liberação é automática</dd>
-            <dt>Se falhar</dt><dd>Os US$ 250,00 voltam para a carteira sozinhos após 15/11</dd>
+            <dt>Se falhar</dt><dd>Seus 2 pagamentos (100 + 150 USDT) voltam sozinhos aos endereços de origem após 15/11, descontada só a taxa de rede</dd>
           </dl>
           <span class="wm-note"><i data-icon="stamp"></i>Marca d'água será gerada na liberação, com um novo entitlement</span>
           <div class="ent-actions">
@@ -176,13 +176,13 @@
       <div class="card"><div class="card-body ent">
         <div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div></div>
         <div class="stack-sm">
-          <div class="row"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido atendido</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Contribuição US$ 200,00 · atendido em 14/10</span><span class="tag">ENT-2P9Q</span></div>
+          <div class="row"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido atendido</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Pedido atendido em 08/10 · você e mais 2 interessados · US$ 200 cada</span><span class="tag">ENT-2P9Q</span></div>
           <div class="title"><a href="../buyer/visualizador.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></div>
           <div class="meta"><span>ped-1b6j8</span><span>86 JPG · 1,4 GB</span><span class="handle" data-handle="cartografo-5a77"></span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
           <dl class="kv">
-            <dt>Acesso</dt><dd>Recompensa de US$ 600 somada por 3 contribuidores; a curadoria validou a entrega contra os critérios de aceite</dd>
+            <dt>Acesso</dt><dd>Recompensa total de US$ 600 (3 interessados × US$ 200); a curadoria validou a entrega contra os critérios de aceite e a carteira do pedido foi entregue a quem atendeu em 11/10</dd>
             <dt>Direitos</dt><dd>Download permitido, com marca d'água</dd>
-            <dt>Disputa</dt><dd>Janela encerrada em 17/10</dd>
+            <dt>Disputa</dt><dd>Janela terminada em 11/10</dd>
           </dl>
           <span class="wm-note"><i data-icon="stamp"></i>Marca d'água: @coruja-7f3a · ENT-2P9Q em cada imagem (invisível + canto inferior)</span>
           <div class="ent-actions">
@@ -219,7 +219,7 @@
 
     <div class="grid cols-2 mt-3">
       <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">A marca d'água identifica a conta, não a pessoa</span>Cada entitlement gera uma marca única (pseudônimo + código). Se um arquivo vazar, sabemos de qual acesso saiu; nada liga isso a uma identidade.</div></div>
-      <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Expirados e revogados</span>Nenhum. Um acesso é revogado só se o item for removido por violação; nesse caso o valor volta em créditos para a carteira.</div></div>
+      <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Expirados e revogados</span>Nenhum no momento. Um acesso é revogado se o item for removido por violação ou se uma disputa sua for procedente com reembolso total; nesse caso o pagamento volta ao endereço de origem: da carteira do item antes da finalização, do fundo de garantia depois dela.</div></div>
     </div>
   </main>
 </body>
