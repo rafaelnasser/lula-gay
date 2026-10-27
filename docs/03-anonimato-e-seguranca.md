@@ -35,12 +35,14 @@ A promessa pública fica assim: **"Anonimato total entre as partes e para o púb
 
 **Criação (3 passos, sem nenhum dado pessoal):**
 1. **Pseudônimo gerado**: `palavra-hex4` (ex.: `coruja-7f3a`). O usuário pode sortear outro quantas vezes quiser. Não é editável depois (evita personalização que identifica).
-2. **Senha** (mínimo 12 caracteres) ou **passkey** (WebAuthn). Hash Argon2id.
+2. **Senha** (mínimo 12 caracteres), **passkey** (WebAuthn) ou **arquivo de acesso**: um arquivo `pseudonimo.lacre` (cerca de 1 KB) com uma chave privada Ed25519 cifrada por um PIN opcional (Argon2id + XChaCha20-Poly1305). Para entrar, o usuário escolhe o arquivo no dispositivo; o navegador decifra localmente, assina um desafio único do servidor e o servidor confere com a chave pública que guardou. O arquivo nunca é enviado. Pode ser regenerado (revogando o anterior) em Configurações › Segurança. Senha: hash Argon2id.
 3. **Frase de recuperação** de 12 palavras (BIP-39 em português). É o único jeito de recuperar a conta. A plataforma mostra uma vez, pede confirmação de 3 palavras e nunca mais exibe. Sem e-mail, não há "esqueci minha senha" por fora.
 
 **Segurança adicional (opcional):** TOTP (app autenticador), sessões com expiração curta, lista de sessões ativas, PIN para abrir o cofre.
 
-**O que a conta armazena:** pseudônimo, hash da senha, chave pública da passkey, hash da frase de recuperação (para validar, não para recuperar), segredo TOTP cifrado, data de criação, preferências, saldo (via ledger), reputação. **Nada mais.**
+**O que a conta armazena:** pseudônimo, hash da senha, chave pública da passkey, chave pública e impressão digital do arquivo de acesso, hash da frase de recuperação (para validar, não para recuperar), segredo TOTP cifrado, data de criação, preferências, saldo (via ledger), reputação. **Nada mais.**
+
+**Arquivo de acesso: o que avisar ao usuário.** Quem tem o arquivo (e o PIN, se houver) entra na conta; sem PIN o arquivo é uma chave pura. A interface recomenda o PIN, pede confirmação de guarda segura e permite revogar. Mitigação adicional: limite de 5 tentativas de PIN por hora por arquivo (o desafio é por arquivo), e aviso in-app a cada entrada com um método ainda não usado naquele dispositivo.
 
 **Notificações:** apenas dentro da plataforma e por push do navegador (a assinatura push é anônima). Sem e-mail, sem SMS. Opcional na V2: canal Telegram ou Signal via bot, com aviso de que isso vincula um identificador externo.
 

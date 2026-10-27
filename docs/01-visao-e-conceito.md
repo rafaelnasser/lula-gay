@@ -133,3 +133,4 @@ Cada item aprovado é uma peça de marketing. Cada lacre rompido é uma notícia
 | **Pedido** | Demanda publicada por compradores com recompensa para quem entregar. |
 | **Entitlement** | Direito de acesso de uma conta a um item (termo técnico). |
 | **Pseudônimo** | Identificador gerado da conta, ex. `coruja-7f3a`. |
+| **Arquivo de acesso** | Arquivo `pseudonimo.lacre` que funciona como chave de entrada: o usuário escolhe o arquivo (e digita o PIN) para entrar. |

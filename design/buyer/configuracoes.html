@@ -37,7 +37,7 @@
       <h1>Configurações</h1>
       <p class="sub">Conta <span class="handle" data-handle="coruja-7f3a"></span> · criada em mar/2026 · o pseudônimo não pode ser alterado.</p>
     </div>
-    <div class="actions"><span class="badge badge-ok"><i data-icon="shield-check"></i>TOTP ativo</span><span class="badge badge-ok"><i data-icon="key"></i>2 passkeys</span><span class="badge badge-outline"><i data-icon="eye-off"></i>sem e-mail, telefone ou nome</span></div>
+    <div class="actions"><span class="badge badge-ok"><i data-icon="shield-check"></i>TOTP ativo</span><span class="badge badge-ok"><i data-icon="key"></i>2 passkeys</span><span class="badge badge-ok"><i data-icon="file-lock"></i>arquivo de acesso</span><span class="badge badge-outline"><i data-icon="eye-off"></i>sem e-mail, telefone ou nome</span></div>
   </div>
 
   <div data-tabs>
@@ -71,6 +71,18 @@
           </div>
         </div>
         <div class="card">
+          <div class="card-head"><h3>Arquivo de acesso</h3><span class="badge badge-ok"><i data-icon="check"></i>ativo · com PIN</span></div>
+          <div class="card-body stack-sm">
+            <div class="file-row"><span class="file-icon"><i data-icon="key"></i></span><div class="grow"><div class="file-name">coruja-7f3a.lacre</div><div class="file-meta">gerado em 12/03/2026 · impressão digital 9F3A-C21E-7B04-D5A1 · último uso 20/10 às 01:12 (Tor Browser)</div></div></div>
+            <p class="xs muted">Para entrar, você escolhe o arquivo e digita o PIN. O arquivo contém uma chave privada cifrada; o Lacre guarda só a chave pública. Não é possível baixar de novo: se perdeu, gere outro (o antigo deixa de valer na hora).</p>
+            <div class="row">
+              <button class="btn btn-sm" data-toast="Exige senha + TOTP. O novo arquivo é baixado uma única vez e o anterior é revogado."><i data-icon="refresh"></i>Gerar novo arquivo</button>
+              <button class="btn btn-sm" data-toast="PIN alterado. O arquivo precisa ser baixado de novo."><i data-icon="key"></i>Trocar PIN</button>
+              <button class="btn btn-sm btn-danger" data-toast="Arquivo de acesso revogado. Senha e passkeys continuam valendo."><i data-icon="ban"></i>Revogar</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
           <div class="card-head"><h3>Autenticação em duas etapas (TOTP)</h3><span class="badge badge-ok"><i data-icon="shield-check"></i>ativo desde 12/03/2026</span></div>
           <div class="card-body stack-sm small">
             <p>App autenticador no celular. Exigido para entrar com senha, sacar, ver a frase de recuperação e excluir a conta.</p>
@@ -95,7 +107,7 @@
               <tr class="selected"><td><b>Linux</b><span class="sub">esta sessão</span></td><td>Firefox 131</td><td class="num">27/10 · 08:15</td><td class="num">agora</td><td>senha + TOTP</td><td class="text-right"><span class="badge badge-brass">atual</span></td></tr>
               <tr><td><b>Android</b></td><td>Chrome 130</td><td class="num">25/10 · 21:40</td><td class="num">26/10 · 23:10</td><td>passkey</td><td class="text-right"><button class="btn btn-sm" data-toast="Sessão do Android encerrada">Encerrar</button></td></tr>
               <tr><td><b>Windows</b></td><td>Edge 130</td><td class="num">19/10 · 12:02</td><td class="num">24/10 · 18:33</td><td>senha + TOTP</td><td class="text-right"><button class="btn btn-sm" data-toast="Sessão do Windows encerrada">Encerrar</button></td></tr>
-              <tr><td><b>Linux</b><span class="sub">via Tor</span></td><td>Tor Browser 14</td><td class="num">14/10 · 22:51</td><td class="num">20/10 · 01:12</td><td>senha + TOTP</td><td class="text-right"><button class="btn btn-sm" data-toast="Sessão do Tor Browser encerrada">Encerrar</button></td></tr>
+              <tr><td><b>Linux</b><span class="sub">via Tor</span></td><td>Tor Browser 14</td><td class="num">14/10 · 22:51</td><td class="num">20/10 · 01:12</td><td>arquivo de acesso + PIN</td><td class="text-right"><button class="btn btn-sm" data-toast="Sessão do Tor Browser encerrada">Encerrar</button></td></tr>
             </tbody>
           </table>
           <div class="table-foot"><span>Não registramos IP nas sessões. Mostramos só sistema, navegador e horários. Sessões expiram após 30 dias sem uso.</span></div>
@@ -241,7 +253,7 @@
             <p class="small">Tudo o que o Lacre guarda sobre <span class="handle" data-handle="coruja-7f3a"></span>, em JSON assinado e CSV. Esta lista é completa:</p>
             <ol class="exists">
               <li>pseudônimo e data de criação (mar/2026)</li>
-              <li>hash da senha e chaves públicas das 2 passkeys (não as privadas)</li>
+              <li>hash da senha, chaves públicas das 2 passkeys e do arquivo de acesso (não as privadas)</li>
               <li>hash da frase de recuperação (não a frase)</li>
               <li>segredo TOTP cifrado</li>
               <li>preferências (tema, notificações, privacidade)</li>

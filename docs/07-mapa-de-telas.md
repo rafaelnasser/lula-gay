@@ -104,12 +104,12 @@ Rodapé do painel em todas: "Compra anônima. Registramos item, valor e data. Na
 
 ### `auth/criar-conta.html` · Criar conta anônima (3 passos)
 1. **Pseudônimo**: gerado (`coruja-7f3a`) com botão "Sortear outro"; aviso de que não poderá ser alterado; nenhum campo de e-mail/telefone, com um bloco "O que não pedimos".
-2. **Senha ou passkey**: campo de senha (mín. 12), medidor de força, opção "Usar passkey em vez de senha".
+2. **Senha, passkey ou arquivo de acesso**: campo de senha (mín. 12), medidor de força, opção "Usar passkey em vez de senha" e bloco "Arquivo de acesso": arquivo `pseudonimo.lacre` gerado no navegador, impressão digital, PIN opcional (recomendado), botão baixar, confirmação de guarda segura e aviso de que o arquivo é uma chave.
 3. **Frase de recuperação**: 12 palavras em grade, botões copiar e baixar, aviso "mostramos uma vez", checkbox "anotei", depois confirmação de 3 palavras (campos: palavra 3, 7, 11).
 Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `auth/entrar.html` · Entrar
-- Pseudônimo + senha, botão "Entrar com passkey", link "Perdi minha senha" (vai para recuperar).
+- Pseudônimo + senha, botão "Entrar com passkey", bloco "Entrar com arquivo de acesso" (escolher o arquivo `.lacre`, PIN se houver, botão entrar; o arquivo é lido localmente e assina um desafio do servidor, nunca é enviado), link "Perdi minha senha" (vai para recuperar).
 - Segundo passo opcional: código TOTP (6 campos).
 - Aviso: sem e-mail, a frase de recuperação é a única saída.
 
@@ -165,7 +165,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Lista agrupada por dia; tipos: curadoria (aprovado/ajustes), lacre (marco/rompido/falhou), compra, mensagem, disputa, saque, segurança (novo login). Filtro por tipo e "marcar todas como lidas". Preferências de push.
 
 ### `buyer/configuracoes.html` (compartilhada)
-- Abas: **Segurança** (senha, passkeys, TOTP, sessões ativas com dispositivo e data, PIN do cofre, encerrar todas), **Recuperação** (ver frase exige senha; status "confirmada em dd/mm"), **Privacidade** (ocultar pseudônimo em páginas públicas, apagar mensagens ao encerrar, permitir marca d'água invisível), **Notificações** (push por tipo), **Aparência** (tema), **Conta** (exportar dados que existem sobre a conta, excluir conta com condição de saldo zero).
+- Abas: **Segurança** (senha, passkeys, arquivo de acesso com gerar novo / trocar PIN / revogar, TOTP, sessões ativas com dispositivo, data e método usado, PIN do cofre, encerrar todas), **Recuperação** (ver frase exige senha; status "confirmada em dd/mm"), **Privacidade** (ocultar pseudônimo em páginas públicas, apagar mensagens ao encerrar, permitir marca d'água invisível), **Notificações** (push por tipo), **Aparência** (tema), **Conta** (exportar dados que existem sobre a conta, excluir conta com condição de saldo zero).
 
 ## VENDEDOR
 

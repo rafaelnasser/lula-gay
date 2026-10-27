@@ -74,8 +74,8 @@
       <div data-step="2" class="stack">
         <div>
           <p class="eyebrow">Passo 2 de 3</p>
-          <h1 class="mt-1">Senha ou passkey</h1>
-          <p class="muted small mt-1">Escolha um dos dois. Nos dois casos você recebe uma frase de recuperação no próximo passo.</p>
+          <h1 class="mt-1">Senha, passkey ou arquivo de acesso</h1>
+          <p class="muted small mt-1">Escolha pelo menos um; você pode combinar os três depois. Em todos os casos você recebe uma frase de recuperação no próximo passo.</p>
         </div>
         <div class="field">
           <label for="senha">Senha</label>
@@ -92,7 +92,19 @@
           <button type="button" class="btn btn-outline btn-block" data-toast="Passkey criada neste dispositivo"><i data-icon="fingerprint"></i>Usar passkey em vez de senha</button>
           <p class="xs muted">A passkey fica no seu dispositivo ou gerenciador de senhas (WebAuthn). Não existe senha para vazar. Você pode adicionar outras depois, em Configurações › Segurança.</p>
         </div>
-        <div class="alert alert-anon"><i data-icon="shield"></i><div>Guardamos só um hash da senha (Argon2id). Ninguém da equipe consegue ver ou redefinir sua senha por você.</div></div>
+        <p class="text-center xs muted">ou</p>
+        <div class="panel stack-sm">
+          <div class="row between"><b class="small"><i data-icon="file-lock" class="icon"></i> Arquivo de acesso</b><span class="badge badge-ok"><i data-icon="check"></i>gerado</span></div>
+          <p class="xs muted">Um arquivo que funciona como chave: para entrar, você escolhe o arquivo no seu computador ou celular e pronto. Ele é lido só no seu navegador e nunca é enviado; o Lacre guarda apenas a chave pública correspondente.</p>
+          <div class="file-row"><span class="file-icon"><i data-icon="key"></i></span><div class="grow"><div class="file-name">coruja-7f3a.lacre</div><div class="file-meta">1,2 KB · impressão digital 9F3A-C21E-7B04-D5A1 · gerado agora neste dispositivo</div></div><button type="button" class="btn btn-sm btn-primary" data-toast="Arquivo coruja-7f3a.lacre salvo"><i data-icon="download"></i>Baixar</button></div>
+          <div class="field">
+            <label for="pin-arquivo">PIN do arquivo <span class="muted">(opcional, recomendado)</span></label>
+            <input id="pin-arquivo" type="password" class="input mono" inputmode="numeric" maxlength="8" placeholder="4 a 8 dígitos" value="••••••">
+            <span class="hint">Com PIN, o arquivo sozinho não basta para entrar. Sem PIN, qualquer pessoa com o arquivo entra na sua conta: guarde-o como guardaria uma chave.</span>
+          </div>
+          <label class="check"><input type="checkbox" checked><span>Guardei o arquivo em um lugar seguro (gerenciador de senhas, pendrive ou pasta cifrada).<span class="desc">Perdeu o arquivo? Gere outro em Configurações › Segurança; o antigo deixa de valer. Sem arquivo, senha, passkey e frase de recuperação, a conta é perdida.</span></span></label>
+        </div>
+        <div class="alert alert-anon"><i data-icon="shield"></i><div>Guardamos só um hash da senha (Argon2id), as chaves públicas da passkey e do arquivo de acesso. Ninguém da equipe consegue ver ou redefinir seu acesso por você.</div></div>
         <div class="form-actions">
           <button type="button" class="btn btn-ghost" data-step-go="1"><i data-icon="arrow-left"></i>Voltar</button>
           <button type="button" class="btn btn-primary" data-step-go="3">Continuar<i data-icon="arrow-right"></i></button>
@@ -146,7 +158,7 @@
         </div>
         <dl class="kv panel">
           <dt>Criada em</dt><dd>27/10/2026</dd>
-          <dt>Acesso</dt><dd>Senha definida · passkey opcional</dd>
+          <dt>Acesso</dt><dd>Senha definida · arquivo de acesso coruja-7f3a.lacre com PIN · passkey opcional</dd>
           <dt>Recuperação</dt><dd>Frase confirmada (palavras 3, 7 e 11)</dd>
           <dt>Saldo</dt><dd>US$ 0,00 · deposite em cripto quando quiser comprar ou apoiar</dd>
         </dl>

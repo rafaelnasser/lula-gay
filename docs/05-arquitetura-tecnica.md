@@ -158,6 +158,9 @@ Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)─
 ```
 POST   /auth/register            cria pseudônimo + senha + frase (retorna frase uma vez)
 POST   /auth/login               handle + senha (+ TOTP)
+POST   /auth/keyfile/challenge   handle → nonce assinável (válido 2 min)
+POST   /auth/keyfile/verify      nonce assinado com a chave do arquivo → sessão
+POST   /auth/keyfile             gera novo par; retorna o arquivo .lacre uma vez e revoga o anterior
 POST   /auth/recover             12 palavras → nova senha
 GET    /me                       conta, reputação, preferências
 GET    /wallet                   saldo, reservado, em custódia
@@ -211,7 +214,7 @@ GET    /admin/settings  PATCH /admin/settings
 
 ## 10. Segurança: lista mínima antes do lançamento
 
-- [ ] Argon2id para senhas; passkeys; TOTP; rate limit por conta e por token anônimo (sem IP em claro).
+- [ ] Argon2id para senhas; passkeys; arquivo de acesso (Ed25519, chave privada cifrada no cliente, só a pública no servidor, desafio com nonce de uso único); TOTP; rate limit por conta e por token anônimo (sem IP em claro).
 - [ ] CSP estrita, sem scripts de terceiros, sem analytics externos.
 - [ ] Cookies `HttpOnly`, `Secure`, `SameSite=Strict`; sessão de 24 h (8 h no admin).
 - [ ] Uploads só por URL pré-assinada; bucket de quarentena sem leitura pública; varredura antes de mover.

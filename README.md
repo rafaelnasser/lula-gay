@@ -43,7 +43,7 @@ design/      protótipo navegável em HTML estático
 
 - **Global.** Informação de qualquer país, com país e idioma em cada item e filtro de país no catálogo. Preços em dólar (US$), liquidados em USDT. Interface em português no protótipo; produto com pt, en e es.
 
-- **Conta sem identidade**: pseudônimo gerado + senha ou passkey + frase de recuperação de 12 palavras. Sem e-mail, telefone, CPF.
+- **Conta sem identidade**: pseudônimo gerado + senha, passkey ou arquivo de acesso (um arquivo-chave que o usuário escolhe para entrar) + frase de recuperação de 12 palavras. Sem e-mail, telefone, CPF.
 - **Só cripto, dos dois lados.** Depósito em USDT/USDC (Polygon, Tron, Base) ou Bitcoin (Lightning, on-chain); saque em cripto. Nenhum real entra ou sai, nenhum parceiro de pagamento, nenhum KYC. A carteira interna guarda créditos em USDT; preços são exibidos em US$ e convertidos na hora.
 - **Comissão única de 10 %** em todos os modelos. Nada é cobrado se um lacre coletivo falhar.
 - **Compra com exclusividade.** Em Cópias, Lacre coletivo e Camadas, o vendedor pode definir um valor pelo qual um único comprador leva o item e o anúncio encerra (apoios devolvidos).

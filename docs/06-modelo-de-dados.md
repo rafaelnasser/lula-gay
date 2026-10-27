@@ -47,6 +47,7 @@ erDiagram
 | recovery_hash | text | hash da frase de 12 palavras |
 | totp_secret_enc | bytea null | cifrado |
 | passkeys | jsonb | credenciais WebAuthn |
+| access_keys | jsonb | arquivos de acesso: `{public_key, fingerprint, pin_protected, created_at, last_used_bucket, revoked_at}` (só a chave pública) |
 | roles | text[] | `buyer`, `seller` (toda conta pode ser ambos) |
 | status | enum | `active`, `restricted`, `banned`, `deleted` |
 | reputation | jsonb | `{score, approved, rejected, disputes_lost, since}` |
