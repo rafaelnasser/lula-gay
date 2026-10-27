@@ -121,7 +121,7 @@ design/
 | ped-9h2d5 | Lista de todos os editais de fomento cultural municipais do RS em 2025 | US$ 2.100 · 9 | 10/12/2026 | Aberto |
 | ped-5r2k8 | Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos · `CL · espanhol` | US$ 900 · 4 | 20/12/2026 | Aberto |
 
-**Carteira de @coruja-7f3a (extrato):** 20/10 depósito USDT Polygon +US$ 1.455,00 · 21/10 compra lcr-9f2k7 −US$ 490,00 · 22/10 apoio lcr-4m2x9 −US$ 100,00 · 23/10 compra camada 1 lcr-3c7r8 −US$ 190,00 · 24/10 depósito Bitcoin Lightning +US$ 500,00 (0,00142 BTC) · 25/10 apoio lcr-4m2x9 −US$ 150,00 · 25/10 assinatura lcr-6d1k5 −US$ 190,00 · 26/10 liquidação de venda lcr-5m8c4 +US$ 135,00 (×3). Saldo US$ 1.240,00.
+**Carteira de @coruja-7f3a (extrato):** 20/10 depósito USDT Polygon +US$ 1.455,00 · 21/10 compra lcr-9f2k7 −US$ 490,00 · 22/10 apoio lcr-4m2x9 −US$ 100,00 · 23/10 compra camada 1 lcr-3c7r8 −US$ 190,00 · 24/10 depósito Bitcoin Lightning +US$ 500,00 (0,00731 BTC a US$ 68.400) · 25/10 apoio lcr-4m2x9 −US$ 150,00 · 25/10 assinatura lcr-6d1k5 −US$ 190,00 · 26/10 liquidação de venda lcr-5m8c4 +US$ 135,00 (×3). Saldo US$ 1.240,00.
 
 **Ganhos de @coruja-7f3a:** bruto US$ 13.200 (88 × US$ 150) · comissão 10 % US$ 1.320 · líquido US$ 11.880 · em custódia US$ 405,00 (3 vendas de US$ 135 líquidos, liberam em 48 h) · sacado US$ 9.800 (2 saques em USDT: US$ 4.800 em 02/10 e US$ 5.000 em 15/09) · 1 saque em processamento US$ 1.000.
 

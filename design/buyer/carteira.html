@@ -32,9 +32,9 @@
   <main>
     <div class="page-head">
       <div>
-        <p class="eyebrow">Carteira · créditos em USDT</p>
+        <p class="eyebrow">Carteira · saldo em USDT</p>
         <h1 class="mt-1">Carteira</h1>
-        <p class="sub">Preços em R$, créditos guardados em USDT. Cada compra, apoio ou lance converte R$ → USDT na hora. <span class="rate"><i data-icon="refresh"></i>1 USDT = R$ 5,38 · atualizada há 40 s</span></p>
+        <p class="sub">Valores em US$, liquidados em USDT 1:1 (1 USDT = US$ 1), sem conversão. Só depósitos em Bitcoin são convertidos para USDT na hora, com cotação travada por 10 min.</p>
       </div>
       <div class="actions">
         <button class="btn" data-tab="sacar"><i data-icon="arrow-up-right"></i>Sacar</button>
@@ -43,11 +43,11 @@
     </div>
 
     <div class="stat-grid mb-3">
-      <div class="stat"><span class="label">Disponível</span><span class="value">R$ 1.240,00</span><span class="delta flat">≈ 230,4 USDT · pode ser gasto ou sacado</span></div>
-      <div class="stat"><span class="label">Em custódia · apoios ativos</span><span class="value">R$ 250,00</span><span class="delta flat">≈ 46,5 USDT · 2 apoios ao lcr-4m2x9 · volta sozinho se a meta falhar em 15/11</span></div>
-      <div class="stat"><span class="label">Reservado · lances e ofertas</span><span class="value">R$ 0,00</span><span class="delta flat">nenhum lance ou oferta em aberto</span></div>
+      <div class="stat"><span class="label">Disponível · USDT</span><span class="value">US$ 1.240,00</span><span class="delta flat">1.240 USDT · 1 USDT = US$ 1 · pode ser gasto ou sacado</span></div>
+      <div class="stat"><span class="label">Em custódia · apoios ativos</span><span class="value">US$ 250,00</span><span class="delta flat">250 USDT · 2 apoios ao lcr-4m2x9 · volta sozinho se a meta falhar em 15/11</span></div>
+      <div class="stat"><span class="label">Reservado · lances e ofertas</span><span class="value">US$ 0,00</span><span class="delta flat">nenhum lance ou oferta em aberto</span></div>
     </div>
-    <p class="xs muted mb-3">Fora destes valores: R$ 50,00 somados à recompensa do pedido ped-2c8d1, em custódia do pedido até 30/11 (ver <a class="link" href="../buyer/pedidos.html">Meus pedidos</a>).</p>
+    <p class="xs muted mb-3">Fora destes valores: US$ 50,00 somados à recompensa do pedido ped-2c8d1, em custódia do pedido até 30/11 (ver <a class="link" href="../buyer/pedidos.html">Meus pedidos</a>).</p>
 
     <div data-tabs>
       <div class="tabs">
@@ -60,30 +60,30 @@
       <!-- ================= Depositar ================= -->
       <div class="tab-panel active" data-panel="depositar">
         <div data-variants="usdt-polygon">
-          <p class="small muted mb-2">Escolha a moeda e a rede. Stablecoins creditam 1:1; Bitcoin é convertido para USDT na hora com cotação travada por 10 min.</p>
+          <p class="small muted mb-2">Escolha a moeda e a rede. USDT e USDC creditam 1:1 (1 USDT = US$ 1), sem conversão. Só o Bitcoin é convertido para USDT na hora, com cotação travada por 10 min.</p>
           <div class="choice-cards mb-3">
-            <button type="button" class="choice" data-show="usdt-polygon"><span class="choice-title"><i data-icon="circle-dollar"></i>USDT · Polygon</span><span class="choice-desc">Crédito 1:1 após 12 confirmações (≈ 1 min).</span><span class="choice-meta">Mínimo 10 USDT · taxa de rede ≈ R$ 0,20</span></button>
-            <button type="button" class="choice" data-show="usdt-tron"><span class="choice-title"><i data-icon="circle-dollar"></i>USDT · Tron</span><span class="choice-desc">Crédito 1:1 após 19 confirmações (≈ 1 min).</span><span class="choice-meta">Mínimo 10 USDT · taxa de rede ≈ R$ 8</span></button>
-            <button type="button" class="choice" data-show="usdc"><span class="choice-title"><i data-icon="circle-dollar"></i>USDC · Polygon ou Base</span><span class="choice-desc">Crédito 1:1 após 12 (Polygon) ou 20 (Base) confirmações.</span><span class="choice-meta">Mínimo 10 USDC · taxa ≈ R$ 0,10–0,20</span></button>
-            <button type="button" class="choice" data-show="lightning"><span class="choice-title"><i data-icon="zap"></i>Bitcoin · Lightning</span><span class="choice-desc">Instantâneo. Convertido para USDT na hora.</span><span class="choice-meta">Mínimo 1.000 sats · taxa ≈ R$ 0,05</span></button>
-            <button type="button" class="choice" data-show="onchain"><span class="choice-title"><i data-icon="bitcoin"></i>Bitcoin · on-chain</span><span class="choice-desc">2 confirmações (≈ 20 min). Convertido na hora.</span><span class="choice-meta">Mínimo 0,0002 BTC · taxa da rede</span></button>
+            <button type="button" class="choice" data-show="usdt-polygon"><span class="choice-title"><i data-icon="circle-dollar"></i>USDT · Polygon</span><span class="choice-desc">Crédito 1:1 após 12 confirmações (≈ 1 min).</span><span class="choice-meta">Mínimo 10 USDT · taxa de rede ≈ US$ 0,04</span></button>
+            <button type="button" class="choice" data-show="usdt-tron"><span class="choice-title"><i data-icon="circle-dollar"></i>USDT · Tron</span><span class="choice-desc">Crédito 1:1 após 19 confirmações (≈ 1 min).</span><span class="choice-meta">Mínimo 10 USDT · taxa de rede ≈ US$ 1,50</span></button>
+            <button type="button" class="choice" data-show="usdc"><span class="choice-title"><i data-icon="circle-dollar"></i>USDC · Polygon ou Base</span><span class="choice-desc">Crédito 1:1 após 12 (Polygon) ou 20 (Base) confirmações.</span><span class="choice-meta">Mínimo 10 USDC · taxa ≈ US$ 0,02–0,04</span></button>
+            <button type="button" class="choice" data-show="lightning"><span class="choice-title"><i data-icon="zap"></i>Bitcoin · Lightning</span><span class="choice-desc">Instantâneo. Convertido para USDT na hora.</span><span class="choice-meta">Mínimo 1.000 sats · taxa ≈ US$ 0,01</span></button>
+            <button type="button" class="choice" data-show="onchain"><span class="choice-title"><i data-icon="bitcoin"></i>Bitcoin · on-chain</span><span class="choice-desc">2 confirmações (≈ 20 min). Convertido na hora.</span><span class="choice-meta">Mínimo 0,0002 BTC · taxa da rede ≈ US$ 2</span></button>
           </div>
           <div class="alert alert-anon mb-3"><i data-icon="shield"></i><div><span class="alert-title">Endereço novo a cada depósito</span>Cada depósito gera um endereço novo. O endereço não é vinculado a nenhuma identidade; o marketplace registra apenas o crédito na sua carteira. Quem olha a blockchain vê um depósito, nunca o que foi comprado.</div></div>
 
           <div data-variant="usdt-polygon">
             <div class="card">
-              <div class="card-head"><h3>Depositar USDT pela rede Polygon</h3><span class="badge badge-ok">1 USDT = 1 USDT · sem conversão</span></div>
+              <div class="card-head"><h3>Depositar USDT pela rede Polygon</h3><span class="badge badge-ok">Crédito 1:1 · sem conversão</span></div>
               <div class="card-body addr-box">
                 <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Escaneie com sua carteira</span></div>
                 <div class="stack-sm">
                   <div class="field"><label>Endereço de depósito · Polygon (ERC-20)</label><div class="hash"><code>0x7f3a9C0e1D4b8A2f6E5c9D0b7a1E3f4C2d6Bc21e</code><button class="btn btn-sm btn-ghost" data-copy="0x7f3a9C0e1D4b8A2f6E5c9D0b7a1E3f4C2d6Bc21e" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div><span class="hint">Gerado às 14:02 só para esta carteira. Envie apenas USDT na rede Polygon: outros tokens ou outras redes são perdidos.</span></div>
                   <dl class="kv">
                     <dt>Confirmações</dt><dd>12 (≈ 1 min)</dd>
-                    <dt>Mínimo</dt><dd>10 USDT (≈ R$ 53,80)</dd>
-                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ R$ 0,20)</dd>
+                    <dt>Mínimo</dt><dd>10 USDT (US$ 10,00)</dd>
+                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ US$ 0,04)</dd>
                     <dt>Status</dt><dd><span class="badge st-triagem">Aguardando transação</span></dd>
                   </dl>
-                  <div class="row"><button class="btn btn-sm" data-toast="Endereço marcado como usado. Um novo foi gerado."><i data-icon="refresh"></i>Gerar outro endereço</button><span class="xs muted">O crédito aparece em R$ pela cotação do momento da confirmação.</span></div>
+                  <div class="row"><button class="btn btn-sm" data-toast="Endereço marcado como usado. Um novo foi gerado."><i data-icon="refresh"></i>Gerar outro endereço</button><span class="xs muted">O crédito aparece em US$ assim que as confirmações chegam.</span></div>
                 </div>
               </div>
             </div>
@@ -91,15 +91,15 @@
 
           <div data-variant="usdt-tron">
             <div class="card">
-              <div class="card-head"><h3>Depositar USDT pela rede Tron</h3><span class="badge badge-ok">1 USDT = 1 USDT · sem conversão</span></div>
+              <div class="card-head"><h3>Depositar USDT pela rede Tron</h3><span class="badge badge-ok">Crédito 1:1 · sem conversão</span></div>
               <div class="card-body addr-box">
                 <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Escaneie com sua carteira</span></div>
                 <div class="stack-sm">
                   <div class="field"><label>Endereço de depósito · Tron (TRC-20)</label><div class="hash"><code>TQ8kZf3aLm9Xq2Wv7Yb1Nc4Rd6Pe8S9xA2</code><button class="btn btn-sm btn-ghost" data-copy="TQ8kZf3aLm9Xq2Wv7Yb1Nc4Rd6Pe8S9xA2" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div><span class="hint">Gerado às 14:02 só para esta carteira. Envie apenas USDT TRC-20.</span></div>
                   <dl class="kv">
                     <dt>Confirmações</dt><dd>19 (≈ 1 min)</dd>
-                    <dt>Mínimo</dt><dd>10 USDT (≈ R$ 53,80)</dd>
-                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ R$ 8, varia com a energia da rede)</dd>
+                    <dt>Mínimo</dt><dd>10 USDT (US$ 10,00)</dd>
+                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ US$ 1,50, varia com a energia da rede)</dd>
                     <dt>Status</dt><dd><span class="badge st-triagem">Aguardando transação</span></dd>
                   </dl>
                   <div class="row"><button class="btn btn-sm" data-toast="Endereço marcado como usado. Um novo foi gerado."><i data-icon="refresh"></i>Gerar outro endereço</button></div>
@@ -110,15 +110,15 @@
 
           <div data-variant="usdc">
             <div class="card">
-              <div class="card-head"><h3>Depositar USDC</h3><div class="segmented"><button class="active" data-toast="Rede selecionada: Polygon">Polygon</button><button data-toast="Rede selecionada: Base · endereço 0x4b8A…9e0f">Base</button></div><span class="badge badge-ok">1 USDC = 1 USDT em créditos</span></div>
+              <div class="card-head"><h3>Depositar USDC</h3><div class="segmented"><button class="active" data-toast="Rede selecionada: Polygon">Polygon</button><button data-toast="Rede selecionada: Base · endereço 0x4b8A…9e0f">Base</button></div><span class="badge badge-ok">Crédito 1:1 · sem conversão</span></div>
               <div class="card-body addr-box">
                 <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Escaneie com sua carteira</span></div>
                 <div class="stack-sm">
                   <div class="field"><label>Endereço de depósito · Polygon (ERC-20)</label><div class="hash"><code>0x9c2D4b8A2f6E5c9D0b7a1E3f4C2d6B8a9E0f1C3d</code><button class="btn btn-sm btn-ghost" data-copy="0x9c2D4b8A2f6E5c9D0b7a1E3f4C2d6B8a9E0f1C3d" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div><span class="hint">Em Base, o endereço é outro (0x4b8A…9e0f). Nunca envie USDC de uma rede para o endereço da outra.</span></div>
                   <dl class="kv">
                     <dt>Confirmações</dt><dd>12 em Polygon (≈ 1 min) · 20 em Base (≈ 40 s)</dd>
-                    <dt>Mínimo</dt><dd>10 USDC (≈ R$ 53,80)</dd>
-                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ R$ 0,20 Polygon · ≈ R$ 0,10 Base)</dd>
+                    <dt>Mínimo</dt><dd>10 USDC (US$ 10,00)</dd>
+                    <dt>Taxa de rede</dt><dd>paga por quem envia (≈ US$ 0,04 Polygon · ≈ US$ 0,02 Base)</dd>
                     <dt>Status</dt><dd><span class="badge st-triagem">Aguardando transação</span></dd>
                   </dl>
                 </div>
@@ -128,18 +128,18 @@
 
           <div data-variant="lightning">
             <div class="card">
-              <div class="card-head"><h3>Depositar Bitcoin pela Lightning</h3><span class="rate"><i data-icon="lock"></i>1 BTC = R$ 352.400 · travada por 09:58</span></div>
+              <div class="card-head"><h3>Depositar Bitcoin pela Lightning</h3><span class="rate"><i data-icon="lock"></i>1 BTC = US$ 68.400 · travada por 09:58</span></div>
               <div class="card-body addr-box">
                 <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Invoice válida por 10 min</span></div>
                 <div class="stack-sm">
                   <div class="form-grid">
-                    <div class="field"><label for="ln-valor">Valor a creditar</label><div class="input-group"><span class="affix">R$</span><input id="ln-valor" class="input num" value="500,00"></div><span class="hint">= 142.000 sats (0,00142 BTC) · ≈ 92,94 USDT em créditos</span></div>
+                    <div class="field"><label for="ln-valor">Valor a creditar</label><div class="input-group"><span class="affix">US$</span><input id="ln-valor" class="input num" value="500,00"></div><span class="hint">= 731.000 sats (0,00731 BTC) · creditados como 500 USDT</span></div>
                     <div class="field"><label>&nbsp;</label><button class="btn btn-block" data-toast="Nova invoice gerada com a cotação travada por 10 min"><i data-icon="zap"></i>Gerar nova invoice</button></div>
                   </div>
-                  <div class="field"><label>Invoice (BOLT11)</label><div class="hash"><code>lnbc1420u1pj9f2k7pp5x7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3aqdqqcqzzsxqyz5vqsp5m0jn4h2u8d6c3ta5lw9g2k7r4e6y1q0s8p5x3v2n9c7d4m1k8f0qq9qyyssq</code><button class="btn btn-sm btn-ghost" data-copy="lnbc1420u1pj9f2k7pp5x7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3aqdqqcqzzsxqyz5vqsp5m0jn4h2u8d6c3ta5lw9g2k7r4e6y1q0s8p5x3v2n9c7d4m1k8f0qq9qyyssq" aria-label="Copiar invoice"><i data-icon="copy"></i></button></div></div>
+                  <div class="field"><label>Invoice (BOLT11)</label><div class="hash"><code>lnbc7310u1pj9f2k7pp5x7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3aqdqqcqzzsxqyz5vqsp5m0jn4h2u8d6c3ta5lw9g2k7r4e6y1q0s8p5x3v2n9c7d4m1k8f0qq9qyyssq</code><button class="btn btn-sm btn-ghost" data-copy="lnbc7310u1pj9f2k7pp5x7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3aqdqqcqzzsxqyz5vqsp5m0jn4h2u8d6c3ta5lw9g2k7r4e6y1q0s8p5x3v2n9c7d4m1k8f0qq9qyyssq" aria-label="Copiar invoice"><i data-icon="copy"></i></button></div></div>
                   <dl class="kv">
                     <dt>Crédito</dt><dd>instantâneo, convertido para USDT pela cotação travada</dd>
-                    <dt>Taxa de rede</dt><dd>≈ R$ 0,05, paga por quem envia</dd>
+                    <dt>Taxa de rede</dt><dd>≈ US$ 0,01, paga por quem envia</dd>
                     <dt>Status</dt><dd><span class="badge st-triagem">Aguardando pagamento · 09:58</span></dd>
                   </dl>
                 </div>
@@ -149,19 +149,19 @@
 
           <div data-variant="onchain">
             <div class="card">
-              <div class="card-head"><h3>Depositar Bitcoin on-chain</h3><span class="rate"><i data-icon="lock"></i>1 BTC = R$ 352.400 · travada por 09:58</span></div>
+              <div class="card-head"><h3>Depositar Bitcoin on-chain</h3><span class="rate"><i data-icon="lock"></i>1 BTC = US$ 68.400 · travada por 09:58</span></div>
               <div class="card-body addr-box">
                 <div class="qr-wrap"><div class="qr"><span class="f"></span></div><span>Escaneie com sua carteira</span></div>
                 <div class="stack-sm">
                   <div class="form-grid">
-                    <div class="field"><label for="btc-valor">Valor a creditar</label><div class="input-group"><span class="affix">R$</span><input id="btc-valor" class="input num" value="500,00"></div><span class="hint">Envie exatamente 0,00142 BTC. Valores diferentes são creditados pela cotação do momento da confirmação.</span></div>
+                    <div class="field"><label for="btc-valor">Valor a creditar</label><div class="input-group"><span class="affix">US$</span><input id="btc-valor" class="input num" value="500,00"></div><span class="hint">Envie exatamente 0,00731 BTC. Valores diferentes são creditados pela cotação do momento da confirmação.</span></div>
                     <div class="field"><label>&nbsp;</label><button class="btn btn-block" data-toast="Novo endereço gerado com a cotação travada por 10 min"><i data-icon="refresh"></i>Gerar novo endereço</button></div>
                   </div>
                   <div class="field"><label>Endereço de depósito · Bitcoin (bech32)</label><div class="hash"><code>bc1qx7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3a</code><button class="btn btn-sm btn-ghost" data-copy="bc1qx7c0e4d9a2f6e5c9d07a3e3f4c2d6g8a9e7f3a" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div></div>
                   <dl class="kv">
                     <dt>Confirmações</dt><dd>2 (≈ 20 min)</dd>
-                    <dt>Mínimo</dt><dd>0,0002 BTC (≈ R$ 70,50)</dd>
-                    <dt>Taxa de rede</dt><dd>definida por você na sua carteira; ≈ R$ 9 hoje</dd>
+                    <dt>Mínimo</dt><dd>0,0002 BTC (≈ US$ 13,68)</dd>
+                    <dt>Taxa de rede</dt><dd>definida por você na sua carteira; ≈ US$ 2 hoje</dd>
                     <dt>Status</dt><dd><span class="badge st-triagem">Aguardando transação</span></dd>
                   </dl>
                 </div>
@@ -175,7 +175,7 @@
       <div class="tab-panel" data-panel="sacar">
         <div class="split">
           <div class="card" data-wizard>
-            <div class="card-head"><h3>Sacar em cripto</h3><span class="xs muted">disponível R$ 1.240,00 · custódia e reservas não podem ser sacadas</span></div>
+            <div class="card-head"><h3>Sacar em cripto</h3><span class="xs muted">disponível US$ 1.240,00 · custódia e reservas não podem ser sacadas</span></div>
             <div class="card-body stack">
               <div class="stepper">
                 <div class="step active"><span class="n">1</span><span class="t">Destino e valor</span></div>
@@ -186,13 +186,13 @@
               <div data-step="1" class="active stack">
                 <div class="form-grid">
                   <div class="field"><label for="moeda">Moeda</label><select id="moeda" class="select"><option>USDT</option><option>USDC</option><option>BTC</option></select></div>
-                  <div class="field"><label for="rede">Rede</label><select id="rede" class="select"><option>Polygon · taxa ≈ R$ 0,20 · ≈ 2 min</option><option>Tron (TRC-20) · taxa ≈ R$ 8 · ≈ 2 min</option><option>Base · taxa ≈ R$ 0,10 · ≈ 1 min</option><option>Lightning · taxa ≈ R$ 0,05 · segundos</option><option>Bitcoin on-chain · taxa ≈ R$ 9 · ≈ 30 min</option></select></div>
+                  <div class="field"><label for="rede">Rede</label><select id="rede" class="select"><option>Polygon · taxa ≈ US$ 0,04 · ≈ 2 min</option><option>Tron (TRC-20) · taxa ≈ US$ 1,50 · ≈ 2 min</option><option>Base · taxa ≈ US$ 0,02 · ≈ 1 min</option><option>Lightning · taxa ≈ US$ 0,01 · segundos</option><option>Bitcoin on-chain · taxa ≈ US$ 2 · ≈ 30 min</option></select></div>
                   <div class="field full"><label for="addr">Endereço de destino</label><input id="addr" class="input mono" value="0x4B8a2F6e5C9d0B7a1e3F4c2D6b8A9e0F1c3D5b7A" spellcheck="false"><span class="hint">Confira os 6 primeiros e os 6 últimos caracteres. Saques em cripto não podem ser desfeitos.</span></div>
-                  <div class="field"><label for="val">Valor</label><div class="input-group"><span class="affix">R$</span><input id="val" class="input num" value="500,00"><button class="btn" data-toast="Valor máximo aplicado: R$ 1.240,00">Máx.</button></div><span class="hint">≈ 92,94 USDT pela cotação de agora (R$ 5,38)</span></div>
+                  <div class="field"><label for="val">Valor</label><div class="input-group"><span class="affix">US$</span><input id="val" class="input num" value="500,00"><button class="btn" data-toast="Valor máximo aplicado: US$ 1.240,00">Máx.</button></div><span class="hint">= 500 USDT · disponível US$ 1.240,00 (1.240 USDT)</span></div>
                   <div class="field"><label>Resumo</label>
                     <dl class="kv">
-                      <dt>Taxa de rede</dt><dd>≈ R$ 0,20 (0,04 USDT), repassada</dd>
-                      <dt>Você recebe</dt><dd>≈ 92,90 USDT</dd>
+                      <dt>Taxa de rede</dt><dd>≈ US$ 0,04 (0,04 USDT), repassada</dd>
+                      <dt>Você recebe</dt><dd>499,96 USDT</dd>
                       <dt>Tempo estimado</dt><dd>próximo lote às 15:00 · ≈ 2 min na rede</dd>
                     </dl>
                   </div>
@@ -207,10 +207,10 @@
               <div data-step="2" class="stack">
                 <div class="alert alert-info"><i data-icon="lock-keyhole"></i><div>Confirmação em 2 passos: senha e código do app autenticador. Sem TOTP ativo, o saque fica 24 h em espera por segurança.</div></div>
                 <dl class="kv panel">
-                  <dt>Saque</dt><dd>R$ 500,00 ≈ 92,94 USDT</dd>
+                  <dt>Saque</dt><dd>US$ 500,00 = 500 USDT</dd>
                   <dt>Rede</dt><dd>Polygon · taxa ≈ 0,04 USDT</dd>
                   <dt>Destino</dt><dd class="mono">0x4B8a2F…3D5b7A</dd>
-                  <dt>Recebe</dt><dd>≈ 92,90 USDT</dd>
+                  <dt>Recebe</dt><dd>499,96 USDT</dd>
                 </dl>
                 <div class="form-grid">
                   <div class="field"><label for="sq-senha">Senha</label><input id="sq-senha" type="password" class="input" value="moinho-tinta-farol-quartzo-2026" autocomplete="current-password"></div>
@@ -223,7 +223,7 @@
               </div>
 
               <div data-step="3" class="stack">
-                <div class="alert alert-ok"><i data-icon="check-circle"></i><div><span class="alert-title">Saque na fila do lote das 15:00</span>R$ 500,00 (92,94 USDT) saíram do saldo disponível. Você recebe uma notificação com o txid assim que a rede confirmar.</div></div>
+                <div class="alert alert-ok"><i data-icon="check-circle"></i><div><span class="alert-title">Saque na fila do lote das 15:00</span>US$ 500,00 (500 USDT) saíram do saldo disponível. Você recebe uma notificação com o txid assim que a rede confirmar.</div></div>
                 <div class="timeline">
                   <div class="tl-item ok"><div class="when">27/10 · 14:07</div><div class="what">Solicitado · senha e TOTP confirmados</div></div>
                   <div class="tl-item ok"><div class="when">27/10 · 14:07</div><div class="what">Verificações automáticas: saldo, endereço válido, limite antifraude</div></div>
@@ -240,8 +240,8 @@
               <div class="card-head"><h3>Saques anteriores</h3></div>
               <div class="card-body" style="padding-top:4px;padding-bottom:4px">
                 <div class="list">
-                  <div class="list-item"><span class="li-icon"><i data-icon="circle-dollar"></i></span><div class="li-body"><div class="li-title">R$ 4.800,00 · 892,19 USDT · Polygon</div><div class="li-sub">02/10 · txid 0x9e1c…4f2a · taxa R$ 0,19</div></div><span class="badge st-liquidada">Confirmado</span></div>
-                  <div class="list-item"><span class="li-icon"><i data-icon="circle-dollar"></i></span><div class="li-body"><div class="li-title">R$ 5.000,00 · 925,93 USDT · Polygon</div><div class="li-sub">15/09 · txid 0x3b7d…c08e · taxa R$ 0,21</div></div><span class="badge st-liquidada">Confirmado</span></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="circle-dollar"></i></span><div class="li-body"><div class="li-title">US$ 4.800,00 · 4.800 USDT · Polygon</div><div class="li-sub">02/10 · txid 0x9e1c…4f2a · taxa US$ 0,04</div></div><span class="badge st-liquidada">Confirmado</span></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="circle-dollar"></i></span><div class="li-body"><div class="li-title">US$ 5.000,00 · 5.000 USDT · Polygon</div><div class="li-sub">15/09 · txid 0x3b7d…c08e · taxa US$ 0,05</div></div><span class="badge st-liquidada">Confirmado</span></div>
                 </div>
               </div>
               <div class="card-foot"><span class="xs muted">Os endereços de destino destes saques já foram apagados. Fica só o txid, que é público na rede.</span></div>
@@ -251,7 +251,7 @@
               <div class="card-body stack-sm small">
                 <div class="anon-note"><i data-icon="clock"></i><span>Saques saem em lotes a cada hora, de uma carteira quente que cobre 48 h de volume. O restante fica em carteira fria com multisig 2-de-3.</span></div>
                 <div class="anon-note"><i data-icon="percent"></i><span>A taxa de rede é repassada pelo custo real. A plataforma não cobra nada de quem compra: a comissão de 10 % é descontada do vendedor na venda.</span></div>
-                <div class="anon-note"><i data-icon="shield"></i><span>Contas com menos de 7 dias ou sem item aprovado sacam até R$ 2.000 por dia. Não é identificação: é um freio contra golpes com contas novas.</span></div>
+                <div class="anon-note"><i data-icon="shield"></i><span>Contas com menos de 7 dias ou sem item aprovado sacam até US$ 2.000 por dia. Não é identificação: é um freio contra golpes com contas novas.</span></div>
                 <div class="anon-note"><i data-icon="alert-triangle"></i><span>Reutilizar um endereço que você já usou em uma corretora com cadastro cria um vínculo fora da plataforma. Prefira endereços novos.</span></div>
               </div>
             </div>
@@ -274,23 +274,23 @@
         </div>
         <div class="table-wrap">
           <table class="table">
-            <thead><tr><th>Data</th><th>Tipo</th><th>Referência</th><th class="num">Valor (R$)</th><th class="num">USDT</th><th class="num">Saldo após</th><th>Status</th></tr></thead>
+            <thead><tr><th>Data</th><th>Tipo</th><th>Referência</th><th class="num">Valor (US$ = USDT)</th><th class="num">Saldo após</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 3 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">+25,09</td><td class="num">1.240,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
-              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 2 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">+25,09</td><td class="num">1.105,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
-              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 1 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">+25,09</td><td class="num">970,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
-              <tr><td class="num">25/10 · 19:30</td><td>Assinatura</td><td><b>Monitor semanal de patentes do setor farmacêutico</b><span class="sub">lcr-6d1k5 · período 25/10–24/11 · renova em 25/11</span></td><td class="num">−190,00</td><td class="num">−35,32</td><td class="num">835,00</td><td><span class="badge st-liquidada">Paga</span></td></tr>
-              <tr><td class="num">25/10 · 11:48</td><td>Apoio</td><td><b>Cadeia do ouro ilegal no Pará</b><span class="sub">lcr-4m2x9 · lacre coletivo · meta R$ 80.000 até 15/11</span></td><td class="num">−150,00</td><td class="num">−27,88</td><td class="num">1.025,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
-              <tr><td class="num">24/10 · 09:15</td><td>Depósito</td><td><b>Bitcoin · Lightning</b><span class="sub">0,00142 BTC · 1 BTC = R$ 352.112 · convertido para USDT</span></td><td class="num ok">+500,00</td><td class="num">+92,94</td><td class="num">1.175,00</td><td><span class="badge st-liquidada">Confirmado</span></td></tr>
-              <tr><td class="num">23/10 · 17:22</td><td>Compra</td><td><b>Como uma operação de última milha cortou 31 % do custo</b><span class="sub">lcr-3c7r8 · camada 1 · sumário executivo</span></td><td class="num">−190,00</td><td class="num">−35,38</td><td class="num">675,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
-              <tr><td class="num">22/10 · 20:05</td><td>Apoio</td><td><b>Cadeia do ouro ilegal no Pará</b><span class="sub">lcr-4m2x9 · lacre coletivo · meta R$ 80.000 até 15/11</span></td><td class="num">−100,00</td><td class="num">−18,59</td><td class="num">865,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
-              <tr><td class="num">21/10 · 10:02</td><td>Compra</td><td><b>12.400 licitações municipais do Nordeste (2019–2025)</b><span class="sub">lcr-9f2k7 · cópia 38 de 100 · disputa aberta até 28/10 14:20</span></td><td class="num">−490,00</td><td class="num">−90,57</td><td class="num">965,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
-              <tr><td class="num">20/10 · 08:51</td><td>Depósito</td><td><b>USDT · Polygon</b><span class="sub">270 USDT · 12 confirmações · txid 0x5a2e…b19c</span></td><td class="num ok">+1.455,00</td><td class="num">+270,00</td><td class="num">1.455,00</td><td><span class="badge st-liquidada">Confirmado</span></td></tr>
+              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 3 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">1.240,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
+              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 2 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">1.105,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
+              <tr><td class="num">26/10 · 15:10</td><td>Liquidação de venda</td><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · venda 1 de 3 · líquido após comissão de 10 %</span></td><td class="num ok">+135,00</td><td class="num">970,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
+              <tr><td class="num">25/10 · 19:30</td><td>Assinatura</td><td><b>Monitor semanal de patentes do setor farmacêutico</b><span class="sub">lcr-6d1k5 · período 25/10–24/11 · renova em 25/11</span></td><td class="num">−190,00</td><td class="num">835,00</td><td><span class="badge st-liquidada">Paga</span></td></tr>
+              <tr><td class="num">25/10 · 11:48</td><td>Apoio</td><td><b>Cadeia do ouro ilegal no Pará</b><span class="sub">lcr-4m2x9 · lacre coletivo · meta US$ 80.000 até 15/11</span></td><td class="num">−150,00</td><td class="num">1.025,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
+              <tr><td class="num">24/10 · 09:15</td><td>Depósito</td><td><b>Bitcoin · Lightning</b><span class="sub">0,00731 BTC · 1 BTC = US$ 68.400 · convertido para USDT</span></td><td class="num ok">+500,00</td><td class="num">1.175,00</td><td><span class="badge st-liquidada">Confirmado</span></td></tr>
+              <tr><td class="num">23/10 · 17:22</td><td>Compra</td><td><b>Como uma operação de última milha cortou 31 % do custo</b><span class="sub">lcr-3c7r8 · camada 1 · sumário executivo</span></td><td class="num">−190,00</td><td class="num">675,00</td><td><span class="badge st-liquidada">Liquidada</span></td></tr>
+              <tr><td class="num">22/10 · 20:05</td><td>Apoio</td><td><b>Cadeia do ouro ilegal no Pará</b><span class="sub">lcr-4m2x9 · lacre coletivo · meta US$ 80.000 até 15/11</span></td><td class="num">−100,00</td><td class="num">865,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
+              <tr><td class="num">21/10 · 10:02</td><td>Compra</td><td><b>12.400 licitações municipais do Nordeste (2019–2025)</b><span class="sub">lcr-9f2k7 · cópia 38 de 100 · disputa aberta até 28/10 14:20</span></td><td class="num">−490,00</td><td class="num">965,00</td><td><span class="badge st-triagem">Em custódia</span></td></tr>
+              <tr><td class="num">20/10 · 08:51</td><td>Depósito</td><td><b>USDT · Polygon</b><span class="sub">1.455 USDT · 12 confirmações · txid 0x5a2e…b19c</span></td><td class="num ok">+1.455,00</td><td class="num">1.455,00</td><td><span class="badge st-liquidada">Confirmado</span></td></tr>
             </tbody>
           </table>
           <div class="table-foot"><span>10 lançamentos em outubro · ledger imutável, partidas dobradas</span><div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary" data-toast="Página 1 de 1">1</button><button class="btn btn-sm" data-toast="Não há mais lançamentos em outubro">›</button></div></div>
         </div>
-        <p class="xs muted mt-2">A coluna USDT é o lançamento real no ledger. O valor em R$ usa a cotação registrada no momento de cada operação, por isso a soma em R$ pode diferir por centavos da conversão do saldo atual.</p>
+        <p class="xs muted mt-2">Cada valor em US$ corresponde 1:1 ao lançamento em USDT no ledger (partidas dobradas, imutável). Depósitos em Bitcoin entram já convertidos pela cotação travada no momento.</p>
       </div>
 
       <!-- ================= Redes e taxas ================= -->
@@ -299,12 +299,12 @@
           <table class="table">
             <thead><tr><th>Moeda</th><th>Rede</th><th>Confirmações para creditar</th><th class="num">Mínimo de depósito</th><th class="num">Taxa de saque (rede)</th><th>Tempo típico do saque</th></tr></thead>
             <tbody>
-              <tr><td><b>USDT</b></td><td>Polygon</td><td>12 (≈ 1 min)</td><td class="num">10 USDT</td><td class="num">≈ R$ 0,20</td><td>≈ 2 min após o lote</td></tr>
-              <tr><td><b>USDT</b></td><td>Tron (TRC-20)</td><td>19 (≈ 1 min)</td><td class="num">10 USDT</td><td class="num">≈ R$ 8,00</td><td>≈ 2 min após o lote</td></tr>
-              <tr><td><b>USDC</b></td><td>Polygon</td><td>12 (≈ 1 min)</td><td class="num">10 USDC</td><td class="num">≈ R$ 0,20</td><td>≈ 2 min após o lote</td></tr>
-              <tr><td><b>USDC</b></td><td>Base</td><td>20 (≈ 40 s)</td><td class="num">10 USDC</td><td class="num">≈ R$ 0,10</td><td>≈ 1 min após o lote</td></tr>
-              <tr><td><b>BTC</b></td><td>Lightning</td><td>instantâneo</td><td class="num">1.000 sats</td><td class="num">≈ R$ 0,05</td><td>segundos após o lote</td></tr>
-              <tr><td><b>BTC</b></td><td>Bitcoin on-chain</td><td>2 (≈ 20 min)</td><td class="num">0,0002 BTC</td><td class="num">≈ R$ 9,00 (varia)</td><td>≈ 30 min após o lote</td></tr>
+              <tr><td><b>USDT</b></td><td>Polygon</td><td>12 (≈ 1 min)</td><td class="num">10 USDT</td><td class="num">≈ US$ 0,04</td><td>≈ 2 min após o lote</td></tr>
+              <tr><td><b>USDT</b></td><td>Tron (TRC-20)</td><td>19 (≈ 1 min)</td><td class="num">10 USDT</td><td class="num">≈ US$ 1,50</td><td>≈ 2 min após o lote</td></tr>
+              <tr><td><b>USDC</b></td><td>Polygon</td><td>12 (≈ 1 min)</td><td class="num">10 USDC</td><td class="num">≈ US$ 0,04</td><td>≈ 2 min após o lote</td></tr>
+              <tr><td><b>USDC</b></td><td>Base</td><td>20 (≈ 40 s)</td><td class="num">10 USDC</td><td class="num">≈ US$ 0,02</td><td>≈ 1 min após o lote</td></tr>
+              <tr><td><b>BTC</b></td><td>Lightning</td><td>instantâneo</td><td class="num">1.000 sats</td><td class="num">≈ US$ 0,01</td><td>segundos após o lote</td></tr>
+              <tr><td><b>BTC</b></td><td>Bitcoin on-chain</td><td>2 (≈ 20 min)</td><td class="num">0,0002 BTC</td><td class="num">≈ US$ 2,00 (varia)</td><td>≈ 30 min após o lote</td></tr>
             </tbody>
           </table>
           <div class="table-foot"><span>Taxas de rede são repassadas pelo custo real do dia. Lotes de saque saem a cada hora cheia.</span><span>Atualizado em 27/10 · 14:00</span></div>
@@ -313,15 +313,15 @@
           <div class="card">
             <div class="card-head"><h3>Limite interno antifraude</h3></div>
             <div class="card-body stack-sm small">
-              <p>Contas com menos de 7 dias ou sem nenhum item aprovado sacam até <b>R$ 2.000 por dia</b>. Não é identificação: serve para conter golpes com contas novas.</p>
+              <p>Contas com menos de 7 dias ou sem nenhum item aprovado sacam até <b>US$ 2.000 por dia</b>. Não é identificação: serve para conter golpes com contas novas.</p>
               <div class="alert alert-ok"><i data-icon="check-circle"></i><div>Sua conta: criada em mar/2026, 3 itens aprovados. <b>Sem limite interno.</b></div></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-head"><h3>Cotação</h3></div>
+            <div class="card-head"><h3>Moedas e redes</h3></div>
             <div class="card-body stack-sm small">
-              <p>Mediana de três corretoras, atualizada a cada minuto. Preços são exibidos em R$ e cada operação converte para USDT na hora.</p>
-              <p>Para Bitcoin, a cotação fica travada por 10 min a partir da geração do endereço ou da invoice. Hoje: <b>1 BTC = R$ 352.400</b> · <b>1 USDT = R$ 5,38</b>.</p>
+              <p>USDT e USDC creditam e liquidam 1:1: <b>1 USDT = US$ 1</b>, sem conversão nem spread. Saldo, compras, apoios e saques são sempre em USDT, na rede que você escolher.</p>
+              <p>Só o Bitcoin é convertido: a cotação (mediana de três corretoras) fica travada por 10 min a partir da geração do endereço ou da invoice. Hoje: <b>1 BTC = US$ 68.400</b> (0,00731 BTC = US$ 500).</p>
             </div>
           </div>
           <div class="card">
