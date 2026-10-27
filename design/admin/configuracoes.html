@@ -28,13 +28,13 @@
       <div>
         <p class="eyebrow">Sistema · parâmetros da plataforma</p>
         <h1>Configurações</h1>
-        <p class="sub">Administrador responsável: <b>Marcos L.</b> · Administrador. Toda alteração gera um evento <code>settings.*</code> na auditoria e vale só para novos envios, vendas e saques.</p>
+        <p class="sub">Administrador responsável: <b>Marcos L.</b> · Administrador. Toda alteração gera um evento <code>settings.*</code> na auditoria e vale só para novos envios, pagamentos e finalizações.</p>
       </div>
       <div class="actions">
         <a class="btn btn-outline" href="../admin/auditoria.html"><i data-icon="scroll-text"></i>Histórico de alterações</a>
       </div>
     </div>
-    <div class="alert alert-warn mb-3"><i data-icon="alert-triangle"></i><div><span class="alert-title">Você está vendo como Ana R. · Curadora sênior</span>Os campos são editáveis para revisão, mas salvar cria uma proposta que precisa da confirmação de Marcos L. (administrador). Última alteração aplicada: 26/10 · 17:48 · limite antifraude de saque para contas novas (US$ 1.500 → US$ 2.000/dia).</div></div>
+    <div class="alert alert-warn mb-3"><i data-icon="alert-triangle"></i><div><span class="alert-title">Você está vendo como Ana R. · Curadora sênior</span>Os campos são editáveis para revisão, mas salvar cria uma proposta que precisa da confirmação de Marcos L. (administrador). Última alteração aplicada: 26/10 · 17:48 · aprovação de 2 pessoas para finalizações acima de US$ 15.000 (antes: US$ 25.000).</div></div>
 
     <div data-tabs>
       <div class="tabs">
@@ -45,7 +45,7 @@
         <a class="tab" data-tab="canais" href="#">Canais</a>
         <a class="tab" data-tab="paises" href="#">Países e idiomas</a>
         <a class="tab" data-tab="equipe" href="#">Equipe <span class="count">6</span></a>
-        <a class="tab" data-tab="limites" href="#">Limites</a>
+        <a class="tab" data-tab="limites" href="#">Pagamentos e limites</a>
       </div>
 
       <!-- ====================== Categorias ====================== -->
@@ -81,36 +81,36 @@
           <div class="card">
             <div class="card-head"><h3>Comissão e fundo</h3><span class="badge badge-brass">vigente desde 15/03/2026</span></div>
             <div class="card-body stack">
-              <div class="field"><label for="t-com">Comissão da plataforma</label><div class="input-group"><input id="t-com" class="input num w-sm" value="10"><span class="affix">%</span></div><span class="hint">Única, igual em todos os modelos. Cobrada na liquidação, sobre o valor pago pelo comprador.</span></div>
-              <div class="field"><label for="t-rede">Taxa de rede do saque</label><select id="t-rede" class="select"><option selected>Repassada ao usuário (sem margem)</option><option>Absorvida pela plataforma</option></select><span class="hint">Lightning ~0,1 % · USDT/USDC centavos por transação · BTC on-chain variável. Mostrada antes de confirmar o saque.</span></div>
-              <div class="field"><label for="t-fundo">Fundo de garantia</label><div class="input-group"><input id="t-fundo" class="input num w-sm" value="2"><span class="affix">% da comissão</span></div><span class="hint">Saldo atual US$ 8.120 · meta: 1 mês de GMV antes de reduzir a alíquota. Cobre reembolsos quando a custódia do vendedor não basta.</span></div>
+              <div class="field"><label for="t-com">Comissão da plataforma</label><div class="input-group"><input id="t-com" class="input num w-sm" value="10"><span class="affix">%</span></div><span class="hint">Única, igual em todos os modelos. Separada só na finalização, a partir da carteira do item, sobre o que foi pago.</span></div>
+              <div class="field"><label for="t-rede">Taxa de rede dos reembolsos</label><select id="t-rede" class="select"><option selected>Descontada do valor devolvido (padrão)</option><option>Absorvida pela plataforma</option></select><span class="hint">Polygon ≈ US$ 0,04 · Base ≈ US$ 0,01 · Tron ≈ US$ 1,50 · Bitcoin variável. Um lacre com 1.187 apoios pode gerar 1.187 reembolsos; por isso lacres só aceitam Polygon, Tron e Base.</span></div>
+              <div class="field"><label for="t-fundo">Fundo de garantia</label><div class="input-group"><input id="t-fundo" class="input num w-sm" value="2"><span class="affix">% da comissão</span></div><span class="hint">Hoje US$ 3.164 on-chain · meta: 1 % do valor em carteiras ativas. Paga reembolsos depois da finalização (item retirado ou disputa procedente quando o dinheiro já está com o vendedor).</span></div>
               <div class="form-grid">
                 <div class="field"><label for="t-ex1">Exclusividade · mínimo em lacre coletivo</label><div class="input-group"><input id="t-ex1" class="input num w-sm" value="5"><span class="affix">× a meta</span></div></div>
                 <div class="field"><label for="t-ex2">Exclusividade · mínimo em cópias e camadas</label><div class="input-group"><input id="t-ex2" class="input num w-sm" value="20"><span class="affix">× o preço</span></div></div>
               </div>
-              <div class="alert alert-info"><i data-icon="info"></i><div>A comissão <b>não é cobrada em lacres coletivos que falham</b>: 100 % do valor volta às carteiras dos apoiadores. Também não é cobrada em reembolsos por disputa ou remoção. Na compra com exclusividade de um lacre, os apoios voltam sem comissão; a comissão incide só sobre o valor pago pelo comprador.</div></div>
-              <div class="save-row"><button class="btn" data-toast="Alterações descartadas">Descartar</button><button class="btn btn-primary" data-toast="Proposta de comissão enviada a Marcos L. · vale só para vendas liquidadas após a confirmação">Salvar</button></div>
+              <div class="alert alert-info"><i data-icon="info"></i><div>A comissão <b>não é cobrada em lacres coletivos que falham</b>: cada apoio volta ao endereço de origem, menos a taxa de rede. Também não é cobrada em pedidos que expiram nem sobre valores reembolsados. Na compra com exclusividade de um lacre, os apoios voltam sem comissão; a comissão incide só sobre o valor pago pelo comprador.</div></div>
+              <div class="save-row"><button class="btn" data-toast="Alterações descartadas">Descartar</button><button class="btn btn-primary" data-toast="Proposta de comissão enviada a Marcos L. · vale só para finalizações após a confirmação">Salvar</button></div>
             </div>
           </div>
           <div class="card">
             <div class="card-head"><h3>Como a comissão se aplica</h3></div>
             <div class="table-wrap" style="border:0;border-radius:0">
               <table class="table compact">
-                <thead><tr><th>Modelo</th><th class="num">Comissão</th><th>Momento da cobrança</th></tr></thead>
+                <thead><tr><th>Modelo</th><th class="num">Comissão</th><th>Momento da finalização</th></tr></thead>
                 <tbody>
-                  <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td class="num">10 %</td><td class="small">Na liquidação de cada venda (72 h após o acesso)</td></tr>
-                  <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="num">10 %</td><td class="small">Na liquidação · mínimo US$ 50</td></tr>
-                  <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">Só se a meta for batida</td></tr>
-                  <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td class="num">10 %</td><td class="small">Sobre a recompensa paga ao vendedor</td></tr>
-                  <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão</span></td><td class="num">10 %</td><td class="small">Sobre o preço de fechamento (segundo preço)</td></tr>
-                  <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span></td><td class="num">10 %</td><td class="small">Por camada vendida</td></tr>
-                  <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span></td><td class="num">10 %</td><td class="small">Por período cobrado</td></tr>
-                  <tr><td><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span></td><td class="num">10 %</td><td class="small">Nas duas fases</td></tr>
-                  <tr><td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span></td><td class="num">10 %</td><td class="small">Por licença emitida</td></tr>
-                  <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Compra com exclusividade</span></td><td class="num">10 %</td><td class="small">Sobre o valor pago pelo comprador · mínimo sugerido 5× a meta ou 20× o preço</td></tr>
+                  <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas, após a última janela de 72 h</td></tr>
+                  <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="num">10 %</td><td class="small">72 h após a venda, sem disputa aberta</td></tr>
+                  <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">72 h após o lacre romper · nada se a meta não bater</td></tr>
+                  <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td class="num">10 %</td><td class="small">Quando o atendimento é validado · sobre a recompensa total (valor por interessado × interessados)</td></tr>
+                  <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão</span></td><td class="num">10 %</td><td class="small">72 h após o pagamento do vencedor · sobre o segundo preço</td></tr>
+                  <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas · sobre todas as camadas vendidas</td></tr>
+                  <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span></td><td class="num">10 %</td><td class="small">Carteira nova por período · finaliza 72 h após o fim do período</td></tr>
+                  <tr><td><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span></td><td class="num">10 %</td><td class="small">Nas duas fases: como Exclusivo e depois como Cópias</td></tr>
+                  <tr><td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas · sobre as licenças emitidas</td></tr>
+                  <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Compra com exclusividade</span></td><td class="num">10 %</td><td class="small">72 h após o pagamento · sobre o valor pago pelo comprador (mínimo 5× a meta ou 20× o preço) · apoios devolvidos antes</td></tr>
                 </tbody>
               </table>
-              <div class="table-foot"><span>Exemplo: cópia de US$ 490 → vendedor US$ 441,00 · plataforma US$ 49,00 · dos quais US$ 0,98 ao fundo de garantia.</span></div>
+              <div class="table-foot"><span>Exemplo: cópia de US$ 490 → na finalização, US$ 49,00 vão à carteira da plataforma (US$ 0,98 ao fundo) e US$ 441,00 ficam na carteira do item, entregue ao vendedor.</span></div>
             </div>
           </div>
         </div>
@@ -129,6 +129,7 @@
               <div class="field"><label for="s6">Pedidos de titulares (LGPD)</label><div class="input-group"><input id="s6" class="input num w-sm" value="15"><span class="affix">dias</span></div><span class="hint">Resposta documentada.</span></div>
               <div class="field"><label for="s7">Disputa</label><div class="input-group"><input id="s7" class="input num w-sm" value="5"><span class="affix">dias</span></div><span class="hint">Janela para abrir: 72 h após o acesso.</span></div>
               <div class="field"><label for="s8">Triagem de denúncia pública</label><div class="input-group"><input id="s8" class="input num w-sm" value="24"><span class="affix">h</span></div></div>
+              <div class="field"><label for="s9">Validação de atendimento de pedido</label><div class="input-group"><input id="s9" class="input num w-sm" value="48"><span class="affix">h</span></div><span class="hint">O pedido fica travado enquanto isso.</span></div>
             </div>
             <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de SLAs enviada a Marcos L. · settings.sla.update">Salvar SLAs</button></div>
           </div></div>
@@ -151,10 +152,10 @@
             <thead><tr><th>Documento</th><th>Versão</th><th>Vigência</th><th>Status</th><th>Autoria</th><th class="cell-actions"></th></tr></thead>
             <tbody>
               <tr><td><b>Política de conteúdo</b><span class="sub">pode / não pode · códigos R01–R13 · texto público</span></td><td class="mono">v1.2</td><td class="num">desde 01/10/2026</td><td><span class="badge st-ativo">Vigente</span></td><td class="small">Marcos L. · Carla S.</td><td class="cell-actions"><a class="btn btn-sm" href="../public/politicas.html">Ver</a><button class="btn btn-sm" data-toast="Diferenças v1.1 → v1.2 abertas: inclui R12 fora do escopo e regra de suspensão preventiva">Diff</button></td></tr>
-              <tr><td><b>Política de conteúdo</b></td><td class="mono">v1.1</td><td class="num">01/06/2026 – 30/09/2026</td><td><span class="badge st-encerrado">Substituída</span></td><td class="small">Marcos L. · Carla S.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.1 aberta em modo leitura · 312 itens aprovados sob esta versão">Ver</button></td></tr>
-              <tr><td><b>Política de conteúdo</b></td><td class="mono">v1.0</td><td class="num">15/03/2026 – 31/05/2026</td><td><span class="badge st-encerrado">Substituída</span></td><td class="small">Marcos L.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.0 aberta em modo leitura · 96 itens aprovados sob esta versão">Ver</button></td></tr>
+              <tr><td><b>Política de conteúdo</b></td><td class="mono">v1.1</td><td class="num">01/06/2026 – 30/09/2026</td><td><span class="badge st-arquivado">Substituída</span></td><td class="small">Marcos L. · Carla S.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.1 aberta em modo leitura · 312 itens aprovados sob esta versão">Ver</button></td></tr>
+              <tr><td><b>Política de conteúdo</b></td><td class="mono">v1.0</td><td class="num">15/03/2026 – 31/05/2026</td><td><span class="badge st-arquivado">Substituída</span></td><td class="small">Marcos L.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.0 aberta em modo leitura · 96 itens aprovados sob esta versão">Ver</button></td></tr>
               <tr><td><b>Declarações do vendedor</b><span class="sub">6 declarações do passo 5 do envio</span></td><td class="mono">v1.1</td><td class="num">desde 01/08/2026</td><td><span class="badge st-ativo">Vigente</span></td><td class="small">Carla S.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Texto das 6 declarações aberto">Ver</button><button class="btn btn-sm" data-toast="Diferenças v1.0 → v1.1: declaração sobre informação privilegiada e sigilo legal">Diff</button></td></tr>
-              <tr><td><b>Declarações do vendedor</b></td><td class="mono">v1.0</td><td class="num">15/03/2026 – 31/07/2026</td><td><span class="badge st-encerrado">Substituída</span></td><td class="small">Carla S.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.0 aberta em modo leitura">Ver</button></td></tr>
+              <tr><td><b>Declarações do vendedor</b></td><td class="mono">v1.0</td><td class="num">15/03/2026 – 31/07/2026</td><td><span class="badge st-arquivado">Substituída</span></td><td class="small">Carla S.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.0 aberta em modo leitura">Ver</button></td></tr>
               <tr><td><b>Termos de uso</b><span class="sub">resumo público + texto integral</span></td><td class="mono">v1.0</td><td class="num">desde 15/03/2026</td><td><span class="badge st-ativo">Vigente</span></td><td class="small">Carla S. · Marcos L.</td><td class="cell-actions"><a class="btn btn-sm" href="../public/politicas.html">Ver</a></td></tr>
             </tbody>
           </table>
@@ -200,14 +201,14 @@
               <thead><tr><th>Opção</th><th>Exige</th><th>Impacto</th></tr></thead>
               <tbody>
                 <tr><td><b>Brasil</b></td><td class="small">Marco Civil (registros de acesso por 6 meses, ordem judicial) · Lei 14.478/2022</td><td class="small">registros cifrados em sistema separado</td></tr>
-                <tr><td><b>União Europeia</b></td><td class="small">GDPR · DSA · MiCA</td><td class="small">custódia de cripto exige licença</td></tr>
+                <tr><td><b>União Europeia</b></td><td class="small">GDPR · DSA · MiCA</td><td class="small">guarda temporária da chave do item pode exigir licença (MiCA)</td></tr>
                 <tr><td><b>Estados Unidos</b></td><td class="small">DMCA · valores mobiliários · sanções (OFAC)</td><td class="small">takedown formal; triagem de países sancionados</td></tr>
               </tbody></table></div>
             <div class="field"><label for="g-sede">Sede atual</label><select id="g-sede" class="select"><option selected>A definir · opções comparadas em docs/03 §8</option><option>Brasil</option><option>União Europeia</option><option>Estados Unidos</option></select></div>
           </div></div>
         </div>
         <div class="grid cols-2">
-          <div class="card"><div class="card-head"><h3>Países bloqueados para depósito e saque</h3><span class="badge badge-danger">sanções · 4</span></div><div class="card-body stack-sm">
+          <div class="card"><div class="card-head"><h3>Países bloqueados para pagamento</h3><span class="badge badge-danger">sanções · 4</span></div><div class="card-body stack-sm">
             <div class="chips"><span class="chip active">KP · Coreia do Norte</span><span class="chip active">IR · Irã</span><span class="chip active">SY · Síria</span><span class="chip active">CU · Cuba</span><button class="chip" data-toast="Adicionar país à lista de bloqueio exige administrador"><i data-icon="plus"></i>adicionar</button></div>
             <p class="xs muted">Lista provisória conforme sanções amplamente aplicadas, até a sede ser definida. O bloqueio usa o país do item e listas públicas de endereços on-chain sancionados; nunca o IP da pessoa, que não é guardado. Alteração gera <code>settings.countries.block</code> na auditoria · última: 26/10 · 09:12 · Marcos L.</p>
           </div></div>
@@ -230,24 +231,28 @@
               <tr><td><b>Bruno M.</b><span class="sub">desde 20/03/2026</span></td><td><select class="select sm"><option>Triagem</option><option selected>Curador</option><option>Curador sênior</option><option>Jurídico</option><option>Financeiro</option><option>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="smartphone"></i>TOTP</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">27/10 · 07:52</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Bruno M. listadas: 1 ativa">Sessões</button></td></tr>
               <tr><td><b>Carla S.</b><span class="sub">desde 15/03/2026</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option selected>Jurídico</option><option>Financeiro</option><option>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="smartphone"></i>TOTP</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="num">26/10 · 18:10</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Carla S. listadas: 0 ativas">Sessões</button></td></tr>
               <tr><td><b>Diego T.</b><span class="sub">desde 02/04/2026</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option>Jurídico</option><option>Financeiro</option><option selected>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="fingerprint"></i>Passkey</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">27/10 · 08:40</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Diego T. listadas: 1 ativa">Sessões</button></td></tr>
-              <tr><td><b>Elisa F.</b><span class="sub">desde 15/03/2026 · assina lotes de saque</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option>Jurídico</option><option selected>Financeiro</option><option>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="smartphone"></i>TOTP</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="num">27/10 · 08:31</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Elisa F. listadas: 1 ativa">Sessões</button></td></tr>
-              <tr><td><b>Marcos L.</b><span class="sub">desde 15/03/2026 · assina lotes de saque</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option>Jurídico</option><option>Financeiro</option><option>Publicação</option><option selected>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="fingerprint"></i>Passkey + TOTP</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">26/10 · 17:48</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Marcos L. listadas: 0 ativas">Sessões</button></td></tr>
+              <tr><td><b>Elisa F.</b><span class="sub">desde 15/03/2026 · aprova finalizações acima de US$ 15.000</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option>Jurídico</option><option selected>Financeiro</option><option>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="smartphone"></i>TOTP</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="num">27/10 · 08:31</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Elisa F. listadas: 1 ativa">Sessões</button></td></tr>
+              <tr><td><b>Marcos L.</b><span class="sub">desde 15/03/2026 · aprova finalizações acima de US$ 15.000</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option>Jurídico</option><option>Financeiro</option><option>Publicação</option><option selected>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="fingerprint"></i>Passkey + TOTP</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">26/10 · 17:48</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Marcos L. listadas: 0 ativas">Sessões</button></td></tr>
             </tbody>
           </table>
           <div class="table-foot"><span>Mudança de papel exige administrador e gera <code>staff.role.update</code>. Dois administradores no mínimo para alterar comissão ou limites.</span><button class="btn btn-primary btn-sm" data-toast="Convite gerado: link de uso único, válido por 24 h, papel Curador · exige 2FA no primeiro acesso"><i data-icon="plus"></i>Convidar membro</button></div>
         </div>
       </div>
 
-      <!-- ====================== Limites ====================== -->
+      <!-- ====================== Pagamentos e limites ====================== -->
       <div class="tab-panel" data-panel="limites">
         <div class="grid cols-2 mb-3">
-          <div class="card"><div class="card-head"><h3>Antifraude de saque</h3></div><div class="card-body">
+          <div class="card"><div class="card-head"><h3>Pagamento, finalização e reembolso</h3></div><div class="card-body">
             <div class="form-grid">
-              <div class="field"><label for="l1">Limite diário para contas novas</label><div class="input-group"><span class="affix">US$</span><input id="l1" class="input num" value="2.000"><span class="affix">/dia</span></div></div>
-              <div class="field"><label for="l2">Vale nos primeiros</label><div class="input-group"><input id="l2" class="input num w-sm" value="7"><span class="affix">dias</span></div></div>
-              <div class="field full"><label class="switch"><input type="checkbox" checked><span class="track"></span><span>Libera antes do prazo quando a conta tem o primeiro item aprovado</span></label></div>
-              <div class="field"><label for="l3">Revisão manual acima de</label><div class="input-group"><span class="affix">US$</span><input id="l3" class="input num" value="25.000"><span class="affix">/saque</span></div></div>
-              <div class="field"><label for="l4">Risco da conta que força revisão</label><div class="input-group"><input id="l4" class="input num w-sm" value="85"><span class="affix">/100</span></div></div>
+              <div class="field"><label for="l1">Validade do endereço de pagamento</label><div class="input-group"><input id="l1" class="input num w-sm" value="24"><span class="affix">h</span></div><span class="hint">Endereço derivado, valor exato. Pagamento parcial espera o complemento pelo mesmo prazo.</span></div>
+              <div class="field"><label for="l8">Janela de disputa</label><div class="input-group"><input id="l8" class="input num w-sm" value="72"><span class="affix">h</span></div><span class="hint">Conta a partir do acesso ao conteúdo. A finalização espera a última janela.</span></div>
+              <div class="field"><label for="l3">Aprovação de 2 pessoas para finalização acima de</label><div class="input-group"><span class="affix">US$</span><input id="l3" class="input num" value="15.000"></div><span class="hint">Financeiro + administrador. Abaixo disso o job finaliza sozinho assim que a condição vale (ex.: 72 h após a venda).</span></div>
+              <div class="field"><label for="l4">Risco da conta que força 2 pessoas</label><div class="input-group"><input id="l4" class="input num w-sm" value="85"><span class="affix">/100</span></div></div>
+              <div class="field"><label for="l9">Reembolsos por lote</label><div class="input-group"><input id="l9" class="input num w-sm" value="200"><span class="affix">por rede</span></div><span class="hint">Um lacre com 1.187 apoios leva 6 lotes. Lote de lacre que falhou exige aprovação do financeiro.</span></div>
+              <div class="field"><label for="l10">Lotes de reembolso por dia</label><select id="l10" class="select"><option>1 · 03:00</option><option selected>2 · 03:00 e 11:00</option><option>4 · a cada 6 h</option></select></div>
+              <div class="field"><label for="l11">Pedido · janela para igualar</label><div class="input-group"><input id="l11" class="input num w-sm" value="48"><span class="affix">h</span></div><span class="hint">Quando o valor por interessado sobe. Nunca além do prazo do pedido; quem não iguala sai e recebe de volta.</span></div>
+              <div class="field"><label for="l12">Pedido · incremento mínimo para cobrir</label><div class="input-group"><input id="l12" class="input num w-sm" value="10"><span class="affix">%</span></div><span class="hint">Cobrir = subir o valor por interessado para V′ ≥ V + 10 %.</span></div>
+              <div class="field"><label for="l13">Pedido · prazo máximo</label><div class="input-group"><input id="l13" class="input num w-sm" value="90"><span class="affix">dias</span></div></div>
             </div>
           </div></div>
           <div class="card"><div class="card-head"><h3>Itens e envios</h3></div><div class="card-body">
@@ -255,25 +260,43 @@
               <div class="field"><label for="l5">Tamanho máximo por item</label><div class="input-group"><input id="l5" class="input num w-sm" value="20"><span class="affix">GB</span></div></div>
               <div class="field"><label for="l6">Arquivos por item</label><div class="input-group"><input id="l6" class="input num w-sm" value="200"><span class="affix">arquivos</span></div></div>
               <div class="field"><label for="l7">Envios simultâneos · vendedor novo</label><div class="input-group"><input id="l7" class="input num w-sm" value="3"><span class="affix">itens</span></div><span class="hint">Até a primeira aprovação.</span></div>
-              <div class="field"><label for="l8">Janela de disputa</label><div class="input-group"><input id="l8" class="input num w-sm" value="72"><span class="affix">h</span></div></div>
+              <div class="field"><label for="l14">Reenvios após "Ajustes solicitados"</label><div class="input-group"><input id="l14" class="input" value="sem limite" readonly></div></div>
             </div>
+            <div class="alert alert-info mt-2"><i data-icon="info"></i><div>Não existe limite de saque nem de depósito porque não existe saldo: o que entra vai para a carteira do item e só sai como reembolso ao endereço de origem ou na finalização.</div></div>
             <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de limites enviada a Marcos L. · settings.limit.update">Salvar limites</button></div>
-            </div></div>
+          </div></div>
         </div>
-        <div class="card"><div class="card-head"><h3>Redes e confirmações</h3><span class="badge badge-outline">só cripto</span></div><div class="table-wrap" style="border:0;border-radius:0">
+        <div class="grid cols-2">
+          <div class="card"><div class="card-head"><h3>Redes e confirmações</h3><span class="badge badge-outline">só cripto</span></div><div class="table-wrap" style="border:0;border-radius:0">
             <table class="table compact">
-              <thead><tr><th>Moeda · rede</th><th>Confirmações</th><th>Tempo típico</th><th class="num">Depósito mínimo</th><th>Taxa de saque</th></tr></thead>
+              <thead><tr><th>Moeda · rede</th><th>Confirmações</th><th>Tempo típico</th><th>Taxa de rede típica</th></tr></thead>
               <tbody>
-                <tr><td><b>BTC</b> · on-chain</td><td><input class="input sm num" value="2"></td><td class="small">~20 min</td><td class="num">US$ 100</td><td class="small">rede · variável</td></tr>
-                <tr><td><b>BTC</b> · Lightning</td><td class="small">invoice liquidada</td><td class="small">segundos</td><td class="num">US$ 5</td><td class="small">~0,1 %</td></tr>
-                <tr><td><b>USDT</b> · Polygon</td><td><input class="input sm num" value="128"></td><td class="small">~5 min</td><td class="num">US$ 20</td><td class="small">~US$ 0,10</td></tr>
-                <tr><td><b>USDT</b> · Tron</td><td><input class="input sm num" value="19"></td><td class="small">~1 min</td><td class="num">US$ 20</td><td class="small">~US$ 8</td></tr>
-                <tr><td><b>USDC</b> · Polygon</td><td><input class="input sm num" value="128"></td><td class="small">~5 min</td><td class="num">US$ 20</td><td class="small">~US$ 0,10</td></tr>
-                <tr><td><b>USDC</b> · Base</td><td><input class="input sm num" value="30"></td><td class="small">~1 min</td><td class="num">US$ 20</td><td class="small">~US$ 0,05</td></tr>
+                <tr><td><b>USDT · USDC</b> · Polygon</td><td><input class="input sm num" value="12"></td><td class="small">≈ 30 s</td><td class="small">≈ US$ 0,04</td></tr>
+                <tr><td><b>USDT</b> · Tron</td><td><input class="input sm num" value="19"></td><td class="small">≈ 1 min</td><td class="small">≈ US$ 1,50</td></tr>
+                <tr><td><b>USDC</b> · Base</td><td><input class="input sm num" value="12"></td><td class="small">≈ 30 s</td><td class="small">≈ US$ 0,01</td></tr>
+                <tr><td><b>BTC</b> · on-chain</td><td><input class="input sm num" value="2"></td><td class="small">≈ 20 min</td><td class="small">variável · US$ 1 a 4</td></tr>
               </tbody>
             </table>
-            <div class="table-foot"><span>USDT e USDC liquidam 1:1 em US$, sem conversão. Bitcoin é convertido para USDT na hora (1 BTC = US$ 68.400, travado por 10 min). Carteira quente mantém ≈ 48 h de saques; alerta abaixo de 24 h.</span><button class="btn btn-sm" data-toast="Proposta de confirmações por rede enviada a Marcos L.">Salvar</button></div>
+            <div class="table-foot"><span>Lightning não é aceito: a invoice não é reembolsável ao endereço de origem. Preços em US$; USDT e USDC valem 1:1. Em Bitcoin, o valor em BTC é calculado no momento do pagamento e vale pelas 24 h do endereço.</span><button class="btn btn-sm" data-toast="Proposta de confirmações por rede enviada a Marcos L. · settings.networks.update">Salvar</button></div>
           </div></div>
+          <div class="card"><div class="card-head"><h3>Redes permitidas por modelo</h3><span class="muted small">lacre e pedido só em redes baratas</span></div><div class="table-wrap" style="border:0;border-radius:0">
+            <table class="table compact">
+              <thead><tr><th>Modelo</th><th>Polygon</th><th>Tron</th><th>Base</th><th>Bitcoin</th></tr></thead>
+              <tbody>
+                <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" disabled><span class="track"></span></label></td></tr>
+                <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" disabled><span class="track"></span></label></td></tr>
+                <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td></tr>
+                <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td></tr>
+                <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td></tr>
+                <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td></tr>
+                <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td></tr>
+                <tr><td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td></tr>
+                <tr><td><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td></tr>
+              </tbody>
+            </table>
+            <div class="table-foot"><span>Bitcoin on-chain só onde há poucos pagamentos e poucos reembolsos; em lacre e pedido fica travado. Mudança vale para itens aprovados depois dela.</span><button class="btn btn-sm" data-toast="Proposta de redes por modelo enviada a Marcos L. · settings.networks.update">Salvar</button></div>
+          </div></div>
+        </div>
       </div>
     </div>
 

@@ -12,255 +12,433 @@
     .split > *, .grid > * { min-width: 0; }
     @media (min-width: 1001px) { .sidebar-backdrop { display: none; } } /* contorno: backdrop vira item do grid .app no desktop (bug em app.css) */
     .card-head .actions { flex-wrap: wrap; }
-    .checks { display: flex; gap: 4px; flex-wrap: wrap; max-width: 300px; }
     .table td.num, .table td.mono { white-space: nowrap; }
-    @media (min-width: 701px) { .stat-grid.six { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-    .checks .badge { font-size: 11px; padding: 1px 6px; }
-    .table.ledger td { font-family: var(--font-mono); font-size: var(--fs-xs); white-space: nowrap; }
-    .table.ledger td.memo { white-space: normal; font-family: var(--font-body); font-size: var(--fs-sm); min-width: 220px; }
-    .sign { display: inline-flex; gap: 6px; align-items: center; font-size: var(--fs-sm); }
+    .table td.num .sub { white-space: normal; }
+    .table .handle { display: inline-flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; }
+    .table td.item { min-width: 200px; max-width: 330px; }
+    .table td.item b { font-weight: 600; }
+    .addr { font-family: var(--font-mono); font-size: var(--fs-xs); white-space: nowrap; }
+    .addr a { color: var(--brass); }
+    .sign { display: inline-flex; gap: 6px; align-items: center; font-size: var(--fs-sm); white-space: nowrap; }
+    .sign svg { width: 14px; height: 14px; }
+    .flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .flow .f { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 12px; font-size: var(--fs-sm); }
+    .flow .f b { display: block; margin-bottom: 2px; }
+    .flow .f .n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--brass); display: block; margin-bottom: 4px; }
+    @media (max-width: 700px) { .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .ev { display: inline-block; font-family: var(--font-mono); font-size: var(--fs-xs); padding: 1px 6px; border-radius: 4px; background: var(--surface-3); white-space: nowrap; }
+    .ev.create { color: var(--info); } .ev.settle { color: var(--brass); } .ev.reveal { color: var(--warn); } .ev.shred { color: var(--danger); }
+    .kv.labels { grid-template-columns: minmax(120px, 190px) 1fr; }
+    .kv.labels dt { overflow-wrap: anywhere; }
   </style>
 </head>
 <body data-shell="admin" data-page="financeiro" data-root="../" data-title="Financeiro">
   <main>
     <div class="page-head">
       <div>
-        <p class="eyebrow">Operação · dinheiro</p>
+        <p class="eyebrow">Operação · carteiras de itens</p>
         <h1>Financeiro</h1>
-        <p class="sub">Posição em 27/10/2026 · 08:00 · Responsável: <b>Elisa F.</b> · Financeiro. Valores em US$; liquidação em USDT 1:1 (1 USDT = US$ 1), sem conversão. Bitcoin entra convertido para USDT na hora (1 BTC = US$ 68.400, travado por 10 min).</p>
+        <p class="sub">Posição em 27/10/2026 · 11:20 · Responsável: <b>Elisa F.</b> · Financeiro. Valores em US$; USDT e USDC valem 1:1. Bitcoin aparece ao valor do dia (1 BTC = US$ 68.400) só para leitura: o que existe on-chain são os BTC.</p>
       </div>
       <div class="actions">
-        <button class="btn" data-toast="Posição de 27/10 exportada (CSV assinado) com hashes do ledger"><i data-icon="download"></i>Exportar posição</button>
-        <button class="btn btn-primary" data-toast="Fechamento do dia 26/10 registrado · reconciliação ok · evento finance.close na auditoria"><i data-icon="stamp"></i>Fechar o dia</button>
+        <button class="btn" data-toast="Posição de 27/10 exportada (CSV assinado): 212 carteiras, livro de pagamentos e hashes da auditoria"><i data-icon="download"></i>Exportar posição</button>
+        <button class="btn btn-primary" data-toast="Reconciliação executada agora: 212 carteiras · 4 redes · divergência US$ 0,00 · 2 min 09 s"><i data-icon="refresh"></i>Reconciliar agora</button>
       </div>
     </div>
 
-    <div class="stat-grid six mb-3">
-      <div class="stat"><span class="label">Total em carteiras (passivo)</span><span class="value">US$ 412.380</span><span class="delta flat">4.312 contas · liquidação 1:1 em USDT</span></div>
-      <div class="stat"><span class="label">Em custódia</span><span class="value">US$ 186.940</span><span class="delta flat">45 % do passivo</span></div>
-      <div class="stat"><span class="label">Comissões do mês</span><span class="value">US$ 27.610</span><span class="delta up"><i data-icon="trending-up"></i>+18 % vs. setembro</span></div>
-      <div class="stat"><span class="label">Fundo de garantia</span><span class="value">US$ 8.120</span><span class="delta flat">meta: 1 mês de GMV (US$ 184 mil) · 4,4 %</span></div>
-      <div class="stat"><span class="label">Tesouraria cripto</span><span class="value">US$ 428.904</span><span class="delta flat">USDT · USDC · BTC em 5 redes</span></div>
-      <div class="stat"><span class="label">Cobertura</span><span class="value ok">104 %</span><span class="delta up"><i data-icon="shield-check"></i>tesouraria ≥ passivo das carteiras: sim</span></div>
-    </div>
+    <div class="alert alert-anon mb-3"><i data-icon="vault"></i><div><span class="alert-title">A plataforma não guarda saldo de usuários.</span>O dinheiro está nas carteiras dos itens; só a comissão passa pela carteira da plataforma. A chave de cada carteira fica no HSM até a finalização: aí a frase de recuperação é entregue ao vendedor e a cópia da plataforma é destruída.</div></div>
 
-    <div class="split mb-3">
-      <div class="card">
-        <div class="card-head"><h3>Tesouraria cripto · por moeda e rede</h3><span class="badge badge-ok"><i data-icon="check"></i>Cobertura 104 %</span></div>
-        <div class="table-wrap" style="border:0;border-radius:0">
-          <table class="table compact">
-            <thead><tr><th>Ativo · rede</th><th class="num">Saldo</th><th class="num">Equivalente US$</th><th class="num">Carteira quente</th><th class="num">Carteira fria</th></tr></thead>
-            <tbody>
-              <tr><td><b>USDT</b> · Polygon</td><td class="num">162.400,00 USDT</td><td class="num">US$ 162.400</td><td class="num">18.300,00</td><td class="num">144.100,00</td></tr>
-              <tr><td><b>USDT</b> · Tron</td><td class="num">98.500,00 USDT</td><td class="num">US$ 98.500</td><td class="num">5.900,00</td><td class="num">92.600,00</td></tr>
-              <tr><td><b>USDC</b> · Base</td><td class="num">61.300,00 USDC</td><td class="num">US$ 61.300</td><td class="num">2.700,00</td><td class="num">58.600,00</td></tr>
-              <tr><td><b>BTC</b> · on-chain</td><td class="num">1,2300 BTC</td><td class="num">US$ 84.132</td><td class="num">0,0300</td><td class="num">1,2000</td></tr>
-              <tr><td><b>BTC</b> · Lightning</td><td class="num">0,3300 BTC</td><td class="num">US$ 22.572</td><td class="num">0,3300 <span class="muted xs">canais</span></td><td class="num">—</td></tr>
-            </tbody>
-          </table>
-          <div class="table-foot"><span><b>Quente US$ 51.524</b> (12 %) · cobre ≈ 48 h de saques · <b>Fria US$ 377.380</b> (88 %) · multisig 2-de-3</span><span>USDT/USDC 1:1 · BTC a US$ 68.400 · passivo US$ 412.380 → cobertura 104 %</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-head"><h3>Custódia por modelo</h3><span class="muted small">US$ 186.940</span></div>
-        <div class="card-body stack-sm">
-          <div class="hbar"><span>Lacre coletivo</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">US$ 141.200</span></div>
-          <div class="hbar"><span>Cópias (72 h)</span><div class="track"><div class="fill" style="width:17%"></div></div><span class="num">US$ 24.300</span></div>
-          <div class="hbar"><span>Exclusivo</span><div class="track"><div class="fill" style="width:11%"></div></div><span class="num">US$ 15.000</span></div>
-          <div class="hbar"><span>Pedidos</span><div class="track"><div class="fill" style="width:5%"></div></div><span class="num">US$ 6.440</span></div>
-          <p class="xs muted mt-1">Custódia é passivo com destino definido: volta ao comprador ou liquida ao vendedor. Lacres coletivos que falham devolvem 100 % sem comissão.</p>
-        </div>
-      </div>
+    <div class="stat-grid mb-3">
+      <div class="stat"><span class="label">Em carteiras de itens ativas</span><span class="value">US$ 248.310</span><span class="delta flat">212 carteiras · não é passivo da plataforma</span></div>
+      <div class="stat"><span class="label">Finalizações hoje</span><span class="value">3</span><span class="delta flat">comissão separada US$ 2.570 · 1 frase já entregue · 1 elegível aguarda 2ª aprovação</span></div>
+      <div class="stat"><span class="label">Comissões do mês</span><span class="value">US$ 24.890</span><span class="delta up"><i data-icon="shield-check"></i>carteira da plataforma · multisig 2-de-3 · 23 finalizações</span></div>
+      <div class="stat"><span class="label">Fundo de garantia</span><span class="value">US$ 3.424</span><span class="delta flat">2 % de cada comissão · 1 saída no mês (DSP-0203 · US$ 50)</span></div>
+      <div class="stat"><span class="label">Reembolsos na fila</span><span class="value">24</span><span class="delta flat">lacre lcr-8c1v3 não bateu a meta · US$ 2.140 · 15 de 24 confirmados</span></div>
     </div>
 
     <div data-tabs>
       <div class="tabs">
-        <a class="tab active" data-tab="saques" href="#"><i data-icon="bitcoin"></i>Saques <span class="count">7</span></a>
-        <a class="tab" data-tab="reembolsos" href="#"><i data-icon="rotate-ccw"></i>Reembolsos automáticos</a>
-        <a class="tab" data-tab="reconciliacao" href="#"><i data-icon="scale"></i>Reconciliação</a>
-        <a class="tab" data-tab="ledger" href="#"><i data-icon="receipt"></i>Ledger</a>
+        <a class="tab active" data-tab="carteiras" href="#"><i data-icon="vault"></i>Carteiras de itens <span class="count">212</span></a>
+        <a class="tab" data-tab="finalizacoes" href="#"><i data-icon="stamp"></i>Finalizações</a>
+        <a class="tab" data-tab="reembolsos" href="#"><i data-icon="rotate-ccw"></i>Reembolsos <span class="count">24</span></a>
+        <a class="tab" data-tab="comissoes" href="#"><i data-icon="percent"></i>Comissões</a>
+        <a class="tab" data-tab="chaves" href="#"><i data-icon="key"></i>Chaves (HSM)</a>
+        <a class="tab" data-tab="reconciliacao" href="#"><i data-icon="scale"></i>Reconciliação on-chain</a>
+        <a class="tab" data-tab="fundo" href="#"><i data-icon="shield"></i>Fundo de garantia</a>
       </div>
 
-      <!-- ====================== Saques ====================== -->
-      <div class="tab-panel active" data-panel="saques">
-        <div class="alert alert-info mb-2"><i data-icon="clock"></i><div><span class="alert-title">Lote das 15:00 · 5 saques · US$ 22.010</span>Verificação automática concluída. Regra de 2 assinaturas na carteira quente: <span class="sign"><i data-icon="check-circle"></i>Elisa F. · 08:31</span> · <span class="sign"><i data-icon="hourglass"></i>Marcos L. · pendente</span>. Endereços validados por checksum e rede; apagados após o envio.</div></div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Pedido</th><th>Conta</th><th>Moeda · rede</th><th class="num">Valor</th><th>Verificação automática</th><th>Status</th><th>Lote</th><th class="cell-actions"></th></tr></thead>
-            <tbody>
-              <tr><td class="mono">PO-7781<span class="sub">27/10 08:02</span></td><td><span class="handle" data-handle="sextante-21c9"></span></td><td>BTC · on-chain</td><td class="num">US$ 9.800,00<span class="sub">0,14327 BTC</span></td><td><div class="checks"><span class="badge badge-ok">limite ok</span><span class="badge badge-ok">saldo ≠ custódia ok</span><span class="badge badge-ok">endereço válido</span></div></td><td><span class="badge st-aprovado">Aprovado</span></td><td class="num">15:00</td><td class="cell-actions"><button class="btn btn-sm" data-toast="PO-7781 retirado do lote e aberto para revisão">Revisar</button></td></tr>
-              <tr><td class="mono">PO-7782<span class="sub">27/10 07:40</span></td><td><span class="handle" data-handle="arquivista-0d2e"></span></td><td>USDT · Polygon</td><td class="num">US$ 6.400,00</td><td><div class="checks"><span class="badge badge-ok">limite ok</span><span class="badge badge-ok">saldo ≠ custódia ok</span><span class="badge badge-ok">endereço válido</span></div></td><td><span class="badge st-aprovado">Aprovado</span></td><td class="num">15:00</td><td class="cell-actions"><button class="btn btn-sm" data-toast="PO-7782 retirado do lote e aberto para revisão">Revisar</button></td></tr>
-              <tr><td class="mono">PO-7783<span class="sub">27/10 06:55</span></td><td><span class="handle" data-handle="prisma-66af"></span></td><td>BTC · Lightning</td><td class="num">US$ 2.850,00<span class="sub">0,04167 BTC</span></td><td><div class="checks"><span class="badge badge-ok">limite ok</span><span class="badge badge-ok">saldo ≠ custódia ok</span><span class="badge badge-ok">invoice válida</span></div></td><td><span class="badge st-aprovado">Aprovado</span></td><td class="num">15:00</td><td class="cell-actions"><button class="btn btn-sm" data-toast="PO-7783 retirado do lote e aberto para revisão">Revisar</button></td></tr>
-              <tr><td class="mono">PO-7784<span class="sub">26/10 22:10</span></td><td><span class="handle" data-handle="tipografo-8e04"></span></td><td>USDC · Base</td><td class="num">US$ 1.960,00</td><td><div class="checks"><span class="badge badge-ok">limite ok</span><span class="badge badge-ok">saldo ≠ custódia ok</span><span class="badge badge-ok">endereço válido</span></div></td><td><span class="badge st-aprovado">Aprovado</span></td><td class="num">15:00</td><td class="cell-actions"><button class="btn btn-sm" data-toast="PO-7784 retirado do lote e aberto para revisão">Revisar</button></td></tr>
-              <tr><td class="mono">PO-7785<span class="sub">26/10 20:31</span></td><td><span class="handle" data-handle="coruja-7f3a"></span></td><td>USDT · Polygon</td><td class="num">US$ 1.000,00</td><td><div class="checks"><span class="badge badge-ok">limite ok</span><span class="badge badge-ok">saldo ≠ custódia ok</span><span class="badge badge-ok">endereço válido</span></div></td><td><span class="badge st-aprovado">Aprovado</span><span class="sub">a conta vê "em processamento"</span></td><td class="num">15:00</td><td class="cell-actions"><button class="btn btn-sm" data-toast="PO-7785 retirado do lote e aberto para revisão">Revisar</button></td></tr>
-              <tr><td class="mono">PO-7786<span class="sub">27/10 07:12</span></td><td><span class="handle" data-handle="quartzo-a1f0"></span></td><td>USDT · Tron</td><td class="num">US$ 3.400,00</td><td><div class="checks"><span class="badge badge-danger">limite antifraude: conta nova · US$ 2.000/dia</span><span class="badge badge-ok">saldo ≠ custódia ok</span><span class="badge badge-ok">endereço válido</span></div></td><td><span class="badge st-ajustes">Revisar</span></td><td class="num">—</td><td class="cell-actions"><button class="btn btn-sm" data-toast="PO-7786: US$ 2.000 liberados no lote das 15:00; US$ 1.400 ficam para amanhã">Liberar parcial</button></td></tr>
-              <tr><td class="mono">PO-7787<span class="sub">27/10 07:58</span></td><td><span class="handle" data-handle="cartografo-5a77"></span></td><td>USDT · Polygon</td><td class="num">US$ 3.300,00</td><td><div class="checks"><span class="badge badge-ok">limite ok</span><span class="badge badge-danger">saldo: US$ 900 em custódia até 29/10 · disponível US$ 2.400</span><span class="badge badge-ok">endereço válido</span></div></td><td><span class="badge st-ajustes">Revisar</span></td><td class="num">—</td><td class="cell-actions"><button class="btn btn-sm" data-toast="PO-7787 devolvido à conta com aviso: disponível US$ 2.400,00">Devolver</button></td></tr>
-            </tbody>
-          </table>
-          <div class="table-foot">
-            <span>5 aprovados · US$ 22.010 · 2 em revisão · lotes a cada hora · taxa de rede repassada ao usuário</span>
-            <div class="row"><button class="btn" data-toast="2 pedidos abertos para revisão manual: PO-7786 e PO-7787"><i data-icon="eye"></i>Revisar (2)</button><button class="btn btn-primary" data-toast="Aprovação registrada · lote das 15:00 aguarda a 2ª assinatura (Marcos L.) na carteira quente"><i data-icon="check"></i>Aprovar lote · 5 · US$ 22.010</button></div>
-          </div>
-        </div>
-        <div class="grid cols-2 mt-3">
-          <div class="card"><div class="card-head"><h3>Últimos lotes</h3></div><div class="table-wrap" style="border:0;border-radius:0"><table class="table compact">
-            <thead><tr><th>Lote</th><th class="num">Saques</th><th class="num">Valor</th><th>Assinaturas</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td class="num">26/10 · 15:00</td><td class="num">5</td><td class="num">US$ 18.340</td><td class="small">Elisa F. + Marcos L.</td><td><span class="badge st-liquidada">Enviado · 5 txids</span></td></tr>
-              <tr><td class="num">26/10 · 14:00</td><td class="num">2</td><td class="num">US$ 3.120</td><td class="small">Elisa F. + Marcos L.</td><td><span class="badge st-liquidada">Enviado · 2 txids</span></td></tr>
-              <tr><td class="num">26/10 · 11:00</td><td class="num">3</td><td class="num">US$ 7.460</td><td class="small">Elisa F. + Marcos L.</td><td><span class="badge st-liquidada">Enviado · 3 txids</span></td></tr>
-            </tbody></table></div></div>
-          <div class="card"><div class="card-head"><h3>Regras do saque</h3></div><div class="card-body">
-            <dl class="kv">
-              <dt>Verificação</dt><dd>Limite antifraude (contas novas: US$ 2.000/dia nos primeiros 7 dias ou até o primeiro item aprovado), saldo disponível ≠ custódia, endereço válido para a rede.</dd>
-              <dt>Execução</dt><dd>Lotes horários pela carteira quente, assinados por 2 pessoas (Elisa F. + Marcos L.). BTCPay para Lightning/on-chain; carteira própria para USDT/USDC.</dd>
-              <dt>Endereço</dt><dd>Informado pelo usuário na hora, nunca salvo. Após o envio fica apenas o txid no ledger.</dd>
-              <dt>Restrições</dt><dd>Contas com saques restritos (ex.: @granito-55ab até 10/11) não chegam à fila: o pedido é bloqueado na origem.</dd>
-            </dl>
+      <!-- ====================== Carteiras de itens ====================== -->
+      <div class="tab-panel active" data-panel="carteiras">
+        <div class="grid cols-2 mb-3">
+          <div class="card"><div class="card-head"><h3>Por modelo</h3><span class="muted small">US$ 248.310 · 212 carteiras em andamento</span></div><div class="card-body stack-sm">
+            <div class="hbar"><span>Lacre coletivo · 14</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">US$ 118.400</span></div>
+            <div class="hbar"><span>Cópias · 118</span><div class="track"><div class="fill" style="width:81%"></div></div><span class="num">US$ 96.300</span></div>
+            <div class="hbar"><span>Exclusivo · 6</span><div class="track"><div class="fill" style="width:15%"></div></div><span class="num">US$ 18.000</span></div>
+            <div class="hbar"><span>Pedidos · 12</span><div class="track"><div class="fill" style="width:8%"></div></div><span class="num">US$ 9.050</span></div>
+            <div class="hbar"><span>Camadas · 19</span><div class="track"><div class="fill" style="width:4%"></div></div><span class="num">US$ 4.360</span></div>
+            <div class="hbar"><span>Licença e assinatura · 43</span><div class="track"><div class="fill" style="width:2%"></div></div><span class="num">US$ 2.200</span></div>
+            <p class="xs muted mt-1">O valor fica na carteira de cada item até a finalização. Lacre que falha e pedido que expira devolvem tudo ao endereço de origem, sem comissão.</p>
+          </div></div>
+          <div class="card"><div class="card-head"><h3>Por rede</h3><span class="muted small">uma carteira por rede aceita no item</span></div><div class="card-body stack-sm">
+            <div class="hbar"><span>Polygon · USDT/USDC</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">US$ 171.900</span></div>
+            <div class="hbar"><span>Tron · USDT</span><div class="track"><div class="fill" style="width:22%"></div></div><span class="num">US$ 38.200</span></div>
+            <div class="hbar"><span>Base · USDC</span><div class="track"><div class="fill" style="width:11%"></div></div><span class="num">US$ 19.400</span></div>
+            <div class="hbar"><span>Bitcoin · on-chain</span><div class="track"><div class="fill" style="width:11%"></div></div><span class="num">US$ 18.810 · 0,2750 BTC</span></div>
+            <p class="xs muted mt-1">Bitcoin só em Exclusivo e Cópias (poucos pagamentos, poucos reembolsos). Lightning não é aceito: a invoice não é reembolsável ao endereço de origem.</p>
           </div></div>
         </div>
+
+        <div class="toolbar">
+          <div class="search"><i data-icon="search"></i><input class="input mono" placeholder="lcr-…, ped-…, @pseudônimo ou endereço" aria-label="Buscar carteira"></div>
+          <select class="select"><option>Todos os modelos</option><option>Lacre coletivo</option><option>Cópias</option><option>Exclusivo</option><option>Pedido</option><option>Camadas</option><option>Licença</option><option>Assinatura</option></select>
+          <select class="select"><option>Todas as redes</option><option>Polygon</option><option>Tron</option><option>Base</option><option>Bitcoin</option></select>
+          <select class="select"><option>Em andamento + finalizadas em outubro</option><option>Recebendo</option><option>A finalizar</option><option>Reembolsando</option><option>Finalizadas e entregues</option></select>
+        </div>
+        <div class="table-wrap">
+          <table class="table compact">
+            <thead><tr><th>Item</th><th>Vendedor / quem atende</th><th>Modelo</th><th>Endereço do item · rede</th><th class="num">Recebido</th><th class="num">Reembolsos</th><th>Estado</th><th>Finalização prevista</th></tr></thead>
+            <tbody>
+              <tr><td class="item"><b>Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</b><span class="sub">lcr-4m2x9 · Jornalismo e investigação</span></td><td><span class="handle" data-handle="sextante-21c9"></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">meta US$ 80.000 · 68 %</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x4m2x…c21e</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 54.120,00<span class="sub">1.187 pagamentos</span></td><td class="num">0</td><td><span class="badge st-ativo">Recebendo</span></td><td class="small">18/11 · 72 h após o lacre romper, se a meta bater até 15/11</td></tr>
+              <tr><td class="item"><b>Mapeamento de 1.900 postos de combustível com preços semanais (2024–2026)</b><span class="sub">lcr-1k6p3 · Negócios e mercado · buyout US$ 50.000 pago em 26/10 22:40</span></td><td><span class="handle" data-handle="bussola-c4e1"></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">comprado com exclusividade</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x1k6p…3e8d</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 53.840,00<span class="sub">143 pagamentos · 142 apoios + buyout</span></td><td class="num">142 · US$ 3.840<span class="sub">lote das 03:00 · todos confirmados</span></td><td><span class="badge st-aguardando">Janela de 72 h</span><span class="sub">apoios já devolvidos</span></td><td class="small">29/10 22:40 · 72 h após o buyout, se nenhuma disputa for aberta</td></tr>
+              <tr><td class="item"><b>Acervo sonoro de 90 programas de rádio comunitária do Vale do Jequitinhonha (1998–2012)</b><span class="sub">lcr-8c1v3 · Cultura e entretenimento · prazo venceu 26/10 23:59</span></td><td><span class="handle" data-handle="tipografo-8e04"></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">meta US$ 8.000 · 27 %</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x8c1v…3d6a</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 2.140,00<span class="sub">24 pagamentos</span></td><td class="num">24 · US$ 2.140<span class="sub">15 confirmados · 9 aguardando</span></td><td><span class="badge st-enviado">Reembolsando</span><span class="sub">lote aprovado por Elisa F. às 10:05</span></td><td class="small">Não há: meta não batida, nada é cobrado · chave destruída quando o último reembolso confirmar</td></tr>
+              <tr><td class="item"><b>Estudo de viabilidade de 14 parques eólicos no Ceará (2025), com modelos financeiros</b><span class="sub">lcr-7n3q8 · Negócios e mercado · vendido em 23/10</span></td><td><span class="handle" data-handle="bussola-c4e1"></span></td><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (mempool.space)">bc1q…7x3f</a><span class="sub">Bitcoin</span></td><td class="num">US$ 18.000,00<span class="sub">1 pagamento · 0,26316 BTC</span></td><td class="num">0</td><td><span class="badge st-pendente">A finalizar</span><span class="sub">1 de 2 aprovações</span></td><td class="small">Elegível desde 26/10 10:15 · acima de US$ 15.000 exige 2 pessoas</td></tr>
+              <tr><td class="item"><b>Relatório setorial de franquias de alimentação (2025)</b><span class="sub">lcr-4h8d2 · Negócios e mercado · vendas encerradas pelo vendedor em 20/10</span></td><td><span class="handle" data-handle="granito-55ab"></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 775 · 9 vendidas</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x4h8d…2b6f</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 6.975,00<span class="sub">9 pagamentos</span></td><td class="num">2 · US$ 1.550<span class="sub">DSP-0200 · DSP-0201</span></td><td><a class="badge st-suspenso status-link" href="../admin/contas.html" data-tip="Abrir a conta">Finalização bloqueada<i data-icon="chevron-right"></i></a><span class="sub">conta restrita até 10/11</span></td><td class="small">Elegível desde 23/10 · fica na carteira do item até o bloqueio cair</td></tr>
+              <tr><td class="item"><b>12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</b><span class="sub">lcr-9f2k7 · Dados e bases</span></td><td><span class="handle" data-handle="lanterna-b31d"></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 490 · 37 de 100</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…c0d4</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 18.130,00<span class="sub">37 pagamentos</span></td><td class="num">0<span class="sub">DSP-0207 aberta · adia a finalização</span></td><td><span class="badge st-ativo">Recebendo</span></td><td class="small">Ao vender a 100ª cópia ou quando o vendedor encerrar as vendas, com DSP-0207 decidida</td></tr>
+              <tr><td class="item"><b>1.200 páginas de jornais operários de São Paulo (1917–1930) digitalizadas em 600 dpi</b><span class="sub">lcr-5t6w1 · História e acervos</span></td><td><span class="handle" data-handle="arquivista-0d2e"></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 120 · ilimitadas · 214 vendidas</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x5t6w…1b7c</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 23.280,00<span class="sub">194 pagamentos</span></td><td class="num">0</td><td><span class="badge st-ativo">Recebendo</span></td><td class="small">Quando o vendedor encerrar as vendas</td></tr>
+              <tr><td class="item"><b>1.200 páginas de jornais operários de São Paulo (1917–1930)</b><span class="sub">lcr-5t6w1 · segunda carteira do mesmo item</span></td><td><span class="handle" data-handle="arquivista-0d2e"></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (tronscan)">TQ5t…6w1k</a><span class="sub">Tron · USDT</span></td><td class="num">US$ 2.400,00<span class="sub">20 pagamentos</span></td><td class="num">0<span class="sub">DSP-0209 aberta · US$ 120</span></td><td><span class="badge st-ativo">Recebendo</span></td><td class="small">Junto com a carteira Polygon</td></tr>
+              <tr><td class="item"><b>Registro de 2.300 fábricas têxteis de Bangladesh com resultados de auditorias públicas de segurança (2014–2025)</b><span class="sub">lcr-7e2m4 · Dados e bases · <span class="tag">BD</span></span></td><td><span class="handle" data-handle="meridiano-4b8e"></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 320 · 41 de 150</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (tronscan)">TQ7e…2m4b</a><span class="sub">Tron · USDT</span></td><td class="num">US$ 13.120,00<span class="sub">41 pagamentos</span></td><td class="num">0</td><td><span class="badge st-ativo">Recebendo</span></td><td class="small">Ao vender a 150ª cópia ou quando o vendedor encerrar</td></tr>
+              <tr><td class="item"><b>Entrevistas em áudio com 25 ex-trabalhadores de minas de lítio em Jujuy, com transcrição em espanhol</b><span class="sub">lcr-9w5t2 · Jornalismo e investigação · <span class="tag">AR</span></span></td><td><span class="handle" data-handle="quebracho-8d1f"></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">meta US$ 15.000 · 46 %</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (tronscan)">TQ9w…5t2a</a><span class="sub">Tron · USDT</span></td><td class="num">US$ 6.900,00<span class="sub">312 pagamentos</span></td><td class="num">0</td><td><span class="badge st-ativo">Recebendo</span></td><td class="small">08/12 · se a meta bater até 05/12; senão, 312 reembolsos em 2 lotes</td></tr>
+              <tr><td class="item"><b>Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</b><span class="sub">ped-2c8d1 · Pedido com recompensa · aberto por @coruja-7f3a em 12/10</span></td><td><span class="muted small">— · aberto</span></td><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span><span class="sub">US$ 800 × 4 interessados</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2c8d…91af</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 3.200,00<span class="sub">6 pagamentos · 2 igualaram</span></td><td class="num">0</td><td><span class="badge st-ativo">Recebendo</span></td><td class="small">Quando o atendimento for validado · prazo 30/11; sem atendimento, 4 reembolsos</td></tr>
+              <tr><td class="item"><b>Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</b><span class="sub">ped-4k9e2 · Pedido com recompensa · atendimento em curadoria desde 22/10</span></td><td><span class="handle" data-handle="bussola-c4e1"></span><span class="sub">atendendo</span></td><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span><span class="sub">US$ 290 × 5 interessados</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x4k9e…2c7a</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 1.450,00<span class="sub">5 pagamentos</span></td><td class="num">0</td><td><span class="badge st-analise">Travado</span><span class="sub">atendimento em curadoria</span></td><td class="small">Na validação do atendimento (Ana R., SLA 48 h) · comissão US$ 145</td></tr>
+              <tr><td class="item"><b>Catálogo de 2.600 espécies de peixes da bacia do Tocantins com fotos e coordenadas</b><span class="sub">lcr-8v2c1 · Ciência e pesquisa · vendas encerradas em 23/10</span></td><td><span class="handle" data-handle="lanterna-b31d"></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 60 · 105 vendidas</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x8v2c…1d5e</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 6.300,00<span class="sub">105 pagamentos · líquido US$ 5.670</span></td><td class="num">0</td><td><span class="badge st-aguardando">Finalizada · aguardando o vendedor</span></td><td class="small">Finalizada hoje 03:00 · frase ainda não recebida · chave viva</td></tr>
+              <tr><td class="item"><b>Tabela de preços de medicamentos oncológicos em 15 países (2020–2026)</b><span class="sub">lcr-4g7h9 · Saúde e meio ambiente · aprovado com ajustes em 26/10 · publicado às 19:12</span></td><td><span class="handle" data-handle="coruja-7f3a"></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 350 · 0 vendidas</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x4g7h…e3b9</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 0,00<span class="sub">0 pagamentos · criada 26/10 19:12</span></td><td class="num">0</td><td><span class="badge st-ativo">Recebendo</span></td><td class="small">Quando o vendedor encerrar as vendas</td></tr>
+              <tr><td class="item"><b>Acervo de 3.000 fotografias inéditas do porto de Santos (1930–1960), digitalizado e catalogado</b><span class="sub">lcr-9t4c1 · História e acervos · vendido em 24/10 09:40</span></td><td><span class="handle" data-handle="arquivista-0d2e"></span></td><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9t4c…5f1b</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 12.000,00<span class="sub">1 pagamento · comissão US$ 1.200</span></td><td class="num">0</td><td><span class="badge st-finalizado">Finalizado e entregue</span><span class="sub">hoje 10:15 · chave destruída</span></td><td class="small">— · finalização automática às 09:40, 72 h após a venda</td></tr>
+              <tr><td class="item"><b>Guia de acesso a dados do SUS: 60 fontes, endpoints e scripts de coleta</b><span class="sub">lcr-5m8c4 · Tecnologia e segurança · vendas encerradas em 02/10</span></td><td><span class="handle" data-handle="coruja-7f3a"></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 150 · 88 válidas</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x5m8c…4e2a</a><span class="sub">Polygon · USDT</span></td><td class="num">US$ 13.350,00<span class="sub">89 pagamentos · comissão US$ 1.320</span></td><td class="num">1 · US$ 150<span class="sub">disputa procedente</span></td><td><span class="badge st-finalizado">Finalizado e entregue</span><span class="sub">05/10 · chave destruída</span></td><td class="small">— · US$ 11.880 entregues; o vendedor já transferiu</td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>Mostrando 16 de 235 carteiras (212 em andamento · 23 finalizadas em outubro) · recebido = pagamentos confirmados · o endereço do item é público na página de prova; cada pagamento usa um endereço derivado próprio, válido por 24 h</span><div class="pagination"><button class="btn btn-sm">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">2</button><button class="btn btn-sm">…</button><button class="btn btn-sm">15</button><button class="btn btn-sm">›</button></div></div>
+        </div>
       </div>
 
-      <!-- ====================== Reembolsos automáticos ====================== -->
+      <!-- ====================== Finalizações ====================== -->
+      <div class="tab-panel" data-panel="finalizacoes">
+        <div class="flow mb-3">
+          <div class="f"><span class="n">1 · comissão</span><b>10 % saem da carteira do item</b>para a carteira da plataforma, com txid no livro e na auditoria.</div>
+          <div class="f"><span class="n">2 · reembolsos</span><b>Disputa aberta nas 72 h adia a finalização</b>até a decisão; as procedentes voltam ao endereço de origem antes da entrega.</div>
+          <div class="f"><span class="n">3 · entrega</span><b>Frase de recuperação ao vendedor</b>exibida uma única vez, após senha + TOTP, nunca por mensagem.</div>
+          <div class="f"><span class="n">4 · chave</span><b>Cópia da plataforma destruída</b>no HSM; a auditoria recebe o hash do evento.</div>
+        </div>
+        <div class="alert alert-warn mb-2"><i data-icon="users"></i><div><span class="alert-title">lcr-7n3q8 · Exclusivo · US$ 18.000 · elegível desde 26/10 10:15</span>Acima de US$ 15.000 a finalização exige duas pessoas: <span class="sign"><i data-icon="check-circle"></i>Marcos L. · 08:31</span> · <span class="sign"><i data-icon="hourglass"></i>Elisa F. · pendente (você)</span>. Reconciliação de hoje sem divergência · a conta @bussola-c4e1 não tem bloqueio.</div></div>
+        <div class="card mb-3">
+          <div class="card-head"><h3>Hoje · 27/10</h3><span class="badge badge-ok">3 executadas · US$ 2.570</span><span class="badge badge-warn">1 elegível</span></div>
+          <div class="table-wrap" style="border:0;border-radius:0">
+            <table class="table compact">
+              <thead><tr><th>Item</th><th class="num">Recebido</th><th class="num">Reembolsos executados</th><th>Comissão separada</th><th class="num">Líquido na carteira</th><th>Frase entregue em</th><th>Chave destruída em</th><th class="cell-actions"></th></tr></thead>
+              <tbody>
+                <tr><td class="item"><b>Acervo de 3.000 fotografias inéditas do porto de Santos (1930–1960), digitalizado e catalogado</b><span class="sub">lcr-9t4c1 · Exclusivo · <span class="handle" data-handle="arquivista-0d2e"></span> · executada 09:40 (automática, 72 h após a venda)</span></td><td class="num">US$ 12.000,00<span class="sub">1 pagamento</span></td><td class="num">0</td><td class="addr">US$ 1.200,00 · <a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9t4c…2e7b</a></td><td class="num">US$ 10.800,00</td><td class="num">27/10 · 10:15</td><td class="num">27/10 · 10:15</td><td class="cell-actions"><span class="badge st-finalizado">Entregue</span></td></tr>
+                <tr><td class="item"><b>Catálogo de 2.600 espécies de peixes da bacia do Tocantins</b><span class="sub">lcr-8v2c1 · Cópias · <span class="handle" data-handle="lanterna-b31d"></span> · vendas encerradas em 23/10 · executada 03:00 (automática)</span></td><td class="num">US$ 6.300,00<span class="sub">105 pagamentos</span></td><td class="num">0</td><td class="addr">US$ 630,00 · <a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x3e8b…51ab</a></td><td class="num">US$ 5.670,00</td><td><span class="badge st-aguardando">Aguardando o vendedor</span></td><td class="small">Viva até a entrega</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Notificação enviada a @lanterna-b31d: a carteira de lcr-8v2c1 está pronta para ser recebida">Lembrar</button></td></tr>
+                <tr><td class="item"><b>Registro fotográfico de 120 cemitérios quilombolas do Maranhão com geolocalização</b><span class="sub">lcr-2f8n5 · Lacre coletivo · <span class="handle" data-handle="cartografo-5a77"></span> · lacre rompeu 24/10 02:40 · executada 03:00</span></td><td class="num">US$ 7.400,00<span class="sub">241 pagamentos · meta US$ 7.000</span></td><td class="num">0</td><td class="addr">US$ 740,00 · <a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2f8n…6c40</a></td><td class="num">US$ 6.660,00</td><td><span class="badge st-aguardando">Aguardando o vendedor</span></td><td class="small">Viva até a entrega</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Notificação enviada a @cartografo-5a77: a carteira de lcr-2f8n5 está pronta para ser recebida">Lembrar</button></td></tr>
+                <tr><td class="item"><b>Estudo de viabilidade de 14 parques eólicos no Ceará (2025), com modelos financeiros</b><span class="sub">lcr-7n3q8 · Exclusivo · <span class="handle" data-handle="bussola-c4e1"></span> · janela de disputa venceu em 26/10 10:15</span></td><td class="num">US$ 18.000,00<span class="sub">1 pagamento · 0,26316 BTC</span></td><td class="num">0</td><td class="small">prevista US$ 1.800,00<span class="sub">0,02632 BTC</span></td><td class="num">US$ 16.200,00<span class="sub">previsto</span></td><td class="muted">—</td><td class="muted">—</td><td class="cell-actions"><button class="btn btn-sm btn-primary" data-modal-open="m-finalizar"><i data-icon="stamp"></i>Executar finalização</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Esta semana · 21 a 27/10</h3><span class="muted small">6 finalizadas · US$ 4.210 em comissão · 1 bloqueada</span></div>
+          <div class="table-wrap" style="border:0;border-radius:0">
+            <table class="table compact">
+              <thead><tr><th>Item</th><th class="num">Recebido</th><th class="num">Reembolsos executados</th><th>Comissão separada</th><th class="num">Líquido</th><th>Frase entregue em</th><th>Chave destruída em</th></tr></thead>
+              <tbody>
+                <tr><td class="item"><b>Série de dados de qualidade do ar em 38 estações de SP (2015–2026)</b><span class="sub">lcr-9d3x2 · Cópias · <span class="handle" data-handle="lanterna-b31d"></span> · 25/10 03:00</span></td><td class="num">US$ 4.880,00<span class="sub">61 pagamentos</span></td><td class="num">1 · US$ 80,00<span class="sub">DSP-0206</span></td><td class="addr">US$ 480,00 · <a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9d1c…a4c2</a></td><td class="num">US$ 4.320,00</td><td class="num">25/10 · 10:12</td><td class="num">25/10 · 10:12</td></tr>
+                <tr><td class="item"><b>Entrevistas com 18 catadores de recicláveis de Belo Horizonte (áudio + transcrição)</b><span class="sub">lcr-6j1r9 · Lacre coletivo · <span class="handle" data-handle="sextante-21c9"></span> · lacre rompeu 21/10 · 24/10 03:00</span></td><td class="num">US$ 7.620,00<span class="sub">263 pagamentos</span></td><td class="num">0</td><td class="addr">US$ 762,00 · <a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x61fe…9b0e</a></td><td class="num">US$ 6.858,00</td><td class="num">24/10 · 09:03</td><td class="num">24/10 · 09:03</td></tr>
+                <tr><td class="item"><b>Modelo de valuation de startups em estágio inicial com 40 casos</b><span class="sub">lcr-3w9f1 · Camadas · <span class="handle" data-handle="prisma-66af"></span> · 22/10 03:00</span></td><td class="num">US$ 3.980,00<span class="sub">31 pagamentos</span></td><td class="num">0</td><td class="addr">US$ 398,00 · <a href="#" data-toast="Abriria o explorador da rede (basescan)">0xb20d…7e45</a></td><td class="num">US$ 3.582,00</td><td><span class="badge st-aguardando">Aguardando o vendedor</span><span class="sub">há 5 dias</span></td><td class="small">Viva até a entrega</td></tr>
+                <tr><td class="item"><b>Relatório setorial de franquias de alimentação (2025)</b><span class="sub">lcr-4h8d2 · Cópias · <span class="handle" data-handle="granito-55ab"></span> · elegível desde 23/10</span></td><td class="num">US$ 6.975,00<span class="sub">9 pagamentos</span></td><td class="num">2 · US$ 1.550,00<span class="sub">DSP-0200 · DSP-0201</span></td><td><a class="badge st-suspenso status-link" href="../admin/contas.html" data-tip="Abrir a conta">Bloqueada<i data-icon="chevron-right"></i></a><span class="sub">conta restrita até 10/11 · Marcos L.</span></td><td class="num">US$ 5.425,00<span class="sub">fica na carteira do item</span></td><td class="muted">—</td><td class="muted">—</td></tr>
+              </tbody>
+            </table>
+            <div class="table-foot"><span>Outubro: 23 finalizações · comissões US$ 24.890 · 20 frases entregues · 3 aguardando o vendedor · nenhuma finalização executada com divergência de reconciliação</span><button class="btn btn-sm" data-toast="Lista de outubro exportada (CSV): 23 finalizações com txids e hashes"><i data-icon="download"></i>Exportar mês</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================== Reembolsos ====================== -->
       <div class="tab-panel" data-panel="reembolsos">
         <div class="stat-grid mb-3">
-          <div class="stat"><span class="label">Reembolsado no mês</span><span class="value">US$ 9.720</span><span class="delta flat">193 carteiras · em créditos</span></div>
-          <div class="stat"><span class="label">Lacres que falharam</span><span class="value">1</span><span class="delta flat">US$ 4.100 devolvidos · comissão US$ 0</span></div>
-          <div class="stat"><span class="label">Itens removidos com vendas</span><span class="value">1</span><span class="delta flat">US$ 2.400 · 100 % pela custódia</span></div>
-          <div class="stat"><span class="label">Compras com exclusividade</span><span class="value">1</span><span class="delta flat">US$ 15.000 · 118 apoios devolvidos</span></div>
-          <div class="stat"><span class="label">Fundo de garantia acionado</span><span class="value">US$ 0</span><span class="delta up"><i data-icon="check"></i>custódia cobriu tudo</span></div>
+          <div class="stat"><span class="label">Na fila</span><span class="value">24</span><span class="delta flat">lcr-8c1v3 · US$ 2.140 · 15 confirmados · 9 aguardando confirmação</span></div>
+          <div class="stat"><span class="label">Executados no mês</span><span class="value">352</span><span class="delta flat">US$ 14.620 devolvidos · taxa de rede total US$ 16,10</span></div>
+          <div class="stat"><span class="label">Lacres que falharam</span><span class="value">2</span><span class="delta flat">lcr-8c1v3 · lcr-3v8j1 · US$ 6.240 devolvidos · comissão US$ 0</span></div>
+          <div class="stat"><span class="label">Fundo de garantia acionado</span><span class="value">1</span><span class="delta flat">US$ 50 · DSP-0203 · reclamação depois da finalização</span></div>
         </div>
-        <div class="grid cols-2 mb-3">
-          <div class="card wax-edge">
-            <div class="card-head"><h3>Lacre coletivo que falhou</h3><span class="badge st-falhou">Meta não batida</span></div>
-            <div class="card-body stack-sm">
-              <b>Acervo de 300 cartazes de cinema de rua de Recife (1960–1985), digitalizado</b>
-              <div class="row small muted"><span class="mono">lcr-3v8j1</span><span class="handle" data-handle="tipografo-8e04"></span><span>História e acervos</span></div>
-              <div class="goal-head"><span class="raised">US$ 4.100</span><span class="goal">meta US$ 9.000 · 46 % · prazo 09/10/2026</span></div>
-              <div class="progress"><div class="progress-bar wax" data-width="46%"></div></div>
-              <dl class="kv mt-1">
-                <dt>Reembolso</dt><dd>10/10/2026 · 03:00 · <b>61 carteiras</b> · US$ 4.100,00 devolvidos integralmente em créditos</dd>
-                <dt>Comissão</dt><dd>US$ 0 · não é cobrada em lacre que falha</dd>
-                <dt>Ledger</dt><dd>61 lançamentos <code>escrow:lcr-3v8j1 → wallet:*</code> · custódia zerada</dd>
-                <dt>Comunicação</dt><dd>Apoiadores notificados; post de encerramento publicado (Diego T.)</dd>
-              </dl>
+        <div class="alert alert-info mb-2"><i data-icon="info"></i><div>Antes da finalização, todo reembolso sai da <b>carteira do item</b> e volta ao <b>endereço de origem</b> do pagamento, descontada só a taxa de rede. Por isso o checkout insiste: pague de uma carteira que você controla, nunca direto de uma corretora. Depois da finalização, quem paga é o fundo de garantia.</div></div>
+        <div class="card mb-3">
+          <div class="card-head"><h3>Em execução · lote RB-1027-02 · lcr-8c1v3</h3><span class="badge badge-warn">24 · US$ 2.140</span><div class="actions"><button class="btn btn-sm" data-toast="Lote RB-1027-02: 24 txids listados · 15 confirmados · 9 aguardando confirmação"><i data-icon="list"></i>Ver os 24 txids</button></div></div>
+          <div class="table-wrap" style="border:0;border-radius:0">
+            <table class="table compact">
+              <thead><tr><th>Pagamento</th><th>Motivo</th><th>Item</th><th>Rede</th><th>Endereço de origem</th><th class="num">Valor</th><th class="num">Taxa de rede</th><th>txid</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">PAY-8c1v3-0003</td><td>Lacre falhou · meta não batida</td><td class="mono">lcr-8c1v3</td><td>Polygon</td><td class="addr">0x2c9d…4e71</td><td class="num">US$ 100,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x7b40…e1c5</a></td><td><span class="badge st-liquidada">Confirmado</span><span class="sub">12 de 12</span></td></tr>
+                <tr><td class="mono">PAY-8c1v3-0011</td><td>Lacre falhou · meta não batida</td><td class="mono">lcr-8c1v3</td><td>Polygon</td><td class="addr">0x8a3f…b0d2</td><td class="num">US$ 50,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x19de…b7a3</a></td><td><span class="badge st-liquidada">Confirmado</span><span class="sub">12 de 12</span></td></tr>
+                <tr><td class="mono">PAY-8c1v3-0017</td><td>Lacre falhou · meta não batida</td><td class="mono">lcr-8c1v3</td><td>Polygon</td><td class="addr">0xe4b7…13c9</td><td class="num">US$ 200,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x5c1d…e83a</a></td><td><span class="badge st-enviado">Enviado</span><span class="sub">7 de 12 confirmações</span></td></tr>
+                <tr><td class="mono">PAY-8c1v3-0022</td><td>Lacre falhou · meta não batida</td><td class="mono">lcr-8c1v3</td><td>Polygon</td><td class="addr">0x51d0…9a2e</td><td class="num">US$ 30,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xa0f2…3d8e</a></td><td><span class="badge st-enviado">Enviado</span><span class="sub">3 de 12 confirmações</span></td></tr>
+                <tr><td class="mono">PAY-8c1v3-0024</td><td>Lacre falhou · meta não batida</td><td class="mono">lcr-8c1v3</td><td>Polygon</td><td class="addr">0x6d21…c07f</td><td class="num">US$ 20,00</td><td class="num">≈ US$ 0,04</td><td class="addr"><span class="muted">—</span></td><td><span class="badge st-enviado">Enviado</span><span class="sub">aguardando o primeiro bloco</span></td></tr>
+              </tbody>
+            </table>
+            <div class="table-foot"><span>E mais 19 apoios do mesmo lacre · US$ 2.140 de US$ 8.000 em 24 apoios até 26/10 23:59 · lote aprovado por Elisa F. às 10:05 e enviado às 10:06 · nada é cobrado · a taxa de rede sai do valor devolvido · o endereço de origem é apagado depois da confirmação</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Executados · outubro</h3><span class="muted small">352 reembolsos · US$ 14.620</span></div>
+          <div class="table-wrap" style="border:0;border-radius:0">
+            <table class="table compact">
+              <thead><tr><th>Quando</th><th>Motivo</th><th>Item</th><th class="num">Pagamentos</th><th>Rede</th><th>Endereço de origem</th><th class="num">Valor</th><th class="num">Taxa de rede</th><th>txid</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="num">27/10 · 03:00</td><td>Buyout · apoios devolvidos</td><td class="mono">lcr-1k6p3</td><td class="num">142</td><td>Polygon</td><td class="addr">142 endereços</td><td class="num">US$ 3.840,00</td><td class="num">US$ 5,68</td><td class="addr"><a href="#" data-toast="Lote RB-1027-01: 142 txids listados">142 txids</a></td><td><span class="badge st-liquidada">Concluído</span><span class="sub">todos confirmados às 03:41</span></td></tr>
+                <tr><td class="num">26/10 · 03:00</td><td>Pedido expirou</td><td class="mono">ped-8t4c6</td><td class="num">2</td><td>Polygon · Tron</td><td class="addr">0x6e2b…f9a3 · TQ1m…3xV8</td><td class="num">US$ 350,00</td><td class="num">US$ 1,54</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x1e8b…6a4d</a> · <a href="#" data-toast="Abriria o explorador da rede (tronscan)">c0d4…71e9</a></td><td><span class="badge st-liquidada">Concluído</span></td></tr>
+                <tr><td class="num">25/10 · 10:00</td><td>Saiu do pedido (não igualou)</td><td class="mono">ped-9h2d5</td><td class="num">1</td><td>Polygon</td><td class="addr">0x3e1b…77c0</td><td class="num">US$ 250,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xa71d…0e5b</a></td><td><span class="badge st-liquidada">Concluído</span><span class="sub">valor subiu para US$ 300 em 23/10</span></td></tr>
+                <tr><td class="num">24/10 · 11:00</td><td>Disputa procedente · DSP-0206</td><td class="mono">lcr-9d3x2</td><td class="num">1</td><td>Polygon</td><td class="addr">0x90ce…2f8b</td><td class="num">US$ 80,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xc8a1…4e27</a></td><td><span class="badge st-liquidada">Concluído</span></td></tr>
+                <tr><td class="num">19/10 · 03:00</td><td>Disputa procedente · DSP-0201</td><td class="mono">lcr-4h8d2</td><td class="num">1</td><td>Polygon</td><td class="addr">0x1f7b…d3a5</td><td class="num">US$ 775,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2b6e…c7d1</a></td><td><span class="badge st-liquidada">Concluído</span></td></tr>
+                <tr><td class="num">18/10 · 11:00</td><td>Disputa procedente · parcial · DSP-0204</td><td class="mono">lcr-2n8v4</td><td class="num">1</td><td>Polygon</td><td class="addr">0x3f62…c9a8</td><td class="num">US$ 90,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2n8v…a4c1</a></td><td><span class="badge st-liquidada">Concluído</span></td></tr>
+                <tr><td class="num">16/10 · 03:00</td><td>Buyout · apoios devolvidos</td><td class="mono">lcr-6c4t2</td><td class="num">118</td><td>Polygon</td><td class="addr">118 endereços</td><td class="num">US$ 2.350,00</td><td class="num">US$ 4,72</td><td class="addr"><a href="#" data-toast="Lote RB-1016-01: 118 txids listados">118 txids</a></td><td><span class="badge st-liquidada">Concluído</span><span class="sub">comprado com exclusividade por US$ 15.000 · inclui 0xb04d…3f1a (40 USDT)</span></td></tr>
+                <tr><td class="num">12/10 · 15:40</td><td>Disputa procedente · parcial · DSP-0202</td><td class="mono">lcr-3c7r8</td><td class="num">1</td><td>Base</td><td class="addr">0x7b1e…a940</td><td class="num">US$ 95,00</td><td class="num">US$ 0,01</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (basescan)">0xd41a…7c2e</a></td><td><span class="badge st-liquidada">Concluído</span></td></tr>
+                <tr><td class="num">10/10 · 15:20</td><td>Reclamação depois da finalização · DSP-0203</td><td class="mono">lcr-2d9r4</td><td class="num">1</td><td>Polygon</td><td class="addr">0x4d2a…8e1f</td><td class="num">US$ 50,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2d9r…51fe</a></td><td><span class="badge st-liquidada">Concluído</span><span class="sub">pago pelo fundo de garantia</span></td></tr>
+                <tr><td class="num">10/10 · 03:00</td><td>Item retirado antes da finalização · R01</td><td class="mono">lcr-7x2d4</td><td class="num">12</td><td>Polygon</td><td class="addr">12 endereços</td><td class="num">US$ 2.400,00</td><td class="num">US$ 0,48</td><td class="addr"><a href="#" data-toast="Lote RB-1010-02: 12 txids listados">12 txids</a></td><td><span class="badge st-liquidada">Concluído</span><span class="sub">acessos revogados</span></td></tr>
+                <tr><td class="num">10/10 · 03:00</td><td>Lacre falhou · meta não batida</td><td class="mono">lcr-3v8j1</td><td class="num">61</td><td>Polygon</td><td class="addr">61 endereços</td><td class="num">US$ 4.100,00</td><td class="num">US$ 2,44</td><td class="addr"><a href="#" data-toast="Lote RB-1010-01: 61 txids listados">61 txids</a></td><td><span class="badge st-liquidada">Concluído</span><span class="sub">comissão US$ 0</span></td></tr>
+                <tr><td class="num">01/10 · 11:00</td><td>Disputa procedente · DSP-0199</td><td class="mono">lcr-5m8c4</td><td class="num">1</td><td>Polygon</td><td class="addr">0x7a9c…31e0</td><td class="num">US$ 150,00</td><td class="num">US$ 0,04</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x5m8c…91af</a></td><td><span class="badge st-liquidada">Concluído</span><span class="sub">da carteira do item, antes da finalização</span></td></tr>
+              </tbody>
+            </table>
+            <div class="table-foot"><span>Mostrando 12 de 352 · motivos: lacre falhou · pedido expirou · saiu do pedido (não igualou) · disputa · item retirado · buyout · lotes às 03:00 e 11:00, por rede, até 200 reembolsos cada; lote de lacre que falhou exige aprovação do financeiro</span><button class="btn btn-sm" data-toast="Reembolsos de outubro exportados (CSV): 352 linhas com txids"><i data-icon="download"></i>Exportar</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================== Comissões ====================== -->
+      <div class="tab-panel" data-panel="comissoes">
+        <div class="split mb-3">
+          <div class="card">
+            <div class="card-head"><h3>Carteira da plataforma · por rede</h3><span class="badge badge-ok"><i data-icon="shield-check"></i>multisig 2-de-3</span></div>
+            <div class="table-wrap" style="border:0;border-radius:0">
+              <table class="table compact">
+                <thead><tr><th>Rede · ativo</th><th>Endereço</th><th class="num">Entradas no mês</th><th class="num">Para a carteira fria</th><th class="num">On-chain agora</th></tr></thead>
+                <tbody>
+                  <tr><td><b>Polygon</b> · USDT/USDC</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x1a2c…9f0e</a></td><td class="num">US$ 17.980</td><td class="num">US$ 15.600</td><td class="num">US$ 4.160</td></tr>
+                  <tr><td><b>Tron</b> · USDT</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (tronscan)">TQ7k…9pZ2</a></td><td class="num">US$ 3.240</td><td class="num">US$ 2.100</td><td class="num">US$ 1.230</td></tr>
+                  <tr><td><b>Base</b> · USDC</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (basescan)">0x6b3d…2c8f</a></td><td class="num">US$ 1.470</td><td class="num">US$ 800</td><td class="num">US$ 670</td></tr>
+                  <tr><td><b>Bitcoin</b></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (mempool.space)">bc1q…c4d9</a></td><td class="num">US$ 2.200<span class="sub">0,03216 BTC</span></td><td class="num">0,0410 BTC<span class="sub">06/10</span></td><td class="num">0,03216 BTC</td></tr>
+                </tbody>
+              </table>
+              <div class="table-foot"><span>Entradas no mês US$ 24.890 = comissões das 23 finalizações · 2 % de cada entrada segue ao fundo de garantia no mesmo lote · chaves: Elisa F., Marcos L. e uma de recuperação em cofre físico</span></div>
             </div>
           </div>
           <div class="card">
-            <div class="card-head"><h3>Item removido após denúncia</h3><span class="badge st-removido">Removido · R01</span></div>
-            <div class="card-body stack-sm">
-              <b>Lista de 800 influenciadores com contatos comerciais</b>
-              <div class="row small muted"><span class="mono">lcr-7x2d4</span><span class="handle" data-handle="sinal-9e4b"></span><span>Cópias · US$ 200 · 12 vendidas</span></div>
-              <dl class="kv">
-                <dt>Remoção</dt><dd>10/10/2026 · denúncia DN-2022 · suspensão preventiva em 09/10 · decisão Ana R.</dd>
-                <dt>Reembolso</dt><dd><b>12 compradores</b> · US$ 2.400,00 em créditos · entitlements revogados</dd>
-                <dt>Fonte</dt><dd>Custódia do vendedor US$ 2.400,00 (<b>100 %</b>) · fundo de garantia US$ 0</dd>
-                <dt>Ledger</dt><dd>12 lançamentos <code>escrow:lcr-7x2d4 → wallet:*</code> · comissão não cobrada</dd>
-                <dt>Conta</dt><dd>Envios restritos até 30/11 · <a class="link" href="../admin/contas.html">ver conta</a></dd>
-              </dl>
-            </div>
-          </div>
-          <div class="card brass-edge" style="grid-column: 1 / -1">
-            <div class="card-head"><h3>Vendido com exclusividade · apoios devolvidos</h3><span class="badge st-vendido">Vendido com exclusividade</span><span class="tag">BR</span></div>
-            <div class="card-body">
-              <div class="split">
-                <div class="stack-sm">
-                  <b>Planilha de preços de leilões de gado em 40 municípios de MT</b>
-                  <div class="row small muted"><span class="mono">lcr-6c4t2</span><span class="handle" data-handle="bussola-c4e1"></span><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span>Negócios e mercado</span></div>
-                  <div class="goal-head"><span class="raised">US$ 2.350</span><span class="goal">meta US$ 6.000 · 39 % · 118 apoiadores · encerrado em 16/10</span></div>
-                  <div class="progress"><div class="progress-bar wax" data-width="39%"></div></div>
-                </div>
-                <dl class="kv">
-                  <dt>Compra</dt><dd>16/10/2026 · comprador anônimo pagou <b>US$ 15.000,00</b> · anúncio encerrado na hora, prévia fora do catálogo, prova marcada "vendido com exclusividade"</dd>
-                  <dt>Reembolso</dt><dd><b>118 apoios</b> · US$ 2.350,00 devolvidos integralmente em 16/10 · sem comissão</dd>
-                  <dt>Comissão</dt><dd>10 % sobre US$ 15.000 = <b>US$ 1.500,00</b> (US$ 30,00 ao fundo) · vendedor recebeu US$ 13.500,00 em 19/10, após a janela de 72 h</dd>
-                  <dt>Ledger</dt><dd>118 lançamentos <code>escrow:lcr-6c4t2 → wallet:*</code> · <code>wallet:comprador → escrow</code> 15.000 · <code>escrow → wallet:bussola-c4e1</code> 13.500 · <code>escrow → platform:fees</code> 1.500</dd>
-                </dl>
-              </div>
+            <div class="card-head"><h3>Transferências para a carteira fria</h3><span class="muted small">semanal · excedente acima de US$ 5.000 por rede</span></div>
+            <div class="table-wrap" style="border:0;border-radius:0">
+              <table class="table compact">
+                <thead><tr><th>Data</th><th>Rede</th><th class="num">Valor</th><th>Assinaturas</th><th>txid</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td class="num">20/10</td><td>Polygon</td><td class="num">US$ 9.400</td><td class="small">Elisa F. + Marcos L.</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x62af…b31d</a></td><td><span class="badge st-liquidada">Concluída</span></td></tr>
+                  <tr><td class="num">13/10</td><td>Polygon</td><td class="num">US$ 6.200</td><td class="small">Elisa F. + Marcos L.</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x0c7e…44d8</a></td><td><span class="badge st-liquidada">Concluída</span></td></tr>
+                  <tr><td class="num">13/10</td><td>Tron</td><td class="num">US$ 2.100</td><td class="small">Elisa F. + Marcos L.</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (tronscan)">f3a9…21c0</a></td><td><span class="badge st-liquidada">Concluída</span></td></tr>
+                  <tr><td class="num">06/10</td><td>Bitcoin</td><td class="num">0,0410 BTC<span class="sub">US$ 2.804</span></td><td class="small">Elisa F. + Marcos L.</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (mempool.space)">a81f…93be</a></td><td><span class="badge st-liquidada">Concluída</span></td></tr>
+                </tbody>
+              </table>
+              <div class="table-foot"><span>Carteira fria: multisig 3-de-5, chaves em locais separados, nunca conectada. Só recebe comissão; nunca dinheiro de usuário.</span><button class="btn btn-sm" data-toast="Proposta criada: Polygon US$ 4.160 → carteira fria · aguarda 2 assinaturas"><i data-icon="arrow-up-right"></i>Propor transferência</button></div>
             </div>
           </div>
         </div>
         <div class="table-wrap">
-          <table class="table">
-            <thead><tr><th>Data</th><th>Origem</th><th>Item</th><th class="num">Carteiras</th><th class="num">Valor</th><th>Fonte</th><th>Status</th></tr></thead>
+          <table class="table compact">
+            <thead><tr><th>Quando</th><th>Item</th><th>Modelo</th><th>Rede</th><th class="num">Base da comissão</th><th class="num">Comissão (10 %)</th><th>txid</th><th class="num">Fundo (2 %)</th></tr></thead>
             <tbody>
-              <tr><td class="num">23/10</td><td>Disputa DS-0312 · reembolso parcial</td><td>Playbook de última milha<span class="sub">lcr-3c7r8 · camada 1</span></td><td class="num">1</td><td class="num">US$ 95,00</td><td>Custódia do vendedor</td><td><span class="badge st-liquidada">Concluído</span></td></tr>
-              <tr><td class="num">19/10</td><td>Disputa DS-0301 · reembolso total</td><td>Relatório setorial<span class="sub">lcr-4h8d2 · @granito-55ab</span></td><td class="num">1</td><td class="num">US$ 775,00</td><td>Custódia do vendedor</td><td><span class="badge st-liquidada">Concluído</span></td></tr>
-              <tr><td class="num">16/10</td><td>Compra com exclusividade · apoios devolvidos</td><td>Planilha de preços de leilões de gado em 40 municípios de MT<span class="sub">lcr-6c4t2 · comprado por US$ 15.000</span></td><td class="num">118</td><td class="num">US$ 2.350,00</td><td>Custódia do lacre</td><td><span class="badge st-liquidada">Concluído</span></td></tr>
-              <tr><td class="num">10/10</td><td>Item removido · R01</td><td>Lista de 800 influenciadores<span class="sub">lcr-7x2d4</span></td><td class="num">12</td><td class="num">US$ 2.400,00</td><td>Custódia do vendedor · 100 %</td><td><span class="badge st-liquidada">Concluído</span></td></tr>
-              <tr><td class="num">10/10</td><td>Lacre coletivo · meta não batida</td><td>Acervo de 300 cartazes de cinema de rua de Recife<span class="sub">lcr-3v8j1</span></td><td class="num">61</td><td class="num">US$ 4.100,00</td><td>Custódia do lacre</td><td><span class="badge st-liquidada">Concluído</span></td></tr>
+              <tr><td class="num">27/10 · 09:40</td><td class="item"><b>Acervo de 3.000 fotografias inéditas do porto de Santos (1930–1960)</b><span class="sub">lcr-9t4c1 · <span class="handle" data-handle="arquivista-0d2e"></span> · frase entregue 10:15</span></td><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td>Polygon</td><td class="num">US$ 12.000,00</td><td class="num">US$ 1.200,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9t4c…2e7b</a></td><td class="num">US$ 24,00</td></tr>
+              <tr><td class="num">27/10 · 03:00</td><td class="item"><b>Registro fotográfico de 120 cemitérios quilombolas do Maranhão</b><span class="sub">lcr-2f8n5 · <span class="handle" data-handle="cartografo-5a77"></span></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td>Polygon</td><td class="num">US$ 7.400,00</td><td class="num">US$ 740,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2f8n…6c40</a></td><td class="num">US$ 14,80</td></tr>
+              <tr><td class="num">27/10 · 03:00</td><td class="item"><b>Catálogo de 2.600 espécies de peixes da bacia do Tocantins</b><span class="sub">lcr-8v2c1 · <span class="handle" data-handle="lanterna-b31d"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td>Polygon</td><td class="num">US$ 6.300,00</td><td class="num">US$ 630,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x3e8b…51ab</a></td><td class="num">US$ 12,60</td></tr>
+              <tr><td class="num">25/10 · 03:00</td><td class="item"><b>Série de dados de qualidade do ar em 38 estações de SP (2015–2026)</b><span class="sub">lcr-9d3x2 · <span class="handle" data-handle="lanterna-b31d"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td>Polygon</td><td class="num">US$ 4.800,00<span class="sub">61 pagamentos − 1 reembolso</span></td><td class="num">US$ 480,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9d1c…a4c2</a></td><td class="num">US$ 9,60</td></tr>
+              <tr><td class="num">24/10 · 03:00</td><td class="item"><b>Entrevistas com 18 catadores de recicláveis de Belo Horizonte</b><span class="sub">lcr-6j1r9 · <span class="handle" data-handle="sextante-21c9"></span></span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td>Polygon</td><td class="num">US$ 7.620,00</td><td class="num">US$ 762,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x61fe…9b0e</a></td><td class="num">US$ 15,24</td></tr>
+              <tr><td class="num">22/10 · 03:00</td><td class="item"><b>Modelo de valuation de startups em estágio inicial com 40 casos</b><span class="sub">lcr-3w9f1 · <span class="handle" data-handle="prisma-66af"></span></span></td><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span></td><td>Base</td><td class="num">US$ 3.980,00</td><td class="num">US$ 398,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (basescan)">0xb20d…7e45</a></td><td class="num">US$ 7,96</td></tr>
+              <tr><td class="num">19/10 · 03:00</td><td class="item"><b>Planilha de preços de leilões de gado em 40 municípios de Mato Grosso (2019–2026)</b><span class="sub">lcr-6c4t2 · <span class="handle" data-handle="bussola-c4e1"></span> · comprado com exclusividade em 16/10 · 118 apoios devolvidos</span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td>Polygon</td><td class="num">US$ 15.000,00</td><td class="num">US$ 1.500,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x6c4t…b2d9</a></td><td class="num">US$ 30,00</td></tr>
+              <tr><td class="num">19/10 · 03:00</td><td class="item"><b>Estudo de mercado de data centers no Brasil: capacidade, custos e contratos (2026–2030)</b><span class="sub">lcr-2r7y4 · <span class="handle" data-handle="bussola-c4e1"></span></span></td><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td>Bitcoin</td><td class="num">US$ 22.000,00<span class="sub">0,32164 BTC</span></td><td class="num">US$ 2.200,00<span class="sub">0,03216 BTC</span></td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (mempool.space)">b7e2…4c9a</a></td><td class="num">US$ 44,00</td></tr>
+              <tr><td class="num">15/10 · 03:00</td><td class="item"><b>Base de 1.400 cooperativas agrícolas do Sul com faturamento declarado</b><span class="sub">lcr-7p4d2 · <span class="handle" data-handle="prisma-66af"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td>Tron</td><td class="num">US$ 4.600,00</td><td class="num">US$ 460,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (tronscan)">9e21…d0f7</a></td><td class="num">US$ 9,20</td></tr>
+              <tr><td class="num">08/10 · 14:05</td><td class="item"><b>Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</b><span class="sub">ped-1b6j8 · atendido por <span class="handle" data-handle="cartografo-5a77"></span> · carteira entregue em 11/10</span></td><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td>Polygon</td><td class="num">US$ 600,00<span class="sub">US$ 200 × 3 interessados</span></td><td class="num">US$ 60,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x1b6e…8d2c</a></td><td class="num">US$ 1,20</td></tr>
+              <tr><td class="num">05/10 · 09:00</td><td class="item"><b>Guia de acesso a dados do SUS: 60 fontes, endpoints e scripts de coleta</b><span class="sub">lcr-5m8c4 · <span class="handle" data-handle="coruja-7f3a"></span> · frase entregue 05/10 18:42</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td>Polygon</td><td class="num">US$ 13.200,00<span class="sub">89 pagamentos − 1 reembolso</span></td><td class="num">US$ 1.320,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x1c3f…8a7d</a></td><td class="num">US$ 26,40</td></tr>
+              <tr><td class="num">02/10 · 03:00</td><td class="item"><b>Planilha de custos de 30 restaurantes de rua em Salvador (2024–2025)</b><span class="sub">lcr-6h4k8 · <span class="handle" data-handle="tipografo-8e04"></span></span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td>Polygon</td><td class="num">US$ 9.300,00</td><td class="num">US$ 930,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x6c4a…e7a3</a></td><td class="num">US$ 18,60</td></tr>
             </tbody>
           </table>
-          <div class="table-foot"><span>Regra: item retirado por violação após vendas → compradores reembolsados em créditos; a custódia do vendedor cobre; a diferença, se houver, sai do fundo de garantia. Compra com exclusividade de um lacre devolve todos os apoios, sem comissão.</span></div>
+          <div class="table-foot"><span>Mostrando 12 de 23 · outubro US$ 24.890 · setembro US$ 46.830 · a comissão é separada só na finalização; lacres que falham e pedidos que expiram não pagam comissão</span><div class="pagination"><button class="btn btn-sm">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">2</button><button class="btn btn-sm">3</button><button class="btn btn-sm">›</button></div></div>
         </div>
       </div>
 
-      <!-- ====================== Reconciliação ====================== -->
+      <!-- ====================== Chaves (HSM) ====================== -->
+      <div class="tab-panel" data-panel="chaves">
+        <div class="stat-grid mb-3">
+          <div class="stat"><span class="label">Chaves vivas no HSM</span><span class="value">212</span><span class="delta up"><i data-icon="check"></i>= 212 carteiras em andamento · conferido às 03:00</span></div>
+          <div class="stat"><span class="label">Criadas desde 15/03</span><span class="value">432</span><span class="delta flat">uma por item ou pedido aprovado, por rede</span></div>
+          <div class="stat"><span class="label">Destruídas</span><span class="value">220</span><span class="delta flat">189 entregues ao vendedor · 31 fechadas após reembolso</span></div>
+          <div class="stat"><span class="label">Frases reveladas no mês</span><span class="value">20</span><span class="delta flat">sempre após senha + TOTP · 3 aguardando o vendedor</span></div>
+        </div>
+        <div class="split">
+          <div class="table-wrap">
+            <table class="table compact">
+              <thead><tr><th>Quando</th><th>Evento</th><th>Item</th><th>Pessoa / serviço</th><th>Detalhe</th><th>Hash</th></tr></thead>
+              <tbody>
+                <tr><td class="num">27/10 · 10:15:52</td><td><span class="ev shred">key.shred</span></td><td class="mono">lcr-9t4c1</td><td class="small">HSM · ordem da API</td><td class="small">atestado de destruição · a plataforma não movimenta mais a carteira</td><td class="mono xs">9b1e…40cf</td></tr>
+                <tr><td class="num">27/10 · 10:15:50</td><td><span class="ev reveal">key.reveal</span></td><td class="mono">lcr-9t4c1</td><td><span class="handle" data-handle="arquivista-0d2e"></span><span class="sub">vendedor · senha + TOTP</span></td><td class="small">frase de 12 palavras exibida uma única vez · US$ 10.800 na carteira</td><td class="mono xs">6b0d…e415</td></tr>
+                <tr><td class="num">27/10 · 09:40:21</td><td><span class="ev settle">wallet.settle</span></td><td class="mono">lcr-9t4c1</td><td class="small">Sistema · settlement-job<span class="sub">72 h após a venda</span></td><td class="small">comissão US$ 1.200 transferida (txid 0x9t4c…2e7b) · 0 reembolsos</td><td class="mono xs">c9e4…2d70</td></tr>
+                <tr><td class="num">27/10 · 03:00:41</td><td><span class="ev settle">wallet.settle</span></td><td class="mono">lcr-8v2c1</td><td class="small">Sistema · settlement-job</td><td class="small">comissão US$ 630 transferida · 0 reembolsos · chave viva até a entrega</td><td class="mono xs">0a7c…d93b</td></tr>
+                <tr><td class="num">27/10 · 03:00:38</td><td><span class="ev settle">wallet.settle</span></td><td class="mono">lcr-2f8n5</td><td class="small">Sistema · settlement-job</td><td class="small">comissão US$ 740 transferida · 0 reembolsos · chave viva até a entrega</td><td class="mono xs">5c2a…e71f</td></tr>
+                <tr><td class="num">26/10 · 19:12:33</td><td><span class="ev create">wallet.create</span></td><td class="mono">lcr-4g7h9</td><td class="small">Sistema · hsm-worker<span class="sub">aprovado com ajustes por Ana R. às 16:30 · vendedor aceitou o título às 19:12</span></td><td class="small">carteira HD em Polygon · xpub registrado · 0x4g7h…e3b9 publicado na prova</td><td class="mono xs">1b7d…c93e</td></tr>
+                <tr><td class="num">25/10 · 10:12:48</td><td><span class="ev shred">key.shred</span></td><td class="mono">lcr-9d3x2</td><td class="small">HSM · ordem da API</td><td class="small">atestado de destruição · a plataforma não movimenta mais a carteira</td><td class="mono xs">5a40…7f1b</td></tr>
+                <tr><td class="num">25/10 · 10:12:46</td><td><span class="ev reveal">key.reveal</span></td><td class="mono">lcr-9d3x2</td><td><span class="handle" data-handle="lanterna-b31d"></span><span class="sub">vendedor · senha + TOTP</span></td><td class="small">frase de 12 palavras exibida uma única vez na sessão do vendedor</td><td class="mono xs">2e9c…04d6</td></tr>
+                <tr><td class="num">25/10 · 03:00:39</td><td><span class="ev settle">wallet.settle</span></td><td class="mono">lcr-9d3x2</td><td class="small">Sistema · settlement-job</td><td class="small">comissão US$ 480 · 1 reembolso US$ 80 (DSP-0206)</td><td class="mono xs">7f3b…a1e8</td></tr>
+                <tr><td class="num">24/10 · 09:03:12</td><td><span class="ev shred">key.shred</span></td><td class="mono">lcr-6j1r9</td><td class="small">HSM · ordem da API</td><td class="small">atestado de destruição</td><td class="mono xs">c42d…6b90</td></tr>
+                <tr><td class="num">24/10 · 09:03:10</td><td><span class="ev reveal">key.reveal</span></td><td class="mono">lcr-6j1r9</td><td><span class="handle" data-handle="sextante-21c9"></span><span class="sub">vendedor · senha + TOTP</span></td><td class="small">frase exibida uma única vez</td><td class="mono xs">0d8e…f27c</td></tr>
+                <tr><td class="num">22/10 · 14:30:05</td><td><span class="ev create">wallet.create</span></td><td class="mono">ped-5r2k8</td><td class="small">Sistema · hsm-worker</td><td class="small">carteira HD em Tron · TQ5r…2k8c publicado na página do pedido</td><td class="mono xs">93ab…1e4d</td></tr>
+                <tr><td class="num">19/10 · 10:30:07</td><td><span class="ev shred">key.shred</span></td><td class="mono">lcr-6c4t2</td><td class="small">HSM · ordem da API</td><td class="small">atestado de destruição · lacre comprado com exclusividade em 16/10, 118 apoios devolvidos antes</td><td class="mono xs">61f0…b3a7</td></tr>
+                <tr><td class="num">19/10 · 10:30:05</td><td><span class="ev reveal">key.reveal</span></td><td class="mono">lcr-6c4t2</td><td><span class="handle" data-handle="bussola-c4e1"></span><span class="sub">vendedor · senha + TOTP</span></td><td class="small">frase exibida uma única vez · US$ 13.500 na carteira</td><td class="mono xs">d07a…28e5</td></tr>
+                <tr><td class="num">11/10 · 18:22:51</td><td><span class="ev shred">key.shred</span></td><td class="mono">ped-1b6j8</td><td class="small">HSM · ordem da API</td><td class="small">carteira do pedido entregue a quem atendeu</td><td class="mono xs">48c3…d19e</td></tr>
+                <tr><td class="num">11/10 · 18:22:49</td><td><span class="ev reveal">key.reveal</span></td><td class="mono">ped-1b6j8</td><td><span class="handle" data-handle="cartografo-5a77"></span><span class="sub">atendeu o pedido · senha + TOTP</span></td><td class="small">frase exibida uma única vez · 3 dias após a finalização</td><td class="mono xs">a7e1…5c08</td></tr>
+                <tr><td class="num">05/10 · 18:42:19</td><td><span class="ev shred">key.shred</span></td><td class="mono">lcr-5m8c4</td><td class="small">HSM · ordem da API</td><td class="small">atestado de destruição</td><td class="mono xs">f2b8…30ad</td></tr>
+                <tr><td class="num">05/10 · 18:42:17</td><td><span class="ev reveal">key.reveal</span></td><td class="mono">lcr-5m8c4</td><td><span class="handle" data-handle="coruja-7f3a"></span><span class="sub">vendedor · senha + TOTP</span></td><td class="small">frase exibida uma única vez</td><td class="mono xs">7e0c…d4a9</td></tr>
+                <tr><td class="num">05/10 · 09:00:12</td><td><span class="ev settle">wallet.settle</span></td><td class="mono">lcr-5m8c4</td><td class="small">Sistema · settlement-job</td><td class="small">vendas encerradas 02/10 09:00 · comissão US$ 1.320 (txid 0x1c3f…8a7d) · 1 reembolso US$ 150 (DSP-0199, já executado) · líquido US$ 11.880</td><td class="mono xs">3d5a…9e62</td></tr>
+              </tbody>
+            </table>
+            <div class="table-foot"><span>Mostrando 19 de 1.104 eventos de chave · o hash é o do evento na cadeia da auditoria</span><a class="btn btn-sm" href="../admin/auditoria.html"><i data-icon="scroll-text"></i>Ver na auditoria</a></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>O que o HSM faz</h3><span class="badge badge-outline">chave privada nunca sai</span></div>
+            <div class="card-body"><dl class="kv">
+              <dt><span class="ev create">wallet.create</span></dt><dd>Na aprovação do item ou publicação do pedido: gera uma carteira HD por rede aceita. A chave privada nasce e fica no HSM; só o xpub sai, para derivar um endereço por pagamento.</dd>
+              <dt><span class="ev settle">wallet.settle</span></dt><dd>Na finalização: assina a transferência da comissão e os reembolsos pendentes a partir da carteira do item. Só executa se a reconciliação do dia não tiver divergência, a conta não tiver bloqueio e não houver disputa aberta.</dd>
+              <dt><span class="ev reveal">key.reveal</span></dt><dd>O vendedor confirma senha + TOTP em "Carteiras dos itens"; o HSM exporta a frase de 12 palavras uma única vez para a sessão dele. Ninguém da equipe vê a frase, nem o administrador.</dd>
+              <dt><span class="ev shred">key.shred</span></dt><dd>Logo após o reveal, ou após o último reembolso de uma carteira que falhou, o HSM apaga a chave e devolve um atestado. Depois disso a plataforma não consegue movimentar a carteira.</dd>
+              <dt>Conferência</dt><dd>Às 03:00: chaves vivas = carteiras em andamento. Qualquer diferença abre incidente e bloqueia finalizações.</dd>
+            </dl></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================== Reconciliação on-chain ====================== -->
       <div class="tab-panel" data-panel="reconciliacao">
+        <div class="alert alert-ok mb-2"><i data-icon="check-circle"></i><div><span class="alert-title">Última execução: 27/10 · 03:00 · 2 min 14 s · divergência US$ 0,00 · fechada por Elisa F. às 09:25 · finalizações liberadas</span>Livro de pagamentos (confirmados − reembolsos − comissão) × saldo on-chain de cada carteira em andamento, nas 4 redes. Qualquer divergência bloqueia as finalizações do dia até a análise.</div></div>
         <div class="table-wrap mb-3">
-          <table class="table">
-            <thead><tr><th>Data</th><th class="num">Lançamentos</th><th class="num">Passivo pelo ledger</th><th class="num">Saldos materializados</th><th class="num">Divergência</th><th>Executada</th></tr></thead>
+          <table class="table compact">
+            <thead><tr><th>Data</th><th class="num">Carteiras</th><th class="num">Pagamentos conferidos</th><th class="num">Livro de pagamentos</th><th class="num">Saldo on-chain</th><th class="num">Divergência</th><th>Executada</th><th>Finalizações</th></tr></thead>
             <tbody>
-              <tr><td class="num">27/10/2026</td><td class="num">1.284</td><td class="num">US$ 411.940,00</td><td class="num">US$ 411.940,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 41 s</td></tr>
-              <tr><td class="num">26/10/2026</td><td class="num">1.402</td><td class="num">US$ 409.215,00</td><td class="num">US$ 409.215,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 44 s</td></tr>
-              <tr><td class="num">25/10/2026</td><td class="num">1.118</td><td class="num">US$ 404.880,00</td><td class="num">US$ 404.880,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 39 s</td></tr>
-              <tr><td class="num">24/10/2026</td><td class="num">1.566</td><td class="num">US$ 402.130,00</td><td class="num">US$ 402.130,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 47 s</td></tr>
-              <tr><td class="num">23/10/2026</td><td class="num">1.239</td><td class="num">US$ 398.710,00</td><td class="num">US$ 398.710,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 40 s</td></tr>
-              <tr><td class="num">22/10/2026</td><td class="num">1.097</td><td class="num">US$ 395.460,00</td><td class="num">US$ 395.460,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 38 s</td></tr>
-              <tr><td class="num">21/10/2026</td><td class="num">1.321</td><td class="num">US$ 390.900,00</td><td class="num">US$ 390.900,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 42 s</td></tr>
+              <tr><td class="num">27/10/2026</td><td class="num">212</td><td class="num">3.214</td><td class="num">US$ 248.310,00</td><td class="num">US$ 248.310,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 2 min 14 s</td><td><span class="badge st-ativo">Liberadas</span></td></tr>
+              <tr><td class="num">26/10/2026</td><td class="num">211</td><td class="num">3.070</td><td class="num">US$ 201.868,00</td><td class="num">US$ 201.868,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 2 min 02 s</td><td><span class="badge st-ativo">Liberadas</span></td></tr>
+              <tr><td class="num">25/10/2026</td><td class="num">210</td><td class="num">3.012</td><td class="num">US$ 206.150,00</td><td class="num">US$ 206.150,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 1 min 58 s</td><td><span class="badge st-ativo">Liberadas</span></td></tr>
+              <tr><td class="num">24/10/2026</td><td class="num">209</td><td class="num">2.990</td><td class="num">US$ 213.480,00</td><td class="num">US$ 213.480,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 2 min 05 s</td><td><span class="badge st-ativo">Liberadas</span></td></tr>
+              <tr><td class="num">23/10/2026</td><td class="num">208</td><td class="num">2.941</td><td class="num">US$ 207.900,00</td><td class="num">US$ 207.900,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 2 min 00 s</td><td><span class="badge st-ativo">Liberadas</span></td></tr>
+              <tr><td class="num">22/10/2026</td><td class="num">206</td><td class="num">2.905</td><td class="num">US$ 205.200,00</td><td class="num">US$ 205.200,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 1 min 57 s</td><td><span class="badge st-ativo">Liberadas</span></td></tr>
+              <tr><td class="num">21/10/2026</td><td class="num">204</td><td class="num">2.860</td><td class="num">US$ 198.350,00</td><td class="num">US$ 198.350,00</td><td class="num">US$ 0,00 <span class="badge badge-ok"><i data-icon="check"></i>ok</span></td><td class="num">03:00 · 1 min 55 s</td><td><span class="badge st-ativo">Liberadas</span></td></tr>
             </tbody>
           </table>
-          <div class="table-foot"><span>Ledger (partidas dobradas, append-only) × <code>wallet_balances</code> materializado por trigger. 7 de 7 dias sem divergência.</span><button class="btn btn-sm" data-toast="Reconciliação executada agora: 612.904 lançamentos · divergência US$ 0,00"><i data-icon="refresh"></i>Executar agora</button></div>
+          <div class="table-foot"><span>7 de 7 dias sem divergência · 1 divergência no mês (14/10, resolvida em 6 h 40) · 226 execuções desde 15/03 · Bitcoin conferido em BTC, sem conversão</span><button class="btn btn-sm" data-toast="Reconciliação executada agora: 212 carteiras · divergência US$ 0,00 · 2 min 09 s"><i data-icon="refresh"></i>Executar agora</button></div>
         </div>
-        <div class="grid cols-3">
-          <div class="card"><div class="card-head"><h3>BTCPay · Bitcoin</h3><span class="badge badge-ok">ok</span></div><div class="card-body"><dl class="kv">
-            <dt>Invoices liquidadas</dt><dd><b>14</b> = 14 créditos · US$ 18.920 · Lightning 11 · on-chain 3</dd>
-            <dt>Expiradas</dt><dd>2 invoices BTC sem pagamento (janela de 10 min vencida) · nenhum crédito</dd>
-            <dt>Webhooks</dt><dd><code>InvoiceSettled</code> 14/14 assinados</dd>
-            <dt>Divergências</dt><dd>0</dd>
-          </dl></div></div>
-          <div class="card"><div class="card-head"><h3>Indexador on-chain · USDT/USDC</h3><span class="badge badge-ok">ok</span></div><div class="card-body"><dl class="kv">
-            <dt>Depósitos confirmados</dt><dd><b>38</b> = 38 créditos · US$ 41.300 · USDT 31 · USDC 7</dd>
-            <dt>Aguardando confirmações</dt><dd>2 · USDT Tron 12/19 blocos · USDC Base 18/30 blocos</dd>
-            <dt>Endereços</dt><dd>40 únicos, um por depósito · nenhum reutilizado</dd>
-            <dt>Divergências</dt><dd>0</dd>
-          </dl></div></div>
-          <div class="card"><div class="card-head"><h3>Carteira quente × fria</h3><span class="badge badge-ok">≈ 48 h</span></div><div class="card-body"><dl class="kv">
-            <dt>Quente</dt><dd><b>US$ 51.524</b> · cobre ≈ 48 h de saques (média 7 dias: US$ 23.400/dia) · alerta abaixo de 24 h</dd>
-            <dt>Fria</dt><dd><b>US$ 377.380</b> · multisig 2-de-3 · chaves separadas</dd>
-            <dt>Última reposição</dt><dd>25/10 · US$ 7.400 em USDT Polygon, fria → quente · Elisa F. + Marcos L.</dd>
-          </dl><button class="btn btn-sm mt-2" data-toast="Pedido de reposição fria → quente criado · exige 2 assinaturas">Solicitar reposição</button></div></div>
+        <div class="split">
+          <div class="card">
+            <div class="card-head"><h3>Execução de hoje · por carteira</h3><span class="muted small">6 maiores de 212</span></div>
+            <div class="table-wrap" style="border:0;border-radius:0">
+              <table class="table compact">
+                <thead><tr><th>Carteira</th><th>Rede</th><th class="num">Livro</th><th class="num">On-chain</th><th class="num">Divergência</th></tr></thead>
+                <tbody>
+                  <tr><td class="mono">lcr-4m2x9</td><td>Polygon</td><td class="num">54.120,00 USDT</td><td class="num">54.120,00 USDT</td><td class="num">0</td></tr>
+                  <tr><td class="mono">lcr-1k6p3</td><td>Polygon</td><td class="num">50.000,00 USDT<span class="sub">53.840 − 3.840 reembolsados</span></td><td class="num">50.000,00 USDT</td><td class="num">0</td></tr>
+                  <tr><td class="mono">lcr-5t6w1</td><td>Polygon</td><td class="num">23.280,00 USDT</td><td class="num">23.280,00 USDT</td><td class="num">0</td></tr>
+                  <tr><td class="mono">lcr-9f2k7</td><td>Polygon</td><td class="num">18.130,00 USDT</td><td class="num">18.130,00 USDT</td><td class="num">0</td></tr>
+                  <tr><td class="mono">lcr-7n3q8</td><td>Bitcoin</td><td class="num">0,26316 BTC</td><td class="num">0,26316 BTC</td><td class="num">0</td></tr>
+                  <tr><td class="mono">lcr-8v2c1</td><td>Polygon</td><td class="num">5.670,00 USDT<span class="sub">6.300 − 630 de comissão</span></td><td class="num">5.670,00 USDT</td><td class="num">0</td></tr>
+                </tbody>
+              </table>
+              <div class="table-foot"><span>Carteiras entregues saem da conferência: depois do key.shred o que acontece nelas é do vendedor.</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Indexadores</h3><span class="badge badge-ok">4 redes em dia</span></div>
+            <div class="card-body stack-sm">
+              <dl class="kv">
+                <dt>Polygon</dt><dd>bloco 78.412.903 · atraso 2 blocos · 12 confirmações ≈ 30 s</dd>
+                <dt>Tron</dt><dd>bloco 71.886.120 · atraso 1 bloco · 19 confirmações ≈ 1 min</dd>
+                <dt>Base</dt><dd>bloco 37.904.551 · atraso 3 blocos · 12 confirmações ≈ 30 s</dd>
+                <dt>Bitcoin</dt><dd>bloco 923.418 · em dia · 2 confirmações ≈ 20 min</dd>
+                <dt>Agora</dt><dd>6 pagamentos aguardando confirmação (US$ 1.930) · 9 reembolsos aguardando confirmação (lcr-8c1v3)</dd>
+              </dl>
+              <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Última divergência · 14/10 · US$ 120,00 · lcr-7p4d2 (Tron)</span>Pagamento marcado como confirmado com 18 de 19 blocos por reorganização da rede. Finalizações bloqueadas das 03:00 às 09:40; o indexador reprocessou e o pagamento confirmou. Incidente INC-0007 · Elisa F. · registrado na auditoria.</div></div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- ====================== Ledger ====================== -->
-      <div class="tab-panel" data-panel="ledger">
-        <div class="toolbar">
-          <div class="search"><i data-icon="search"></i><input class="input mono" placeholder="conta, ref ou txid…" value="wallet:coruja-7f3a"></div>
-          <select class="select"><option>Todos os tipos</option><option>Depósito</option><option>Compra / apoio</option><option>Liquidação</option><option>Comissão</option><option>Reembolso</option><option>Saque</option></select>
-          <select class="select"><option>Últimos 7 dias</option><option>Hoje</option><option>30 dias</option><option>Período…</option></select>
-          <div class="right"><button class="btn btn-sm" data-toast="Extrato exportado (CSV) · 10 lançamentos filtrados"><i data-icon="download"></i>Exportar</button></div>
+      <!-- ====================== Fundo de garantia ====================== -->
+      <div class="tab-panel" data-panel="fundo">
+        <div class="stat-grid mb-3">
+          <div class="stat"><span class="label">Saldo on-chain do fundo</span><span class="value">US$ 3.424,40</span><span class="delta flat">0x9f0a…d4e7 · Polygon · USDT · multisig 2-de-3</span></div>
+          <div class="stat"><span class="label">Entradas no mês</span><span class="value">US$ 497,80</span><span class="delta flat">2 % de US$ 24.890 · 23 comissões</span></div>
+          <div class="stat"><span class="label">Saídas no mês</span><span class="value">US$ 50,00</span><span class="delta flat">1 · DSP-0203 · reclamação depois da finalização</span></div>
+          <div class="stat"><span class="label">Cobertura</span><span class="value">138 %</span><span class="delta up"><i data-icon="shield-check"></i>meta: 1 % do valor em carteiras ativas (US$ 2.483)</span></div>
         </div>
-        <div class="table-wrap">
-          <table class="table ledger">
-            <thead><tr><th>Quando</th><th>Débito</th><th>Crédito</th><th class="num">Valor (USDT = US$)</th><th>Ref</th><th>Memo</th></tr></thead>
-            <tbody>
-              <tr><td>27/10 08:02:11</td><td>wallet:sextante-21c9</td><td>payout:pending</td><td class="num">9.800,00</td><td>PO-7781</td><td class="memo">Saque BTC on-chain solicitado · endereço validado · lote 15:00</td></tr>
-              <tr><td>26/10 23:59:00</td><td>escrow:lcr-5m8c4</td><td>wallet:coruja-7f3a</td><td class="num">135,00</td><td>ORD-5m8c4-0086</td><td class="memo">Liquidação de venda · fim da janela de disputa (72 h)</td></tr>
-              <tr><td>26/10 23:59:00</td><td>escrow:lcr-5m8c4</td><td>platform:fees</td><td class="num">15,00</td><td>ORD-5m8c4-0086</td><td class="memo">Comissão 10 %</td></tr>
-              <tr><td>26/10 23:59:00</td><td>platform:fees</td><td>platform:guarantee_fund</td><td class="num">0,30</td><td>ORD-5m8c4-0086</td><td class="memo">2 % da comissão → fundo de garantia</td></tr>
-              <tr><td>25/10 18:40:27</td><td>wallet:coruja-7f3a</td><td>escrow:lcr-6d1k5</td><td class="num">190,00</td><td>SUB-6d1k5-0213</td><td class="memo">Assinatura mensal · preço travado US$ 190</td></tr>
-              <tr><td>25/10 16:12:03</td><td>wallet:coruja-7f3a</td><td>escrow:lcr-4m2x9</td><td class="num">150,00</td><td>PLG-4m2x9-1187</td><td class="memo">Apoio ao lacre coletivo · devolve se a meta não bater até 15/11</td></tr>
-              <tr><td>24/10 11:03:49</td><td>external:btcpay</td><td>wallet:coruja-7f3a</td><td class="num">500,00</td><td>INV-8k2m77qx</td><td class="memo">Depósito Bitcoin Lightning · 0,00731 BTC → 500 USDT · invoice liquidada</td></tr>
-              <tr><td>22/10 09:51:30</td><td>wallet:coruja-7f3a</td><td>escrow:lcr-4m2x9</td><td class="num">100,00</td><td>PLG-4m2x9-1143</td><td class="memo">Apoio ao lacre coletivo</td></tr>
-              <tr><td>21/10 15:27:18</td><td>wallet:coruja-7f3a</td><td>escrow:lcr-9f2k7</td><td class="num">490,00</td><td>ORD-9f2k7-0037</td><td class="memo">Compra de cópia · 37/100 · entrega imediata no cofre</td></tr>
-              <tr><td>20/10 10:15:52</td><td>external:chain:polygon</td><td>wallet:coruja-7f3a</td><td class="num">1.455,00</td><td>0x3f9a…c21e</td><td class="memo">Depósito USDT Polygon · 128 confirmações · endereço único</td></tr>
-            </tbody>
-          </table>
-          <div class="table-foot"><span>Mostrando 10 de 612.904 · nenhum lançamento é alterado ou apagado; correções são novos lançamentos</span><div class="pagination"><button class="btn btn-sm">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">2</button><button class="btn btn-sm">3</button><button class="btn btn-sm">›</button></div></div>
+        <div class="split">
+          <div class="card">
+            <div class="card-head"><h3>Entradas por mês · 2 % das comissões</h3><span class="muted small">desde 15/03/2026</span></div>
+            <div class="table-wrap" style="border:0;border-radius:0">
+              <table class="table compact">
+                <thead><tr><th>Mês</th><th class="num">Comissões</th><th class="num">Entrada (2 %)</th><th class="num">Saídas</th></tr></thead>
+                <tbody>
+                  <tr><td>Março (desde 15/03)</td><td class="num">US$ 3.100,00</td><td class="num">US$ 62,00</td><td class="num">—</td></tr>
+                  <tr><td>Abril</td><td class="num">US$ 9.400,00</td><td class="num">US$ 188,00</td><td class="num">—</td></tr>
+                  <tr><td>Maio</td><td class="num">US$ 14.800,00</td><td class="num">US$ 296,00</td><td class="num">—</td></tr>
+                  <tr><td>Junho</td><td class="num">US$ 21.300,00</td><td class="num">US$ 426,00</td><td class="num">—</td></tr>
+                  <tr><td>Julho</td><td class="num">US$ 28.900,00</td><td class="num">US$ 578,00</td><td class="num">US$ 180,00<span class="sub">lcr-0f5t7 · retirado após a finalização</span></td></tr>
+                  <tr><td>Agosto</td><td class="num">US$ 36.400,00</td><td class="num">US$ 728,00</td><td class="num">—</td></tr>
+                  <tr><td>Setembro</td><td class="num">US$ 46.830,00</td><td class="num">US$ 936,60</td><td class="num">US$ 58,00<span class="sub">DSP-0183</span></td></tr>
+                  <tr><td>Outubro (até 27)</td><td class="num">US$ 24.890,00</td><td class="num">US$ 497,80</td><td class="num">US$ 50,00<span class="sub">DSP-0203</span></td></tr>
+                </tbody>
+              </table>
+              <div class="table-foot"><span>Total: comissões US$ 185.620 · entradas US$ 3.712,40 · saídas US$ 288,00 · saldo on-chain US$ 3.424,40 (confere na reconciliação)</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Quando o fundo paga</h3></div>
+            <div class="card-body stack-sm">
+              <dl class="kv labels">
+                <dt>Item retirado depois da finalização</dt><dd>Compradores reembolsados pelo fundo, ao endereço de origem registrado no pagamento, porque o dinheiro já está com o vendedor.</dd>
+                <dt>Disputa procedente depois da finalização</dt><dd>Idem. Ex.: DSP-0203, lcr-2d9r4, US$ 50 em 10/10: reclamação aceita fora das 72 h, item já finalizado.</dd>
+                <dt>Antes da finalização</dt><dd>Nunca. O reembolso sai da carteira do item (ex.: DSP-0199, lcr-5m8c4, US$ 150 em 01/10). Disputa aberta nas 72 h adia a finalização até a decisão.</dd>
+                <dt>Lacre que falha, pedido que expira</dt><dd>Nunca. Cada pagamento volta da carteira do item, sem comissão.</dd>
+                <dt>Movimentar</dt><dd>2 assinaturas (Elisa F. + Marcos L.) · evento <code>fund.payout</code> na auditoria com o número da disputa ou da denúncia.</dd>
+              </dl>
+              <div class="table-wrap" style="border:0;border-radius:0">
+                <table class="table compact">
+                  <thead><tr><th>Saída</th><th>Motivo</th><th class="num">Valor</th><th>txid</th></tr></thead>
+                  <tbody>
+                    <tr><td class="num">10/10</td><td class="small">DSP-0203 · lcr-2d9r4 · reclamação depois da finalização · 1 apoiador</td><td class="num">US$ 50,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2d9r…51fe</a></td></tr>
+                    <tr><td class="num">03/09</td><td class="small">DSP-0183 · lcr-2m8w3 · disputa depois da finalização · 1 comprador</td><td class="num">US$ 58,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x4e07…b6c1</a></td></tr>
+                    <tr><td class="num">22/07</td><td class="small">lcr-0f5t7 · retirado após a finalização (R02) · 3 compradores</td><td class="num">US$ 180,00</td><td class="addr"><a href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9a3d…e58f</a></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <button class="btn btn-sm" data-toast="Proposta de saída do fundo criada · exige disputa ou denúncia decidida e 2 assinaturas"><i data-icon="hand-coins"></i>Propor saída do fundo</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- modal: executar finalização com 2 aprovações -->
+    <div class="modal-backdrop" id="m-finalizar"><div class="modal">
+      <div class="modal-head"><h3>Executar finalização · lcr-7n3q8</h3><button class="icon-btn" data-modal-close><i data-icon="x"></i></button></div>
+      <div class="modal-body stack">
+        <p class="small"><b>Estudo de viabilidade de 14 parques eólicos no Ceará (2025), com modelos financeiros</b> · Exclusivo · <span class="handle" data-handle="bussola-c4e1"></span> · vendido em 23/10 por US$ 18.000 · janela de disputa de 72 h venceu em 26/10 10:15 · nenhuma disputa aberta.</p>
+        <dl class="kv">
+          <dt>Carteira do item</dt><dd><span class="addr">bc1q…7x3f</span> · Bitcoin · 0,26316 BTC on-chain (US$ 18.000,00)</dd>
+          <dt>1 · Comissão</dt><dd>US$ 1.800,00 (0,02632 BTC) → carteira da plataforma <span class="addr">bc1q…c4d9</span> · taxa de rede ≈ US$ 2,10, paga pela plataforma</dd>
+          <dt>2 · Reembolsos</dt><dd>Nenhum pendente</dd>
+          <dt>3 · Entrega</dt><dd>US$ 16.200,00 ficam na carteira do item; o vendedor recebe a frase de recuperação em "Carteiras dos itens", após senha + TOTP</dd>
+          <dt>4 · Chave</dt><dd>Destruída no HSM logo após a entrega · <code>key.shred</code> na auditoria</dd>
+        </dl>
+        <div class="alert alert-warn"><i data-icon="users"></i><div>Acima de US$ 15.000: duas pessoas. <span class="sign"><i data-icon="check-circle"></i>Marcos L. · 08:31</span> · <span class="sign"><i data-icon="hourglass"></i>Elisa F. · pendente (você)</span>. Reconciliação de 27/10 sem divergência · chaves vivas = carteiras em andamento · conta sem bloqueio.</div></div>
+        <label class="check"><input type="checkbox"><span>Confirmo os valores acima e o destino da comissão.<span class="desc">Registrado como <code>wallet.settle.approve</code> com hash encadeado; com a 2ª aprovação o HSM assina a transferência.</span></span></label>
+      </div>
+      <div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-primary" data-modal-close data-toast="2ª aprovação registrada · comissão de 0,02632 BTC enviada (txid em instantes) · @bussola-c4e1 avisado para receber a carteira"><i data-icon="stamp"></i>Registrar 2ª aprovação e executar</button></div>
+    </div></div>
   </main>
 </body>
 </html>

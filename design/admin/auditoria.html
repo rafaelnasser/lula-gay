@@ -39,7 +39,7 @@
 
     <div class="stat-grid mb-3">
       <div class="stat"><span class="label">Eventos na cadeia</span><span class="value">48.212</span><span class="delta flat">desde 15/03/2026</span></div>
-      <div class="stat"><span class="label">Hoje</span><span class="value">212</span><span class="delta flat">6 pessoas · 14 tipos de ação</span></div>
+      <div class="stat"><span class="label">Hoje</span><span class="value">212</span><span class="delta flat">6 pessoas, 3 serviços · 16 tipos de ação</span></div>
       <div class="stat"><span class="label">Última verificação</span><span class="value ok">íntegra</span><span class="delta flat">27/10 · 06:00 · automática, diária</span></div>
       <div class="stat"><span class="label">Último hash</span><span class="value mono" style="font-size:var(--fs-md)">4e91…7b2d</span><span class="delta flat"><button class="btn btn-sm btn-ghost" data-copy="4e91c0a7d33f8b5e2a6c9d1f0e4b7a8c3d5f6e2b1a9c8d7e6f5a4b3c2d1e0f7b2d"><i data-icon="copy"></i>copiar completo</button></span></div>
     </div>
@@ -48,7 +48,7 @@
       <div class="card-body">
         <div class="grid cols-4">
           <div class="field"><label for="f-pessoa">Pessoa</label><select id="f-pessoa" class="select"><option>Todas</option><option>Ana R. · Curadora sênior</option><option>Bruno M. · Curador</option><option>Carla S. · Jurídico</option><option>Diego T. · Publicação</option><option>Elisa F. · Financeiro</option><option>Marcos L. · Administrador</option></select></div>
-          <div class="field"><label for="f-acao">Ação</label><select id="f-acao" class="select"><option>Todas</option><option>review.* (análise)</option><option>asset.* (conteúdo e redação)</option><option>listing.* (itens)</option><option>account.* (contas)</option><option>dispute.* (disputas)</option><option>legal.* (jurídico)</option><option>social.* (publicação)</option><option>payout.* (saques)</option><option>settings.* (configurações)</option><option>auth.* (acesso da equipe)</option></select></div>
+          <div class="field"><label for="f-acao">Ação</label><select id="f-acao" class="select"><option>Todas</option><option>review.* (análise)</option><option>asset.* (conteúdo e redação)</option><option>listing.* (itens)</option><option>account.* (contas)</option><option>dispute.* (disputas)</option><option>legal.* (jurídico)</option><option>social.* (publicação)</option><option>wallet.* (carteiras de itens)</option><option>key.* (chaves no HSM)</option><option>refund.* (reembolsos)</option><option>settings.* (configurações)</option><option>auth.* (acesso da equipe)</option></select></div>
           <div class="field"><label for="f-per">Período</label><select id="f-per" class="select"><option>Últimos 30 dias</option><option>Hoje</option><option>7 dias</option><option>Personalizado…</option></select></div>
           <div class="field"><label for="f-alvo">Alvo</label><input id="f-alvo" class="input mono" placeholder="lcr-…, DN-…, DS-…, @pseudônimo"></div>
         </div>
@@ -61,12 +61,76 @@
         <thead><tr><th>Data/hora</th><th>Pessoa</th><th>Ação</th><th>Alvo</th><th>Antes → depois</th><th>Hash (prev → atual)</th></tr></thead>
         <tbody>
           <tr>
+            <td class="num">27/10 · 10:20:14</td>
+            <td><span class="person">Bruno M.<small>Curador</small></span></td>
+            <td><span class="tag">review.second.start</span></td>
+            <td class="mono">lcr-6b2v7</td>
+            <td class="diff">—<span class="arr">→</span>2ª análise iniciada · notas de Ana R. ocultas até concluir</td>
+            <td><span class="chain">a8c5…0f6e<span class="arr">→</span><b>4e91…7b2d</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 10:15:52</td>
+            <td><span class="person">Sistema<small>HSM · ordem da API</small></span></td>
+            <td><span class="tag">key.shred</span></td>
+            <td class="mono">lcr-9t4c1</td>
+            <td class="diff">chave viva<span class="arr">→</span>destruída · atestado 9b1e…40cf · a plataforma não movimenta mais a carteira</td>
+            <td><span class="chain">6b0d…e415<span class="arr">→</span><b>a8c5…0f6e</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 10:15:50</td>
+            <td><span class="handle" data-handle="arquivista-0d2e"></span><span class="sub">vendedor · senha + TOTP</span></td>
+            <td><span class="tag">key.reveal</span></td>
+            <td class="mono">lcr-9t4c1</td>
+            <td class="diff">—<span class="arr">→</span>frase de recuperação exibida uma única vez · US$ 10.800 na carteira do item</td>
+            <td><span class="chain">2f7a…91c3<span class="arr">→</span><b>6b0d…e415</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 10:05:07</td>
+            <td><span class="person">Elisa F.<small>Financeiro</small></span></td>
+            <td><span class="tag">refund.batch.approve</span></td>
+            <td class="mono">lcr-8c1v3</td>
+            <td class="diff">24 reembolsos na fila · meta não batida em 26/10<span class="arr">→</span>lote RB-1027-02 aprovado · US$ 2.140 · Polygon · enviado às 10:06 · nada é cobrado</td>
+            <td><span class="chain">c9e4…2d70<span class="arr">→</span><b>2f7a…91c3</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 09:40:21</td>
+            <td><span class="person">Sistema<small>settlement-job</small></span></td>
+            <td><span class="tag">wallet.settle</span></td>
+            <td class="mono">lcr-9t4c1</td>
+            <td class="diff">janela de 72 h vencida · US$ 12.000 (1 pagamento)<span class="arr">→</span>finalizada · comissão US$ 1.200 (txid 0x9t4c…2e7b) · 0 reembolsos · líquido US$ 10.800</td>
+            <td><span class="chain">7d2e…43a8<span class="arr">→</span><b>c9e4…2d70</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 09:35:40</td>
+            <td><span class="person">Carla S.<small>Jurídico</small></span></td>
+            <td><span class="tag">legal.order.receive</span></td>
+            <td class="mono">OJ-2026-014</td>
+            <td class="diff">—<span class="arr">→</span>ordem judicial recebida em juridico@ · prazo de resposta 05/11</td>
+            <td><span class="chain">f06a…b9c1<span class="arr">→</span><b>7d2e…43a8</b></span></td>
+          </tr>
+          <tr>
             <td class="num">27/10 · 09:14:02</td>
             <td><span class="person">Ana R.<small>Curadora sênior</small></span></td>
             <td><span class="tag">report.decision.propose</span></td>
             <td class="mono">DN-2041 · lcr-2n8v4</td>
             <td class="diff">—<span class="arr">→</span>nova versão com redação (v2) · aguarda registro</td>
-            <td><span class="chain">a8c5…0f6e<span class="arr">→</span><b>4e91…7b2d</b></span></td>
+            <td><span class="chain">1c3f…58d7<span class="arr">→</span><b>f06a…b9c1</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 08:31:18</td>
+            <td><span class="person">Marcos L.<small>Administrador</small></span></td>
+            <td><span class="tag">wallet.settle.approve</span></td>
+            <td class="mono">lcr-7n3q8</td>
+            <td class="diff">elegível desde 26/10 10:15 · US$ 18.000<span class="arr">→</span>1ª de 2 aprovações (acima de US$ 15.000) · aguarda Elisa F.</td>
+            <td><span class="chain">94b1…e6a0<span class="arr">→</span><b>1c3f…58d7</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 08:12:03</td>
+            <td><span class="person">Marcos L.<small>Administrador</small></span></td>
+            <td><span class="tag">listing.suspend</span></td>
+            <td class="mono">lcr-8s1d4</td>
+            <td class="diff">ativo<span class="arr">→</span>suspenso (preventivo) · denúncia pública · compras pausadas · carteira do item mantida</td>
+            <td><span class="chain">d5e8…72f4<span class="arr">→</span><b>94b1…e6a0</b></span></td>
           </tr>
           <tr>
             <td class="num">27/10 · 08:05:41</td>
@@ -74,119 +138,143 @@
             <td><span class="tag">auth.login.totp</span></td>
             <td class="mono">staff:ana-r</td>
             <td class="diff">—<span class="arr">→</span>sessão de 8 h · passkey + TOTP</td>
-            <td><span class="chain">7d2e…43a8<span class="arr">→</span><b>a8c5…0f6e</b></span></td>
+            <td><span class="chain">0a7c…d93b<span class="arr">→</span><b>d5e8…72f4</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 03:00:41</td>
+            <td><span class="person">Sistema<small>settlement-job</small></span></td>
+            <td><span class="tag">wallet.settle</span></td>
+            <td class="mono">lcr-8v2c1</td>
+            <td class="diff">vendas encerradas em 23/10 · US$ 6.300 (105 pagamentos)<span class="arr">→</span>finalizada · comissão US$ 630 (txid 0x3e8b…51ab) · 0 reembolsos · líquido US$ 5.670 · aguarda o vendedor receber a frase</td>
+            <td><span class="chain">5c2a…e71f<span class="arr">→</span><b>0a7c…d93b</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 03:00:38</td>
+            <td><span class="person">Sistema<small>settlement-job</small></span></td>
+            <td><span class="tag">wallet.settle</span></td>
+            <td class="mono">lcr-2f8n5</td>
+            <td class="diff">lacre rompido em 24/10 · US$ 7.400 (241 apoios)<span class="arr">→</span>finalizada · comissão US$ 740 (txid 0x2f8n…6c40) · 0 reembolsos · líquido US$ 6.660 · aguarda o vendedor</td>
+            <td><span class="chain">3e77…b0c4<span class="arr">→</span><b>5c2a…e71f</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 03:00:12</td>
+            <td><span class="person">Sistema<small>refund-job</small></span></td>
+            <td><span class="tag">refund.batch</span></td>
+            <td class="mono">lcr-1k6p3</td>
+            <td class="diff">142 apoios na fila (buyout em 26/10)<span class="arr">→</span>lote RB-1027-01 · 142 reembolsos · US$ 3.840 · Polygon · todos confirmados às 03:41</td>
+            <td><span class="chain">6f14…ce28<span class="arr">→</span><b>3e77…b0c4</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">26/10 · 19:20:05</td>
+            <td><span class="person">Diego T.<small>Publicação</small></span></td>
+            <td><span class="tag">social.post.schedule</span></td>
+            <td class="mono">lcr-4g7h9</td>
+            <td class="diff">rascunho<span class="arr">→</span>na fila de publicação · 28/10 14:00 · X, Telegram, Bluesky</td>
+            <td><span class="chain">b83e…1a5d<span class="arr">→</span><b>6f14…ce28</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">26/10 · 19:12:33</td>
+            <td><span class="person">Sistema<small>hsm-worker</small></span></td>
+            <td><span class="tag">wallet.create</span></td>
+            <td class="mono">lcr-4g7h9</td>
+            <td class="diff">—<span class="arr">→</span>carteira HD em Polygon criada no HSM · xpub registrado · endereço 0x4g7h…e3b9 publicado na prova</td>
+            <td><span class="chain">2d6b…97f0<span class="arr">→</span><b>b83e…1a5d</b></span></td>
           </tr>
           <tr>
             <td class="num">26/10 · 17:48:19</td>
             <td><span class="person">Marcos L.<small>Administrador</small></span></td>
             <td><span class="tag">settings.limit.update</span></td>
-            <td class="mono">antifraude.saque.conta_nova</td>
-            <td class="diff">US$ 1.500/dia<span class="arr">→</span>US$ 2.000/dia</td>
-            <td><span class="chain">f06a…b9c1<span class="arr">→</span><b>7d2e…43a8</b></span></td>
+            <td class="mono">finalizacao.aprovacao_dupla</td>
+            <td class="diff">US$ 25.000<span class="arr">→</span>US$ 15.000</td>
+            <td><span class="chain">e9a0…4c75<span class="arr">→</span><b>2d6b…97f0</b></span></td>
           </tr>
           <tr>
-            <td class="num">26/10 · 16:20:33</td>
-            <td><span class="person">Diego T.<small>Publicação</small></span></td>
-            <td><span class="tag">social.post.schedule</span></td>
+            <td class="num">26/10 · 16:30:48</td>
+            <td><span class="person">Ana R.<small>Curadora sênior</small></span></td>
+            <td><span class="tag">review.decision.approve_with_changes</span></td>
             <td class="mono">lcr-4g7h9</td>
-            <td class="diff">rascunho<span class="arr">→</span>agendado 28/10 14:05 · X, Telegram, Bluesky</td>
-            <td><span class="chain">1c3f…58d7<span class="arr">→</span><b>f06a…b9c1</b></span></td>
-          </tr>
-          <tr>
-            <td class="num">26/10 · 15:02:10</td>
-            <td><span class="person">Elisa F.<small>Financeiro</small></span></td>
-            <td><span class="tag">payout.batch.approve</span></td>
-            <td class="mono">lote 26/10 15:00</td>
-            <td class="diff">5 saques · US$ 18.340 · 1ª assinatura<span class="arr">→</span>2ª assinatura (Marcos L.) · enviados</td>
-            <td><span class="chain">94b1…e6a0<span class="arr">→</span><b>1c3f…58d7</b></span></td>
-          </tr>
-          <tr>
-            <td class="num">26/10 · 11:40:57</td>
-            <td><span class="person">Bruno M.<small>Curador</small></span></td>
-            <td><span class="tag">review.decision.approve</span></td>
-            <td class="mono">lcr-4g7h9</td>
-            <td class="diff">em análise<span class="arr">→</span>aprovado · Verificado parcialmente · publicado 28/10 14:00</td>
-            <td><span class="chain">d5e8…72f4<span class="arr">→</span><b>94b1…e6a0</b></span></td>
+            <td class="diff">em análise<span class="arr">→</span>aprovado com ajustes · título reescrito · publica quando o vendedor aceitar (aceito às 19:12)</td>
+            <td><span class="chain">51f3…b8d2<span class="arr">→</span><b>e9a0…4c75</b></span></td>
           </tr>
           <tr>
             <td class="num">26/10 · 11:05:12</td>
             <td><span class="person">Bruno M.<small>Curador</small></span></td>
             <td><span class="tag">review.decision.request_changes</span></td>
             <td class="mono">lcr-2z5q7</td>
-            <td class="diff">em análise<span class="arr">→</span>ajustes solicitados · prévia expõe coordenadas exatas</td>
-            <td><span class="chain">0a7c…d93b<span class="arr">→</span><b>d5e8…72f4</b></span></td>
+            <td class="diff">em análise<span class="arr">→</span>ajustes solicitados · R11 · prévia expõe coordenadas exatas</td>
+            <td><span class="chain">c47d…09ae<span class="arr">→</span><b>51f3…b8d2</b></span></td>
           </tr>
           <tr>
-            <td class="num">26/10 · 10:15:48</td>
-            <td><span class="person">Ana R.<small>Curadora sênior</small></span></td>
-            <td><span class="tag">review.second.start</span></td>
-            <td class="mono">lcr-6b2v7</td>
-            <td class="diff">—<span class="arr">→</span>2ª análise iniciada · notas de Bruno M. ocultas</td>
-            <td><span class="chain">5c2a…e71f<span class="arr">→</span><b>0a7c…d93b</b></span></td>
+            <td class="num">26/10 · 09:50:26</td>
+            <td><span class="person">Elisa F.<small>Financeiro</small></span></td>
+            <td><span class="tag">wallet.reconcile.close</span></td>
+            <td class="mono">reconciliacao-2026-10-26</td>
+            <td class="diff">212 carteiras · execução 03:00<span class="arr">→</span>livro de pagamentos = saldo on-chain · divergência US$ 0,00 · finalizações liberadas</td>
+            <td><span class="chain">8e02…f61b<span class="arr">→</span><b>c47d…09ae</b></span></td>
           </tr>
           <tr>
-            <td class="num">26/10 · 09:12:40</td>
-            <td><span class="person">Marcos L.<small>Administrador</small></span></td>
-            <td><span class="tag">settings.countries.block</span></td>
-            <td class="mono">paises.bloqueio.deposito_saque</td>
-            <td class="diff">KP, IR, SY<span class="arr">→</span>KP, IR, SY, CU · sanções · sede a definir</td>
-            <td><span class="chain">6f14…ce28<span class="arr">→</span><b>5c2a…e71f</b></span></td>
+            <td class="num">25/10 · 10:12:48</td>
+            <td><span class="person">Sistema<small>HSM · ordem da API</small></span></td>
+            <td><span class="tag">key.shred</span></td>
+            <td class="mono">lcr-9d3x2</td>
+            <td class="diff">chave viva<span class="arr">→</span>destruída · atestado 5a40…7f1b · a plataforma não movimenta mais a carteira</td>
+            <td><span class="chain">3b9f…a2c7<span class="arr">→</span><b>8e02…f61b</b></span></td>
           </tr>
           <tr>
-            <td class="num">25/10 · 09:40:05</td>
-            <td><span class="person">Carla S.<small>Jurídico</small></span></td>
-            <td><span class="tag">legal.opinion</span></td>
-            <td class="mono">DN-2041 · lcr-2n8v4</td>
-            <td class="diff">—<span class="arr">→</span>aprovar com redação · fundamento registrado</td>
-            <td><span class="chain">b83e…1a5d<span class="arr">→</span><b>6f14…ce28</b></span></td>
-          </tr>
-          <tr>
-            <td class="num">24/10 · 14:32:26</td>
-            <td><span class="person">Ana R.<small>Curadora sênior</small></span></td>
-            <td><span class="tag">listing.suspend</span></td>
-            <td class="mono">lcr-2n8v4</td>
-            <td class="diff">ativo<span class="arr">→</span>suspenso (preventivo) · DN-2041</td>
-            <td><span class="chain">2d6b…97f0<span class="arr">→</span><b>b83e…1a5d</b></span></td>
-          </tr>
-          <tr>
-            <td class="num">23/10 · 16:10:39</td>
-            <td><span class="person">Ana R.<small>Curadora sênior</small></span></td>
-            <td><span class="tag">dispute.resolve</span></td>
-            <td class="mono">DS-0312 · lcr-3c7r8</td>
-            <td class="diff">em análise<span class="arr">→</span>reembolso parcial US$ 95,00 · nota registrada</td>
-            <td><span class="chain">e9a0…4c75<span class="arr">→</span><b>2d6b…97f0</b></span></td>
+            <td class="num">25/10 · 10:12:46</td>
+            <td><span class="handle" data-handle="lanterna-b31d"></span><span class="sub">vendedor · senha + TOTP</span></td>
+            <td><span class="tag">key.reveal</span></td>
+            <td class="mono">lcr-9d3x2</td>
+            <td class="diff">—<span class="arr">→</span>frase de recuperação exibida uma única vez na sessão do vendedor</td>
+            <td><span class="chain">7a1c…d4e9<span class="arr">→</span><b>3b9f…a2c7</b></span></td>
           </tr>
           <tr>
             <td class="num">22/10 · 10:02:51</td>
             <td><span class="person">Marcos L.<small>Administrador</small></span></td>
             <td><span class="tag">account.restrict</span></td>
             <td><span class="handle" data-handle="granito-55ab"></span></td>
-            <td class="diff">ativa<span class="arr">→</span>restrita (saques) até 10/11 · 2 disputas perdidas</td>
-            <td><span class="chain">51f3…b8d2<span class="arr">→</span><b>e9a0…4c75</b></span></td>
+            <td class="diff">ativa<span class="arr">→</span>restrita (finalizações) até 10/11 · 2 disputas perdidas · pagamentos e reembolsos continuam</td>
+            <td><span class="chain">9c5e…02b8<span class="arr">→</span><b>7a1c…d4e9</b></span></td>
           </tr>
           <tr>
             <td class="num">20/10 · 09:30:14</td>
             <td><span class="person">Marcos L.<small>Administrador</small></span></td>
             <td><span class="tag">account.ban</span></td>
             <td><span class="handle" data-handle="espelho-c9d2"></span></td>
-            <td class="diff">restrita<span class="arr">→</span>banida · R04 credenciais · saldo US$ 310 retido</td>
-            <td><span class="chain">c47d…09ae<span class="arr">→</span><b>51f3…b8d2</b></span></td>
+            <td class="diff">restrita<span class="arr">→</span>banida · R04 credenciais · nenhuma carteira de item a reembolsar</td>
+            <td><span class="chain">4d71…a3e6<span class="arr">→</span><b>9c5e…02b8</b></span></td>
           </tr>
           <tr>
-            <td class="num">17/10 · 11:20:08</td>
-            <td><span class="person">Carla S.<small>Jurídico</small></span></td>
-            <td><span class="tag">legal.lgpd.open</span></td>
-            <td class="mono">LG-0107 · lcr-6b2v7</td>
-            <td class="diff">—<span class="arr">→</span>em análise jurídica · prazo 01/11</td>
-            <td><span class="chain">8e02…f61b<span class="arr">→</span><b>c47d…09ae</b></span></td>
+            <td class="num">12/10 · 15:40:09</td>
+            <td><span class="person">Ana R.<small>Curadora sênior</small></span></td>
+            <td><span class="tag">dispute.resolve</span></td>
+            <td class="mono">DSP-0202 · lcr-3c7r8</td>
+            <td class="diff">em análise<span class="arr">→</span>reembolso parcial US$ 95,00 ao endereço de origem, da carteira do item · refund na fila</td>
+            <td><span class="chain">0b2f…c8d1<span class="arr">→</span><b>4d71…a3e6</b></span></td>
           </tr>
           <tr>
-            <td class="num">03/10 · 15:48:33</td>
-            <td><span class="person">Carla S.<small>Jurídico</small></span></td>
-            <td><span class="tag">asset.redact.v2</span></td>
-            <td class="mono">lcr-9f2k7</td>
-            <td class="diff">v1<span class="arr">→</span>v2 · coluna representante_legal removida · LG-0094</td>
-            <td><span class="chain">3b9f…a2c7<span class="arr">→</span><b>8e02…f61b</b></span></td>
+            <td class="num">11/10 · 18:22:51</td>
+            <td><span class="person">Sistema<small>HSM · ordem da API</small></span></td>
+            <td><span class="tag">key.shred</span></td>
+            <td class="mono">ped-1b6j8</td>
+            <td class="diff">chave viva<span class="arr">→</span>destruída · carteira do pedido entregue a @cartografo-5a77 (key.reveal 18:22:49)</td>
+            <td><span class="chain">e63a…57f0<span class="arr">→</span><b>0b2f…c8d1</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">05/10 · 18:42:17</td>
+            <td><span class="handle" data-handle="coruja-7f3a"></span><span class="sub">vendedor · senha + TOTP</span></td>
+            <td><span class="tag">key.reveal</span></td>
+            <td class="mono">lcr-5m8c4</td>
+            <td class="diff">—<span class="arr">→</span>frase de recuperação exibida uma única vez · key.shred às 18:42:19</td>
+            <td><span class="chain">5f9d…1b24<span class="arr">→</span><b>e63a…57f0</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">05/10 · 09:00:12</td>
+            <td><span class="person">Sistema<small>settlement-job</small></span></td>
+            <td><span class="tag">wallet.settle</span></td>
+            <td class="mono">lcr-5m8c4</td>
+            <td class="diff">vendas encerradas em 02/10 09:00 · US$ 13.350 (89 pagamentos)<span class="arr">→</span>finalizada · 1 reembolso US$ 150 (DSP-0199) · comissão US$ 1.320 (txid 0x1c3f…8a7d) · líquido US$ 11.880</td>
+            <td><span class="chain">a1c7…6e93<span class="arr">→</span><b>5f9d…1b24</b></span></td>
           </tr>
           <tr>
             <td class="num">01/10 · 09:00:00</td>
@@ -194,11 +282,11 @@
             <td><span class="tag">settings.policy.publish</span></td>
             <td class="mono">politica-conteudo</td>
             <td class="diff">v1.1<span class="arr">→</span>v1.2 (vigente)</td>
-            <td><span class="chain">7a1c…d4e9<span class="arr">→</span><b>3b9f…a2c7</b></span></td>
+            <td><span class="chain">72b0…d4f5<span class="arr">→</span><b>a1c7…6e93</b></span></td>
           </tr>
         </tbody>
       </table>
-      <div class="table-foot"><span>Mostrando 17 de 48.212 · do mais recente · o hash de cada linha é o <code>prev</code> da linha acima</span><div class="pagination"><button class="btn btn-sm">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">2</button><button class="btn btn-sm">3</button><button class="btn btn-sm">…</button><button class="btn btn-sm">›</button></div></div>
+      <div class="table-foot"><span>Mostrando 28 de 48.212 · do mais recente · o hash de cada linha é o <code>prev</code> da linha acima</span><div class="pagination"><button class="btn btn-sm">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">2</button><button class="btn btn-sm">3</button><button class="btn btn-sm">…</button><button class="btn btn-sm">›</button></div></div>
     </div>
 
     <div class="grid cols-2 mb-3">
@@ -222,8 +310,8 @@
             <div class="list-item"><span class="li-icon"><i data-icon="key"></i></span><div class="li-body"><div class="li-title">Acesso da equipe</div><div class="li-sub">Login com 2FA, sessão, troca de papel, falhas de autenticação.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="eye"></i></span><div class="li-body"><div class="li-title">Cada abertura de conteúdo no workbench</div><div class="li-sub">Quem viu qual arquivo de qual item, e quando. Conteúdo bruto nunca sai do visualizador.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="clipboard-check"></i></span><div class="li-body"><div class="li-title">Decisões e redações</div><div class="li-sub">Aprovar, ajustes, rejeitar com código, escalar, nova versão com tarjas, nível de autenticidade.</div></div></div>
-            <div class="list-item"><span class="li-icon"><i data-icon="users"></i></span><div class="li-body"><div class="li-title">Ações em contas</div><div class="li-sub">Advertir, restringir, banir, liberar saldo retido. Sempre com motivo e fundamento.</div></div></div>
-            <div class="list-item"><span class="li-icon"><i data-icon="banknote"></i></span><div class="li-body"><div class="li-title">Dinheiro</div><div class="li-sub">Assinaturas de lote de saque, reposição quente ↔ fria, fechamento do dia, reembolsos manuais.</div></div></div>
+            <div class="list-item"><span class="li-icon"><i data-icon="users"></i></span><div class="li-body"><div class="li-title">Ações em contas</div><div class="li-sub">Advertir, restringir envios, bloquear finalizações, banir. Sempre com motivo e fundamento.</div></div></div>
+            <div class="list-item"><span class="li-icon"><i data-icon="vault"></i></span><div class="li-body"><div class="li-title">Carteiras de itens e chaves</div><div class="li-sub"><code>wallet.create</code> na aprovação, <code>wallet.settle</code> na finalização (comissão e reembolsos), <code>key.reveal</code> (o vendedor recebeu a frase, após senha + TOTP), <code>key.shred</code>, <code>refund.batch</code>, aprovações de finalização acima de US$ 15.000, fechamento da reconciliação e saídas do fundo de garantia.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="settings"></i></span><div class="li-body"><div class="li-title">Configurações e políticas</div><div class="li-sub">Comissão, limites, SLAs, categorias, países bloqueados, versões de política, papéis da equipe, canais.</div></div></div>
           </div>
           <p class="xs muted mt-2">Não entra no log: nada sobre identidade de usuários. Alvos são slugs, pseudônimos e números de caso.</p>
@@ -233,13 +321,15 @@
 
     <div class="grid cols-2">
       <div class="card">
-        <div class="card-head"><h3>Eventos por família · 30 dias</h3><span class="muted small">6.920</span></div>
+        <div class="card-head"><h3>Eventos por família · 30 dias</h3><span class="muted small">7.238</span></div>
         <div class="card-body stack-sm">
           <div class="hbar"><span>asset.* · aberturas e redações</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">3.860</span></div>
           <div class="hbar"><span>review.* · análises</span><div class="track"><div class="fill" style="width:55%"></div></div><span class="num">2.140</span></div>
           <div class="hbar"><span>auth.* · acesso</span><div class="track"><div class="fill" style="width:11%"></div></div><span class="num">420</span></div>
           <div class="hbar"><span>social.* · publicação</span><div class="track"><div class="fill" style="width:8%"></div></div><span class="num">310</span></div>
-          <div class="hbar"><span>payout.* · saques</span><div class="track"><div class="fill" style="width:3%"></div></div><span class="num">96</span></div>
+          <div class="hbar"><span>wallet.* · carteiras de itens</span><div class="track"><div class="fill" style="width:5%"></div></div><span class="num">212</span></div>
+          <div class="hbar"><span>key.* · chaves no HSM</span><div class="track"><div class="fill" style="width:4%"></div></div><span class="num">164</span></div>
+          <div class="hbar"><span>refund.* · reembolsos</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">38</span></div>
           <div class="hbar"><span>legal.* · jurídico</span><div class="track"><div class="fill" style="width:2%"></div></div><span class="num">46</span></div>
           <div class="hbar"><span>dispute.* · disputas</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">22</span></div>
           <div class="hbar"><span>account.* · contas</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">18</span></div>
