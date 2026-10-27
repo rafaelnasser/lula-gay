@@ -138,6 +138,7 @@ Aberto ──(cobrir: paga V' ≥ V+10 %)──► Valor subiu (janela 48 h) ─
 Aberto ──(vendedor envia atendimento)──► Travado ──(curadoria valida)──► Atendido ──(acesso aos interessados; 10 %; carteira entregue)──► Finalizado
                                                 └──(curadoria rejeita)──► Aberto
 Aberto ──(prazo vence)──► Expirado ──► Reembolsos à origem ──► Finalizado
+Extra: mesma máquina, por sub-item, independente do principal (criado → em curadoria → aberto …)
 ```
 
 **Leilão aberto**
@@ -193,7 +194,11 @@ POST   /requests                 cria pedido (vai à curadoria)
 POST   /requests/:id/join        junta-se pagando o valor por interessado atual → endereço derivado
 POST   /requests/:id/raise       cobre o valor (≥ atual + 10 %) → endereço derivado; abre janela de 48 h para os demais
 POST   /requests/:id/match       iguala a diferença dentro da janela → endereço derivado
-POST   /requests/:id/leave       sai do pedido → reembolso ao endereço de origem
+POST   /requests/:id/leave       sai do pedido (e dos extras) → reembolso ao endereço de origem
+POST   /requests/:id/extras      interessado cria um extra (vai à curadoria) → endereço derivado para pagar
+POST   /extras/:id/join|raise|match|leave   mesmas regras do pedido, só para interessados do principal
+POST   /requests/:id/proposals   vendedor propõe um extra (público; vira extra quando um interessado o cria)
+POST   /extras/:id/fulfill       vendedor envia atendimento do extra (cria listing vinculado)
 POST   /requests/:id/fulfill     vendedor envia atendimento (cria listing vinculado)
 
 GET    /threads /threads/:id/messages  POST /threads/:id/messages

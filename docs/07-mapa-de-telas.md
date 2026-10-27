@@ -88,6 +88,7 @@ Rodapé do painel em todas: "Compra anônima. Registramos item, valor e data. Na
 - Painel lateral: valor por interessado, nº de interessados, recompensa total, botões "Juntar-se por US$ V" e "Cobrir o valor (mín. V + 10 %)", regra em uma linha ("Todos pagam o mesmo valor e recebem o mesmo acesso. Se ninguém atender até o prazo, cada um recebe o seu de volta."), carteira do pedido (endereço público, pagamentos), botão "Tenho essa informação" (leva ao assistente de envio com o pedido vinculado).
 - Lista pública de interessados (pseudônimo, data de entrada, "igualou em") e linha do tempo (abertura, entradas, coberturas, igualadas, saídas).
 - Estados (variantes): aberto; valor subiu, "iguale até dd/mm hh:mm (+US$ X) ou saia" para quem participa; travado (atendimento em curadoria).
+- Seção "Extras deste pedido": cards de extras (título, quem criou, valor por interessado, interessados, total, carteira, status) com "Entrar no extra por US$ X" e "Cobrir" para interessados do principal e a frase "Não entrar no extra não muda sua participação no pedido"; "Propostas de vendedores" com "Criar extra a partir desta proposta"; botão "Adicionar um extra" (modal: título, descrição, critérios, valor por interessado, prazo = do pedido, aviso de curadoria e de pagamento ao criar).
 - Atendimentos: contagem de atendimentos em curadoria (sem detalhes).
 - Perguntas públicas ao autor (Q&A moderado).
 
@@ -162,6 +163,8 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Lista de pedidos do usuário (abertos por ele ou em que se juntou) com status (em curadoria / aberto / valor subiu: iguale até… / travado: atendimento em curadoria / atendido / expirado / saiu), valor por interessado, nº de interessados e recompensa total; ações: Cobrir, Igualar, Sair (reembolso ao endereço de origem), Abrir no cofre.
 - Detalhe expandido do pedido "em análise": "1 atendimento aguardando curadoria".
 
+- Extras: por pedido, os extras abertos (entrou / não entrou, "Entrar no extra"), propostas pendentes e "Adicionar um extra"; extras atendidos sem a sua participação aparecem só como nota.
+
 ### `buyer/mensagens.html` (compartilhada)
 - Layout de chat: lista de conversas por item/pedido à esquerda; conversa à direita com mensagens, mensagem de sistema ("Conversa vinculada ao item X. Expira 90 dias após o encerramento."), exemplo de mensagem filtrada (tentativa de passar e-mail bloqueada com explicação), campo de envio.
 
@@ -206,6 +209,8 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `seller/pedidos.html`
 - Mural de pedidos abertos com filtros e cards; botão "Atender este pedido" leva ao assistente com o pedido vinculado; aba "Meus atendimentos" com status (em curadoria / aceito / recusado).
+
+- Extras: cada card mostra os extras abertos (podem ser atendidos separadamente) e o botão "Tenho algo próximo: propor um extra" (modal com título, descrição e valor sugerido; proposta pública, sem exclusividade); seção "Minhas propostas de extra".
 
 ### `seller/reputacao.html`
 - Nota geral, componentes (aprovações, autenticidade média, disputas perdidas, tempo de resposta), histórico, selos (Verificado 10×, Rompeu lacres, Fonte recorrente), como melhorar. Aviso de que a reputação é do pseudônimo.

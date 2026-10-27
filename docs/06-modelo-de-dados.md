@@ -31,6 +31,8 @@ erDiagram
     REVIEW ||--o{ DECISION : resulta
     REQUEST ||--o{ PARTICIPATION : interessados
     REQUEST ||--o{ REQUEST_EVENT : historico
+    REQUEST ||--o{ REQUEST_EXTRA : extras
+    REQUEST ||--o{ EXTRA_PROPOSAL : propostas
     REQUEST ||--o{ FULFILLMENT : atendido_por
     FULFILLMENT }o--|| LISTING : via
     THREAD ||--|{ MESSAGE : tem
@@ -151,7 +153,9 @@ Sem e-mail, telefone, nome, IP.
 ### request / contribution / fulfillment
 `request (id, author_id, title, description, acceptance_criteria, category_id, countries text[], languages text[], price_per_party (valor por interessado atual), parties_active, reward_total (= price_per_party × parties_active), deadline_at, match_until null (fim da janela de igualar), status (draft|in_review|open|raised|locked|fulfilled|expired|rejected), allow_copies_after bool default false, created_at)`
 `participation (id, request_id, account_id, paid_total, status (active|must_match|left|refunded|delivered), joined_at, matched_at null, left_at null)` todos os ativos pagaram o mesmo valor
-`request_event (id, request_id, account_id, kind (open|join|raise|match|leave|auto_leave|lock|unlock|fulfill|expire), amount null, created_at)` linha do tempo pública
+`request_event (id, request_id, extra_id null, account_id, kind (open|join|raise|match|leave|auto_leave|lock|unlock|fulfill|expire|extra_created|proposal), amount null, created_at)` linha do tempo pública
+`request_extra (id, request_id, created_by, title, description, acceptance_criteria, price_per_party, parties_active, reward_total, deadline_at (≤ pedido), match_until null, status (in_review|open|raised|locked|fulfilled|expired|rejected), created_at)` sub-item opcional; carteira própria (`item_wallet.extra_id`); participações com `participation.extra_id`
+`extra_proposal (id, request_id, seller_id, title, description, suggested_price, status (open|adopted|withdrawn), adopted_extra_id null, created_at)` proposta pública de vendedor
 `fulfillment (id, request_id, seller_id, listing_id, status (submitted|in_review|accepted|rejected))`
 
 ### thread / message
