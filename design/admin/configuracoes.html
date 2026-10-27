@@ -34,7 +34,7 @@
         <a class="btn btn-outline" href="../admin/auditoria.html"><i data-icon="scroll-text"></i>Histórico de alterações</a>
       </div>
     </div>
-    <div class="alert alert-warn mb-3"><i data-icon="alert-triangle"></i><div><span class="alert-title">Você está vendo como Ana R. · Curadora sênior</span>Os campos são editáveis para revisão, mas salvar cria uma proposta que precisa da confirmação de Marcos L. (administrador). Última alteração aplicada: 26/10 · 17:48 · limite antifraude de saque para contas novas (R$ 1.500 → R$ 2.000/dia).</div></div>
+    <div class="alert alert-warn mb-3"><i data-icon="alert-triangle"></i><div><span class="alert-title">Você está vendo como Ana R. · Curadora sênior</span>Os campos são editáveis para revisão, mas salvar cria uma proposta que precisa da confirmação de Marcos L. (administrador). Última alteração aplicada: 26/10 · 17:48 · limite antifraude de saque para contas novas (US$ 1.500 → US$ 2.000/dia).</div></div>
 
     <div data-tabs>
       <div class="tabs">
@@ -43,6 +43,7 @@
         <a class="tab" data-tab="slas" href="#">SLAs</a>
         <a class="tab" data-tab="politicas" href="#">Políticas</a>
         <a class="tab" data-tab="canais" href="#">Canais</a>
+        <a class="tab" data-tab="paises" href="#">Países e idiomas</a>
         <a class="tab" data-tab="equipe" href="#">Equipe <span class="count">6</span></a>
         <a class="tab" data-tab="limites" href="#">Limites</a>
       </div>
@@ -82,8 +83,12 @@
             <div class="card-body stack">
               <div class="field"><label for="t-com">Comissão da plataforma</label><div class="input-group"><input id="t-com" class="input num w-sm" value="10"><span class="affix">%</span></div><span class="hint">Única, igual em todos os modelos. Cobrada na liquidação, sobre o valor pago pelo comprador.</span></div>
               <div class="field"><label for="t-rede">Taxa de rede do saque</label><select id="t-rede" class="select"><option selected>Repassada ao usuário (sem margem)</option><option>Absorvida pela plataforma</option></select><span class="hint">Lightning ~0,1 % · USDT/USDC centavos por transação · BTC on-chain variável. Mostrada antes de confirmar o saque.</span></div>
-              <div class="field"><label for="t-fundo">Fundo de garantia</label><div class="input-group"><input id="t-fundo" class="input num w-sm" value="2"><span class="affix">% da comissão</span></div><span class="hint">Saldo atual R$ 8.120 · meta: 1 mês de GMV antes de reduzir a alíquota. Cobre reembolsos quando a custódia do vendedor não basta.</span></div>
-              <div class="alert alert-info"><i data-icon="info"></i><div>A comissão <b>não é cobrada em lacres coletivos que falham</b>: 100 % do valor volta às carteiras dos apoiadores. Também não é cobrada em reembolsos por disputa ou remoção.</div></div>
+              <div class="field"><label for="t-fundo">Fundo de garantia</label><div class="input-group"><input id="t-fundo" class="input num w-sm" value="2"><span class="affix">% da comissão</span></div><span class="hint">Saldo atual US$ 8.120 · meta: 1 mês de GMV antes de reduzir a alíquota. Cobre reembolsos quando a custódia do vendedor não basta.</span></div>
+              <div class="form-grid">
+                <div class="field"><label for="t-ex1">Exclusividade · mínimo em lacre coletivo</label><div class="input-group"><input id="t-ex1" class="input num w-sm" value="5"><span class="affix">× a meta</span></div></div>
+                <div class="field"><label for="t-ex2">Exclusividade · mínimo em cópias e camadas</label><div class="input-group"><input id="t-ex2" class="input num w-sm" value="20"><span class="affix">× o preço</span></div></div>
+              </div>
+              <div class="alert alert-info"><i data-icon="info"></i><div>A comissão <b>não é cobrada em lacres coletivos que falham</b>: 100 % do valor volta às carteiras dos apoiadores. Também não é cobrada em reembolsos por disputa ou remoção. Na compra com exclusividade de um lacre, os apoios voltam sem comissão; a comissão incide só sobre o valor pago pelo comprador.</div></div>
               <div class="save-row"><button class="btn" data-toast="Alterações descartadas">Descartar</button><button class="btn btn-primary" data-toast="Proposta de comissão enviada a Marcos L. · vale só para vendas liquidadas após a confirmação">Salvar</button></div>
             </div>
           </div>
@@ -94,7 +99,7 @@
                 <thead><tr><th>Modelo</th><th class="num">Comissão</th><th>Momento da cobrança</th></tr></thead>
                 <tbody>
                   <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td class="num">10 %</td><td class="small">Na liquidação de cada venda (72 h após o acesso)</td></tr>
-                  <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="num">10 %</td><td class="small">Na liquidação · mínimo R$ 50</td></tr>
+                  <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="num">10 %</td><td class="small">Na liquidação · mínimo US$ 50</td></tr>
                   <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">Só se a meta for batida</td></tr>
                   <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td class="num">10 %</td><td class="small">Sobre a recompensa paga ao vendedor</td></tr>
                   <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão</span></td><td class="num">10 %</td><td class="small">Sobre o preço de fechamento (segundo preço)</td></tr>
@@ -102,9 +107,10 @@
                   <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span></td><td class="num">10 %</td><td class="small">Por período cobrado</td></tr>
                   <tr><td><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span></td><td class="num">10 %</td><td class="small">Nas duas fases</td></tr>
                   <tr><td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span></td><td class="num">10 %</td><td class="small">Por licença emitida</td></tr>
+                  <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Compra com exclusividade</span></td><td class="num">10 %</td><td class="small">Sobre o valor pago pelo comprador · mínimo sugerido 5× a meta ou 20× o preço</td></tr>
                 </tbody>
               </table>
-              <div class="table-foot"><span>Exemplo: cópia de R$ 490 → vendedor R$ 441,00 · plataforma R$ 49,00 · dos quais R$ 0,98 ao fundo de garantia.</span></div>
+              <div class="table-foot"><span>Exemplo: cópia de US$ 490 → vendedor US$ 441,00 · plataforma US$ 49,00 · dos quais US$ 0,98 ao fundo de garantia.</span></div>
             </div>
           </div>
         </div>
@@ -178,6 +184,41 @@
         </div>
       </div>
 
+      <!-- ====================== Países e idiomas ====================== -->
+      <div class="tab-panel" data-panel="paises">
+        <div class="grid cols-2 mb-3">
+          <div class="card"><div class="card-head"><h3>Idiomas da interface</h3><span class="badge badge-ok">3 ativos</span></div><div class="card-body stack-sm">
+            <label class="switch"><input type="checkbox" checked><span class="track"></span><span><b>Português</b> · padrão · 100 % traduzido</span></label>
+            <label class="switch"><input type="checkbox" checked><span class="track"></span><span><b>Inglês</b> · ativo · 100 %</span></label>
+            <label class="switch"><input type="checkbox" checked><span class="track"></span><span><b>Espanhol</b> · ativo · 98 % (12 textos pendentes)</span></label>
+            <label class="switch"><input type="checkbox"><span class="track"></span><span><b>Francês</b> · em preparação · 41 %</span></label>
+            <p class="xs muted mt-1">O idioma da interface é escolhido pela pessoa, nunca inferido de IP. Posts sociais saem no idioma do item; a prova pública mostra o idioma do item e inglês.</p>
+          </div></div>
+          <div class="card"><div class="card-head"><h3>Sede e jurisdição</h3><span class="badge badge-warn">a definir</span></div><div class="card-body stack-sm">
+            <p class="small">Opções comparadas em <code>docs/03 §8</code>. A sede define guarda de registros, resposta a autoridades e regime de ativos virtuais; a promessa pública de anonimato será ajustada ao que a sede permite.</p>
+            <div class="table-wrap" style="border:0;border-radius:0"><table class="table compact">
+              <thead><tr><th>Opção</th><th>Exige</th><th>Impacto</th></tr></thead>
+              <tbody>
+                <tr><td><b>Brasil</b></td><td class="small">Marco Civil (registros de acesso por 6 meses, ordem judicial) · Lei 14.478/2022</td><td class="small">registros cifrados em sistema separado</td></tr>
+                <tr><td><b>União Europeia</b></td><td class="small">GDPR · DSA · MiCA</td><td class="small">custódia de cripto exige licença</td></tr>
+                <tr><td><b>Estados Unidos</b></td><td class="small">DMCA · valores mobiliários · sanções (OFAC)</td><td class="small">takedown formal; triagem de países sancionados</td></tr>
+              </tbody></table></div>
+            <div class="field"><label for="g-sede">Sede atual</label><select id="g-sede" class="select"><option selected>A definir · opções comparadas em docs/03 §8</option><option>Brasil</option><option>União Europeia</option><option>Estados Unidos</option></select></div>
+          </div></div>
+        </div>
+        <div class="grid cols-2">
+          <div class="card"><div class="card-head"><h3>Países bloqueados para depósito e saque</h3><span class="badge badge-danger">sanções · 4</span></div><div class="card-body stack-sm">
+            <div class="chips"><span class="chip active">KP · Coreia do Norte</span><span class="chip active">IR · Irã</span><span class="chip active">SY · Síria</span><span class="chip active">CU · Cuba</span><button class="chip" data-toast="Adicionar país à lista de bloqueio exige administrador"><i data-icon="plus"></i>adicionar</button></div>
+            <p class="xs muted">Lista provisória conforme sanções amplamente aplicadas, até a sede ser definida. O bloqueio usa o país do item e listas públicas de endereços on-chain sancionados; nunca o IP da pessoa, que não é guardado. Alteração gera <code>settings.countries.block</code> na auditoria · última: 26/10 · 09:12 · Marcos L.</p>
+          </div></div>
+          <div class="card"><div class="card-head"><h3>Revisão jurídica obrigatória por país</h3><span class="badge badge-outline">3 países</span></div><div class="card-body stack-sm">
+            <div class="chips"><span class="chip active">DE · Alemanha</span><span class="chip active">GB · Reino Unido</span><span class="chip active">SG · Singapura</span><button class="chip" data-toast="Adicionar país à lista de revisão jurídica"><i data-icon="plus"></i>adicionar</button></div>
+            <p class="xs muted">Itens cujo país é um destes vão ao jurídico antes da aprovação, independentemente da categoria (leis de difamação e privacidade rigorosas, histórico de notificações). Soma-se às regras por categoria e por item.</p>
+            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de países e idiomas enviada a Marcos L. · settings.countries.update">Salvar países e idiomas</button></div>
+          </div></div>
+        </div>
+      </div>
+
       <!-- ====================== Equipe ====================== -->
       <div class="tab-panel" data-panel="equipe">
         <div class="alert alert-anon mb-2"><i data-icon="shield"></i><div><span class="alert-title">2FA obrigatório para todos</span>Passkey ou TOTP, sem exceção. Sessões de 8 h em domínio separado; IP allowlist opcional. Papéis (RBAC): triagem, curador, curador sênior, jurídico, financeiro, publicação, administrador.</div></div>
@@ -202,10 +243,10 @@
         <div class="grid cols-2 mb-3">
           <div class="card"><div class="card-head"><h3>Antifraude de saque</h3></div><div class="card-body">
             <div class="form-grid">
-              <div class="field"><label for="l1">Limite diário para contas novas</label><div class="input-group"><span class="affix">R$</span><input id="l1" class="input num" value="2.000"><span class="affix">/dia</span></div></div>
+              <div class="field"><label for="l1">Limite diário para contas novas</label><div class="input-group"><span class="affix">US$</span><input id="l1" class="input num" value="2.000"><span class="affix">/dia</span></div></div>
               <div class="field"><label for="l2">Vale nos primeiros</label><div class="input-group"><input id="l2" class="input num w-sm" value="7"><span class="affix">dias</span></div></div>
               <div class="field full"><label class="switch"><input type="checkbox" checked><span class="track"></span><span>Libera antes do prazo quando a conta tem o primeiro item aprovado</span></label></div>
-              <div class="field"><label for="l3">Revisão manual acima de</label><div class="input-group"><span class="affix">R$</span><input id="l3" class="input num" value="25.000"><span class="affix">/saque</span></div></div>
+              <div class="field"><label for="l3">Revisão manual acima de</label><div class="input-group"><span class="affix">US$</span><input id="l3" class="input num" value="25.000"><span class="affix">/saque</span></div></div>
               <div class="field"><label for="l4">Risco da conta que força revisão</label><div class="input-group"><input id="l4" class="input num w-sm" value="85"><span class="affix">/100</span></div></div>
             </div>
           </div></div>
@@ -223,15 +264,15 @@
             <table class="table compact">
               <thead><tr><th>Moeda · rede</th><th>Confirmações</th><th>Tempo típico</th><th class="num">Depósito mínimo</th><th>Taxa de saque</th></tr></thead>
               <tbody>
-                <tr><td><b>BTC</b> · on-chain</td><td><input class="input sm num" value="2"></td><td class="small">~20 min</td><td class="num">R$ 100</td><td class="small">rede · variável</td></tr>
-                <tr><td><b>BTC</b> · Lightning</td><td class="small">invoice liquidada</td><td class="small">segundos</td><td class="num">R$ 5</td><td class="small">~0,1 %</td></tr>
-                <tr><td><b>USDT</b> · Polygon</td><td><input class="input sm num" value="128"></td><td class="small">~5 min</td><td class="num">R$ 20</td><td class="small">~R$ 0,10</td></tr>
-                <tr><td><b>USDT</b> · Tron</td><td><input class="input sm num" value="19"></td><td class="small">~1 min</td><td class="num">R$ 20</td><td class="small">~R$ 8</td></tr>
-                <tr><td><b>USDC</b> · Polygon</td><td><input class="input sm num" value="128"></td><td class="small">~5 min</td><td class="num">R$ 20</td><td class="small">~R$ 0,10</td></tr>
-                <tr><td><b>USDC</b> · Base</td><td><input class="input sm num" value="30"></td><td class="small">~1 min</td><td class="num">R$ 20</td><td class="small">~R$ 0,05</td></tr>
+                <tr><td><b>BTC</b> · on-chain</td><td><input class="input sm num" value="2"></td><td class="small">~20 min</td><td class="num">US$ 100</td><td class="small">rede · variável</td></tr>
+                <tr><td><b>BTC</b> · Lightning</td><td class="small">invoice liquidada</td><td class="small">segundos</td><td class="num">US$ 5</td><td class="small">~0,1 %</td></tr>
+                <tr><td><b>USDT</b> · Polygon</td><td><input class="input sm num" value="128"></td><td class="small">~5 min</td><td class="num">US$ 20</td><td class="small">~US$ 0,10</td></tr>
+                <tr><td><b>USDT</b> · Tron</td><td><input class="input sm num" value="19"></td><td class="small">~1 min</td><td class="num">US$ 20</td><td class="small">~US$ 8</td></tr>
+                <tr><td><b>USDC</b> · Polygon</td><td><input class="input sm num" value="128"></td><td class="small">~5 min</td><td class="num">US$ 20</td><td class="small">~US$ 0,10</td></tr>
+                <tr><td><b>USDC</b> · Base</td><td><input class="input sm num" value="30"></td><td class="small">~1 min</td><td class="num">US$ 20</td><td class="small">~US$ 0,05</td></tr>
               </tbody>
             </table>
-            <div class="table-foot"><span>Cotação travada por 10 min para BTC; USDT/USDC 1:1 com a referência (R$ 5,38), atualizada a cada minuto. Carteira quente mantém ≈ 48 h de saques; alerta abaixo de 24 h.</span><button class="btn btn-sm" data-toast="Proposta de confirmações por rede enviada a Marcos L.">Salvar</button></div>
+            <div class="table-foot"><span>USDT e USDC liquidam 1:1 em US$, sem conversão. Bitcoin é convertido para USDT na hora (1 BTC = US$ 68.400, travado por 10 min). Carteira quente mantém ≈ 48 h de saques; alerta abaixo de 24 h.</span><button class="btn btn-sm" data-toast="Proposta de confirmações por rede enviada a Marcos L.">Salvar</button></div>
           </div></div>
       </div>
     </div>

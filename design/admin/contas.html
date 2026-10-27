@@ -15,6 +15,8 @@
     .list-item.absent .li-icon { background: transparent; border: 1px dashed var(--border-2); }
     .list-item.absent .li-icon svg { color: var(--muted-2); }
     .list-item.absent .li-title { color: var(--fg-2); text-decoration: line-through; text-decoration-color: var(--muted-2); }
+    .table td:first-child, .table td .sub { white-space: nowrap; }
+    .table .handle { display: inline-flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; }
     .obs { display: grid; gap: 10px; }
     .obs .panel { display: flex; flex-direction: column; gap: 8px; }
   </style>
@@ -28,7 +30,7 @@
         <p class="sub">Busca por pseudônimo. Nenhuma conta tem nome, e-mail, telefone, documento ou endereço. Tudo o que a equipe pode ver sobre uma conta está listado no detalhe, por completo.</p>
       </div>
       <div class="actions">
-        <button class="btn" data-toast="Lista exportada (CSV): 8 contas, só pseudônimo e métricas"><i data-icon="download"></i>Exportar</button>
+        <button class="btn" data-toast="Lista exportada (CSV): 10 contas, só pseudônimo e métricas"><i data-icon="download"></i>Exportar</button>
       </div>
     </div>
 
@@ -36,24 +38,26 @@
       <div class="search"><i data-icon="search"></i><input class="input mono" value="lanterna" placeholder="Buscar pseudônimo…" aria-label="Buscar pseudônimo"></div>
       <select class="select"><option>Todos os status</option><option>Ativa</option><option>Restrita</option><option>Banida</option></select>
       <select class="select"><option>Todos os riscos</option><option>Baixo</option><option>Médio</option><option>Alto</option></select>
-      <div class="right"><span class="xs muted">8 contas em observação · 4.312 no total</span></div>
+      <div class="right"><span class="xs muted">10 contas em observação · 4.312 no total</span></div>
     </div>
 
     <div class="table-wrap mb-3">
-      <table class="table">
-        <thead><tr><th>Pseudônimo</th><th>Criada em</th><th class="num">Itens</th><th class="num">Disputas</th><th class="num">Denúncias</th><th class="num">Saldo em custódia</th><th>Risco</th><th>Status</th><th class="cell-actions"></th></tr></thead>
+      <table class="table compact">
+        <thead><tr><th>Pseudônimo</th><th>País dos itens</th><th>Criada em</th><th class="num">Itens</th><th class="num">Disputas</th><th class="num">Denúncias</th><th class="num">Saldo em custódia</th><th>Risco</th><th>Status</th><th class="cell-actions"></th></tr></thead>
         <tbody>
-          <tr class="selected"><td><span class="handle" data-handle="lanterna-b31d" data-rep="4,7"></span></td><td class="num">14/02/2026</td><td class="num">12</td><td class="num">0</td><td class="num">1</td><td class="num">R$ 1.470,00</td><td><span class="badge risk-baixo">Baixo · 12</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><a class="btn btn-sm" href="#detalhe">Abrir</a></td></tr>
-          <tr><td><span class="handle" data-handle="sextante-21c9" data-rep="4,9"></span></td><td class="num">08/01/2026</td><td class="num">12</td><td class="num">1<span class="sub">ganha</span></td><td class="num">1</td><td class="num">R$ 54.120,00<span class="sub">lacre coletivo lcr-4m2x9</span></td><td><span class="badge risk-baixo">Baixo · 6</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @sextante-21c9 aberto">Abrir</button></td></tr>
-          <tr><td><span class="handle" data-handle="cartografo-5a77" data-rep="4,9"></span></td><td class="num">21/03/2026</td><td class="num">9</td><td class="num">0</td><td class="num">1<span class="sub">DN-2041 · item suspenso</span></td><td class="num">R$ 900,00</td><td><span class="badge risk-baixo">Baixo · 14</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @cartografo-5a77 aberto">Abrir</button></td></tr>
-          <tr><td><span class="handle" data-handle="coruja-7f3a" data-rep="4,8"></span></td><td class="num">12/03/2026</td><td class="num">3</td><td class="num">0</td><td class="num">1<span class="sub">DN-2051 · nova</span></td><td class="num">R$ 655,00<span class="sub">405 vendas · 250 apoios</span></td><td><span class="badge risk-baixo">Baixo · 9</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @coruja-7f3a aberto">Abrir</button></td></tr>
-          <tr><td><span class="handle" data-handle="bussola-c4e1" data-rep="4,5"></span></td><td class="num">02/05/2026</td><td class="num">5</td><td class="num">1<span class="sub">perdida · DS-0312</span></td><td class="num">0</td><td class="num">R$ 2.400,00</td><td><span class="badge risk-medio">Médio · 38</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @bussola-c4e1 aberto">Abrir</button></td></tr>
-          <tr><td><span class="handle" data-handle="granito-55ab" data-rep="3,6"></span></td><td class="num">19/06/2026</td><td class="num">4</td><td class="num">2<span class="sub">perdidas</span></td><td class="num">1</td><td class="num">R$ 0,00</td><td><span class="badge risk-alto">Alto · 71</span></td><td><span class="badge st-suspenso">Restrita</span><span class="sub">saques até 10/11</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @granito-55ab aberto">Abrir</button></td></tr>
-          <tr><td><span class="handle" data-handle="sinal-9e4b" data-rep="—"></span></td><td class="num">28/08/2026</td><td class="num">1<span class="sub">removido · R01</span></td><td class="num">0</td><td class="num">1<span class="sub">DN-2022 · ação tomada</span></td><td class="num">R$ 0,00</td><td><span class="badge risk-alto">Alto · 64</span></td><td><span class="badge st-suspenso">Restrita</span><span class="sub">envios até 30/11</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @sinal-9e4b aberto">Abrir</button></td></tr>
-          <tr><td><span class="handle" data-handle="espelho-c9d2" data-rep="—"></span></td><td class="num">03/09/2026</td><td class="num">0<span class="sub">1 rejeitado · R04</span></td><td class="num">0</td><td class="num">0</td><td class="num">R$ 310,00<span class="sub">retido para análise</span></td><td><span class="badge risk-alto">Alto · 95</span></td><td><span class="badge st-banido">Banida</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @espelho-c9d2 aberto">Abrir</button></td></tr>
+          <tr class="selected"><td><span class="handle" data-handle="lanterna-b31d" data-rep="4,7"></span></td><td><span class="tag">BR</span></td><td class="num">14/02/2026</td><td class="num">12</td><td class="num">0</td><td class="num">1</td><td class="num">US$ 1.470,00</td><td><span class="badge risk-baixo">Baixo · 12</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><a class="btn btn-sm" href="#detalhe">Abrir</a></td></tr>
+          <tr><td><span class="handle" data-handle="sextante-21c9" data-rep="4,9"></span></td><td><span class="tag">BR</span></td><td class="num">08/01/2026</td><td class="num">12</td><td class="num">1<span class="sub">ganha</span></td><td class="num">1</td><td class="num">US$ 54.120,00<span class="sub">lacre coletivo lcr-4m2x9</span></td><td><span class="badge risk-baixo">Baixo · 6</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @sextante-21c9 aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="cartografo-5a77" data-rep="4,9"></span></td><td><span class="tag">BR</span></td><td class="num">21/03/2026</td><td class="num">9</td><td class="num">0</td><td class="num">1<span class="sub">DN-2041 · item suspenso</span></td><td class="num">US$ 900,00</td><td><span class="badge risk-baixo">Baixo · 14</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @cartografo-5a77 aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="coruja-7f3a" data-rep="4,8"></span></td><td><span class="tag">BR</span></td><td class="num">12/03/2026</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">US$ 655,00<span class="sub">405 vendas · 250 apoios</span></td><td><span class="badge risk-baixo">Baixo · 9</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @coruja-7f3a aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="bussola-c4e1" data-rep="4,5"></span></td><td><span class="tag">BR</span></td><td class="num">02/05/2026</td><td class="num">5</td><td class="num">1<span class="sub">perdida · DS-0312</span></td><td class="num">0</td><td class="num">US$ 2.400,00<span class="sub">lcr-6c4t2 · exclusividade liquidada 19/10</span></td><td><span class="badge risk-medio">Médio · 38</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @bussola-c4e1 aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="quebracho-8d1f" data-rep="4,6"></span></td><td><span class="tag">AR</span></td><td class="num">11/04/2026</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">US$ 6.900,00<span class="sub">lacre coletivo lcr-9w5t2</span></td><td><span class="badge risk-baixo">Baixo · 15</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @quebracho-8d1f aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="meridiano-4b8e" data-rep="4,4"></span></td><td><span class="tag">BD</span></td><td class="num">30/07/2026</td><td class="num">2</td><td class="num">0</td><td class="num">1<span class="sub">DN-2051 · nova · titular LG-0112</span></td><td class="num">US$ 1.280,00</td><td><span class="badge risk-medio">Médio · 34</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @meridiano-4b8e aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="granito-55ab" data-rep="3,6"></span></td><td><span class="tag">BR</span></td><td class="num">19/06/2026</td><td class="num">4</td><td class="num">2<span class="sub">perdidas</span></td><td class="num">1</td><td class="num">US$ 0,00</td><td><span class="badge risk-alto">Alto · 71</span></td><td><span class="badge st-suspenso">Restrita</span><span class="sub">saques até 10/11</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @granito-55ab aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="sinal-9e4b" data-rep="—"></span></td><td><span class="tag">BR</span></td><td class="num">28/08/2026</td><td class="num">1<span class="sub">removido · R01</span></td><td class="num">0</td><td class="num">1<span class="sub">DN-2022 · ação tomada</span></td><td class="num">US$ 0,00</td><td><span class="badge risk-alto">Alto · 64</span></td><td><span class="badge st-suspenso">Restrita</span><span class="sub">envios até 30/11</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @sinal-9e4b aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="espelho-c9d2" data-rep="—"></span></td><td><span class="muted">—</span></td><td class="num">03/09/2026</td><td class="num">0<span class="sub">1 rejeitado · R04</span></td><td class="num">0</td><td class="num">0</td><td class="num">US$ 310,00<span class="sub">retido para análise</span></td><td><span class="badge risk-alto">Alto · 95</span></td><td><span class="badge st-banido">Banida</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @espelho-c9d2 aberto">Abrir</button></td></tr>
         </tbody>
       </table>
-      <div class="table-foot"><span>Mostrando 8 de 8 · filtro: em observação</span><span>Risco = disputas perdidas, denúncias procedentes, rejeições, idade da conta e padrão de saques. Nunca usa dados de identidade.</span></div>
+      <div class="table-foot"><span>Mostrando 10 de 10 · filtro: em observação</span><span>País = país principal dos itens da conta (código ISO), nunca da pessoa: a conta não tem país. Risco = disputas perdidas, denúncias procedentes, rejeições, idade da conta e padrão de saques. Nunca usa dados de identidade.</span></div>
     </div>
 
     <div class="split" id="detalhe">
@@ -73,10 +77,11 @@
           <div class="card-body stack">
             <dl class="kv-row">
               <div><dt>Itens</dt><dd>12 <span class="muted xs">10 ativos · 2 encerrados</span></dd></div>
-              <div><dt>Vendas brutas</dt><dd>R$ 61.300</dd></div>
-              <div><dt>Disponível</dt><dd>R$ 4.820,00</dd></div>
-              <div><dt>Em custódia</dt><dd>R$ 1.470,00</dd></div>
-              <div><dt>Sacado</dt><dd>R$ 38.900 <span class="muted xs">9 saques · USDT Polygon e BTC</span></dd></div>
+              <div><dt>País dos itens</dt><dd><span class="tag">BR</span> <span class="muted xs">12 de 12 · a conta em si não tem país</span></dd></div>
+              <div><dt>Vendas brutas</dt><dd>US$ 61.300</dd></div>
+              <div><dt>Disponível</dt><dd>US$ 4.820,00</dd></div>
+              <div><dt>Em custódia</dt><dd>US$ 1.470,00</dd></div>
+              <div><dt>Sacado</dt><dd>US$ 38.900 <span class="muted xs">9 saques · USDT Polygon e BTC</span></dd></div>
               <div><dt>Disputas</dt><dd>0</dd></div>
               <div><dt>Denúncias</dt><dd>1 <span class="muted xs">aberta</span></dd></div>
             </dl>
@@ -123,7 +128,7 @@
             <table class="table compact">
               <thead><tr><th>Item</th><th>Modelo</th><th>Status</th><th class="num">Vendas</th><th>Última decisão</th></tr></thead>
               <tbody>
-                <tr><td><b>12.400 licitações municipais do Nordeste (2019–2025)</b><span class="sub">lcr-9f2k7 · Dados e bases · v2</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 37/100</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">R$ 18.130</td><td class="small">03/10 · v2 com redação · Carla S.</td></tr>
+                <tr><td><b>12.400 licitações municipais do Nordeste (2019–2025)</b><span class="sub">lcr-9f2k7 · Dados e bases · v2</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 37/100</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">US$ 18.130</td><td class="small">03/10 · v2 com redação · Carla S.</td></tr>
                 <tr><td><b>Relatório de inspeção de 90 barragens de rejeito (ANM, 2024)</b><span class="sub">lcr-6b2v7 · Governo e políticas públicas</span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td><span class="badge st-analise">Em análise</span><span class="sub">dois olhos · jurídico</span></td><td class="num">—</td><td class="small">17/10 · escalado · Ana R.</td></tr>
               </tbody>
             </table>
@@ -168,8 +173,8 @@
             </div>
             <div class="panel">
               <div class="row between"><span class="handle" data-handle="espelho-c9d2"></span><span class="badge st-banido">Banida</span></div>
-              <div class="small">Motivo <b>R04 · credenciais/acesso</b> · item rejeitado e removido em 20/10 · Marcos L. · Administrador. Saldo de <b>R$ 310,00</b> retido para análise. Conteúdo com chave destruída após 30 dias.</div>
-              <div class="row"><button class="btn btn-sm" data-toast="Saldo retido de R$ 310,00 encaminhado ao financeiro (Elisa F.)">Analisar saldo retido</button><a class="btn btn-sm btn-ghost" href="../admin/auditoria.html">account.ban na auditoria</a></div>
+              <div class="small">Motivo <b>R04 · credenciais/acesso</b> · item rejeitado e removido em 20/10 · Marcos L. · Administrador. Saldo de <b>US$ 310,00</b> retido para análise. Conteúdo com chave destruída após 30 dias.</div>
+              <div class="row"><button class="btn btn-sm" data-toast="Saldo retido de US$ 310,00 encaminhado ao financeiro (Elisa F.)">Analisar saldo retido</button><a class="btn btn-sm btn-ghost" href="../admin/auditoria.html">account.ban na auditoria</a></div>
             </div>
           </div>
         </div>
@@ -220,7 +225,7 @@
       <div class="modal-body stack">
         <div class="alert alert-danger"><i data-icon="ban"></i><div><span class="alert-title">Irreversível para este pseudônimo</span>Itens saem do catálogo, envios e saques são bloqueados, conversas encerram. O ledger é mantido. Exige segunda confirmação de um administrador (Marcos L.).</div></div>
         <div class="field"><label for="b-mot">Motivo (obrigatório)</label><select id="b-mot" class="select"><option>Selecione…</option><option>R03 conteúdo íntimo/sexual</option><option>R04 credenciais/acesso</option><option>R05 sigilo legal</option><option>R01 dados pessoais em escala (base vazada)</option><option>Fraude em disputas ou lacres</option><option>R13 outro (texto obrigatório)</option></select></div>
-        <div class="field"><label for="b-sal">Saldo da conta (R$ 4.820,00 disponível + R$ 1.470,00 em custódia)</label><select id="b-sal" class="select"><option selected>Reter para análise (reembolsos pendentes primeiro)</option><option>Liberar saque final após 30 dias</option></select></div>
+        <div class="field"><label for="b-sal">Saldo da conta (US$ 4.820,00 disponível + US$ 1.470,00 em custódia)</label><select id="b-sal" class="select"><option selected>Reter para análise (reembolsos pendentes primeiro)</option><option>Liberar saque final após 30 dias</option></select></div>
         <div class="field"><label for="b-txt">Fundamento (vai para a auditoria)</label><textarea id="b-txt" class="textarea" rows="3"></textarea></div>
         <label class="check"><input type="checkbox"><span>Confirmo o motivo e o fundamento acima.<span class="desc">Registrado como <code>account.ban</code> com hash encadeado.</span></span></label>
       </div>

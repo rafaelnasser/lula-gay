@@ -125,7 +125,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `buyer/carteira.html`
 - Cartões: saldo disponível, em custódia (apoios ativos), reservado (lances/ofertas).
-- Saldo exibido em US$ com o equivalente em USDT (os créditos são guardados em USDT; preços em US$ são convertidos no momento de cada operação).
+- Saldo em US$, liquidado em USDT 1:1 (1 USDT = US$ 1), sem conversão. Só depósitos em Bitcoin são convertidos para USDT, com cotação travada por 10 min.
 - Abas: **Depositar** (USDT Polygon, USDT Tron, USDC Polygon/Base, Bitcoin Lightning, Bitcoin on-chain; endereço novo por depósito com QR, confirmações exigidas, cotação travada por 10 min para BTC, explicação de que o endereço não é vinculado a identidade), **Sacar** (moeda, rede, endereço informado na hora e apagado após o envio, taxa de rede repassada, senha + TOTP, limite antifraude para contas novas), **Extrato** (tabela com tipo, referência, valor em US$ e USDT, saldo após, status) e **Redes e taxas** (moeda, rede, confirmações, mínimo de depósito, taxa de saque).
 
 ### `buyer/checkout.html` · Checkout (variantes)
