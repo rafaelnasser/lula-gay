@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fila de análise · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .acts { text-align: right; white-space: nowrap; }
+    .ico { display: inline-flex; align-items: center; vertical-align: middle; }
+    .ico svg { width: 16px; height: 16px; }
+    .toolbar .select { width: auto; flex: 1 1 150px; max-width: 230px; }
+    .tri { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+    .prio { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; background: var(--surface-3); color: var(--fg-2); }
+    .prio.hot { background: var(--danger-soft); color: var(--danger); }
+    .prio.mid { background: var(--warn-soft); color: var(--warn); }
+    .table td .title { font-weight: 600; display: block; max-width: 40ch; }
+    .table .sub .handle { font-size: var(--fs-xs); }
+    .table .sub .handle .identicon { width: 16px; height: 16px; border-radius: 4px; }
+    tr.exp td { background: var(--surface-2); padding: 16px 18px 18px; }
+    tr.exp.collapsed { display: none; }
+    .exp-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; font-size: var(--fs-sm); }
+    .exp-grid h4 { font-size: var(--fs-sm); margin-bottom: 8px; }
+    @media (max-width: 800px) { .exp-grid { grid-template-columns: 1fr; } }
+    .legend-tri { display: flex; gap: 16px; flex-wrap: wrap; font-size: var(--fs-xs); color: var(--muted); margin: 0 0 14px; align-items: center; }
+  </style>
+</head>
+<body data-shell="admin" data-page="fila" data-root="../" data-title="Fila de análise">
+  <main>
+    <div class="page-head">
+      <div>
+        <h1>Fila de análise</h1>
+        <p class="sub">23 itens · 5 de risco alto · 2 fora do SLA de 48 h · ordenação padrão: risco, depois idade do envio, depois valor estimado.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" data-toast="Próximo item sem responsável atribuído a Ana R.: lcr-5w2n8 (risco alto)"><i data-icon="user-check"></i>Assumir o próximo</button>
+        <a class="btn btn-primary" href="../admin/analise.html"><i data-icon="clipboard-check"></i>Minhas análises · 6</a>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search"><i data-icon="search"></i><input class="input" placeholder="Buscar por título, slug, pseudônimo ou hash…" aria-label="Buscar na fila"></div>
+      <select class="select" aria-label="Status"><option>Status: todos (23)</option><option>Na fila (9)</option><option>Em análise (8)</option><option>Escalado ao jurídico (4)</option><option>Ajustes solicitados (2)</option></select>
+      <select class="select" aria-label="Risco"><option>Risco: todos</option><option>Alto (5)</option><option>Médio (6)</option><option>Baixo (12)</option></select>
+      <select class="select" aria-label="Categoria"><option>Categoria: todas</option><option>Governo e políticas públicas (5)</option><option>Dados e bases (4)</option><option>Jornalismo e investigação (3)</option><option>Negócios e mercado (3)</option><option>Fotografia e vídeo (2)</option><option>Saúde e meio ambiente (2)</option><option>Ciência e pesquisa (2)</option><option>História e acervos (2)</option></select>
+      <select class="select" aria-label="Modelo"><option>Modelo: todos</option><option>Cópias (14)</option><option>Lacre coletivo (3)</option><option>Exclusivo (2)</option><option>Licença (2)</option><option>Pedido (1)</option><option>Assinatura (1)</option></select>
+      <select class="select" aria-label="Responsável"><option>Responsável: qualquer</option><option>Ana R. (6)</option><option>Bruno M. (5)</option><option>Sem responsável (9)</option><option>Com o jurídico (4)</option></select>
+      <select class="select" aria-label="Idade"><option>Idade: qualquer</option><option>Fora do SLA · mais de 48 h (2)</option><option>24 a 48 h (7)</option><option>Menos de 24 h (14)</option></select>
+      <div class="right">
+        <select class="select" aria-label="Ordenação"><option>Ordenar: prioridade</option><option>Mais antigos primeiro</option><option>Maior valor estimado</option><option>Categoria</option></select>
+        <button class="btn btn-ghost" data-toast="Filtros limpos"><i data-icon="x"></i>Limpar</button>
+      </div>
+    </div>
+
+    <div class="legend-tri">
+      <span><b>Triagem automática:</b></span>
+      <span><span class="ico ok"><i data-icon="shield-check"></i></span> antivírus limpo</span>
+      <span><span class="badge badge-warn">PII 12</span> dados pessoais detectados (contagem)</span>
+      <span><span class="badge badge-ok">PII 0</span> nenhum dado pessoal</span>
+      <span><span class="badge badge-danger">dup</span> hash coincide com item existente ou rejeitado</span>
+      <span><span class="badge badge-info"><i data-icon="users"></i>2 olhos</span> exige dois curadores independentes</span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr><th>#</th><th>Item</th><th>Categoria</th><th>Modelo</th><th>Risco</th><th>Na fila</th><th>Triagem</th><th>Responsável(is)</th><th>Dois olhos</th><th class="acts">Ações</th></tr>
+        </thead>
+        <tbody>
+          <tr class="selected">
+            <td><span class="prio hot">1</span></td>
+            <td><span class="title">Relatório de inspeção de 90 barragens de rejeito (ANM, 2024), consolidado com georreferenciamento e histórico de autuações</span><span class="sub">lcr-6b2v7 · <span class="handle" data-handle="lanterna-b31d"></span></span></td>
+            <td>Governo e políticas públicas</td>
+            <td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">meta R$ 30.000</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">37 h<span class="sub"><span class="badge st-analise">Em análise</span></span><span class="sub">SLA pausado · jurídico</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 4 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="12 nomes próprios · 0 CPFs · 0 telefones">PII 12</span><span class="muted xs">dup 0</span></span></td>
+            <td>Ana R. + Bruno M.<span class="sub">jurídico: Carla S. · prazo 03/11</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><button class="btn btn-sm btn-ghost" data-toggle-class="collapsed" data-target="#exp-6b2v7" aria-label="Recolher resumo"><i data-icon="chevron-up"></i></button> <a class="btn btn-sm btn-primary" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr class="exp" id="exp-6b2v7">
+            <td colspan="10">
+              <div class="exp-grid">
+                <div>
+                  <h4>Resumo da triagem automática · concluída em 25/10 às 22:09 (4 min após o envio)</h4>
+                  <dl class="kv">
+                    <dt>Antivírus</dt><dd><span class="ok">Limpo</span> · 4 arquivos (PDF, CSV, XLSX, GeoJSON) · 3 motores</dd>
+                    <dt>Dados pessoais</dt><dd>0 CPFs · 0 telefones · 0 e-mails · <b>12 nomes próprios</b> em 7 páginas. Amostras tarjadas: "Resp. técnico: <span class="redacted">xxxxxxxxxxxx</span>", "Eng. <span class="redacted">xxxxxxxxxxxxxx</span>, CREA-MG <span class="redacted">xxxxxx</span>", "Representante: <span class="redacted">xxxxxxxxx</span>"</dd>
+                    <dt>Duplicidade</dt><dd>0 · nenhum hash coincide com o catálogo nem com itens rejeitados</dd>
+                    <dt>Conteúdo proibido</dt><dd>0 · sem credenciais, chaves, executáveis ou conteúdo sexual</dd>
+                    <dt>Metadados removidos</dt><dd>PDF: autor, produtor, datas · XLSX: autor, empresa, última modificação · CSV e GeoJSON: nenhum metadado presente</dd>
+                    <dt>Integridade</dt><dd>hash do cliente = hash do servidor <span class="ico ok"><i data-icon="check-circle"></i></span> <code>7c2e…9b41</code> · 51,1 MB</dd>
+                    <dt>OCR</dt><dd>212 páginas indexadas para busca interna</dd>
+                    <dt>Declarações</dt><dd>6 de 6 aceitas em 25/10 às 22:05 · texto versão 1.2</dd>
+                  </dl>
+                </div>
+                <div class="stack-sm">
+                  <h4>Por que está no topo</h4>
+                  <p class="small">Categoria de risco alto (dois olhos e jurídico por padrão), pessoas identificáveis em documento de origem institucional e 90 empresas citadas em contexto de autuação. Valor estimado: R$ 30.000 de meta.</p>
+                  <h4>Andamento</h4>
+                  <div class="timeline">
+                    <div class="tl-item ok"><div class="when">25/10 · 22:05</div><div class="what">Enviado · triagem concluída às 22:09</div></div>
+                    <div class="tl-item info"><div class="when">26/10 · 09:30</div><div class="what">1ª análise · Ana R. · 5 de 7 blocos concluídos</div></div>
+                    <div class="tl-item warn"><div class="when">26/10 · 15:20</div><div class="what">Escalado ao jurídico · Carla S. · SLA pausado</div></div>
+                    <div class="tl-item info"><div class="when">Hoje · 10:20</div><div class="what">2ª análise · Bruno M. · em andamento, sem ver as notas da 1ª</div></div>
+                  </div>
+                  <div class="row"><a class="btn btn-sm btn-primary" href="../admin/analise.html"><i data-icon="clipboard-check"></i>Abrir no workbench</a><a class="btn btn-sm" href="../admin/juridico.html"><i data-icon="scale"></i>Ver no jurídico</a></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">2</span></td>
+            <td><span class="title">Fotos aéreas de 50 condomínios irregulares em APA de Brasília</span><span class="sub">lcr-7h4k1 · <span class="handle" data-handle="cartografo-5a77"></span></span></td>
+            <td>Fotografia e vídeo</td>
+            <td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="sub">editorial R$ 1.200 · comercial R$ 6.000</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">44 h<span class="sub"><span class="badge st-escalado">Escalado</span></span><span class="sub">SLA pausado · jurídico</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 50 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="badge badge-outline" data-tip="EXIF: GPS e dispositivo removidos de 50 fotos">GPS</span></span></td>
+            <td>Ana R.<span class="sub">jurídico: Carla S. · 2ª análise pendente</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">3</span></td>
+            <td><span class="title">Metodologia de precificação dinâmica de um app de delivery, enviada por ex-funcionário</span><span class="sub">lcr-1q9x5 · <span class="handle" data-handle="alicate-2d7e"></span> · conta criada em 19/10, 0 itens</span></td>
+            <td>Negócios e mercado</td>
+            <td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="sub">R$ 40.000</span></td>
+            <td><span class="badge risk-alto">Alto</span><span class="sub"><span class="badge badge-danger">segredo comercial</span></span></td>
+            <td class="num">27 h<span class="sub"><span class="badge st-escalado">Escalado</span></span><span class="sub">SLA pausado · jurídico</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 3 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="3 nomes próprios em cabeçalhos de e-mail interno">PII 3</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.<span class="sub">jurídico: Carla S. · aguarda documentos do vendedor</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">4</span></td>
+            <td><span class="title">Contratos de patrocínio de 12 clubes de futebol (2020–2025) com fontes públicas</span><span class="sub">lcr-3f8d2 · <span class="handle" data-handle="sextante-21c9"></span></span></td>
+            <td>Jornalismo e investigação</td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 650 · limite 50</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">22 h<span class="sub"><span class="badge st-analise">Em análise</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 38 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="41 nomes próprios: dirigentes e signatários">PII 41</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.<span class="sub">2ª análise pendente · jurídico recomendado</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">5</span></td>
+            <td><span class="title">Indicadores de mortalidade materna por hospital em 5 estados (2018–2025), compilados do DataSUS</span><span class="sub">lcr-5w2n8 · <span class="handle" data-handle="ampulheta-4e9c"></span></span></td>
+            <td>Saúde e meio ambiente</td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 380</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">19 h<span class="sub"><span class="badge st-triagem">Na fila</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td class="muted">—</td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><button class="btn btn-sm btn-primary" data-toast="lcr-5w2n8 atribuído a Ana R. como primeira análise">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio mid">6</span></td>
+            <td><span class="title">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</span><span class="sub">lcr-9d3m6 · <span class="handle" data-handle="estenografo-7b3c"></span></span></td>
+            <td>Governo e políticas públicas</td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 220</span></td>
+            <td><span class="badge risk-medio">Médio</span></td>
+            <td class="num"><span class="danger">51 h</span><span class="sub"><span class="badge st-analise">Em análise</span></span><span class="sub danger">fora do SLA · 3 h</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 212 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="86 nomes: vereadores e expositores em sessão pública">PII 86</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.</td>
+            <td class="muted">não</td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio mid">7</span></td>
+            <td><span class="title">Série histórica de tarifas de ônibus em 27 capitais (1994–2026) com fontes</span><span class="sub">lcr-0p4m3 · <span class="handle" data-handle="coruja-7f3a"></span></span></td>
+            <td>Governo e políticas públicas</td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 90</span></td>
+            <td><span class="badge risk-medio">Médio</span></td>
+            <td class="num"><span class="danger">49 h</span><span class="sub"><span class="badge st-analise">Em análise</span></span><span class="sub danger">fora do SLA · 1 h</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.</td>
+            <td class="muted">não</td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">8</span></td>
+            <td><span class="title">Pesquisa: 1.200 entrevistas com motoristas de app em 5 capitais</span><span class="sub">lcr-4c6t9 · <span class="handle" data-handle="bussola-c4e1"></span></span></td>
+            <td>Ciência e pesquisa</td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 290</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">15 h<span class="sub"><span class="badge st-triagem">Na fila</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 3 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok" data-tip="Respostas anonimizadas pelo vendedor; sem identificadores">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td class="muted">—</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="lcr-4c6t9 atribuído a Ana R.">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">9</span></td>
+            <td><span class="title">Dataset de 5 anos de preços de combustíveis por posto (ANP) tratado</span><span class="sub">lcr-8e2r5 · <span class="handle" data-handle="lanterna-b31d"></span></span></td>
+            <td>Dados e bases</td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 180</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">12 h<span class="sub"><span class="badge st-triagem">Na fila</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 6 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="badge badge-danger" data-tip="2 arquivos idênticos a um item rejeitado em 09/2026 (R10)">dup 2</span></span></td>
+            <td class="muted">—</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="lcr-8e2r5 atribuído a Ana R.">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">10</span></td>
+            <td><span class="title">Catálogo da 1ª Bienal de São Paulo (1951) digitalizado · atendimento ao pedido ped-7f1a3</span><span class="sub">lcr-2k7p1 · <span class="handle" data-handle="tipografo-8e04"></span></span></td>
+            <td>História e acervos</td>
+            <td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span><span class="sub">recompensa R$ 800 · 1 contribuidor</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">9 h<span class="sub"><span class="badge st-triagem">Na fila</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 1 arquivo limpo"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td class="muted">—</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="lcr-2k7p1 atribuído a Ana R. · critérios de aceite do pedido anexados">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">11</span></td>
+            <td><span class="title">Monitor semanal de patentes do setor farmacêutico · edição #43</span><span class="sub">lcr-6v1b8 · edição de lcr-6d1k5 · <span class="handle" data-handle="prisma-66af"></span></span></td>
+            <td>Ciência e pesquisa</td>
+            <td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="sub">212 assinantes · R$ 190/mês</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">5 h<span class="sub"><span class="badge st-triagem">Na fila</span></span><span class="sub">SLA 24 h · edição</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td class="muted">—</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="lcr-6v1b8 atribuído a Ana R. · comparação com a edição #42 aberta">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">12</span></td>
+            <td><span class="title">Mapeamento de 3.100 feiras livres do estado de SP com dias, horários e geolocalização</span><span class="sub">lcr-2z5q7 · <span class="handle" data-handle="coruja-7f3a"></span></span></td>
+            <td>Dados e bases</td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 240</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">3 d<span class="sub"><span class="badge st-ajustes">Ajustes solicitados</span></span><span class="sub">aguardando o vendedor · prazo pausado</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="badge badge-warn" data-tip="R11: a prévia expõe coordenadas exatas; reduzir amostra">prévia</span></span></td>
+            <td>Bruno M.</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="Pendências enviadas em 26/10: reduzir amostra da prévia e arredondar coordenadas"><i data-icon="message-square"></i>Pendências</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="table-foot">
+        <span>Mostrando 12 de 23 itens · 9 sem responsável · atualizado há 2 min</span>
+        <div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm" data-toast="Página 2: 11 itens de risco baixo e médio">2</button><button class="btn btn-sm" data-toast="Página 2: 11 itens de risco baixo e médio">›</button></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

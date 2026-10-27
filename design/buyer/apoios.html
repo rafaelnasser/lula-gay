@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Apoios · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .apoio .item-row { align-items: start; }
+    .apoio .item-row .actions { display: flex; flex-direction: column; gap: 8px; min-width: 200px; }
+    .apoio .item-row .actions .btn { justify-content: flex-start; }
+    @media (max-width: 700px) { .apoio .item-row .actions { flex-direction: row; flex-wrap: wrap; min-width: 0; } }
+    .selo { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface-2); }
+    .selo .s-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--brass-soft); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .selo .s-icon svg { width: 18px; height: 18px; color: var(--brass); }
+    .selo.locked { opacity: .7; } .selo.locked .s-icon { background: var(--surface-3); } .selo.locked .s-icon svg { color: var(--muted); }
+    .mini-ledger { display: grid; grid-template-columns: max-content 1fr max-content; gap: 4px 12px; font-size: var(--fs-xs); color: var(--muted); font-variant-numeric: tabular-nums; }
+    .mini-ledger b { color: var(--fg-2); font-weight: 500; }
+  </style>
+</head>
+<body data-shell="buyer" data-page="apoios" data-root="../" data-title="Apoios">
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Minha conta</p>
+      <h1>Apoios</h1>
+      <p class="sub">Lacres coletivos que você apoiou e recompensas de pedidos a que contribuiu. O valor fica em custódia até o resultado.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="../public/pedidos.html"><i data-icon="file-search"></i>Mural de pedidos</a>
+      <a class="btn btn-wax" href="../public/explorar.html#coletivos"><i data-icon="hand-coins"></i>Lacres em andamento</a>
+    </div>
+  </div>
+
+  <div class="stat-grid mb-3">
+    <div class="stat"><span class="label">Total apoiado em lacres</span><span class="value">R$ 600,00</span><span class="delta flat">3 lacres · 4 apoios</span></div>
+    <div class="stat"><span class="label">Em custódia</span><span class="value">R$ 250,00</span><span class="delta flat"><i data-icon="lock"></i>1 lacre em andamento</span></div>
+    <div class="stat"><span class="label">Lacres rompidos</span><span class="value">1</span><span class="delta up"><i data-icon="unlock"></i>acesso no cofre</span></div>
+    <div class="stat"><span class="label">Devolvido</span><span class="value">R$ 50,00</span><span class="delta flat">1 lacre não bateu a meta</span></div>
+  </div>
+
+  <div class="split">
+    <div data-tabs>
+      <div class="tabs">
+        <a class="tab active" data-tab="lacres" href="#lacres">Lacres apoiados <span class="count">3</span></a>
+        <a class="tab" data-tab="pedidos" href="#pedidos">Recompensas de pedidos <span class="count">3</span></a>
+      </div>
+
+      <div class="tab-panel active" data-panel="lacres">
+        <div class="stack">
+          <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Apoio anônimo</span>O vendedor vê apenas a contagem de apoiadores e o total arrecadado. Se a meta não for batida no prazo, o valor volta para a sua carteira automaticamente, como crédito em USDT. Nada é cobrado em lacres que falham.</div></div>
+
+          <!-- lcr-4m2x9 · em andamento -->
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row">
+                  <span class="badge st-ativo">Em andamento</span>
+                  <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                  <span class="tag">lcr-4m2x9</span>
+                </div>
+                <h3><a href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
+                <div class="row small muted"><span class="handle" data-handle="sextante-21c9" data-rep="4,9 · 12 itens"></span><span>Jornalismo e investigação</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></div>
+                <div class="goal-head"><span class="raised">R$ 54.120</span><span class="goal">meta R$ 80.000 · 68 % · 1.187 apoiadores</span></div>
+                <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
+                <div class="row small"><span><i data-icon="timer" class="ico brass"></i> Encerra em <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span> (15/11)</span><span class="muted">Liberação pública: quando bater, fica aberto para todos. Apoiadores veem 24 h antes.</span></div>
+                <div class="panel">
+                  <div class="row between"><b class="small">Você apoiou R$ 250,00 em 2 apoios</b><span class="badge badge-wax">em custódia</span></div>
+                  <div class="mini-ledger mt-1">
+                    <span>22/10</span><span>Apoio · carteira → custódia do lacre</span><b>R$ 100,00</b>
+                    <span>25/10</span><span>Apoio · carteira → custódia do lacre</span><b>R$ 150,00</b>
+                  </div>
+                  <p class="xs muted mt-1">Meta estendida R$ 120.000: libera também os 31 áudios das entrevistas. Faltam R$ 25.880 para a meta principal.</p>
+                </div>
+              </div>
+              <div class="actions">
+                <a class="btn btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Apoiar mais</a>
+                <button class="btn" data-copy="https://lacre.app/p/4m2x9?via=an0n-k7x2" data-tip="Link com contador anônimo"><i data-icon="link"></i>Compartilhar link anônimo</button>
+                <a class="btn btn-ghost" href="../public/item.html"><i data-icon="arrow-right"></i>Ver item e atualizações</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- lacre rompido -->
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="audio"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row">
+                  <span class="badge st-rompido"><i data-icon="unlock"></i>Lacre rompido</span>
+                  <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                  <span class="tag">lcr-7w3n8</span>
+                </div>
+                <h3><a href="../public/item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</a></h3>
+                <div class="row small muted"><span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 8 itens"></span><span>Governo e políticas públicas</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <div class="goal-head"><span class="raised">R$ 19.240</span><span class="goal">meta R$ 18.000 batida em 12/10 · 107 % · 612 apoiadores</span></div>
+                <div class="progress"><div class="progress-bar wax" data-width="100%"></div></div>
+                <div class="row small"><span><i data-icon="check-circle" class="ico ok"></i> Acesso antecipado de apoiadores em 12/10 · liberação pública em 13/10</span></div>
+                <div class="panel">
+                  <div class="row between"><b class="small">Você apoiou R$ 300,00 em 1 apoio</b><span class="badge badge-ok">liquidado</span></div>
+                  <div class="mini-ledger mt-1">
+                    <span>05/10</span><span>Apoio · carteira → custódia do lacre</span><b>R$ 300,00</b>
+                    <span>12/10</span><span>Meta batida · acesso liberado no cofre (ENT-7C1D)</span><b>—</b>
+                  </div>
+                  <p class="xs muted mt-1">Pacote: 200 h de transcrição em TXT e PDF (1.420 páginas), índice por sessão e planilha de falas por vereador. Download com marca d'água da sua conta.</p>
+                </div>
+              </div>
+              <div class="actions">
+                <a class="btn btn-primary" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a>
+                <a class="btn" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova pública</a>
+                <button class="btn btn-ghost" data-copy="https://lacre.app/p/7w3n8"><i data-icon="share"></i>Compartilhar</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- falhou e reembolsado -->
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row">
+                  <span class="badge st-falhou"><i data-icon="x-circle"></i>Não atingiu a meta</span>
+                  <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                  <span class="tag">lcr-2d9r4</span>
+                </div>
+                <h3><a href="../public/item.html">Acervo de 300 cartazes de cinema de rua de Recife (1960–1990)</a></h3>
+                <div class="row small muted"><span class="handle" data-handle="arquivista-0d2e" data-rep="4,6 · 5 itens"></span><span>História e acervos</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <div class="goal-head"><span class="raised muted">R$ 4.100</span><span class="goal">meta R$ 9.000 · 46 % · 131 apoiadores · encerrou 09/10</span></div>
+                <div class="progress"><div class="progress-bar" data-width="46%" style="background: var(--muted-2)"></div></div>
+                <div class="panel">
+                  <div class="row between"><b class="small">Você apoiou R$ 50,00 · devolvido integralmente</b><span class="badge st-encerrado">reembolsado</span></div>
+                  <div class="mini-ledger mt-1">
+                    <span>28/09</span><span>Apoio · carteira → custódia do lacre</span><b>R$ 50,00</b>
+                    <span>10/10</span><span>Reembolso automático · crédito em USDT na carteira (9,29 USDT)</span><b>+R$ 50,00</b>
+                  </div>
+                  <p class="xs muted mt-1">Tudo ou nada: sem meta, sem cobrança. O vendedor pode republicar com meta ou prazo diferentes; você será avisado se quiser acompanhar.</p>
+                </div>
+              </div>
+              <div class="actions">
+                <a class="btn" href="../buyer/carteira.html"><i data-icon="wallet"></i>Ver no extrato</a>
+                <button class="btn btn-ghost" data-toast="Você será avisado se este item for republicado"><i data-icon="bell"></i>Avisar se voltar</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="pedidos">
+        <div class="stack">
+          <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Como funciona</span>Quem contribui recebe acesso quando um atendimento é validado pela curadoria. Se ninguém atender até o prazo, tudo volta para as carteiras. Contribuído até hoje: <b>R$ 450,00</b> em 3 pedidos · R$ 250,00 em custódia · 1 pedido atendido.</div></div>
+
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="badge st-ativo">Aberto</span><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido com recompensa</span><span class="tag">ped-2c8d1</span></div>
+                <h3><a href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></h3>
+                <div class="row small muted"><span>Saúde e meio ambiente</span><span>Prazo 30/11/2026 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></span><span>0 atendimentos em curadoria</span></div>
+                <dl class="kv-row">
+                  <div><dt>Recompensa</dt><dd>R$ 3.200,00</dd></div>
+                  <div><dt>Contribuidores</dt><dd>14</dd></div>
+                  <div><dt>Você contribuiu</dt><dd>R$ 100,00 · 14/10</dd></div>
+                  <div><dt>Liberação</dt><dd>contribuidores</dd></div>
+                </dl>
+              </div>
+              <div class="actions">
+                <a class="btn btn-primary" href="../buyer/checkout.html"><i data-icon="plus"></i>Somar à recompensa</a>
+                <a class="btn" href="../public/pedido.html"><i data-icon="arrow-right"></i>Ver pedido</a>
+                <button class="btn btn-ghost" data-copy="https://lacre.app/r/2c8d1"><i data-icon="share"></i>Compartilhar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="badge st-analise">Atendimento em curadoria</span><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido com recompensa</span><span class="tag">ped-4k9e2</span></div>
+                <h3><a href="../public/pedido.html">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</a></h3>
+                <div class="row small muted"><span>Negócios e mercado</span><span>Prazo 20/11/2026</span><span class="info"><i data-icon="hourglass" class="ico"></i> 1 atendimento aguardando curadoria desde 24/10</span></div>
+                <dl class="kv-row">
+                  <div><dt>Recompensa</dt><dd>R$ 1.450,00</dd></div>
+                  <div><dt>Contribuidores</dt><dd>6</dd></div>
+                  <div><dt>Você contribuiu</dt><dd>R$ 150,00 · 08/10</dd></div>
+                  <div><dt>Decisão prevista</dt><dd>até 29/10</dd></div>
+                </dl>
+              </div>
+              <div class="actions">
+                <a class="btn" href="../buyer/pedidos.html"><i data-icon="arrow-right"></i>Acompanhar atendimento</a>
+                <a class="btn btn-ghost" href="../public/pedido.html"><i data-icon="external-link"></i>Página pública</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="badge st-liberado"><i data-icon="check"></i>Atendido · acesso liberado</span><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido com recompensa</span><span class="tag">ped-1b6j8</span></div>
+                <h3><a href="../public/pedido.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></h3>
+                <div class="row small muted"><span>Fotografia e vídeo</span><span>Atendido em 20/09 · validado pela curadoria em 24/09 (Ana R.)</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <dl class="kv-row">
+                  <div><dt>Recompensa paga</dt><dd>R$ 600,00</dd></div>
+                  <div><dt>Contribuidores</dt><dd>3</dd></div>
+                  <div><dt>Você contribuiu</dt><dd>R$ 200,00 · 02/09</dd></div>
+                  <div><dt>Entrega</dt><dd>212 fotos · 3,1 GB · ENT-9A4F</dd></div>
+                </dl>
+              </div>
+              <div class="actions">
+                <a class="btn btn-primary" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a>
+                <a class="btn" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova pública</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <aside class="stack">
+      <div class="card">
+        <div class="card-head"><h3>Seus selos</h3><span class="badge badge-brass">2 conquistados</span></div>
+        <div class="card-body stack-sm">
+          <div class="selo"><span class="s-icon"><i data-icon="unlock"></i></span><div><b class="small">Rompeu 1 lacre</b><div class="xs muted">Apoiou um lacre coletivo que bateu a meta · 12/10/2026</div></div></div>
+          <div class="selo"><span class="s-icon"><i data-icon="calendar"></i></span><div><b class="small">Apoiador desde mar/2026</b><div class="xs muted">Primeiro apoio registrado em 15/03/2026</div></div></div>
+          <div class="selo locked"><span class="s-icon"><i data-icon="flame"></i></span><div><b class="small">Rompeu 3 lacres</b><div class="xs muted">Faltam 2 · o lcr-4m2x9 conta quando bater a meta</div><div class="progress thin mt-1"><div class="progress-bar wax" data-width="33%"></div></div></div></div>
+          <div class="selo locked"><span class="s-icon"><i data-icon="target"></i></span><div><b class="small">Pedido atendido 3×</b><div class="xs muted">1 de 3 pedidos a que você contribuiu foi atendido</div><div class="progress thin mt-1"><div class="progress-bar" data-width="33%"></div></div></div></div>
+          <p class="xs muted">Selos ficam no seu pseudônimo e aparecem para o vendedor apenas como contagem agregada ("3 apoiadores com selo").</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Custódia e devolução</h3></div>
+        <div class="card-body stack-sm small">
+          <div class="row start"><i data-icon="lock" class="ico brass"></i><div>O apoio sai da sua carteira na hora e fica na custódia do item, em USDT. Não rende nem pode ser usado em outra compra.</div></div>
+          <div class="row start"><i data-icon="unlock" class="ico brass"></i><div>Meta batida: o conteúdo libera no cofre e o valor vai ao vendedor 72 h depois, menos a comissão de 10 %.</div></div>
+          <div class="row start"><i data-icon="rotate-ccw" class="ico brass"></i><div>Meta não batida: devolução automática no dia seguinte ao prazo, como crédito em USDT, sem taxa.</div></div>
+          <div class="row start"><i data-icon="eye-off" class="ico brass"></i><div>Registramos item, valor e data do apoio. Nada mais. O vendedor nunca sabe quem apoiou.</div></div>
+          <a class="link xs" href="../public/como-funciona.html">Como funciona um lacre coletivo</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

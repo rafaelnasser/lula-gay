@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mensagens · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .msg-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+    @media (max-width: 1100px) { .msg-layout { grid-template-columns: 1fr; } }
+    .chat .thread-tools { padding: 10px 12px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+    .chat .thread { cursor: pointer; align-items: flex-start; }
+    .chat .thread .t-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex: none; font-size: var(--fs-xs); color: var(--muted); }
+    .chat .thread .unread { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 99px; background: var(--brass); color: var(--brass-fg); font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+    .chat .thread .t-preview { color: var(--muted); font-size: var(--fs-xs); }
+    .chat .conv-head .spacer { flex: 1; }
+    .msg.them .who { display: block; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); margin-bottom: 2px; }
+    .only-mobile { display: none; }
+    @media (max-width: 900px) {
+      .only-mobile { display: inline-flex; }
+      .chat.show-threads .threads { display: block; }
+      .chat.show-threads .conv { display: none; }
+      .msg { max-width: 88%; }
+    }
+  </style>
+</head>
+<body data-shell="buyer" data-page="mensagens" data-root="../" data-title="Mensagens">
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Compartilhada · comprador e vendedor</p>
+      <h1>Mensagens</h1>
+      <p class="sub">Conversas existem só dentro de um item ou pedido. O filtro de anonimato bloqueia e-mails, telefones, @ de redes, links e endereços de carteira antes de entregar.</p>
+    </div>
+    <div class="actions">
+      <button class="btn btn-ghost" data-toast="Todas as conversas marcadas como lidas"><i data-icon="check"></i>Marcar como lidas</button>
+      <a class="btn" href="../buyer/notificacoes.html"><i data-icon="bell"></i>Notificações <span class="badge badge-brass">4</span></a>
+    </div>
+  </div>
+
+  <div class="msg-layout">
+    <div class="chat">
+      <div class="threads">
+        <div class="thread-tools">
+          <div class="search"><i data-icon="search"></i><input class="input" placeholder="Buscar por item, pedido ou pseudônimo"></div>
+          <div class="chips">
+            <button class="chip active" data-toast="Mostrando todas as conversas">Todas <b>4</b></button>
+            <button class="chip" data-toast="Filtro: itens que você comprou ou apoiou">Compras <b>2</b></button>
+            <button class="chip" data-toast="Filtro: itens que você vende">Vendas <b>1</b></button>
+            <button class="chip" data-toast="Filtro: pedidos">Pedidos <b>1</b></button>
+          </div>
+        </div>
+
+        <div class="thread active" data-toast="Conversa aberta: lcr-9f2k7">
+          <span class="identicon" data-handle="lanterna-b31d"></span>
+          <div class="grow">
+            <div class="t-title truncate">12.400 licitações municipais do Nordeste (2019–2025)</div>
+            <div class="t-sub">@lanterna-b31d · vendedor · lcr-9f2k7</div>
+            <div class="t-preview truncate">O dicionário já está no pacote (dicionario.md, 14 KB)…</div>
+          </div>
+          <div class="t-meta"><span>11:03</span></div>
+        </div>
+
+        <div class="thread" data-toast="Conversa aberta: lcr-4m2x9">
+          <span class="identicon" data-handle="sextante-21c9"></span>
+          <div class="grow">
+            <div class="t-title truncate">Cadeia do ouro ilegal no Pará: 18 meses de apuração</div>
+            <div class="t-sub">@sextante-21c9 · vendedor · lcr-4m2x9</div>
+            <div class="t-preview truncate">Os áudios da meta estendida já estão enviados e analisados pela curadoria.</div>
+          </div>
+          <div class="t-meta"><span>ontem</span><span class="unread">1</span></div>
+        </div>
+
+        <div class="thread" data-toast="Conversa aberta: ped-9h2d5">
+          <span class="identicon" data-handle="prisma-66af"></span>
+          <div class="grow">
+            <div class="t-title truncate">Lista de todos os editais de fomento cultural municipais do RS em 2025</div>
+            <div class="t-sub">@prisma-66af · interessado no seu pedido · ped-9h2d5</div>
+            <div class="t-preview truncate">Editais de fundações municipais de cultura entram nos critérios?</div>
+          </div>
+          <div class="t-meta"><span>25/10</span><span class="unread">1</span></div>
+        </div>
+
+        <div class="thread" data-toast="Conversa aberta: lcr-5m8c4">
+          <span class="identicon" data-handle="farol-3e9b"></span>
+          <div class="grow">
+            <div class="t-title truncate">Guia de acesso a dados do SUS: 60 fontes, endpoints e scripts</div>
+            <div class="t-sub">@farol-3e9b · comprador · lcr-5m8c4 · <span class="brass">você vende</span></div>
+            <div class="t-preview truncate">Você: Rodam em Python 3.12. O script 41 precisa da chave do…</div>
+          </div>
+          <div class="t-meta"><span>20/10</span></div>
+        </div>
+      </div>
+
+      <div class="conv">
+        <div class="conv-head">
+          <button class="btn btn-sm btn-ghost only-mobile" data-toggle-class="show-threads" data-target=".chat"><i data-icon="chevron-left"></i>Conversas</button>
+          <span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 8 itens · Verificado 6×"></span>
+          <span class="badge st-ativo">Item ativo</span>
+          <span class="badge badge-outline"><i data-icon="vault"></i>Comprado em 21/10 · ENT-3F9A</span>
+          <span class="spacer"></span>
+          <a class="btn btn-sm" href="../public/item.html"><i data-icon="external-link"></i>Ver item</a>
+          <a class="btn btn-sm" href="../buyer/cofre.html"><i data-icon="vault"></i>Abrir no cofre</a>
+          <div class="menu-wrap">
+            <button class="icon-btn" data-menu-toggle aria-label="Mais ações"><i data-icon="more-vertical"></i></button>
+            <div class="menu">
+              <button data-toast="Conversa silenciada. Você ainda vê as mensagens aqui."><i data-icon="bell"></i>Silenciar</button>
+              <button data-toast="Denúncia registrada. A curadoria pode ler esta conversa a partir de agora."><i data-icon="flag"></i>Denunciar conversa</button>
+              <div class="sep"></div>
+              <button data-toast="Conversa apagada do seu lado. O outro lado mantém a cópia até a expiração."><i data-icon="trash"></i>Apagar do meu lado</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="conv-body">
+          <div class="msg system">Conversa vinculada ao item lcr-9f2k7 · 12.400 licitações municipais do Nordeste (2019–2025). Expira 90 dias após o encerramento do item. Dados de contato são bloqueados automaticamente.</div>
+          <div class="msg system">21/10</div>
+          <div class="msg me">A base inclui licitações de consórcios intermunicipais?<span class="when">10:02</span></div>
+          <div class="msg them"><span class="who">@lanterna-b31d</span>Inclui 412 licitações de consórcios, marcadas na coluna tipo_ente.<span class="when">10:40</span></div>
+          <div class="msg me">E os valores: nominais ou corrigidos?<span class="when">10:44</span></div>
+          <div class="msg them"><span class="who">@lanterna-b31d</span>Nominais. Há uma coluna valor_ipca_2025 com a correção pelo IPCA até jan/2025. O dicionário de dados explica cada coluna.<span class="when">10:52</span></div>
+          <div class="msg me filtered">Consegue me mandar o dicionário atualizado por e-mail? [e-mail removido]<span class="when">10:55 · trecho bloqueado pelo filtro de anonimato</span></div>
+          <div class="msg system"><i data-icon="shield" class="ico brass"></i> Bloqueamos um endereço de e-mail nesta mensagem antes de entregá-la. Contatos externos identificam você e tiram a conversa da proteção da plataforma. O restante do texto foi entregue. Arquivos só circulam pelo cofre.</div>
+          <div class="msg system">Hoje</div>
+          <div class="msg them"><span class="who">@lanterna-b31d</span>O dicionário já está no pacote (dicionario.md, 14 KB). Vou pedir à curadoria para incluir 10 linhas a mais na amostra pública; costuma liberar em até 24 h.<span class="when">11:03</span></div>
+          <div class="msg system"><i data-icon="clock" class="ico"></i> Esta conversa expira em 28/02/2027, 90 dias após o encerramento previsto do item (30/11/2026). Depois disso as mensagens são apagadas dos dois lados.</div>
+        </div>
+
+        <div class="conv-foot">
+          <div class="input-group">
+            <input class="input" placeholder="Escreva uma mensagem… contatos externos são bloqueados" aria-label="Mensagem">
+            <button class="btn btn-primary" data-toast="Mensagem enviada" aria-label="Enviar"><i data-icon="send"></i></button>
+          </div>
+          <div class="row between mt-1 xs muted">
+            <span>Enter envia · sem anexos: arquivos só pelo cofre</span>
+            <span><i data-icon="eye-off" class="ico"></i> O vendedor vê só o seu pseudônimo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="stack">
+      <div class="alert alert-anon">
+        <i data-icon="scale"></i>
+        <div>
+          <span class="alert-title">O que a curadoria pode ler</span>
+          Mensagens são privadas entre as duas contas. A curadoria só lê uma conversa quando há <b>disputa</b> ou <b>denúncia</b> sobre o item ou pedido vinculado, e cada leitura fica no log de auditoria com nome da pessoa da equipe, data e motivo. Nenhuma mensagem é usada para publicidade, análise de perfil ou treinamento.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Filtro de anonimato</h3><span class="badge badge-ok">ativo</span></div>
+        <div class="card-body stack-sm small">
+          <p class="muted xs">Bloqueado antes de entregar, nos dois sentidos:</p>
+          <div class="row start"><i data-icon="ban" class="ico danger"></i><div>Endereços de e-mail</div></div>
+          <div class="row start"><i data-icon="ban" class="ico danger"></i><div>Telefones e números de mensageiros</div></div>
+          <div class="row start"><i data-icon="ban" class="ico danger"></i><div>@ de redes sociais e nomes de usuário externos</div></div>
+          <div class="row start"><i data-icon="ban" class="ico danger"></i><div>Links externos</div></div>
+          <div class="row start"><i data-icon="ban" class="ico danger"></i><div>Endereços de carteira cripto</div></div>
+          <p class="xs muted">O trecho vira <code>[removido]</code>; o resto chega. Quem enviou vê o aviso. Nesta conta: 1 bloqueio nos últimos 30 dias.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Regras</h3></div>
+        <div class="card-body stack-sm small">
+          <div class="row start"><i data-icon="link" class="ico brass"></i><div>Só existe conversa entre comprador e vendedor de um item, ou autor e interessado em um pedido. Não há mensagem direta nem perfil público.</div></div>
+          <div class="row start"><i data-icon="hourglass" class="ico brass"></i><div>Expira 90 dias após o encerramento do item. Em <a class="link" href="../buyer/configuracoes.html">Privacidade</a> dá para apagar já no encerramento.</div></div>
+          <div class="row start"><i data-icon="message-square" class="ico brass"></i><div>Perguntas de interesse geral vão para as perguntas públicas do item; a curadoria modera.</div></div>
+          <div class="row start"><i data-icon="alert-triangle" class="ico brass"></i><div>Não conte onde ou como obteve um documento. Vale para os dois lados.</div></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

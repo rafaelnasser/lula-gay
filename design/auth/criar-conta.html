@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Criar conta · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    main { width: 100%; max-width: 560px; }
+    .auth-card { max-width: 560px; }
+    [data-wizard] > [data-step]:not(.active) { display: none; }
+    .pseudo-box { display: flex; align-items: center; gap: 16px; padding: 18px; border: 1px solid var(--border-2); border-radius: var(--r-lg); background: var(--bg-2); flex-wrap: wrap; }
+    .pseudo-box .identicon { width: 64px; height: 64px; border-radius: 16px; }
+    .pseudo-box .grow { flex: 1 1 200px; }
+    .pseudo-box .name { font-family: var(--font-mono); font-size: var(--fs-xl); font-weight: 500; overflow-wrap: anywhere; }
+    .not-asked { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .not-asked div { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 6px; border-radius: var(--r-sm); background: var(--surface-2); font-size: var(--fs-xs); color: var(--muted); text-align: center; }
+    .not-asked svg { width: 18px; height: 18px; color: var(--muted-2); }
+    .not-asked span { text-decoration: line-through; text-decoration-color: var(--danger); }
+    @media (max-width: 480px) { .not-asked { grid-template-columns: repeat(3, 1fr); } }
+    .strength { display: flex; align-items: center; gap: 10px; font-size: var(--fs-xs); color: var(--muted); }
+    .strength .progress { flex: 1; }
+    .done-head { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .done-head svg { width: 48px; height: 48px; color: var(--ok); }
+  </style>
+</head>
+<body data-shell="auth" data-page="auth" data-root="../">
+  <main>
+    <div class="auth-card" data-wizard>
+      <div class="stepper mb-3">
+        <div class="step active"><span class="n">1</span><span class="t">Pseudônimo</span></div>
+        <div class="step"><span class="n">2</span><span class="t">Senha</span></div>
+        <div class="step"><span class="n">3</span><span class="t">Recuperação</span></div>
+      </div>
+
+      <!-- Passo 1 · pseudônimo -->
+      <div data-step="1" class="active stack">
+        <div>
+          <p class="eyebrow">Passo 1 de 3</p>
+          <h1 class="mt-1">Seu pseudônimo</h1>
+          <p class="muted small mt-1">É assim que você aparece para vendedores, compradores e para o público. Nenhum dado seu entra aqui.</p>
+        </div>
+        <div class="pseudo-box">
+          <span class="identicon" data-handle="coruja-7f3a" data-pseudo-icon></span>
+          <div class="grow">
+            <div class="name" data-pseudo>@coruja-7f3a</div>
+            <div class="xs muted">palavra + 4 caracteres · gerado agora, sem relação com você</div>
+          </div>
+          <button type="button" class="btn" id="sortear" data-toast="Novo pseudônimo sorteado"><i data-icon="refresh"></i>Sortear outro</button>
+        </div>
+        <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Não poderá ser alterado depois</span>Um pseudônimo fixo evita personalizações que acabam identificando a pessoa. Sorteie até gostar de um.</div></div>
+        <div>
+          <h3>O que não pedimos</h3>
+          <p class="small muted mt-1 mb-2">Nenhum destes dados é coletado, nem agora nem depois.</p>
+          <div class="not-asked">
+            <div><i data-icon="user"></i><span>Nome</span></div>
+            <div><i data-icon="send"></i><span>E-mail</span></div>
+            <div><i data-icon="smartphone"></i><span>Telefone</span></div>
+            <div><i data-icon="fingerprint"></i><span>CPF</span></div>
+            <div><i data-icon="file-text"></i><span>Documento</span></div>
+          </div>
+          <p class="xs muted mt-2">A conta guarda só: pseudônimo, hash da senha, hash da frase de recuperação, data de criação e saldo. <a class="link" href="../public/politicas.html#anonimato">Anonimato e seus limites</a>.</p>
+        </div>
+        <div class="form-actions">
+          <a class="link small" href="entrar.html">Já tenho conta</a>
+          <button type="button" class="btn btn-primary" data-step-go="2">Continuar<i data-icon="arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Passo 2 · senha ou passkey -->
+      <div data-step="2" class="stack">
+        <div>
+          <p class="eyebrow">Passo 2 de 3</p>
+          <h1 class="mt-1">Senha ou passkey</h1>
+          <p class="muted small mt-1">Escolha um dos dois. Nos dois casos você recebe uma frase de recuperação no próximo passo.</p>
+        </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" class="input lg" minlength="12" autocomplete="new-password" value="moinho-tinta-farol-quartzo-2026">
+          <div class="strength"><div class="progress thin"><div class="progress-bar" id="pw-bar" data-width="0%"></div></div><span id="pw-label">Digite para medir</span></div>
+          <span class="hint">Mínimo de 12 caracteres. Uma frase longa vale mais do que símbolos. Não reutilize senhas de outros serviços.</span>
+        </div>
+        <div class="field">
+          <label for="senha2">Confirmar senha</label>
+          <input id="senha2" type="password" class="input lg" minlength="12" autocomplete="new-password" value="moinho-tinta-farol-quartzo-2026">
+        </div>
+        <p class="text-center xs muted">ou</p>
+        <div class="panel stack-sm">
+          <button type="button" class="btn btn-outline btn-block" data-toast="Passkey criada neste dispositivo"><i data-icon="fingerprint"></i>Usar passkey em vez de senha</button>
+          <p class="xs muted">A passkey fica no seu dispositivo ou gerenciador de senhas (WebAuthn). Não existe senha para vazar. Você pode adicionar outras depois, em Configurações › Segurança.</p>
+        </div>
+        <div class="alert alert-anon"><i data-icon="shield"></i><div>Guardamos só um hash da senha (Argon2id). Ninguém da equipe consegue ver ou redefinir sua senha por você.</div></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" data-step-go="1"><i data-icon="arrow-left"></i>Voltar</button>
+          <button type="button" class="btn btn-primary" data-step-go="3">Continuar<i data-icon="arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Passo 3 · frase de recuperação -->
+      <div data-step="3" class="stack">
+        <div>
+          <p class="eyebrow">Passo 3 de 3</p>
+          <h1 class="mt-1">Frase de recuperação</h1>
+          <p class="muted small mt-1">12 palavras, nesta ordem. Sem e-mail ou telefone, elas são o único caminho de volta para a conta.</p>
+        </div>
+        <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Mostramos uma única vez</span>Depois deste passo a frase não aparece mais. Nem a equipe consegue recuperá-la: guardamos apenas um hash para validar.</div></div>
+        <div class="words">
+          <span>amanhecer</span><span>bússola</span><span>lacre</span>
+          <span>moinho</span><span>sextante</span><span>tinta</span>
+          <span>farol</span><span>quartzo</span><span>prisma</span>
+          <span>lanterna</span><span>cartógrafo</span><span>arquivista</span>
+        </div>
+        <input type="hidden" id="frase" value="amanhecer bússola lacre moinho sextante tinta farol quartzo prisma lanterna cartógrafo arquivista">
+        <div class="row">
+          <button type="button" class="btn btn-sm" data-copy="#frase"><i data-icon="copy"></i>Copiar</button>
+          <button type="button" class="btn btn-sm" data-toast="Arquivo frase-de-recuperacao.txt baixado"><i data-icon="download"></i>Baixar .txt</button>
+          <span class="xs muted">Anote no papel ou guarde em um gerenciador de senhas. Nunca em e-mail ou nuvem sincronizada.</span>
+        </div>
+        <label class="check"><input type="checkbox" checked><span>Anotei a frase em um lugar seguro, fora deste dispositivo.<span class="desc">Sem isso, perder a senha significa perder a conta e o saldo.</span></span></label>
+        <div>
+          <h3>Confirme 3 palavras</h3>
+          <p class="small muted mt-1 mb-2">Digite as palavras nas posições indicadas para provar que anotou.</p>
+          <div class="grid cols-3">
+            <div class="field"><label for="w3">Palavra 3</label><input id="w3" class="input mono" value="lacre" autocomplete="off"></div>
+            <div class="field"><label for="w7">Palavra 7</label><input id="w7" class="input mono" value="farol" autocomplete="off"></div>
+            <div class="field"><label for="w11">Palavra 11</label><input id="w11" class="input mono" value="cartógrafo" autocomplete="off"></div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" data-step-go="2"><i data-icon="arrow-left"></i>Voltar</button>
+          <button type="button" class="btn btn-primary" data-step-go="4"><i data-icon="check"></i>Criar conta</button>
+        </div>
+      </div>
+
+      <!-- Final · conta criada -->
+      <div data-step="4" class="stack">
+        <div class="done-head">
+          <i data-icon="check-circle"></i>
+          <p class="eyebrow">Pronto</p>
+          <h1>Conta criada</h1>
+          <span class="handle lg"><span class="identicon" data-handle="coruja-7f3a" data-pseudo-icon></span><span data-pseudo>@coruja-7f3a</span></span>
+          <p class="muted small">A partir de agora, só o pseudônimo representa você. Guarde a frase de recuperação.</p>
+        </div>
+        <dl class="kv panel">
+          <dt>Criada em</dt><dd>27/10/2026</dd>
+          <dt>Acesso</dt><dd>Senha definida · passkey opcional</dd>
+          <dt>Recuperação</dt><dd>Frase confirmada (palavras 3, 7 e 11)</dd>
+          <dt>Saldo</dt><dd>R$ 0,00 · deposite em cripto quando quiser comprar ou apoiar</dd>
+        </dl>
+        <div class="grid cols-2">
+          <a class="btn btn-primary btn-lg" href="../public/explorar.html"><i data-icon="compass"></i>Ir para o catálogo</a>
+          <a class="btn btn-lg" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Vender informação</a>
+        </div>
+        <p class="xs muted text-center">Recomendado: ative o código do app autenticador (TOTP) em <a class="link" href="../buyer/configuracoes.html">Configurações › Segurança</a>.</p>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var names = ['tordo-91be', 'ardosia-4c2d', 'sabia-0f9c', 'moinho-3b8e', 'coruja-7f3a'], i = 0;
+        document.getElementById('sortear').addEventListener('click', function () {
+          var h = names[i++ % names.length];
+          document.querySelectorAll('[data-pseudo]').forEach(function (el) { el.textContent = '@' + h; });
+          document.querySelectorAll('[data-pseudo-icon]').forEach(function (el) { el.innerHTML = window.Lacre.identicon(h); });
+        });
+        var pw = document.getElementById('senha'), bar = document.getElementById('pw-bar'), lbl = document.getElementById('pw-label');
+        var levels = [['Muito fraca', '10%', 'var(--danger)'], ['Fraca', '30%', 'var(--danger)'], ['Razoável', '55%', 'var(--warn)'], ['Boa', '75%', 'var(--brass)'], ['Forte', '90%', 'var(--ok)'], ['Muito forte', '100%', 'var(--ok)']];
+        function measure() {
+          var v = pw.value, s = 0;
+          if (v.length >= 12) s++; if (v.length >= 20) s++; if (/[a-z]/.test(v) && /[A-Z0-9]/.test(v)) s++; if (/[^A-Za-z0-9]/.test(v)) s++; if (v.length >= 28) s++;
+          if (v.length < 12) s = Math.min(s, 1);
+          var l = levels[s];
+          bar.dataset.width = l[1]; bar.style.width = l[1]; bar.style.background = l[2];
+          lbl.textContent = v.length < 12 ? l[0] + ' · faltam ' + (12 - v.length) + ' caracteres' : l[0];
+        }
+        pw.addEventListener('input', measure);
+        measure();
+      })();
+    </script>
+  </main>
+</body>
+</html>

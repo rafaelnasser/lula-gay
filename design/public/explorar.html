@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Explorar · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    a.preview { display: block; }
+    .catalog { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 24px; align-items: start; }
+    @media (max-width: 900px) { .catalog { grid-template-columns: 1fr; } .catalog .sticky { position: static; } }
+    .filters .card-body { padding: 16px; display: flex; flex-direction: column; gap: 20px; }
+    .filter-group { display: flex; flex-direction: column; gap: 8px; }
+    .filter-group h4 { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-family: var(--font-body); }
+    .filter-group .cnt { color: var(--muted-2); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
+    .toolbar .select { width: auto; }
+    .segmented svg { width: 16px; height: 16px; display: block; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .section-head p { color: var(--muted); margin-top: 6px; max-width: 60ch; }
+  </style>
+</head>
+<body data-shell="public" data-page="explorar" data-root="../">
+<main>
+  <section class="section tight">
+    <div class="container">
+      <div class="page-head">
+        <div><p class="eyebrow">Catálogo</p><h1>Explorar</h1><p class="sub">197 itens ativos. Todos passaram por curadoria humana antes de aparecer aqui, e todos têm uma prova pública.</p></div>
+        <div class="actions"><a class="btn" href="#coletivos"><i data-icon="hand-coins"></i>Lacres coletivos</a><a class="btn" href="pedidos.html"><i data-icon="file-search"></i>Pedidos com recompensa</a></div>
+      </div>
+      <div class="search"><i data-icon="search"></i><input class="input lg" placeholder="Buscar por título, categoria, tag ou código do item (ex.: lcr-4m2x9)" aria-label="Buscar no catálogo"></div>
+      <div class="chips mt-2">
+        <button class="chip active" data-toast="Mostrando todas as categorias">Todas</button>
+        <button class="chip" data-toast="Filtro: Jornalismo e investigação (23 itens)">Jornalismo e investigação</button>
+        <button class="chip" data-toast="Filtro: Dados e bases (41 itens)">Dados e bases</button>
+        <button class="chip" data-toast="Filtro: Governo e políticas públicas (29 itens)">Governo e políticas públicas</button>
+        <button class="chip" data-toast="Filtro: Negócios e mercado (18 itens)">Negócios e mercado</button>
+        <button class="chip" data-toast="Filtro: Fotografia e vídeo (34 itens)">Fotografia e vídeo</button>
+        <button class="chip" data-toast="Filtro: História e acervos (22 itens)">História e acervos</button>
+        <button class="chip" data-toast="Filtro: Ciência e pesquisa (12 itens)">Ciência e pesquisa</button>
+        <button class="chip" data-toast="Filtro: Educação e métodos (9 itens)">Educação e métodos</button>
+        <button class="chip" data-toast="Filtro: Saúde e meio ambiente (6 itens)">Saúde e meio ambiente</button>
+        <button class="chip" data-toast="Filtro: Tecnologia e segurança (3 itens)">Tecnologia e segurança</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="catalog">
+        <!-- Filtros laterais -->
+        <aside class="card filters sticky">
+          <div class="card-head"><h3>Filtros</h3><div class="actions"><button class="btn btn-sm btn-ghost" data-toast="Filtros limpos">Limpar</button></div></div>
+          <div class="card-body">
+            <div class="filter-group">
+              <h4>Modelo de venda</h4>
+              <label class="check"><input type="checkbox" checked><span class="grow">Cópias</span><span class="cnt">84</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Lacre coletivo</span><span class="cnt">3</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Exclusivo</span><span class="cnt">12</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Leilão lacrado</span><span class="cnt">4</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Camadas</span><span class="cnt">17</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Assinatura</span><span class="cnt">9</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Licença</span><span class="cnt">68</span></label>
+            </div>
+            <div class="filter-group">
+              <h4>Tipo de conteúdo</h4>
+              <label class="check"><input type="checkbox" checked><span class="grow">Documento</span><span class="cnt">61</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Dados (CSV, XLSX)</span><span class="cnt">52</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Imagem</span><span class="cnt">44</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Vídeo</span><span class="cnt">21</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Áudio</span><span class="cnt">8</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Pacote</span><span class="cnt">11</span></label>
+            </div>
+            <div class="filter-group">
+              <h4>Autenticidade</h4>
+              <label class="check"><input type="checkbox" checked><span class="grow">Verificado</span><span class="cnt">118</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Verificado parcialmente</span><span class="cnt">46</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Plausível</span><span class="cnt">31</span></label>
+              <label class="check"><input type="checkbox"><span class="grow">Não verificado</span><span class="cnt">2</span></label>
+            </div>
+            <div class="filter-group">
+              <h4>Faixa de preço</h4>
+              <div class="row nowrap"><div class="input-group grow"><span class="affix">R$</span><input class="input" placeholder="mín." aria-label="Preço mínimo"></div><div class="input-group grow"><span class="affix">R$</span><input class="input" placeholder="máx." aria-label="Preço máximo"></div></div>
+              <span class="xs muted">Para lacres coletivos, considera o menor apoio (R$ 10).</span>
+            </div>
+            <div class="filter-group">
+              <h4>Status</h4>
+              <label class="radio"><input type="radio" name="st" checked><span>Ativo</span></label>
+              <label class="radio"><input type="radio" name="st"><span>Financiado (lacre rompido)</span></label>
+              <label class="radio"><input type="radio" name="st"><span>Encerrando em 24 h</span></label>
+            </div>
+            <button class="btn btn-primary btn-block" data-toast="Filtros aplicados · 197 itens">Aplicar filtros</button>
+          </div>
+        </aside>
+
+        <!-- Grade -->
+        <div>
+          <div class="toolbar">
+            <span class="small muted">Mostrando 1–9 de 197 itens</span>
+            <div class="right">
+              <select class="select" aria-label="Ordenar por"><option>Mais recentes</option><option>Mais apoiados</option><option>Encerrando primeiro</option><option>Menor preço</option><option>Maior preço</option></select>
+              <div class="segmented"><button class="active" data-toast="Visualização em grade" aria-label="Grade"><i data-icon="grid"></i></button><button data-toast="Visualização em lista" aria-label="Lista"><i data-icon="list"></i></button></div>
+            </div>
+          </div>
+          <div class="grid cols-3">
+            <article class="card item-card">
+              <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span></div>
+                <h3 class="item-title"><a href="item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
+                <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
+                <div class="item-foot"><div><div class="price wax">R$ 54.120<small>de R$ 80.000</small></div><div class="xs muted">1.187 apoiadores · <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></div></div><span class="handle" data-handle="sextante-21c9"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Dados e bases</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 37/100</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <h3 class="item-title"><a href="item.html">12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</a></h3>
+                <div class="item-foot"><div class="price">R$ 490<small>63 restantes</small></div><span class="handle" data-handle="lanterna-b31d"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Negócios e mercado</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span></div>
+                <h3 class="item-title"><a href="item.html">Mercado de energia solar distribuída no Brasil: projeções 2026–2030, 120 páginas</a></h3>
+                <div class="item-foot"><div class="price">R$ 25.000<small>ou oferta a partir de R$ 15.000 · 2 ofertas</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="imagem" href="item.html"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <h3 class="item-title"><a href="item.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></h3>
+                <div class="item-foot"><div class="price">R$ 900<small>editorial · comercial R$ 4.500 · exclusiva R$ 25.000</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">História e acervos</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias ilimitadas</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <h3 class="item-title"><a href="item.html">1.200 páginas de jornais operários de São Paulo (1917–1930) digitalizadas em 600 dpi</a></h3>
+                <div class="item-foot"><div class="price">R$ 120<small>214 vendidas</small></div><span class="handle" data-handle="arquivista-0d2e"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="video" href="item.html"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <h3 class="item-title"><a href="item.html">Filmagem aérea 4K das queimadas no Pantanal, agosto de 2025: 6 horas de material bruto</a></h3>
+                <div class="item-foot"><div class="price">R$ 2.400<small>editorial · comercial R$ 12.000</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Educação e métodos</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span></div>
+                <h3 class="item-title"><a href="item.html">Como uma operação de última milha cortou 31% do custo: playbook, planilhas e modelo de roteirização</a></h3>
+                <div class="item-foot"><div class="price">R$ 190<small>a R$ 2.400 · 4 camadas</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Ciência e pesquisa</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span></div>
+                <h3 class="item-title"><a href="item.html">Monitor semanal de patentes do setor farmacêutico brasileiro</a></h3>
+                <div class="item-foot"><div class="price">R$ 190<small>/mês · 212 assinantes · avulsa R$ 90</small></div><span class="handle" data-handle="prisma-66af"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="imagem" href="item.html"><div class="preview-tag"><span class="badge">História e acervos</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <h3 class="item-title"><a href="item.html">400 fotografias inéditas da construção de Brasília (1957–1960), acervo pessoal digitalizado</a></h3>
+                <div class="item-foot"><div><div class="price">7 lances<small>segundo preço · reserva não revelada</small></div><div class="xs muted">encerra em <span class="countdown" data-deadline="2026-11-02T20:00:00-03:00"></span></div></div><span class="handle" data-handle="arquivista-0d2e"></span></div>
+              </div>
+            </article>
+          </div>
+          <div class="row between mt-3">
+            <span class="small muted">Página 1 de 22</span>
+            <div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm" data-toast="Página 2 do catálogo">2</button><button class="btn btn-sm" data-toast="Página 3 do catálogo">3</button><span class="btn btn-sm btn-ghost">…</span><button class="btn btn-sm" data-toast="Página 22 do catálogo">22</button><button class="btn btn-sm" data-toast="Página 2 do catálogo">›</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lacres coletivos -->
+  <section class="section band" id="coletivos">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Lacre coletivo</p><h2>Lacres coletivos em andamento</h2><p>Uma meta em reais, um prazo e o conteúdo completo já analisado pela curadoria. Quando a soma dos apoios bate a meta, o lacre rompe. Se não bater, todo apoio volta para a carteira de origem, sem taxa.</p></div>
+        <a class="btn btn-ghost" href="como-funciona.html">Como funciona o lacre coletivo<i data-icon="arrow-right"></i></a>
+      </div>
+      <div class="grid cols-3">
+        <article class="card item-card">
+          <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="badge badge-outline">Liberação pública</span></div>
+            <h3 class="item-title"><a href="item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
+            <div class="item-foot"><div><div class="price wax">R$ 54.120<small>de R$ 80.000 · 68 %</small></div><div class="xs muted">1.187 apoiadores · <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></div></div><span class="handle" data-handle="sextante-21c9"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Governo e políticas públicas</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge badge-outline">Liberação pública</span></div>
+            <h3 class="item-title"><a href="item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o Plano Diretor (2024–2026)</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="63%"></div></div>
+            <div class="item-foot"><div><div class="price wax">R$ 11.340<small>de R$ 18.000 · 63 %</small></div><div class="xs muted">402 apoiadores · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></div></div><span class="badge badge-outline"><i data-icon="eye-off"></i>Vendedor oculto</span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Ciência e pesquisa</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="badge badge-outline">Só apoiadores</span></div>
+            <h3 class="item-title"><a href="item.html">Pesquisa com 1.200 motoristas de aplicativo em 5 capitais: renda, jornada e custos (2026)</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="27%"></div></div>
+            <div class="item-foot"><div><div class="price wax">R$ 6.750<small>de R$ 25.000 · 27 %</small></div><div class="xs muted">188 apoiadores · <span class="countdown" data-deadline="2026-12-20T23:59:00-03:00"></span></div></div><span class="handle" data-handle="lanterna-b31d"></span></div>
+          </div>
+        </article>
+      </div>
+      <div class="row mt-3">
+        <span class="badge st-financiado">Financiado</span><span class="small muted">11 lacres já romperam. Os de liberação pública ficam acessíveis a qualquer conta; basta entrar e abrir no cofre.</span>
+        <a class="small link" href="prova.html">Ver a prova de um lacre rompido</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estado vazio (exemplo) -->
+  <section class="section tight">
+    <div class="container">
+      <div class="row mb-2"><span class="badge badge-outline"><i data-icon="info"></i>Exemplo de estado vazio</span><span class="xs muted">Exibido no lugar da grade quando a busca ou os filtros não retornam itens.</span></div>
+      <div class="card">
+        <div class="empty">
+          <i data-icon="search"></i>
+          <h4>Nenhum resultado para “contratos da prefeitura de Manaus em 2022”</h4>
+          <p>Tente termos mais curtos, remova filtros ou troque a categoria. Se o que você procura ainda não existe no catálogo, publique um pedido com recompensa: alguém pode ter essa informação.</p>
+          <div class="row"><button class="btn" data-toast="Filtros limpos · 197 itens">Limpar filtros</button><a class="btn btn-primary" href="pedidos.html"><i data-icon="file-search"></i>Fazer um pedido</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

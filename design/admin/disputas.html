@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Disputas · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .acts { text-align: right; white-space: nowrap; }
+    .ico { display: inline-flex; align-items: center; vertical-align: middle; }
+    .ico svg { width: 15px; height: 15px; }
+    .table td .title { font-weight: 600; display: block; max-width: 36ch; }
+    .table .handle { font-size: var(--fs-xs); }
+    .table .handle .identicon { width: 18px; height: 18px; border-radius: 5px; }
+    .quote { border-left: 3px solid var(--brass); padding: 10px 14px; background: var(--surface-2); border-radius: 0 var(--r) var(--r) 0; font-size: var(--fs-sm); }
+    .quote .by { display: block; margin-top: 6px; color: var(--muted); font-size: var(--fs-xs); }
+    .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .cmp { grid-template-columns: 1fr; } }
+    .cmp .doc-mock { font-size: 11px; padding: 18px 20px; }
+    .cmp .doc-mock table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 9.5px; }
+    .cmp .doc-mock th, .cmp .doc-mock td { border: 1px solid #d9d4c7; padding: 3px 5px; text-align: left; white-space: nowrap; }
+    .cmp .doc-mock th { background: #ece8dd; }
+    .cmp .doc-mock td.miss { background: #f3d9d6; color: #8a2a24; font-style: italic; }
+    .cmp .doc-mock .cap { font-family: var(--font-mono); font-size: 9px; color: #666; margin-bottom: 8px; display: flex; justify-content: space-between; }
+    .hist { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .hist { grid-template-columns: 1fr; } }
+    .amount .input-group { max-width: 220px; }
+  </style>
+</head>
+<body data-shell="admin" data-page="disputas" data-root="../" data-title="Disputas">
+  <main>
+    <div class="page-head">
+      <div>
+        <h1>Disputas</h1>
+        <p class="sub">3 abertas · prazo de resolução de 5 dias · janela de abertura de 72 h após o acesso · reembolsos em créditos (USDT) na carteira do comprador, debitados da custódia da venda.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" data-toast="Filtro aplicado: só as minhas (Ana R.)"><i data-icon="filter"></i>Só as minhas</button>
+        <button class="btn btn-ghost" data-toast="Relatório de disputas do mês exportado (CSV)"><i data-icon="download"></i>Exportar</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Disputa</th><th>Prazo de resolução</th><th>Item</th><th>Motivo</th><th class="num">Valor</th><th>Comprador</th><th>Vendedor</th><th>Status</th><th class="acts"></th></tr></thead>
+        <tbody>
+          <tr class="selected"><td><b>DSP-0207</b><span class="sub">aberta 25/10 · 14:20</span></td><td class="num">30/10<span class="sub"><span class="countdown" data-deadline="2026-10-30T14:20:00-03:00"></span></span></td><td><span class="title">12.400 licitações municipais do Nordeste (2019–2025)</span><span class="sub">lcr-9f2k7 · Cópias</span></td><td>Conteúdo diferente da prévia</td><td class="num">R$ 490,00</td><td><span class="handle" data-handle="quartzo-a1f0"></span></td><td><span class="handle" data-handle="lanterna-b31d"></span></td><td><span class="badge st-analise">Em análise · Ana R.</span></td><td class="acts"><a class="btn btn-sm btn-primary" href="#dsp-0207">Detalhe</a></td></tr>
+          <tr><td><b>DSP-0208</b><span class="sub">aberta 25/10 · 18:05</span></td><td class="num">30/10<span class="sub">3 dias</span></td><td><span class="title">Como uma operação de última milha cortou 31% do custo · camada 1 (Sumário)</span><span class="sub">lcr-3c7r8 · Camadas</span></td><td>Conteúdo diferente da prévia</td><td class="num">R$ 190,00</td><td><span class="handle" data-handle="coruja-7f3a"></span></td><td><span class="handle" data-handle="bussola-c4e1"></span></td><td><span class="badge st-triagem">Aberta · sem responsável</span></td><td class="acts"><button class="btn btn-sm" data-toast="DSP-0208 atribuída a Ana R.">Assumir</button></td></tr>
+          <tr><td><b>DSP-0209</b><span class="sub">aberta hoje · 09:05</span></td><td class="num">01/11<span class="sub">5 dias</span></td><td><span class="title">1.200 páginas de jornais operários de São Paulo (1917–1930)</span><span class="sub">lcr-5t6w1 · Cópias</span></td><td>Arquivo corrompido (12 páginas ilegíveis no PDF 3 de 6)</td><td class="num">R$ 120,00</td><td><span class="handle" data-handle="farol-3e9b"></span></td><td><span class="handle" data-handle="arquivista-0d2e"></span></td><td><span class="badge st-analise">Em análise · Bruno M.</span></td><td class="acts"><button class="btn btn-sm" data-toast="Detalhe de DSP-0209: Bruno M. já reproduziu o erro em 12 páginas">Detalhe</button></td></tr>
+          <tr><td><b>DSP-0204</b><span class="sub">aberta 15/10</span></td><td class="num">resolvida 18/10<span class="sub">em 3 dias</span></td><td><span class="title">340 fotografias da enchente de 2024 em Porto Alegre · licença editorial</span><span class="sub">lcr-2n8v4 · Licença</span></td><td>Autenticidade (geolocalização divergente em 4 fotos)</td><td class="num">R$ 900,00</td><td><span class="handle" data-handle="farol-3e9b"></span></td><td><span class="handle" data-handle="cartografo-5a77"></span></td><td><span class="badge st-liberado">Reembolso parcial · R$ 90,00</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="DSP-0204: 4 de 340 fotos com GPS deslocado em 300 m · reembolso de 10 % · Ana R.">Ver</button></td></tr>
+          <tr><td><b>DSP-0205</b><span class="sub">aberta 19/10</span></td><td class="num">resolvida 22/10<span class="sub">em 3 dias</span></td><td><span class="title">Monitor semanal de patentes do setor farmacêutico · edição avulsa #40</span><span class="sub">lcr-6d1k5 · Assinatura</span></td><td>Conteúdo diferente da prévia</td><td class="num">R$ 90,00</td><td><span class="handle" data-handle="quartzo-a1f0"></span></td><td><span class="handle" data-handle="prisma-66af"></span></td><td><span class="badge st-encerrado">Mantida · improcedente</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="DSP-0205: a edição entregou o que a prévia descrevia · mantida por Bruno M.">Ver</button></td></tr>
+        </tbody>
+      </table>
+      <div class="table-foot"><span>5 disputas em outubro · taxa de disputa procedente por curador que aprovou: 0,8 % (meta: abaixo de 2 %)</span></div>
+    </div>
+
+    <div class="page-head mt-4" id="dsp-0207">
+      <div>
+        <p class="eyebrow">DSP-0207 · lcr-9f2k7 · aberta em 25/10 às 14:20, 27 h após o acesso (dentro das 72 h)</p>
+        <h2>Conteúdo diferente da prévia · R$ 490,00 em custódia congelada</h2>
+        <div class="row mt-1"><span class="badge st-analise">Em análise · Ana R.</span><span class="badge badge-danger"><i data-icon="clock"></i>resolver até 30/10 · <span class="countdown" data-deadline="2026-10-30T14:20:00-03:00"></span></span><span class="muted small">Comprador</span><span class="handle" data-handle="quartzo-a1f0" data-rep="6 compras · desde jun/2026"></span><span class="muted small">Vendedor</span><span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 12 itens"></span></div>
+      </div>
+      <div class="actions"><a class="btn" href="../public/item.html"><i data-icon="external-link"></i>Página pública</a><a class="btn btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Prova</a></div>
+    </div>
+
+    <div class="split">
+      <div class="stack">
+        <div class="card">
+          <div class="card-head"><h3>Alegação do comprador</h3></div>
+          <div class="card-body stack">
+            <blockquote class="quote">"A prévia prometia valores homologados e a coluna está vazia em 2.100 linhas. Comprei justamente para cruzar valor estimado com valor homologado por município, e para 2019 e 2020 em PE e MA não dá para fazer."<span class="by"><span class="handle" data-handle="quartzo-a1f0"></span> · 25/10 às 14:20 · motivo selecionado: conteúdo diferente da prévia</span></blockquote>
+            <div class="stack-sm">
+              <div class="file-row"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">captura-coluna-vazia.png</div><div class="file-meta">1.440×900 · filtro na coluna valor_homologado mostrando 2.100 linhas em branco · metadados removidos</div></div><button class="btn btn-sm" data-toast="Anexo aberto no visualizador interno">Abrir</button></div>
+              <div class="file-row"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">previa-publica-recorte.png</div><div class="file-meta">820×410 · recorte da amostra pública com a coluna preenchida</div></div><button class="btn btn-sm" data-toast="Anexo aberto no visualizador interno">Abrir</button></div>
+            </div>
+            <blockquote class="quote"><b>Resposta do vendedor</b> · 26/10 às 18:40: "Os portais de PE e MA não publicaram valor homologado para 2.100 certames de 2019–2020. A coluna está vazia por ausência na fonte, e isso está documentado no README do pacote (seção 4). A amostra pública foi gerada aleatoriamente pela plataforma a partir de 2023."<span class="by"><span class="handle" data-handle="lanterna-b31d"></span> · pela conversa interna · prazo de 48 h cumprido</span></blockquote>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Prévia pública × conteúdo entregue</h3><span class="badge badge-outline">coluna valor_homologado</span></div>
+          <div class="card-body stack">
+            <div class="cmp">
+              <div>
+                <p class="eyebrow mb-1">Prévia pública aprovada · amostra de 20 linhas (2023)</p>
+                <div class="doc-mock">
+                  <div class="cap"><span>amostra_publica.csv · aprovada em 14/10</span><span>6 de 20 linhas</span></div>
+                  <table><thead><tr><th>uf</th><th>ano</th><th>objeto</th><th>vencedor (CNPJ)</th><th>valor_estimado</th><th>valor_homologado</th></tr></thead><tbody>
+                    <tr><td>BA</td><td>2023</td><td>merenda escolar</td><td>12.345.678/0001-90</td><td>1.240.000</td><td>1.198.400</td></tr>
+                    <tr><td>CE</td><td>2023</td><td>pavimentação</td><td>23.456.789/0001-01</td><td>3.900.000</td><td>3.712.000</td></tr>
+                    <tr><td>PB</td><td>2023</td><td>medicamentos</td><td>34.567.890/0001-12</td><td>480.000</td><td>455.900</td></tr>
+                    <tr><td>RN</td><td>2023</td><td>transporte escolar</td><td>45.678.901/0001-23</td><td>2.100.000</td><td>2.080.000</td></tr>
+                    <tr><td>SE</td><td>2023</td><td>iluminação pública</td><td>56.789.012/0001-34</td><td>760.000</td><td>742.100</td></tr>
+                    <tr><td>PI</td><td>2023</td><td>coleta de resíduos</td><td>67.890.123/0001-45</td><td>5.400.000</td><td>5.390.000</td></tr>
+                  </tbody></table>
+                  <span class="wm">prévia · lacre.app/p/9f2k7</span>
+                </div>
+              </div>
+              <div>
+                <p class="eyebrow mb-1">Conteúdo entregue · linhas 2.081 a 2.086 de 12.400 (2019–2020)</p>
+                <div class="doc-mock">
+                  <div class="cap"><span>licitacoes_ne_2019_2025.csv · sha256 e3d1…77a0</span><span>filtro: valor_homologado vazio</span></div>
+                  <table><thead><tr><th>uf</th><th>ano</th><th>objeto</th><th>vencedor (CNPJ)</th><th>valor_estimado</th><th>valor_homologado</th></tr></thead><tbody>
+                    <tr><td>PE</td><td>2019</td><td>merenda escolar</td><td>78.901.234/0001-56</td><td>980.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>PE</td><td>2019</td><td>obras de drenagem</td><td>89.012.345/0001-67</td><td>4.150.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>MA</td><td>2019</td><td>transporte escolar</td><td>90.123.456/0001-78</td><td>1.720.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>MA</td><td>2020</td><td>EPIs</td><td>01.234.567/0001-89</td><td>610.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>PE</td><td>2020</td><td>testes rápidos</td><td>11.223.344/0001-90</td><td>2.300.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>MA</td><td>2020</td><td>cestas básicas</td><td>22.334.455/0001-01</td><td>890.000</td><td class="miss">vazio</td></tr>
+                  </tbody></table>
+                  <span class="wm">curadoria · Ana R.</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-grid">
+              <div class="stat"><span class="label">Linhas</span><span class="value">12.400</span><span class="delta flat">como descrito</span></div>
+              <div class="stat"><span class="label">valor_homologado vazio</span><span class="value">2.100</span><span class="delta down"><i data-icon="trending-down"></i>17 % · PE e MA · 2019–2020</span></div>
+              <div class="stat"><span class="label">Prévia</span><span class="value">0 vazios</span><span class="delta flat">amostra só com 2023</span></div>
+              <div class="stat"><span class="label">README do pacote</span><span class="value">§ 4</span><span class="delta flat">lacuna documentada</span></div>
+            </div>
+            <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Leitura da curadoria</span>O conteúdo corresponde ao que foi analisado e aprovado; a lacuna existe na fonte e está documentada no README. Porém a descrição pública não a mencionava e a amostra, gerada só com linhas de 2023, não permitia percebê-la. Prévia parcialmente enganosa por omissão: cabe reembolso parcial e correção da descrição.</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Linha do tempo</h3></div>
+          <div class="card-body">
+            <div class="timeline">
+              <div class="tl-item ok"><div class="when">24/10 · 11:02</div><div class="what">Compra de 1 cópia por <span class="handle" data-handle="quartzo-a1f0"></span> · R$ 490,00 · entrega imediata no cofre (ENT-7C2A)</div></div>
+              <div class="tl-item warn"><div class="when">25/10 · 14:20</div><div class="what">Disputa aberta · 2 anexos · custódia da venda congelada (R$ 441,00 líquidos ao vendedor + comissão de R$ 49,00)</div></div>
+              <div class="tl-item info"><div class="when">26/10 · 09:00</div><div class="what">Ana R. assumiu · vendedor notificado com prazo de 48 h para responder</div></div>
+              <div class="tl-item info"><div class="when">26/10 · 18:40</div><div class="what">Vendedor respondeu pela conversa interna · README § 4 conferido</div></div>
+              <div class="tl-item brass"><div class="when">Hoje · 10:30</div><div class="what">Comparação prévia × conteúdo concluída · 2.100 linhas confirmadas · proposta de resolução em elaboração</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="hist">
+          <div class="card card-sm">
+            <div class="card-head"><h3>Vendedor</h3></div>
+            <div class="card-body stack-sm">
+              <span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · desde fev/2025"></span>
+              <dl class="kv"><dt>Itens</dt><dd>12 publicados · 4 aprovados nos últimos 12 meses</dd><dt>Disputas</dt><dd>1 aberta (esta) · <b>0 perdidas</b></dd><dt>Cópias vendidas</dt><dd>37 deste item · 0 outras disputas</dd><dt>Reincidência</dt><dd>não</dd></dl>
+            </div>
+          </div>
+          <div class="card card-sm">
+            <div class="card-head"><h3>Comprador</h3></div>
+            <div class="card-body stack-sm">
+              <span class="handle" data-handle="quartzo-a1f0" data-rep="desde jun/2026"></span>
+              <dl class="kv"><dt>Compras</dt><dd>6 · R$ 1.830 no total</dd><dt>Disputas</dt><dd>2 abertas em 4 meses · <b>1 anterior improcedente</b> (DSP-0205)</dd><dt>Limite</dt><dd>uma nova improcedente limita o direito de disputa</dd></dl>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Resolução</h3><span class="badge badge-outline">decide até 30/10</span></div>
+          <div class="card-body stack">
+            <fieldset>
+              <legend>Decisão</legend>
+              <div class="stack-sm">
+                <label class="radio"><input type="radio" name="res"><span>Reembolso total · R$ 490,00<span class="desc">≈ 91,08 USDT em créditos. Acesso ao item revogado.</span></span></label>
+                <label class="radio"><input type="radio" name="res" checked><span>Reembolso parcial<span class="desc">Comprador mantém o acesso. Valor sai da custódia da venda.</span></span></label>
+                <div class="field amount"><label for="val">Valor do reembolso parcial</label><div class="input-group"><span class="affix">R$</span><input id="val" class="input num" value="85,00"></div><span class="hint">≈ 15,80 USDT · proporcional às 2.100 linhas sem valor homologado (17 % de R$ 490, arredondado)</span></div>
+                <label class="radio"><input type="radio" name="res"><span>Manter a venda · improcedente<span class="desc">Conta como disputa improcedente para o comprador.</span></span></label>
+              </div>
+            </fieldset>
+            <div class="field"><label for="nota">Nota da resolução</label><textarea id="nota" class="textarea">O conteúdo corresponde ao aprovado e a lacuna de 2.100 valores homologados (PE e MA, 2019–2020) existe na fonte e está documentada no README § 4. A descrição pública, porém, não informava a lacuna e a amostra foi gerada só com 2023. Reembolso parcial de R$ 85,00 (17 %) em créditos; acesso mantido. Vendedor deve atualizar a descrição e a amostra (nova versão da prévia) em 72 h. Sem rebaixamento de reputação: não há reincidência.</textarea><span class="hint">A nota vai para as duas partes, sem identificar a curadora.</span></div>
+            <label class="check"><input type="checkbox" checked><span>Exigir do vendedor nova versão da descrição e da amostra pública<span class="desc">Prazo de 72 h; o item continua ativo.</span></span></label>
+            <label class="check"><input type="checkbox"><span>Rebaixar reputação do vendedor<span class="desc">Só em reincidência ou prévia deliberadamente enganosa.</span></span></label>
+            <div class="row">
+              <button class="btn btn-primary" data-toast="DSP-0207 resolvida: reembolso parcial de R$ 85,00 (≈ 15,80 USDT) creditado a @quartzo-a1f0 · custódia liberada ao vendedor em 72 h · auditoria registrada"><i data-icon="gavel"></i>Resolver</button>
+              <button class="btn" data-toast="Pedido de informação enviado ao comprador · prazo de resolução pausa por até 48 h">Pedir mais informações</button>
+              <button class="btn btn-ghost" data-toast="Disputa encaminhada à curadora sênior para segunda opinião">Segunda opinião</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que cada parte vê</span>Comprador e vendedor veem o motivo, a resolução, o valor e a nota. Nenhum deles vê o outro além do pseudônimo. A equipe não vê nada além do pseudônimo, do item e do ledger.</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Configurações · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .split > *, .grid > * { min-width: 0; }
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } } /* contorno: backdrop vira item do grid .app no desktop (bug em app.css) */
+    .table .switch { gap: 0; }
+    .table .select.sm, .table .input.sm { padding: 5px 8px; font-size: var(--fs-xs); min-width: 120px; }
+    .input-group .input.w-sm { max-width: 110px; text-align: right; }
+    .channel { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .channel:last-child { border-bottom: 0; }
+    .channel .ch-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--surface-3); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .channel .ch-icon svg { width: 18px; height: 18px; color: var(--brass); }
+    .channel .grow { min-width: 160px; }
+    .save-row { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  </style>
+</head>
+<body data-shell="admin" data-page="configuracoes" data-root="../" data-title="Configurações">
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Sistema · parâmetros da plataforma</p>
+        <h1>Configurações</h1>
+        <p class="sub">Administrador responsável: <b>Marcos L.</b> · Administrador. Toda alteração gera um evento <code>settings.*</code> na auditoria e vale só para novos envios, vendas e saques.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-outline" href="../admin/auditoria.html"><i data-icon="scroll-text"></i>Histórico de alterações</a>
+      </div>
+    </div>
+    <div class="alert alert-warn mb-3"><i data-icon="alert-triangle"></i><div><span class="alert-title">Você está vendo como Ana R. · Curadora sênior</span>Os campos são editáveis para revisão, mas salvar cria uma proposta que precisa da confirmação de Marcos L. (administrador). Última alteração aplicada: 26/10 · 17:48 · limite antifraude de saque para contas novas (R$ 1.500 → R$ 2.000/dia).</div></div>
+
+    <div data-tabs>
+      <div class="tabs">
+        <a class="tab active" data-tab="categorias" href="#">Categorias <span class="count">14</span></a>
+        <a class="tab" data-tab="taxas" href="#">Taxas</a>
+        <a class="tab" data-tab="slas" href="#">SLAs</a>
+        <a class="tab" data-tab="politicas" href="#">Políticas</a>
+        <a class="tab" data-tab="canais" href="#">Canais</a>
+        <a class="tab" data-tab="equipe" href="#">Equipe <span class="count">6</span></a>
+        <a class="tab" data-tab="limites" href="#">Limites</a>
+      </div>
+
+      <!-- ====================== Categorias ====================== -->
+      <div class="tab-panel active" data-panel="categorias">
+        <p class="small muted mb-2">O risco padrão define o rigor da curadoria. Categorias de risco alto exigem dois curadores independentes; a segunda análise não vê as notas da primeira. "Jurídico por padrão" envia todo item da categoria ao parecer antes de aprovar, além dos gatilhos por item (pessoa identificável, empresa em contexto negativo, documento institucional).</p>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>#</th><th>Categoria</th><th>Risco padrão</th><th>Dois olhos obrigatórios</th><th>Jurídico por padrão</th><th class="num">Itens ativos</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td><b>Negócios e mercado</b></td><td><span class="badge risk-medio">Médio</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">41</td></tr>
+              <tr><td class="num">2</td><td><b>Dados e bases</b></td><td><span class="badge risk-baixo">Baixo</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">58</td></tr>
+              <tr><td class="num">3</td><td><b>Jornalismo e investigação</b></td><td><span class="badge risk-alto">Alto</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td class="num">23</td></tr>
+              <tr><td class="num">4</td><td><b>Finanças e investimentos</b></td><td><span class="badge risk-alto">Alto</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td class="num">17</td></tr>
+              <tr><td class="num">5</td><td><b>Ciência e pesquisa</b></td><td><span class="badge risk-baixo">Baixo</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">19</td></tr>
+              <tr><td class="num">6</td><td><b>Tecnologia e segurança</b></td><td><span class="badge risk-alto">Alto</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">14</td></tr>
+              <tr><td class="num">7</td><td><b>Imóveis e urbanismo</b></td><td><span class="badge risk-medio">Médio</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">12</td></tr>
+              <tr><td class="num">8</td><td><b>Governo e políticas públicas</b></td><td><span class="badge risk-alto">Alto</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td class="num">31</td></tr>
+              <tr><td class="num">9</td><td><b>História e acervos</b></td><td><span class="badge risk-baixo">Baixo</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">36</td></tr>
+              <tr><td class="num">10</td><td><b>Fotografia e vídeo</b></td><td><span class="badge risk-medio">Médio</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">44</td></tr>
+              <tr><td class="num">11</td><td><b>Cultura e entretenimento</b></td><td><span class="badge risk-baixo">Baixo</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">15</td></tr>
+              <tr><td class="num">12</td><td><b>Esportes</b></td><td><span class="badge risk-baixo">Baixo</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">6</td></tr>
+              <tr><td class="num">13</td><td><b>Saúde e meio ambiente</b></td><td><span class="badge risk-alto">Alto</span></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="switch"><input type="checkbox" checked><span class="track"></span></label></td><td class="num">21</td></tr>
+              <tr><td class="num">14</td><td><b>Educação e métodos</b></td><td><span class="badge risk-baixo">Baixo</span></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td><label class="switch"><input type="checkbox"><span class="track"></span></label></td><td class="num">27</td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>O curador pode subir o risco de um item individual; nunca baixar abaixo do padrão da categoria.</span><button class="btn btn-primary btn-sm" data-toast="Proposta de alteração em categorias enviada a Marcos L. · settings.category.update">Salvar categorias</button></div>
+        </div>
+      </div>
+
+      <!-- ====================== Taxas ====================== -->
+      <div class="tab-panel" data-panel="taxas">
+        <div class="grid cols-2">
+          <div class="card">
+            <div class="card-head"><h3>Comissão e fundo</h3><span class="badge badge-brass">vigente desde 15/03/2026</span></div>
+            <div class="card-body stack">
+              <div class="field"><label for="t-com">Comissão da plataforma</label><div class="input-group"><input id="t-com" class="input num w-sm" value="10"><span class="affix">%</span></div><span class="hint">Única, igual em todos os modelos. Cobrada na liquidação, sobre o valor pago pelo comprador.</span></div>
+              <div class="field"><label for="t-rede">Taxa de rede do saque</label><select id="t-rede" class="select"><option selected>Repassada ao usuário (sem margem)</option><option>Absorvida pela plataforma</option></select><span class="hint">Lightning ~0,1 % · USDT/USDC centavos por transação · BTC on-chain variável. Mostrada antes de confirmar o saque.</span></div>
+              <div class="field"><label for="t-fundo">Fundo de garantia</label><div class="input-group"><input id="t-fundo" class="input num w-sm" value="2"><span class="affix">% da comissão</span></div><span class="hint">Saldo atual R$ 8.120 · meta: 1 mês de GMV antes de reduzir a alíquota. Cobre reembolsos quando a custódia do vendedor não basta.</span></div>
+              <div class="alert alert-info"><i data-icon="info"></i><div>A comissão <b>não é cobrada em lacres coletivos que falham</b>: 100 % do valor volta às carteiras dos apoiadores. Também não é cobrada em reembolsos por disputa ou remoção.</div></div>
+              <div class="save-row"><button class="btn" data-toast="Alterações descartadas">Descartar</button><button class="btn btn-primary" data-toast="Proposta de comissão enviada a Marcos L. · vale só para vendas liquidadas após a confirmação">Salvar</button></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Como a comissão se aplica</h3></div>
+            <div class="table-wrap" style="border:0;border-radius:0">
+              <table class="table compact">
+                <thead><tr><th>Modelo</th><th class="num">Comissão</th><th>Momento da cobrança</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td class="num">10 %</td><td class="small">Na liquidação de cada venda (72 h após o acesso)</td></tr>
+                  <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="num">10 %</td><td class="small">Na liquidação · mínimo R$ 50</td></tr>
+                  <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">Só se a meta for batida</td></tr>
+                  <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td class="num">10 %</td><td class="small">Sobre a recompensa paga ao vendedor</td></tr>
+                  <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão</span></td><td class="num">10 %</td><td class="small">Sobre o preço de fechamento (segundo preço)</td></tr>
+                  <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span></td><td class="num">10 %</td><td class="small">Por camada vendida</td></tr>
+                  <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span></td><td class="num">10 %</td><td class="small">Por período cobrado</td></tr>
+                  <tr><td><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span></td><td class="num">10 %</td><td class="small">Nas duas fases</td></tr>
+                  <tr><td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span></td><td class="num">10 %</td><td class="small">Por licença emitida</td></tr>
+                </tbody>
+              </table>
+              <div class="table-foot"><span>Exemplo: cópia de R$ 490 → vendedor R$ 441,00 · plataforma R$ 49,00 · dos quais R$ 0,98 ao fundo de garantia.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================== SLAs ====================== -->
+      <div class="tab-panel" data-panel="slas">
+        <div class="split">
+          <div class="card"><div class="card-head"><h3>Prazos</h3></div><div class="card-body">
+            <div class="form-grid">
+              <div class="field"><label for="s1">Triagem automática</label><div class="input-group"><input id="s1" class="input num w-sm" value="5"><span class="affix">minutos</span></div><span class="hint">Antivírus, metadados, PII, duplicidade, hash.</span></div>
+              <div class="field"><label for="s2">Primeira análise humana</label><div class="input-group"><input id="s2" class="input num w-sm" value="48"><span class="affix">h</span></div><span class="hint">Prazo prometido ao vendedor no envio.</span></div>
+              <div class="field"><label for="s3">Edições de assinatura</label><div class="input-group"><input id="s3" class="input num w-sm" value="24"><span class="affix">h</span></div><span class="hint">Novas edições de itens já aprovados.</span></div>
+              <div class="field"><label for="s4">Resposta a ajustes do vendedor</label><div class="input-group"><input id="s4" class="input num w-sm" value="24"><span class="affix">h</span></div></div>
+              <div class="field"><label for="s5">Jurídico</label><div class="input-group"><input id="s5" class="input num w-sm" value="5"><span class="affix">dias úteis</span></div></div>
+              <div class="field"><label for="s6">Pedidos de titulares (LGPD)</label><div class="input-group"><input id="s6" class="input num w-sm" value="15"><span class="affix">dias</span></div><span class="hint">Resposta documentada.</span></div>
+              <div class="field"><label for="s7">Disputa</label><div class="input-group"><input id="s7" class="input num w-sm" value="5"><span class="affix">dias</span></div><span class="hint">Janela para abrir: 72 h após o acesso.</span></div>
+              <div class="field"><label for="s8">Triagem de denúncia pública</label><div class="input-group"><input id="s8" class="input num w-sm" value="24"><span class="affix">h</span></div></div>
+            </div>
+            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de SLAs enviada a Marcos L. · settings.sla.update">Salvar SLAs</button></div>
+          </div></div>
+          <div class="card"><div class="card-head"><h3>Desempenho · 30 dias</h3></div><div class="card-body stack-sm">
+            <div class="hbar"><span>Triagem (mediana)</span><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2 min</span></div>
+            <div class="hbar"><span>1ª análise em 48 h</span><div class="track"><div class="fill" style="width:91%"></div></div><span class="num">91 %</span></div>
+            <div class="hbar"><span>Ajustes em 24 h</span><div class="track"><div class="fill" style="width:88%"></div></div><span class="num">88 %</span></div>
+            <div class="hbar"><span>Jurídico em 5 d.ú.</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">100 %</span></div>
+            <div class="hbar"><span>LGPD em 15 dias</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">100 %</span></div>
+            <div class="hbar"><span>Disputas em 5 dias</span><div class="track"><div class="fill" style="width:93%"></div></div><span class="num">93 %</span></div>
+            <p class="xs muted mt-1">Fonte: painel da curadoria. Metas: 1ª análise ≥ 90 %, reversão &lt; 1 %, disputa procedente por curador &lt; 2 %.</p>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ====================== Políticas ====================== -->
+      <div class="tab-panel" data-panel="politicas">
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Documento</th><th>Versão</th><th>Vigência</th><th>Status</th><th>Autoria</th><th class="cell-actions"></th></tr></thead>
+            <tbody>
+              <tr><td><b>Política de conteúdo</b><span class="sub">pode / não pode · códigos R01–R13 · texto público</span></td><td class="mono">v1.2</td><td class="num">desde 01/10/2026</td><td><span class="badge st-ativo">Vigente</span></td><td class="small">Marcos L. · Carla S.</td><td class="cell-actions"><a class="btn btn-sm" href="../public/politicas.html">Ver</a><button class="btn btn-sm" data-toast="Diferenças v1.1 → v1.2 abertas: inclui R12 fora do escopo e regra de suspensão preventiva">Diff</button></td></tr>
+              <tr><td><b>Política de conteúdo</b></td><td class="mono">v1.1</td><td class="num">01/06/2026 – 30/09/2026</td><td><span class="badge st-encerrado">Substituída</span></td><td class="small">Marcos L. · Carla S.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.1 aberta em modo leitura · 312 itens aprovados sob esta versão">Ver</button></td></tr>
+              <tr><td><b>Política de conteúdo</b></td><td class="mono">v1.0</td><td class="num">15/03/2026 – 31/05/2026</td><td><span class="badge st-encerrado">Substituída</span></td><td class="small">Marcos L.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.0 aberta em modo leitura · 96 itens aprovados sob esta versão">Ver</button></td></tr>
+              <tr><td><b>Declarações do vendedor</b><span class="sub">6 declarações do passo 5 do envio</span></td><td class="mono">v1.1</td><td class="num">desde 01/08/2026</td><td><span class="badge st-ativo">Vigente</span></td><td class="small">Carla S.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Texto das 6 declarações aberto">Ver</button><button class="btn btn-sm" data-toast="Diferenças v1.0 → v1.1: declaração sobre informação privilegiada e sigilo legal">Diff</button></td></tr>
+              <tr><td><b>Declarações do vendedor</b></td><td class="mono">v1.0</td><td class="num">15/03/2026 – 31/07/2026</td><td><span class="badge st-encerrado">Substituída</span></td><td class="small">Carla S.</td><td class="cell-actions"><button class="btn btn-sm" data-toast="v1.0 aberta em modo leitura">Ver</button></td></tr>
+              <tr><td><b>Termos de uso</b><span class="sub">resumo público + texto integral</span></td><td class="mono">v1.0</td><td class="num">desde 15/03/2026</td><td><span class="badge st-ativo">Vigente</span></td><td class="small">Carla S. · Marcos L.</td><td class="cell-actions"><a class="btn btn-sm" href="../public/politicas.html">Ver</a></td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>Itens aprovados guardam a versão da política aplicada; ela aparece na prova pública e não muda quando uma nova versão entra em vigor.</span><button class="btn btn-primary btn-sm" data-modal-open="m-politica"><i data-icon="plus"></i>Nova versão</button></div>
+        </div>
+      </div>
+
+      <!-- ====================== Canais ====================== -->
+      <div class="tab-panel" data-panel="canais">
+        <div class="split">
+          <div class="card"><div class="card-head"><h3>Canais conectados</h3></div><div class="card-body">
+            <div class="channel"><span class="ch-icon"><i data-icon="megaphone"></i></span><div class="grow"><b>X</b> · <span class="mono">@lacre</span><div class="xs muted">Token válido até 12/01/2027 · 312 posts · cards 1600×900</div></div><span class="badge badge-ok"><i data-icon="check"></i>Conectado</span><button class="btn btn-sm" data-toast="Post de teste publicado em @lacre e apagado">Testar</button></div>
+            <div class="channel"><span class="ch-icon"><i data-icon="send"></i></span><div class="grow"><b>Telegram</b> · canal público<div class="xs muted">2.140 inscritos · mensagem com imagem + botão para a prova</div></div><span class="badge badge-ok"><i data-icon="check"></i>Conectado</span><button class="btn btn-sm" data-toast="Mensagem de teste enviada ao canal">Testar</button></div>
+            <div class="channel"><span class="ch-icon"><i data-icon="globe"></i></span><div class="grow"><b>Bluesky</b><div class="xs muted">AT Protocol · texto + imagem · 1.080 seguidores</div></div><span class="badge badge-ok"><i data-icon="check"></i>Conectado</span><button class="btn btn-sm" data-toast="Post de teste publicado no Bluesky e apagado">Testar</button></div>
+            <div class="channel"><span class="ch-icon"><i data-icon="image"></i></span><div class="grow"><b>Instagram</b><div class="xs muted">V2 · imagem 1080×1080 + legenda · link na bio</div></div><span class="badge badge-outline">Não conectado</span><button class="btn btn-sm" data-toast="Conexão com a Graph API iniciada · exige conta profissional">Conectar</button></div>
+            <div class="channel"><span class="ch-icon"><i data-icon="rss"></i></span><div class="grow"><b>RSS / JSON feed</b><div class="xs muted">Itens publicados e lacres rompidos · atualizado a cada publicação</div></div><span class="badge badge-ok"><i data-icon="check"></i>Ativo</span><button class="btn btn-sm" data-copy="https://lacre.app/feed.xml"><i data-icon="copy"></i>Copiar URL</button></div>
+          </div></div>
+          <div class="card"><div class="card-head"><h3>Agendamento</h3></div><div class="card-body stack">
+            <div class="field"><label for="c-int">Intervalo mínimo entre posts (X)</label><div class="input-group"><input id="c-int" class="input num w-sm" value="2"><span class="affix">h</span></div><span class="hint">A fila sugere o próximo slot livre respeitando o intervalo.</span></div>
+            <div class="field"><label>Horários sugeridos</label><div class="chips"><span class="chip active">09:00</span><span class="chip active">12:30</span><span class="chip active">14:00</span><span class="chip active">18:30</span><span class="chip active">21:00</span><button class="chip" data-toast="Novo horário adicionado à lista"><i data-icon="plus"></i>adicionar</button></div><span class="hint">Ajuste automático por canal após 100 posts (melhor horário observado).</span></div>
+            <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Marcos automáticos (25/50/75/90/100 %, vendido, último dia) passam pela fila com aprovação em um clique</span></label>
+            <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Ao suspender um item, ocultar posts e publicar retratação curta</span></label>
+            <label class="switch"><input type="checkbox"><span class="track"></span><span>Responder menções e respostas pelas contas oficiais <span class="muted xs">(desligado no MVP; texto fixo aponta para o formulário de denúncia)</span></span></label>
+            <div class="field"><label for="c-met">Coleta de métricas</label><select id="c-met" class="select"><option selected>A cada 6 h por 7 dias</option><option>A cada 12 h por 7 dias</option><option>Diária por 30 dias</option></select></div>
+            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de configuração de canais enviada a Marcos L. · settings.social.update">Salvar canais</button></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ====================== Equipe ====================== -->
+      <div class="tab-panel" data-panel="equipe">
+        <div class="alert alert-anon mb-2"><i data-icon="shield"></i><div><span class="alert-title">2FA obrigatório para todos</span>Passkey ou TOTP, sem exceção. Sessões de 8 h em domínio separado; IP allowlist opcional. Papéis (RBAC): triagem, curador, curador sênior, jurídico, financeiro, publicação, administrador.</div></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Membro</th><th>Papel (RBAC)</th><th>2FA</th><th>Status</th><th>Último acesso</th><th class="cell-actions"></th></tr></thead>
+            <tbody>
+              <tr><td><b>Ana R.</b><span class="sub">na equipe desde 15/03/2026</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option selected>Curador sênior</option><option>Jurídico</option><option>Financeiro</option><option>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="fingerprint"></i>Passkey + TOTP</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="num">27/10 · 08:05</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Ana R. listadas: 1 ativa">Sessões</button></td></tr>
+              <tr><td><b>Bruno M.</b><span class="sub">desde 20/03/2026</span></td><td><select class="select sm"><option>Triagem</option><option selected>Curador</option><option>Curador sênior</option><option>Jurídico</option><option>Financeiro</option><option>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="smartphone"></i>TOTP</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">27/10 · 07:52</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Bruno M. listadas: 1 ativa">Sessões</button></td></tr>
+              <tr><td><b>Carla S.</b><span class="sub">desde 15/03/2026</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option selected>Jurídico</option><option>Financeiro</option><option>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="smartphone"></i>TOTP</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="num">26/10 · 18:10</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Carla S. listadas: 0 ativas">Sessões</button></td></tr>
+              <tr><td><b>Diego T.</b><span class="sub">desde 02/04/2026</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option>Jurídico</option><option>Financeiro</option><option selected>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="fingerprint"></i>Passkey</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">27/10 · 08:40</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Diego T. listadas: 1 ativa">Sessões</button></td></tr>
+              <tr><td><b>Elisa F.</b><span class="sub">desde 15/03/2026 · assina lotes de saque</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option>Jurídico</option><option selected>Financeiro</option><option>Publicação</option><option>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="smartphone"></i>TOTP</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="num">27/10 · 08:31</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Elisa F. listadas: 1 ativa">Sessões</button></td></tr>
+              <tr><td><b>Marcos L.</b><span class="sub">desde 15/03/2026 · assina lotes de saque</span></td><td><select class="select sm"><option>Triagem</option><option>Curador</option><option>Curador sênior</option><option>Jurídico</option><option>Financeiro</option><option>Publicação</option><option selected>Administrador</option></select></td><td><span class="badge badge-ok"><i data-icon="fingerprint"></i>Passkey + TOTP</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">26/10 · 17:48</td><td class="cell-actions"><button class="btn btn-sm" data-toast="Sessões de Marcos L. listadas: 0 ativas">Sessões</button></td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>Mudança de papel exige administrador e gera <code>staff.role.update</code>. Dois administradores no mínimo para alterar comissão ou limites.</span><button class="btn btn-primary btn-sm" data-toast="Convite gerado: link de uso único, válido por 24 h, papel Curador · exige 2FA no primeiro acesso"><i data-icon="plus"></i>Convidar membro</button></div>
+        </div>
+      </div>
+
+      <!-- ====================== Limites ====================== -->
+      <div class="tab-panel" data-panel="limites">
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-head"><h3>Antifraude de saque</h3></div><div class="card-body">
+              <div class="form-grid">
+                <div class="field"><label for="l1">Limite diário para contas novas</label><div class="input-group"><span class="affix">R$</span><input id="l1" class="input num" value="2.000"><span class="affix">/dia</span></div></div>
+                <div class="field"><label for="l2">Vale nos primeiros</label><div class="input-group"><input id="l2" class="input num w-sm" value="7"><span class="affix">dias</span></div></div>
+                <div class="field full"><label class="switch"><input type="checkbox" checked><span class="track"></span><span>Libera antes do prazo quando a conta tem o primeiro item aprovado</span></label></div>
+                <div class="field"><label for="l3">Revisão manual acima de</label><div class="input-group"><span class="affix">R$</span><input id="l3" class="input num" value="25.000"><span class="affix">/saque</span></div></div>
+                <div class="field"><label for="l4">Risco da conta que força revisão</label><div class="input-group"><input id="l4" class="input num w-sm" value="85"><span class="affix">/100</span></div></div>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>Itens e envios</h3></div><div class="card-body">
+              <div class="form-grid">
+                <div class="field"><label for="l5">Tamanho máximo por item</label><div class="input-group"><input id="l5" class="input num w-sm" value="20"><span class="affix">GB</span></div></div>
+                <div class="field"><label for="l6">Arquivos por item</label><div class="input-group"><input id="l6" class="input num w-sm" value="200"><span class="affix">arquivos</span></div></div>
+                <div class="field"><label for="l7">Envios simultâneos · vendedor novo</label><div class="input-group"><input id="l7" class="input num w-sm" value="3"><span class="affix">itens</span></div><span class="hint">Até a primeira aprovação.</span></div>
+                <div class="field"><label for="l8">Janela de disputa</label><div class="input-group"><input id="l8" class="input num w-sm" value="72"><span class="affix">h</span></div></div>
+              </div>
+              <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de limites enviada a Marcos L. · settings.limit.update">Salvar limites</button></div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-head"><h3>Redes e confirmações</h3><span class="badge badge-outline">só cripto</span></div><div class="table-wrap" style="border:0;border-radius:0">
+            <table class="table compact">
+              <thead><tr><th>Moeda · rede</th><th>Confirmações</th><th>Tempo típico</th><th class="num">Depósito mínimo</th><th>Taxa de saque</th></tr></thead>
+              <tbody>
+                <tr><td><b>BTC</b> · on-chain</td><td><input class="input sm num" value="2"></td><td class="small">~20 min</td><td class="num">R$ 100</td><td class="small">rede · variável</td></tr>
+                <tr><td><b>BTC</b> · Lightning</td><td class="small">invoice liquidada</td><td class="small">segundos</td><td class="num">R$ 5</td><td class="small">~0,1 %</td></tr>
+                <tr><td><b>USDT</b> · Polygon</td><td><input class="input sm num" value="128"></td><td class="small">~5 min</td><td class="num">R$ 20</td><td class="small">~R$ 0,10</td></tr>
+                <tr><td><b>USDT</b> · Tron</td><td><input class="input sm num" value="19"></td><td class="small">~1 min</td><td class="num">R$ 20</td><td class="small">~R$ 8</td></tr>
+                <tr><td><b>USDC</b> · Polygon</td><td><input class="input sm num" value="128"></td><td class="small">~5 min</td><td class="num">R$ 20</td><td class="small">~R$ 0,10</td></tr>
+                <tr><td><b>USDC</b> · Base</td><td><input class="input sm num" value="30"></td><td class="small">~1 min</td><td class="num">R$ 20</td><td class="small">~R$ 0,05</td></tr>
+              </tbody>
+            </table>
+            <div class="table-foot"><span>Cotação travada por 10 min para BTC; USDT/USDC 1:1 com a referência (R$ 5,38), atualizada a cada minuto. Carteira quente mantém ≈ 48 h de saques; alerta abaixo de 24 h.</span><button class="btn btn-sm" data-toast="Proposta de confirmações por rede enviada a Marcos L.">Salvar</button></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="m-politica"><div class="modal">
+      <div class="modal-head"><h3>Nova versão de política</h3><button class="icon-btn" data-modal-close><i data-icon="x"></i></button></div>
+      <div class="modal-body stack">
+        <div class="form-grid">
+          <div class="field"><label for="p-doc">Documento</label><select id="p-doc" class="select"><option selected>Política de conteúdo (atual v1.2)</option><option>Declarações do vendedor (atual v1.1)</option><option>Termos de uso (atual v1.0)</option></select></div>
+          <div class="field"><label for="p-ver">Nova versão</label><input id="p-ver" class="input mono" value="v1.3"></div>
+          <div class="field full"><label for="p-res">Resumo das mudanças (público)</label><textarea id="p-res" class="textarea" rows="3" placeholder="O que muda e por quê, em linguagem simples."></textarea></div>
+          <div class="field"><label for="p-vig">Entra em vigor em</label><input id="p-vig" class="input" value="01/12/2026"></div>
+          <div class="field"><label for="p-rev">Revisão</label><select id="p-rev" class="select"><option selected>Carla S. · Jurídico</option><option>Marcos L. · Administrador</option></select></div>
+        </div>
+        <div class="alert alert-info"><i data-icon="info"></i><div>Itens aprovados guardam a versão aplicada na análise; a prova pública mostra essa versão. A nova versão vale só para envios a partir da vigência. Vendedores com itens ativos são avisados 30 dias antes.</div></div>
+      </div>
+      <div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-primary" data-modal-close data-toast="Rascunho v1.3 criado · aguarda revisão de Carla S. e publicação por Marcos L.">Criar rascunho</button></div>
+    </div></div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Meus anúncios · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .table td.cell-thumb { width: 76px; padding-right: 0; }
+    .thumb { width: 76px; aspect-ratio: 16 / 10; border-radius: var(--r-sm); }
+    .table .thumb .preview-lock .seal { width: 22px; height: 22px; }
+    .table .title-cell { min-width: 280px; }
+    .table .title-cell b { display: block; line-height: 1.3; }
+    .menu button:disabled { opacity: .45; cursor: not-allowed; }
+    .menu button:disabled:hover { background: transparent; }
+    /* o menu de ações abre fora da área de rolagem da tabela em telas largas */
+    @media (min-width: 1200px) { .table-wrap:has(.menu.open) { overflow: visible; } }
+  </style>
+</head>
+<body data-shell="seller" data-page="anuncios" data-root="../" data-title="Meus anúncios">
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Vender</p>
+        <h1>Meus anúncios</h1>
+        <p class="sub">6 anúncios · nenhum ativo no catálogo · R$ 13.200 brutos em vendas acumuladas (R$ 11.880 líquidos após a comissão de 10 %)</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="../seller/ganhos.html"><i data-icon="coins"></i>Ganhos</a>
+        <a class="btn btn-primary" href="../seller/novo-anuncio.html"><i data-icon="plus"></i>Novo anúncio</a>
+      </div>
+    </div>
+
+    <div class="alert alert-warn mb-2"><i data-icon="alert-triangle"></i><div><span class="alert-title">1 anúncio aguarda sua resposta</span>lcr-2z5q7 · ajustes solicitados por Bruno M. em 26/10 11:05 · responda até 29/10 11:05, ou o item volta para rascunho. <a class="link" href="../seller/anuncio.html">Responder agora</a></div></div>
+
+    <div class="stat-grid mb-3">
+      <div class="stat"><span class="label">Vendas acumuladas</span><span class="value">R$ 13.200</span><span class="delta flat">88 cópias · R$ 11.880 líquidos</span></div>
+      <div class="stat"><span class="label">Taxa de aprovação</span><span class="value">75 %</span><span class="delta flat">3 aprovados de 4 analisados</span></div>
+      <div class="stat"><span class="label">Tempo médio de curadoria</span><span class="value">41 h</span><span class="delta up"><i data-icon="trending-up"></i>dentro do SLA de 48 h</span></div>
+      <div class="stat"><span class="label">Próxima publicação</span><span class="value">28/10 · 14:00</span><span class="delta flat">lcr-4g7h9 · X, Telegram, Bluesky</span></div>
+    </div>
+
+    <div class="tabs">
+      <a class="tab active" href="#" data-filter="todos">Todos <span class="count">6</span></a>
+      <a class="tab" href="#" data-filter="rascunho">Rascunhos <span class="count">1</span></a>
+      <a class="tab" href="#" data-filter="curadoria">Em curadoria <span class="count">1</span></a>
+      <a class="tab" href="#" data-filter="ajustes">Ajustes solicitados <span class="count">1</span></a>
+      <a class="tab" href="#" data-filter="agendado">Agendados <span class="count">1</span></a>
+      <a class="tab" href="#" data-filter="ativo">Ativos <span class="count">0</span></a>
+      <a class="tab" href="#" data-filter="encerrado">Encerrados <span class="count">1</span></a>
+      <a class="tab" href="#" data-filter="rejeitado">Rejeitados <span class="count">1</span></a>
+    </div>
+
+    <div class="toolbar mt-2">
+      <div class="search"><i data-icon="search"></i><input class="input" placeholder="Buscar por título ou código…" aria-label="Buscar anúncios"></div>
+      <select class="select" style="max-width:200px" aria-label="Filtrar por modelo"><option>Todos os modelos</option><option>Cópias</option><option>Exclusivo</option><option>Lacre coletivo</option><option>Pedido</option></select>
+      <div class="right"><select class="select" style="max-width:240px" aria-label="Ordenar"><option>Ordenar: última atualização</option><option>Ordenar: título</option><option>Ordenar: vendas</option><option>Ordenar: prazo</option></select></div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th></th><th>Anúncio</th><th>Modelo</th><th>Status</th><th>Métrica principal</th><th>Prazo</th><th class="cell-actions">Ações</th></tr></thead>
+        <tbody id="rows">
+          <tr data-status="rascunho">
+            <td class="cell-thumb"><div class="preview thumb" data-type="audio"><div class="preview-lock"><span data-seal></span></div></div></td>
+            <td class="title-cell"><b>Entrevistas com 40 ex-cobradores de ônibus de SP sobre a extinção da função (áudio + transcrição)</b><span class="sub">lcr-8k1n2 · Jornalismo e investigação · áudio · editado hoje às 10:42</span></td>
+            <td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">meta R$ 12.000</span></td>
+            <td><span class="badge st-rascunho">Rascunho</span></td>
+            <td><b>Passo 4 de 6</b><span class="sub">2 de 3 arquivos enviados</span></td>
+            <td><span class="muted">—</span><span class="sub">rascunhos expiram em 30 dias</span></td>
+            <td class="cell-actions"><div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Ações"><i data-icon="more-horizontal"></i></button><div class="menu"><a href="../seller/novo-anuncio.html"><i data-icon="edit"></i>Continuar edição</a><button disabled><i data-icon="message-square"></i>Ver feedback · sem envio</button><button data-toast="Rascunho lcr-8k1n2 descartado · arquivos apagados"><i data-icon="trash"></i>Descartar rascunho</button><button data-toast="Rascunho duplicado · lcr-7p2q9 criado"><i data-icon="copy"></i>Duplicar</button></div></div></td>
+          </tr>
+          <tr data-status="ajustes">
+            <td class="cell-thumb"><div class="preview thumb" data-type="mapa"><div class="preview-lock"><span data-seal></span></div></div></td>
+            <td class="title-cell"><b>Mapeamento de 3.100 feiras livres do estado de SP com dias, horários e geolocalização</b><span class="sub">lcr-2z5q7 · Dados e bases · dataset · enviado 24/10 09:12 · v1</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 240</span></td>
+            <td><span class="badge st-ajustes">Ajustes solicitados</span><span class="sub">Bruno M. · 26/10 11:05</span></td>
+            <td><span class="muted">—</span><span class="sub">não publicado</span></td>
+            <td><b class="warn">Responder até 29/10</b><span class="sub">11:05 · 72 h</span></td>
+            <td class="cell-actions"><div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Ações"><i data-icon="more-horizontal"></i></button><div class="menu"><a href="../seller/novo-anuncio.html"><i data-icon="edit"></i>Editar anúncio</a><a href="../seller/anuncio.html"><i data-icon="message-square"></i>Ver feedback e responder</a><button data-toast="Envio cancelado · lcr-2z5q7 volta para rascunho"><i data-icon="x"></i>Cancelar envio</button><button data-toast="Rascunho criado a partir de lcr-2z5q7"><i data-icon="copy"></i>Duplicar</button></div></div></td>
+          </tr>
+          <tr data-status="agendado">
+            <td class="cell-thumb"><div class="preview thumb" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div></td>
+            <td class="title-cell"><b>Tabela de preços de medicamentos oncológicos em 15 países (2020–2026)</b><span class="sub">lcr-4g7h9 · Saúde e meio ambiente · dataset · <span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 350 · R$ 315 líquidos</span></td>
+            <td><span class="badge st-agendado">Agendado</span><span class="sub">aprovado 26/10 · Ana R.</span></td>
+            <td><b>0 vendas</b><span class="sub">publica 28/10 às 14:00</span></td>
+            <td><b>26/01/2027</b><span class="sub">90 dias após publicar</span></td>
+            <td class="cell-actions"><div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Ações"><i data-icon="more-horizontal"></i></button><div class="menu"><button data-toast="Editar agora reabre a análise da curadoria · ação não aplicada"><i data-icon="edit"></i>Editar (reabre a curadoria)</button><a href="../seller/anuncio.html"><i data-icon="message-square"></i>Ver feedback</a><button data-toast="Publicação adiada para 29/10 às 14:00 (1 adiamento permitido)"><i data-icon="calendar"></i>Adiar publicação</button><button disabled><i data-icon="x"></i>Encerrar · ainda não publicado</button><button data-toast="Rascunho criado a partir de lcr-4g7h9"><i data-icon="copy"></i>Duplicar</button></div></div></td>
+          </tr>
+          <tr data-status="encerrado">
+            <td class="cell-thumb"><div class="preview thumb" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div></td>
+            <td class="title-cell"><b>Guia de acesso a dados do SUS: 60 fontes, endpoints e scripts de coleta</b><span class="sub">lcr-5m8c4 · Tecnologia e segurança · pacote · <span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 150 · R$ 135 líquidos</span></td>
+            <td><span class="badge st-encerrado">Encerrado</span><span class="sub">prazo de 90 dias atingido</span></td>
+            <td><b>88 vendas · R$ 13.200</b><span class="sub">R$ 11.880 líquidos · 3 em custódia</span></td>
+            <td><b>Encerrado em 26/10</b><span class="sub">quem comprou mantém o acesso</span></td>
+            <td class="cell-actions"><div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Ações"><i data-icon="more-horizontal"></i></button><div class="menu"><button disabled><i data-icon="edit"></i>Editar · encerrado</button><a href="../seller/anuncio.html"><i data-icon="message-square"></i>Ver feedback</a><a href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova pública</a><button disabled><i data-icon="x"></i>Encerrar · já encerrado</button><button data-toast="Rascunho criado a partir de lcr-5m8c4 · reenvie como edição 2026"><i data-icon="copy"></i>Duplicar</button></div></div></td>
+          </tr>
+          <tr data-status="curadoria">
+            <td class="cell-thumb"><div class="preview thumb" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div></td>
+            <td class="title-cell"><b>Série histórica de tarifas de ônibus em 27 capitais (1994–2026) com fontes</b><span class="sub">lcr-0p4m3 · Governo e políticas públicas · dataset · enviado 26/10 08:10 · v1</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 90</span></td>
+            <td><span class="badge st-analise">Em análise</span><span class="sub">Bruno M. · dois olhos: 2º curador pendente</span></td>
+            <td><span class="muted">—</span><span class="sub">não publicado</span></td>
+            <td><b>Resposta até 28/10</b><span class="sub">08:10 · SLA de 48 h</span></td>
+            <td class="cell-actions"><div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Ações"><i data-icon="more-horizontal"></i></button><div class="menu"><button disabled><i data-icon="edit"></i>Editar · em análise</button><button disabled><i data-icon="message-square"></i>Ver feedback · ainda não há</button><button data-toast="Envio cancelado · lcr-0p4m3 volta para rascunho"><i data-icon="x"></i>Cancelar envio</button><button data-toast="Rascunho criado a partir de lcr-0p4m3"><i data-icon="copy"></i>Duplicar</button></div></div></td>
+          </tr>
+          <tr data-status="rejeitado">
+            <td class="cell-thumb"><div class="preview thumb" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div></td>
+            <td class="title-cell"><b>Base de 210 mil CNPJs do setor de construção com faturamento estimado</b><span class="sub">lcr-9r3t1 · Negócios e mercado · dataset · enviado 17/10 · v1</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">R$ 1.200</span></td>
+            <td><span class="badge st-rejeitado">Rejeitado · R01</span><span class="sub">contém CPFs de sócios</span></td>
+            <td><span class="muted">—</span><span class="sub">conteúdo apagado em 18/11</span></td>
+            <td><b>Rejeitado em 19/10</b><span class="sub">Ana R. · reenvio só como novo item</span></td>
+            <td class="cell-actions"><div class="menu-wrap"><button class="icon-btn" data-menu-toggle aria-label="Ações"><i data-icon="more-horizontal"></i></button><div class="menu"><button disabled><i data-icon="edit"></i>Editar · rejeitado</button><button data-toast="R01 · dados pessoais de terceiros: o arquivo contém CPFs de sócios. Remova a coluna e reenvie como novo item."><i data-icon="message-square"></i>Ver motivo (R01)</button><button disabled><i data-icon="x"></i>Encerrar · não publicado</button><button data-toast="Rascunho criado a partir de lcr-9r3t1 · remova a coluna de CPFs antes de enviar"><i data-icon="copy"></i>Duplicar como novo item</button></div></div></td>
+          </tr>
+          <tr id="empty-row" hidden><td colspan="7"><div class="empty"><i data-icon="inbox"></i><h4>Nenhum anúncio neste status</h4><p>Nenhum item seu está no catálogo agora. lcr-4g7h9 entra no ar em 28/10 às 14:00, depois do post de lançamento.</p><a class="btn btn-primary" href="../seller/novo-anuncio.html"><i data-icon="plus"></i>Novo anúncio</a></div></td></tr>
+        </tbody>
+      </table>
+      <div class="table-foot"><span id="foot-count">Mostrando 6 de 6 anúncios</span><span class="xs">Métrica principal: vendas em Cópias, arrecadado em Lacre coletivo, lances em Leilão.</span></div>
+    </div>
+
+    <div class="grid cols-3 mt-3">
+      <div class="panel"><div class="label"><i data-icon="clock"></i> Prazos</div><p class="small muted mt-1">Itens encerram no prazo que você definiu (24 h a 90 dias) ou ao esgotar as unidades. Você pode encerrar antes; quem comprou mantém o acesso. Lacres coletivos sem meta no prazo devolvem os apoios.</p></div>
+      <div class="panel"><div class="label"><i data-icon="x-circle"></i> Rejeitados</div><p class="small muted mt-1">Não podem ser reenviados. Corrija e crie um novo anúncio. O código de motivo fica no histórico do pseudônimo e conta na reputação. O conteúdo fica 30 dias para recurso e depois é apagado.</p></div>
+      <div class="panel"><div class="label"><i data-icon="edit"></i> Rascunhos</div><p class="small muted mt-1">Salvos automaticamente. Após 30 dias sem alteração, os arquivos enviados são apagados e o rascunho fica só com os textos.</p></div>
+    </div>
+
+    <script>
+      (function () {
+        var tabs = document.querySelectorAll('[data-filter]'), rows = document.querySelectorAll('#rows tr[data-status]');
+        var empty = document.getElementById('empty-row'), foot = document.getElementById('foot-count');
+        tabs.forEach(function (t) {
+          t.addEventListener('click', function (e) {
+            e.preventDefault();
+            var f = t.dataset.filter, n = 0;
+            tabs.forEach(function (x) { x.classList.toggle('active', x === t); });
+            rows.forEach(function (r) { var show = f === 'todos' || r.dataset.status === f; r.hidden = !show; if (show) n++; });
+            empty.hidden = n > 0;
+            foot.textContent = 'Mostrando ' + n + ' de 6 anúncios';
+          });
+        });
+      })();
+    </script>
+  </main>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pedido ped-2c8d1 · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
+    .criteria { counter-reset: c; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .criteria li { counter-increment: c; display: grid; grid-template-columns: 30px 1fr; gap: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); font-size: var(--fs-sm); align-items: start; }
+    .criteria li::before { content: counter(c); width: 26px; height: 26px; border-radius: 50%; background: var(--brass-soft); color: var(--brass); font-weight: 700; font-family: var(--font-display); display: inline-flex; align-items: center; justify-content: center; font-size: var(--fs-xs); }
+    .criteria li b { display: block; }
+    .criteria li span { color: var(--fg-2); }
+    .qa { display: flex; flex-direction: column; gap: 12px; }
+    .qa .q { padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); display: flex; flex-direction: column; gap: 10px; font-size: var(--fs-sm); }
+    .qa .a { padding-left: 14px; border-left: 2px solid var(--brass); color: var(--fg-2); }
+    .qa .meta { color: var(--muted); font-size: var(--fs-xs); }
+    .side .card-body { padding: 18px; }
+    .side-foot { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
+    .contrib { display: flex; justify-content: space-between; gap: 10px; font-size: var(--fs-xs); color: var(--muted); padding: 6px 0; border-top: 1px solid var(--border); }
+    .contrib:first-of-type { border-top: 0; }
+    @media (max-width: 900px) { .split .sticky { position: static; } }
+  </style>
+</head>
+<body data-shell="public" data-page="pedidos" data-root="../">
+<main>
+  <section class="section tight">
+    <div class="container">
+      <div class="crumbs mb-2"><a href="pedidos.html">Pedidos com recompensa</a><i data-icon="chevron-right"></i><a href="pedidos.html">Saúde e meio ambiente</a><i data-icon="chevron-right"></i><span class="mono">ped-2c8d1</span></div>
+      <div class="split">
+        <!-- Coluna principal -->
+        <div class="stack-lg">
+          <div>
+            <p class="eyebrow">Pedido com recompensa · Saúde e meio ambiente · publicado em 18/10/2026</p>
+            <h1 class="mt-1">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</h1>
+            <div class="row mt-2"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span><span class="badge st-ativo">Aberto</span><span class="badge badge-outline"><i data-icon="users"></i>Recompensa coletiva</span><span class="badge badge-outline"><i data-icon="unlock"></i>Aberto ao público depois</span><span class="badge badge-outline"><i data-icon="database"></i>Dataset · CSV</span></div>
+            <div class="row mt-2"><span class="small muted">Pedido por</span><span class="handle" data-handle="farol-3e9b" data-rep="4,6 · 2 pedidos atendidos"></span><span class="small muted">· aprovado pela curadoria em 19/10 (Bruno M.)</span></div>
+          </div>
+
+          <div class="prose">
+            <h2 style="margin-top:0">O que estou procurando</h2>
+            <p>A série mensal de tempo médio de espera (da triagem ao atendimento médico) nas UPAs municipais de São Paulo, de janeiro de 2023 a dezembro de 2025, por unidade. A Secretaria Municipal de Saúde publica só médias anuais agregadas. Os dados por unidade existem no sistema de regulação e já foram fornecidos parcialmente por LAI em 2024, para seis unidades.</p>
+            <p>Quero a série completa, consolidada e com a origem documentada, para cruzar com os dados de lotação por unidade. Não procuro opiniões nem reportagens: procuro o dado bruto, limpo e rastreável.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><i data-icon="clipboard-check"></i><h3>Critérios de aceite</h3><div class="actions"><span class="badge badge-outline">6 critérios · todos obrigatórios</span></div></div>
+            <div class="card-body">
+              <ol class="criteria">
+                <li><div><b>Cobertura</b><span>Todas as UPAs municipais ativas em cada mês (pelo menos 28 unidades), de jan/2023 a dez/2025, sem lacunas superiores a um mês por unidade.</span></div></li>
+                <li><div><b>Granularidade</b><span>Uma linha por unidade e mês, com tempo médio e mediano de espera em minutos e volume de atendimentos no mês.</span></div></li>
+                <li><div><b>Origem documentada</b><span>Documento oficial anexado ao pacote: resposta de LAI com número de protocolo, planilha publicada pela SMS ou extração do sistema com data.</span></div></li>
+                <li><div><b>Formato</b><span>CSV UTF-8, separador vírgula, cabeçalho em snake_case, mais um dicionário de dados em Markdown descrevendo cada coluna.</span></div></li>
+                <li><div><b>Sem dados pessoais</b><span>Nenhuma informação de paciente ou de servidor identificável. Isso é também regra da curadoria (bloco 1); não passa sem isso.</span></div></li>
+                <li><div><b>Consistência</b><span>Totais mensais compatíveis com os relatórios anuais publicados pela SMS, com tolerância de 2 %.</span></div></li>
+              </ol>
+              <p class="xs muted mt-2">A curadoria confere cada critério no atendimento. Se faltar um, o vendedor recebe a lista do que ajustar e tem 7 dias para reenviar.</p>
+            </div>
+          </div>
+
+          <div class="grid cols-2">
+            <div class="card">
+              <div class="card-head"><i data-icon="database"></i><h3>Formato esperado</h3></div>
+              <div class="card-body"><dl class="kv">
+                <dt>Tipo</dt><dd>Dataset</dd>
+                <dt>Arquivos</dt><dd>1 CSV, 1 dicionário (MD), anexos de origem (PDF)</dd>
+                <dt>Tamanho estimado</dt><dd>Menos de 5 MB</dd>
+                <dt>Colunas mínimas</dt><dd class="mono xs">unidade, mes, espera_media_min, espera_mediana_min, atendimentos, fonte</dd>
+                <dt>Licença</dt><dd>Contribuidores recebem acesso completo com download</dd>
+              </dl></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><i data-icon="calendar"></i><h3>Prazo e liberação</h3></div>
+              <div class="card-body"><dl class="kv">
+                <dt>Prazo</dt><dd>30/11/2026 · 23:59 BRT · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd>
+                <dt>Se atendido</dt><dd>Contribuidores recebem acesso no cofre no mesmo dia da validação</dd>
+                <dt>Depois</dt><dd>Aberto ao público como Cópias a R$ 40; a receita devolve as contribuições originais até reembolsá-las</dd>
+                <dt>Se expirar</dt><dd>Toda a recompensa volta para as carteiras, sem taxa</dd>
+              </dl></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><i data-icon="hourglass"></i><h3>Atendimentos</h3><div class="actions"><span class="badge st-analise">1 em curadoria</span></div></div>
+            <div class="card-body">
+              <p class="small">Um atendimento foi enviado em 24/10/2026 e aguarda a análise da curadoria (prazo de 48 h a partir do início da análise). Até a validação, o pedido continua aberto: outras pessoas podem contribuir e outros vendedores podem atender. Se dois atendimentos forem validados, vale o primeiro; o segundo pode publicar o conteúdo como item normal.</p>
+              <p class="xs muted mt-1">Não mostramos quem atendeu nem o conteúdo enviado. Contribuidores são notificados quando a curadoria decidir.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><i data-icon="message-square"></i><h3>Perguntas públicas ao autor</h3><div class="actions"><span class="badge badge-outline">2 respondidas</span></div></div>
+            <div class="card-body stack">
+              <div class="qa">
+                <div class="q"><div class="row between"><span class="handle" data-handle="quartzo-a1f0"></span><span class="meta">20/10 · moderada por Bruno M.</span></div><div>Dados de 2022 contam para o critério de cobertura, se eu conseguir?</div><div class="a">Não contam para o critério, mas são bem-vindos como coluna extra no mesmo CSV. O que define o aceite é jan/2023 a dez/2025 completo.<div class="meta mt-1">Resposta do autor · 20/10</div></div></div>
+                <div class="q"><div class="row between"><span class="handle" data-handle="lanterna-b31d"></span><span class="meta">23/10 · moderada por Ana R.</span></div><div>Aceita uma série que inclua também as UPAs de gestão estadual na capital?</div><div class="a">Aceito, desde que haja uma coluna indicando a gestão (municipal ou estadual) e as municipais estejam completas.<div class="meta mt-1">Resposta do autor · 23/10</div></div></div>
+              </div>
+              <form class="stack-sm" data-submit-toast="Pergunta enviada para moderação. Aparece aqui quando a curadoria aprovar.">
+                <div class="field"><label for="pergunta">Faça uma pergunta pública</label><textarea id="pergunta" class="textarea" style="min-height:80px" placeholder="Perguntas passam por moderação antes de aparecer. Não inclua contatos ou dados pessoais."></textarea></div>
+                <div class="row end"><button class="btn" type="submit"><i data-icon="send"></i>Enviar pergunta</button></div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel lateral -->
+        <aside class="sticky">
+          <div class="card raised side">
+            <div class="card-body stack">
+              <div><span class="label">Recompensa acumulada</span><div class="price price-xl wax mt-1">R$ 3.200<small>≈ 594,8 USDT</small></div><div class="row mt-1"><span class="badge badge-outline"><i data-icon="users"></i>14 contribuidores</span><span class="badge badge-outline"><i data-icon="timer"></i>encerra em <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></span></div></div>
+              <div>
+                <div class="contrib"><span>há 3 h</span><span>+ R$ 100</span></div>
+                <div class="contrib"><span>ontem</span><span>+ R$ 250</span></div>
+                <div class="contrib"><span>25/10</span><span>+ R$ 50</span></div>
+                <div class="contrib"><span>recompensa inicial · 18/10</span><span>R$ 500</span></div>
+              </div>
+              <div>
+                <span class="label">Quanto você quer somar?</span>
+                <div class="amount-options mt-1" data-target="#ped-valor"><button class="btn" data-amount="20">R$ 20</button><button class="btn active" data-amount="50">R$ 50</button><button class="btn" data-amount="100">R$ 100</button><button class="btn" data-amount="250">R$ 250</button></div>
+                <div class="input-group mt-1"><span class="affix">R$</span><input id="ped-valor" class="input num" value="50" data-amount-input aria-label="Outro valor"><span class="affix">≈ 9,3 USDT</span></div>
+                <p class="xs muted mt-1">Mínimo R$ 10. Debitado da carteira em USDT pela cotação do momento (R$ 5,38).</p>
+              </div>
+              <a class="btn btn-wax btn-lg btn-block" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Somar à recompensa</a>
+              <div class="alert alert-wax"><i data-icon="unlock"></i><div>Quem contribuir recebe acesso. Se ninguém atender até 30/11/2026, tudo volta para as carteiras, sem taxa.</div></div>
+              <hr style="margin:4px 0">
+              <div>
+                <a class="btn btn-primary btn-block" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Tenho essa informação</a>
+                <p class="xs muted mt-1">Abre o assistente de envio com este pedido vinculado. O atendimento passa pela curadoria como qualquer item. Comissão de 10 % sobre a recompensa paga; nada se o pedido expirar.</p>
+              </div>
+              <dl class="kv">
+                <dt>Atendimentos</dt><dd>1 em curadoria</dd>
+                <dt>Autor</dt><dd><span class="handle" data-handle="farol-3e9b"></span></dd>
+                <dt>Curadoria do pedido</dt><dd>Aprovado em 19/10 · Bruno M.</dd>
+              </dl>
+            </div>
+            <div class="side-foot">
+              <div class="anon-note"><i data-icon="shield"></i><span>Contribuição anônima. Registramos pedido, valor e data. O autor e quem atende nunca veem quem contribuiu.</span></div>
+              <a class="btn btn-sm btn-ghost" href="prova.html#denunciar"><i data-icon="flag"></i>Denunciar este pedido</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight band">
+    <div class="container">
+      <div class="row between mb-2"><h2>Outros pedidos abertos</h2><a class="btn btn-sm btn-ghost" href="pedidos.html">Ver o mural<i data-icon="arrow-right"></i></a></div>
+      <div class="grid cols-3">
+        <div class="card"><div class="card-body stack-sm"><div class="row between"><span class="eyebrow">Governo e políticas públicas</span><span class="badge st-ativo">Aberto</span></div><b><a href="pedido.html">Lista de todos os editais de fomento cultural municipais do RS em 2025</a></b><dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">R$ 2.100</dd></div><div><dt>Contribuidores</dt><dd>9</dd></div><div><dt>Prazo</dt><dd>10/12</dd></div></dl></div></div>
+        <div class="card"><div class="card-body stack-sm"><div class="row between"><span class="eyebrow">Negócios e mercado</span><span class="badge st-analise">Em curadoria</span></div><b><a href="pedido.html">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</a></b><dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">R$ 1.450</dd></div><div><dt>Contribuidores</dt><dd>6</dd></div><div><dt>Prazo</dt><dd>20/11</dd></div></dl></div></div>
+        <div class="card"><div class="card-body stack-sm"><div class="row between"><span class="eyebrow">História e acervos</span><span class="badge st-ativo">Aberto</span></div><b><a href="pedido.html">Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)</a></b><dl class="kv-row"><div><dt>Recompensa</dt><dd class="wax">R$ 800</dd></div><div><dt>Contribuidores</dt><dd>1</dd></div><div><dt>Prazo</dt><dd>15/12</dd></div></dl></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

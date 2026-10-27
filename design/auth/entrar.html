@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Entrar · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    main { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 20px; }
+    .otp { flex-wrap: wrap; }
+    .otp .input.filled { border-color: var(--brass); }
+    .divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: var(--fs-xs); }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+    .faq details { border-top: 1px solid var(--border); padding: 10px 0; font-size: var(--fs-sm); }
+    .faq details:last-child { border-bottom: 1px solid var(--border); }
+    .faq summary { cursor: pointer; font-weight: 600; color: var(--fg); list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+    .faq summary::after { content: "+"; color: var(--muted); font-weight: 500; }
+    .faq details[open] summary::after { content: "–"; }
+    .faq p { color: var(--muted); margin-top: 6px; font-size: var(--fs-sm); }
+  </style>
+</head>
+<body data-shell="auth" data-page="auth" data-root="../">
+  <main>
+    <!-- Pseudônimo + senha -->
+    <div class="auth-card">
+      <p class="eyebrow">Entrar</p>
+      <h1 class="mt-1">Sua conta, só com o pseudônimo</h1>
+      <p class="muted small mt-1">Pseudônimo e senha. Nenhum e-mail, nenhum telefone, nenhum código por SMS.</p>
+
+      <form class="stack mt-3" data-submit-toast="Verificando pseudônimo e senha…">
+        <div class="field">
+          <label for="pseudo">Pseudônimo</label>
+          <div class="input-group"><span class="affix">@</span><input id="pseudo" class="input mono lg" value="coruja-7f3a" autocomplete="username" spellcheck="false"></div>
+        </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" class="input lg" value="moinho-tinta-farol-quartzo-2026" autocomplete="current-password">
+          <span class="hint"><a class="link" href="recuperar.html">Perdi minha senha</a> · a recuperação usa a frase de 12 palavras</span>
+        </div>
+        <label class="check"><input type="checkbox"><span>Lembrar este dispositivo por 7 dias<span class="desc">Não pede o código do autenticador de novo. Evite em computador compartilhado.</span></span></label>
+        <a class="btn btn-primary btn-lg btn-block" href="../buyer/painel.html"><i data-icon="lock-keyhole"></i>Entrar</a>
+        <div class="divider">ou</div>
+        <button type="button" class="btn btn-outline btn-block" data-toast="Solicitando passkey ao dispositivo…"><i data-icon="fingerprint"></i>Entrar com passkey</button>
+      </form>
+
+      <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">Sem e-mail, sem "esqueci minha senha" por fora</span>A frase de recuperação de 12 palavras é a única saída se você perder a senha e a passkey. Ninguém da equipe consegue redefinir o acesso por você.</div></div>
+
+      <p class="small text-center mt-3">Ainda não tem conta? <a class="link" href="criar-conta.html">Criar conta anônima</a> · leva 2 minutos</p>
+    </div>
+
+    <!-- Segundo passo · TOTP -->
+    <div class="auth-card">
+      <p class="eyebrow">Segundo passo · quando o TOTP está ativo</p>
+      <h2 class="mt-1">Código do app autenticador</h2>
+      <p class="muted small mt-1">Abra o app autenticador e digite o código de 6 dígitos gerado para <span class="handle" data-handle="coruja-7f3a"></span>.</p>
+
+      <div class="otp mt-3" id="otp" aria-label="Código de 6 dígitos">
+        <input class="input filled" inputmode="numeric" maxlength="1" value="4" aria-label="Dígito 1">
+        <input class="input filled" inputmode="numeric" maxlength="1" value="8" aria-label="Dígito 2">
+        <input class="input filled" inputmode="numeric" maxlength="1" value="2" aria-label="Dígito 3">
+        <input class="input" inputmode="numeric" maxlength="1" aria-label="Dígito 4">
+        <input class="input" inputmode="numeric" maxlength="1" aria-label="Dígito 5">
+        <input class="input" inputmode="numeric" maxlength="1" aria-label="Dígito 6">
+      </div>
+      <p class="xs muted mt-1">O código muda a cada 30 segundos. Ele é gerado no seu dispositivo: nada é enviado por SMS ou e-mail.</p>
+
+      <div class="row between mt-3">
+        <button type="button" class="btn btn-ghost btn-sm" data-toast="Digite um dos 8 códigos de backup gerados em Configurações › Segurança">Usar código de backup</button>
+        <a class="btn btn-primary" href="../buyer/painel.html"><i data-icon="check"></i>Confirmar e entrar</a>
+      </div>
+
+      <div class="alert alert-info mt-3"><i data-icon="info"></i><div><span class="alert-title">Dispositivo novo</span>Este navegador não foi usado antes nesta conta. Depois de entrar, um aviso de segurança aparece em Notificações com a data e o tipo de dispositivo.</div></div>
+    </div>
+
+    <!-- O que registramos ao entrar -->
+    <div class="auth-card">
+      <h3>O que fica registrado quando você entra</h3>
+      <div class="list mt-1">
+        <div class="list-item">
+          <span class="li-icon"><i data-icon="calendar"></i></span>
+          <div class="li-body">
+            <div class="li-title">Dia da última atividade</div>
+            <div class="li-sub">Só a data, nunca a hora exata. Serve para encerrar sessões paradas.</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <span class="li-icon"><i data-icon="monitor"></i></span>
+          <div class="li-body">
+            <div class="li-title">Tipo de dispositivo e navegador da sessão</div>
+            <div class="li-sub">Aparece em Configurações › Segurança para você encerrar o que não reconhecer.</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <span class="li-icon"><i data-icon="eye-off"></i></span>
+          <div class="li-body">
+            <div class="li-title">Nenhum IP no marketplace</div>
+            <div class="li-sub">Os registros de acesso exigidos por lei ficam em um sistema separado, cifrado, por 6 meses, e só saem por ordem judicial.</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <span class="li-icon"><i data-icon="clock"></i></span>
+          <div class="li-body">
+            <div class="li-title">Sessão expira após 8 h sem uso</div>
+            <div class="li-sub">Com "lembrar este dispositivo", o TOTP não é pedido de novo por 7 dias; a senha continua sendo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Problemas para entrar -->
+    <div class="auth-card">
+      <h3>Problemas para entrar?</h3>
+      <div class="faq mt-2">
+        <details>
+          <summary>Esqueci meu pseudônimo</summary>
+          <p>Use a <a class="link" href="recuperar.html">frase de recuperação</a>. Ela identifica a conta sozinha e mostra o pseudônimo antes de definir a nova senha.</p>
+        </details>
+        <details>
+          <summary>Perdi o celular com o app autenticador</summary>
+          <p>Use um dos 8 códigos de backup gerados quando você ativou o TOTP. Depois de entrar, desative e reative o TOTP em Configurações › Segurança. Sem os códigos, só a frase de recuperação resolve.</p>
+        </details>
+        <details>
+          <summary>Perdi a senha e a passkey</summary>
+          <p>A frase de 12 palavras define uma senha nova e encerra as outras sessões. Se perdeu também a frase, não existe caminho: nem a equipe consegue abrir a conta, e o saldo não pode ser movido.</p>
+        </details>
+        <details>
+          <summary>Aparece "conta restringida"</summary>
+          <p>Uma restrição de envios ou saques vem sempre com o motivo em Notificações. Você continua entrando e pode responder pelo canal de mensagens da curadoria.</p>
+        </details>
+        <details>
+          <summary>Quero esconder também a minha conexão</summary>
+          <p>Use o espelho .onion pela rede Tor. Não há rastreadores de terceiros nem CDN nas páginas autenticadas. Leia <a class="link" href="../public/politicas.html#anonimato">Anonimato e seus limites</a>.</p>
+        </details>
+      </div>
+    </div>
+
+    <p class="xs muted text-center">Protótipo navegável · os botões "Entrar" levam ao painel do comprador sem validar nada.</p>
+
+    <script>
+      (function () {
+        var cells = Array.prototype.slice.call(document.querySelectorAll('#otp .input'));
+        cells.forEach(function (c, i) {
+          c.addEventListener('input', function () {
+            c.value = c.value.replace(/\D/g, '').slice(-1);
+            c.classList.toggle('filled', !!c.value);
+            if (c.value && cells[i + 1]) cells[i + 1].focus();
+          });
+          c.addEventListener('keydown', function (e) { if (e.key === 'Backspace' && !c.value && cells[i - 1]) cells[i - 1].focus(); });
+        });
+      })();
+    </script>
+  </main>
+</body>
+</html>

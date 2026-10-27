@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Meus pedidos · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .pedido .card-body { display: flex; flex-direction: column; gap: 10px; }
+    .pedido h3 { font-size: var(--fs-md); }
+    .pedido .crit { margin: 0; padding-left: 20px; font-size: var(--fs-sm); color: var(--fg-2); }
+    .pedido .crit li + li { margin-top: 2px; }
+    .criteria { display: flex; flex-direction: column; gap: 8px; counter-reset: c; }
+    .criteria .input-group .affix { min-width: 36px; justify-content: center; }
+    .how { display: flex; flex-direction: column; gap: 10px; }
+    .how .how-step .n { width: 26px; height: 26px; font-size: var(--fs-xs); }
+  </style>
+</head>
+<body data-shell="buyer" data-page="pedidos" data-root="../" data-title="Meus pedidos">
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Comprar</p>
+      <h1>Meus pedidos</h1>
+      <p class="sub">Pedidos com recompensa que você criou ou aos quais contribuiu. Todo pedido passa pela curadoria antes de ficar público.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="../public/pedidos.html"><i data-icon="compass"></i>Mural público</a>
+      <button class="btn btn-primary" data-modal-open="novo-pedido"><i data-icon="plus"></i>Novo pedido</button>
+    </div>
+  </div>
+
+  <div class="stat-grid mb-3">
+    <div class="stat"><span class="label">Criados por você</span><span class="value">3</span><span class="delta flat">1 aberto · 1 em curadoria · 1 expirado</span></div>
+    <div class="stat"><span class="label">Contribuições</span><span class="value">3</span><span class="delta flat">1 em análise · 1 aberto · 1 atendido</span></div>
+    <div class="stat"><span class="label">Em custódia</span><span class="value">R$ 850,00</span><span class="delta flat"><i data-icon="lock"></i>volta se ninguém atender</span></div>
+    <div class="stat"><span class="label">Acessos recebidos</span><span class="value">1</span><span class="delta up"><i data-icon="vault"></i>ped-1b6j8 no cofre</span></div>
+  </div>
+
+  <div class="split">
+    <div class="stack">
+      <div class="chips">
+        <button class="chip active" data-toast="Mostrando todos os 6 pedidos">Todos <b>6</b></button>
+        <button class="chip" data-toast="Filtro: criados por você">Criados por você <b>3</b></button>
+        <button class="chip" data-toast="Filtro: contribuições">Contribuições <b>3</b></button>
+        <button class="chip" data-toast="Filtro: em curadoria">Em curadoria <b>1</b></button>
+        <button class="chip" data-toast="Filtro: abertos">Abertos <b>2</b></button>
+        <button class="chip" data-toast="Filtro: atendimento em análise">Em análise <b>1</b></button>
+        <button class="chip" data-toast="Filtro: atendidos">Atendidos <b>1</b></button>
+        <button class="chip" data-toast="Filtro: expirados">Expirados <b>1</b></button>
+      </div>
+
+      <!-- em curadoria · criado hoje -->
+      <article class="card pedido brass-edge">
+        <div class="card-body">
+          <div class="row"><span class="badge st-analise"><i data-icon="hourglass"></i>Em curadoria</span><span class="badge badge-outline">Criado por você</span><span class="tag">ped-3n7q1</span><span class="xs muted">Enviado hoje às 09:14</span></div>
+          <h3>Planilha de ocupação hoteleira de Florianópolis por mês, 2018–2026</h3>
+          <dl class="kv-row">
+            <div><dt>Recompensa inicial</dt><dd>R$ 300,00</dd></div>
+            <div><dt>Em custódia</dt><dd>55,76 USDT</dd></div>
+            <div><dt>Prazo pedido</dt><dd>20/12/2026</dd></div>
+            <div><dt>Liberação</dt><dd>público depois</dd></div>
+            <div><dt>Resposta até</dt><dd>29/10 · 09:14</dd></div>
+          </dl>
+          <div class="alert alert-info"><i data-icon="info"></i><div>A curadoria confere se o pedido é lícito e claro (nada de dados pessoais, credenciais ou conteúdo íntimo) e pode reescrever o título. Enquanto isso, ele não aparece no mural.</div></div>
+          <div class="row">
+            <button class="btn btn-sm" data-toast="Edição reabre a análise; o prazo de 48 h recomeça"><i data-icon="edit"></i>Editar</button>
+            <button class="btn btn-sm btn-ghost" data-toast="Pedido cancelado. R$ 300,00 voltam para a carteira."><i data-icon="x"></i>Cancelar pedido</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- aberto · criado por coruja -->
+      <article class="card pedido">
+        <div class="card-body">
+          <div class="row"><span class="badge st-ativo">Aberto</span><span class="badge badge-outline">Criado por você · 05/10</span><span class="tag">ped-9h2d5</span><span class="xs muted">Governo e políticas públicas</span></div>
+          <h3><a href="../public/pedido.html">Lista de todos os editais de fomento cultural municipais do RS em 2025</a></h3>
+          <dl class="kv-row">
+            <div><dt>Recompensa</dt><dd>R$ 2.100,00</dd></div>
+            <div><dt>Contribuidores</dt><dd>9 (você: R$ 300,00)</dd></div>
+            <div><dt>Prazo</dt><dd>10/12/2026 · <span class="countdown" data-deadline="2026-12-10T23:59:00-03:00"></span></dd></div>
+            <div><dt>Atendimentos</dt><dd>0 em curadoria</dd></div>
+          </dl>
+          <div>
+            <div class="xs muted mb-1">Critérios de aceite (resumo)</div>
+            <ol class="crit">
+              <li>Todos os 497 municípios do RS, com indicação dos que não publicaram edital.</li>
+              <li>Para cada edital: órgão, objeto, valor total, data de publicação e link para a fonte oficial.</li>
+              <li>Formato CSV e XLSX, codificação UTF-8, uma linha por edital.</li>
+            </ol>
+          </div>
+          <div class="row small"><i data-icon="message-square" class="ico brass"></i><span>2 perguntas públicas aguardando sua resposta · <span class="handle" data-handle="prisma-66af"></span> perguntou se fundações municipais entram</span></div>
+          <div class="row">
+            <a class="btn btn-sm btn-primary" href="../public/pedido.html"><i data-icon="message-square"></i>Responder perguntas</a>
+            <a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="plus"></i>Somar à recompensa</a>
+            <button class="btn btn-sm" data-copy="https://lacre.app/r/9h2d5"><i data-icon="link"></i>Copiar link</button>
+            <button class="btn btn-sm btn-ghost" data-toast="Prazo estendido para 10/01/2027. Contribuidores foram avisados."><i data-icon="calendar"></i>Estender prazo</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- contribuidor · atendimento em curadoria · detalhe expandido -->
+      <article class="card pedido" id="ped-4k9e2">
+        <div class="card-body">
+          <div class="row"><span class="badge st-analise"><i data-icon="hourglass"></i>Atendimento em curadoria</span><span class="badge badge-outline">Você contribuiu · R$ 150,00</span><span class="tag">ped-4k9e2</span><span class="xs muted">Negócios e mercado</span></div>
+          <h3><a href="../public/pedido.html">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</a></h3>
+          <dl class="kv-row">
+            <div><dt>Recompensa</dt><dd>R$ 1.450,00</dd></div>
+            <div><dt>Contribuidores</dt><dd>6</dd></div>
+            <div><dt>Prazo</dt><dd>20/11/2026</dd></div>
+            <div><dt>Autor</dt><dd><span class="handle" data-handle="quartzo-a1f0"></span></dd></div>
+          </dl>
+          <div class="panel stack-sm">
+            <div class="row between"><b class="small"><i data-icon="clipboard-check" class="ico brass"></i> 1 atendimento aguardando curadoria desde 24/10</b><span class="badge st-analise">em análise · Bruno M.</span></div>
+            <div class="timeline mt-1">
+              <div class="tl-item ok"><div class="when">02/10 · 11:20</div><div class="what">Pedido aprovado pela curadoria e publicado no mural</div></div>
+              <div class="tl-item ok"><div class="when">08/10 · 19:02</div><div class="what">Você somou R$ 150,00 à recompensa (custódia)</div></div>
+              <div class="tl-item info"><div class="when">24/10 · 16:48</div><div class="what">Um vendedor enviou um atendimento (dataset, 12 MB). Triagem automática concluída: metadados removidos, 0 alertas</div></div>
+              <div class="tl-item info"><div class="when">25/10 · 09:30</div><div class="what">Em análise · Bruno M. confere os 4 critérios de aceite e a autenticidade</div></div>
+              <div class="tl-item"><div class="when">até 29/10</div><div class="what muted">Decisão prevista. Se aprovado, acesso no seu cofre e recompensa paga ao vendedor (menos 10 %). Se recusado, o pedido volta a aberto.</div></div>
+            </div>
+            <p class="xs muted">Você não vê o conteúdo nem o pseudônimo do vendedor até a validação. Se outro vendedor entregar antes, vale o primeiro validado.</p>
+          </div>
+          <div class="row">
+            <a class="btn btn-sm" href="../public/pedido.html"><i data-icon="external-link"></i>Página pública</a>
+            <a class="btn btn-sm btn-ghost" href="../buyer/notificacoes.html"><i data-icon="bell"></i>Avisar quando decidir</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- contribuidor · aberto -->
+      <article class="card pedido">
+        <div class="card-body">
+          <div class="row"><span class="badge st-ativo">Aberto</span><span class="badge badge-outline">Você contribuiu · R$ 100,00</span><span class="tag">ped-2c8d1</span><span class="xs muted">Saúde e meio ambiente</span></div>
+          <h3><a href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></h3>
+          <dl class="kv-row">
+            <div><dt>Recompensa</dt><dd>R$ 3.200,00</dd></div>
+            <div><dt>Contribuidores</dt><dd>14</dd></div>
+            <div><dt>Prazo</dt><dd>30/11/2026</dd></div>
+            <div><dt>Atendimentos</dt><dd>0 em curadoria</dd></div>
+          </dl>
+          <div class="row">
+            <a class="btn btn-sm btn-primary" href="../buyer/checkout.html"><i data-icon="plus"></i>Somar à recompensa</a>
+            <a class="btn btn-sm" href="../public/pedido.html"><i data-icon="arrow-right"></i>Ver pedido</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- atendido -->
+      <article class="card pedido">
+        <div class="card-body">
+          <div class="row"><span class="badge st-liberado"><i data-icon="check"></i>Atendido</span><span class="badge badge-outline">Você contribuiu · R$ 200,00</span><span class="tag">ped-1b6j8</span><span class="xs muted">Fotografia e vídeo</span></div>
+          <h3><a href="../public/pedido.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></h3>
+          <dl class="kv-row">
+            <div><dt>Recompensa paga</dt><dd>R$ 600,00 · 24/09</dd></div>
+            <div><dt>Contribuidores</dt><dd>3</dd></div>
+            <div><dt>Validação</dt><dd>Ana R. · Curadora sênior</dd></div>
+            <div><dt>Entrega</dt><dd>212 fotos · 3,1 GB · <span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></dd></div>
+          </dl>
+          <div class="row">
+            <a class="btn btn-sm btn-primary" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a>
+            <a class="btn btn-sm" href="../public/prova.html"><i data-icon="badge-check"></i>Prova pública</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- expirado -->
+      <article class="card pedido">
+        <div class="card-body">
+          <div class="row"><span class="badge st-expirado"><i data-icon="clock"></i>Expirado · reembolsado</span><span class="badge badge-outline">Criado por você · 01/08</span><span class="tag">ped-6v2m8</span><span class="xs muted">Educação e métodos</span></div>
+          <h3>Custo por refeição da merenda escolar em 50 municípios de Minas Gerais (2023–2024)</h3>
+          <dl class="kv-row">
+            <div><dt>Recompensa</dt><dd>R$ 400,00</dd></div>
+            <div><dt>Contribuidores</dt><dd>2 (você: R$ 250,00)</dd></div>
+            <div><dt>Prazo</dt><dd>30/09/2026 · sem atendimento</dd></div>
+            <div><dt>Devolvido</dt><dd>+R$ 250,00 em 01/10 (crédito em USDT)</dd></div>
+          </dl>
+          <div class="row">
+            <button class="btn btn-sm" data-toast="Novo pedido criado a partir deste. Revise prazo e recompensa antes de enviar."><i data-icon="refresh"></i>Republicar com novo prazo</button>
+            <a class="btn btn-sm btn-ghost" href="../buyer/carteira.html"><i data-icon="wallet"></i>Ver no extrato</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <aside class="stack">
+      <div class="card">
+        <div class="card-head"><h3>Como funciona um pedido</h3></div>
+        <div class="card-body how small">
+          <div class="how-step"><span class="n">1</span><div>Você descreve o que procura, define critérios de aceite e paga a recompensa inicial (mínimo R$ 100). O valor fica em custódia.</div></div>
+          <div class="how-step"><span class="n">2</span><div>A curadoria aprova o pedido em até 48 h. Nada de dados pessoais, credenciais ou conteúdo íntimo.</div></div>
+          <div class="how-step"><span class="n">3</span><div>O pedido vai ao mural. Outras pessoas somam valor à recompensa.</div></div>
+          <div class="how-step"><span class="n">4</span><div>Um vendedor atende com um envio normal, que passa pela curadoria.</div></div>
+          <div class="how-step"><span class="n">5</span><div>Validado: todos os contribuidores recebem acesso no cofre; o vendedor recebe a recompensa menos 10 %.</div></div>
+          <div class="how-step"><span class="n">6</span><div>Sem atendimento no prazo: tudo volta para as carteiras, como crédito em USDT, sem taxa.</div></div>
+        </div>
+      </div>
+      <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Pedido anônimo</span>O mural mostra o seu pseudônimo como autor. Se preferir, marque "ocultar autor" ao criar: aparece "autor oculto". Vendedores nunca sabem quem contribuiu.</div></div>
+      <div class="card">
+        <div class="card-head"><h3>Em custódia</h3></div>
+        <div class="card-body">
+          <dl class="kv">
+            <dt>ped-9h2d5</dt><dd>R$ 300,00</dd>
+            <dt>ped-3n7q1</dt><dd>R$ 300,00</dd>
+            <dt>ped-4k9e2</dt><dd>R$ 150,00</dd>
+            <dt>ped-2c8d1</dt><dd>R$ 100,00</dd>
+            <dt><b>Total</b></dt><dd><b>R$ 850,00</b> <span class="xs muted">≈ 157,99 USDT</span></dd>
+          </dl>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- modal: novo pedido -->
+  <div class="modal-backdrop" id="novo-pedido">
+    <div class="modal wide">
+      <div class="modal-head"><h3>Novo pedido com recompensa</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+      <form class="modal-body stack" data-submit-toast="Pedido enviado para curadoria. Resposta em até 48 h.">
+        <div class="alert alert-info"><i data-icon="clipboard-check"></i><div><span class="alert-title">Passa pela curadoria antes de ficar público</span>Em até 48 h conferimos se o pedido é lícito e claro. A curadoria pode reescrever o título. Não aceitamos pedidos de dados pessoais, credenciais, conteúdo íntimo ou material sob sigilo legal.</div></div>
+        <div class="form-grid">
+          <div class="field full"><label for="np-titulo">Título</label><input id="np-titulo" class="input" maxlength="120" placeholder="O que você procura, em uma frase" value="Planilha de ocupação hoteleira de Florianópolis por mês, 2018–2026"><span class="hint">Até 120 caracteres. Sem nomes de pessoas.</span></div>
+          <div class="field"><label for="np-cat">Categoria</label><select id="np-cat" class="select"><option>Negócios e mercado · risco baixo</option><option>Dados e bases · risco baixo</option><option>Governo e políticas públicas · risco médio</option><option>Saúde e meio ambiente · risco médio</option><option>Jornalismo e investigação · risco alto</option><option>História e acervos · risco baixo</option><option>Educação e métodos · risco baixo</option><option>Fotografia e vídeo · risco baixo</option></select></div>
+          <div class="field"><label for="np-formato">Formato esperado</label><select id="np-formato" class="select"><option>Planilha (CSV ou XLSX)</option><option>Documento (PDF)</option><option>Imagens</option><option>Áudio ou transcrição</option><option>Vídeo</option><option>Pacote com vários formatos</option></select></div>
+          <div class="field full"><label for="np-desc">Descrição</label><textarea id="np-desc" class="textarea" placeholder="Contexto, abrangência, fontes aceitas, o que não serve">Taxa de ocupação mensal dos hotéis de Florianópolis, de janeiro de 2018 a setembro de 2026, separada por região da ilha (Norte, Centro, Sul, Leste). Servem levantamentos de sindicato, associação hoteleira ou pesquisa própria com metodologia descrita. Não serve estimativa sem fonte.</textarea></div>
+          <div class="field full">
+            <label>Critérios de aceite</label>
+            <div class="criteria">
+              <div class="input-group"><span class="affix">1</span><input class="input" value="Cobertura mensal completa de jan/2018 a set/2026, sem meses faltantes"></div>
+              <div class="input-group"><span class="affix">2</span><input class="input" value="Taxa de ocupação e número de leitos por região da ilha"></div>
+              <div class="input-group"><span class="affix">3</span><input class="input" value="Fonte de cada número e metodologia em uma aba separada"></div>
+            </div>
+            <div class="row between mt-1"><span class="hint">A curadoria usa estes critérios para validar o atendimento. Seja objetivo.</span><button type="button" class="btn btn-sm btn-ghost" data-toast="Até 6 critérios por pedido"><i data-icon="plus"></i>Adicionar critério</button></div>
+          </div>
+          <div class="field"><label for="np-valor">Recompensa inicial</label><div class="input-group"><span class="affix">R$</span><input id="np-valor" class="input num" value="300,00" inputmode="decimal"></div><span class="hint">Mínimo R$ 100. Sai da carteira agora (≈ 55,76 USDT) e fica em custódia. Saldo disponível: R$ 1.240,00.</span></div>
+          <div class="field"><label for="np-prazo">Prazo para atendimento</label><input id="np-prazo" class="input" type="date" value="2026-12-20" min="2026-10-29" max="2027-01-25"><span class="hint">Entre 2 e 90 dias. Sem atendimento até lá, tudo volta às carteiras.</span></div>
+          <fieldset class="field full">
+            <legend>Regra de liberação</legend>
+            <div class="choice-cards">
+              <label class="choice"><input type="radio" name="np-lib"><span class="choice-title"><i data-icon="users"></i>Só contribuidores</span><span class="choice-desc">Quem somou valor recebe acesso. Ninguém mais.</span><span class="choice-meta">Padrão</span></label>
+              <label class="choice"><input type="radio" name="np-lib" checked><span class="choice-title"><i data-icon="globe"></i>Público depois de atendido</span><span class="choice-desc">Após a validação, o item abre como Cópias. Parte da receita volta aos contribuidores até reembolsar o que pagaram.</span><span class="choice-meta">Atrai mais vendedores</span></label>
+            </div>
+          </fieldset>
+          <label class="check full"><input type="checkbox"><span>Ocultar meu pseudônimo como autor no mural<span class="desc">O pedido aparece como "autor oculto". A curadoria continua vendo o seu pseudônimo.</span></span></label>
+          <label class="check full"><input type="checkbox" required><span>Declaro que não estou pedindo dados pessoais de terceiros, credenciais, conteúdo íntimo nem material sob sigilo legal.<span class="desc">A declaração fica registrada e vinculada ao seu pseudônimo.</span></span></label>
+        </div>
+        <div class="form-actions">
+          <span class="xs muted">Registramos pedido, valor e data. Nada mais.</span>
+          <div class="row"><button type="button" class="btn" data-modal-close>Cancelar</button><button type="submit" class="btn btn-primary"><i data-icon="send"></i>Pagar R$ 300 e enviar para curadoria</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // fecha o modal quando o formulário é enviado (o app.js já mostra o toast e impede o envio real)
+    document.querySelector('#novo-pedido form').addEventListener('submit', function () {
+      document.getElementById('novo-pedido').classList.remove('open');
+    });
+  </script>
+</main>
+</body>
+</html>
