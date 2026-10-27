@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Notificações · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .day { margin-top: 20px; }
+    .day:first-child { margin-top: 0; }
+    .day h3 { font-size: var(--fs-sm); color: var(--muted); font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; padding-bottom: 6px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+    .day h3 span { font-weight: 500; text-transform: none; letter-spacing: 0; }
+    .list-item .li-icon.t-cur svg { color: var(--info); } .list-item .li-icon.t-lac svg { color: var(--wax-2); } .list-item .li-icon.t-dis svg { color: var(--warn); }
+    .list-item .li-icon.t-saq svg { color: var(--ok); } .list-item .li-icon.t-seg svg { color: var(--danger); }
+    .list-item .li-title .handle { vertical-align: middle; font-size: var(--fs-xs); }
+    .list-item .li-act { display: flex; align-items: center; gap: 8px; flex: none; }
+    .list-item .nd { width: 8px; height: 8px; border-radius: 50%; background: var(--brass); flex: none; }
+    .list-item .nd.off { background: transparent; }
+    .pref { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); }
+    .pref:last-child { border-bottom: 0; }
+    .pref .d { color: var(--muted); font-size: var(--fs-xs); }
+    @media (max-width: 600px) { .list-item .li-act .btn { display: none; } }
+  </style>
+</head>
+<body data-shell="buyer" data-page="notificacoes" data-root="../" data-title="Notificações">
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Compartilhada · comprador e vendedor</p>
+      <h1>Notificações</h1>
+      <p class="sub">4 não lidas · só dentro da plataforma e por push anônimo do navegador. Sem e-mail, sem SMS.</p>
+    </div>
+    <div class="actions">
+      <button class="btn" data-toast="16 notificações marcadas como lidas"><i data-icon="check"></i>Marcar todas como lidas</button>
+      <a class="btn btn-ghost" href="#preferencias"><i data-icon="sliders"></i>Preferências de push</a>
+    </div>
+  </div>
+
+  <div class="chips mb-3">
+    <button class="chip active" data-toast="Mostrando todas as notificações">Todas <b>16</b></button>
+    <button class="chip" data-toast="Filtro: curadoria">Curadoria <b>3</b></button>
+    <button class="chip" data-toast="Filtro: lacres">Lacres <b>4</b></button>
+    <button class="chip" data-toast="Filtro: compras">Compras <b>2</b></button>
+    <button class="chip" data-toast="Filtro: mensagens">Mensagens <b>2</b></button>
+    <button class="chip" data-toast="Filtro: disputas">Disputas <b>1</b></button>
+    <button class="chip" data-toast="Filtro: saques">Saques <b>2</b></button>
+    <button class="chip" data-toast="Filtro: segurança">Segurança <b>2</b></button>
+  </div>
+
+  <div class="split">
+    <div class="card">
+      <div class="card-body">
+        <section class="day">
+          <h3>Hoje · 27/10 <span>3 não lidas</span></h3>
+          <div class="list">
+            <div class="list-item unread">
+              <span class="li-icon"><i data-icon="message-square"></i></span>
+              <div class="li-body">
+                <div class="li-title">Nova mensagem de <span class="handle" data-handle="lanterna-b31d"></span> sobre lcr-9f2k7</div>
+                <div class="li-sub">Mensagens · 11:03 · "O dicionário já está no pacote (dicionario.md, 14 KB)…"</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/mensagens.html">Responder</a><span class="nd"></span></div>
+            </div>
+            <div class="list-item unread">
+              <span class="li-icon t-cur"><i data-icon="clipboard-check"></i></span>
+              <div class="li-body">
+                <div class="li-title">Seu item lcr-4g7h9 foi aprovado e será publicado em 28/10 às 14:00</div>
+                <div class="li-sub">Curadoria · 09:42 · Tabela de preços de medicamentos oncológicos em 15 países · Verificado parcialmente · post no X agendado</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/anuncio.html">Ver anúncio</a><span class="nd"></span></div>
+            </div>
+            <div class="list-item unread">
+              <span class="li-icon t-seg"><i data-icon="shield-alert"></i></span>
+              <div class="li-body">
+                <div class="li-title">Novo acesso à sua conta de um dispositivo Linux · Firefox</div>
+                <div class="li-sub">Segurança · 08:15 · entrada com senha + TOTP · se não foi você, encerre a sessão e troque a senha</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/configuracoes.html">Ver sessões</a><span class="nd"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-saq"><i data-icon="coins"></i></span>
+              <div class="li-body">
+                <div class="li-title">Saque de R$ 1.000,00 (185,87 USDT) solicitado · sai no próximo lote horário</div>
+                <div class="li-sub">Saques · 07:58 · rede Polygon · taxa de rede estimada 0,02 USDT · endereço apagado após a confirmação</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/ganhos.html">Acompanhar</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>Ontem · 26/10 <span>1 não lida</span></h3>
+          <div class="list">
+            <div class="list-item unread">
+              <span class="li-icon t-cur"><i data-icon="edit"></i></span>
+              <div class="li-body">
+                <div class="li-title">Ajustes solicitados em lcr-2z5q7</div>
+                <div class="li-sub">Curadoria · 11:05 · Ana R.: a prévia expõe coordenadas exatas das feiras; reduza a amostra para bairro e dia · responda em até 7 dias</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/anuncio.html">Responder</a><span class="nd"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-lac"><i data-icon="hand-coins"></i></span>
+              <div class="li-body">
+                <div class="li-title"><span class="handle" data-handle="sextante-21c9"></span> publicou uma atualização em lcr-4m2x9</div>
+                <div class="li-sub">Lacres · 16:40 · "Os áudios da meta estendida já estão enviados e analisados pela curadoria" · 68 % · faltam R$ 25.880</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../public/item.html">Ver</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>25/10 <span>sábado</span></h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="message-square"></i></span>
+              <div class="li-body">
+                <div class="li-title"><span class="handle" data-handle="prisma-66af"></span> perguntou sobre o seu pedido ped-9h2d5</div>
+                <div class="li-sub">Mensagens · 19:05 · "Editais de fundações municipais de cultura entram nos critérios?"</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/mensagens.html">Responder</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-cur"><i data-icon="hourglass"></i></span>
+              <div class="li-body">
+                <div class="li-title">lcr-0p4m3 entrou em análise com Bruno M.</div>
+                <div class="li-sub">Curadoria · 14:40 · Série histórica de tarifas de ônibus em 27 capitais · decisão prevista até 27/10</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/anuncios.html">Ver</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-lac"><i data-icon="hand-coins"></i></span>
+              <div class="li-body">
+                <div class="li-title">Seu apoio de R$ 150,00 em lcr-4m2x9 foi registrado</div>
+                <div class="li-sub">Lacres · 09:30 · total apoiado neste lacre: R$ 250,00 · em custódia até o resultado (15/11)</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/apoios.html">Apoios</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="repeat"></i></span>
+              <div class="li-body">
+                <div class="li-title">Assinatura de lcr-6d1k5 renovada: −R$ 190,00</div>
+                <div class="li-sub">Compras · 09:12 · Monitor semanal de patentes do setor farmacêutico · próxima edição em 03/11</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Cofre</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>Semana passada <span>20 a 24/10</span></h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="li-icon t-seg"><i data-icon="key"></i></span>
+              <div class="li-body">
+                <div class="li-title">Nova passkey cadastrada: "ThinkPad · Firefox"</div>
+                <div class="li-sub">Segurança · 24/10 · 18:02 · você agora tem 2 passkeys</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/configuracoes.html">Ver</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-lac"><i data-icon="flame"></i></span>
+              <div class="li-body">
+                <div class="li-title">lcr-4m2x9 chegou a 50 %</div>
+                <div class="li-sub">Lacres · 23/10 · 21:10 · R$ 40.000 de R$ 80.000 · 884 apoiadores · marco publicado no X</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../public/item.html">Ver</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-dis"><i data-icon="gavel"></i></span>
+              <div class="li-body">
+                <div class="li-title">Disputa DSP-0192 resolvida: reembolso parcial de R$ 60,00</div>
+                <div class="li-sub">Disputas · 22/10 · 16:05 · lcr-5t6w1 · 11,15 USDT creditados na carteira · acesso mantido</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/disputa.html">Ver decisão</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="vault"></i></span>
+              <div class="li-body">
+                <div class="li-title">Compra de lcr-9f2k7 entregue no cofre</div>
+                <div class="li-sub">Compras · 21/10 · 10:40 · R$ 490,00 · download com marca d'água · janela de disputa: 72 h após o primeiro acesso</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Abrir</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>Anteriores <span>outubro</span></h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="li-icon t-lac"><i data-icon="unlock"></i></span>
+              <div class="li-body">
+                <div class="li-title">Lacre rompido: Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</div>
+                <div class="li-sub">Lacres · 12/10 · 23:14 · meta de R$ 18.000 batida · acesso antecipado liberado no seu cofre · público em 13/10</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Abrir</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-saq"><i data-icon="coins"></i></span>
+              <div class="li-body">
+                <div class="li-title">Saque de R$ 4.800 (892 USDT) enviado para a rede Polygon</div>
+                <div class="li-sub">Saques · 02/10 · 13:00 · txid 0x8c1f…e27a · 12 confirmações · endereço de destino apagado</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/ganhos.html">Ver</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+        <div class="table-foot mt-2"><span>16 de 41 notificações · guardamos 90 dias</span><button class="btn btn-sm" data-toast="Carregando notificações de setembro">Carregar mais</button></div>
+      </div>
+    </div>
+
+    <aside class="stack" id="preferencias">
+      <div class="card">
+        <div class="card-head"><h3>Push por tipo</h3><span class="badge badge-ok">push ativo</span></div>
+        <div class="card-body">
+          <div class="pref"><div><b>Curadoria</b><div class="d">aprovado, ajustes, rejeitado, publicado</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Lacres</b><div class="d">marcos de 25/50/75/90 %, rompido, falhou, atualizações do vendedor</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Compras</b><div class="d">entrega no cofre, renovação de assinatura, lance superado</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Mensagens</b><div class="d">novas mensagens e perguntas nos seus pedidos</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Disputas</b><div class="d">abertura, resposta do vendedor, decisão</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Saques</b><div class="d">solicitado, enviado, confirmado na rede</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Segurança</b><div class="d">novo acesso, passkey, alteração de senha · sempre ativo</div></div><label class="switch"><input type="checkbox" checked disabled><span class="track"></span></label></div>
+          <div class="pref"><div><b>Resumo diário</b><div class="d">um único aviso às 09:00 em vez de notificações individuais (exceto segurança)</div></div><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
+          <div class="row end mt-2"><button class="btn btn-primary btn-sm" data-toast="Preferências salvas"><i data-icon="check"></i>Salvar</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Dispositivos com push</h3></div>
+        <div class="card-body stack-sm small">
+          <div class="row between"><span><i data-icon="monitor" class="ico brass"></i> ThinkPad · Firefox <span class="xs muted">· desde 24/10</span></span><button class="btn btn-sm btn-ghost" data-toast="Push removido deste dispositivo">Remover</button></div>
+          <div class="row between"><span><i data-icon="smartphone" class="ico brass"></i> Android · Chrome <span class="xs muted">· desde 12/03</span></span><button class="btn btn-sm btn-ghost" data-toast="Push removido deste dispositivo">Remover</button></div>
+          <p class="xs muted">A assinatura push é anônima: o navegador recebe um endereço de entrega aleatório, sem identificador seu. Não tem relação com e-mail ou número.</p>
+        </div>
+      </div>
+      <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Sem canais externos</span>Não enviamos e-mail nem SMS porque não os temos. Um canal Telegram ou Signal pode entrar na V2, com aviso de que ele vincula um identificador externo à sua conta.</div></div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

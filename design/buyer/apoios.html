@@ -11,8 +11,11 @@
   <style>
     /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
     @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
-    svg.ico { width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .row.start > div { flex: 1 1 0; min-width: 0; }
+    @media (min-width: 901px) { .split { grid-template-columns: minmax(0, 1fr) 300px; } }
     .apoio .item-row { align-items: start; }
+    @media (min-width: 701px) { .apoio .item-row { grid-template-columns: 120px minmax(0, 1fr) auto; } }
     .apoio .item-row .actions { display: flex; flex-direction: column; gap: 8px; min-width: 200px; }
     .apoio .item-row .actions .btn { justify-content: flex-start; }
     @media (max-width: 700px) { .apoio .item-row .actions { flex-direction: row; flex-wrap: wrap; min-width: 0; } }

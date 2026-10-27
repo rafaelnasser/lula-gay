@@ -11,7 +11,8 @@
   <style>
     /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
     @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
-    svg.ico { width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .row.start > div { flex: 1 1 0; min-width: 0; }
     .pedido .card-body { display: flex; flex-direction: column; gap: 10px; }
     .pedido h3 { font-size: var(--fs-md); }
     .pedido .crit { margin: 0; padding-left: 20px; font-size: var(--fs-sm); color: var(--fg-2); }
@@ -95,7 +96,7 @@
               <li>Formato CSV e XLSX, codificação UTF-8, uma linha por edital.</li>
             </ol>
           </div>
-          <div class="row small"><i data-icon="message-square" class="ico brass"></i><span>2 perguntas públicas aguardando sua resposta · <span class="handle" data-handle="prisma-66af"></span> perguntou se fundações municipais entram</span></div>
+          <div class="row start small"><i data-icon="message-square" class="ico brass"></i><div>2 perguntas públicas aguardando sua resposta · <span class="handle" data-handle="prisma-66af"></span> perguntou se fundações municipais entram</div></div>
           <div class="row">
             <a class="btn btn-sm btn-primary" href="../public/pedido.html"><i data-icon="message-square"></i>Responder perguntas</a>
             <a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="plus"></i>Somar à recompensa</a>

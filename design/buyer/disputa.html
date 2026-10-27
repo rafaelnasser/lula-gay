@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Disputa · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    /* o .split do app.css usa 1fr (mín. auto) no celular; o auto-fill de .choice-cards força 2 colunas e estoura a largura */
+    @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); } }
+    .row.start > div { flex: 1 1 0; min-width: 0; }
+    @media (max-width: 600px) { .file-row { flex-wrap: wrap; } .file-row .progress { flex-basis: 100%; order: 9; } }
+    .item-brief { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; align-items: start; }
+    .item-brief .preview { aspect-ratio: 4 / 3; border-radius: var(--r-sm); }
+    .after { display: flex; flex-direction: column; gap: 10px; }
+    .after .how-step .n { width: 26px; height: 26px; font-size: var(--fs-xs); }
+    .resolution { border: 1px solid var(--ok); background: var(--ok-soft); border-radius: var(--r); padding: 14px 16px; }
+    .quote { border-left: 3px solid var(--border-2); padding: 4px 0 4px 14px; color: var(--fg-2); font-size: var(--fs-sm); }
+    .reviewer { display: flex; align-items: center; gap: 10px; }
+    .reviewer .av { width: 32px; height: 32px; border-radius: 8px; background: var(--brass-soft); color: var(--brass); font-weight: 700; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body data-shell="buyer" data-page="cofre" data-root="../" data-title="Disputa">
+<main>
+  <div data-variants="abrir">
+
+    <!-- ===================== VARIANTE: ABRIR ===================== -->
+    <div data-variant="abrir">
+      <div class="crumbs mb-2"><a href="../buyer/cofre.html">Cofre</a><i data-icon="chevron-right"></i><a href="../public/item.html">lcr-9f2k7</a><i data-icon="chevron-right"></i><span>Abrir disputa</span></div>
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Janela de disputa · 72 h após o primeiro acesso</p>
+          <h1>Abrir disputa</h1>
+          <p class="sub">Você abriu este item pela primeira vez em 26/10 às 11:30. A janela termina em 29/10 às 11:30: restam <span class="countdown brass" data-deadline="2026-10-29T11:30:00-03:00"></span>.</p>
+        </div>
+        <div class="actions"><a class="btn btn-ghost" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Reabrir no visualizador</a></div>
+      </div>
+
+      <div class="split">
+        <form class="card" data-submit-toast="Disputa DSP-0207 aberta. A curadoria responde em até 5 dias.">
+          <div class="card-body stack">
+            <div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">O valor fica retido enquanto a disputa estiver aberta</span>R$ 490,00 (91,08 USDT) continuam na custódia do item e não são liberados ao vendedor até a decisão. A curadoria já tem a prévia pública e o conteúdo entregue; o seu papel é apontar a diferença.</div></div>
+
+            <fieldset class="field">
+              <legend>Motivo</legend>
+              <div class="choice-cards">
+                <label class="choice"><input type="radio" name="motivo" checked><span class="choice-title"><i data-icon="file-search"></i>Conteúdo diferente da prévia</span><span class="choice-desc">O que foi entregue não corresponde ao que a prévia, o título e a descrição prometem.</span></label>
+                <label class="choice"><input type="radio" name="motivo"><span class="choice-title"><i data-icon="alert-triangle"></i>Arquivo corrompido ou incompleto</span><span class="choice-desc">Não abre, falta parte dos dados, páginas ou arquivos listados.</span></label>
+                <label class="choice"><input type="radio" name="motivo"><span class="choice-title"><i data-icon="copy"></i>Duplicado</span><span class="choice-desc">É cópia de outro item do catálogo ou de material disponível livremente, sem trabalho de compilação.</span></label>
+                <label class="choice"><input type="radio" name="motivo"><span class="choice-title"><i data-icon="shield-alert"></i>Autenticidade</span><span class="choice-desc">Indícios de fabricação, montagem ou origem diferente da declarada.</span></label>
+                <label class="choice"><input type="radio" name="motivo"><span class="choice-title"><i data-icon="more-horizontal"></i>Outro</span><span class="choice-desc">Descreva abaixo. A curadoria avalia se cabe reembolso.</span></label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="d-desc">Descrição</label>
+              <textarea id="d-desc" class="textarea" placeholder="Qual arquivo, qual coluna, qual página. Compare com o que a prévia e a descrição prometem.">A descrição promete 12.400 licitações com vencedor e valor. No CSV, 1.930 linhas (16 %) estão sem a coluna vencedor_cnpj e 412 estão sem valor_homologado, todas do Maranhão e do Piauí em 2019 e 2020. A amostra pública não tinha linhas vazias.</textarea>
+              <span class="hint">Seja específico. Até 2.000 caracteres. Não inclua dados pessoais seus nem de terceiros.</span>
+            </div>
+
+            <div class="field">
+              <label>Anexos (capturas de tela ou trechos)</label>
+              <div class="dropzone"><i data-icon="upload"></i><strong>Arraste capturas ou clique para escolher</strong><span class="xs">PNG, JPG ou PDF · até 10 MB cada · metadados removidos automaticamente</span></div>
+              <div class="file-row"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">captura-linhas-sem-vencedor.png</div><div class="file-meta">1.412 × 820 · 412 KB · EXIF removido</div></div><div class="progress thin"><div class="progress-bar ok" data-width="100%"></div></div><span class="badge badge-ok"><i data-icon="check"></i>Enviado</span><button type="button" class="icon-btn" data-toast="Anexo removido" aria-label="Remover"><i data-icon="x"></i></button></div>
+              <span class="hint">Anexos ficam visíveis só para a curadoria. O vendedor recebe o motivo e a descrição, sem o seu pseudônimo.</span>
+            </div>
+
+            <div class="panel">
+              <b class="small">O que acontece depois</b>
+              <div class="after mt-1 small">
+                <div class="how-step"><span class="n">1</span><div>A disputa recebe um número (DSP-…) e o vendedor é notificado do motivo, sem saber quem abriu.</div></div>
+                <div class="how-step"><span class="n">2</span><div>A curadoria compara a prévia pública com o conteúdo entregue e pode ler a conversa do item. O vendedor pode responder em 48 h.</div></div>
+                <div class="how-step"><span class="n">3</span><div>Decisão em até 5 dias: reembolso total, parcial ou disputa mantida. Reembolsos voltam para a carteira como crédito em USDT.</div></div>
+                <div class="how-step"><span class="n">4</span><div>Você mantém o acesso ao item até a decisão. Em reembolso total, o acesso é revogado.</div></div>
+              </div>
+            </div>
+
+            <label class="check"><input type="checkbox" required><span>Confirmo que as informações são verdadeiras e que comparei o conteúdo com a prévia.<span class="desc">Disputas improcedentes repetidas limitam o direito de abrir novas disputas. Esta é a sua 2ª disputa; a anterior (DSP-0192) foi procedente.</span></span></label>
+
+            <div class="form-actions">
+              <a class="btn btn-ghost" href="../buyer/cofre.html">Cancelar</a>
+              <button type="submit" class="btn btn-primary"><i data-icon="gavel"></i>Enviar disputa</button>
+            </div>
+          </div>
+        </form>
+
+        <aside class="stack">
+          <div class="card">
+            <div class="card-head"><h3>Item em disputa</h3></div>
+            <div class="card-body stack-sm">
+              <div class="item-brief">
+                <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+                <div class="stack-sm">
+                  <div class="row"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                  <b class="small">12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</b>
+                  <span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 8 itens"></span>
+                </div>
+              </div>
+              <dl class="kv">
+                <dt>Slug</dt><dd>lcr-9f2k7</dd>
+                <dt>Pago</dt><dd>R$ 490,00 · 91,08 USDT · 21/10</dd>
+                <dt>Entitlement</dt><dd>ENT-3F9A · download com marca d'água</dd>
+                <dt>Primeiro acesso</dt><dd>26/10 · 11:30</dd>
+                <dt>Hash do pacote</dt><dd><a class="link" href="../public/prova.html">3f9a…c21e</a></dd>
+              </dl>
+            </div>
+          </div>
+          <div class="alert alert-anon"><i data-icon="eye-off"></i><div><span class="alert-title">Anônimo dos dois lados</span>O vendedor vê o número da disputa, o motivo e a descrição. Não vê o seu pseudônimo nem o seu histórico. Registramos item, valor, data e decisão.</div></div>
+          <div class="card">
+            <div class="card-head"><h3>O que a curadoria vai olhar</h3></div>
+            <div class="card-body stack-sm small">
+              <div class="row start"><i data-icon="scan" class="ico brass"></i><div>Prévia pública aprovada × conteúdo entregue, lado a lado.</div></div>
+              <div class="row start"><i data-icon="clipboard-check" class="ico brass"></i><div>Notas da análise original (bloco 3: qualidade e completude).</div></div>
+              <div class="row start"><i data-icon="message-square" class="ico brass"></i><div>A conversa do item, se houver (acesso registrado em auditoria).</div></div>
+              <div class="row start"><i data-icon="users" class="ico brass"></i><div>Histórico de disputas do vendedor e o seu, sem identidade.</div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ===================== VARIANTE: ACOMPANHAR ===================== -->
+    <div data-variant="acompanhar">
+      <div class="crumbs mb-2"><a href="../buyer/cofre.html">Cofre</a><i data-icon="chevron-right"></i><a href="../public/item.html">lcr-5t6w1</a><i data-icon="chevron-right"></i><span>Disputa DSP-0192</span></div>
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Disputa · aberta em 19/10 · resolvida em 22/10</p>
+          <h1>Disputa DSP-0192</h1>
+          <p class="sub">1.200 páginas de jornais operários de São Paulo (1917–1930) digitalizadas em 600 dpi · lcr-5t6w1 · comprado por R$ 120,00 em 17/10</p>
+        </div>
+        <div class="actions"><span class="badge badge-lg badge-ok"><i data-icon="check-circle"></i>Resolvida · reembolso parcial</span></div>
+      </div>
+
+      <div class="split">
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3>Linha do tempo</h3><span class="badge badge-outline">decidida em 3 dias · prazo 5</span></div>
+            <div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">17/10 · 15:12</div><div class="what">Compra entregue no cofre · ENT-5B2C · primeiro acesso em 18/10 às 20:05</div></div>
+                <div class="tl-item warn"><div class="when">19/10 · 10:12</div><div class="what">Disputa aberta · motivo: arquivo corrompido ou incompleto · 2 anexos · R$ 120,00 retidos na custódia</div></div>
+                <div class="tl-item info"><div class="when">20/10 · 09:30</div><div class="what">Em análise · Bruno M. (Curador) · prévia pública e pacote entregue comparados no visualizador seguro</div></div>
+                <div class="tl-item info"><div class="when">20/10 · 17:48</div><div class="what">Vendedor respondeu: reconhece a resolução menor nas páginas 611 a 740 e propõe substituir o lote</div></div>
+                <div class="tl-item ok"><div class="when">22/10 · 16:05</div><div class="what">Resolvida · reembolso parcial de R$ 60,00 · descrição pública do item corrigida · acesso mantido</div></div>
+                <div class="tl-item ok"><div class="when">22/10 · 16:05</div><div class="what">R$ 60,00 (11,15 USDT) creditados na carteira</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Sua alegação</h3><span class="badge badge-outline">19/10 · 10:12</span></div>
+            <div class="card-body stack-sm">
+              <div class="row"><span class="badge badge-warn"><i data-icon="alert-triangle"></i>Arquivo corrompido ou incompleto</span></div>
+              <div class="quote">As páginas 611 a 740 (jornal A Plebe, 1919–1921) estão em 300 dpi, não nos 600 dpi declarados, e 38 delas estão ilegíveis por falha na digitalização (texto cortado na dobra). O restante das 1.200 páginas confere com a prévia e a descrição.</div>
+              <div class="row"><div class="file-row grow"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">pagina-702-dobra.png</div><div class="file-meta">388 KB</div></div></div><div class="file-row grow"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">propriedades-dpi-lote-2.png</div><div class="file-meta">96 KB</div></div></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Resposta da curadoria</h3><span class="badge badge-outline">22/10 · 16:05</span></div>
+            <div class="card-body stack">
+              <div class="reviewer"><span class="av">BM</span><div><b class="small">Bruno M.</b><div class="xs muted">Curador · análise de disputa · acesso ao conteúdo registrado em auditoria</div></div></div>
+              <p class="small">Conferimos o pacote entregue contra a prévia aprovada. 130 páginas (611 a 740) estão em 300 dpi em vez dos 600 dpi declarados, e 38 delas têm perda de legibilidade na margem interna. As outras 1.070 páginas correspondem à prévia e à descrição, em 600 dpi, com OCR íntegro. O item não é duplicado nem há indício de fabricação.</p>
+              <p class="small">Decisão: <b>reembolso parcial de 50 %</b> (R$ 60,00), proporcional à parte afetada e ao valor de uso do restante. A descrição pública foi corrigida para informar a resolução dessas 130 páginas, e o vendedor foi orientado a enviar um lote substituto como nova versão; se for aprovado, você recebe a atualização no cofre sem custo. Os demais compradores foram notificados.</p>
+              <div class="resolution">
+                <div class="row between"><b>Resultado: reembolso parcial</b><span class="price ok">R$ 60,00</span></div>
+                <div class="xs muted mt-1">11,15 USDT creditados em 22/10 às 16:05 · você mantém o acesso ao item · a reputação do vendedor registra 1 disputa parcialmente procedente</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="stack">
+          <div class="stat"><span class="label">Saldo devolvido</span><span class="value">R$ 60,00</span><span class="delta up"><i data-icon="wallet"></i>na carteira desde 22/10</span></div>
+          <div class="card">
+            <div class="card-head"><h3>Resumo</h3></div>
+            <div class="card-body">
+              <dl class="kv">
+                <dt>Disputa</dt><dd>DSP-0192</dd>
+                <dt>Item</dt><dd>lcr-5t6w1 · <span class="handle" data-handle="arquivista-0d2e"></span></dd>
+                <dt>Valor pago</dt><dd>R$ 120,00 · 22,30 USDT</dd>
+                <dt>Devolvido</dt><dd>R$ 60,00 · 11,15 USDT</dd>
+                <dt>Liberado ao vendedor</dt><dd>R$ 60,00 menos 10 % de comissão</dd>
+                <dt>Acesso</dt><dd>mantido · ENT-5B2C</dd>
+              </dl>
+              <div class="row mt-2"><a class="btn btn-sm" href="../buyer/carteira.html"><i data-icon="wallet"></i>Ver no extrato</a><a class="btn btn-sm btn-ghost" href="../buyer/cofre.html"><i data-icon="vault"></i>Abrir no cofre</a></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Discorda da decisão?</h3></div>
+            <div class="card-body stack-sm small">
+              <p>Você pode pedir uma revisão, uma única vez, até 29/10. Uma curadora sênior (Ana R.) reanalisa sem ver as notas da primeira decisão.</p>
+              <button class="btn btn-outline" data-toast="Pedido de revisão registrado. Ana R. responde em até 5 dias."><i data-icon="rotate-ccw"></i>Pedir revisão</button>
+            </div>
+          </div>
+          <div class="alert alert-anon"><i data-icon="shield"></i><div>Disputas procedentes não afetam a sua conta. Esta foi a sua 1ª disputa. O vendedor não sabe quem a abriu.</div></div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="variant-switch"><span class="vs-label">Variante</span><button data-show="abrir">Abrir</button><button data-show="acompanhar">Acompanhar</button></div>
+  </div>
+</main>
+</body>
+</html>

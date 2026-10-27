@@ -11,7 +11,8 @@
   <style>
     /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
     @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
-    svg.ico { width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .row.start > div { flex: 1 1 0; min-width: 0; }
     .msg-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
     @media (max-width: 1100px) { .msg-layout { grid-template-columns: 1fr; } }
     .chat .thread-tools { padding: 10px 12px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
