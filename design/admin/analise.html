@@ -25,6 +25,8 @@
     .doc-page .sel { background: var(--brass-soft); outline: 1.5px dashed var(--brass); color: inherit; padding: 0 2px; }
     .doc-page + .doc-page { margin-top: 10px; opacity: .85; }
     .tab-panel.file { padding-top: 12px; }
+    .file-tabs > .tabs { flex-wrap: wrap; overflow: visible; }
+    mark.sel { background: var(--brass-soft); color: inherit; outline: 1px dashed var(--brass); padding: 0 2px; }
     .kv.tight { gap: 5px 14px; }
     .tri-grid > *, .cmp-grid > * { min-width: 0; }
     .tri-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -73,7 +75,7 @@
       <section class="stack">
         <div class="card">
           <div class="card-head"><h3>Conteúdo lacrado</h3><span class="badge badge-outline">4 arquivos · 51,1 MB</span><div class="actions"><button class="btn btn-sm btn-ghost" data-toast="Visualizador em tela cheia (sessão de 15 min)"><i data-icon="maximize"></i></button></div></div>
-          <div class="card-body" data-tabs>
+          <div class="card-body file-tabs" data-tabs>
             <div class="tabs">
               <a class="tab active" data-tab="pdf" href="#"><i data-icon="file-text"></i>relatorio-consolidado.pdf <span class="count">212 p.</span></a>
               <a class="tab" data-tab="csv" href="#"><i data-icon="table"></i>barragens.csv</a>

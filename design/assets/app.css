@@ -614,6 +614,7 @@ legend { padding: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--fg-
 .tl-item { position: relative; padding: 0 0 18px; font-size: var(--fs-sm); }
 .tl-item::before { content: ""; position: absolute; left: -19px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--muted-2); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--border); }
 .tl-item.ok::before { background: var(--ok); } .tl-item.warn::before { background: var(--warn); } .tl-item.danger::before { background: var(--danger); } .tl-item.brass::before { background: var(--brass); } .tl-item.wax::before { background: var(--wax); } .tl-item.info::before { background: var(--info); }
+.tl-item.ok, .tl-item.warn, .tl-item.danger, .tl-item.brass, .tl-item.wax, .tl-item.info { color: inherit; }
 .tl-item .when { color: var(--muted); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
 .tl-item .what { font-weight: 500; }
 .list { display: flex; flex-direction: column; }
