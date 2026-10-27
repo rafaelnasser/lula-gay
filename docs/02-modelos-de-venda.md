@@ -96,7 +96,9 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Mecânicas de engajamento.**
 - Barra de progresso pública, número de apoiadores e tempo restante.
-- Marcos automáticos postados nas redes: 25 %, 50 %, 75 %, 90 %, meta batida.
+- **Linha do tempo do lacre** na página do item: barra de prazo (publicado → hoje → encerra, com o dia atual marcado), ritmo dos últimos dias e previsão de rompimento, e uma barra própria para cada marco (25, 50, 75, 90, 100 % e meta estendida) com a data em que foi batido e quantos apoiadores havia.
+- **Prévias por marco**: o vendedor escolhe, no envio, uma prévia extra para cada marco (ex.: índice dos documentos aos 25 %, uma página sem tarjas aos 50 %, um mapa e 3 min de áudio aos 75 %). A curadoria aprova junto com o item. Ao bater o marco, a prévia é liberada ao público e publicada nas redes com o anúncio do marco. É o que mostra ao público o que está por vir.
+- Marcos automáticos postados nas redes: 25 %, 50 %, 75 %, 90 %, meta batida, cada um com a prévia correspondente.
 - "Apoio âncora": o vendedor pode aceitar que um apoiador pague uma fatia grande em troca de acesso antecipado de 72 h.
 - Compartilhamento com link de referência anônimo (contador por link, sem identificar quem compartilhou).
 

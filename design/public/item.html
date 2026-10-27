@@ -40,6 +40,33 @@
     .updates .up { font-size: var(--fs-sm); padding: 8px 0; border-top: 1px solid var(--border); }
     .updates .up .when { font-size: var(--fs-xs); color: var(--muted); }
     .big-count { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; }
+    .timebar .tb-head { display: flex; justify-content: space-between; gap: 10px; font-size: var(--fs-xs); color: var(--muted); flex-wrap: wrap; margin-bottom: 6px; }
+    .timebar .tb-head b { color: var(--fg); font-weight: 600; }
+    .timebar .tb-today { color: var(--info); font-weight: 600; }
+    .timebar .progress { position: relative; overflow: visible; }
+    .timebar .tb-pin { position: absolute; top: -5px; width: 2px; height: 16px; background: var(--info); transform: translateX(-1px); }
+    .timebar .tb-pin::after { content: "hoje"; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font-size: 10px; color: var(--info); font-weight: 600; letter-spacing: .04em; }
+    .timebar .tb-note { font-size: var(--fs-sm); color: var(--fg-2); margin-top: 24px; }
+    .ms-list { display: flex; flex-direction: column; gap: 10px; }
+    .ms { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); }
+    .ms .ms-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border-2); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--muted); background: var(--bg-2); }
+    .ms .ms-dot svg { width: 14px; height: 14px; }
+    .ms.done .ms-dot { background: var(--ok); border-color: var(--ok); color: #fff; }
+    .ms.next { border-color: var(--wax); box-shadow: inset 0 0 0 1px var(--wax); background: var(--wax-soft); }
+    .ms.next .ms-dot { border-color: var(--wax); color: var(--wax-2); }
+    .ms.goal .ms-dot { border-color: var(--brass); color: var(--brass); }
+    .ms .ms-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; font-size: var(--fs-sm); }
+    .ms .ms-head b { font-size: var(--fs-md); font-family: var(--font-display); }
+    .ms .ms-when { font-size: var(--fs-xs); color: var(--muted); }
+    .ms .progress { margin: 8px 0 6px; }
+    .ms .ms-prev { display: flex; gap: 8px; align-items: flex-start; font-size: var(--fs-sm); color: var(--fg-2); }
+    .ms .ms-prev svg { width: 15px; height: 15px; color: var(--brass); flex: none; margin-top: 3px; }
+    .ms .ms-prev .lbl { font-weight: 600; color: var(--fg); margin-right: 4px; }
+    .ms .ms-foot { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 6px; font-size: var(--fs-xs); color: var(--muted); }
+    .flag-btn { color: var(--muted-2); }
+    .flag-btn:hover { color: var(--danger); }
+    .title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .title-row .spacer { flex: 1; }
     @media (max-width: 900px) { .split .sticky { position: static; } }
     @media (max-width: 600px) { .file-row { flex-wrap: wrap; } .file-row .grow { flex-basis: calc(100% - 48px); } .file-row .badge { margin-left: 48px; } }
   </style>
@@ -69,7 +96,7 @@
           <div>
             <p class="eyebrow">Jornalismo e investigação · Brasil · português · lcr-4m2x9 · publicado em 21/10/2026</p>
             <h1 class="mt-1">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</h1>
-            <div class="row mt-2"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-ativo">Ativo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="badge badge-outline"><i data-icon="package"></i>Pacote · PDF 212 p. · 31 áudios · planilhas</span><span class="badge badge-outline"><i data-icon="globe"></i>Brasil · português</span></div>
+            <div class="title-row mt-2"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-ativo">Ativo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="badge badge-outline"><i data-icon="package"></i>Pacote · PDF 212 p. · 31 áudios · planilhas</span><span class="badge badge-outline"><i data-icon="globe"></i>Brasil · português</span><span class="spacer"></span><button class="icon-btn flag-btn" data-modal-open="m-denuncia" data-tip="Reportar este item" aria-label="Reportar este item"><i data-icon="flag"></i></button></div>
             <div class="row mt-2"><span class="tag">ouro</span><span class="tag">mineração</span><span class="tag">pará</span><span class="tag">anm</span><span class="tag">lai</span><span class="tag">notas-fiscais</span><span class="tag">entrevistas</span></div>
           </div>
 
@@ -80,6 +107,72 @@
               <b>Curadoria concluída em 20/10/2026 às 16:42 (BRT)</b>
               <p class="small muted mt-1">Dois curadores independentes (Ana R. · Curadora sênior e Bruno M. · Curador) e revisão jurídica (Carla S. · Jurídico). Nível de autenticidade: <b>Verificado parcialmente</b>. Política de curadoria v1.2. O hash do pacote foi registrado e publicado antes do primeiro apoio.</p>
               <div class="row mt-2"><a class="btn btn-sm btn-outline" href="prova.html"><i data-icon="badge-check"></i>Ver a prova pública</a><span class="hash" style="flex:1 1 240px"><code>sha256: 3f9a7c0e…6d8bc21e</code><button class="btn btn-sm btn-ghost" data-copy="3f9a7c0e1d4b8a2f6e5c9d0b7a1e3f4c2d6b8a9e0f1c3d5b7a9e2f4c6d8bc21e" aria-label="Copiar hash do pacote"><i data-icon="copy"></i></button></span></div>
+            </div>
+          </div>
+
+          <!-- Linha do tempo do lacre -->
+          <div class="card" id="linha-do-tempo">
+            <div class="card-head"><i data-icon="activity"></i><h3>Onde este lacre está</h3><div class="actions"><span class="badge badge-wax">dia 7 de 26 · 68 % da meta</span></div></div>
+            <div class="card-body stack">
+              <div class="timebar">
+                <div class="tb-head"><span><b>Publicado</b> 21/10</span><span class="tb-today">hoje · 27/10 · dia 7 de 26</span><span><b>Encerra</b> 15/11 às 23:59</span></div>
+                <div class="progress thin"><div class="progress-bar info" data-width="27%"></div><span class="tb-pin" style="left:27%"></span></div>
+                <div class="tb-note"><b>27 % do prazo usado, 68 % da meta batida.</b> Ritmo dos últimos 3 dias: cerca de US$ 4.700 por dia. Nesse ritmo, o lacre rompe por volta de 1/11, duas semanas antes do prazo.</div>
+              </div>
+              <div class="ms-list">
+                <div class="ms done">
+                  <span class="ms-dot"><i data-icon="check"></i></span>
+                  <div>
+                    <div class="ms-head"><span><b>25 %</b> · US$ 20.000</span><span class="ms-when">batido em 22/10 às 14:10 · dia 2 · 488 apoiadores</span></div>
+                    <div class="progress thin"><div class="progress-bar ok" data-width="100%"></div></div>
+                    <div class="ms-prev"><i data-icon="unlock"></i><div><span class="lbl">Prévia liberada:</span>índice dos 140 documentos públicos citados (PDF, 6 páginas), para qualquer pessoa conferir a origem de cada um.</div></div>
+                    <div class="ms-foot"><button class="btn btn-sm btn-ghost" data-toast="Abrindo a prévia do marco de 25 % (índice dos documentos)"><i data-icon="eye"></i>Ver prévia liberada</button><span>postado no X e no Telegram em 22/10</span></div>
+                  </div>
+                </div>
+                <div class="ms done">
+                  <span class="ms-dot"><i data-icon="check"></i></span>
+                  <div>
+                    <div class="ms-head"><span><b>50 %</b> · US$ 40.000</span><span class="ms-when">batido em 25/10 às 09:35 · dia 5 · 912 apoiadores</span></div>
+                    <div class="progress thin"><div class="progress-bar ok" data-width="100%"></div></div>
+                    <div class="ms-prev"><i data-icon="unlock"></i><div><span class="lbl">Prévia liberada:</span>página 47 do relatório sem as tarjas de valores e 200 linhas da planilha de processos minerários.</div></div>
+                    <div class="ms-foot"><button class="btn btn-sm btn-ghost" data-toast="Abrindo a prévia do marco de 50 % (página 47 e amostra da planilha)"><i data-icon="eye"></i>Ver prévia liberada</button><span>postado no X e no Telegram em 25/10</span></div>
+                  </div>
+                </div>
+                <div class="ms next">
+                  <span class="ms-dot">75</span>
+                  <div>
+                    <div class="ms-head"><span><b>75 %</b> · US$ 60.000 · <span class="wax">próximo marco</span></span><span class="ms-when">faltam US$ 5.880 · US$ 54.120 de 60.000</span></div>
+                    <div class="progress thin"><div class="progress-bar wax" data-width="90%"></div></div>
+                    <div class="ms-prev"><i data-icon="lock"></i><div><span class="lbl">Será liberado:</span>mapa dos 7 municípios com as 23 áreas de extração identificadas e 3 minutos de uma entrevista (voz alterada).</div></div>
+                    <div class="ms-foot"><span>90 % do caminho até este marco · um apoio de US$ 50 avança 0,08 %</span></div>
+                  </div>
+                </div>
+                <div class="ms">
+                  <span class="ms-dot">90</span>
+                  <div>
+                    <div class="ms-head"><span><b>90 %</b> · US$ 72.000</span><span class="ms-when">faltam US$ 17.880</span></div>
+                    <div class="progress thin"><div class="progress-bar" data-width="75%"></div></div>
+                    <div class="ms-prev"><i data-icon="lock"></i><div><span class="lbl">Será liberado:</span>sumário executivo completo (12 páginas) e a lista das 6 empresas citadas, com os documentos de suporte de cada uma.</div></div>
+                  </div>
+                </div>
+                <div class="ms goal">
+                  <span class="ms-dot"><i data-icon="unlock"></i></span>
+                  <div>
+                    <div class="ms-head"><span><b>100 %</b> · US$ 80.000 · lacre rompido</span><span class="ms-when">faltam US$ 25.880</span></div>
+                    <div class="progress thin"><div class="progress-bar" data-width="68%"></div></div>
+                    <div class="ms-prev"><i data-icon="package"></i><div><span class="lbl">Liberação completa:</span>relatório de 212 páginas, planilhas e os 140 anexos. Apoiadores recebem no cofre 24 h depois; o público, 48 h depois, sem pagar.</div></div>
+                  </div>
+                </div>
+                <div class="ms">
+                  <span class="ms-dot"><i data-icon="plus"></i></span>
+                  <div>
+                    <div class="ms-head"><span><b>Meta estendida</b> · US$ 120.000</span><span class="ms-when">45 % · só vale se a meta base bater</span></div>
+                    <div class="progress thin"><div class="progress-bar" data-width="45%"></div></div>
+                    <div class="ms-prev"><i data-icon="audio"></i><div><span class="lbl">Será liberado:</span>as 31 entrevistas completas em áudio, com transcrição e vozes alteradas.</div></div>
+                  </div>
+                </div>
+              </div>
+              <p class="xs muted">As prévias de cada marco foram escolhidas pelo vendedor e aprovadas pela curadoria junto com o item. Cada marco batido é publicado nas redes com a prévia correspondente. Se a meta não bater até 15/11, as prévias já liberadas continuam públicas e os apoios voltam às carteiras.</p>
             </div>
           </div>
 
@@ -118,7 +211,6 @@
               </div>
               <div class="stack-sm mt-2">
                 <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Aviso</span>Contém nomes de agentes públicos no exercício da função, de fonte pública. Entrevistados anonimizados; nomes de particulares tarjados.</div></div>
-                <div class="alert alert-info"><i data-icon="info"></i><div>Qualquer pessoa pode denunciar o item pela página de prova. Durante uma reanálise, os apoios ficam pausados e nada é liberado.</div></div>
               </div>
             </div>
           </div>
@@ -206,14 +298,7 @@
                   <div class="up"><div class="when">25/10 · ao bater 50 %</div>Obrigado aos 912 primeiros. Adicionei ao anexo o índice dos 140 documentos públicos citados, para quem quiser conferir a origem de cada um.</div>
                   <div class="up"><div class="when">22/10 · ao bater 25 %</div>Pergunta recorrente: as transcrições parciais citadas no relatório estão na meta base. Os áudios completos ficam na meta estendida.</div>
                 </div>
-                <div>
-                  <span class="label">Marcos postados nas redes</span>
-                  <div class="timeline mt-1">
-                    <div class="tl-item wax"><div class="when">22/10 · 14:10</div><div class="what">25 % · US$ 20.300 · 488 apoiadores</div></div>
-                    <div class="tl-item wax"><div class="when">25/10 · 09:35</div><div class="what">50 % · US$ 40.120 · 912 apoiadores</div></div>
-                    <div class="tl-item"><div class="when">próximo marco</div><div class="what">75 % · US$ 60.000</div></div>
-                  </div>
-                </div>
+                <a class="panel row between" href="#linha-do-tempo" style="text-decoration:none"><div><b class="small">Próximo marco: 75 %</b><div class="xs muted">faltam US$ 5.880 · libera o mapa das 23 áreas e 3 min de entrevista</div></div><i data-icon="chevron-down"></i></a>
               </div>
             </div>
 
@@ -313,13 +398,28 @@
 
             <div class="side-foot">
               <div class="anon-note"><i data-icon="shield"></i><span>Compra anônima. Registramos item, valor e data. Nada mais. O vendedor nunca vê quem comprou ou apoiou.</span></div>
-              <a class="btn btn-sm btn-ghost" href="prova.html#denunciar"><i data-icon="flag"></i>Denunciar este item</a>
             </div>
           </div>
         </aside>
       </div>
     </div>
   </section>
+
+  <!-- Modal de denúncia (abre pela bandeira no cabeçalho) -->
+  <div class="modal-backdrop" id="m-denuncia"><div class="modal wide">
+    <div class="modal-head"><h3>Reportar este item</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+    <div class="modal-body">
+      <p class="small muted mb-2">Sem login. A denúncia entra na fila da curadoria com prioridade alta; o item pode ser suspenso enquanto é reanalisado. Resposta em até 5 dias; pedidos de titular de dados em até 15.</p>
+      <form class="form-grid" data-submit-toast="Denúncia recebida · protocolo DEN-2026-0417. A curadoria responde em até 5 dias.">
+        <div class="field"><label for="dn-motivo">Motivo</label><select id="dn-motivo" class="select"><option>Dados pessoais de terceiros</option><option>Direitos autorais</option><option>Falsificação ou fabricação</option><option>Conteúdo ilegal</option><option>Sou a pessoa citada (pedido de titular de dados)</option><option>Outro</option></select></div>
+        <div class="field"><label for="dn-onde">Onde está o problema (opcional)</label><input id="dn-onde" class="input" placeholder="Ex.: página 47 do relatório"></div>
+        <div class="field full"><label for="dn-desc">Descrição</label><textarea id="dn-desc" class="textarea" style="min-height:90px" placeholder="Descreva o problema com precisão. Não inclua dados pessoais de outras pessoas."></textarea></div>
+        <div class="field full"><label for="dn-contato">Contato para resposta (opcional)</label><input id="dn-contato" class="input" placeholder="Deixe em branco para acompanhar só pelo protocolo"><span class="hint">Só o jurídico vê; apagado ao encerrar o caso. Não registramos quem denunciou.</span></div>
+        <label class="check full"><input type="checkbox"><span>Declaro que as informações são verdadeiras. Denúncias falsas reiteradas são bloqueadas.</span></label>
+        <div class="form-actions full"><button class="btn" type="button" data-modal-close>Cancelar</button><button class="btn btn-danger" type="submit"><i data-icon="flag"></i>Enviar denúncia</button></div>
+      </form>
+    </div>
+  </div></div>
 
   <!-- Modal de confirmação de apoio -->
   <div class="modal-backdrop" id="m-apoio"><div class="modal">

@@ -47,6 +47,7 @@ Os posts são gerados automaticamente a partir do item e revisados por um humano
 
 **Marco (50 %)**
 > Metade do caminho. US$ 40.120 de US$ 80.000 em 6 dias, 912 apoiadores.
+> Liberado agora para todos: a página 47 do relatório sem tarjas e 200 linhas da planilha.
 > Faltam 15 dias para romper o lacre. lacre.app/p/4m2x9
 
 **Lacre rompido**
@@ -78,7 +79,7 @@ Gerado pelo worker (HTML → PNG via Playwright/Chromium) a partir de um templat
 1. Item aprovado entra na **fila de publicação** com data/hora sugerida (próximo slot livre, respeitando intervalo mínimo de 2 h entre posts no X).
 2. O publicador vê o post gerado por canal, pode editar o texto (dentro dos limites), trocar a prévia e aprovar.
 3. Agendamento: o worker publica no horário; falhas voltam à fila com o erro.
-4. Marcos de lacres coletivos e eventos (vendido, último dia, rompido) são gerados automaticamente e também passam pela fila, com aprovação em um clique.
+4. Marcos de lacres coletivos e eventos (vendido, último dia, rompido) são gerados automaticamente e também passam pela fila, com aprovação em um clique. O post de cada marco inclui a prévia liberada naquele marco (imagem ou trecho) e o texto diz o que o próximo marco vai liberar.
 5. Registro: ID externo do post, horário, métricas coletadas a cada 6 h por 7 dias (impressões, cliques, respostas).
 
 ## 6. Regras editoriais

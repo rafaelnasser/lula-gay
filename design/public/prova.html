@@ -38,7 +38,7 @@
         <h1 class="display">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</h1>
         <div class="row"><span class="badge">Jornalismo e investigação</span><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-ativo">Ativo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="tag">lcr-4m2x9</span><span class="tag">BR · português</span></div>
         <p class="small muted" style="max-width:64ch">Página pública, sem login, estável para sempre. Ela prova que este conteúdo existia, foi analisado por pessoas e tinha exatamente este hash em 20/10/2026, antes do primeiro apoio. Nenhum post nas redes sai sem ela.</p>
-        <div class="row"><a class="btn btn-primary" href="item.html"><i data-icon="arrow-right"></i>Ver item</a><button class="btn" data-copy="https://lacre.app/p/4m2x9"><i data-icon="share"></i>Compartilhar</button><a class="btn btn-ghost" href="#denunciar"><i data-icon="flag"></i>Denunciar</a></div>
+        <div class="row"><a class="btn btn-primary" href="item.html"><i data-icon="arrow-right"></i>Ver item</a><button class="btn" data-copy="https://lacre.app/p/4m2x9"><i data-icon="share"></i>Compartilhar</button><span id="denunciar"></span><button class="icon-btn" data-modal-open="m-denuncia" data-tip="Reportar este item" aria-label="Reportar este item" style="color:var(--muted-2)"><i data-icon="flag"></i></button></div>
       </div>
       <div class="card mt-3">
         <div class="card-body stack-sm">
@@ -139,6 +139,25 @@
         </div>
       </div>
 
+      <!-- Linha do tempo -->
+      <div class="card">
+        <div class="card-head"><i data-icon="clock"></i><h3>Linha do tempo pública</h3></div>
+        <div class="card-body">
+          <div class="timeline">
+            <div class="tl-item ok"><div class="when">14/10/2026 · 09:12</div><div class="what">Enviado para curadoria pelo vendedor · versão 1 · hash calculado no navegador</div></div>
+            <div class="tl-item ok"><div class="when">14/10 · 09:15</div><div class="what">Triagem automática concluída · metadados removidos (PDF: autor e software; áudios: tags ID3) · antivírus limpo · alerta de PII encaminhado à curadoria</div></div>
+            <div class="tl-item info"><div class="when">15/10 e 16/10</div><div class="what">Primeira e segunda análises, independentes · categoria de risco alto</div></div>
+            <div class="tl-item info"><div class="when">17/10</div><div class="what">Escalado ao jurídico · pessoas identificáveis e documentos de origem institucional</div></div>
+            <div class="tl-item ok"><div class="when">19/10 · 15:20</div><div class="what">Parecer jurídico: aprovar com redação · 14 trechos tarjados em nova versão · título reescrito e aceito pelo vendedor</div></div>
+            <div class="tl-item brass"><div class="when">20/10 · 16:42</div><div class="what">Aprovado · Verificado parcialmente · política v1.2 · hash do pacote registrado · esta prova emitida</div></div>
+            <div class="tl-item ok"><div class="when">21/10 · 10:00</div><div class="what">Publicado · lacre aberto · post no X, Telegram e Bluesky com o link desta prova</div></div>
+            <div class="tl-item wax"><div class="when">22/10 · 14:10</div><div class="what">Marco 25 % · US$ 20.300 · 488 apoiadores</div></div>
+            <div class="tl-item wax"><div class="when">25/10 · 09:35</div><div class="what">Marco 50 % · US$ 40.120 · 912 apoiadores</div></div>
+            <div class="tl-item"><div class="when">até 15/11/2026</div><div class="what">Próximos marcos: 75 %, 90 %, meta batida (lacre rompido) ou falha com devolução automática</div></div>
+          </div>
+        </div>
+      </div>
+
       <!-- Como verificar -->
       <div class="card" id="verificar">
         <div class="card-head"><i data-icon="scan"></i><h3>Como verificar o que você recebeu</h3></div>
@@ -160,42 +179,23 @@
         </div>
       </div>
 
-      <!-- Linha do tempo -->
-      <div class="card">
-        <div class="card-head"><i data-icon="clock"></i><h3>Linha do tempo pública</h3></div>
-        <div class="card-body">
-          <div class="timeline">
-            <div class="tl-item ok"><div class="when">14/10/2026 · 09:12</div><div class="what">Enviado para curadoria pelo vendedor · versão 1 · hash calculado no navegador</div></div>
-            <div class="tl-item ok"><div class="when">14/10 · 09:15</div><div class="what">Triagem automática concluída · metadados removidos (PDF: autor e software; áudios: tags ID3) · antivírus limpo · alerta de PII encaminhado à curadoria</div></div>
-            <div class="tl-item info"><div class="when">15/10 e 16/10</div><div class="what">Primeira e segunda análises, independentes · categoria de risco alto</div></div>
-            <div class="tl-item info"><div class="when">17/10</div><div class="what">Escalado ao jurídico · pessoas identificáveis e documentos de origem institucional</div></div>
-            <div class="tl-item ok"><div class="when">19/10 · 15:20</div><div class="what">Parecer jurídico: aprovar com redação · 14 trechos tarjados em nova versão · título reescrito e aceito pelo vendedor</div></div>
-            <div class="tl-item brass"><div class="when">20/10 · 16:42</div><div class="what">Aprovado · Verificado parcialmente · política v1.2 · hash do pacote registrado · esta prova emitida</div></div>
-            <div class="tl-item ok"><div class="when">21/10 · 10:00</div><div class="what">Publicado · lacre aberto · post no X, Telegram e Bluesky com o link desta prova</div></div>
-            <div class="tl-item wax"><div class="when">22/10 · 14:10</div><div class="what">Marco 25 % · US$ 20.300 · 488 apoiadores</div></div>
-            <div class="tl-item wax"><div class="when">25/10 · 09:35</div><div class="what">Marco 50 % · US$ 40.120 · 912 apoiadores</div></div>
-            <div class="tl-item"><div class="when">até 15/11/2026</div><div class="what">Próximos marcos: 75 %, 90 %, meta batida (lacre rompido) ou falha com devolução automática</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Denunciar -->
-      <div class="card" id="denunciar">
-        <div class="card-head"><i data-icon="flag"></i><h3>Denunciar este item</h3><div class="actions"><span class="badge badge-outline">sem login</span></div></div>
-        <div class="card-body">
-          <p class="small muted mb-2">A denúncia entra na fila da curadoria com prioridade alta. O item pode ser suspenso preventivamente (sai do catálogo, apoios pausam) enquanto é reanalisado. Resposta em até 5 dias; pedidos de titulares de dados (LGPD, GDPR ou equivalente) em até 15 dias.</p>
-          <form class="form-grid" data-submit-toast="Denúncia recebida · protocolo DEN-2026-0417. A curadoria responde em até 5 dias.">
-            <div class="field"><label for="d-motivo">Motivo</label><select id="d-motivo" class="select"><option>Dados pessoais de terceiros</option><option>Direitos autorais</option><option>Falsificação ou fabricação</option><option>Conteúdo ilegal</option><option>Sou a pessoa citada (pedido de titular de dados)</option><option>Outro</option></select></div>
-            <div class="field"><label for="d-trecho">Onde está o problema (opcional)</label><input id="d-trecho" class="input" placeholder="Ex.: página 47 do relatório, coluna titular da planilha"></div>
-            <div class="field full"><label for="d-desc">Descrição</label><textarea id="d-desc" class="textarea" placeholder="Descreva o problema com o máximo de precisão. Não inclua dados pessoais de outras pessoas."></textarea><span class="hint">Mínimo 40 caracteres. Anexos podem ser enviados depois, pelo protocolo.</span></div>
-            <div class="field full"><label for="d-contato">Contato para resposta (opcional)</label><input id="d-contato" class="input" placeholder="Deixe em branco para acompanhar só pelo protocolo"><span class="hint">Não é obrigatório. Se preencher, só o jurídico vê, usamos apenas para responder a esta denúncia e apagamos ao encerrar o caso. Sem contato, você acompanha pelo número do protocolo nesta página.</span></div>
-            <label class="check full"><input type="checkbox"><span>Declaro que as informações são verdadeiras e sei que denúncias falsas reiteradas são bloqueadas.</span></label>
-            <div class="form-actions full"><span class="xs muted">Protocolo gerado na hora. Registramos data e motivo; não registramos quem denunciou.</span><button class="btn btn-danger" type="submit"><i data-icon="flag"></i>Enviar denúncia</button></div>
-          </form>
-        </div>
-      </div>
     </div>
   </section>
+  <div class="modal-backdrop" id="m-denuncia"><div class="modal wide">
+    <div class="modal-head"><h3>Reportar este item</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+    <div class="modal-body">
+      <p class="small muted mb-2">Sem login. A denúncia entra na fila da curadoria com prioridade alta; o item pode ser suspenso enquanto é reanalisado. Resposta em até 5 dias; pedidos de titular de dados (LGPD, GDPR ou equivalente) em até 15.</p>
+      <form class="form-grid" data-submit-toast="Denúncia recebida · protocolo DEN-2026-0417. A curadoria responde em até 5 dias.">
+        <div class="field"><label for="d-motivo">Motivo</label><select id="d-motivo" class="select"><option>Dados pessoais de terceiros</option><option>Direitos autorais</option><option>Falsificação ou fabricação</option><option>Conteúdo ilegal</option><option>Sou a pessoa citada (pedido de titular de dados)</option><option>Outro</option></select></div>
+        <div class="field"><label for="d-trecho">Onde está o problema (opcional)</label><input id="d-trecho" class="input" placeholder="Ex.: página 47 do relatório"></div>
+        <div class="field full"><label for="d-desc">Descrição</label><textarea id="d-desc" class="textarea" style="min-height:90px" placeholder="Descreva o problema com precisão. Não inclua dados pessoais de outras pessoas."></textarea></div>
+        <div class="field full"><label for="d-contato">Contato para resposta (opcional)</label><input id="d-contato" class="input" placeholder="Deixe em branco para acompanhar só pelo protocolo"><span class="hint">Só o jurídico vê; apagado ao encerrar o caso. Não registramos quem denunciou.</span></div>
+        <label class="check full"><input type="checkbox"><span>Declaro que as informações são verdadeiras. Denúncias falsas reiteradas são bloqueadas.</span></label>
+        <div class="form-actions full"><button class="btn" type="button" data-modal-close>Cancelar</button><button class="btn btn-danger" type="submit"><i data-icon="flag"></i>Enviar denúncia</button></div>
+      </form>
+    </div>
+  </div></div>
+  <script>if (location.hash === '#denunciar') { window.addEventListener('load', function () { var m = document.getElementById('m-denuncia'); if (m) m.classList.add('open'); }); }</script>
 </main>
 </body>
 </html>
