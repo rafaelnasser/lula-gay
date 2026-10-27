@@ -242,11 +242,25 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                       <div class="field"><label for="meta">Meta</label><div class="input-group"><span class="affix">US$</span><input id="meta" class="input num" value="12.000,00" data-sim></div><span class="hint">Mínimo US$ 1.000. Apoios a partir de US$ 10.</span></div>
                       <div class="field"><label for="prazo">Prazo</label><select id="prazo" class="select"><option>7 dias · até 03/11/2026</option><option>14 dias · até 10/11/2026</option><option selected>30 dias · até 26/11/2026</option><option>60 dias · até 26/12/2026</option><option>90 dias · até 25/01/2027</option></select><span class="hint">Entre 24 h e 90 dias. Marcos de 25/50/75/90 % são postados automaticamente.</span></div>
                     </div>
-                    <div class="alert alert-wax"><i data-icon="unlock"></i><div><span class="alert-title">Liberação sempre pública</span>Quando a meta bater, o conteúdo fica público para todos ao mesmo tempo, com post nas redes. Quem apoiou ganha o selo “Rompeu este lacre” no perfil.</div></div>
+                    <fieldset>
+                      <legend>Fila de liberação (ondas)</legend>
+                      <p class="small muted">Quando a meta bater, o conteúdo sai em ondas, do maior apoio para o menor (soma de cada apoiador; empate por data). O público recebe por último, na finalização. Sugestão do Lacre já preenchida.</p>
+                      <div class="form-grid">
+                        <div class="field"><label for="onda1">Onda 1 · na hora do rompimento</label><div class="input-group"><span class="affix">a partir de US$</span><input id="onda1" class="input num" value="500,00"></div></div>
+                        <div class="field"><label for="onda2">Onda 2 · depois de 1 janela</label><div class="input-group"><span class="affix">a partir de US$</span><input id="onda2" class="input num" value="100,00"></div></div>
+                      </div>
+                      <p class="xs muted mt-1">Onda 3: os demais apoios (US$ 10 até o valor da onda 2), depois de 2 janelas.</p>
+                      <div class="form-grid mt-1">
+                        <label class="radio"><input type="radio" name="janela" value="48" checked><span>Janela de 48 h<span class="desc">Onda 2 em 48 h, onda 3 em 96 h, público em 7 dias.</span></span></label>
+                        <label class="radio"><input type="radio" name="janela" value="72"><span>Janela de 72 h<span class="desc">Onda 2 em 72 h, onda 3 em 144 h, público em 9 dias.</span></span></label>
+                      </div>
+                      <div class="panel mt-1"><div class="label">Calendário depois do rompimento</div><p class="small" id="ondas-cal"><b>Onda 1</b> na hora · <b>Onda 2</b> +48 h · <b>Onda 3</b> +96 h · <b>Público e finalização</b> +168 h (7 dias): 72 h após a última onda, quando separamos 10 % e entregamos a carteira a você.</p></div>
+                      <p class="xs muted mt-1">A fila é pública na página do item (posição, pseudônimo, total e onda). Quem apoia mais sobe de onda. Apoiadores ganham o selo “Rompeu este lacre”.</p>
+                    </fieldset>
                     <fieldset>
                       <legend>Regra de arrecadação</legend>
                       <div class="form-grid">
-                        <label class="radio"><input type="radio" name="arr" checked><span>Tudo ou nada<span class="desc">Não bateu a meta no prazo: todos os apoios voltam às carteiras. Nada é cobrado.</span></span></label>
+                        <label class="radio"><input type="radio" name="arr" checked><span>Tudo ou nada<span class="desc">Não bateu a meta no prazo: cada apoio volta ao endereço de origem. Nada é cobrado.</span></span></label>
                         <label class="radio"><input type="radio" name="arr"><span>Flexível<span class="desc">Libera com o que arrecadou se passar de um piso (70 % da meta = US$ 8.400). Precisa ser declarado antes de publicar.</span></span></label>
                       </div>
                     </fieldset>
@@ -343,7 +357,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <div class="card-body stack-sm">
                 <h3>Você recebe 90 %</h3>
                 <div><div class="xs muted" id="s-meta-label">Meta de US$ 12.000,00 batida</div><div class="big ok" id="s-liq">US$ 10.800,00</div></div>
-                <p class="xs muted" id="s-note">Os apoios entram direto na carteira deste item. Na finalização (72 h após a liberação), separamos 10 % e entregamos a carteira a você. Se a meta não bater, nada é cobrado e os apoios voltam aos endereços de origem.</p>
+                <p class="xs muted" id="s-note">Os apoios entram direto na carteira deste item. Na finalização (72 h após a última onda, quando o conteúdo fica público), separamos 10 % e entregamos a carteira a você. Se a meta não bater, nada é cobrado e os apoios voltam aos endereços de origem.</p>
                 <hr style="margin:4px 0">
                 <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 36.000,00</b></p>
                 <p class="xs muted">Comissão de 10 % sobre <span id="s-excl-base">US$ 40.000,00</span>. O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</p>
@@ -414,8 +428,8 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                 <div class="card-body"><dl class="kv">
                   <dt>Modelo</dt><dd><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></dd>
                   <dt>Meta e prazo</dt><dd><b>US$ 12.000</b> em 30 dias · até 26/11/2026 às 23:59 · apoios a partir de US$ 10</dd>
-                  <dt>Arrecadação</dt><dd>Tudo ou nada · sem meta, cada apoio volta à carteira de origem e nada é cobrado</dd>
-                  <dt>Liberação</dt><dd>Pública para todos ao mesmo tempo, com post nas redes · apoiadores ganham o selo “Rompeu este lacre”</dd>
+                  <dt>Arrecadação</dt><dd>Tudo ou nada · sem meta, cada apoio volta ao endereço de origem e nada é cobrado</dd>
+                  <dt>Liberação</dt><dd>Em ondas, do maior apoio para o menor: <b>≥ US$ 500</b> na hora · <b>US$ 100–499</b> +48 h · <b>US$ 10–99</b> +96 h · <b>público e finalização</b> +7 dias · post nas redes no rompimento e na abertura ao público · apoiadores ganham o selo “Rompeu este lacre”</dd>
                   <dt>Marcos e prévias</dt><dd>
                     <div class="stack-sm" style="margin-top:4px">
                       <div class="row between"><span><b>25 %</b> · US$ 3.000</span><span class="small muted">libera o índice das 40 entrevistas (sem nomes)</span></div>
@@ -497,7 +511,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           if (m === 'coletivo') {
             var meta = num('meta'), excl = num('excl');
             label.textContent = 'Meta de ' + usd(meta) + ' batida'; set('s-liq', usd(meta * 0.90));
-            note.textContent = 'Os apoios entram direto na carteira deste item. Na finalização (72 h após a liberação), separamos 10 % e entregamos a carteira a você. Se a meta não bater, nada é cobrado e os apoios voltam aos endereços de origem.';
+            note.textContent = 'Os apoios entram direto na carteira deste item. Na finalização (72 h após a última onda, quando o conteúdo fica público), separamos 10 % e entregamos a carteira a você. Se a meta não bater, nada é cobrado e os apoios voltam aos endereços de origem.';
             set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl)); exclRow.hidden = false; exclNote.hidden = false;
           } else if (m === 'copias') {
             var preco = num('preco'), lim = num('lim') || 0, excl2 = num('excl2');
@@ -518,6 +532,14 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
         document.querySelectorAll('[data-sim]').forEach(function (el) { el.addEventListener('input', sim); });
         document.addEventListener('change', function (e) { if (e.target.matches('[data-switch]')) sim(); });
         sim();
+      })();
+    </script>
+    <script>
+      (function () {
+        var cal = document.getElementById('ondas-cal'); if (!cal) return;
+        var t = { '48': '<b>Onda 1</b> na hora · <b>Onda 2</b> +48 h · <b>Onda 3</b> +96 h · <b>Público e finalização</b> +168 h (7 dias): 72 h após a última onda, quando separamos 10 % e entregamos a carteira a você.',
+                  '72': '<b>Onda 1</b> na hora · <b>Onda 2</b> +72 h · <b>Onda 3</b> +144 h · <b>Público e finalização</b> +216 h (9 dias): 72 h após a última onda, quando separamos 10 % e entregamos a carteira a você.' };
+        document.querySelectorAll('input[name="janela"]').forEach(function (r) { r.addEventListener('change', function () { cal.innerHTML = t[r.value]; }); });
       })();
     </script>
   </main>

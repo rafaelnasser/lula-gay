@@ -119,7 +119,7 @@ Reconciliação diária: soma dos `payment.received_amount` confirmados por cart
 
 **Lacre coletivo**
 ```
-Ativo ──(soma ≥ meta)──► Financiado ──(liberação automática)──► Liberado ──(72 h)──► Pago ao vendedor
+Ativo ──(soma ≥ meta)──► Rompido ──► Onda 1 (≥ faixa 1, na hora) ──(janela 48/72 h)──► Onda 2 ──(janela)──► Onda 3 ──(72 h)──► Público + Finalizado (10 %, carteira entregue)
   │
   └──(prazo vence, soma < meta)──► Falhou ──► Reembolsos à origem ──► Finalizado
 ```
@@ -150,7 +150,7 @@ Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)─
 ## 8. Agendamentos (BullMQ repeatable jobs)
 
 - A cada minuto: encerrar itens/leilões/lacres vencidos; liquidar custódias com janela de disputa vencida.
-- A cada 5 min: publicar posts agendados; checar marcos de lacres coletivos (25/50/75/90/100 %).
+- A cada 5 min: publicar posts agendados; checar marcos de lacres coletivos (25/50/75/90/100 %); liberar ondas vencidas (emite os entitlements da onda e notifica).
 - A cada hora: finalizações elegíveis (comissão + reembolsos pendentes); lotes de reembolso por rede; expirar pagamentos não recebidos em 24 h; fechar janelas de igualar vencidas (quem não igualou sai, com reembolso à origem); expirar pedidos sem atendimento; expirar concessões de visualização.
 - A cada minuto: varrer confirmações de pagamentos pendentes.
 - Diário: reconciliação on-chain das carteiras de itens; apagar endereços de origem de itens finalizados; destruição de DEKs de exclusivos vendidos há mais de 72 h; limpeza de mensagens expiradas; destruição de registros de acesso com mais de 6 meses.

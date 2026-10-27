@@ -81,12 +81,20 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 É o modelo mais característico da plataforma e o que gera mais conversa nas redes.
 
-**Como funciona.** O vendedor define uma **meta** em US$ e um **prazo**. Qualquer pessoa pode apoiar com qualquer valor a partir de um mínimo (US$ 10). Quando a soma atinge a meta, o lacre é rompido e o conteúdo é liberado conforme a regra de liberação escolhida.
+**Como funciona.** O vendedor define uma **meta** em US$ e um **prazo**. Qualquer pessoa pode apoiar com qualquer valor a partir de um mínimo (US$ 10). Quando a soma atinge a meta, o lacre é rompido e o conteúdo é liberado em ondas, do maior apoio para o menor; o público recebe por último.
 
-**Liberação: sempre pública.** Quando a meta bate, o conteúdo fica público para todos ao mesmo tempo, inclusive quem não apoiou, e o rompimento é postado nas redes. Quem apoiou ganha o selo "Rompeu este lacre" no perfil. Não existem variantes "só para apoiadores", acesso antecipado nem apoio âncora: o lacre coletivo é o modelo de bem público da plataforma; quem quer vender para poucos usa Cópias ou Exclusivo.
+**Liberação em ondas, do maior apoio para o menor.** Não é justo quem apoiou com US$ 10 receber junto com quem apoiou com US$ 2.000. Quando o lacre rompe:
+1. **Fila de liberação.** Os apoiadores são ordenados pelo total que cada um pagou (soma dos apoios); empate: quem apoiou antes vem primeiro.
+2. **Três ondas por faixa de valor**, definidas pelo vendedor no envio (sugestão da plataforma): **onda 1**, apoios a partir de US$ 500, recebe na hora do rompimento; **onda 2**, de US$ 100 a 499, recebe depois de uma janela; **onda 3**, de US$ 10 a 99, depois de duas janelas. A **janela** entre ondas é de **48 h ou 72 h**, à escolha do vendedor (padrão 48 h).
+3. **Público por último.** O conteúdo fica público na **finalização**, 72 h depois da última onda (com janela de 48 h: 7 dias após o rompimento). É o mesmo momento em que a plataforma separa os 10 % e entrega a carteira ao vendedor. O rompimento e a abertura ao público são postados nas redes.
+4. **Subir na fila.** Quem já apoiou pode apoiar mais e sobe de onda (conta o total). O checkout mostra em que onda o valor coloca a pessoa.
+5. **Fila pública.** A página do item mostra posição, pseudônimo, total apoiado, onda e quando cada um recebe. Cada apoiador vê a própria posição em Apoios.
+6. **Disputa:** 72 h a partir do momento em que a onda do apoiador recebeu. A compra com exclusividade (buyout) continua encerrando o lacre e devolvendo todos os apoios.
+
+Por que ondas e não um por um: com mais de mil apoiadores, liberar individualmente levaria meses; as faixas mantêm a ordem justa e um calendário curto. Quem apoiou ganha o selo "Rompeu este lacre" no perfil.
 
 **Regras de arrecadação.**
-- *Tudo ou nada* (padrão): se a meta não for atingida no prazo, todos os apoios voltam para as carteiras automaticamente.
+- *Tudo ou nada* (padrão): se a meta não for atingida no prazo, cada apoio volta ao endereço de origem automaticamente, sem ondas.
 - *Flexível*: o vendedor pode optar por liberar com o que arrecadou se tiver passado de um piso (ex.: 70 % da meta). Deve ser declarado antes de publicar.
 
 **Metas estendidas.** O vendedor pode definir níveis acima da meta que destravam material adicional (ex.: US$ 80 mil libera o relatório; US$ 120 mil libera também as entrevistas em áudio). Cada nível é um asset separado no envio.
@@ -98,9 +106,9 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 - Marcos automáticos postados nas redes: 25 %, 50 %, 75 %, 90 %, meta batida, cada um com a prévia correspondente.
 - Compartilhamento com link de referência anônimo (contador por link, sem identificar quem compartilhou).
 
-**Regras de custódia.** Os apoios ficam na carteira do item até o resultado. Se a meta for batida, 72 h após a liberação do conteúdo a plataforma separa a comissão, executa reembolsos procedentes e entrega a carteira ao vendedor. Se falhar, cada apoio volta ao endereço de origem.
+**Regras de custódia.** Os apoios ficam na carteira do item até o resultado. Se a meta for batida, 72 h após a última onda (quando o conteúdo fica público) a plataforma separa a comissão, executa reembolsos procedentes e entrega a carteira ao vendedor. Se falhar, cada apoio volta ao endereço de origem.
 
-**Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, outro), regra de liberação em destaque, metas estendidas em lista, atualizações do vendedor.
+**Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, 500, outro) com a onda correspondente, fila de liberação (ondas, topo da fila, sua posição), metas estendidas em lista, atualizações do vendedor.
 
 **Comissão.** 10 %.
 
@@ -223,7 +231,7 @@ Um item publicado para muitos compradores pode trazer, ao lado do preço normal 
 - Opcional, definido no passo 4 do envio. Sugestão de mínimo: 5× a meta (lacre coletivo) ou 20× o preço unitário (cópias). A curadoria pode sugerir outro valor.
 - Disponível enquanto o item está ativo. Em lacre coletivo, só até a meta ser batida; depois do rompimento não existe mais exclusividade a vender.
 - **Cópias e Camadas:** quem já comprou mantém o acesso (já recebeu). O comprador da exclusividade vê, antes de pagar, quantas cópias já foram vendidas. A partir da compra, ninguém mais recebe.
-- **Lacre coletivo:** todos os apoios são devolvidos automaticamente às carteiras e os apoiadores são notificados. O conteúdo não é liberado ao público.
+- **Lacre coletivo:** cada apoio volta automaticamente ao endereço de origem e os apoiadores são notificados. O conteúdo não é liberado a ninguém além do comprador.
 - O vendedor assina a mesma declaração de exclusividade do modelo Exclusivo (24 meses), e o conteúdo é destruído dos servidores após a janela de disputa.
 - Comissão de 10 % sobre o valor pago. A página de prova registra "vendido com exclusividade" e a prévia sai do catálogo.
 - Assinatura e Licença: fase 2 (a licença exclusiva já cobre o caso de fotos e vídeos).

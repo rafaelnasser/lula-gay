@@ -15,7 +15,7 @@ public/pedido.html                                     buyer/apoios             
 public/como-funciona.html                              buyer/pedidos             seller/reputacao           admin/denuncias
 public/vendedor.html                                   buyer/mensagens (compartilhada)                      admin/contas
 public/politicas.html                                  buyer/disputa                                        admin/financeiro
-                                                       buyer/notificacoes (compartilhada)                   admin/auditoria
+public/guia-cripto.html                                buyer/notificacoes (compartilhada)                   admin/auditoria
                                                        buyer/configuracoes (compartilhada)                  admin/configuracoes
 ```
 
@@ -48,6 +48,8 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 - **Novos no catálogo** (grade de 6 cards de item).
 - **Pedidos com recompensa** (3 cards).
 - **Anonimato**: bloco explicando o que não pedimos (nome, e-mail, telefone) e um link para "Anonimato e seus limites".
+- **Para a verdade sempre sair** (missão): por que o Lacre existe, em três pilares (anonimato dos dois lados, curadoria antes de publicar, prova pública e dinheiro transparente).
+- **Primeira vez com cripto?**: os 5 passos resumidos (instalar a MetaMask, criar a carteira e guardar a frase, ativar a rede Polygon, colocar USDT e uns centavos de POL, pagar no Lacre) e link para o guia completo.
 - **Prova pública**: bloco mostrando um post do X com card e link da prova.
 - CTA final: criar conta anônima.
 
@@ -60,7 +62,7 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 ### `public/item.html` · Página do item (6 variantes do painel de compra)
 Coluna principal: prévia grande selada (com seletor de miniaturas: capa, página tarjada, amostra de dados), título curado, categoria, tags (com um ícone de bandeira discreto que abre o pop-up de denúncia; nada de bloco de denúncia na tela), selo de curadoria com nível de autenticidade e número de curadores, **linha do tempo do lacre** (barra de prazo com o dia atual, ritmo e previsão de rompimento, uma barra por marco com data em que foi batido e a prévia que cada marco libera), descrição, "O que você recebe" (lista de arquivos com tamanho e tipo, sem nomes sensíveis), "O que a curadoria verificou" (resumo por bloco), avisos (ex.: "contém nomes de agentes públicos no exercício da função"), hash do pacote (abreviado, link para a prova), vendedor (pseudônimo, reputação, itens aprovados, desde; sempre exibido), perguntas públicas respondidas (Q&A moderado), itens relacionados.
 Coluna lateral (painel fixo) com uma variante por modelo. Um seletor de desenvolvimento no canto permite alternar:
-1. **Lacre coletivo**: arrecadado em destaque, meta, barra, apoiadores, prazo com contagem, liberação ("Quando bater, fica público para todos ao mesmo tempo."), botões de valor (US$ 20 / 50 / 100 / 250 / outro), botão "Apoiar", metas estendidas, atualizações do vendedor, marcos postados. Abaixo, bloco **Comprar com exclusividade** (valor, consequência: encerra o anúncio e devolve os apoios).
+1. **Lacre coletivo**: arrecadado em destaque, meta, barra, apoiadores, prazo com contagem, fila de liberação (3 ondas por faixa de valor com o calendário, topo da fila com posição/pseudônimo/total/onda, "sua posição" e "apoie mais para subir de onda"; público na finalização), botões de valor (US$ 20 / 50 / 100 / 250 / outro), botão "Apoiar", metas estendidas, atualizações do vendedor, marcos postados. Abaixo, bloco **Comprar com exclusividade** (valor, consequência: encerra o anúncio e devolve os apoios).
 2. **Cópias**: preço, "37 de 100 restantes", preço escalonado se houver, botão "Comprar cópia", "entrega imediata no cofre", direitos (download permitido / somente leitura), janela de disputa 72 h. Bloco **Comprar com exclusividade** (valor; quem já comprou mantém; ninguém mais recebe).
 3. **Exclusivo**: preço, "um único comprador", botão "Comprar exclusividade", "Fazer uma oferta" (campo com mínimo), exclusividade declarada de 24 meses, destruição do conteúdo após a venda.
 4. **Leilão lacrado**: "7 lances lacrados", reserva não revelada, encerra em (contagem), campo de lance único, explicação do segundo preço, lance pago na hora para um endereço do item e devolvido à origem a quem não vencer.
@@ -91,6 +93,9 @@ Rodapé do painel em todas: "Compra anônima. Registramos item, valor e data. Na
 - Seção "Extras deste pedido": cards de extras (título, quem criou, valor por interessado, interessados, total, carteira, status) com "Entrar no extra por US$ X" e "Cobrir" para interessados do principal e a frase "Não entrar no extra não muda sua participação no pedido"; "Propostas de vendedores" com "Criar extra a partir desta proposta"; botão "Adicionar um extra" (modal: título, descrição, critérios, valor por interessado, prazo = do pedido, aviso de curadoria e de pagamento ao criar).
 - Atendimentos: contagem de atendimentos em curadoria (sem detalhes).
 - Perguntas públicas ao autor (Q&A moderado).
+
+### `public/guia-cripto.html` · Primeiros passos com cripto
+- Guia de 10 minutos para quem nunca usou cripto: por que só cripto; passo a passo com mock de cada tela (instalar a MetaMask pelo site oficial, criar a carteira e anotar a frase de 12 palavras, ativar a rede Polygon, colocar USDT por compra na própria carteira, corretora ou P2P e uns US$ 1 de POL para taxas, pagar no Lacre com o valor exato); regras de ouro (pagar da própria carteira, conferir a rede, guardar a frase offline, carteira nova só para o Lacre, começar pequeno); perguntas frequentes (documento, custo, rede errada, frase perdida, outras carteiras, como o vendedor importa a carteira do item).
 
 ### `public/como-funciona.html` · Como funciona
 - Abas: Para quem compra / Para quem vende / Curadoria / Dinheiro / Perguntas frequentes.
@@ -154,7 +159,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Aviso de sessão de visualização expira em 15 min (renova automaticamente). Download desabilitado quando o item é somente leitura.
 
 ### `buyer/apoios.html`
-- Lista de lacres apoiados com progresso, valor apoiado, status (em andamento / rompido / falhou e reembolsado), prazo, botão "Apoiar mais", "Compartilhar" (link anônimo), "Ver no cofre" quando liberado.
+- Lista de lacres apoiados com progresso, valor apoiado, posição na fila e onda (quando recebe), status (em andamento / rompido · sua onda recebe em… / público / falhou e reembolsado), prazo, botão "Apoiar mais", "Compartilhar" (link anônimo), "Ver no cofre" quando liberado.
 - Aba "Pedidos" com os pedidos de que o usuário participa (valor por interessado pago, recompensa total, status).
 - Total apoiado e selos ("Rompeu 3 lacres").
 
@@ -189,7 +194,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 1. **Tipos e categoria**: cards de tipo com seleção múltipla (documento, dados, imagem, vídeo, áudio, texto, código), categoria (select) com nível de risco exibido, **país(es) a que a informação se refere (ou Global) e idioma do material**, vinculação opcional a um pedido existente.
 2. **Arquivos**: dropzone, lista de arquivos com progresso e hash local, relatório de metadados removidos (ex.: "EXIF: GPS, dispositivo; DOCX: autor"), alertas da triagem automática (ex.: "detectamos 12 nomes próprios"), limite 20 GB.
 3. **Prévia e descrição**: título (até 120), resumo (até 280), descrição (markdown restrito) e tags **preenchidos automaticamente** a partir da transcrição e do OCR dos arquivos (processados na própria infraestrutura), com selo "sugerido", botões "Gerar de novo" e "Limpar"; em branco quando os arquivos não puderem ser lidos; tags editáveis (Enter adiciona, clique remove); seleção de prévias geradas (borradas/tarjadas) com opção de marcar o que a curadoria pode mostrar, tags, aviso "a curadoria pode reescrever título e resumo".
-4. **Modelo de venda**: prévias por marco (25/50/75/90 %) escolhidas entre as prévias do passo 3; cards dos modelos (Cópias, Exclusivo, Lacre coletivo, Pedido, Leilão, Camadas, Assinatura, Janela, Licença) com os da V2/V3 marcados "em breve"; **a configuração abaixo muda conforme o modelo marcado** (Cópias: preço, limite, preço escalonado; Exclusivo: preço, ofertas, declaração de 24 meses; Lacre coletivo: meta, prazo, tudo-ou-nada/flexível, liberação sempre pública, metas estendidas; Pedido: pedido vinculado e critérios); **valor de exclusividade (opcional) em Cópias, Lacre coletivo e Camadas**, com explicação do que acontece ao ser pago; simulação de ganho líquido; modificadores (marca d'água, somente leitura; garantia de exclusividade só no Exclusivo).
+4. **Modelo de venda**: prévias por marco (25/50/75/90 %) escolhidas entre as prévias do passo 3; cards dos modelos (Cópias, Exclusivo, Lacre coletivo, Pedido, Leilão, Camadas, Assinatura, Janela, Licença) com os da V2/V3 marcados "em breve"; **a configuração abaixo muda conforme o modelo marcado** (Cópias: preço, limite, preço escalonado; Exclusivo: preço, ofertas, declaração de 24 meses; Lacre coletivo: meta, prazo, tudo-ou-nada/flexível, faixas das ondas e janela de 48 h ou 72 h com o calendário resultante, metas estendidas; Pedido: pedido vinculado e critérios); **valor de exclusividade (opcional) em Cópias, Lacre coletivo e Camadas**, com explicação do que acontece ao ser pago; simulação de ganho líquido; modificadores (marca d'água, somente leitura; garantia de exclusividade só no Exclusivo).
 5. **Declarações**: 6 checkboxes com texto completo (origem lícita; titularidade ou direito de venda; sem dados pessoais de terceiros sem base legal; sem conteúdo íntimo/menores; sem credenciais; não é informação privilegiada de mercado nem sob sigilo legal), nota de que o pseudônimo é sempre exibido (não existe opção de escondê-lo), aviso de que as declarações ficam registradas.
 6. **Revisão e envio**: resumo completo em quatro blocos com "editar" (conteúdo: tipos, categoria, país e idioma, arquivos com tamanho e hash, triagem; prévia: título, resumo, prévias públicas, tags; modelo: meta e prazo, arrecadação, liberação, os cinco marcos com a prévia que cada um libera, meta estendida, exclusividade, modificadores, quanto você recebe; declarações e pseudônimo), prazo estimado da curadoria (48 h), "o que acontece agora", botão "Enviar para curadoria". Tela de sucesso.
 

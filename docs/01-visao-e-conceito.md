@@ -20,7 +20,7 @@ O Lacre é o marketplace onde informação é negociada com três garantias que 
 |---|---|
 | Um marketplace curado de informação lícita | Um site de vazamentos ou um canal de denúncia anônima |
 | Uma camada de confiança (curadoria + prova + custódia do dinheiro) entre pessoas anônimas | Um fórum ou rede social |
-| Um lugar onde a informação pode ser liberada para todos quando a demanda paga por ela (lacre coletivo) | Um lugar onde se vende acesso, credencial, dado pessoal de terceiro ou conteúdo íntimo |
+| Um lugar onde a informação pode ser liberada a todos quando a demanda paga por ela (lacre coletivo: primeiro a quem apoiou, em ondas do maior apoio para o menor; depois ao público) | Um lugar onde se vende acesso, credencial, dado pessoal de terceiro ou conteúdo íntimo |
 | Um produto com equipe de curadoria como parte central do negócio | Uma plataforma automática ou "sem moderação" |
 
 ## 3. Princípios de produto
