@@ -29,7 +29,7 @@ Convenções que valem para todos os modelos:
 | 9 | **Licença** | Direitos de uso por finalidade (editorial, comercial, exclusiva) | Muitos | V3 |
 | 10 | **Consulta paga** | Comprador faz uma pergunta e paga pela resposta verificada | Um | V3 |
 
-Modificadores (combináveis): **compra com exclusividade (buyout)**, edição limitada, preço escalonado por volume, metas estendidas, pague o que quiser com mínimo, tudo-ou-nada vs. flexível, compra em grupo, acesso antecipado para apoiadores, marca d'água obrigatória, somente leitura (sem download).
+Modificadores (combináveis): **compra com exclusividade (buyout)**, edição limitada, preço escalonado por volume, metas estendidas, prévias por marco, pague o que quiser com mínimo, tudo-ou-nada vs. flexível, compra em grupo, marca d'água obrigatória, somente leitura (sem download).
 
 ---
 
@@ -83,10 +83,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Como funciona.** O vendedor define uma **meta** em US$ e um **prazo**. Qualquer pessoa pode apoiar com qualquer valor a partir de um mínimo (US$ 10). Quando a soma atinge a meta, o lacre é rompido e o conteúdo é liberado conforme a regra de liberação escolhida.
 
-**Regras de liberação (o vendedor escolhe uma).**
-- *Público*: todo mundo passa a ter acesso, inclusive quem não apoiou. Os apoiadores ganham acesso 24 h antes e um selo "Rompeu este lacre" no perfil. É o modelo de bem público.
-- *Apoiadores*: só quem apoiou recebe acesso. Depois da liberação, quem chegou atrasado pode comprar por um preço fixo definido pelo vendedor (modelo passa a Cópias).
-- *Apoiadores com piso*: só quem apoiou a partir de um valor mínimo (ex.: US$ 50) recebe acesso completo; valores menores recebem um resumo ou agradecimento.
+**Liberação: sempre pública.** Quando a meta bate, o conteúdo fica público para todos ao mesmo tempo, inclusive quem não apoiou, e o rompimento é postado nas redes. Quem apoiou ganha o selo "Rompeu este lacre" no perfil. Não existem variantes "só para apoiadores", acesso antecipado nem apoio âncora: o lacre coletivo é o modelo de bem público da plataforma; quem quer vender para poucos usa Cópias ou Exclusivo.
 
 **Regras de arrecadação.**
 - *Tudo ou nada* (padrão): se a meta não for atingida no prazo, todos os apoios voltam para as carteiras automaticamente.
@@ -99,7 +96,6 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 - **Linha do tempo do lacre** na página do item: barra de prazo (publicado → hoje → encerra, com o dia atual marcado), ritmo dos últimos dias e previsão de rompimento, e uma barra própria para cada marco (25, 50, 75, 90, 100 % e meta estendida) com a data em que foi batido e quantos apoiadores havia.
 - **Prévias por marco**: o vendedor escolhe, no envio, uma prévia extra para cada marco (ex.: índice dos documentos aos 25 %, uma página sem tarjas aos 50 %, um mapa e 3 min de áudio aos 75 %). A curadoria aprova junto com o item. Ao bater o marco, a prévia é liberada ao público e publicada nas redes com o anúncio do marco. É o que mostra ao público o que está por vir.
 - Marcos automáticos postados nas redes: 25 %, 50 %, 75 %, 90 %, meta batida, cada um com a prévia correspondente.
-- "Apoio âncora": o vendedor pode aceitar que um apoiador pague uma fatia grande em troca de acesso antecipado de 72 h.
 - Compartilhamento com link de referência anônimo (contador por link, sem identificar quem compartilhou).
 
 **Regras de custódia.** Apoios ficam em custódia até o resultado. Se a meta for batida, o valor vai para a custódia do item e é liberado ao vendedor 72 h após a liberação do conteúdo, descontados pedidos de reembolso procedentes.
@@ -242,7 +238,6 @@ Um item publicado para muitos compradores pode trazer, ao lado do preço normal 
 | Pague o que quiser | Valor livre acima de um mínimo | Cópias (itens de interesse público) |
 | Tudo ou nada / flexível | Regra de falha da arrecadação | Lacre coletivo, Pedido |
 | Compra em grupo | Preço fixo de exclusividade dividido entre N compradores que entram juntos; fecha ao completar N | Exclusivo |
-| Acesso antecipado | Apoiadores veem antes do público | Lacre coletivo |
 | Marca d'água | Visível ou invisível, por entitlement | Todos |
 | Somente leitura | Sem download; só visualizador seguro | Documento, imagem, vídeo |
 | Garantia de exclusividade | Retenção de 20 % do valor por 30 dias contra revenda | Exclusivo, Janela |

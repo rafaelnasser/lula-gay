@@ -732,6 +732,17 @@ legend { padding: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--fg-
 .variant-switch button { padding: 5px 9px; border-radius: 6px; border: 1px solid var(--border-2); color: var(--fg-2); font-size: var(--fs-xs); font-weight: 600; background: var(--surface); }
 .variant-switch button.active { background: var(--brass); color: var(--brass-fg); border-color: var(--brass); }
 [data-variant]:not(.active) { display: none; }
+[data-configs] [data-config]:not(.active) { display: none; }
+.tag-input { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 6px 8px; background: var(--bg-2); border: 1px solid var(--border-2); border-radius: var(--r-sm); min-height: 42px; }
+.tag-input:focus-within { border-color: var(--brass); box-shadow: var(--ring); }
+.tag-input .tag { cursor: pointer; padding: 4px 9px; font-size: var(--fs-sm); display: inline-flex; align-items: center; gap: 6px; }
+.tag-input .tag::after { content: "×"; color: var(--muted-2); font-weight: 700; }
+.tag-input .tag:hover { background: var(--danger-soft); color: var(--danger); }
+.tag-input .tag:hover::after { color: var(--danger); }
+.tag-input input { flex: 1 1 140px; min-width: 120px; background: transparent; border: 0; padding: 4px 6px; color: var(--fg); font-size: var(--fs-sm); }
+.tag-input input:focus { outline: none; }
+.ai-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--info); background: var(--info-soft); padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+.ai-badge svg { width: 11px; height: 11px; }
 [data-wizard] [data-step]:not(.active) { display: none; }
 
 /* --------------------------------------------------------------------------

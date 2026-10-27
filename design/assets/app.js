@@ -555,6 +555,37 @@
       if (t.hasAttribute('data-dismiss')) { e.preventDefault(); const tgt = t.closest(t.dataset.dismiss || '.alert'); if (tgt) tgt.remove(); return; }
     });
     document.addEventListener('click', (e) => { if (e.target.classList && e.target.classList.contains('modal-backdrop')) e.target.classList.remove('open'); });
+    // Tags editáveis: clique remove; Enter ou vírgula adiciona; Backspace vazio remove a última.
+    document.addEventListener('click', (e) => {
+      const tag = e.target.closest('.tag-input .tag');
+      if (tag) { tag.remove(); return; }
+    });
+    document.addEventListener('keydown', (e) => {
+      const inp = e.target;
+      if (!inp.matches || !inp.matches('[data-tag-input]')) return;
+      const box = inp.closest('.tag-input');
+      if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        const v = inp.value.trim().replace(/,$/, '').toLowerCase();
+        if (!v) return;
+        const exists = Array.from(box.querySelectorAll('.tag')).some(t => t.textContent.trim() === v);
+        if (!exists) { const t = document.createElement('span'); t.className = 'tag'; t.textContent = v; t.title = 'Clique para remover'; box.insertBefore(t, inp); }
+        inp.value = '';
+      } else if (e.key === 'Backspace' && !inp.value) {
+        const last = box.querySelectorAll('.tag'); if (last.length) last[last.length - 1].remove();
+      }
+    });
+    // Painéis de configuração que seguem a opção escolhida: <input data-switch="x"> mostra [data-config="x"] dentro de [data-configs].
+    function syncConfigs() {
+      document.querySelectorAll('[data-configs]').forEach(scope => {
+        const sel = document.querySelector('[data-switch]:checked');
+        const key = sel ? sel.dataset.switch : scope.dataset.configs;
+        scope.querySelectorAll('[data-config]').forEach(el => el.classList.toggle('active', el.dataset.config === key));
+        scope.dispatchEvent(new CustomEvent('lacre:config', { detail: { key } }));
+      });
+    }
+    document.addEventListener('change', (e) => { if (e.target.matches && e.target.matches('[data-switch]')) syncConfigs(); });
+    syncConfigs();
     document.addEventListener('input', (e) => {
       if (!e.target.matches('[data-country-search]')) return;
       const q = e.target.value.trim().toLowerCase();

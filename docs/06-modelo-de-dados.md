@@ -51,7 +51,7 @@ erDiagram
 | roles | text[] | `buyer`, `seller` (toda conta pode ser ambos) |
 | status | enum | `active`, `restricted`, `banned`, `deleted` |
 | reputation | jsonb | `{score, approved, rejected, disputes_lost, since}` |
-| prefs | jsonb | tema, notificações, ocultar handle em páginas públicas |
+| prefs | jsonb | tema, notificações, idioma, país padrão |
 | last_seen_bucket | date | granularidade de dia; nunca timestamp exato |
 
 Sem e-mail, telefone, nome, IP.
@@ -66,17 +66,17 @@ Sem e-mail, telefone, nome, IP.
 | countries | text[] | códigos ISO 3166-1 alpha-2 ou `GLOBAL`; filtro de primeira classe |
 | languages | text[] | idiomas do material (ISO 639-1) |
 | tags | text[] | |
-| content_type | enum | `document`, `dataset`, `image`, `video`, `audio`, `text`, `code`, `bundle` |
+| content_types | enum[] | um ou mais de `document`, `dataset`, `image`, `video`, `audio`, `text`, `code` |
 | risk_level | enum | `low`, `medium`, `high` (herda da categoria, curador pode subir) |
 | authenticity | enum null | `verified`, `partial`, `plausible`, `unverified` |
 | model | enum | `copies`, `exclusive`, `crowdfund`, `request_fulfillment`, `auction`, `tiers`, `subscription`, `window`, `license`, `consult` |
 | status | enum | ver máquina de estados |
-| show_seller_handle | bool | vendedor pode ocultar |
 | deadline_at | timestamptz | |
 | published_at, closed_at | timestamptz null | |
 | version | int | incrementa a cada reenvio |
 | declarations | jsonb | 6 declarações aceitas + versão do texto + timestamp |
 | curated_title, curated_summary | text null | reescritos pela curadoria, se houver |
+| ai_suggested | jsonb | título, resumo, descrição e tags sugeridos pela leitura dos arquivos (OCR/transcrição, na própria infraestrutura) e se o vendedor os manteve |
 | stats | jsonb | views, favorites, shares (contadores agregados) |
 
 ### sale_config (1:1 com listing, JSONB validado por modelo)
@@ -86,7 +86,7 @@ Sem e-mail, telefone, nome, IP.
 // exclusive
 { "price": 2500000, "accept_offers": true, "min_offer": 1500000, "exclusivity_months": 24, "guarantee_holdback_pct": 20 }
 // crowdfund
-{ "goal": 8000000, "raised": 5412000, "backers": 1187, "buyout_price": 25000000, "release": "public" | "backers" | "backers_floor", "floor": 5000, "all_or_nothing": true, "flexible_min_pct": null, "early_access_hours": 24, "stretch": [{"goal": 12000000, "asset_ids": ["..."], "label": "Áudios das entrevistas"}] }
+{ "goal": 8000000, "raised": 5412000, "backers": 1187, "buyout_price": 25000000, "all_or_nothing": true, "flexible_min_pct": null, "milestone_previews": {"25": "preview_id", "50": "preview_id", "75": "preview_id", "90": "preview_id"}, "stretch": [{"goal": 12000000, "asset_ids": ["..."], "label": "Áudios das entrevistas"}] }
 // auction
 { "kind": "open" | "sealed_first" | "sealed_second" | "dutch", "start_price": 1500000, "reserve": 2000000, "increment": 50000, "anti_snipe_min": 10, "dutch": {"step": 100000, "every_min": 60, "floor": 800000} }
 // tiers
@@ -125,7 +125,7 @@ Sem e-mail, telefone, nome, IP.
 `id, listing_id, buyer_id, kind (copy|exclusive|buyout|tier|license|window|back_issue), amount, fee, status (created|paid|delivered|settled|disputed|refunded|partially_refunded), tier_id null, license_kind null, dispute_deadline_at, settled_at`
 
 ### pledge (lacre coletivo e pedidos)
-`id, listing_id null, request_id null, backer_id, amount, status (held|released|refunded), anchor bool, created_at`
+`id, listing_id null, request_id null, backer_id, amount, status (held|released|refunded), created_at`
 
 ### bid / offer
 `id, listing_id, bidder_id, amount, kind (open|sealed|dutch_accept|offer), status (active|outbid|won|lost|withdrawn|accepted|rejected|countered), reserved_entry_id → ledger_entry`

@@ -21,7 +21,7 @@ A promessa pública fica assim: **"Anonimato total entre as partes e para o púb
 | Quem poderia identificar | O que veria | Como mitigamos |
 |---|---|---|
 | Outro usuário | Pseudônimo, reputação, itens, mensagens | Mensagens filtradas (bloqueio de contatos externos), sem perfis com texto livre no MVP |
-| Público (redes) | Prévia, prova, pseudônimo do vendedor (opcional ocultar) | Vendedor escolhe exibir ou não o pseudônimo na página pública |
+| Público (redes) | Prévia, prova, pseudônimo do vendedor | O pseudônimo é sempre exibido (é a reputação); nada além dele existe |
 | Equipe de curadoria | Conteúdo completo, pseudônimo, histórico | Acesso registrado em log imutável, 2FA, regra de dois olhos, sem download do conteúdo bruto |
 | Operador da infraestrutura | Banco de dados, arquivos cifrados | Arquivos cifrados com chave por item; chaves em KMS separado; dados do marketplace sem PII |
 | Análise de blockchain | Endereço de depósito ↔ carteira de origem do usuário | Endereço novo por depósito, nunca reutilizado; Lightning para valores baixos; endereço de saque apagado após o envio; orientação para não reutilizar carteiras |
@@ -142,6 +142,5 @@ Toda tela que toca em identidade deve:
 - [ ] Nunca pedir nome, e-mail ou telefone.
 - [ ] Exibir pseudônimos sempre com o mesmo componente (`.handle`), com avatar gerado deterministicamente (identicon).
 - [ ] Avisar antes de qualquer ação que crie vínculo externo (reutilizar endereço de cripto, canal de notificação externo).
-- [ ] Oferecer "ocultar meu pseudônimo nesta página pública" ao vendedor.
 - [ ] Mostrar o relatório de metadados removidos ao vendedor após o upload.
 - [ ] Mostrar no checkout o que a plataforma registra sobre a compra (item, valor, data) e o que não registra.

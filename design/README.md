@@ -51,6 +51,8 @@ design/
 | Status de item | `<span class="badge st-ativo">Ativo</span>` com `st-rascunho`, `st-triagem`, `st-analise`, `st-ajustes`, `st-aprovado`, `st-agendado`, `st-ativo`, `st-financiado`, `st-vendido`, `st-encerrado`, `st-rejeitado`, `st-suspenso`, `st-arquivado`, `st-escalado`, `st-liberado`, `st-falhou` |
 | Autenticidade | `<span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span>`, `auth-parcial`, `auth-plausivel`, `auth-nao` |
 | Risco | `.badge.risk-baixo` / `risk-medio` / `risk-alto` |
+| Tags editáveis | `.tag-input` > `.tag` (clique remove) + `<input data-tag-input>` (Enter adiciona) |
+| Painéis por opção | `<input type="radio" data-switch="x">` mostra `[data-config="x"]` dentro de `[data-configs="padrão"]` |
 | Modelo de venda | `<span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>` · ícones: copias→`copy`, exclusivo→`crown`, coletivo→`hand-coins`, pedido→`file-search`, leilao→`gavel`, camadas→`layers`, assinatura→`repeat`, janela→`timer`, licenca→`scale` |
 | Pseudônimo | `<span class="handle" data-handle="coruja-7f3a" data-rep="4.8 · 12 itens"></span>` (o JS gera o identicon) |
 | Prévia selada | `<div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>` · tipos: `documento`, `dados`, `imagem`, `video`, `audio`, `mapa` |
