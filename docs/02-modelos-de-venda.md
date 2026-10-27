@@ -44,7 +44,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Regras.**
 - Entrega instantânea após o pagamento.
-- Janela de disputa de 72 h: o comprador pode alegar que o conteúdo não corresponde à prévia. Ver `04`.
+- Janela de disputa de 72 h: o comprador pode alegar que o conteúdo não corresponde à prévia. Disputa aberta adia a finalização do item até a decisão. Ver `04`.
 - O vendedor pode encerrar a venda a qualquer momento; quem já comprou mantém o acesso.
 
 **Interface.** Botão "Comprar por US$ X", contador de unidades (se limitado), faixa de preço escalonado, selo de curadoria, nota de autenticidade.

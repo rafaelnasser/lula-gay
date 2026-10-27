@@ -81,7 +81,7 @@ Técnicas: comparação com fontes oficiais, análise de metadados antes da remo
 
 | Decisão | Efeito | Comunicação ao vendedor |
 |---|---|---|
-| Aprovar | Item vai para agendamento de publicação | Notificação com data prevista |
+| Aprovar | Item publicado na hora, com prova pública e carteira do item criada; post de lançamento vai à fila de publicação | Notificação "Aprovado e publicado" |
 | Aprovar com ajustes | Curadoria altera título, descrição ou prévia; vendedor confirma em 72 h | Diff do que mudou |
 | Solicitar ajustes | Volta ao vendedor com lista de pendências | Lista com códigos |
 | Rejeitar | Encerra. Reenvio só como novo item | Código de motivo + texto |
