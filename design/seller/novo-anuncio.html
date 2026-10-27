@@ -99,11 +99,23 @@
               <label for="ped">Vincular a um pedido com recompensa (opcional)</label>
               <select id="ped" class="select">
                 <option selected>Nenhum · anúncio avulso</option>
-                <option>ped-2c8d1 · Tempo de espera em UPAs de SP (2023–2025) · R$ 3.200 · até 30/11</option>
-                <option>ped-9h2d5 · Editais de fomento cultural do RS em 2025 · R$ 2.100 · até 10/12</option>
-                <option>ped-7f1a3 · Catálogo da 1ª Bienal de São Paulo (1951) · R$ 800 · até 15/12</option>
+                <option>ped-2c8d1 · Tempo de espera em UPAs de SP (2023–2025) · US$ 3.200 · até 30/11</option>
+                <option>ped-9h2d5 · Editais de fomento cultural do RS em 2025 · US$ 2.100 · até 10/12</option>
+                <option>ped-7f1a3 · Catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 · até 15/12</option>
               </select>
               <span class="hint">Ao vincular, o modelo passa a ser Pedido com recompensa e os critérios de aceite do pedido entram no checklist da curadoria.</span>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="pais">País(es) a que a informação se refere</label>
+              <div class="row"><button class="chip active" type="button" data-toast="Brasil removido da lista de países"><span class="mono">BR</span> Brasil<i data-icon="x"></i></button><select id="pais" class="select" style="max-width:260px"><option selected>Adicionar outro país…</option><option>Global · não se refere a um país</option><option>AR · Argentina</option><option>CL · Chile</option><option>PT · Portugal</option><option>US · Estados Unidos</option><option>MX · México</option><option>GB · Reino Unido</option><option>DE · Alemanha</option><option>IN · Índia</option><option>BD · Bangladesh</option></select></div>
+              <span class="hint">Vira a etiqueta do catálogo (BR) e orienta a curadoria sobre a legislação aplicável. Use Global quando a informação não se refere a um país.</span>
+            </div>
+            <div class="field">
+              <label for="idioma">Idioma do material</label>
+              <select id="idioma" class="select"><option selected>Português</option><option>Espanhol</option><option>Inglês</option><option>Alemão</option><option>Bengali</option><option>Outro</option></select>
+              <span class="hint">Idioma predominante dos arquivos. A curadoria aloca quem lê o idioma; a página pública mostra “Brasil · português”.</span>
             </div>
           </div>
           <div class="row">
@@ -211,7 +223,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           <div class="choice-cards">
             <label class="choice"><input type="radio" name="modelo"><span class="choice-title"><i data-icon="copy"></i>Cópias</span><span class="choice-desc">Preço fixo, vários compradores, com ou sem limite de unidades.</span><span class="choice-meta">Comissão 10 % · entrega imediata</span></label>
             <label class="choice"><input type="radio" name="modelo"><span class="choice-title"><i data-icon="crown"></i>Exclusivo</span><span class="choice-desc">Um único comprador leva; o item sai do catálogo.</span><span class="choice-meta">Comissão 10 % · 24 meses de exclusividade</span></label>
-            <label class="choice"><input type="radio" name="modelo" checked><span class="choice-title"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="choice-desc">Meta em R$ e prazo. Batida a meta, o conteúdo é liberado.</span><span class="choice-meta">Comissão 10 % só se bater · nada se falhar</span></label>
+            <label class="choice"><input type="radio" name="modelo" checked><span class="choice-title"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="choice-desc">Meta em US$ e prazo. Batida a meta, o conteúdo é liberado.</span><span class="choice-meta">Comissão 10 % só se bater · nada se falhar</span></label>
             <label class="choice"><input type="radio" name="modelo"><span class="choice-title"><i data-icon="file-search"></i>Pedido</span><span class="choice-desc">Atende um pedido com recompensa já publicado.</span><span class="choice-meta">Comissão 10 % · vincule no passo 1</span></label>
             <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="gavel"></i>Leilão<span class="badge">em breve</span></span><span class="choice-desc">Aberto, lacrado (segundo preço) ou holandês.</span><span class="choice-meta">V2 · comissão 10 %</span></label>
             <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="layers"></i>Camadas<span class="badge">em breve</span></span><span class="choice-desc">Níveis com preços crescentes; o comprador prova antes.</span><span class="choice-meta">V2 · comissão 10 %</span></label>
@@ -226,7 +238,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                 <div class="tab-panel active" data-panel="coletivo">
                   <div class="stack">
                     <div class="form-grid">
-                      <div class="field"><label for="meta">Meta</label><div class="input-group"><span class="affix">R$</span><input id="meta" class="input num" value="12.000,00" data-sim></div><span class="hint">Mínimo R$ 1.000. Apoios a partir de R$ 10. Preço convertido em USDT a cada apoio.</span></div>
+                      <div class="field"><label for="meta">Meta</label><div class="input-group"><span class="affix">US$</span><input id="meta" class="input num" value="12.000,00" data-sim></div><span class="hint">Mínimo US$ 1.000. Apoios a partir de US$ 10.</span></div>
                       <div class="field"><label for="prazo">Prazo</label><select id="prazo" class="select"><option>7 dias · até 03/11/2026</option><option>14 dias · até 10/11/2026</option><option selected>30 dias · até 26/11/2026</option><option>60 dias · até 26/12/2026</option><option>90 dias · até 25/01/2027</option></select><span class="hint">Entre 24 h e 90 dias. Marcos de 25/50/75/90 % são postados automaticamente.</span></div>
                     </div>
                     <fieldset>
@@ -234,21 +246,28 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                       <div class="stack-sm">
                         <label class="radio"><input type="radio" name="lib" checked><span>Público<span class="desc">Quando bater, fica público para todos, inclusive quem não apoiou. Apoiadores veem 24 h antes e ganham o selo “Rompeu este lacre”.</span></span></label>
                         <label class="radio"><input type="radio" name="lib"><span>Apoiadores<span class="desc">Só quem apoiou recebe. Depois da liberação, quem chegou atrasado compra por um preço fixo (o item passa a Cópias).</span></span></label>
-                        <label class="radio"><input type="radio" name="lib"><span>Apoiadores com piso<span class="desc">Só apoios a partir de um valor mínimo (ex.: R$ 50) recebem o acesso completo; valores menores recebem um resumo.</span></span></label>
+                        <label class="radio"><input type="radio" name="lib"><span>Apoiadores com piso<span class="desc">Só apoios a partir de um valor mínimo (ex.: US$ 50) recebem o acesso completo; valores menores recebem um resumo.</span></span></label>
                       </div>
                     </fieldset>
                     <fieldset>
                       <legend>Regra de arrecadação</legend>
                       <div class="form-grid">
                         <label class="radio"><input type="radio" name="arr" checked><span>Tudo ou nada<span class="desc">Não bateu a meta no prazo: todos os apoios voltam às carteiras. Nada é cobrado.</span></span></label>
-                        <label class="radio"><input type="radio" name="arr"><span>Flexível<span class="desc">Libera com o que arrecadou se passar de um piso (70 % da meta = R$ 8.400). Precisa ser declarado antes de publicar.</span></span></label>
+                        <label class="radio"><input type="radio" name="arr"><span>Flexível<span class="desc">Libera com o que arrecadou se passar de um piso (70 % da meta = US$ 8.400). Precisa ser declarado antes de publicar.</span></span></label>
                       </div>
                     </fieldset>
                     <fieldset>
                       <legend>Metas estendidas</legend>
                       <div class="stack-sm">
-                        <div class="stretch-row"><div class="input-group"><span class="affix">R$</span><input class="input num" value="18.000,00" aria-label="Valor da meta estendida"></div><input class="input" value="Áudios brutos sem edição (40 WAV, 9,2 GB) · arquivo a adicionar no passo 2" aria-label="O que a meta estendida destrava"><button class="icon-btn" data-toast="Meta estendida removida" aria-label="Remover meta estendida"><i data-icon="trash"></i></button></div>
+                        <div class="stretch-row"><div class="input-group"><span class="affix">US$</span><input class="input num" value="18.000,00" aria-label="Valor da meta estendida"></div><input class="input" value="Áudios brutos sem edição (40 WAV, 9,2 GB) · arquivo a adicionar no passo 2" aria-label="O que a meta estendida destrava"><button class="icon-btn" data-toast="Meta estendida removida" aria-label="Remover meta estendida"><i data-icon="trash"></i></button></div>
                         <div class="row"><button class="btn btn-sm" data-toast="Nova linha de meta estendida adicionada"><i data-icon="plus"></i>Adicionar meta estendida</button><span class="xs muted">Cada nível destrava um arquivo adicional, analisado pela curadoria como parte do item.</span></div>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend>Compra com exclusividade (opcional)</legend>
+                      <div class="stack-sm">
+                        <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Enquanto a meta não for batida, um único comprador pode levar o item só para si pagando o valor abaixo.</span></span></label>
+                        <div class="field"><label for="excl">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl" class="input num" value="40.000,00" data-sim></div><span class="hint">Quem pagar leva o item só para si e o anúncio encerra na hora. Em lacre coletivo, os apoios são devolvidos; em cópias, quem já comprou mantém o acesso. Sugestão: pelo menos 5× a meta ou 20× o preço.</span></div>
                       </div>
                     </fieldset>
                     <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Acesso antecipado<span class="desc">Apoiadores veem 24 h antes do público.</span></span></label>
@@ -258,14 +277,21 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                 <div class="tab-panel" data-panel="copias">
                   <div class="stack">
                     <div class="form-grid">
-                      <div class="field"><label for="preco">Preço por cópia</label><div class="input-group"><span class="affix">R$</span><input id="preco" class="input num" value="60,00" data-sim></div><span class="hint">Mediana da categoria Jornalismo: R$ 120. Você também pode fixar o preço em USDT.</span></div>
+                      <div class="field"><label for="preco">Preço por cópia</label><div class="input-group"><span class="affix">US$</span><input id="preco" class="input num" value="60,00" data-sim></div><span class="hint">Mediana da categoria Jornalismo: US$ 120.</span></div>
                       <div class="field"><label for="lim">Limite de unidades</label><div class="input-group"><input id="lim" class="input num" value="150" data-sim><span class="affix">cópias</span></div><span class="hint">Vazio = ilimitado. O catálogo mostra “x de 150 restantes”.</span></div>
                     </div>
                     <fieldset>
                       <legend>Preço escalonado</legend>
                       <div class="stack-sm">
-                        <div class="stretch-row"><div class="input-group"><span class="affix">Primeiras</span><input class="input num" value="50" aria-label="Quantidade da primeira faixa"></div><div class="input-group"><span class="affix">R$</span><input class="input num" value="45,00" aria-label="Preço da primeira faixa"></div><span class="xs muted">depois, R$ 60,00</span></div>
+                        <div class="stretch-row"><div class="input-group"><span class="affix">Primeiras</span><input class="input num" value="50" aria-label="Quantidade da primeira faixa"></div><div class="input-group"><span class="affix">US$</span><input class="input num" value="45,00" aria-label="Preço da primeira faixa"></div><span class="xs muted">depois, US$ 60,00</span></div>
                         <button class="btn btn-sm" data-toast="Nova faixa de preço adicionada"><i data-icon="plus"></i>Adicionar faixa</button>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend>Compra com exclusividade (opcional)</legend>
+                      <div class="stack-sm">
+                        <label class="switch"><input type="checkbox"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Encerra as vendas de cópias; quem já comprou mantém o acesso.</span></span></label>
+                        <div class="field"><label for="excl2">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl2" class="input num" value="1.200,00"></div><span class="hint">Quem pagar leva o item só para si e o anúncio encerra na hora. Em lacre coletivo, os apoios são devolvidos; em cópias, quem já comprou mantém o acesso. Sugestão: pelo menos 5× a meta ou 20× o preço.</span></div>
                       </div>
                     </fieldset>
                     <label class="switch"><input type="checkbox"><span class="track"></span><span>Renovação automática<span class="desc">Reabre o prazo de 90 dias ao vencer, enquanto houver unidades.</span></span></label>
@@ -286,8 +312,11 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <div class="card-body stack-sm">
                 <h3>Você recebe 90 %</h3>
                 <span class="xs muted">Comissão única de 10 %, em todos os modelos</span>
-                <div><div class="xs muted" id="s-meta-label">Meta de R$ 12.000,00 batida</div><div class="big ok" id="s-liq">R$ 10.800,00</div></div>
+                <div><div class="xs muted" id="s-meta-label">Meta de US$ 12.000,00 batida</div><div class="big ok" id="s-liq">US$ 10.800,00</div></div>
                 <p class="xs muted">Cai na sua carteira em cripto 72 h após a liberação do conteúdo. Se a meta não bater, nada é cobrado e os apoios voltam aos apoiadores.</p>
+                <hr style="margin:4px 0">
+                <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 36.000,00</b></p>
+                <p class="xs muted">Comissão de 10 % sobre <span id="s-excl-base">US$ 40.000,00</span>. O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</p>
               </div>
             </aside>
           </div>
@@ -329,6 +358,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
             <dl class="kv">
               <dt>Tipo</dt><dd>Áudio com transcrição · <a class="link" href="#" data-step-go="1">editar</a></dd>
               <dt>Categoria</dt><dd>Jornalismo e investigação · <span class="badge risk-alto">risco alto</span> · dois curadores</dd>
+              <dt>País · idioma</dt><dd><span class="tag">BR</span> Brasil · português</dd>
               <dt>Pedido vinculado</dt><dd>Nenhum · anúncio avulso</dd>
               <dt>Arquivos</dt><dd>3 arquivos · 2,2 GB · 1 upload em andamento (64 %) · <a class="link" href="#" data-step-go="2">editar</a></dd>
               <dt>Triagem</dt><dd>12 nomes próprios (a avaliar) · 0 CPFs · duplicidade 0 · antivírus ok</dd>
@@ -336,10 +366,11 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <dt>Resumo</dt><dd>Quarenta entrevistas em áudio (média de 38 min) com ex-cobradores de ônibus da capital paulista, gravadas entre 2024 e 2026…</dd>
               <dt>Prévias liberadas</dt><dd>3 de 4 · trecho de 30 s, página 1 tarjada, índice de 10 linhas</dd>
               <dt>Tags</dt><dd><span class="tag">entrevistas</span> <span class="tag">transporte</span> <span class="tag">são paulo</span> <span class="tag">trabalho</span> <span class="tag">história oral</span></dd>
-              <dt>Modelo</dt><dd><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span> · meta R$ 12.000 · 30 dias (até 26/11/2026) · <a class="link" href="#" data-step-go="4">editar</a></dd>
-              <dt>Regras</dt><dd>Liberação pública · tudo ou nada · meta estendida R$ 18.000 (áudios brutos) · acesso antecipado 24 h</dd>
+              <dt>Modelo</dt><dd><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span> · meta US$ 12.000 · 30 dias (até 26/11/2026) · <a class="link" href="#" data-step-go="4">editar</a></dd>
+              <dt>Regras</dt><dd>Liberação pública · tudo ou nada · meta estendida US$ 18.000 (áudios brutos) · acesso antecipado 24 h</dd>
+              <dt>Exclusividade</dt><dd>US$ 40.000 · encerra o anúncio e devolve os apoios · você recebe US$ 36.000 · declaração de exclusividade de 24 meses</dd>
               <dt>Modificadores</dt><dd>Marca d'água por entitlement · download permitido</dd>
-              <dt>Você recebe</dt><dd><b>R$ 10.800,00</b> (≈ 2.007,4 USDT) se a meta for batida · comissão 10 % · em cripto, na sua carteira do Lacre, 72 h após a entrega</dd>
+              <dt>Você recebe</dt><dd><b>US$ 10.800,00</b> se a meta for batida · comissão 10 % · em cripto, na sua carteira do Lacre, 72 h após a entrega</dd>
               <dt>Declarações</dt><dd>6 de 6 aceitas · v1.3 · <a class="link" href="#" data-step-go="5">rever</a></dd>
               <dt>Pseudônimo</dt><dd>Exibido como <span class="handle" data-handle="coruja-7f3a"></span></dd>
             </dl>
@@ -385,7 +416,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
 
     <script>
       (function () {
-        var brl = function (n) { return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
+        var usd = function (n) { return 'US$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
         var num = function (id) { var el = document.getElementById(id); return parseFloat((el.value || '0').replace(/\./g, '').replace(',', '.')) || 0; };
         var set = function (id, txt) { document.getElementById(id).textContent = txt; };
         document.querySelectorAll('[data-count]').forEach(function (el) {
@@ -394,9 +425,10 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           el.addEventListener('input', upd); upd();
         });
         function sim() {
-          var meta = num('meta');
-          var label = document.getElementById('s-meta-label'); if (label) label.textContent = 'Meta de ' + brl(meta) + ' batida';
-          set('s-liq', brl(meta * 0.90));
+          var meta = num('meta'), excl = num('excl');
+          var label = document.getElementById('s-meta-label'); if (label) label.textContent = 'Meta de ' + usd(meta) + ' batida';
+          set('s-liq', usd(meta * 0.90));
+          set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl));
         }
         document.querySelectorAll('[data-sim]').forEach(function (el) { el.addEventListener('input', sim); });
         sim();
