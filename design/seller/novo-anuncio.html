@@ -254,7 +254,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                         <label class="radio"><input type="radio" name="janela" value="48" checked><span>Janela de 48 h<span class="desc">Onda 2 em 48 h, onda 3 em 96 h, público em 7 dias.</span></span></label>
                         <label class="radio"><input type="radio" name="janela" value="72"><span>Janela de 72 h<span class="desc">Onda 2 em 72 h, onda 3 em 144 h, público em 9 dias.</span></span></label>
                       </div>
-                      <div class="panel mt-1"><div class="label">Calendário depois do rompimento</div><p class="small" id="ondas-cal"><b>Onda 1</b> na hora · <b>Onda 2</b> +48 h · <b>Onda 3</b> +96 h · <b>Público e finalização</b> +168 h (7 dias): 72 h após a última onda, quando separamos 10 % e entregamos a carteira a você.</p></div>
+                      <div class="panel mt-1"><div class="label">Calendário depois do rompimento</div><p class="small" id="ondas-cal"><b>Onda 1</b> na hora · <b>Onda 2</b> +48 h · <b>Onda 3</b> +96 h · <b>Público e finalização</b> +168 h (7 dias), quando você recebe.</p></div>
                       <p class="xs muted mt-1">A fila é pública na página do item (posição, pseudônimo, total e onda). Quem apoia mais sobe de onda. Apoiadores ganham o selo “Rompeu este lacre”.</p>
                     </fieldset>
                     <fieldset>
@@ -350,10 +350,10 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <div class="card-body stack-sm">
                 <h3>Você recebe 90 %</h3>
                 <div><div class="xs muted" id="s-meta-label">Meta de US$ 12.000,00 batida</div><div class="big ok" id="s-liq">US$ 10.800,00</div></div>
-                <p class="xs muted" id="s-note">Os apoios entram direto na carteira deste item. Na finalização (72 h após a última onda, quando o conteúdo fica público), separamos 10 % e entregamos a carteira a você. Se a meta não bater, você fica com o valor do último marco batido. Se a meta não bater, nada é cobrado e os apoios voltam aos endereços de origem.</p>
+                <p class="xs muted" id="s-note">Você recebe quando o conteúdo fica público, 7 dias após o rompimento. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.</p>
                 <hr style="margin:4px 0">
                 <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 36.000,00</b></p>
-                <p class="xs muted">Comissão de 10 % sobre <span id="s-excl-base">US$ 40.000,00</span>. O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</p>
+                <p class="xs muted">90 % de <span id="s-excl-base">US$ 40.000,00</span> para você. O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</p>
               </div>
             </aside>
           </div>
@@ -453,7 +453,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                 <div class="card-body stack">
                   <div class="how-step"><span class="n">1</span><div><b>Triagem automática</b> · minutos<br><span class="small muted">Antivírus, remoção de metadados, varredura de dados pessoais, duplicidade e hash do pacote selado.</span></div></div>
                   <div class="how-step"><span class="n">2</span><div><b>Análise humana</b> · até 48 h<br><span class="small muted">Checklist de 7 blocos e nível de autenticidade. Resultado: aprovado, aprovado com ajustes, ajustes solicitados ou rejeitado, sempre com código e texto.</span></div></div>
-                  <div class="how-step"><span class="n">3</span><div><b>Publicação e recebimento</b><br><span class="small muted">Página de prova com hash, carimbo de tempo e o endereço da carteira do item; post no X, Telegram e Bluesky; marcos automáticos. Na finalização, separamos 10 % e entregamos a carteira do item a você.</span></div></div>
+                  <div class="how-step"><span class="n">3</span><div><b>Publicação e recebimento</b><br><span class="small muted">Página de prova com hash, carimbo de tempo e o endereço da carteira do item; post no X, Telegram e Bluesky; marcos automáticos. Você recebe 90 % na finalização, pela carteira do item.</span></div></div>
                 </div>
               </div>
             </div>
@@ -503,21 +503,21 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           if (m === 'coletivo') {
             var meta = num('meta'), excl = num('excl');
             label.textContent = 'Meta de ' + usd(meta) + ' batida'; set('s-liq', usd(meta * 0.90));
-            note.textContent = 'Os apoios entram direto na carteira deste item. Na finalização (72 h após a última onda, quando o conteúdo fica público), separamos 10 % e entregamos a carteira a você. Se a meta não bater, você fica com o valor do último marco batido. Se a meta não bater, nada é cobrado e os apoios voltam aos endereços de origem.';
+            note.textContent = 'Você recebe quando o conteúdo fica público, 7 dias após o rompimento. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.';
             set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl)); exclRow.hidden = false; exclNote.hidden = false;
           } else if (m === 'copias') {
             var preco = num('preco'), lim = num('lim') || 0, excl2 = num('excl2');
             label.textContent = usd(preco) + ' × ' + (lim || '∞') + ' cópias'; set('s-liq', lim ? usd(preco * lim * 0.90) : usd(preco * 0.90) + ' por cópia');
-            note.textContent = 'Cada venda entra na carteira deste item. Quando você encerrar as vendas, separamos 10 % e entregamos a carteira a você.';
+            note.textContent = 'Você recebe quando encerrar as vendas.';
             set('s-excl', usd(excl2 * 0.90)); set('s-excl-base', usd(excl2)); exclRow.hidden = false; exclNote.hidden = false;
           } else if (m === 'exclusivo') {
             var pe = num('preco-ex');
             label.textContent = 'Venda exclusiva por ' + usd(pe); set('s-liq', usd(pe * 0.90));
-            note.textContent = 'O pagamento entra na carteira deste item; 72 h após a entrega, separamos 10 % e entregamos a carteira a você.';
+            note.textContent = 'Você recebe 72 h após a entrega, se não houver disputa.';
             exclRow.hidden = true; exclNote.hidden = true;
           } else {
             label.textContent = 'Recompensa do pedido · US$ 2.100,00 hoje (7 interessados × US$ 300)'; set('s-liq', usd(2100 * 0.90));
-            note.textContent = 'Novos interessados podem se juntar até você enviar o atendimento; aí o pedido trava. Validado pela curadoria, separamos 10 % e entregamos a carteira do pedido a você.';
+            note.textContent = 'Novos interessados podem se juntar até você enviar o atendimento; aí o pedido trava. Você recebe quando a curadoria validar.';
             exclRow.hidden = true; exclNote.hidden = true;
           }
         }
@@ -529,8 +529,8 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
     <script>
       (function () {
         var cal = document.getElementById('ondas-cal'); if (!cal) return;
-        var t = { '48': '<b>Onda 1</b> na hora · <b>Onda 2</b> +48 h · <b>Onda 3</b> +96 h · <b>Público e finalização</b> +168 h (7 dias): 72 h após a última onda, quando separamos 10 % e entregamos a carteira a você.',
-                  '72': '<b>Onda 1</b> na hora · <b>Onda 2</b> +72 h · <b>Onda 3</b> +144 h · <b>Público e finalização</b> +216 h (9 dias): 72 h após a última onda, quando separamos 10 % e entregamos a carteira a você.' };
+        var t = { '48': '<b>Onda 1</b> na hora · <b>Onda 2</b> +48 h · <b>Onda 3</b> +96 h · <b>Público e finalização</b> +168 h (7 dias), quando você recebe.',
+                  '72': '<b>Onda 1</b> na hora · <b>Onda 2</b> +72 h · <b>Onda 3</b> +144 h · <b>Público e finalização</b> +216 h (9 dias), quando você recebe.' };
         document.querySelectorAll('input[name="janela"]').forEach(function (r) { r.addEventListener('change', function () { cal.innerHTML = t[r.value]; }); });
       })();
     </script>
