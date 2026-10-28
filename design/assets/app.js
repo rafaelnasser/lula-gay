@@ -639,7 +639,7 @@
     bind();
     document.title = document.title || BRAND;
     // abre a aba indicada no hash (ex.: anuncio.html#curadoria)
-    const openHashTab = () => { const h = (location.hash || '').replace('#', ''); if (!h) return; const tabBtn = document.querySelector('.tabs [data-tab="' + h + '"]'); if (tabBtn) tabBtn.click(); };
+    const openHashTab = () => { const h = (location.hash || '').replace('#', ''); if (!h) return; const tabBtn = document.querySelector('.tabs [data-tab="' + h + '"]'); if (tabBtn) tabBtn.click(); const md = document.getElementById(h); if (md && md.classList.contains('modal-backdrop')) md.classList.add('open'); };
     openHashTab(); window.addEventListener('hashchange', openHashTab);
     document.dispatchEvent(new CustomEvent('lacre:ready', { detail: { locale } }));
   }

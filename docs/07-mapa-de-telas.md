@@ -41,7 +41,7 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 ## PÚBLICO
 
 ### `public/home.html` · Página inicial
-- **Hero**: título ("Informação com lacre. Anonimato dos dois lados."), subtítulo com as 3 garantias, botões "Explorar o catálogo" e "Vender informação"; ao lado, um card de item em destaque (lacre coletivo em andamento com barra de progresso ao vivo).
+- **Hero**: título ("Informação com lacre. Anonimato dos dois lados."), subtítulo com as 3 garantias, botões "Explorar o catálogo", "Vender informação" e "Pedir uma informação" (abre o formulário de novo pedido); ao lado, um card de item em destaque (lacre coletivo em andamento com barra de progresso ao vivo).
 - **Faixa de confiança**: números (itens curados, lacres rompidos, US$ liberados ao público, tempo mediano de curadoria) e os 4 nomes de modelos.
 - **Como funciona** em 3 passos para quem compra e 3 para quem vende.
 - **Lacres coletivos em andamento** (3 cards com progresso).
@@ -87,7 +87,7 @@ Rodapé do painel em todas: "Compra anônima. Registramos item, valor e data. Na
 
 ### `public/pedido.html` · Página do pedido
 - Título, autor (pseudônimo), categoria, descrição, critérios de aceite (lista numerada), formato esperado, prazo.
-- Painel lateral: valor por interessado, nº de interessados, recompensa total, botões "Juntar-se por US$ V" e "Cobrir o valor (mín. V + 10 %)", regra em uma linha ("Todos pagam o mesmo valor e recebem o mesmo acesso. Se ninguém atender até o prazo, cada um recebe o seu de volta."), carteira do pedido (endereço público, pagamentos), botão "Tenho essa informação" (leva ao assistente de envio com o pedido vinculado).
+- Painel lateral: valor por interessado, nº de interessados, recompensa total, sinais depositados (10 %), botões "Juntar-se por US$ V" e "Cobrir o valor (mín. V + 10 %)", regra em uma linha ("Todos pagam o mesmo valor e recebem o mesmo acesso. Se ninguém atender até o prazo, cada um recebe o seu de volta."), carteira do pedido (endereço público, pagamentos), botão "Tenho essa informação" (leva ao assistente de envio com o pedido vinculado).
 - Lista pública de interessados (pseudônimo, data de entrada, "igualou em") e linha do tempo (abertura, entradas, coberturas, igualadas, saídas).
 - Estados (variantes): aberto; valor subiu, "iguale até dd/mm hh:mm (+US$ X) ou saia" para quem participa; travado (atendimento em curadoria).
 - Seção "Extras deste pedido": cards de extras (título, quem criou, valor por interessado, interessados, total, carteira, status) com "Entrar no extra por US$ X" e "Cobrir" para interessados do principal e a frase "Não entrar no extra não muda sua participação no pedido"; "Propostas de vendedores" com "Criar extra a partir desta proposta"; botão "Adicionar um extra" (modal: título, descrição, critérios, valor por interessado, prazo = do pedido, aviso de curadoria e de pagamento ao criar).
@@ -164,7 +164,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Total apoiado e selos ("Rompeu 3 lacres").
 
 ### `buyer/pedidos.html`
-- Botão "Novo pedido" abre modal: título, categoria, descrição, critérios de aceite (lista), formato esperado, valor por interessado, prazo, opção "permitir venda posterior como Cópias, nunca abaixo do valor por interessado"; aviso de curadoria.
+- Botão "Novo pedido" abre modal (também por link: `buyer/pedidos.html#novo-pedido`): tipo (entrega única ou por unidade), título, categoria, descrição, critérios de aceite (lista; no por unidade, o que vale como uma unidade), formato esperado, valor por interessado (ou valor por unidade e limite), sinal (mínimo 10 %), prazo, opção "permitir venda posterior como Cópias, nunca abaixo do valor por interessado"; aviso de curadoria.
 - Lista de pedidos do usuário (abertos por ele ou em que se juntou) com status (em curadoria / aberto / valor subiu: iguale até… / travado: atendimento em curadoria / atendido / expirado / saiu), valor por interessado, nº de interessados e recompensa total; ações: Cobrir, Igualar, Sair (reembolso ao endereço de origem), Abrir no cofre.
 - Detalhe expandido do pedido "em análise": "1 atendimento aguardando curadoria".
 
