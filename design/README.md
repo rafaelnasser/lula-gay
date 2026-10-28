@@ -83,7 +83,7 @@ design/
 
 **Global:** todo item e pedido tem **país** (código ISO, ex.: `BR`, `AR`, `PT`, `BD`, `CL`, ou `Global`) e **idioma**. Nos cards, o país aparece como `<span class="tag">BR</span>`; na página do item, "Brasil · português". Filtro de país no catálogo com contagens (Brasil 112, Estados Unidos 64, Argentina 31, Portugal 27, México 22, Reino Unido 19, Alemanha 14, Chile 9, Índia 12, Bangladesh 3, Global 38). Os itens da tabela abaixo são `BR · português`, exceto os três últimos.
 
-**Exclusividade (buyout):** valor opcional em Cópias, Lacre coletivo e Camadas que encerra o anúncio e entrega o item a um único comprador (em lacre coletivo, os apoios são devolvidos; em cópias, quem já comprou mantém). Valores do protótipo: lcr-4m2x9 US$ 250.000 · lcr-9f2k7 US$ 35.000 · lcr-3c7r8 US$ 20.000 · lcr-8k1n2 (assistente) US$ 40.000.
+**Exclusividade (buyout):** valor opcional (desligado por padrão no envio) em Cópias, Lacre coletivo e Camadas que encerra o anúncio e entrega o item a um único comprador (em lacre coletivo, os apoios são devolvidos; em cópias, quem já comprou mantém). Valores do protótipo: lcr-4m2x9 US$ 250.000 · lcr-9f2k7 US$ 35.000 · lcr-3c7r8 US$ 20.000 · lcr-8k1n2 (assistente): desligada por padrão; ao ligar, vem sugerido US$ 60.000 (5× a meta).
 
 **Vendedores:** `@sextante-21c9` (jornalismo, 12 aprovados, Verificado 9×), `@lanterna-b31d` (dados), `@cartografo-5a77` (foto/vídeo), `@arquivista-0d2e` (acervos), `@bussola-c4e1` (negócios), `@prisma-66af` (finanças), `@tipografo-8e04` (história). **Compradores em disputas/mensagens/pedidos:** `@farol-3e9b`, `@quartzo-a1f0`, `@relogio-2b7c`.
 

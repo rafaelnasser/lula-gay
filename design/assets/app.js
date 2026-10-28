@@ -550,7 +550,7 @@
         if (target) target.value = t.dataset.amount;
         return;
       }
-      if (t.hasAttribute('data-toggle-class')) { e.preventDefault(); const tgt = document.querySelector(t.dataset.target) || t; tgt.classList.toggle(t.dataset.toggleClass); return; }
+      if (t.hasAttribute('data-toggle-class')) { e.preventDefault(); const tgt = document.querySelector(t.dataset.target) || t; const isOn = tgt.classList.toggle(t.dataset.toggleClass); if (t.hasAttribute('aria-expanded')) t.setAttribute('aria-expanded', String(isOn)); return; }
       if (t.hasAttribute('data-dismiss')) { e.preventDefault(); const tgt = t.closest(t.dataset.dismiss || '.alert'); if (tgt) tgt.remove(); return; }
     });
     document.addEventListener('click', (e) => { if (e.target.classList && e.target.classList.contains('modal-backdrop')) e.target.classList.remove('open'); });

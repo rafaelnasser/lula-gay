@@ -221,7 +221,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 Um item publicado para muitos compradores pode trazer, ao lado do preço normal ou da meta, um **valor de exclusividade** definido pelo vendedor. Quem pagar esse valor leva o item só para si e o anúncio encerra na hora.
 
 **Regras.**
-- Opcional, definido no passo 4 do envio. Sugestão de mínimo: 5× a meta (lacre coletivo) ou 20× o preço unitário (cópias). A curadoria pode sugerir outro valor.
+- Opcional e **desligada por padrão**: o vendedor liga no passo 4 do envio só se quiser e define o valor. Um "?" ao lado explica a regra com um exemplo. Sugestão de mínimo: 5× a meta (lacre coletivo) ou 20× o preço unitário (cópias). A curadoria pode sugerir outro valor.
 - Disponível enquanto o item está ativo. Em lacre coletivo, só até a meta ser batida; depois do rompimento não existe mais exclusividade a vender.
 - **Cópias e Camadas:** quem já comprou mantém o acesso (já recebeu). O comprador da exclusividade vê, antes de pagar, quantas cópias já foram vendidas. A partir da compra, ninguém mais recebe.
 - **Lacre coletivo:** cada apoio volta automaticamente ao endereço de origem e os apoiadores são notificados. O conteúdo não é liberado a ninguém além do comprador.

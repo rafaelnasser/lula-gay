@@ -262,10 +262,14 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                       </div>
                     </fieldset>
                     <fieldset>
-                      <legend>Compra com exclusividade (opcional)</legend>
+                      <legend>Compra com exclusividade (opcional)<button type="button" class="help-btn" data-toggle-class="open" data-target="#help-excl" aria-controls="help-excl" aria-expanded="false" aria-label="O que é a compra com exclusividade?">?</button></legend>
                       <div class="stack-sm">
-                        <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Enquanto a meta não for batida, um único comprador pode levar o item só para si pagando o valor abaixo.</span></span></label>
-                        <div class="field"><label for="excl">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl" class="input num" value="40.000,00" data-sim></div><span class="hint">Quem pagar leva o item só para si e o anúncio encerra na hora. Em lacre coletivo, os apoios são devolvidos; em cópias, quem já comprou mantém o acesso. Sugestão: pelo menos 5× a meta ou 20× o preço.</span></div>
+                        <div class="help-box" id="help-excl">
+                          <p><b>O que é:</b> um preço opcional para uma única pessoa levar o item só para ela antes de a meta ser batida. Desligado, ninguém pode fazer isso e o lacre segue até a meta.</p>
+                          <p><b>Exemplo:</b> sua meta é US$ 12.000 e você liga a exclusividade por US$ 60.000. Se uma redação pagar US$ 60.000 antes da meta, só ela recebe o conteúdo e você recebe US$ 54.000 (90 %). O anúncio encerra, cada apoio volta para quem apoiou e você não pode vender nem publicar o mesmo conteúdo por 24 meses.</p>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="excl-on" data-excl="#excl-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Enquanto a meta não for batida, um único comprador pode levar o item só para si pagando o valor que você definir.</span></span></label>
+                        <div class="field" id="excl-field" hidden><label for="excl">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl" class="input num" value="60.000,00" data-sim></div><span class="hint">Quem pagar leva o item só para si, o anúncio encerra na hora e os apoios são devolvidos. Sugestão: pelo menos 5× a meta.</span></div>
                       </div>
                     </fieldset>
                   </div>
@@ -285,10 +289,14 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                       </div>
                     </fieldset>
                     <fieldset>
-                      <legend>Compra com exclusividade (opcional)</legend>
+                      <legend>Compra com exclusividade (opcional)<button type="button" class="help-btn" data-toggle-class="open" data-target="#help-excl2" aria-controls="help-excl2" aria-expanded="false" aria-label="O que é a compra com exclusividade?">?</button></legend>
                       <div class="stack-sm">
-                        <label class="switch"><input type="checkbox"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Encerra as vendas de cópias; quem já comprou mantém o acesso.</span></span></label>
-                        <div class="field"><label for="excl2">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl2" class="input num" value="1.200,00"></div><span class="hint">Quem pagar leva o item só para si e o anúncio encerra na hora. Em lacre coletivo, os apoios são devolvidos; em cópias, quem já comprou mantém o acesso. Sugestão: pelo menos 5× a meta ou 20× o preço.</span></div>
+                        <div class="help-box" id="help-excl2">
+                          <p><b>O que é:</b> um preço opcional para uma única pessoa encerrar as vendas e ficar com o item só para ela. Desligado, as cópias seguem à venda normalmente.</p>
+                          <p><b>Exemplo:</b> você vende cópias a US$ 60 e liga a exclusividade por US$ 1.200. Depois de 8 cópias vendidas, alguém paga US$ 1.200: as vendas encerram, os 8 compradores mantêm o acesso e você recebe US$ 1.080 (90 %) pela exclusividade, além das cópias já vendidas. Você não pode vender nem publicar o mesmo conteúdo por 24 meses.</p>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="excl2-on" data-excl="#excl2-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Encerra as vendas de cópias; quem já comprou mantém o acesso.</span></span></label>
+                        <div class="field" id="excl2-field" hidden><label for="excl2">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl2" class="input num" value="1.200,00" data-sim></div><span class="hint">Quem pagar leva o item só para si e as vendas encerram na hora; quem já comprou mantém o acesso. Sugestão: pelo menos 20× o preço da cópia.</span></div>
                       </div>
                     </fieldset>
                     <label class="switch"><input type="checkbox"><span class="track"></span><span>Renovação automática<span class="desc">Reabre o prazo de 90 dias ao vencer, enquanto houver unidades.</span></span></label>
@@ -337,9 +345,11 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                 <h3>Você recebe 90 %</h3>
                 <div><div class="xs muted" id="s-meta-label">Meta de US$ 12.000,00 batida</div><div class="big ok" id="s-liq">US$ 10.800,00</div></div>
                 <p class="xs muted" id="s-note">Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.</p>
-                <hr style="margin:4px 0">
-                <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 36.000,00</b></p>
-                <p class="xs muted">90 % de <span id="s-excl-base">US$ 40.000,00</span> para você. O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</p>
+                <div class="stack-sm" id="s-excl-box" hidden>
+                  <hr style="margin:4px 0">
+                  <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 54.000,00</b></p>
+                  <p class="xs muted">90 % de <span id="s-excl-base">US$ 60.000,00</span> para você. <span id="s-excl-note">O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</span></p>
+                </div>
               </div>
             </aside>
           </div>
@@ -419,9 +429,9 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                     </div>
                     <span class="xs muted">Cada marco batido é postado no X, no Telegram e no Bluesky com a prévia correspondente.</span>
                   </dd>
-                  <dt>Exclusividade</dt><dd>US$ 40.000 · quem pagar leva o item só para si; o anúncio encerra e os apoios são devolvidos · declaração de exclusividade de 24 meses</dd>
+                  <dt>Exclusividade</dt><dd id="r-excl">Desligada · ninguém pode levar o item só para si (opcional; dá para ligar no passo 4)</dd>
                   <dt>Modificadores</dt><dd>Marca d'água por entitlement · download permitido</dd>
-                  <dt>Você recebe</dt><dd><b>US$ 10.800</b> se a meta bater (90 %) · <b>US$ 36.000</b> se alguém comprar a exclusividade · a carteira do item é entregue a você na finalização, com a frase de recuperação, para transferir como quiser</dd>
+                  <dt>Você recebe</dt><dd><b>US$ 10.800</b> se a meta bater (90 %)<span id="r-excl-liq" hidden> · <b>US$ 54.000</b> se alguém comprar a exclusividade</span> · a carteira do item é entregue a você na finalização, com a frase de recuperação, para transferir como quiser</dd>
                 </dl></div>
               </div>
               <div class="card">
@@ -477,6 +487,8 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
         var usd = function (n) { return 'US$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
         var num = function (id) { var el = document.getElementById(id); return parseFloat((el.value || '0').replace(/\./g, '').replace(',', '.')) || 0; };
         var set = function (id, txt) { document.getElementById(id).textContent = txt; };
+        var on = function (id) { var el = document.getElementById(id); return !!(el && el.checked); };
+        var usd0 = function (n) { return 'US$ ' + n.toLocaleString('pt-BR', { maximumFractionDigits: 0 }); };
         document.querySelectorAll('[data-count]').forEach(function (el) {
           var out = document.querySelector(el.dataset.count);
           var upd = function () { out.textContent = el.value.length; out.parentElement.classList.toggle('danger', el.value.length > el.maxLength - 10); };
@@ -485,30 +497,34 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
         function model() { var r = document.querySelector('[data-switch]:checked'); return r ? r.dataset.switch : 'coletivo'; }
         function sim() {
           var m = model(), label = document.getElementById('s-meta-label'), note = document.getElementById('s-note');
-          var exclRow = document.getElementById('s-excl').parentElement, exclNote = document.getElementById('s-excl-base').parentElement;
+          var exclBox = document.getElementById('s-excl-box');
+          document.querySelectorAll('[data-excl]').forEach(function (cb) { document.querySelector(cb.dataset.excl).hidden = !cb.checked; });
+          var exOn = on('excl-on'), ex = num('excl'), rLiq = document.getElementById('r-excl-liq');
+          set('r-excl', exOn ? usd0(ex) + ' · quem pagar leva o item só para si; o anúncio encerra e os apoios são devolvidos · declaração de exclusividade de 24 meses' : 'Desligada · ninguém pode levar o item só para si (opcional; dá para ligar no passo 4)');
+          rLiq.hidden = !exOn; rLiq.querySelector('b').textContent = usd0(ex * 0.90);
           if (m === 'coletivo') {
             var meta = num('meta'), excl = num('excl');
             label.textContent = 'Meta de ' + usd(meta) + ' batida'; set('s-liq', usd(meta * 0.90));
             note.textContent = 'Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.';
-            set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl)); exclRow.hidden = false; exclNote.hidden = false;
+            set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl)); set('s-excl-note', 'O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.'); exclBox.hidden = !exOn;
           } else if (m === 'copias') {
             var preco = num('preco'), lim = num('lim') || 0, excl2 = num('excl2');
             label.textContent = usd(preco) + ' × ' + (lim || '∞') + ' cópias'; set('s-liq', lim ? usd(preco * lim * 0.90) : usd(preco * 0.90) + ' por cópia');
             note.textContent = 'Você recebe quando encerrar as vendas.';
-            set('s-excl', usd(excl2 * 0.90)); set('s-excl-base', usd(excl2)); exclRow.hidden = false; exclNote.hidden = false;
+            set('s-excl', usd(excl2 * 0.90)); set('s-excl-base', usd(excl2)); set('s-excl-note', 'As vendas encerram na hora, quem já comprou mantém o acesso e vale a declaração de exclusividade de 24 meses.'); exclBox.hidden = !on('excl2-on');
           } else if (m === 'exclusivo') {
             var pe = num('preco-ex');
             label.textContent = 'Venda exclusiva por ' + usd(pe); set('s-liq', usd(pe * 0.90));
             note.textContent = 'Você recebe 72 h após a entrega, se não houver disputa.';
-            exclRow.hidden = true; exclNote.hidden = true;
+            exclBox.hidden = true;
           } else {
             label.textContent = 'Recompensa do pedido · US$ 2.100,00 hoje (7 interessados × US$ 300)'; set('s-liq', usd(2100 * 0.90));
             note.textContent = 'Novos interessados podem se juntar até você enviar o atendimento; aí o pedido trava. Você recebe quando a curadoria validar.';
-            exclRow.hidden = true; exclNote.hidden = true;
+            exclBox.hidden = true;
           }
         }
         document.querySelectorAll('[data-sim]').forEach(function (el) { el.addEventListener('input', sim); });
-        document.addEventListener('change', function (e) { if (e.target.matches('[data-switch]')) sim(); });
+        document.addEventListener('change', function (e) { if (e.target.matches('[data-switch],[data-excl]')) sim(); });
         sim();
       })();
     </script>
