@@ -28,7 +28,7 @@
     .quem .handle, .timeline .handle, .alert .handle { vertical-align: middle; font-size: var(--fs-xs); }
     .segmented.vs button svg { width: 13px; height: 13px; vertical-align: -2px; }
     .pedido .timeline .tl-item { padding-bottom: 12px; }
-    .pay-ledger .handle { vertical-align: middle; font-size: var(--fs-xs); }
+    .pay-ledger .handle, .pedido .panel .handle { vertical-align: middle; font-size: var(--fs-xs); }
     .fluxo { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
     .fluxo li { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 6px 9px; font-size: var(--fs-xs); color: var(--muted); display: flex; flex-direction: column; gap: 1px; min-width: 0; }
     .fluxo li b { color: var(--fg); font-size: var(--fs-sm); font-weight: 600; }
@@ -91,7 +91,7 @@
             <div><dt>Prazo pedido</dt><dd>20/12/2026</dd></div>
             <div><dt>Resposta até</dt><dd>29/10 · 09:14</dd></div>
           </dl>
-          <div class="alert alert-info"><i data-icon="info"></i><div>A curadoria confere se o pedido é lícito e claro (nada de dados pessoais, credenciais ou conteúdo íntimo) e pode reescrever o título. Se aprovar, ela cria a carteira do pedido e você recebe um endereço derivado para depositar o sinal (pelo menos 10 %: US$ 30,00) em até 24 h. Só então o pedido entra no mural. O resto só depois da prévia de um atendimento.</div></div>
+          <div class="alert alert-info"><i data-icon="info"></i><div>A curadoria confere se o pedido é lícito e claro (nada de dados pessoais, credenciais ou conteúdo íntimo) e pode reescrever o título. Se aprovar, ela cria a carteira do pedido e você recebe um endereço derivado para pagar o sinal (pelo menos 10 %: US$ 30,00) em até 24 h. Só então o pedido entra no mural. O resto só depois da prévia de um atendimento.</div></div>
           <div class="row">
             <button class="btn btn-sm" data-toast="Edição reabre a análise; o prazo de 48 h recomeça"><i data-icon="edit"></i>Editar</button>
             <button class="btn btn-sm btn-ghost" data-toast="Pedido cancelado. Nada foi pago ainda."><i data-icon="x"></i>Cancelar pedido</button>
@@ -113,7 +113,7 @@
               <div><dt>Valor por interessado</dt><dd>US$ 800,00</dd></div>
               <div><dt>Interessados</dt><dd>4</dd></div>
               <div><dt>Recompensa total</dt><dd class="wax">US$ 3.200,00</dd></div>
-              <div><dt>Sinais depositados</dt><dd>US$ 320,00 (10 %)</dd></div>
+              <div><dt>Sinais pagos</dt><dd>US$ 320,00 (10 %)</dd></div>
               <div><dt>Prazo</dt><dd>30/11/2026 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div>
               <div><dt>Carteira do pedido</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2c8d…91af</a> · Polygon · USDT · 6 pagamentos</dd></div>
             </dl>
@@ -126,7 +126,7 @@
               <p class="xs muted">O sinal fica na carteira do pedido. Se o pedido expirar ou você sair antes de um atendimento, ele volta ao seu endereço de origem, descontada só a taxa de rede.</p>
             </div>
             <ol class="fluxo">
-              <li class="feito"><b>1 · Sinal</b><span>US$ 80 depositados (10 %)</span></li>
+              <li class="feito"><b>1 · Sinal</b><span>US$ 80 pagos (10 %)</span></li>
               <li><b>2 · Atendimento</b><span>um vendedor envia; a curadoria confere</span></li>
               <li><b>3 · Prévia</b><span>você vê uma amostra antes de pagar</span></li>
               <li><b>4 · 72 h</b><span>pague os 90 % (US$ 720) ou recuse com motivo</span></li>
@@ -139,12 +139,12 @@
               <span><span class="handle" data-handle="relogio-2b7c"></span> juntou-se · 24/10</span>
             </div>
             <div class="timeline mt-1">
-              <div class="tl-item ok"><div class="when">12/10 · 10:05</div><div class="what">Pedido aprovado pela curadoria e publicado · carteira do pedido criada · você depositou o sinal de 50 USDT (10 % de US$ 500)</div></div>
+              <div class="tl-item ok"><div class="when">12/10 · 10:05</div><div class="what">Pedido aprovado pela curadoria e publicado · carteira do pedido criada · você pagou o sinal de 50 USDT (10 % de US$ 500)</div></div>
               <div class="tl-item ok"><div class="when">14/10 · 19:40</div><div class="what"><span class="handle" data-handle="farol-3e9b"></span> juntou-se por US$ 500 (sinal de US$ 50) · recompensa total US$ 1.000</div></div>
               <div class="tl-item warn"><div class="when">18/10 · 14:00</div><div class="what"><span class="handle" data-handle="quartzo-a1f0"></span> cobriu o valor: US$ 800 por interessado (sinal de US$ 80) · janela para igualar até 20/10 · 14:00</div></div>
               <div class="tl-item ok"><div class="when">19/10 · 08:52</div><div class="what"><span class="handle" data-handle="farol-3e9b"></span> igualou (+US$ 300 · sinal de US$ 30)</div></div>
               <div class="tl-item ok"><div class="when">20/10 · 11:20</div><div class="what">Você igualou (+US$ 300 · sinal de US$ 30) · 3 interessados × US$ 800 = US$ 2.400</div></div>
-              <div class="tl-item ok"><div class="when">24/10 · 16:15</div><div class="what"><span class="handle" data-handle="relogio-2b7c"></span> juntou-se por US$ 800 (sinal de US$ 80) · recompensa total US$ 3.200 · sinais depositados US$ 320</div></div>
+              <div class="tl-item ok"><div class="when">24/10 · 16:15</div><div class="what"><span class="handle" data-handle="relogio-2b7c"></span> juntou-se por US$ 800 (sinal de US$ 80) · recompensa total US$ 3.200 · sinais pagos US$ 320</div></div>
             </div>
             <div class="extras">
               <div class="row between"><b class="small"><i data-icon="layers" class="ico brass"></i> Extras deste pedido</b><span class="xs muted">1 aberto · 1 proposta pendente · até 5 abertos por pedido</span></div>
@@ -157,7 +157,7 @@
                   <div><dt>Valor por interessado</dt><dd>US$ 150,00</dd></div>
                   <div><dt>Interessados</dt><dd>2</dd></div>
                   <div><dt>Total</dt><dd>US$ 300,00</dd></div>
-                  <div><dt>Sinais depositados</dt><dd>US$ 30,00</dd></div>
+                  <div><dt>Sinais pagos</dt><dd>US$ 30,00</dd></div>
                   <div><dt>Prazo</dt><dd>30/11/2026 · o do pedido</dd></div>
                   <div><dt>Carteira do extra</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2c8e…7b40</a> · Polygon · USDT · 2 pagamentos</dd></div>
                 </dl>
@@ -170,7 +170,7 @@
               <div class="extra proposta">
                 <div class="row"><span class="badge badge-outline"><i data-icon="lightbulb"></i>Proposta de extra</span><span class="xs muted"><span class="handle" data-handle="prisma-66af"></span> · 26/10 · valor sugerido US$ 200 · aguardando um interessado criar o extra</span></div>
                 <b class="small">Tempo de espera nas UBS da capital nos mesmos meses</b>
-                <div class="xs muted">A proposta fica pública no pedido. Ela só vira extra quando um interessado a cria e deposita o sinal; quem propôs não tem exclusividade para atender.</div>
+                <div class="xs muted">A proposta fica pública no pedido. Ela só vira extra quando um interessado a cria e paga o sinal; quem propôs não tem exclusividade para atender.</div>
                 <div class="row"><button class="btn btn-sm" data-modal-open="novo-extra"><i data-icon="sparkles"></i>Criar extra a partir desta proposta</button></div>
               </div>
               <div class="row"><button class="btn btn-sm btn-ghost" data-modal-open="novo-extra"><i data-icon="plus"></i>Adicionar um extra</button></div>
@@ -181,11 +181,11 @@
               <a class="btn btn-sm btn-ghost" href="../public/pedido.html"><i data-icon="external-link"></i>Página pública</a>
               <button class="btn btn-sm btn-ghost" data-copy="https://lacre.app/r/2c8d1"><i data-icon="link"></i>Copiar link</button>
             </div>
-            <p class="xs muted">Cobrir sobe o valor para todos (mínimo +10 %; quem entra agora a US$ 880 deposita US$ 88 de sinal): quem já está dentro tem 48 h para igualar, depositando 10 % da diferença, ou sair. Se ninguém igualar, você fica sozinho e compra com exclusividade de fato.</p>
+            <p class="xs muted">Cobrir sobe o valor para todos (mínimo +10 %; quem entra agora a US$ 880 paga US$ 88 de sinal): quem já está dentro tem 48 h para igualar, pagando 10 % da diferença, ou sair. Se ninguém igualar, você fica sozinho e compra com exclusividade de fato.</p>
           </div>
 
           <div data-variant="subiu" class="stack-sm">
-            <div class="alert alert-warn"><i data-icon="trending-up"></i><div><span class="alert-title">Valor subiu: iguale até 20/10 14:00 (+US$ 300) ou saia</span><span class="handle" data-handle="quartzo-a1f0"></span> cobriu o valor em 18/10 às 14:00: de US$ 500 para US$ 800 por interessado. Você depositou US$ 50 de sinal. Igualar custa agora só o sinal da diferença: US$ 30. Sem resposta até 20/10 às 14:00, você sai automaticamente e o sinal de 50 USDT volta ao endereço de origem, menos a taxa de rede.</div></div>
+            <div class="alert alert-warn"><i data-icon="trending-up"></i><div><span class="alert-title">Valor subiu: iguale até 20/10 14:00 (+US$ 300) ou saia</span><span class="handle" data-handle="quartzo-a1f0"></span> cobriu o valor em 18/10 às 14:00: de US$ 500 para US$ 800 por interessado. Você pagou US$ 50 de sinal. Igualar custa agora só o sinal da diferença: US$ 30. Sem resposta até 20/10 às 14:00, você sai automaticamente e o sinal de 50 USDT volta ao endereço de origem, menos a taxa de rede.</div></div>
             <dl class="kv-row">
               <div><dt>Valor por interessado</dt><dd>US$ 800,00 <span class="xs muted">(antes US$ 500,00)</span></dd></div>
               <div><dt>Interessados</dt><dd>3 · 2 precisam igualar</dd></div>
@@ -198,7 +198,7 @@
               <button class="btn btn-sm" data-toast="Você saiu do ped-2c8d1. O sinal de US$ 50,00 (50 USDT) está a caminho do endereço de origem, taxa de rede descontada."><i data-icon="log-out"></i>Sair do pedido (reembolso ao endereço de origem)</button>
               <a class="btn btn-sm btn-ghost" href="../buyer/checkout.html"><i data-icon="arrow-up-right"></i>Cobrir acima de US$ 880</a>
             </div>
-            <p class="xs muted">Igualar deposita só o sinal da diferença (30 USDT) num novo endereço derivado, válido por 24 h; o resto vem depois da prévia. Quem cobrir de novo, acima de US$ 800, reinicia a janela de 48 h para os outros; a janela nunca passa do prazo do pedido (30/11).</p>
+            <p class="xs muted">Igualar paga só o sinal da diferença (30 USDT) num novo endereço derivado, válido por 24 h; o resto vem depois da prévia. Quem cobrir de novo, acima de US$ 800, reinicia a janela de 48 h para os outros; a janela nunca passa do prazo do pedido (30/11).</p>
           </div>
         </div>
       </article>
@@ -270,8 +270,8 @@
       <div class="card">
         <div class="card-head"><h3>Como funciona um pedido</h3></div>
         <div class="card-body how small">
-          <div class="how-step"><span class="n">1</span><div><b>Abrir com sinal.</b> Você define o valor por interessado (mínimo US$ 100), o prazo (até 90 dias) e o que quer. A curadoria aprova em até 48 h e cria a carteira do pedido; você deposita o sinal: pelo menos 10 % do valor. O sinal evita pedidos falsos e mostra a quem atende que existe dinheiro de verdade.</div></div>
-          <div class="how-step"><span class="n">2</span><div><b>Juntar-se.</b> Qualquer conta entra com o mesmo valor, depositando o sinal. Recompensa total = valor por interessado × interessados. Todos recebem o mesmo acesso.</div></div>
+          <div class="how-step"><span class="n">1</span><div><b>Abrir com sinal.</b> Você define o valor por interessado (mínimo US$ 100), o prazo (até 90 dias) e o que quer. A curadoria aprova em até 48 h e cria a carteira do pedido; você paga o sinal: pelo menos 10 % do valor. O sinal evita pedidos falsos e mostra a quem atende que existe dinheiro de verdade.</div></div>
+          <div class="how-step"><span class="n">2</span><div><b>Juntar-se.</b> Qualquer conta entra com o mesmo valor, pagando o sinal. Recompensa total = valor por interessado × interessados. Todos recebem o mesmo acesso.</div></div>
           <div class="how-step"><span class="n">3</span><div><b>Cobrir, igualar ou sair.</b> Qualquer conta pode subir o valor em pelo menos 10 %. Quem já está dentro tem 48 h para igualar, com sinal de 10 % da diferença, ou sair com o sinal de volta. Todos os interessados ativos têm sempre o mesmo valor; quem cobre e não é igualado fica sozinho.</div></div>
           <div class="how-step"><span class="n">4</span><div><b>Atendimento e prévia.</b> Um vendedor envia o material e o pedido trava. Se a curadoria aprovar, cada interessado recebe uma prévia (amostra, páginas com tarja, miniaturas com marca d'água) e tem 72 h para responder.</div></div>
           <div class="how-step"><span class="n">5</span><div><b>Confirmar ou recusar.</b> Confirmar é pagar os 90 % restantes: o material completo vai para o cofre na hora. Recusar exige motivo, e a curadoria decide em até 48 h. Sem resposta em 72 h, o sinal vai para quem atendeu e você não recebe o material.</div></div>
@@ -317,7 +317,7 @@
     <div class="modal wide">
       <div class="modal-head"><h3>Adicionar um extra ao ped-2c8d1</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
       <form class="modal-body stack" data-submit-toast="Extra enviado para curadoria. Abriria o checkout: sinal de US$ 20,00 (20 USDT) para a carteira do extra, endereço derivado válido por 24 h.">
-        <div class="alert alert-info"><i data-icon="clipboard-check"></i><div><span class="alert-title">Passa pela curadoria e começa com um sinal</span>O extra só fica visível depois da curadoria (mesmas regras de conteúdo do pedido). Ao criar, você deposita o sinal: pelo menos 10 % do valor por interessado do extra, da sua carteira cripto, para a carteira própria do extra. O resto só depois da prévia de um atendimento. Se a curadoria recusar, o sinal volta ao endereço de origem.</div></div>
+        <div class="alert alert-info"><i data-icon="clipboard-check"></i><div><span class="alert-title">Passa pela curadoria e começa com um sinal</span>O extra só fica visível depois da curadoria (mesmas regras de conteúdo do pedido). Ao criar, você paga o sinal: pelo menos 10 % do valor por interessado do extra, da sua carteira cripto, para a carteira própria do extra. O resto só depois da prévia de um atendimento. Se a curadoria recusar, o sinal volta ao endereço de origem.</div></div>
         <div class="row small"><span class="badge badge-outline"><i data-icon="lightbulb"></i>A partir da proposta de <span class="handle" data-handle="prisma-66af"></span> · 26/10</span><span class="xs muted">valor sugerido US$ 200 · quem propôs não tem exclusividade para atender</span></div>
         <div class="form-grid">
           <div class="field full"><label for="ne-titulo">Título</label><input id="ne-titulo" class="input" maxlength="120" value="Tempo de espera nas UBS da capital nos mesmos meses"><span class="hint">Algo próximo ou complementar ao pedido. Sem nomes de pessoas.</span></div>
@@ -335,7 +335,7 @@
         </div>
         <div class="form-actions">
           <span class="xs muted">Registramos extra, valor e data. Nada mais.</span>
-          <div class="row"><button type="button" class="btn" data-modal-close>Cancelar</button><button type="submit" class="btn btn-primary"><i data-icon="send"></i>Enviar para curadoria e depositar o sinal de US$ 20</button></div>
+          <div class="row"><button type="button" class="btn" data-modal-close>Cancelar</button><button type="submit" class="btn btn-primary"><i data-icon="send"></i>Enviar para curadoria e pagar o sinal de US$ 20</button></div>
         </div>
       </form>
     </div>
@@ -345,7 +345,7 @@
   <div class="modal-backdrop" id="novo-pedido">
     <div class="modal wide">
       <div class="modal-head"><h3>Novo pedido com recompensa</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
-      <form class="modal-body stack" data-submit-toast="Pedido enviado para curadoria. Resposta em até 48 h; depois da aprovação você deposita o sinal.">
+      <form class="modal-body stack" data-submit-toast="Pedido enviado para curadoria. Resposta em até 48 h; depois da aprovação você paga o sinal.">
         <div class="alert alert-info"><i data-icon="clipboard-check"></i><div><span class="alert-title">Passa pela curadoria antes de ficar público</span>Em até 48 h conferimos se o pedido é lícito e claro. A curadoria pode reescrever o título. Não aceitamos pedidos de dados pessoais, credenciais, conteúdo íntimo ou material sob sigilo legal.</div></div>
         <div class="form-grid" data-variants="unica">
           <div class="field full tipo">
@@ -397,7 +397,7 @@
           <div class="field" data-variant="unidade"><label for="nu-sinal">Sinal (mínimo 10 % do orçamento)</label><div class="input-group"><span class="affix">US$</span><input id="nu-sinal" class="input num" value="60,00" inputmode="decimal"></div><span class="hint" id="nu-sinal-hint">Mínimo: US$ 60,00. Lotes sem resposta em 72 h são pagos com o sinal; o que sobrar volta para você.</span></div>
           <div class="panel small stack-sm full" data-variant="unidade">
             <div class="row start"><i data-icon="image" class="ico brass"></i><div><b>Prévia de cada lote.</b> Você vê miniaturas com marca d'água e paga só as unidades aceitas; os originais chegam na hora.</div></div>
-            <div class="row start"><i data-icon="clock" class="ico brass"></i><div><b>72 h para pagar cada lote.</b> Sem resposta, o lote validado é pago com o sinal; se o sinal acabar, o pedido pausa até um novo depósito. No fim, o sinal que sobrar volta para você.</div></div>
+            <div class="row start"><i data-icon="clock" class="ico brass"></i><div><b>72 h para pagar cada lote.</b> Sem resposta, o lote validado é pago com o sinal; se o sinal acabar, o pedido pausa até um novo pagamento de sinal. No fim, o sinal que sobrar volta para você.</div></div>
             <div class="row start"><i data-icon="user" class="ico brass"></i><div><b>Um único comprador.</b> Pedido por unidade não aceita outros interessados por enquanto.</div></div>
           </div>
           <label class="check full"><input type="checkbox" required><span>Declaro que não estou pedindo dados pessoais de terceiros, credenciais, conteúdo íntimo nem material sob sigilo legal.<span class="desc">A declaração fica registrada e vinculada ao seu pseudônimo.</span></span></label>
