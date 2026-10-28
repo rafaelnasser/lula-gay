@@ -101,7 +101,7 @@
                   <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas, após a última janela de 72 h</td></tr>
                   <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="num">10 %</td><td class="small">72 h após a venda, sem disputa aberta</td></tr>
                   <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">72 h após a liberação pública (ao bater 100 %) · se a meta não bater: no fim do prazo, sobre o valor garantido pelo último marco (nada abaixo de 25 %)</td></tr>
-                  <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td class="num">10 %</td><td class="small">Quando o atendimento é validado · sobre a recompensa total (valor por interessado × interessados)</td></tr>
+                  <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td class="num">10 %</td><td class="small">72 h após a confirmação da prévia, sem disputa · sobre o total pago (sinal + 90 % restantes) · por unidade: 72 h após o pagamento de cada lote</td></tr>
                   <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão</span></td><td class="num">10 %</td><td class="small">72 h após o pagamento do vencedor · sobre o segundo preço</td></tr>
                   <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas · sobre todas as camadas vendidas</td></tr>
                   <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span></td><td class="num">10 %</td><td class="small">Carteira nova por período · finaliza 72 h após o fim do período</td></tr>
@@ -250,14 +250,8 @@
               <div class="field"><label for="l4">Risco da conta que força 2 pessoas</label><div class="input-group"><input id="l4" class="input num w-sm" value="85"><span class="affix">/100</span></div></div>
               <div class="field"><label for="l9">Reembolsos por lote</label><div class="input-group"><input id="l9" class="input num w-sm" value="200"><span class="affix">por rede</span></div><span class="hint">Um lacre com 1.187 apoios leva 6 lotes. Lote de lacre que falhou exige aprovação do financeiro.</span></div>
               <div class="field"><label for="l10">Lotes de reembolso por dia</label><select id="l10" class="select"><option>1 · 03:00</option><option selected>2 · 03:00 e 11:00</option><option>4 · a cada 6 h</option></select></div>
-              <div class="field"><label for="l11">Pedido · janela para igualar</label><div class="input-group"><input id="l11" class="input num w-sm" value="48"><span class="affix">h</span></div><span class="hint">Quando o valor por interessado sobe. Nunca além do prazo do pedido; quem não iguala sai e recebe de volta.</span></div>
-              <div class="field"><label for="l12">Pedido · incremento mínimo para cobrir</label><div class="input-group"><input id="l12" class="input num w-sm" value="10"><span class="affix">%</span></div><span class="hint">Cobrir = subir o valor por interessado para V′ ≥ V + 10 %.</span></div>
-              <div class="field"><label for="l13">Pedido · prazo máximo</label><div class="input-group"><input id="l13" class="input num w-sm" value="90"><span class="affix">dias</span></div></div>
-              <div class="field"><label for="l15">Pedido · extras abertos por pedido</label><div class="input-group"><input id="l15" class="input num w-sm" value="5"><span class="affix">no máximo</span></div><span class="hint">Cada extra tem valor por interessado e carteira próprios; só interessados ativos do pedido entram.</span></div>
-              <div class="field"><label for="l16">Pedido · valor mínimo do extra</label><div class="input-group"><span class="affix">US$</span><input id="l16" class="input num w-sm" value="10"></div><span class="hint">Prazo do extra: o do pedido por padrão, nunca além dele.</span></div>
             </div>
           </div></div>
-          <div class="stack">
           <div class="card"><div class="card-head"><h3>Itens e envios</h3></div><div class="card-body">
             <div class="form-grid">
               <div class="field"><label for="l5">Tamanho máximo por item</label><div class="input-group"><input id="l5" class="input num w-sm" value="20"><span class="affix">GB</span></div></div>
@@ -267,6 +261,33 @@
             </div>
             <div class="alert alert-info mt-2"><i data-icon="info"></i><div>Não existe limite de saque nem de depósito porque não existe saldo: o que entra vai para a carteira do item e só sai como reembolso ao endereço de origem ou na finalização.</div></div>
             <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de limites enviada a Marcos L. · settings.limit.update">Salvar limites</button></div>
+          </div></div>
+        </div>
+        <div class="grid cols-2 mb-3">
+          <div class="card"><div class="card-head"><h3>Pedido com recompensa</h3><span class="badge badge-outline">sinal e prévia</span></div><div class="card-body">
+            <div class="form-grid">
+              <div class="field"><label for="l25">Sinal mínimo ao abrir ou entrar</label><div class="input-group"><input id="l25" class="input num w-sm" value="10"><span class="affix">% do valor</span></div><span class="hint">Valor US$ 800 → sinal US$ 80; pode depositar até 100 %. Cobrir e igualar: 10 % da diferença.</span></div>
+              <div class="field"><label for="l26">Prazo para confirmar a prévia</label><div class="input-group"><input id="l26" class="input num w-sm" value="72"><span class="affix">h</span></div><span class="hint">Confirmar = pagar os 90 % restantes; o material completo vai para o cofre na hora.</span></div>
+              <div class="field"><label for="l27">Decisão da curadoria sobre recusa</label><div class="input-group"><input id="l27" class="input num w-sm" value="48"><span class="affix">h</span></div><span class="hint">Prévia dentro dos critérios: a recusa não vale e o sinal vai para quem atendeu. Fora: o pedido reabre.</span></div>
+              <div class="field"><label for="l28">Sem resposta em 72 h</label><input id="l28" class="input" value="o sinal vai para quem atendeu" readonly><span class="hint">A participação termina; o interessado não recebe o material.</span></div>
+              <div class="field"><label for="l11">Janela para igualar</label><div class="input-group"><input id="l11" class="input num w-sm" value="48"><span class="affix">h</span></div><span class="hint">Quando o valor por interessado sobe. Nunca além do prazo do pedido; quem não iguala sai e recebe de volta.</span></div>
+              <div class="field"><label for="l12">Incremento mínimo para cobrir</label><div class="input-group"><input id="l12" class="input num w-sm" value="10"><span class="affix">%</span></div><span class="hint">Cobrir = subir o valor por interessado para V′ ≥ V + 10 %.</span></div>
+              <div class="field"><label for="l13">Prazo máximo</label><div class="input-group"><input id="l13" class="input num w-sm" value="90"><span class="affix">dias</span></div></div>
+              <div class="field"><label for="l15">Extras abertos por pedido</label><div class="input-group"><input id="l15" class="input num w-sm" value="5"><span class="affix">no máximo</span></div><span class="hint">Cada extra tem valor por interessado e carteira próprios; só interessados ativos do pedido entram.</span></div>
+              <div class="field"><label for="l16">Valor mínimo do extra</label><div class="input-group"><span class="affix">US$</span><input id="l16" class="input num w-sm" value="10"></div><span class="hint">Prazo do extra: o do pedido por padrão, nunca além dele.</span></div>
+            </div>
+            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de regras de pedido enviada a Marcos L. · settings.request.update">Salvar regras de pedido</button></div>
+          </div></div>
+          <div class="stack">
+          <div class="card"><div class="card-head"><h3>Pedido por unidade</h3><span class="badge badge-outline">paga por unidade aceita</span></div><div class="card-body">
+            <div class="form-grid">
+              <div class="field"><label for="l29">Sinal mínimo</label><div class="input-group"><input id="l29" class="input num w-sm" value="10"><span class="affix">% do orçamento</span></div><span class="hint">Orçamento = valor por unidade × limite de unidades.</span></div>
+              <div class="field"><label for="l30">Amostragem de validação</label><div class="input-group"><input id="l30" class="input num w-sm" value="10"><span class="affix">% do lote</span></div><span class="hint">A triagem descarta duplicadas (hash) e ilegíveis; a curadoria confere a amostra.</span></div>
+              <div class="field"><label for="l31">Prazo para pagar o lote</label><div class="input-group"><input id="l31" class="input num w-sm" value="72"><span class="affix">h</span></div><span class="hint">Depois da prévia do lote (miniaturas com marca d'água).</span></div>
+              <div class="field"><label for="l32">Lote sem resposta</label><input id="l32" class="input" value="pago com o sinal" readonly><span class="hint">Protege quem enviou. Sinal esgotado: o pedido pausa até novo depósito.</span></div>
+              <div class="field full"><label for="l33">Compradores por pedido</label><input id="l33" class="input" value="1 (juntar-se fica para a fase 2)" readonly><span class="hint">No fim do prazo ou do limite, o sinal que sobrar volta a quem pediu.</span></div>
+            </div>
+            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de pedido por unidade enviada a Marcos L. · settings.request.unit.update">Salvar pedido por unidade</button></div>
           </div></div>
           <div class="card"><div class="card-head"><h3>Lacre coletivo · marcos garantidos</h3><span class="badge badge-outline">padrão</span></div><div class="card-body">
             <div class="form-grid">

@@ -39,7 +39,7 @@
 
     <div class="stat-grid mb-3">
       <div class="stat"><span class="label">Eventos na cadeia</span><span class="value">48.212</span><span class="delta flat">desde 15/03/2026</span></div>
-      <div class="stat"><span class="label">Hoje</span><span class="value">212</span><span class="delta flat">6 pessoas, 5 serviços · 17 tipos de ação</span></div>
+      <div class="stat"><span class="label">Hoje</span><span class="value">212</span><span class="delta flat">6 pessoas, 5 serviços · 18 tipos de ação</span></div>
       <div class="stat"><span class="label">Última verificação</span><span class="value ok">íntegra</span><span class="delta flat">27/10 · 06:00 · automática, diária</span></div>
       <div class="stat"><span class="label">Último hash</span><span class="value mono" style="font-size:var(--fs-md)">4e91…7b2d</span><span class="delta flat"><button class="btn btn-sm btn-ghost" data-copy="4e91c0a7d33f8b5e2a6c9d1f0e4b7a8c3d5f6e2b1a9c8d7e6f5a4b3c2d1e0f7b2d"><i data-icon="copy"></i>copiar completo</button></span></div>
     </div>
@@ -48,7 +48,7 @@
       <div class="card-body">
         <div class="grid cols-4">
           <div class="field"><label for="f-pessoa">Pessoa</label><select id="f-pessoa" class="select"><option>Todas</option><option>Ana R. · Curadora sênior</option><option>Bruno M. · Curador</option><option>Carla S. · Jurídico</option><option>Diego T. · Publicação</option><option>Elisa F. · Financeiro</option><option>Marcos L. · Administrador</option></select></div>
-          <div class="field"><label for="f-acao">Ação</label><select id="f-acao" class="select"><option>Todas</option><option>review.* (análise)</option><option>asset.* (conteúdo e redação)</option><option>listing.* (itens)</option><option>account.* (contas)</option><option>dispute.* (disputas)</option><option>legal.* (jurídico)</option><option>social.* (publicação)</option><option>wallet.* (carteiras de itens)</option><option>release.* (liberação pública do lacre)</option><option>key.* (chaves no HSM)</option><option>refund.* (reembolsos)</option><option>settings.* (configurações)</option><option>auth.* (acesso da equipe)</option></select></div>
+          <div class="field"><label for="f-acao">Ação</label><select id="f-acao" class="select"><option>Todas</option><option>review.* (análise)</option><option>asset.* (conteúdo e redação)</option><option>listing.* (itens)</option><option>account.* (contas)</option><option>dispute.* (disputas)</option><option>legal.* (jurídico)</option><option>social.* (publicação)</option><option>wallet.* (carteiras de itens)</option><option>request.* · batch.* (pedidos)</option><option>release.* (liberação pública do lacre)</option><option>key.* (chaves no HSM)</option><option>refund.* (reembolsos)</option><option>settings.* (configurações)</option><option>auth.* (acesso da equipe)</option></select></div>
           <div class="field"><label for="f-per">Período</label><select id="f-per" class="select"><option>Últimos 30 dias</option><option>Hoje</option><option>7 dias</option><option>Personalizado…</option></select></div>
           <div class="field"><label for="f-alvo">Alvo</label><input id="f-alvo" class="input mono" placeholder="lcr-…, DN-…, DS-…, @pseudônimo"></div>
         </div>
@@ -130,7 +130,15 @@
             <td><span class="tag">report.decision.propose</span></td>
             <td class="mono">DN-2041 · lcr-2n8v4</td>
             <td class="diff">—<span class="arr">→</span>nova versão com redação (v2) · aguarda registro</td>
-            <td><span class="chain">1c3f…58d7<span class="arr">→</span><b>f06a…b9c1</b></span></td>
+            <td><span class="chain">7e2a…94c6<span class="arr">→</span><b>f06a…b9c1</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">27/10 · 09:12:30</td>
+            <td><span class="handle" data-handle="farol-3e9b"></span><span class="sub">quem pediu · após a prévia</span></td>
+            <td><span class="tag">batch.accept</span></td>
+            <td class="mono">ped-8b4u2 · L-0412</td>
+            <td class="diff">lote validado · 46 fotos de @coruja-7f3a, 44 válidas<span class="arr">→</span>44 fotos aceitas · US$ 88 pagos na carteira do lote (0x8b4v…1c3a) · originais no cofre · finaliza 30/10 09:12</td>
+            <td><span class="chain">1c3f…58d7<span class="arr">→</span><b>7e2a…94c6</b></span></td>
           </tr>
           <tr>
             <td class="num">27/10 · 08:31:18</td>
@@ -290,7 +298,23 @@
             <td><span class="tag">wallet.settle</span></td>
             <td class="mono">lcr-3v8j1</td>
             <td class="diff">prazo venceu em 09/10 com 34 % (US$ 4.100 de US$ 12.000, 61 apoios) · marco 25 % batido<span class="arr">→</span>finalização parcial · US$ 3.000 garantidos ao vendedor · comissão US$ 300 · 14 reembolsos (US$ 1.100, o que entrou depois do marco) · US$ 2.700 na carteira para o vendedor</td>
-            <td><span class="chain">e63a…57f0<span class="arr">→</span><b>c5a9…3e07</b></span></td>
+            <td><span class="chain">9f27…a0b5<span class="arr">→</span><b>c5a9…3e07</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">07/10 · 10:02:44</td>
+            <td><span class="handle" data-handle="coruja-7f3a"></span><span class="sub">interessada</span></td>
+            <td><span class="tag">request.confirm</span></td>
+            <td class="mono">ped-1b6j8</td>
+            <td class="diff">sinal de US$ 20 pago em 28/09 · prévia recebida<span class="arr">→</span>confirmou · pagou os US$ 180 restantes · material completo no cofre</td>
+            <td><span class="chain">4b18…d6e3<span class="arr">→</span><b>9f27…a0b5</b></span></td>
+          </tr>
+          <tr>
+            <td class="num">06/10 · 16:20:05</td>
+            <td><span class="person">Bruno M.<small>Curador</small></span></td>
+            <td><span class="tag">request.preview.sent</span></td>
+            <td class="mono">ped-1b6j8</td>
+            <td class="diff">atendimento de @cartografo-5a77 (04/10) validado<span class="arr">→</span>prévia enviada aos 3 interessados do pedido e aos 2 do extra · 72 h para confirmar, até 09/10 16:20</td>
+            <td><span class="chain">e63a…57f0<span class="arr">→</span><b>4b18…d6e3</b></span></td>
           </tr>
           <tr>
             <td class="num">05/10 · 18:42:17</td>
@@ -318,7 +342,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="table-foot"><span>Mostrando 32 de 48.212 · do mais recente · o hash de cada linha é o <code>prev</code> da linha acima</span><div class="pagination"><button class="btn btn-sm">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">2</button><button class="btn btn-sm">3</button><button class="btn btn-sm">…</button><button class="btn btn-sm">›</button></div></div>
+      <div class="table-foot"><span>Mostrando 35 de 48.212 · do mais recente · o hash de cada linha é o <code>prev</code> da linha acima</span><div class="pagination"><button class="btn btn-sm">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">2</button><button class="btn btn-sm">3</button><button class="btn btn-sm">…</button><button class="btn btn-sm">›</button></div></div>
     </div>
 
     <div class="grid cols-2 mb-3">
@@ -343,7 +367,7 @@
             <div class="list-item"><span class="li-icon"><i data-icon="eye"></i></span><div class="li-body"><div class="li-title">Cada abertura de conteúdo no workbench</div><div class="li-sub">Quem viu qual arquivo de qual item, e quando. Conteúdo bruto nunca sai do visualizador.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="clipboard-check"></i></span><div class="li-body"><div class="li-title">Decisões e redações</div><div class="li-sub">Aprovar, ajustes, rejeitar com código, escalar, nova versão com tarjas, nível de autenticidade.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="users"></i></span><div class="li-body"><div class="li-title">Ações em contas</div><div class="li-sub">Advertir, restringir envios, bloquear finalizações, banir. Sempre com motivo e fundamento.</div></div></div>
-            <div class="list-item"><span class="li-icon"><i data-icon="vault"></i></span><div class="li-body"><div class="li-title">Carteiras de itens e chaves</div><div class="li-sub"><code>wallet.create</code> na aprovação, <code>wallet.settle</code> na finalização (comissão e reembolsos), <code>key.reveal</code> (o vendedor recebeu a frase, após senha + TOTP), <code>key.shred</code>, <code>release.public</code> (lacre bateu 100 % e ficou público), <code>refund.batch</code>, aprovações de finalização acima de US$ 15.000, fechamento da reconciliação e saídas do fundo de garantia.</div></div></div>
+            <div class="list-item"><span class="li-icon"><i data-icon="vault"></i></span><div class="li-body"><div class="li-title">Carteiras de itens e chaves</div><div class="li-sub"><code>wallet.create</code> na aprovação, <code>wallet.settle</code> na finalização (comissão e reembolsos), <code>key.reveal</code> (o vendedor recebeu a frase, após senha + TOTP), <code>key.shred</code>, <code>release.public</code> (lacre bateu 100 % e ficou público), <code>request.preview.sent</code>, <code>request.confirm</code> e <code>batch.accept</code> (prévia e confirmação de pedidos), <code>refund.batch</code>, aprovações de finalização acima de US$ 15.000, fechamento da reconciliação e saídas do fundo de garantia.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="settings"></i></span><div class="li-body"><div class="li-title">Configurações e políticas</div><div class="li-sub">Comissão, limites, SLAs, categorias, países bloqueados, versões de política, papéis da equipe, canais.</div></div></div>
           </div>
           <p class="xs muted mt-2">Não entra no log: nada sobre identidade de usuários. Alvos são slugs, pseudônimos e números de caso.</p>
@@ -353,7 +377,7 @@
 
     <div class="grid cols-2">
       <div class="card">
-        <div class="card-head"><h3>Eventos por família · 30 dias</h3><span class="muted small">7.244</span></div>
+        <div class="card-head"><h3>Eventos por família · 30 dias</h3><span class="muted small">7.268</span></div>
         <div class="card-body stack-sm">
           <div class="hbar"><span>asset.* · aberturas e redações</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">3.860</span></div>
           <div class="hbar"><span>review.* · análises</span><div class="track"><div class="fill" style="width:55%"></div></div><span class="num">2.140</span></div>
@@ -363,6 +387,7 @@
           <div class="hbar"><span>key.* · chaves no HSM</span><div class="track"><div class="fill" style="width:4%"></div></div><span class="num">164</span></div>
           <div class="hbar"><span>refund.* · reembolsos</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">38</span></div>
           <div class="hbar"><span>release.* · liberações públicas</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">5</span></div>
+          <div class="hbar"><span>request.* · batch.* · pedidos</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">24</span></div>
           <div class="hbar"><span>legal.* · jurídico</span><div class="track"><div class="fill" style="width:2%"></div></div><span class="num">46</span></div>
           <div class="hbar"><span>dispute.* · disputas</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">22</span></div>
           <div class="hbar"><span>account.* · contas</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">18</span></div>
