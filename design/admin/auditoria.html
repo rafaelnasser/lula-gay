@@ -48,7 +48,7 @@
       <div class="card-body">
         <div class="grid cols-4">
           <div class="field"><label for="f-pessoa">Pessoa</label><select id="f-pessoa" class="select"><option>Todas</option><option>Ana R. · Curadora sênior</option><option>Bruno M. · Curador</option><option>Carla S. · Jurídico</option><option>Diego T. · Publicação</option><option>Elisa F. · Financeiro</option><option>Marcos L. · Administrador</option></select></div>
-          <div class="field"><label for="f-acao">Ação</label><select id="f-acao" class="select"><option>Todas</option><option>review.* (análise)</option><option>asset.* (conteúdo e redação)</option><option>listing.* (itens)</option><option>account.* (contas)</option><option>dispute.* (disputas)</option><option>legal.* (jurídico)</option><option>social.* (publicação)</option><option>wallet.* (carteiras de itens)</option><option>release.* (ondas do lacre)</option><option>key.* (chaves no HSM)</option><option>refund.* (reembolsos)</option><option>settings.* (configurações)</option><option>auth.* (acesso da equipe)</option></select></div>
+          <div class="field"><label for="f-acao">Ação</label><select id="f-acao" class="select"><option>Todas</option><option>review.* (análise)</option><option>asset.* (conteúdo e redação)</option><option>listing.* (itens)</option><option>account.* (contas)</option><option>dispute.* (disputas)</option><option>legal.* (jurídico)</option><option>social.* (publicação)</option><option>wallet.* (carteiras de itens)</option><option>release.* (liberação pública do lacre)</option><option>key.* (chaves no HSM)</option><option>refund.* (reembolsos)</option><option>settings.* (configurações)</option><option>auth.* (acesso da equipe)</option></select></div>
           <div class="field"><label for="f-per">Período</label><select id="f-per" class="select"><option>Últimos 30 dias</option><option>Hoje</option><option>7 dias</option><option>Personalizado…</option></select></div>
           <div class="field"><label for="f-alvo">Alvo</label><input id="f-alvo" class="input mono" placeholder="lcr-…, DN-…, DS-…, @pseudônimo"></div>
         </div>
@@ -63,9 +63,9 @@
           <tr>
             <td class="num">27/10 · 10:40:02</td>
             <td><span class="person">Sistema<small>release-job</small></span></td>
-            <td><span class="tag">release.wave</span></td>
+            <td><span class="tag">release.public</span></td>
             <td class="mono">lcr-3m6r2</td>
-            <td class="diff">lacre rompido às 10:40 · US$ 9.120 de 203 apoiadores (meta US$ 9.000)<span class="arr">→</span>onda 1 de 3 liberada · apoios a partir de US$ 500 · onda 2 em 29/10 10:40 · onda 3 em 31/10 10:40 · público na finalização, 03/11 10:40</td>
+            <td class="diff">lacre rompido às 10:40 · US$ 9.120 de 203 apoiadores (meta US$ 9.000)<span class="arr">→</span>todo o conteúdo público, para todos · post na fila de publicação · selo "Rompeu este lacre" aos 203 apoiadores · finalização 30/10 10:40</td>
             <td><span class="chain">8b3e…d07c<span class="arr">→</span><b>4e91…7b2d</b></span></td>
           </tr>
           <tr>
@@ -169,7 +169,7 @@
             <td><span class="person">Sistema<small>settlement-job</small></span></td>
             <td><span class="tag">wallet.settle</span></td>
             <td class="mono">lcr-2f8n5</td>
-            <td class="diff">rompido em 20/10 · ondas 20, 22 e 24/10 · US$ 7.400 (241 apoios)<span class="arr">→</span>finalizada 72 h após a última onda · conteúdo público · comissão US$ 740 (txid 0x2f8n…6c40) · 0 reembolsos · líquido US$ 6.660 · aguarda o vendedor</td>
+            <td class="diff">rompido e público em 24/10 · US$ 7.400 (241 apoios)<span class="arr">→</span>finalizada 72 h após a liberação pública · comissão US$ 740 (txid 0x2f8n…6c40) · 0 reembolsos · líquido US$ 6.660 · aguarda o vendedor</td>
             <td><span class="chain">3e77…b0c4<span class="arr">→</span><b>5c2a…e71f</b></span></td>
           </tr>
           <tr>
@@ -343,7 +343,7 @@
             <div class="list-item"><span class="li-icon"><i data-icon="eye"></i></span><div class="li-body"><div class="li-title">Cada abertura de conteúdo no workbench</div><div class="li-sub">Quem viu qual arquivo de qual item, e quando. Conteúdo bruto nunca sai do visualizador.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="clipboard-check"></i></span><div class="li-body"><div class="li-title">Decisões e redações</div><div class="li-sub">Aprovar, ajustes, rejeitar com código, escalar, nova versão com tarjas, nível de autenticidade.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="users"></i></span><div class="li-body"><div class="li-title">Ações em contas</div><div class="li-sub">Advertir, restringir envios, bloquear finalizações, banir. Sempre com motivo e fundamento.</div></div></div>
-            <div class="list-item"><span class="li-icon"><i data-icon="vault"></i></span><div class="li-body"><div class="li-title">Carteiras de itens e chaves</div><div class="li-sub"><code>wallet.create</code> na aprovação, <code>wallet.settle</code> na finalização (comissão e reembolsos), <code>key.reveal</code> (o vendedor recebeu a frase, após senha + TOTP), <code>key.shred</code>, <code>release.wave</code> (cada onda da fila de liberação do lacre), <code>refund.batch</code>, aprovações de finalização acima de US$ 15.000, fechamento da reconciliação e saídas do fundo de garantia.</div></div></div>
+            <div class="list-item"><span class="li-icon"><i data-icon="vault"></i></span><div class="li-body"><div class="li-title">Carteiras de itens e chaves</div><div class="li-sub"><code>wallet.create</code> na aprovação, <code>wallet.settle</code> na finalização (comissão e reembolsos), <code>key.reveal</code> (o vendedor recebeu a frase, após senha + TOTP), <code>key.shred</code>, <code>release.public</code> (lacre bateu 100 % e ficou público), <code>refund.batch</code>, aprovações de finalização acima de US$ 15.000, fechamento da reconciliação e saídas do fundo de garantia.</div></div></div>
             <div class="list-item"><span class="li-icon"><i data-icon="settings"></i></span><div class="li-body"><div class="li-title">Configurações e políticas</div><div class="li-sub">Comissão, limites, SLAs, categorias, países bloqueados, versões de política, papéis da equipe, canais.</div></div></div>
           </div>
           <p class="xs muted mt-2">Não entra no log: nada sobre identidade de usuários. Alvos são slugs, pseudônimos e números de caso.</p>
@@ -353,7 +353,7 @@
 
     <div class="grid cols-2">
       <div class="card">
-        <div class="card-head"><h3>Eventos por família · 30 dias</h3><span class="muted small">7.252</span></div>
+        <div class="card-head"><h3>Eventos por família · 30 dias</h3><span class="muted small">7.244</span></div>
         <div class="card-body stack-sm">
           <div class="hbar"><span>asset.* · aberturas e redações</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">3.860</span></div>
           <div class="hbar"><span>review.* · análises</span><div class="track"><div class="fill" style="width:55%"></div></div><span class="num">2.140</span></div>
@@ -362,7 +362,7 @@
           <div class="hbar"><span>wallet.* · carteiras de itens</span><div class="track"><div class="fill" style="width:5%"></div></div><span class="num">213</span></div>
           <div class="hbar"><span>key.* · chaves no HSM</span><div class="track"><div class="fill" style="width:4%"></div></div><span class="num">164</span></div>
           <div class="hbar"><span>refund.* · reembolsos</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">38</span></div>
-          <div class="hbar"><span>release.* · ondas do lacre</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">13</span></div>
+          <div class="hbar"><span>release.* · liberações públicas</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">5</span></div>
           <div class="hbar"><span>legal.* · jurídico</span><div class="track"><div class="fill" style="width:2%"></div></div><span class="num">46</span></div>
           <div class="hbar"><span>dispute.* · disputas</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">22</span></div>
           <div class="hbar"><span>account.* · contas</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="num">18</span></div>

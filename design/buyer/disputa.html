@@ -47,7 +47,7 @@
       <div class="split">
         <form class="card" data-submit-toast="Disputa DSP-0207 aberta. A curadoria responde em até 5 dias.">
           <div class="card-body stack">
-            <div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">O pagamento fica marcado na carteira do item enquanto a disputa estiver aberta</span>Os 490 USDT que você pagou continuam na carteira do lcr-9f2k7, marcados como em disputa. Enquanto a disputa estiver aberta, o item não pode ser finalizado: a carteira só é entregue ao vendedor sem disputa aberta. A curadoria já tem a prévia pública e o conteúdo entregue; o seu papel é apontar a diferença.</div></div>
+            <div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">O pagamento fica marcado na carteira do item enquanto a disputa estiver aberta</span>Os 490 USDT que você pagou continuam na carteira do lcr-9f2k7, marcados como em disputa. Enquanto a disputa estiver aberta, o pagamento não vai para o vendedor. A curadoria já tem a prévia pública e o conteúdo entregue; o seu papel é apontar a diferença.</div></div>
 
             <fieldset class="field">
               <legend>Motivo</legend>
@@ -76,10 +76,10 @@
             <div class="panel">
               <b class="small">O que acontece depois</b>
               <div class="after mt-1 small">
-                <div class="how-step"><span class="n">1</span><div>A disputa recebe um número (DSP-…) e o vendedor é notificado do motivo, sem saber quem abriu. A finalização do item fica adiada até a decisão.</div></div>
+                <div class="how-step"><span class="n">1</span><div>A disputa recebe um número (DSP-…) e o vendedor é notificado do motivo, sem saber quem abriu. O pagamento só vai para o vendedor depois da decisão.</div></div>
                 <div class="how-step"><span class="n">2</span><div>A curadoria compara a prévia pública com o conteúdo entregue e pode ler a conversa do item. O vendedor pode responder em 48 h.</div></div>
                 <div class="how-step"><span class="n">3</span><div>Decisão em até 5 dias: reembolso total, parcial ou disputa mantida. O reembolso sai da carteira do item para o endereço de origem do seu pagamento no mesmo dia, descontada só a taxa de rede.</div></div>
-                <div class="how-step"><span class="n">4</span><div>Você mantém o acesso ao item até a decisão. Em reembolso total de uma compra, o acesso é revogado. Depois da finalização de um item, só reclamações excepcionais são aceitas, pagas pelo fundo de garantia.</div></div>
+                <div class="how-step"><span class="n">4</span><div>Você mantém o acesso ao item até a decisão. Em reembolso total de uma compra, o acesso é revogado. Depois que o pagamento vai para o vendedor, só reclamações excepcionais são aceitas, pagas pelo fundo de garantia.</div></div>
               </div>
             </div>
 
@@ -108,7 +108,7 @@
                 <dt>Slug</dt><dd>lcr-9f2k7</dd>
                 <dt>Pagamento</dt><dd>490 USDT · Polygon · 21/10 · confirmado (12 de 12)</dd>
                 <dt>txid</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…7a31</a></dd>
-                <dt>Carteira do item</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…c0d4</a> · Polygon · USDT · item ativo, não finalizado</dd>
+                <dt>Carteira do item</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…c0d4</a> · Polygon · USDT · item ativo</dd>
                 <dt>Entitlement</dt><dd>ENT-3F9A · download com marca d'água</dd>
                 <dt>Versão 2 entregue</dt><dd>25/10 · 14:20</dd>
                 <dt>Hash do pacote</dt><dd><a class="link" href="../public/prova.html">3f9a…c21e</a></dd>
@@ -130,14 +130,14 @@
       </div>
     </div>
 
-    <!-- ===================== VARIANTE: ACOMPANHAR (DSP-0203 · reclamação após a finalização) ===================== -->
+    <!-- ===================== VARIANTE: ACOMPANHAR (DSP-0203 · reclamação depois de o pagamento ir para o vendedor) ===================== -->
     <div data-variant="acompanhar">
       <div class="crumbs mb-2"><a href="../buyer/apoios.html">Apoios</a><i data-icon="chevron-right"></i><a href="../public/item.html">lcr-2d9r4</a><i data-icon="chevron-right"></i><span>Reclamação DSP-0203</span></div>
       <div class="page-head">
         <div>
           <p class="eyebrow">Reclamação · enviada em 08/10 às 22:10, depois da sua janela de 72 h · resolvida em 10/10</p>
           <h1>Reclamação DSP-0203</h1>
-          <p class="sub">Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos · lcr-2d9r4 · lacre coletivo rompido em 01/10 e finalizado em 08/10 · você apoiou com 50 USDT em 01/10 e recebeu na onda 3, em 05/10</p>
+          <p class="sub">Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos · lcr-2d9r4 · lacre coletivo rompido e público em 01/10 · você apoiou com 50 USDT em 01/10</p>
         </div>
         <div class="actions"><span class="badge badge-lg badge-ok"><i data-icon="check-circle"></i>Aceita · reembolso total pelo fundo de garantia</span></div>
       </div>
@@ -149,10 +149,9 @@
             <div class="card-body">
               <div class="timeline">
                 <div class="tl-item ok"><div class="when">01/10 · 09:40</div><div class="what">Apoio de 50 USDT confirmado · Polygon · txid <span class="mono">0x4d0e…a9c3</span> · fica na carteira do lacre até o resultado</div></div>
-                <div class="tl-item wax"><div class="when">01/10 · 10:10</div><div class="what">Lacre rompido · meta batida, com o seu apoio · fila de liberação, do maior apoio para o menor: onda 1 na hora, onda 2 em 03/10, onda 3 em 05/10 · público na finalização</div></div>
-                <div class="tl-item ok"><div class="when">05/10 · 10:10</div><div class="what">Sua onda (3) recebe: acesso no seu cofre (ENT-5B2C) · sua janela de disputa de 72 h vai até 08/10 às 10:10</div></div>
-                <div class="tl-item ok"><div class="when">08/10 · 10:10</div><div class="what">Finalização, 72 h depois da última onda e sem disputa aberta: conteúdo público, comissão separada e carteira do lacre entregue a <span class="handle" data-handle="estenografo-7b3c"></span> · chave destruída</div></div>
-                <div class="tl-item warn"><div class="when">08/10 · 22:10</div><div class="what">Sua reclamação, 12 h depois do fim da sua janela e da finalização · motivo: conteúdo diferente da prova pública (1.500 obras anunciadas, 1.200 entregues) · 2 anexos · nada pode ser retido: a carteira já foi entregue</div></div>
+                <div class="tl-item wax"><div class="when">01/10 · 10:10</div><div class="what">Lacre rompido · meta batida, com o seu apoio · todo o conteúdo público para todos, com post nas redes · acesso também no seu cofre (ENT-5B2C) · sua janela de disputa de 72 h vai até 04/10 às 10:10</div></div>
+                <div class="tl-item ok"><div class="when">04/10 · 10:10</div><div class="what">72 h depois da liberação e sem disputa aberta: o pagamento foi para <span class="handle" data-handle="estenografo-7b3c"></span></div></div>
+                <div class="tl-item warn"><div class="when">08/10 · 22:10</div><div class="what">Sua reclamação, 4 dias e 12 h depois do fim da sua janela · motivo: conteúdo diferente da prova pública (1.500 obras anunciadas, 1.200 entregues) · 2 anexos · nada pode ser retido: o pagamento já foi para o vendedor</div></div>
                 <div class="tl-item info"><div class="when">09/10 · 10:10</div><div class="what">Aceita excepcionalmente para análise · Bruno M. (Curador) · prova pública e pacote comparados</div></div>
                 <div class="tl-item ok"><div class="when">10/10 · 11:05</div><div class="what">Resolvida · reembolso total de 50 USDT pelo fundo de garantia · descrição pública corrigida para 1.200 obras</div></div>
                 <div class="tl-item ok"><div class="when">10/10 · 11:08</div><div class="what">50 USDT enviados ao endereço de origem do seu apoio, a partir do fundo de garantia · Polygon · txid <span class="mono">0x2d9r…51fe</span> · 12 confirmações</div></div>
@@ -173,8 +172,8 @@
             <div class="card-head"><h3>Resposta da curadoria</h3><span class="badge badge-outline">10/10 · 11:05</span></div>
             <div class="card-body stack">
               <div class="reviewer"><span class="av">BM</span><div><b class="small">Bruno M.</b><div class="xs muted">Curador · análise de reclamação · acesso ao conteúdo registrado em auditoria</div></div></div>
-              <p class="small">A sua janela de disputa (72 h a partir da sua onda, a 3ª) terminou em 08/10 às 10:10, junto com a finalização, e a carteira já foi entregue ao vendedor; por isso a reclamação não podia reter nada na carteira do item. Aceitamos excepcionalmente porque a divergência é verificável contra a prova pública: o hash do pacote confere, mas o índice tem 1.200 obras, enquanto a prova e a descrição aprovada anunciavam 1.500, com as 300 de Pernambuco na amostra. Enquadra-se em prévia enganosa (R11).</p>
-              <p class="small">Decisão: <b>aceita, reembolso total</b> (50 USDT), pago pelo fundo de garantia da plataforma ao endereço de origem do seu apoio. A descrição pública foi corrigida para 1.200 obras, o vendedor recebeu a penalidade prevista e os demais apoiadores que reclamarem até 03/11 têm o mesmo tratamento. O conteúdo é público desde a finalização, como em todo lacre rompido; nada é revogado.</p>
+              <p class="small">A sua janela de disputa (72 h a partir da liberação pública) terminou em 04/10 às 10:10, e o pagamento já tinha ido para o vendedor; por isso a reclamação não podia reter nada. Aceitamos excepcionalmente porque a divergência é verificável contra a prova pública: o hash do pacote confere, mas o índice tem 1.200 obras, enquanto a prova e a descrição aprovada anunciavam 1.500, com as 300 de Pernambuco na amostra. Enquadra-se em prévia enganosa (R11).</p>
+              <p class="small">Decisão: <b>aceita, reembolso total</b> (50 USDT), pago pelo fundo de garantia da plataforma ao endereço de origem do seu apoio. A descrição pública foi corrigida para 1.200 obras, o vendedor recebeu a penalidade prevista e os demais apoiadores que reclamarem até 03/11 têm o mesmo tratamento. O conteúdo é público desde 01/10, como em todo lacre rompido; nada é revogado.</p>
               <div class="resolution">
                 <div class="row between"><b>Resultado: reembolso total pelo fundo de garantia</b><span class="price ok">US$ 50,00</span></div>
                 <div class="xs muted mt-1">50 USDT enviados ao endereço de origem do seu apoio em 10/10 às 11:08 · txid <span class="mono">0x2d9r…51fe</span> · só a taxa de rede descontada · a reputação do vendedor registra 1 reclamação aceita</div>
@@ -193,8 +192,8 @@
                 <dt>Item</dt><dd>lcr-2d9r4 · lacre coletivo · <span class="handle" data-handle="estenografo-7b3c"></span></dd>
                 <dt>Apoio</dt><dd>50 USDT · Polygon · 01/10 · txid <span class="mono">0x4d0e…a9c3</span></dd>
                 <dt>Reembolso</dt><dd>50 USDT (100 %) ao endereço de origem · taxa de rede ≈ US$ 0,04</dd>
-                <dt>De onde saiu</dt><dd>do fundo de garantia: a carteira do lacre foi entregue ao vendedor em 08/10</dd>
-                <dt>Acesso</dt><dd>mantido · recebido na onda 3 em 05/10 · público desde 08/10</dd>
+                <dt>De onde saiu</dt><dd>do fundo de garantia: o pagamento já tinha ido para o vendedor em 04/10</dd>
+                <dt>Acesso</dt><dd>mantido · público desde 01/10</dd>
               </dl>
               <div class="row mt-2"><a class="btn btn-sm" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Ver em Pagamentos</a><a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Registro na prova</a></div>
             </div>
@@ -202,8 +201,8 @@
           <div class="card">
             <div class="card-head"><h3>De onde sai um reembolso</h3></div>
             <div class="card-body stack-sm small">
-              <div class="row start"><i data-icon="wallet" class="ico brass"></i><div><b>Antes da finalização:</b> uma disputa aberta dentro da sua janela de 72 h (contada a partir da sua onda, no lacre coletivo) adia a finalização do item até a decisão, e o reembolso sai da carteira do item para o endereço de origem do seu pagamento.</div></div>
-              <div class="row start"><i data-icon="shield-check" class="ico brass"></i><div><b>Depois da finalização:</b> a carteira já foi entregue ao vendedor, então só reclamações excepcionais são aceitas, pagas pelo fundo de garantia da plataforma (2 % de cada comissão), também ao endereço de origem. Foi o caso aqui.</div></div>
+              <div class="row start"><i data-icon="wallet" class="ico brass"></i><div><b>Antes de o pagamento ir para o vendedor:</b> uma disputa aberta dentro das 72 h (no lacre coletivo, contadas a partir da liberação pública) segura o pagamento até a decisão, e o reembolso sai da carteira do item para o endereço de origem do seu pagamento.</div></div>
+              <div class="row start"><i data-icon="shield-check" class="ico brass"></i><div><b>Depois que o pagamento vai para o vendedor:</b> só reclamações excepcionais são aceitas, pagas pelo fundo de garantia da plataforma, também ao endereço de origem. Foi o caso aqui.</div></div>
               <div class="row start"><i data-icon="alert-triangle" class="ico brass"></i><div>Nos dois casos o valor volta ao endereço que pagou. Pague de uma carteira que você controla, nunca direto de uma corretora.</div></div>
             </div>
           </div>

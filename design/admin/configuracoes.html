@@ -100,7 +100,7 @@
                 <tbody>
                   <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas, após a última janela de 72 h</td></tr>
                   <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span></td><td class="num">10 %</td><td class="small">72 h após a venda, sem disputa aberta</td></tr>
-                  <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">72 h após a última onda (7 dias após o rompimento, com 48 h entre ondas) · se a meta não bater: no fim do prazo, sobre o valor garantido pelo último marco (nada abaixo de 25 %)</td></tr>
+                  <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td class="num">10 %</td><td class="small">72 h após a liberação pública (ao bater 100 %) · se a meta não bater: no fim do prazo, sobre o valor garantido pelo último marco (nada abaixo de 25 %)</td></tr>
                   <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span></td><td class="num">10 %</td><td class="small">Quando o atendimento é validado · sobre a recompensa total (valor por interessado × interessados)</td></tr>
                   <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão</span></td><td class="num">10 %</td><td class="small">72 h após o pagamento do vencedor · sobre o segundo preço</td></tr>
                   <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span></td><td class="num">10 %</td><td class="small">Quando o vendedor encerra as vendas · sobre todas as camadas vendidas</td></tr>
@@ -268,19 +268,15 @@
             <div class="alert alert-info mt-2"><i data-icon="info"></i><div>Não existe limite de saque nem de depósito porque não existe saldo: o que entra vai para a carteira do item e só sai como reembolso ao endereço de origem ou na finalização.</div></div>
             <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de limites enviada a Marcos L. · settings.limit.update">Salvar limites</button></div>
           </div></div>
-          <div class="card"><div class="card-head"><h3>Lacre coletivo · marcos e fila de liberação</h3><span class="badge badge-outline">do maior apoio para o menor</span></div><div class="card-body">
+          <div class="card"><div class="card-head"><h3>Lacre coletivo · marcos garantidos</h3><span class="badge badge-outline">padrão</span></div><div class="card-body">
             <div class="form-grid">
-              <div class="field"><label for="l17">Onda 1 · faixa sugerida</label><div class="input-group"><span class="affix">a partir de US$</span><input id="l17" class="input num w-sm" value="500"></div><span class="hint">Recebe na hora do rompimento.</span></div>
-              <div class="field"><label for="l18">Onda 2 · faixa sugerida</label><div class="input-group"><span class="affix">a partir de US$</span><input id="l18" class="input num w-sm" value="100"></div><span class="hint">Onda 3: abaixo disso (apoio mínimo US$ 10).</span></div>
-              <div class="field"><label for="l19">Janela entre ondas</label><select id="l19" class="select"><option selected>48 h (padrão)</option><option>72 h</option></select><span class="hint">Escolha do vendedor ao criar o anúncio.</span></div>
-              <div class="field"><label for="l20">Número de ondas</label><div class="input-group"><input id="l20" class="input num w-sm" value="3" readonly><span class="affix">ondas</span></div></div>
               <div class="field"><label for="l22">Se a meta não bater</label><select id="l22" class="select"><option selected>Marcos garantidos (padrão)</option><option>Flexível (o vendedor declara antes de publicar)</option></select><span class="hint">Fica com o vendedor o valor do último marco batido; o que entrou depois volta. Abaixo de 25 %, tudo volta.</span></div>
-              <div class="field"><label for="l23">Marcos garantidos</label><input id="l23" class="input" value="25 · 50 · 75 · 90 % da meta" readonly><span class="hint">Cada marco libera uma prévia pública e fica garantido ao vendedor.</span></div>
-              <div class="field"><label for="l24">Piso do Flexível</label><div class="input-group"><input id="l24" class="input num w-sm" value="70"><span class="affix">% da meta</span></div><span class="hint">Acima do piso, libera em ondas mesmo sem a meta; o vendedor fica com tudo, menos 10 %.</span></div>
-              <div class="field full"><label for="l21">Público</label><input id="l21" class="input" value="na finalização: 72 h após a última onda" readonly><span class="hint">Com 48 h entre ondas, 7 dias após o rompimento. É quando a comissão é separada e a carteira vai ao vendedor.</span></div>
+              <div class="field"><label for="l23">Marcos garantidos</label><input id="l23" class="input" value="25 · 50 · 75 · 90 % da meta" readonly><span class="hint">Cada marco libera uma prévia pública, postada nas redes, e fica garantido ao vendedor.</span></div>
+              <div class="field"><label for="l24">Piso do Flexível</label><div class="input-group"><input id="l24" class="input num w-sm" value="70"><span class="affix">% da meta</span></div><span class="hint">Acima do piso, o conteúdo fica público no fim do prazo mesmo sem a meta; o vendedor fica com tudo, menos 10 %.</span></div>
+              <div class="field"><label for="l21">Ao bater 100 %</label><input id="l21" class="input" value="tudo público, para todos, na hora" readonly><span class="hint">Post nas redes. Finalização 72 h depois (janela de disputa): comissão separada e carteira ao vendedor.</span></div>
             </div>
-            <p class="xs muted mt-2">As faixas são sugestões: o vendedor ajusta no anúncio. Empate na fila: quem apoiou antes vem primeiro. Quem apoia mais sobe de onda. Compra com exclusividade continua devolvendo todos os apoios.</p>
-            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de fila de liberação enviada a Marcos L. · settings.release.update">Salvar fila de liberação</button></div>
+            <p class="xs muted mt-2">Compra com exclusividade continua encerrando o lacre e devolvendo todos os apoios.</p>
+            <div class="save-row"><button class="btn btn-primary" data-toast="Proposta de regras do lacre enviada a Marcos L. · settings.crowdfund.update">Salvar regras do lacre</button></div>
           </div></div>
           </div>
         </div>

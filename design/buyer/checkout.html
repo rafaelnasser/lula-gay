@@ -35,12 +35,7 @@
     .flow svg { width: 14px; height: 14px; color: var(--muted-2); flex: none; }
     .flow .badge { cursor: pointer; }
     .pay.locked > .card-body { opacity: .4; pointer-events: none; }
-    .waves { display: flex; flex-direction: column; gap: 6px; }
-    .wave { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); font-size: var(--fs-sm); }
-    .wave > b { font-family: var(--font-display); }
-    .wave.on { border-color: var(--wax); background: var(--wax-soft); box-shadow: inset 0 0 0 1px var(--wax); }
-    .wave.on > b { color: var(--wax-2); }
-    .wave.pub { background: transparent; border-style: dashed; color: var(--muted); }
+    .progress-marks span { white-space: nowrap; }
     .done-head { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .done-head svg { width: 52px; height: 52px; color: var(--ok); }
   </style>
@@ -76,17 +71,17 @@
                 <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 490,00 USDT da sua carteira para o endereço derivado deste pagamento, na carteira do item</div></div>
                 <div class="tl-item ok"><div class="when">≈ 30 s</div><div class="what">12 confirmações: acesso no cofre, visualizador seguro e download com marca d'água "@coruja-7f3a · ENT-…"</div></div>
                 <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa. Se o conteúdo não corresponder à prévia, a curadoria compara os dois e decide em até 5 dias; o reembolso sai da carteira do item para o seu endereço de origem</div></div>
-                <div class="tl-item"><div class="when">finalização</div><div class="what">Quando o vendedor encerra as vendas, a plataforma separa 10 % (US$ 49,00 desta cópia) e entrega a carteira do item a ele. Nada passa por um saldo nosso</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
               </div>
             </div></div>
           </div>
           <div class="card"><div class="card-body stack" data-gate>
             <dl class="kv"><dt>Preço</dt><dd>US$ 490,00</dd><dt>Taxas</dt><dd>Nenhuma para quem compra. Só a taxa de rede, paga na sua carteira (≈ US$ 0,04 em Polygon)</dd></dl>
             <div class="total"><span class="small muted">Você paga</span><div><div class="price">US$ 490,00</div><div class="conv">= 490,00 USDT · 1:1</div></div></div>
-            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor, data, rede, txid e o entitlement gerado. O seu endereço de origem fica até a finalização, só para reembolso. O vendedor vê apenas "1 cópia vendida".</div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor, data, rede, txid e o entitlement gerado. O seu endereço de origem fica guardado só enquanto pode haver reembolso. O vendedor vê apenas "1 cópia vendida".</div></div>
             <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Cópias<span class="desc">Uso pessoal, sem revenda ou redistribuição. A marca d'água identifica a conta, não a pessoa.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-            <div class="card pay" data-pay data-item="item lcr-9f2k7" data-usd="490,00" data-polygon="0x9f2k…b8e3" data-tron="TQ9f…k7P2" data-base="0x9f2k…b40e" data-bitcoin="bc1q…9f2k" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x9f2k…7a31" data-done="Acesso liberado no cofre" data-done-note="Entitlement ENT-3F9A emitido: visualizador e download com marca d'água. Janela de disputa de 72 h a partir do primeiro acesso." data-success="sucesso"></div>
+            <div class="card pay" data-pay data-item="item lcr-9f2k7" data-usd="490,00" data-polygon="0x9f2k…b8e3" data-tron="TQ9f…k7P2" data-base="0x9f2k…b40e" data-bitcoin="bc1q…9f2k" data-txid="0x9f2k…7a31" data-done="Acesso liberado no cofre" data-done-note="Entitlement ENT-3F9A emitido: visualizador e download com marca d'água. Janela de disputa de 72 h a partir do primeiro acesso." data-success="sucesso"></div>
             <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
           </div></div>
         </div>
@@ -116,7 +111,7 @@
                 <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 25.000,00 USDT (ou 0,36550 BTC) para o endereço derivado deste pagamento, na carteira do item</div></div>
                 <div class="tl-item ok"><div class="when">ao confirmar</div><div class="what">Acesso no cofre e cessão de direitos padronizada gerada com os pseudônimos e o hash; o item sai do catálogo</div></div>
                 <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa; a prévia sai da página pública. Disputa procedente: reembolso da carteira do item ao seu endereço de origem</div></div>
-                <div class="tl-item"><div class="when">após 72 h · finalização</div><div class="what">A plataforma separa 10 % (US$ 2.500,00), entrega a carteira do item ao vendedor e destrói a chave do conteúdo nos servidores</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor. A chave do conteúdo é destruída nos servidores; fica só o hash na prova</div></div>
               </div>
             </div></div>
           </div>
@@ -126,7 +121,7 @@
             <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor, data, rede, txid e a cessão de direitos com os dois pseudônimos. O vendedor não vê quem comprou.</div></div>
             <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Exclusivo<span class="desc">Compra vinculante; sem devolução fora da janela de disputa.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-            <div class="card pay" data-pay data-item="item lcr-7q1z3" data-usd="25.000,00" data-polygon="0x7q1z…3c9e" data-tron="TQ7q…1z3D" data-base="0x7q1z…e82b" data-bitcoin="bc1q…7q1z" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x7q1z…d41a" data-done="Acesso liberado no cofre" data-done-note="Cessão de direitos gerada com os pseudônimos e o hash; o item saiu do catálogo. Finalização 72 h após a entrega."></div>
+            <div class="card pay" data-pay data-item="item lcr-7q1z3" data-usd="25.000,00" data-polygon="0x7q1z…3c9e" data-tron="TQ7q…1z3D" data-base="0x7q1z…e82b" data-bitcoin="bc1q…7q1z" data-txid="0x7q1z…d41a" data-done="Acesso liberado no cofre" data-done-note="Cessão de direitos gerada com os pseudônimos e o hash; o item saiu do catálogo. Disputa aberta por 72 h."></div>
             <button class="btn btn-block" data-toast="Oferta mínima: US$ 15.000,00. Você paga o valor ofertado para um endereço derivado; recusada ou sem resposta em 48 h, volta ao seu endereço de origem."><i data-icon="send"></i>Ou fazer uma oferta (mín. US$ 15.000)</button>
             <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
           </div></div>
@@ -158,7 +153,7 @@
                 <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 35.000,00 USDT (ou 0,51170 BTC) para o endereço derivado deste pagamento, na carteira do item</div></div>
                 <div class="tl-item ok"><div class="when">ao confirmar</div><div class="what">O anúncio encerra na hora: item marcado "Vendido com exclusividade", prévia fora do catálogo, acesso no cofre e cessão de direitos com os pseudônimos e o hash</div></div>
                 <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa. Os 37 compradores anteriores são avisados de que o item encerrou; o acesso deles continua</div></div>
-                <div class="tl-item"><div class="when">após 72 h · finalização</div><div class="what">A plataforma separa 10 % (US$ 3.500,00), entrega a carteira do item ao vendedor e destrói a chave do conteúdo nos servidores</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor. A chave do conteúdo é destruída nos servidores; fica só o hash na prova</div></div>
               </div>
             </div></div>
           </div>
@@ -167,9 +162,9 @@
             <div class="total"><span class="small muted">Você paga</span><div><div class="price">US$ 35.000,00</div><div class="conv">= 35.000,00 USDT · 1:1</div></div></div>
             <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor, data, rede, txid e a cessão de direitos com os dois pseudônimos. Os compradores anteriores e o vendedor não veem quem comprou.</div></div>
             <label class="check"><input type="checkbox"><span>Entendo que esta compra encerra o anúncio para todos<span class="desc">Compra vinculante. Quem já comprou mantém o acesso; ninguém mais recebe. O conteúdo é destruído dos servidores após 72 h.</span></span></label>
-            <label class="check"><input type="checkbox"><span>Aceito os termos da compra com exclusividade<span class="desc">Declaração de exclusividade do vendedor por 24 meses. A comissão de 10 % sai da carteira do item na finalização, não do seu pagamento.</span></span></label>
+            <label class="check"><input type="checkbox"><span>Aceito os termos da compra com exclusividade<span class="desc">Declaração de exclusividade do vendedor por 24 meses. Você paga só o preço e a taxa da rede.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque os dois aceites para gerar o endereço de pagamento. Enquanto isso, o item continua à venda por cópia e outro comprador pode levar a exclusividade.</p>
-            <div class="card pay" data-pay data-item="item lcr-9f2k7" data-usd="35.000,00" data-polygon="0x9f2k…e5c8" data-tron="TQ9f…k7B1" data-base="0x9f2k…0d7a" data-bitcoin="bc1q…2k7x" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x9f2k…b83d" data-done="Item seu com exclusividade" data-done-note="Anúncio fechado para todos. Acesso no cofre e cessão de direitos emitida; os 37 compradores anteriores foram avisados."></div>
+            <div class="card pay" data-pay data-item="item lcr-9f2k7" data-usd="35.000,00" data-polygon="0x9f2k…e5c8" data-tron="TQ9f…k7B1" data-base="0x9f2k…0d7a" data-bitcoin="bc1q…2k7x" data-txid="0x9f2k…b83d" data-done="Item seu com exclusividade" data-done-note="Anúncio fechado para todos. Acesso no cofre e cessão de direitos emitida; os 37 compradores anteriores foram avisados."></div>
             <button class="btn btn-ghost btn-sm btn-block" data-show="copia">Prefiro só uma cópia · US$ 490,00</button>
           </div></div>
         </div>
@@ -177,7 +172,7 @@
 
       <!-- ===================== APOIO ===================== -->
       <div data-variant="apoio">
-        <div class="page-head"><div><p class="eyebrow">Checkout · lacre coletivo</p><h1>Apoiar este lacre</h1><p class="sub">Valor livre a partir de US$ 10. Fica na carteira do lacre até o resultado da meta. Quando o lacre rompe, quem apoiou mais recebe antes.</p></div></div>
+        <div class="page-head"><div><p class="eyebrow">Checkout · lacre coletivo</p><h1>Apoiar este lacre</h1><p class="sub">Valor livre a partir de US$ 10. Fica na carteira do lacre até o resultado da meta. Ao bater a meta, tudo fica público para todos.</p></div></div>
         <div class="split">
           <div class="stack">
             <div class="card"><div class="card-body item-sum">
@@ -188,50 +183,40 @@
                 <div class="xs muted">lcr-4m2x9 · PDF 212 p., 31 áudios, planilhas · vendedor <span class="handle" data-handle="sextante-21c9" data-rep="4,9 · 12 itens · Verificado 9×"></span></div>
                 <div class="goal-head"><span class="raised">US$ 54.120</span><span class="goal">meta US$ 80.000 · 68 %</span></div>
                 <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
+                <div class="progress-marks"><span style="left:25%">25 %</span><span style="left:50%">50 %</span><span style="left:75%">75 %</span><span style="left:90%">90 %</span></div>
                 <div class="xs muted">1.187 apoiadores · encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b></div>
                 <dl class="kv">
                   <dt>Carteira do lacre</dt><dd><a class="link" href="../public/prova.html">0x4m2x…c21e · Polygon · USDT · 1.187 pagamentos</a> · confere on-chain</dd>
-                  <dt>Liberação</dt><dd>Em ondas, do maior apoio para o menor: onda 1 (a partir de US$ 500) na hora do rompimento, onda 2 (US$ 100 a 499) 48 h depois, onda 3 (US$ 10 a 99) 96 h depois. Público na finalização, 7 dias depois do rompimento</dd>
-                  <dt>Fila de liberação</dt><dd>Pública na página do item: posição, pseudônimo, total apoiado e onda. Empate: quem apoiou antes vem primeiro</dd>
-                  <dt>Se falhar</dt><dd>Tudo ou nada: sem meta até 15/11, o apoio volta sozinho ao seu endereço de origem, descontada só a taxa de rede</dd>
+                  <dt>Liberação</dt><dd>Ao bater a meta, tudo fica público para todos, com post nas redes. Quem apoiou ganha o selo "Rompeu este lacre"</dd>
+                  <dt>Marcos</dt><dd>25 % batido em 22/10 e 50 % em 25/10 às 09:35: cada marco liberou uma prévia ao público e ficou garantido ao vendedor (US$ 40.000 hoje). Próximo: 75 % = US$ 60.000</dd>
+                  <dt>Se falhar</dt><dd>O valor do último marco batido fica com o vendedor; o que entrou depois volta aos apoiadores, ao endereço de origem, menos a taxa de rede. Abaixo de 25 %, tudo volta. As prévias continuam públicas; o conteúdo completo não sai</dd>
                   <dt>O que libera</dt><dd>Tudo ao bater US$ 80.000: relatório, planilhas, anexos e os 31 áudios das entrevistas</dd>
                 </dl>
               </div>
             </div></div>
             <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
               <div class="timeline">
-                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia o apoio para o endereço derivado deste pagamento, na carteira do lacre. Após 12 confirmações, soma ao arrecadado e ao seu total na fila de liberação</div></div>
-                <div class="tl-item info"><div class="when">até 15/11</div><div class="what">Marcos de 75 %, 90 % e meta batida são postados nas redes, sem citar apoiadores</div></div>
-                <div class="tl-item wax"><div class="when">meta batida</div><div class="what">O lacre rompe e libera em ondas, do maior apoio para o menor: onda 1 na hora, onda 2 em 48 h, onda 3 em 96 h. Cada apoiador tem 72 h para abrir disputa a partir do próprio acesso. Selo "Rompeu este lacre" no perfil</div></div>
-                <div class="tl-item ok"><div class="when">+7 dias</div><div class="what">Finalização: o conteúdo fica público, a plataforma separa 10 % do arrecadado e entrega a carteira do lacre ao vendedor</div></div>
-                <div class="tl-item"><div class="when">meta não batida</div><div class="what">Sem ondas: cada apoio volta ao endereço de origem a partir da carteira do lacre, descontada só a taxa de rede, em até 24 h após o prazo</div></div>
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia o apoio para o endereço derivado deste pagamento, na carteira do lacre. Após 12 confirmações, soma ao arrecadado e aparece em Apoios</div></div>
+                <div class="tl-item info"><div class="when">até 15/11</div><div class="what">A cada marco (75 % = US$ 60.000, depois 90 %), uma nova prévia sai ao público e o valor do marco fica garantido ao vendedor. Marcos postados nas redes, sem citar apoiadores</div></div>
+                <div class="tl-item wax"><div class="when">meta batida</div><div class="what">O lacre rompe: todo o conteúdo fica público para todos, com post nas redes. Selo "Rompeu este lacre" no seu perfil e 72 h para abrir disputa</div></div>
+                <div class="tl-item ok"><div class="when">+72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
+                <div class="tl-item"><div class="when">prazo vence antes da meta</div><div class="what">O valor do último marco batido fica com o vendedor (hoje US$ 40.000, marco 50 %). O que entrou depois volta aos endereços de origem, menos a taxa de rede, em até 24 h. As prévias continuam públicas; o conteúdo completo não sai</div></div>
               </div>
             </div></div>
           </div>
           <div class="card"><div class="card-body stack" data-gate>
-            <div class="alert alert-wax"><i data-icon="trending-up"></i><div><span class="alert-title">Sua posição na fila de liberação</span>Você já apoiou US$ 250 · 127º de 1.187 · onda 2; +US$ 250 leva você à onda 1.</div></div>
             <div class="field"><label>Valor do apoio</label>
               <div class="amount-options" data-target="#apoio-valor"><button class="btn active" data-amount="50">US$ 50</button><button class="btn" data-amount="100">US$ 100</button><button class="btn" data-amount="250">US$ 250</button><button class="btn" data-amount="500">US$ 500</button></div>
               <div class="input-group"><span class="affix">US$</span><input id="apoio-valor" class="input num" value="50" data-amount-input><span class="affix">outro valor</span></div>
-              <span class="hint">Mínimo US$ 10 · sem máximo: você paga da sua carteira · apoie mais para subir na fila</span>
+              <span class="hint">Mínimo US$ 10 · sem máximo: você paga da sua carteira</span>
             </div>
-            <div class="panel stack-sm" data-waves data-already="250">
-              <div class="row between"><b class="small">Em que onda você entra</b><span class="xs muted">o total apoiado conta</span></div>
-              <div class="waves">
-                <div class="wave" data-wave="1"><b>Onda 1</b><span>a partir de US$ 500 · na hora do rompimento<br><span class="xs muted">31 apoiadores · US$ 21.400</span></span></div>
-                <div class="wave" data-wave="2"><b>Onda 2</b><span>US$ 100 a 499 · 48 h depois do rompimento<br><span class="xs muted">120 apoiadores · US$ 18.600</span></span></div>
-                <div class="wave" data-wave="3"><b>Onda 3</b><span>US$ 10 a 99 · 96 h depois do rompimento<br><span class="xs muted">1.036 apoiadores · US$ 14.120</span></span></div>
-                <div class="wave pub"><b>Público</b><span>todo mundo, na finalização · 7 dias depois do rompimento</span></div>
-              </div>
-              <p class="small" data-wave-msg>Com US$ 50,00, seu total no lacre passa a US$ 300,00: onda 2, acesso 48 h depois do rompimento. Faltam US$ 200,00 para a onda 1.</p>
-              <p class="xs muted">Primeiro apoio: com US$ 50 você entra na onda 3; com US$ 100, onda 2; com US$ 500, onda 1. Janela de 48 h entre ondas, escolhida pelo vendedor.</p>
-            </div>
-            <dl class="kv"><dt>Seu total no lacre</dt><dd>US$ 250,00 já pagos + este apoio = <b data-wave-total>US$ 300,00</b></dd><dt>Taxas</dt><dd>Nenhuma para quem apoia; só a taxa de rede, na sua carteira</dd></dl>
+            <div class="alert alert-info"><i data-icon="flag"></i><div><span class="alert-title">Se o lacre não bater a meta</span>Já garantido ao vendedor: US$ 40.000 (marco 50 %). Seu apoio entra depois do marco 50 %: se o prazo vencer antes do marco 75 %, ele volta para você; se o lacre passar de 75 % e falhar depois, ele fica com o vendedor.<p class="xs mt-1">Seus apoios anteriores: US$ 100 de 22/10 já garantido ao vendedor (entrou antes do marco 50 %) · US$ 150 de 25/10 volta para você se falhar antes do marco 75 %.</p></div></div>
+            <dl class="kv"><dt>Você já apoiou</dt><dd>US$ 250,00 neste lacre (22/10 e 25/10)</dd><dt>Taxas</dt><dd>Nenhuma para quem apoia; só a taxa de rede, na sua carteira</dd></dl>
             <div class="total"><span class="small muted">Você apoia com</span><div><div class="price wax" data-usd-view>US$ 50,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
-            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este apoio</span>Item, valor, data, rede e txid. A fila de liberação é pública na página do item: posição, pseudônimo, total apoiado e onda. Nada além do pseudônimo identifica você.</div></div>
-            <label class="check"><input type="checkbox" checked><span>Aceito os termos do Lacre coletivo<span class="desc">Fica na carteira do lacre até o resultado. Liberação em ondas pelo total apoiado; público na finalização. Reembolso automático ao endereço de origem se a meta falhar.</span></span></label>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este apoio</span>Item, valor, data, rede e txid. A página pública mostra só a contagem de apoiadores; seu pseudônimo não aparece.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do Lacre coletivo<span class="desc">Fica na carteira do lacre até o resultado. Ao bater a meta, tudo fica público para todos. Se o prazo vencer antes da meta, o valor até o último marco batido fica com o vendedor e só o que entrou depois volta ao meu endereço de origem.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-            <div class="card pay" data-pay data-item="lacre lcr-4m2x9" data-usd="50,00" data-usd-from="#apoio-valor" data-polygon="0x4m2x…7c02" data-tron="TQ4m…2x9W" data-base="0x4m2x…51be" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x4m2x…6f1e" data-done="Apoio registrado" data-done-note="Somado ao arrecadado e ao seu total na fila de liberação. Fica na carteira do lacre até 15/11: meta batida, acesso na sua onda; meta não batida, volta ao seu endereço de origem."></div>
+            <div class="card pay" data-pay data-item="lacre lcr-4m2x9" data-usd="50,00" data-usd-from="#apoio-valor" data-polygon="0x4m2x…7c02" data-tron="TQ4m…2x9W" data-base="0x4m2x…51be" data-txid="0x4m2x…6f1e" data-done="Apoio registrado" data-done-note="Somado ao arrecadado. Fica na carteira do lacre até 15/11: meta batida, tudo fica público para todos; se o prazo vencer antes do marco 75 %, este apoio volta ao seu endereço de origem."></div>
             <a class="btn btn-ghost btn-sm btn-block" href="../buyer/apoios.html">Ver meus apoios</a>
           </div></div>
         </div>
@@ -260,7 +245,7 @@
               <div class="timeline">
                 <div class="tl-item ok"><div class="when">agora</div><div class="what">O lance é pago na hora para o endereço derivado deste pagamento e fica na carteira do item até o encerramento. Não pode ser alterado</div></div>
                 <div class="tl-item info"><div class="when">02/11 · 20:00</div><div class="what">Abertura dos lances. Ninguém vê quem deu lance, nem o vendedor</div></div>
-                <div class="tl-item ok"><div class="when">se vencer</div><div class="what">Paga o segundo preço + US$ 50; a diferença volta ao seu endereço de origem; entrega no cofre; disputa de 72 h; depois, finalização (10 % e carteira entregue ao vendedor)</div></div>
+                <div class="tl-item ok"><div class="when">se vencer</div><div class="what">Paga o segundo preço + US$ 50; a diferença volta ao seu endereço de origem; entrega no cofre e 72 h para disputa. Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
                 <div class="tl-item"><div class="when">se não vencer</div><div class="what">O lance volta integralmente ao endereço de origem no encerramento, descontada só a taxa de rede. Por isso leilões só aceitam redes baratas</div></div>
               </div>
             </div></div>
@@ -272,7 +257,7 @@
             <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este lance</span>Item, valor, data, rede e txid. Os outros participantes veem apenas "8 lances lacrados".</div></div>
             <label class="check"><input type="checkbox" checked><span>Aceito os termos do Leilão lacrado<span class="desc">Lance vinculante e irreversível. Se vencer, a compra é automática.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-            <div class="card pay" data-pay data-item="item lcr-1w9s6" data-usd="1.200,00" data-usd-from="#lance" data-polygon="0x1w9s…6d2f" data-tron="TQ1w…9s6R" data-base="0x1w9s…a93c" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x1w9s…4e7b" data-done="Lance lacrado registrado" data-done-note="Fica na carteira do item até 02/11 às 20:00. Se vencer, a diferença para o segundo preço volta à origem; se não vencer, tudo volta ao endereço de origem."></div>
+            <div class="card pay" data-pay data-item="item lcr-1w9s6" data-usd="1.200,00" data-usd-from="#lance" data-polygon="0x1w9s…6d2f" data-tron="TQ1w…9s6R" data-base="0x1w9s…a93c" data-txid="0x1w9s…4e7b" data-done="Lance lacrado registrado" data-done-note="Fica na carteira do item até 02/11 às 20:00. Se vencer, a diferença para o segundo preço volta à origem; se não vencer, tudo volta ao endereço de origem."></div>
             <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
           </div></div>
         </div>
@@ -302,7 +287,7 @@
                 <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 700,00 USDT (a diferença) para o endereço derivado deste pagamento, na carteira do item</div></div>
                 <div class="tl-item ok"><div class="when">ao confirmar</div><div class="what">O mesmo entitlement (ENT-5K7D) passa a cobrir a camada 2 no cofre</div></div>
                 <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa da camada 2, independente da camada 1; reembolso ao endereço de origem</div></div>
-                <div class="tl-item"><div class="when">finalização</div><div class="what">Quando o vendedor encerra as vendas, a plataforma separa 10 % e entrega a carteira do item a ele</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
               </div>
             </div></div>
           </div>
@@ -312,7 +297,7 @@
             <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, camada, valor, data, rede e txid. O vendedor vê "1 upgrade para a camada 2".</div></div>
             <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Camadas<span class="desc">Cada camada é um asset analisado pela curadoria. Direitos iguais aos da camada 1: download com marca d'água.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-            <div class="card pay" data-pay data-item="item lcr-3c7r8" data-usd="700,00" data-polygon="0x3c7r…92ab" data-tron="TQ3c…7r8E" data-base="0x3c7r…d105" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x3c7r…77c4" data-done="Camada 2 liberada no cofre" data-done-note="O entitlement ENT-5K7D passou a cobrir o playbook completo. Janela de disputa de 72 h para a camada 2."></div>
+            <div class="card pay" data-pay data-item="item lcr-3c7r8" data-usd="700,00" data-polygon="0x3c7r…92ab" data-tron="TQ3c…7r8E" data-base="0x3c7r…d105" data-txid="0x3c7r…77c4" data-done="Camada 2 liberada no cofre" data-done-note="O entitlement ENT-5K7D passou a cobrir o playbook completo. Janela de disputa de 72 h para a camada 2."></div>
             <a class="btn btn-ghost btn-sm btn-block" href="../buyer/cofre.html">Ver no cofre</a>
           </div></div>
         </div>
@@ -342,7 +327,7 @@
                 <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 900,00 USDT para o endereço derivado deste pagamento, na carteira do item</div></div>
                 <div class="tl-item ok"><div class="when">ao confirmar</div><div class="what">Contrato LIC-2N8V4-… em PDF e download do pacote no cofre, sem marca d'água</div></div>
                 <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa (arquivo corrompido, conteúdo diferente da prévia); reembolso ao endereço de origem</div></div>
-                <div class="tl-item"><div class="when">finalização</div><div class="what">Quando o vendedor encerra as vendas, a plataforma separa 10 % e entrega a carteira do item a ele</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
               </div>
             </div></div>
           </div>
@@ -352,7 +337,7 @@
             <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, finalidade, valor, data, rede e txid. O contrato cita apenas os pseudônimos das partes e o hash.</div></div>
             <label class="check"><input type="checkbox" checked><span>Aceito os termos da licença editorial<span class="desc">Uma publicação, 12 meses, território Brasil. Crédito ao pseudônimo opcional. Sem sublicenciar.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-            <div class="card pay" data-pay data-item="item lcr-2n8v4" data-usd="900,00" data-polygon="0x2n8v…9c17" data-tron="TQ2n…8v4L" data-base="0x2n8v…c8f3" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x2n8v…19e0" data-done="Licença emitida" data-done-note="Contrato LIC-2N8V4-7L4E disponível no cofre, com download do pacote em alta resolução."></div>
+            <div class="card pay" data-pay data-item="item lcr-2n8v4" data-usd="900,00" data-polygon="0x2n8v…9c17" data-tron="TQ2n…8v4L" data-base="0x2n8v…c8f3" data-txid="0x2n8v…19e0" data-done="Licença emitida" data-done-note="Contrato LIC-2N8V4-7L4E disponível no cofre, com download do pacote em alta resolução."></div>
             <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
           </div></div>
         </div>
@@ -392,7 +377,7 @@
             <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta assinatura</span>Item, período, valor, data, rede e txid. O vendedor vê só o número de assinantes.</div></div>
             <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Assinatura<span class="desc">Pagamento por período; cancelamento a qualquer momento, sem reembolso do período corrente.</span></span></label>
             <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-            <div class="card pay" data-pay data-item="item lcr-6d1k5" data-usd="190,00" data-polygon="0x6d1k…5b27" data-tron="TQ6d…k5Q7" data-base="0x6d1k…e04a" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x6d1k…38cf" data-done="Assinatura ativa" data-done-note="Edição nº 43 já disponível no cofre. Período 27/10 a 26/11; o endereço do próximo período chega em 24/11."></div>
+            <div class="card pay" data-pay data-item="item lcr-6d1k5" data-usd="190,00" data-polygon="0x6d1k…5b27" data-tron="TQ6d…k5Q7" data-base="0x6d1k…e04a" data-txid="0x6d1k…38cf" data-done="Assinatura ativa" data-done-note="Edição nº 43 já disponível no cofre. Período 27/10 a 26/11; o endereço do próximo período chega em 24/11."></div>
             <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
           </div></div>
         </div>
@@ -435,7 +420,7 @@
                 <div class="timeline">
                   <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga para o endereço derivado deste pagamento, na carteira do pedido. Seu pseudônimo e a data entram na lista pública de interessados</div></div>
                   <div class="tl-item info"><div class="when">enquanto aberto</div><div class="what">Qualquer conta pode cobrir o valor (mínimo +10 %). Quando subir, cada interessado tem 48 h para igualar (pagar a diferença) ou sair (reembolso ao endereço de origem). Quem cobre de novo reinicia a janela</div></div>
-                  <div class="tl-item wax"><div class="when">atendimento</div><div class="what">Um vendedor envia o conteúdo à curadoria: pedido travado. Validado, todos os interessados recebem acesso no cofre; a plataforma separa 10 % e entrega a carteira do pedido a quem atendeu</div></div>
+                  <div class="tl-item wax"><div class="when">atendimento</div><div class="what">Um vendedor envia o conteúdo à curadoria: pedido travado. Validado, todos os interessados recebem acesso no cofre e o pagamento vai para quem atendeu</div></div>
                   <div class="tl-item"><div class="when">30/11</div><div class="what">Sem atendimento validado até o prazo, cada interessado recebe de volta o que pagou, ao endereço de origem, descontada só a taxa de rede</div></div>
                 </div>
               </div></div>
@@ -445,10 +430,10 @@
                 <p class="xs muted">Como uma conta que ainda não participa vê o pedido hoje.</p>
                 <dl class="kv"><dt>Valor por interessado</dt><dd>US$ 800,00 · igual para todos</dd><dt>Com você</dt><dd>5 interessados · a recompensa total passa a US$ 4.000,00</dd><dt>Se o valor subir</dt><dd>48 h para igualar a diferença ou sair com reembolso</dd><dt>Prazo</dt><dd>30/11 · sem atendimento, tudo volta à origem</dd></dl>
                 <div class="total"><span class="small muted">Você paga</span><div><div class="price">US$ 800,00</div><div class="conv">= 800,00 USDT · 1:1</div></div></div>
-                <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos</span>Pedido, valor, data, rede e txid. Interessados são públicos: pseudônimo e data de entrada aparecem na página do pedido. O endereço de origem fica até a finalização, para reembolso.</div></div>
+                <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos</span>Pedido, valor, data, rede e txid. Interessados são públicos: pseudônimo e data de entrada aparecem na página do pedido. O endereço de origem fica guardado só enquanto pode haver reembolso.</div></div>
                 <label class="check"><input type="checkbox" checked><span>Aceito os termos do Pedido com recompensa<span class="desc">Valor igual para todos os interessados; 48 h para igualar quando o valor subir; reembolso ao endereço de origem se eu sair ou se o pedido expirar.</span></span></label>
                 <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-                <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="800,00" data-polygon="0x2c8d…4f7b" data-tron="TQ2c…8d1K" data-base="0x2c8d…9a03" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x2c8d…e5c2" data-done="Você é o 5º interessado" data-done-note="Recompensa total: US$ 4.000,00. Fica na carteira do pedido até o atendimento ser validado ou o prazo vencer (30/11)."></div>
+                <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="800,00" data-polygon="0x2c8d…4f7b" data-tron="TQ2c…8d1K" data-base="0x2c8d…9a03" data-txid="0x2c8d…e5c2" data-done="Você é o 5º interessado" data-done-note="Recompensa total: US$ 4.000,00. Fica na carteira do pedido até o atendimento ser validado ou o prazo vencer (30/11)."></div>
                 <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
               </div></div>
               <div class="tab-panel" data-panel="cobrir"><div class="stack" data-gate>
@@ -459,7 +444,7 @@
                 <div class="total"><span class="small muted">Você paga</span><div><div class="price" data-usd-view>US$ 880,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
                 <label class="check"><input type="checkbox" checked><span>Entendo que cobrir o valor obriga os outros interessados a igualar ou sair<span class="desc">Vinculante. Se o pedido for atendido, você recebe o mesmo acesso que os interessados que igualarem.</span></span></label>
                 <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-                <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="880,00" data-usd-from="#cobrir-valor" data-polygon="0x2c8d…b2d6" data-tron="TQ2c…8dK4" data-base="0x2c8d…7e19" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x2c8d…0a9f" data-done="Valor por interessado: US$ 880" data-done-note="Os outros 4 interessados foram avisados: igualar até 29/10 às 14:12 ou sair. Seu pagamento fica na carteira do pedido."></div>
+                <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="880,00" data-usd-from="#cobrir-valor" data-polygon="0x2c8d…b2d6" data-tron="TQ2c…8dK4" data-base="0x2c8d…7e19" data-txid="0x2c8d…0a9f" data-done="Valor por interessado: US$ 880" data-done-note="Os outros 4 interessados foram avisados: igualar até 29/10 às 14:12 ou sair. Seu pagamento fica na carteira do pedido."></div>
                 <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
               </div></div>
               <div class="tab-panel" data-panel="igualar"><div class="stack" data-gate>
@@ -480,16 +465,16 @@
                   <div class="xs muted">Proposto por <span class="handle" data-handle="lanterna-b31d"></span> em 21/10 ("tenho a base da ouvidoria, não os tempos de espera") · criado por <span class="handle" data-handle="quartzo-a1f0"></span> em 22/10 · aprovado pela curadoria em 22/10 (Bruno M.)</div>
                   <div class="xs muted">Critérios: por unidade e mês · número de reclamações e tema · CSV · prazo 30/11, o mesmo do pedido</div>
                 </div>
-                <dl class="kv"><dt>Valor por interessado</dt><dd>US$ 150,00 · igual para todos no extra</dd><dt>Interessados</dt><dd>2 · <span class="handle" data-handle="quartzo-a1f0"></span> (22/10) · <span class="handle" data-handle="relogio-2b7c"></span> (25/10)</dd><dt>Com você</dt><dd>3 interessados · total US$ 450,00</dd><dt>Carteira do extra</dt><dd><a class="link" href="../public/pedido.html">0x2c8e…7b40 · Polygon · USDT · 2 pagamentos</a> · separada da carteira do pedido</dd></dl>
+                <dl class="kv"><dt>Valor por interessado</dt><dd>US$ 150,00 · igual para todos no extra</dd><dt>Interessados</dt><dd>2 · <span class="handle" data-handle="quartzo-a1f0"></span> (22/10) · <span class="handle" data-handle="relogio-2b7c"></span> (25/10)</dd><dt>Com você</dt><dd>3 interessados · total US$ 450,00</dd><dt>Carteira do extra</dt><dd><a class="link" href="../public/pedido.html">0x2c8e…7b40 · Polygon · USDT · 2 pagamentos</a> · diferente da carteira do pedido</dd></dl>
                 <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Não entrar no extra não muda sua participação no pedido</span>Seus US$ 800 continuam na carteira do pedido principal. Sair do extra não afeta o principal; sair do pedido principal retira também dos extras, com reembolso ao endereço de origem.</div></div>
                 <div class="total"><span class="small muted">Entrar no extra por</span><div><div class="price">US$ 150,00</div><div class="conv">= 150,00 USDT · 1:1</div></div></div>
                 <label class="check"><input type="checkbox" checked><span>Aceito os termos do extra<span class="desc">Mesmas regras do pedido: cobrir exige +10 %; se o valor subir, 48 h para igualar ou sair. Validado o atendimento, acesso no cofre só para os interessados do extra.</span></span></label>
                 <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-                <div class="card pay" data-pay data-item="extra ext-2c8d1-a" data-usd="150,00" data-polygon="0x2c8e…a91d" data-tron="TQ2c…8eA3" data-base="0x2c8e…5f02" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x2c8e…c47b" data-done="Você entrou no extra" data-done-note="Extra com 3 interessados · total US$ 450,00. Fica na carteira do extra até o atendimento ser validado ou o prazo vencer (30/11)."></div>
+                <div class="card pay" data-pay data-item="extra ext-2c8d1-a" data-usd="150,00" data-polygon="0x2c8e…a91d" data-tron="TQ2c…8eA3" data-base="0x2c8e…5f02" data-txid="0x2c8e…c47b" data-done="Você entrou no extra" data-done-note="Extra com 3 interessados · total US$ 450,00. Fica na carteira do extra até o atendimento ser validado ou o prazo vencer (30/11)."></div>
                 <div class="timeline">
                   <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga para o endereço derivado deste pagamento, na carteira do extra. Seu pseudônimo entra na lista de interessados do extra</div></div>
                   <div class="tl-item info"><div class="when">enquanto aberto</div><div class="what">Qualquer interessado do pedido pode entrar ou cobrir o valor (mínimo +10 %); quando subir, 48 h para igualar ou sair</div></div>
-                  <div class="tl-item wax"><div class="when">atendimento</div><div class="what">Pode ser atendido por outro vendedor e em outro momento que o principal. Validado: acesso no cofre dos interessados do extra, 10 % separados, carteira do extra entregue a quem atendeu</div></div>
+                  <div class="tl-item wax"><div class="when">atendimento</div><div class="what">Pode ser atendido por outro vendedor e em outro momento que o principal. Validado: acesso no cofre dos interessados do extra e o pagamento vai para quem atendeu</div></div>
                   <div class="tl-item"><div class="when">30/11</div><div class="what">Extra expirado: cada pagamento volta ao endereço de origem, descontada só a taxa de rede</div></div>
                 </div>
                 <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
@@ -506,7 +491,7 @@
                 <div class="total"><span class="small muted">Você paga</span><div><div class="price" data-usd-view>US$ 200,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
                 <label class="check"><input type="checkbox" checked><span>Entendo que o extra é independente do pedido principal<span class="desc">Não entrar no extra não muda a participação de ninguém no pedido. Sair do pedido principal retira também dos extras.</span></span></label>
                 <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
-                <div class="card pay" data-pay data-item="extra novo do ped-2c8d1" data-usd="200,00" data-usd-from="#extra-valor" data-polygon="0x2c8f…31e6" data-tron="TQ2c…8fB7" data-base="0x2c8f…d904" data-expires="2026-10-28T14:12:00-03:00" data-txid="0x2c8f…6a2e" data-done="Extra enviado à curadoria" data-done-note="Carteira do extra criada para o seu pagamento. Recusado pela curadoria: volta ao seu endereço de origem. Aprovado: aparece em Extras deste pedido, com você como 1º interessado."></div>
+                <div class="card pay" data-pay data-item="extra novo do ped-2c8d1" data-usd="200,00" data-usd-from="#extra-valor" data-polygon="0x2c8f…31e6" data-tron="TQ2c…8fB7" data-base="0x2c8f…d904" data-txid="0x2c8f…6a2e" data-done="Extra enviado à curadoria" data-done-note="Carteira do extra criada para o seu pagamento. Recusado pela curadoria: volta ao seu endereço de origem. Aprovado: aparece em Extras deste pedido, com você como 1º interessado."></div>
                 <div class="timeline">
                   <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga para o endereço derivado da carteira nova do extra; o extra entra na fila da curadoria, ainda invisível para os outros</div></div>
                   <div class="tl-item info"><div class="when">em análise</div><div class="what">Mesmas regras de conteúdo do pedido. Recusado: reembolso ao endereço de origem, nada é cobrado</div></div>
@@ -543,14 +528,14 @@
               <a class="btn btn-lg" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir no visualizador</a>
             </div>
             <div class="row"><a class="btn btn-ghost btn-sm" href="../buyer/apoios.html"><i data-icon="hand-coins"></i>Ver meus apoios</a><a class="btn btn-ghost btn-sm" href="../public/explorar.html"><i data-icon="compass"></i>Continuar explorando</a><a class="btn btn-ghost btn-sm" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Ver em Pagamentos</a></div>
-            <div class="alert alert-info"><i data-icon="info"></i><div>Baixou o arquivo? Confira o hash com <code>sha256sum licitacoes-2019-2025.zip</code> e compare com a prova pública. O vendedor recebeu apenas "1 cópia vendida"; o valor fica na carteira do item até ele encerrar as vendas e finalizar.</div></div>
+            <div class="alert alert-info"><i data-icon="info"></i><div>Baixou o arquivo? Confira o hash com <code>sha256sum licitacoes-2019-2025.zip</code> e compare com a prova pública. O vendedor recebeu apenas "1 cópia vendida".</div></div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Bloco "Pagamento direto", estampado pelo script em cada <div class="card pay" data-pay …>. Atributos por variante: data-item ("item lcr-…", "lacre lcr-…" ou "pedido ped-…"),
-         data-usd (valor em US$), data-polygon / data-tron / data-base / data-bitcoin (endereço derivado por rede; só as redes presentes são oferecidas), data-expires (validade de 24 h)
+         data-usd (valor em US$), data-polygon / data-tron / data-base / data-bitcoin (endereço derivado por rede; só as redes presentes são oferecidas), validade de 24 h contada de agora (sem data-valid)
          ou data-valid (texto fixo), data-txid (estados simulados), data-done / data-done-note (estado final), data-success (variante aberta por "Já enviei"), data-usd-from (campo de valor livre). -->
     <template id="pay-tpl">
       <div class="card-head"><h3>Pagamento direto</h3><span class="badge st-aguardando" data-pay-badge>Aguardando pagamento</span></div>
@@ -608,7 +593,7 @@
           var d = pay.dataset; pay.appendChild(tpl.content.cloneNode(true));
           Object.keys(NETS).forEach(function (k) { if (d[k]) { var b = document.createElement('button'); b.type = 'button'; b.dataset.net = k; b.textContent = NETS[k].label; q(pay, '[data-net-switch]').appendChild(b); } });
           q(pay, '[data-f="item"]').textContent = d.item; q(pay, '[data-pay-state="4"]').textContent = d.done;
-          if (d.valid) q(pay, 'dd[data-pay-validity]').textContent = d.valid; else q(pay, '[data-deadline]').dataset.deadline = d.expires;
+          if (d.valid) q(pay, 'dd[data-pay-validity]').textContent = d.valid; else q(pay, '[data-deadline]').dataset.deadline = new Date(Date.now() + 864e5 - 12e4).toISOString();
           var chk = q(pay, '[data-pay-check]'); if (d.success) chk.setAttribute('data-show', d.success); else chk.setAttribute('data-toast', 'Nenhuma transação encontrada ainda. Verificamos a rede a cada 20 s.');
           if (d.usdFrom) {
             var inp = document.querySelector(d.usdFrom), scope = pay.closest('.tab-panel') || pay.closest('[data-variant]');
@@ -628,21 +613,6 @@
           var sync = function () { var ok = Array.prototype.every.call(boxes, function (c) { return c.checked; }); pay.classList.toggle('locked', !ok); if (note) note.hidden = ok; };
           boxes.forEach(function (c) { c.addEventListener('change', sync); }); sync();
         });
-        // Fila de liberação do lacre: a onda segue o total da conta (o que já apoiou + este apoio), do maior apoio para o menor.
-        var wv = document.querySelector('[data-waves]');
-        if (wv) {
-          var inpA = document.getElementById('apoio-valor'), already = parse(wv.dataset.already), msgW = q(wv, '[data-wave-msg]');
-          var WAVES = [[500, 1, 'na hora do rompimento'], [100, 2, '48 h depois do rompimento'], [10, 3, '96 h depois do rompimento']];
-          var syncW = function () {
-            var v = parse(inpA.value), tot = already + v, hit = WAVES.filter(function (w) { return tot >= w[0]; })[0] || WAVES[2], up = WAVES[hit[1] - 2];
-            wv.querySelectorAll('[data-wave]').forEach(function (r) { r.classList.toggle('on', +r.dataset.wave === hit[1]); });
-            document.querySelectorAll('[data-wave-total]').forEach(function (el) { el.textContent = 'US$ ' + fmt(tot, 2); });
-            msgW.textContent = v < 10 ? 'O apoio mínimo é US$ 10.' : 'Com US$ ' + fmt(v, 2) + ', seu total no lacre passa a US$ ' + fmt(tot, 2) + ': onda ' + hit[1] + ', acesso ' + hit[2] + '.' + (up ? ' Faltam US$ ' + fmt(up[0] - tot, 2) + ' para a onda ' + up[1] + '.' : ' Você recebe junto com os maiores apoios.');
-          };
-          inpA.addEventListener('input', syncW);
-          document.addEventListener('click', function (e) { if (e.target.closest('.amount-options[data-target="#apoio-valor"] [data-amount]')) setTimeout(syncW, 0); });
-          syncW();
-        }
       })();
     </script>
   </main>

@@ -80,7 +80,7 @@
                 <li><div><b>Cobrir o valor</b><span>Qualquer conta, nova ou já participante, pode subir o valor em pelo menos 10 % (hoje: mín. US$ 880). Paga o valor novo, ou só a diferença se já participa. O valor novo vira o valor por interessado.</span></div></li>
                 <li><div><b>Igualar ou sair</b><span>Quando o valor sobe, cada participante tem 48 h (nunca além do prazo do pedido) para igualar, pagando a diferença, ou sair. Quem não iguala sai automaticamente e recebe de volta o que pagou, ao endereço de origem, menos a taxa de rede. Uma cobertura nova reinicia a janela para os outros.</span></div></li>
                 <li><div><b>Mesmo valor, sempre</b><span>A qualquer momento, todos os interessados ativos pagaram o mesmo valor. Se alguém cobre e ninguém iguala, fica sozinho: compra com exclusividade de fato.</span></div></li>
-                <li><div><b>Atender</b><span>Um vendedor envia o conteúdo à curadoria. Da entrada até a decisão, o pedido fica travado: sem entradas, coberturas ou saídas. Validado, cada interessado recebe acesso no cofre; a plataforma separa 10 % e entrega a carteira do pedido a quem atendeu (frase de recuperação, uma única vez). Rejeitado, o pedido destrava.</span></div></li>
+                <li><div><b>Atender</b><span>Um vendedor envia o conteúdo à curadoria. Da entrada até a decisão, o pedido fica travado: sem entradas, coberturas ou saídas. Validado, cada interessado recebe acesso no cofre (72 h para abrir disputa) e o pagamento vai para quem atendeu. Rejeitado, o pedido destrava.</span></div></li>
                 <li><div><b>Expirar</b><span>Sem atendimento validado até 30/11/2026, cada interessado recebe de volta o que pagou, ao endereço de origem, menos a taxa de rede. Nada é cobrado.</span></div></li>
                 <li><div><b>Extras (bônus opcionais)</b><span>Qualquer interessado pode criar um sub-item para algo próximo do pedido, com valor por interessado (mín. US$ 10), prazo (nunca além do principal) e carteira próprios; paga o valor ao criar e a curadoria aprova antes de aparecer. Só interessados do principal entram, pelas mesmas regras (cobrir ≥ +10 %, 48 h para igualar ou sair). Não entrar no extra não muda nada no principal; sair do principal retira também dos extras. Vendedores podem propor um extra, que só nasce quando um interessado o cria. Até 5 abertos por pedido.</span></div></li>
               </ol>
@@ -160,10 +160,10 @@
               </dl></div>
             </div>
             <div class="card">
-              <div class="card-head"><i data-icon="calendar"></i><h3>Prazo e finalização</h3></div>
+              <div class="card-head"><i data-icon="calendar"></i><h3>Prazo e acesso</h3></div>
               <div class="card-body"><dl class="kv">
                 <dt>Prazo</dt><dd>30/11/2026 · 23:59 BRT · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd>
-                <dt>Se atendido</dt><dd>Os 4 interessados recebem acesso no cofre no dia da validação; 10 % separados e carteira do pedido entregue a quem atendeu</dd>
+                <dt>Se atendido</dt><dd>Os 4 interessados recebem acesso no cofre no dia da validação, com 72 h para abrir disputa; o pagamento vai para quem atendeu</dd>
                 <dt>Durante a curadoria</dt><dd>Pedido travado: sem entradas, coberturas ou saídas até a decisão</dd>
                 <dt>Se expirar</dt><dd>Cada interessado recebe de volta US$ 800, ao endereço de origem, menos a taxa de rede</dd>
               </dl></div>
@@ -186,7 +186,7 @@
                 <div class="tl-item ok"><div class="when">25/10</div><div class="what"><span class="handle" data-handle="relogio-2b7c"></span> entrou no extra · US$ 150 · extra com 2 interessados (US$ 300)</div></div>
                 <div class="tl-item info"><div class="when">26/10</div><div class="what"><span class="handle" data-handle="prisma-66af"></span> propôs um extra: tempo de espera nas UBS · US$ 200 sugeridos · aguardando um interessado criar</div></div>
                 <div class="tl-item brass"><div class="when">hoje · 27/10</div><div class="what">4 interessados × US$ 800 = US$ 3.200 · 1 extra aberto (2 × US$ 150) · aberto a novos interessados e coberturas · nenhum atendimento em curadoria</div></div>
-                <div class="tl-item"><div class="when">até 30/11</div><div class="what">Atendimento validado (acesso aos interessados, carteira a quem atendeu) ou expiração com devolução a cada interessado</div></div>
+                <div class="tl-item"><div class="when">até 30/11</div><div class="what">Atendimento validado (acesso aos interessados) ou expiração com devolução a cada interessado</div></div>
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@
             <div class="card-body stack-sm">
               <div class="hash wrap"><code id="addr-ped">0x2c8d…91af</code><button class="btn btn-sm btn-ghost" data-copy="#addr-ped" aria-label="Copiar endereço da carteira do pedido"><i data-icon="copy"></i></button></div>
               <dl class="kv-row"><div><dt>Rede</dt><dd>Polygon</dd></div><div><dt>Moeda</dt><dd>USDT</dd></div><div><dt>Recebido</dt><dd>US$ 3.200</dd></div><div><dt>Pagamentos</dt><dd>6</dd></div><div><dt>Criada em</dt><dd>12/10/2026</dd></div></dl>
-              <p class="small">Criada pela plataforma quando a curadoria aprovou o pedido. Cada pagamento (entrada, cobertura ou igualação) vai para um endereço derivado próprio, com valor exato. Qualquer pessoa pode conferir on-chain quanto entrou. A plataforma não guarda saldo: na validação do atendimento, 10 % vão para a carteira da plataforma e a carteira é entregue a quem atendeu.</p>
+              <p class="small">Criada pela plataforma quando a curadoria aprovou o pedido. Cada pagamento (entrada, cobertura ou igualação) vai para um endereço derivado próprio, com valor exato. Qualquer pessoa pode conferir on-chain quanto entrou. Validado o atendimento, o pagamento vai para quem atendeu; se o pedido expirar, cada pagamento volta ao endereço de origem.</p>
               <div class="row"><a class="btn btn-sm" href="#" data-toast="Abriria o explorador da rede (polygonscan)"><i data-icon="external-link"></i>Conferir no explorador</a><a class="link small" href="como-funciona.html">Como o dinheiro funciona</a></div>
             </div>
           </div>
@@ -231,7 +231,7 @@
                 <hr style="margin:4px 0">
                 <div>
                   <a class="btn btn-primary btn-block" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a>
-                  <p class="xs muted mt-1">Para vendedores. O atendimento passa pela curadoria como qualquer item; enquanto ela decide, o pedido fica travado. Validado: 10 % separados e a carteira do pedido (US$ 3.200) entregue a você. Nada se o pedido expirar.</p>
+                  <p class="xs muted mt-1">Para vendedores. O atendimento passa pela curadoria como qualquer item; enquanto ela decide, o pedido fica travado. Validado, a recompensa vai para quem atendeu (<a class="link" href="vendedor.html">como os vendedores recebem</a>).</p>
                 </div>
                 <dl class="kv">
                   <dt>Cobrir exige</dt><dd>US$ 880 ou mais (+10 %)</dd>
@@ -269,7 +269,7 @@
                 <button class="btn btn-wax btn-lg btn-block" disabled><i data-icon="lock"></i>Juntar-se por US$ 800</button>
                 <button class="btn btn-block" disabled><i data-icon="lock"></i>Cobrir o valor</button>
                 <dl class="kv">
-                  <dt>Se validado</dt><dd>Os 4 interessados recebem acesso no cofre; 10 % (US$ 320) separados e a carteira do pedido entregue a quem atendeu</dd>
+                  <dt>Se validado</dt><dd>Os 4 interessados recebem acesso no cofre, com 72 h para abrir disputa; o pagamento vai para quem atendeu</dd>
                   <dt>Se rejeitado</dt><dd>O pedido destrava e volta a aceitar entradas, coberturas e saídas</dd>
                   <dt>Quem atendeu</dt><dd>Não mostramos até a decisão</dd>
                   <dt>Extras</dt><dd>O extra ext-2c8d1-a continua aberto: o atendimento do principal não trava os extras</dd>
@@ -278,7 +278,7 @@
             </div>
 
             <div class="side-foot">
-              <div class="anon-note"><i data-icon="shield"></i><span>Participação pública por pseudônimo (quem entrou e quando). Registramos valor, data e o endereço de origem do pagamento, este só até a finalização. Quem atende nunca vê os interessados além do pseudônimo.</span></div>
+              <div class="anon-note"><i data-icon="shield"></i><span>Participação pública por pseudônimo (quem entrou e quando). Registramos valor, data e o endereço de origem do pagamento, este só para reembolsos. Quem atende nunca vê os interessados além do pseudônimo.</span></div>
               <a class="btn btn-sm btn-ghost" href="prova.html#denunciar"><i data-icon="flag"></i>Denunciar este pedido</a>
             </div>
           </div>
