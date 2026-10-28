@@ -22,6 +22,7 @@
     .tl-item .what { font-weight: 400; }
     .load { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; font-size: var(--fs-sm); align-items: center; }
     .load .progress { grid-column: 1 / -1; }
+    .stat-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
   </style>
 </head>
 <body data-shell="admin" data-page="painel" data-root="../" data-title="Painel da curadoria">
@@ -50,6 +51,7 @@
       <div class="stat"><span class="label">Denúncias abertas</span><span class="value">2</span><span class="delta down"><i data-icon="trending-up"></i>+1 hoje</span></div>
       <div class="stat"><span class="label">Finalizações hoje</span><span class="value">3</span><span class="delta flat">comissão separada: US$ 2.570 · 1 frase já entregue</span></div>
       <div class="stat"><span class="label">Reembolsos na fila</span><span class="value">24</span><span class="delta flat">lcr-8c1v3 falhou sem marco batido · 15 de 24 confirmados</span></div>
+      <div class="stat"><span class="label">Lotes aguardando validação</span><span class="value">0</span><span class="delta flat">1 validado aguarda o comprador · ped-8b4u2, até 29/10 14:00</span></div>
     </section>
 
     <div class="grid cols-2 mt-3">
