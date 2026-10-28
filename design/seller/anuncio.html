@@ -27,6 +27,16 @@
     .tight-list li + li { margin-top: 4px; }
     .x-card .social-card { padding: 14px 16px; aspect-ratio: auto; gap: 10px; }
     .x-card .social-card .sc-title { font-size: 15px; max-width: none; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .pend { border: 1px solid var(--warn); background: var(--warn-soft); border-radius: var(--r); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+    .pend-head { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+    .pend-title { font-weight: 600; }
+    .pend-body { display: flex; flex-direction: column; gap: 10px; }
+    .pend-done { display: none; }
+    .pend.done { border-color: var(--ok); background: var(--ok-soft); }
+    .pend.done .pend-body { display: none; }
+    .pend.done .pend-done { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+    .pend-done .undo { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; font-size: var(--fs-xs); }
+    .pend .dropzone { cursor: pointer; }
   </style>
 </head>
 <body data-shell="seller" data-page="anuncios" data-root="../" data-title="Anúncio">
@@ -34,22 +44,22 @@
     <div class="crumbs"><a href="../seller/anuncios.html">Meus anúncios</a><i data-icon="chevron-right"></i><span class="mono">lcr-2z5q7</span></div>
     <div class="page-head mt-1">
       <div>
-        <h1>Mapeamento de 3.100 feiras livres do estado de SP com dias, horários e geolocalização</h1>
-        <div class="head-badges"><span class="badge st-ajustes">Ajustes solicitados</span><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · US$ 240</span><span class="badge">Dados e bases · risco baixo</span><span class="tag">BR · português</span><span class="badge badge-outline">versão 1 · enviado 24/10 09:12</span><span class="xs muted">curador: Bruno M.</span></div>
+        <h1 id="item-title">Mapeamento de 3.100 feiras livres do estado de SP com dias, horários e geolocalização</h1>
+        <div class="head-badges"><span class="badge st-ajustes" id="head-status">Ajustes solicitados</span><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · US$ 240</span><span class="badge">Dados e bases · risco baixo</span><span class="tag">BR · português</span><span class="badge badge-outline">versão 1 · enviado 24/10 09:12</span><span class="xs muted">curador: Bruno M.</span></div>
       </div>
       <div class="actions">
         <a class="btn" href="../seller/novo-anuncio.html"><i data-icon="edit"></i>Editar anúncio</a>
         <div class="menu-wrap"><button class="btn" data-menu-toggle>Mais<i data-icon="chevron-down"></i></button><div class="menu"><a href="../public/item.html"><i data-icon="eye"></i>Ver como o comprador verá</a><button data-toast="Rascunho criado a partir de lcr-2z5q7"><i data-icon="copy"></i>Duplicar</button><div class="sep"></div><button data-toast="Envio cancelado · o item volta para rascunho"><i data-icon="x"></i>Cancelar envio</button></div></div>
-        <a class="btn btn-primary" href="#curadoria" data-tab="curadoria"><i data-icon="message-square"></i>Responder ajustes</a>
+        <a class="btn btn-primary" href="#curadoria" data-tab="curadoria" id="head-cta"><i data-icon="alert-triangle"></i>Resolver pendências</a>
       </div>
     </div>
 
-    <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Responda até 29/10 às 11:05 (72 h)</span>Bruno M. pediu 2 ajustes em 26/10 11:05. Sem resposta no prazo, o item volta para rascunho e sai da fila. Depois do reenvio, a curadoria retoma em até 24 h.</div></div>
+    <div class="alert alert-warn" id="top-alert"><i data-icon="alert-triangle"></i><div><span class="alert-title">3 pendências · responda até 29/10 às 11:05 (72 h)</span>Bruno M. pediu em 26/10 às 11:05: corrigir a prévia e decidir o título; depois, reenviar. Sem resposta no prazo, o item volta para rascunho. Reenvios não têm limite.</div></div>
 
     <div data-tabs class="mt-3">
       <div class="tabs">
         <a class="tab active" href="#" data-tab="visao">Visão geral</a>
-        <a class="tab" href="#" data-tab="curadoria">Curadoria <span class="count">2</span></a>
+        <a class="tab" href="#" data-tab="curadoria">Curadoria <span class="count" id="tab-pend-count">3</span></a>
         <a class="tab" href="#" data-tab="conteudo">Conteúdo</a>
         <a class="tab" href="#" data-tab="publicacao">Publicação</a>
         <a class="tab" href="#" data-tab="carteira">Carteira do item</a>
@@ -112,38 +122,53 @@
                   <div class="tl-item ok"><div class="when">24/10 · 09:12</div><div class="what">Enviado para curadoria · versão 1 · 4 arquivos · 36 MB</div></div>
                   <div class="tl-item ok"><div class="when">24/10 · 09:14</div><div class="what">Triagem automática concluída · metadados removidos (GeoJSON: autor; PDF: autor e produtor) · 0 CPFs · duplicidade 0 · antivírus ok</div></div>
                   <div class="tl-item info"><div class="when">25/10 · 14:40</div><div class="what">Em análise · Bruno M., curador · risco baixo: um curador, sem jurídico</div></div>
-                  <div class="tl-item warn current"><span class="step-tag">Etapa atual · depende de você</span><div class="when">desde 26/10 · 11:05 · responda até 29/10 · 11:05</div><div class="what">Ajustes solicitados por Bruno M.: 1 obrigatório e 1 sugestão. Corrija e reenvie pelo formulário abaixo.</div></div>
+                  <div class="tl-item warn current"><span class="step-tag">Etapa atual · depende de você</span><div class="when">desde 26/10 · 11:05 · responda até 29/10 · 11:05</div><div class="what">Ajustes solicitados por Bruno M.: 3 pendências (prévia, título, reenvio) e 1 sugestão opcional. Resolva abaixo.</div></div>
                   <div class="tl-item future"><div class="when">depois do seu reenvio</div><div class="what">Nova análise pelo mesmo curador, em até 24 h</div></div>
                   <div class="tl-item future"><div class="when">em seguida</div><div class="what">Aprovado: publicação imediata, prova pública, post nas redes e carteira do item criada</div></div>
                 </div>
               </div>
             </div>
-            <div class="card">
-              <div class="card-head"><h3>Feedback da curadoria</h3><span class="badge st-ajustes">2 pendências</span></div>
+            <div class="card" id="pendencias">
+              <div class="card-head"><h3>Pendências para reenviar</h3><span class="badge st-pendente" id="pend-count">3 pendências</span></div>
               <div class="card-body stack">
-                <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">AJ-04 · Bloco 4, prévia e descrição · obrigatório</span>“A prévia expõe coordenadas exatas de 40 feiras; reduza a amostra a 10 linhas e arredonde coordenadas.” A prévia deve permitir julgar o item sem entregá-lo: 40 linhas com latitude e longitude de 6 casas já são parte do produto.</div></div>
-                <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">AJ-05 · Bloco 5, preço e modelo · sugestão, não bloqueia</span>“US$ 240 está acima da mediana da categoria (US$ 180). Considere edição limitada de 100 cópias para justificar o valor, ou US$ 180 ilimitado.”</div></div>
-                <div>
-                  <div class="label mb-1">Título reescrito pela curadoria</div>
-                  <div class="diff">
-                    <div class="col"><div class="eyebrow">Original (você)</div>Mapeamento de 3.100 feiras livres do estado de <del>SP</del> com dias, horários e <del>geolocalização</del></div>
-                    <div class="col new"><div class="eyebrow">Sugerido (Bruno M.)</div>3.100 feiras livres do estado de <ins>São Paulo</ins>: dias, horários e <ins>localização aproximada por bairro</ins> <ins>(2026)</ins></div>
+                <p class="small muted">Bruno M. (curador) pediu em 26/10 às 11:05. Resolva cada item: ele fica verde e sai da contagem. O reenvio libera quando os dois primeiros estiverem resolvidos.</p>
+
+                <div class="pend" id="pend-amostra">
+                  <div class="pend-head"><span class="pend-title">1 · Prévia expõe coordenadas exatas</span><span class="badge st-pendente pend-tag"><i data-icon="alert-triangle"></i>Pendência · obrigatória</span></div>
+                  <div class="pend-body">
+                    <p class="small">AJ-04 · bloco 4, prévia e descrição: “A prévia expõe coordenadas exatas de 40 feiras; reduza a amostra a 10 linhas e arredonde coordenadas.” A prévia deve permitir julgar o item sem entregá-lo.</p>
+                    <button type="button" class="dropzone" id="drop-amostra" style="padding:16px;width:100%"><i data-icon="upload"></i><strong>Enviar a amostra corrigida</strong><span class="xs">Gera a versão 2 · hash recalculado · metadados removidos</span></button>
+                    <div class="file-row" id="file-amostra" hidden><span class="file-icon"><i data-icon="table"></i></span><div class="grow"><div class="file-name truncate">amostra-previa-v2.csv</div><div class="file-meta">10 linhas · 2 KB · sha256 <code>9d1c…77ab</code> · coordenadas arredondadas</div></div><div class="progress thin" style="width:120px"><div class="progress-bar ok" id="bar-amostra" style="width:0%"></div></div></div>
+                    <label class="check"><input type="checkbox" checked><span>Também atualizei a descrição: as coordenadas públicas são aproximadas; as completas estão no arquivo entregue.</span></label>
                   </div>
-                  <p class="xs muted mt-1">Motivo: “geolocalização” promete coordenadas exatas, que a prévia não deve expor. “SP” → “São Paulo” ajuda a busca. O ano situa a abrangência.</p>
-                  <div class="row mt-2"><button class="btn btn-success" data-toast="Título sugerido aceito · entra na versão 2"><i data-icon="check"></i>Aceitar edição</button><button class="btn" data-toast="Preferência registrada: título original mantido · a curadoria decide na reanálise">Manter o meu título</button></div>
+                  <div class="pend-done small"></div>
                 </div>
+
+                <div class="pend" id="pend-titulo">
+                  <div class="pend-head"><span class="pend-title">2 · Título reescrito pela curadoria</span><span class="badge st-pendente pend-tag"><i data-icon="alert-triangle"></i>Pendência · decida</span></div>
+                  <div class="pend-body">
+                    <div class="diff">
+                      <div class="col"><div class="eyebrow">Original (você)</div>Mapeamento de 3.100 feiras livres do estado de <del>SP</del> com dias, horários e <del>geolocalização</del></div>
+                      <div class="col new"><div class="eyebrow">Sugerido (Bruno M.)</div>3.100 feiras livres do estado de <ins>São Paulo</ins>: dias, horários e <ins>localização aproximada por bairro</ins> <ins>(2026)</ins></div>
+                    </div>
+                    <p class="xs muted">Motivo: “geolocalização” promete coordenadas exatas, que a prévia não deve expor. “SP” → “São Paulo” ajuda a busca. O ano situa a abrangência.</p>
+                    <div class="row"><button type="button" class="btn btn-success" id="titulo-aceitar"><i data-icon="check"></i>Aceitar edição</button><button type="button" class="btn" id="titulo-manter">Manter o meu título</button></div>
+                  </div>
+                  <div class="pend-done small"></div>
+                </div>
+
+                <form class="pend" id="pend-reenvio">
+                  <div class="pend-head"><span class="pend-title">3 · Responder e reenviar</span><span class="badge st-pendente pend-tag"><i data-icon="alert-triangle"></i>Pendência · último passo</span></div>
+                  <div class="pend-body">
+                    <div class="field"><label for="resp">Sua resposta à curadoria</label><textarea id="resp" class="textarea">Reduzi a amostra para 10 linhas e arredondei latitude e longitude para 2 casas decimais (cerca de 1 km). A coluna “bairro” substitui as coordenadas na prévia. Mantive US$ 240 com edição limitada de 100 cópias, como sugerido.</textarea><span class="hint">Sem links externos nem contatos: o filtro bloqueia. A resposta fica no histórico do item, visível só para a curadoria.</span></div>
+                    <div class="row between"><span class="xs muted" id="reenvio-hint">Resolva os itens 1 e 2 para reenviar.</span><button class="btn btn-primary" type="submit" id="btn-reenviar" disabled><i data-icon="send"></i>Reenviar para análise</button></div>
+                  </div>
+                  <div class="pend-done small"></div>
+                </form>
+
+                <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Sugestão · opcional, não conta como pendência</span>AJ-05 · bloco 5, preço e modelo: “US$ 240 está acima da mediana da categoria (US$ 180). Considere edição limitada de 100 cópias para justificar o valor, ou US$ 180 ilimitado.”</div></div>
               </div>
             </div>
-            <form class="card" data-submit-toast="Resposta enviada · a curadoria retoma em até 24 h">
-              <div class="card-head"><h3>Responder ajustes</h3></div>
-              <div class="card-body stack">
-                <div class="field"><label for="resp">Sua resposta</label><textarea id="resp" class="textarea">Reduzi a amostra para 10 linhas e arredondei latitude e longitude para 2 casas decimais (cerca de 1 km). A coluna “bairro” substitui as coordenadas na prévia. Mantive US$ 240 com edição limitada de 100 cópias, como sugerido.</textarea><span class="hint">Sem links externos nem contatos: o filtro bloqueia. A resposta fica no histórico do item, visível só para a curadoria.</span></div>
-                <div class="field"><span class="label">Reenviar arquivo (prévia ou conteúdo)</span><div class="dropzone" style="padding:18px"><i data-icon="upload"></i><strong>Arraste a nova amostra ou o arquivo corrigido</strong><span class="xs">Gera a versão 2 · hash recalculado · metadados removidos</span></div></div>
-                <div class="file-row"><span class="file-icon"><i data-icon="table"></i></span><div class="grow"><div class="file-name truncate">amostra-previa-v2.csv</div><div class="file-meta">10 linhas · 2 KB · sha256 <code>9d1c…77ab</code> · coordenadas arredondadas</div></div><div class="progress thin"><div class="progress-bar ok" data-width="100%"></div></div><span class="badge badge-ok"><i data-icon="check"></i>Enviado</span></div>
-                <label class="check"><input type="checkbox" checked><span>Também atualizei a descrição: as coordenadas públicas são aproximadas; as completas estão no arquivo entregue.</span></label>
-              </div>
-              <div class="card-foot"><span class="xs muted">Ao reenviar, o item volta para “Em análise” como versão 2.</span><button class="btn btn-primary" type="submit" style="margin-left:auto"><i data-icon="send"></i>Reenviar para análise</button></div>
-            </form>
           </div>
           <div class="stack">
             <div class="card"><div class="card-body stack-sm">
@@ -310,6 +335,68 @@ US$ 240 · prova e prévia: lacre.app/p/2z5q7</div><div class="x-media"><div cla
         </div>
       </div>
     </div>
+  <script>
+    // Pendências da curadoria: cada uma fica verde ao ser resolvida e sai da contagem; o título aceito muda na hora.
+    (function () {
+      var ICON = function (n) { return window.Lacre ? window.Lacre.icon(n) : ''; };
+      var toast = function (m) { if (window.toast) window.toast(m); };
+      var p1 = document.getElementById('pend-amostra'), p2 = document.getElementById('pend-titulo'), p3 = document.getElementById('pend-reenvio');
+      var items = [p1, p2, p3], btn = document.getElementById('btn-reenviar'), hint = document.getElementById('reenvio-hint');
+      var h1 = document.getElementById('item-title'), originalTitle = h1.textContent;
+      var newTitle = '3.100 feiras livres do estado de São Paulo: dias, horários e localização aproximada por bairro (2026)';
+      var origTag = {};
+      items.forEach(function (p) { origTag[p.id] = p.querySelector('.pend-tag').outerHTML; });
+      function refresh() {
+        var open = items.filter(function (p) { return !p.classList.contains('done'); }).length;
+        var label = open === 0 ? 'Tudo resolvido' : open + (open === 1 ? ' pendência' : ' pendências');
+        var c = document.getElementById('pend-count'); c.textContent = label; c.className = 'badge ' + (open ? 'st-pendente' : 'st-aprovado');
+        var t = document.getElementById('tab-pend-count'); t.textContent = open; t.hidden = !open;
+        var top = document.getElementById('top-alert');
+        if (open) top.querySelector('.alert-title').textContent = label + ' · responda até 29/10 às 11:05 (72 h)';
+        var ready = p1.classList.contains('done') && p2.classList.contains('done');
+        if (!p3.classList.contains('done')) { btn.disabled = !ready; hint.textContent = ready ? 'Tudo pronto: reenvie a versão 2.' : 'Resolva os itens 1 e 2 para reenviar.'; }
+      }
+      function resolve(p, html, undo) {
+        p.classList.add('done');
+        var tag = p.querySelector('.pend-tag'); tag.className = 'badge st-aprovado pend-tag'; tag.innerHTML = ICON('check') + 'Resolvida';
+        var d = p.querySelector('.pend-done'); d.innerHTML = '<span>' + html + '</span>' + (undo ? '<button type="button" class="undo">Desfazer</button>' : '');
+        var u = d.querySelector('.undo'); if (u) u.addEventListener('click', function () { undo(); reopen(p); });
+        refresh();
+      }
+      function reopen(p) { p.classList.remove('done'); p.querySelector('.pend-tag').outerHTML = origTag[p.id]; refresh(); }
+      // 1 · amostra corrigida
+      document.getElementById('drop-amostra').addEventListener('click', function () {
+        var row = document.getElementById('file-amostra'), bar = document.getElementById('bar-amostra');
+        row.hidden = false; bar.style.width = '0%'; requestAnimationFrame(function () { bar.style.transition = 'width .6s'; bar.style.width = '100%'; });
+        setTimeout(function () { resolve(p1, 'Amostra v2 enviada: <b>amostra-previa-v2.csv</b> · 10 linhas · coordenadas arredondadas · sha256 9d1c…77ab', function () { row.hidden = true; }); toast('Amostra v2 enviada · pendência 1 resolvida'); }, 700);
+      });
+      // 2 · título
+      document.getElementById('titulo-aceitar').addEventListener('click', function () {
+        h1.textContent = newTitle; document.title = newTitle + ' · Lacre';
+        resolve(p2, 'Título aceito e já aplicado: <b>' + newTitle + '</b>', function () { h1.textContent = originalTitle; document.title = originalTitle + ' · Lacre'; });
+        toast('Título atualizado · pendência 2 resolvida');
+      });
+      document.getElementById('titulo-manter').addEventListener('click', function () {
+        resolve(p2, 'Você manteve o seu título. A curadoria decide na reanálise.', function () {});
+        toast('Título original mantido · pendência 2 resolvida');
+      });
+      // 3 · reenvio
+      p3.addEventListener('submit', function (e) {
+        e.preventDefault(); e.stopPropagation(); if (btn.disabled) return;
+        resolve(p3, 'Reenviado hoje como versão 2. A curadoria retoma em até 24 h.', null);
+        document.querySelectorAll('#pendencias .undo').forEach(function (u) { u.remove(); });
+        var intro = document.querySelector('#pendencias .card-body > p'); if (intro) intro.textContent = 'Tudo resolvido e reenviado. Agora é com a curadoria: o resultado chega por notificação.';
+        var st = document.getElementById('head-status'); st.className = 'badge st-analise'; st.textContent = 'Em análise · versão 2';
+        var top = document.getElementById('top-alert'); top.className = 'alert alert-info';
+        top.innerHTML = '<span>' + ICON('info') + '</span><div><span class="alert-title">Reenviado · em análise</span>Versão 2 enviada hoje. Bruno M. retoma em até 24 h; você recebe uma notificação com o resultado.</div>';
+        var cta = document.getElementById('head-cta'); cta.className = 'btn'; cta.innerHTML = ICON('message-square') + 'Ver curadoria';
+        var cur = document.querySelector('.tl-item.current');
+        if (cur) { cur.classList.remove('warn', 'current'); cur.classList.add('ok'); var tg = cur.querySelector('.step-tag'); if (tg) tg.remove(); cur.querySelector('.what').textContent = 'Você resolveu as pendências e reenviou a versão 2.'; var nx = cur.nextElementSibling; if (nx) { nx.classList.remove('future'); nx.classList.add('info', 'current'); nx.insertAdjacentHTML('afterbegin', '<span class="step-tag">Etapa atual · com a curadoria</span>'); } }
+        toast('Versão 2 reenviada · a curadoria retoma em até 24 h');
+      }, true);
+      refresh();
+    })();
+  </script>
   </main>
 </body>
 </html>

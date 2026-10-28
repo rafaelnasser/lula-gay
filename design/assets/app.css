@@ -624,6 +624,10 @@ legend { padding: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--fg-
 .tl-item.current { background: var(--warn-soft); border: 1px solid var(--warn); border-radius: var(--r); padding: 10px 12px; margin-left: -12px; }
 .tl-item.current::before { background: var(--warn); left: -7px; top: 15px; }
 .tl-item.current .what { font-weight: 600; }
+/* etapa atual com a curadoria (em análise): azul */
+.tl-item.current.info { background: var(--info-soft); border-color: var(--info); }
+.tl-item.current.info::before { background: var(--info); }
+.tl-item.current.info .step-tag { color: var(--info); }
 .tl-item.current .step-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--warn); margin-bottom: 2px; }
 .tl-item.future { opacity: .55; }
 .tl-item .when { color: var(--muted); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
