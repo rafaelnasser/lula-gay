@@ -382,6 +382,13 @@ a.badge.status-link:hover { filter: brightness(1.15); text-decoration: underline
 .card-head h3, .card-head h2 { font-size: var(--fs-md); }
 .card-head .actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
 .card-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+/* cards lado a lado com rodapé alinhado: o corpo cresce e o rodapé fica sempre no fim */
+.card.fill { display: flex; flex-direction: column; height: 100%; }
+.card.fill > .card-body { flex: 1; }
+/* o mesmo, automático, para qualquer card com rodapé dentro de uma grade */
+.grid > .card:has(> .card-foot) { display: flex; flex-direction: column; }
+.grid > .card:has(> .card-foot) > .card-body { flex: 1; }
+.grid > .card:has(> .card-foot) > .card-foot { margin-top: auto; }
 .card.flat { background: var(--surface-2); border-color: transparent; }
 .card.raised { box-shadow: var(--shadow); }
 .card.wax-edge { border-left: 3px solid var(--wax); }
