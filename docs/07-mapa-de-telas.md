@@ -32,7 +32,7 @@ Uma mesma conta é comprador e vendedor. A troca de papel é um link na barra la
 1. **Comprar uma cópia**: explorar → item → checkout (pagar da própria carteira cripto para o endereço do item) → confirmações na rede → cofre → visualizador → (opcional) disputa em 72 h.
 2. **Apoiar um lacre coletivo**: item (variante coletivo) → checkout (valor do apoio) → apoios (acompanhar) → notificação "lacre rompido" → cofre.
 3. **Vender**: criar conta → área do vendedor → novo anúncio (6 passos) → anúncios (em análise) → notificação da curadoria (ajustes ou aprovado) → anúncio publicado com carteira do item → finalização → carteiras dos itens (receber a frase de recuperação) → transferir para a própria carteira.
-4. **Pedir informação**: pedidos → novo pedido (modal, com o valor por interessado) → curadoria aprova → outros interessados se juntam pelo mesmo valor (ou cobrem, e os demais igualam ou saem) → vendedor atende → curadoria valida → interessados recebem acesso; quem atendeu recebe a carteira do pedido.
+4. **Pedir informação**: pedidos → novo pedido (modal, com o valor por pessoa) → curadoria aprova → outros interessados se juntam pelo mesmo valor (ou cobrem, e os demais igualam ou saem) → vendedor atende → curadoria valida → interessados recebem acesso; quem atendeu recebe a carteira do pedido.
 5. **Curadoria**: fila → análise (checklist 7 blocos, autenticidade, redação) → decisão → (jurídico) → publicação (post gerado) → prova pública.
 6. **Disputa**: cofre → abrir disputa → curadoria compara prévia e conteúdo → resolução → reembolso em créditos.
 
@@ -83,14 +83,14 @@ Rodapé do painel em todas: "Compra anônima. Registramos item, valor e data. Na
 
 ### `public/pedidos.html` · Mural de pedidos
 - Explicação em uma linha + botão "Fazer um pedido" (leva ao login se deslogado).
-- Filtros (categoria, país, valor por interessado mínimo, status) e cards de pedido: título, valor por interessado, nº de interessados, recompensa total, prazo, status (aberto / valor subiu / travado: atendimento em curadoria / atendido / expirado), critérios resumidos, botões "Juntar-se" e "Tenho essa informação".
+- Filtros (categoria, país, valor por pessoa mínimo, status) e cards de pedido: título, valor por pessoa, nº de interessados, recompensa total, prazo, status (aberto / valor subiu / travado: atendimento em curadoria / atendido / expirado), critérios resumidos, botões "Juntar-se" e "Tenho essa informação".
 
 ### `public/pedido.html` · Página do pedido
 - Título, autor (pseudônimo), categoria, descrição, critérios de aceite (lista numerada), formato esperado, prazo.
-- Painel lateral: valor por interessado, nº de interessados, recompensa total, sinais depositados (10 %), botões "Juntar-se por US$ V" e "Cobrir o valor (mín. V + 10 %)", regra em uma linha ("Todos pagam o mesmo valor e recebem o mesmo acesso. Se ninguém atender até o prazo, cada um recebe o seu de volta."), carteira do pedido (endereço público, pagamentos), botão "Tenho essa informação" (leva ao assistente de envio com o pedido vinculado).
+- Painel lateral: valor por pessoa, nº de interessados, recompensa total, sinais pagos (25 %), botões "Juntar-se por US$ V" e "Cobrir o valor (mín. V + 10 %)", regra em uma linha ("Todos pagam o mesmo valor e recebem o mesmo acesso. Se ninguém atender até o prazo, cada um recebe o seu de volta."), carteira do pedido (endereço público, pagamentos), botão "Tenho essa informação" (leva ao assistente de envio com o pedido vinculado).
 - Lista pública de interessados (pseudônimo, data de entrada, "igualou em") e linha do tempo (abertura, entradas, coberturas, igualadas, saídas).
 - Estados (variantes): aberto; valor subiu, "iguale até dd/mm hh:mm (+US$ X) ou saia" para quem participa; travado (atendimento em curadoria).
-- Seção "Extras deste pedido": cards de extras (título, quem criou, valor por interessado, interessados, total, carteira, status) com "Entrar no extra por US$ X" e "Cobrir" para interessados do principal e a frase "Não entrar no extra não muda sua participação no pedido"; "Propostas de vendedores" com "Criar extra a partir desta proposta"; botão "Adicionar um extra" (modal: título, descrição, critérios, valor por interessado, prazo = do pedido, aviso de curadoria e de pagamento ao criar).
+- Seção "Extras deste pedido": cards de extras (título, quem criou, valor por pessoa, interessados, total, carteira, status) com "Entrar no extra por US$ X" e "Cobrir" para interessados do principal e a frase "Não entrar no extra não muda sua participação no pedido"; "Propostas de vendedores" com "Criar extra a partir desta proposta"; botão "Adicionar um extra" (modal: título, descrição, critérios, valor por pessoa, prazo = do pedido, aviso de curadoria e de pagamento ao criar).
 - Atendimentos: contagem de atendimentos em curadoria (sem detalhes).
 - Perguntas públicas ao autor (Q&A moderado).
 
@@ -143,7 +143,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Guia "Como pagar": use uma carteira que você controla (MetaMask, Trust, Ledger, carteira de celular), nunca direto de uma corretora; envie o valor exato; reembolsos voltam ao endereço de origem; redes aceitas e confirmações exigidas.
 
 ### `buyer/checkout.html` · Checkout (variantes)
-- Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura, **pedido** (juntar-se pelo valor por interessado / cobrir com mínimo de +10 % / igualar a diferença dentro da janela), **exclusividade (buyout)** com as consequências e um aceite explícito.
+- Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura, **pedido** (juntar-se pelo valor por pessoa / cobrir com mínimo de +10 % / igualar a diferença dentro da janela), **exclusividade (buyout)** com as consequências e um aceite explícito.
 - Pagamento direto: escolha da rede, endereço derivado só para este pagamento, QR, valor exato, aviso "pague de uma carteira que você controla; reembolsos voltam ao endereço de origem", contador de confirmações e liberação automática do acesso.
 - O que acontece depois (acesso ao confirmar / fica na carteira do item até a finalização / se o lacre não bater a meta: o que entrou até o último marco batido fica com o vendedor, o resto volta à origem; o checkout diz em qual caso o novo apoio está).
 - Transparência: "o que registramos sobre esta compra". Valor em US$ e o débito equivalente em USDT.
@@ -160,12 +160,12 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `buyer/apoios.html`
 - Lista de lacres apoiados com progresso, valor apoiado, status (em andamento / rompido e público / não bateu a meta · garantido ao vendedor ou reembolsado), e para cada apoio se ele já está garantido ao vendedor (entrou antes do último marco) ou volta se falhar, prazo, botão "Apoiar mais", "Compartilhar" (link anônimo), "Ver no cofre" quando liberado.
-- Aba "Pedidos" com os pedidos de que o usuário participa (valor por interessado pago, recompensa total, status).
+- Aba "Pedidos" com os pedidos de que o usuário participa (valor por pessoa pago, recompensa total, status).
 - Total apoiado e selos ("Rompeu 3 lacres").
 
 ### `buyer/pedidos.html`
-- Botão "Novo pedido" abre modal (também por link: `buyer/pedidos.html#novo-pedido`): tipo (entrega única ou por unidade), título, categoria, descrição, critérios de aceite (lista; no por unidade, o que vale como uma unidade), formato esperado, valor por interessado (ou valor por unidade e limite), sinal (mínimo 10 %), prazo, opção "permitir venda posterior como Cópias, nunca abaixo do valor por interessado"; aviso de curadoria.
-- Lista de pedidos do usuário (abertos por ele ou em que se juntou) com status (em curadoria / aberto / valor subiu: iguale até… / travado: atendimento em curadoria / atendido / expirado / saiu), valor por interessado, nº de interessados e recompensa total; ações: Cobrir, Igualar, Sair (reembolso ao endereço de origem), Abrir no cofre.
+- Botão "Novo pedido" abre modal (também por link: `buyer/pedidos.html#novo-pedido`): tipo (entrega única ou por unidade), título, categoria, descrição, critérios de aceite (lista; no por unidade, o que vale como uma unidade), formato esperado, quanto você paga pela informação (ou por unidade e o limite), prazo; o sinal de 25 % é calculado na hora e mostrado em destaque ("Para criar o pedido você paga agora: US$ X"), sem campo para digitar; opção "permitir venda posterior como Cópias, nunca abaixo do valor por pessoa"; aviso de curadoria.
+- Lista de pedidos do usuário (abertos por ele ou em que se juntou) com status (em curadoria / aberto / valor subiu: iguale até… / travado: atendimento em curadoria / atendido / expirado / saiu), valor por pessoa, nº de interessados e recompensa total; ações: Cobrir, Igualar, Sair (reembolso ao endereço de origem), Abrir no cofre.
 - Detalhe expandido do pedido "em análise": "1 atendimento aguardando curadoria".
 
 - Extras: por pedido, os extras abertos (entrou / não entrou, "Entrar no extra"), propostas pendentes e "Adicionar um extra"; extras atendidos sem a sua participação aparecem só como nota.

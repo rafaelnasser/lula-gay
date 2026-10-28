@@ -135,7 +135,7 @@ Criada ──(pagamento confirmado on-chain)──► Paga ──(entitlement em
 ```
 Aberto ──(juntar-se: paga V)──► Aberto (n+1)
 Aberto ──(cobrir: paga V' ≥ V+10 %)──► Valor subiu (janela 48 h) ──(cada um iguala ou sai)──► Aberto (todos em V')
-Aberto ──(vendedor envia atendimento)──► Travado ──(curadoria aprova)──► Prévia enviada (72 h) ──(cada interessado paga os 90 % ou recusa)──► Atendido ──(72 h sem disputa)──► Finalizado (quem atendeu recebe 90 %)
+Aberto ──(vendedor envia atendimento)──► Travado ──(curadoria aprova)──► Prévia enviada (72 h) ──(cada participante paga os 75 % ou perde o sinal; contestação decidida em 48 h)──► Atendido ──(72 h sem disputa)──► Finalizado (quem atendeu recebe 90 %)
                                                 └──(curadoria rejeita)──► Aberto
 Aberto ──(prazo vence)──► Expirado ──► Reembolsos à origem ──► Finalizado
 Extra: mesma máquina, por sub-item, independente do principal (criado → em curadoria → aberto …)
@@ -151,7 +151,7 @@ Ativo ──(lance)──► Ativo (prorroga se faltam <10 min) ──(prazo)─
 
 - A cada minuto: encerrar itens/leilões/lacres vencidos; liquidar custódias com janela de disputa vencida.
 - A cada 5 min: publicar posts agendados; checar marcos de lacres coletivos (25/50/75/90/100 %); ao bater 100 %, liberar o conteúdo ao público e postar nas redes.
-- A cada hora: finalizações elegíveis (comissão + reembolsos pendentes); lotes de reembolso por rede; expirar pagamentos não recebidos em 24 h; fechar janelas de igualar vencidas (quem não igualou sai, com reembolso à origem); fechar prévias sem resposta em 72 h (sinal para quem atendeu); pagar com o sinal os lotes validados sem resposta em 72 h; expirar pedidos sem atendimento; expirar concessões de visualização.
+- A cada hora: finalizações elegíveis (comissão + reembolsos pendentes); lotes de reembolso por rede; expirar pagamentos não recebidos em 24 h; fechar janelas de completar o sinal vencidas (quem não completou deixa de participar; o sinal fica no pedido); fechar prévias sem resposta em 72 h (sinal para quem atendeu); pagar com o sinal os lotes validados sem resposta em 72 h; expirar pedidos sem atendimento; expirar concessões de visualização.
 - A cada minuto: varrer confirmações de pagamentos pendentes.
 - Diário: reconciliação on-chain das carteiras de itens; apagar endereços de origem de itens finalizados; destruição de DEKs de exclusivos vendidos há mais de 72 h; limpeza de mensagens expiradas; destruição de registros de acesso com mais de 6 meses.
 
@@ -191,16 +191,16 @@ POST   /disputes                 abre disputa
 
 GET    /requests                 mural de pedidos
 POST   /requests                 cria pedido (vai à curadoria)
-POST   /requests/:id/join        junta-se com o sinal (≥ 10 % do valor por interessado) → endereço derivado
-POST   /requests/:id/raise       cobre o valor (≥ atual + 10 %) → endereço derivado; abre janela de 48 h para os demais
-POST   /requests/:id/match       iguala a diferença dentro da janela → endereço derivado
-POST   /requests/:id/leave       sai do pedido (e dos extras) → reembolso ao endereço de origem
+POST   /requests/:id/join        entra com o sinal (25 % do valor por pessoa) → endereço derivado
+POST   /requests/:id/raise       sobe o valor (≥ atual + 10 %) e paga 25 % dele → endereço derivado; abre 48 h para os demais completarem o sinal
+POST   /requests/:id/match       completa o sinal (25 % da diferença) dentro das 48 h → endereço derivado
+POST   /requests/:id/leave       deixa de participar (o sinal fica no pedido; não há reembolso por desistência)
 POST   /requests/:id/extras      interessado cria um extra (vai à curadoria) → endereço derivado para pagar
 POST   /extras/:id/join|raise|match|leave   mesmas regras do pedido, só para interessados do principal
 POST   /requests/:id/proposals   vendedor propõe um extra (público; vira extra quando um interessado o cria)
 POST   /extras/:id/fulfill       vendedor envia atendimento do extra (cria listing vinculado)
-POST   /requests/:id/confirm     interessado aprova a prévia e paga o restante (90 %) → endereço derivado
-POST   /requests/:id/reject      interessado recusa a prévia com motivo (curadoria decide em 48 h)
+POST   /requests/:id/confirm     participante aprova a prévia e paga o restante (75 %) → endereço derivado
+POST   /requests/:id/contest     participante contesta a prévia com motivo (curadoria decide em 48 h)
 POST   /requests/:id/batches     pedido por unidade: envia um lote de unidades (cria a carteira do lote)
 POST   /batches/:id/accept       quem pediu aceita o lote e paga valor × unidades aceitas
 POST   /requests/:id/fulfill     vendedor envia atendimento (cria listing vinculado)
