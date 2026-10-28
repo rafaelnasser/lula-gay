@@ -27,7 +27,7 @@
     .thumb .t-meta .ok { color: var(--ok); } .thumb .t-meta .wax { color: var(--wax-2); font-weight: 600; }
     .thumb .t-ms { position: absolute; left: 6px; top: 6px; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; background: rgba(14,17,24,.75); color: #e9ecf3; border: 1px solid rgba(255,255,255,.15); }
     .thumb .t-ms.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
-    .thumb.locked .preview::before { filter: blur(8px) saturate(.5); opacity: .55; }
+    .thumb.locked .preview::before { filter: blur(4px) saturate(.6); opacity: .75; }
     .thumb .lockmark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
     .thumb .lockmark span { width: 30px; height: 30px; border-radius: 50%; background: rgba(14,17,24,.8); border: 1px solid rgba(255,255,255,.25); display: inline-flex; align-items: center; justify-content: center; color: #e9ecf3; }
     .thumb .lockmark svg { width: 14px; height: 14px; }
@@ -47,6 +47,8 @@
     .gallery .g-locked .progress { width: min(420px, 85%); background: rgba(255,255,255,.18); }
     .gallery .g-locked .g-sub { font-size: var(--fs-sm); color: #c3c9d8; max-width: 46ch; }
     #g-main.locked::before { filter: blur(10px) saturate(.5); opacity: .5; }
+    /* visualização grande: o conteúdo real (documento, tabela, áudio) fica sobre um fundo neutro, sem a miniatura atrás */
+    #g-main.unlocked::before { background: radial-gradient(circle at 25% 15%, rgba(255,255,255,.07), transparent 55%), linear-gradient(160deg, #262d3e, #131826); filter: none; inset: 0; }
     .seal-mid { width: 56px; height: 56px; display: inline-block; flex: none; }
     .verify { display: grid; gap: 8px; }
     .verify .vrow { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); font-size: var(--fs-sm); align-items: start; }
