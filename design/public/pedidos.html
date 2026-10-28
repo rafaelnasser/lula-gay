@@ -23,8 +23,6 @@
     .rules li + li { margin-top: 8px; }
     .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
     .section-head p { color: var(--muted); margin-top: 6px; max-width: 60ch; }
-    .cover-note { font-size: var(--fs-xs); color: var(--muted); display: flex; gap: 6px; align-items: flex-start; }
-    .cover-note svg { width: 13px; height: 13px; flex: none; margin-top: 2px; }
   </style>
 </head>
 <body data-shell="public" data-page="pedidos" data-root="../">
@@ -32,14 +30,14 @@
   <section class="section tight">
     <div class="container">
       <div class="page-head">
-        <div><p class="eyebrow">Demanda primeiro</p><h1>Pedidos com recompensa</h1><p class="sub">Alguém descreve a informação que procura, de qualquer país, e deposita um sinal de 10 % do valor por interessado. Outras contas se juntam pelo mesmo valor. Quando alguém atende, cada interessado vê uma prévia e só então paga o resto. Há também pedidos por unidade: paga-se cada foto ou documento aceito.</p></div>
+        <div><p class="eyebrow">Demanda primeiro</p><h1>Pedidos com recompensa</h1><p class="sub">Alguém descreve a informação que procura, de qualquer país, define o valor por pessoa e paga agora um sinal de 25 %. Outras pessoas entram pelo mesmo valor, com o mesmo sinal. Quando alguém atende, cada pessoa vê uma prévia e só então paga os 75 % restantes. Há também pedidos por unidade: paga-se cada foto ou documento aceito.</p></div>
         <div class="actions"><a class="btn btn-primary" href="../buyer/pedidos.html"><i data-icon="plus"></i>Fazer um pedido</a><span class="xs muted">exige conta anônima</span></div>
       </div>
       <div class="stat-grid">
-        <div class="stat"><span class="label">Recompensas em aberto</span><span class="value">US$ 8.450</span><span class="delta flat">5 pedidos de entrega única · sinais de 10 % nas carteiras</span></div>
-        <div class="stat"><span class="label">Interessados</span><span class="value">20</span><span class="delta flat">em 5 pedidos · cada um pelo mesmo valor</span></div>
+        <div class="stat"><span class="label">Recompensas em aberto</span><span class="value">US$ 8.450</span><span class="delta flat">5 pedidos de entrega única · sinais de 25 % nas carteiras</span></div>
+        <div class="stat"><span class="label">Pessoas</span><span class="value">20</span><span class="delta flat">em 5 pedidos · cada um pelo mesmo valor</span></div>
         <div class="stat"><span class="label">Por unidade</span><span class="value">1</span><span class="delta flat">US$ 2 por foto válida · 1.112 de 5.000</span></div>
-        <div class="stat"><span class="label">Atendidos</span><span class="value">1</span><span class="delta flat">US$ 600 · 3 interessados com acesso</span></div>
+        <div class="stat"><span class="label">Atendidos</span><span class="value">1</span><span class="delta flat">US$ 600 · 3 pessoas com acesso</span></div>
       </div>
     </div>
   </section>
@@ -50,94 +48,87 @@
         <div class="search"><i data-icon="search"></i><input class="input" placeholder="Buscar nos pedidos…" aria-label="Buscar nos pedidos"></div>
         <select class="select" aria-label="Categoria"><option>Todas as categorias</option><option>Saúde e meio ambiente</option><option>Governo e políticas públicas</option><option>Negócios e mercado</option><option>História e acervos</option><option>Fotografia e vídeo</option></select>
         <select class="select" aria-label="País"><option>Todos os países</option><option>Brasil (6)</option><option>Chile (1)</option><option>Argentina</option><option>Portugal</option><option>Estados Unidos</option><option>México</option><option>Global</option></select>
-        <select class="select" aria-label="Valor por interessado"><option>Todos os valores por interessado</option><option>Até US$ 300</option><option>De US$ 300 a US$ 800</option><option>Acima de US$ 800</option></select>
+        <select class="select" aria-label="Valor por pessoa"><option>Todos os valores por pessoa</option><option>Até US$ 300</option><option>De US$ 300 a US$ 800</option><option>Acima de US$ 800</option></select>
         <div class="right"><div class="segmented"><button class="active" data-toast="Mostrando todos os pedidos">Todos</button><button data-toast="Filtro: abertos (5)">Abertos</button><button data-toast="Filtro: pedidos por unidade (1)">Por unidade</button><button data-toast="Filtro: travados, atendimento em curadoria (1)">Travados</button><button data-toast="Filtro: atendidos (1)">Atendidos</button></div></div>
       </div>
 
       <div class="grid cols-2">
         <article class="card req">
           <div class="card-body">
-            <div class="row between"><div class="row"><span class="badge st-ativo">Aberto</span><span class="eyebrow">Saúde e meio ambiente</span><span class="tag">BR</span><span class="badge badge-outline"><i data-icon="plus"></i>1 extra · US$ 300</span></div><span class="tag">ped-2c8d1</span></div>
+            <div class="row"><span class="badge st-ativo">Aberto</span><span class="eyebrow">Saúde e meio ambiente</span><span class="tag">BR</span></div>
             <h3 class="req-title"><a href="pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></h3>
             <ul class="crit"><li>Uma linha por unidade e mês, tempo médio e mediano em minutos, volume de atendimentos</li><li>Origem oficial anexada (resposta de LAI com protocolo ou extração do sistema)</li><li>CSV UTF-8 com dicionário de dados; nenhum dado de paciente</li></ul>
-            <dl class="kv-row"><div><dt>Por interessado</dt><dd class="wax">US$ 800</dd></div><div><dt>Interessados</dt><dd>4</dd></div><div><dt>Recompensa total</dt><dd>US$ 3.200</dd></div><div><dt>Sinais depositados</dt><dd>US$ 320</dd></div><div><dt>Prazo</dt><dd>30/11 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="coruja-7f3a"></span></dd></div></dl>
-            <span class="cover-note"><i data-icon="trending-up"></i>Cobrir o valor exige US$ 880 ou mais (sinal de US$ 88); os 4 interessados teriam 48 h para igualar ou sair.</span>
+            <dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 800</dd></div><div><dt>Pessoas</dt><dd>4</dd></div><div><dt>Recompensa total</dt><dd>US$ 3.200</dd></div><div><dt>Sinais pagos</dt><dd>US$ 800</dd></div><div><dt>Prazo</dt><dd>30/11 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="coruja-7f3a"></span></dd></div></dl>
           </div>
-          <div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Juntar-se com sinal de US$ 80</a><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
+          <div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 800, sinal de US$ 200 agora</a><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
         </article>
 
         <article class="card req">
           <div class="card-body">
-            <div class="row between"><div class="row"><span class="badge st-ativo">Aberto</span><span class="eyebrow">Governo e políticas públicas</span><span class="tag">BR</span><span class="badge badge-outline"><i data-icon="plus"></i>1 extra · US$ 80</span></div><span class="tag">ped-9h2d5</span></div>
+            <div class="row"><span class="badge st-ativo">Aberto</span><span class="eyebrow">Governo e políticas públicas</span><span class="tag">BR</span></div>
             <h3 class="req-title"><a href="pedido.html">Lista de todos os editais de fomento cultural municipais do RS em 2025</a></h3>
             <ul class="crit"><li>Todos os 497 municípios, com link ou cópia do edital e data de publicação</li><li>Valor total, número de vagas e área cultural por edital</li><li>Planilha XLSX ou CSV com fonte por linha</li></ul>
-            <dl class="kv-row"><div><dt>Por interessado</dt><dd class="wax">US$ 300</dd></div><div><dt>Interessados</dt><dd>7</dd></div><div><dt>Recompensa total</dt><dd>US$ 2.100</dd></div><div><dt>Prazo</dt><dd>10/12 · <span class="countdown" data-deadline="2026-12-10T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="farol-3e9b"></span></dd></div></dl>
-            <span class="cover-note"><i data-icon="trending-up"></i>Cobrir o valor exige US$ 330 ou mais (sinal de US$ 33); os 7 interessados teriam 48 h para igualar ou sair.</span>
+            <dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 300</dd></div><div><dt>Pessoas</dt><dd>7</dd></div><div><dt>Recompensa total</dt><dd>US$ 2.100</dd></div><div><dt>Sinais pagos</dt><dd>US$ 525</dd></div><div><dt>Prazo</dt><dd>10/12 · <span class="countdown" data-deadline="2026-12-10T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="farol-3e9b"></span></dd></div></dl>
           </div>
-          <div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Juntar-se com sinal de US$ 30</a><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
+          <div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 300, sinal de US$ 75 agora</a><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
         </article>
 
         <article class="card req" style="grid-column: 1 / -1">
           <div class="card-body">
-            <div class="row between"><div class="row"><span class="badge st-ativo">Aberto</span><span class="badge badge-brass"><i data-icon="layers"></i>Por unidade</span><span class="eyebrow">Governo e políticas públicas</span><span class="tag">BR</span></div><span class="tag">ped-8b4u2</span></div>
+            <div class="row"><span class="badge st-ativo">Aberto</span><span class="badge badge-brass"><i data-icon="layers"></i>Por unidade</span><span class="eyebrow">Governo e políticas públicas</span><span class="tag">BR</span></div>
             <h3 class="req-title"><a href="pedido.html">Fotos dos boletins de urna (BU) afixados nas seções eleitorais de Minas Gerais no 2º turno de 2026 (25/10)</a></h3>
-            <ul class="crit"><li>Uma foto por BU, legível, com o QR code inteiro e o número da seção visível</li><li>Sem pessoas, cabines ou cédulas no enquadramento</li><li>Envio em lotes: a triagem descarta duplicadas e ilegíveis; a curadoria valida cada lote</li></ul>
-            <div><div class="row between small"><span><b>1.112 de 5.000</b> fotos válidas</span><span class="muted">1.240 enviadas por 38 pessoas · 128 duplicadas ou ilegíveis</span></div><div class="progress thin mt-1"><div class="progress-bar wax" data-width="22%"></div></div></div>
-            <dl class="kv-row"><div><dt>Por unidade</dt><dd class="wax">US$ 2 por foto válida</dd></div><div><dt>Limite</dt><dd>5.000 fotos · US$ 10.000</dd></div><div><dt>Sinal</dt><dd>US$ 1.000</dd></div><div><dt>Prazo</dt><dd>30/11 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="farol-3e9b"></span></dd></div></dl>
-            <span class="cover-note"><i data-icon="layers"></i>2 lotes pagos (920 fotos, US$ 1.840) · 1 lote aguardando confirmação de quem pediu (192 fotos, US$ 384, até 29/10 às 14:00) · um único comprador neste tipo de pedido</span>
-            <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div>Nunca fotos de votos, cabines ou documentos de eleitores: a curadoria recusa (sigilo do voto e dados pessoais).</div></div>
+            <ul class="crit"><li>Uma foto por BU, legível, com o QR code inteiro e o número da seção visível</li><li>Sem pessoas, cabines ou cédulas no enquadramento; nunca fotos de votos ou documentos de eleitores (sigilo do voto e dados pessoais)</li><li>Envio em lotes: a triagem descarta duplicadas e ilegíveis; a curadoria valida cada lote</li></ul>
+            <div><div class="row between small"><span><b>1.112 de 5.000</b> fotos válidas</span><span class="muted">1.240 enviadas por 38 pessoas</span></div><div class="progress thin mt-1"><div class="progress-bar wax" data-width="22%"></div></div></div>
+            <dl class="kv-row"><div><dt>Por unidade</dt><dd class="wax">US$ 2 por foto válida</dd></div><div><dt>Limite</dt><dd>5.000 fotos · US$ 10.000</dd></div><div><dt>Válidas até agora</dt><dd>1.112</dd></div><div><dt>Sinal pago</dt><dd>US$ 2.500</dd></div><div><dt>Prazo</dt><dd>30/11 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="farol-3e9b"></span></dd></div></dl>
           </div>
           <div class="card-foot"><a class="btn btn-sm btn-primary" href="../seller/pedidos.html"><i data-icon="upload"></i>Enviar fotos</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
         </article>
 
         <article class="card req">
           <div class="card-body">
-            <div class="row between"><div class="row"><span class="badge st-analise">Travado: atendimento em curadoria</span><span class="eyebrow">Negócios e mercado</span><span class="tag">BR</span></div><span class="tag">ped-4k9e2</span></div>
+            <div class="row"><span class="badge st-analise">Travado: atendimento em curadoria</span><span class="eyebrow">Negócios e mercado</span><span class="tag">BR</span></div>
             <h3 class="req-title"><a href="pedido.html">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</a></h3>
             <ul class="crit"><li>Preço mediano do m² por bairro e mês, apartamentos e casas separados</li><li>Metodologia de coleta e fonte dos anúncios documentadas</li><li>Pelo menos 60 bairros com série contínua</li></ul>
-            <dl class="kv-row"><div><dt>Por interessado</dt><dd class="wax">US$ 290</dd></div><div><dt>Interessados</dt><dd>5</dd></div><div><dt>Recompensa total</dt><dd>US$ 1.450</dd></div><div><dt>Prazo</dt><dd>20/11 · <span class="countdown" data-deadline="2026-11-20T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="relogio-2b7c"></span></dd></div></dl>
-            <div class="alert alert-info"><i data-icon="hourglass"></i><div>Atendimento em curadoria desde 22/10, enviado por <span class="handle" data-handle="bussola-c4e1"></span>. Até a decisão, sem entradas, coberturas ou saídas. Aprovado: cada um dos 5 interessados vê uma prévia e tem 72 h para pagar o restante. Rejeitado: o pedido destrava.</div></div>
+            <dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 290</dd></div><div><dt>Pessoas</dt><dd>5</dd></div><div><dt>Recompensa total</dt><dd>US$ 1.450</dd></div><div><dt>Sinais pagos</dt><dd>US$ 362,50</dd></div><div><dt>Prazo</dt><dd>20/11 · <span class="countdown" data-deadline="2026-11-20T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="relogio-2b7c"></span></dd></div></dl>
           </div>
-          <div class="card-foot"><button class="btn btn-sm btn-wax" disabled><i data-icon="lock"></i>Juntar-se com sinal de US$ 29</button><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
+          <div class="card-foot"><button class="btn btn-sm btn-wax" disabled><i data-icon="lock"></i>Entrar por US$ 290, sinal de US$ 72,50 agora</button><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
         </article>
 
         <article class="card req">
           <div class="card-body">
-            <div class="row between"><div class="row"><span class="badge st-ativo">Aberto</span><span class="eyebrow">História e acervos</span><span class="tag">BR</span></div><span class="tag">ped-7f1a3</span></div>
+            <div class="row"><span class="badge st-ativo">Aberto</span><span class="eyebrow">História e acervos</span><span class="tag">BR</span></div>
             <h3 class="req-title"><a href="pedido.html">Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)</a></h3>
             <ul class="crit"><li>Todas as páginas, incluindo capa, colofão e anúncios, em 400 dpi ou mais</li><li>PDF com OCR e imagens individuais em TIFF ou PNG</li><li>Declaração de que o exemplar digitalizado é de acervo próprio ou de uso permitido</li></ul>
-            <dl class="kv-row"><div><dt>Por interessado</dt><dd class="wax">US$ 800</dd></div><div><dt>Interessados</dt><dd>1</dd></div><div><dt>Recompensa total</dt><dd>US$ 800</dd></div><div><dt>Prazo</dt><dd>15/12 · <span class="countdown" data-deadline="2026-12-15T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="tipografo-8e04"></span></dd></div></dl>
-            <span class="cover-note"><i data-icon="trending-up"></i>Só quem abriu participa até agora. Cobrir o valor exige US$ 880 ou mais (sinal de US$ 88); quem abriu teria 48 h para igualar ou sair.</span>
+            <dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 800</dd></div><div><dt>Pessoas</dt><dd>1</dd></div><div><dt>Recompensa total</dt><dd>US$ 800</dd></div><div><dt>Sinais pagos</dt><dd>US$ 200 + US$ 100 retidos</dd></div><div><dt>Prazo</dt><dd>15/12 · <span class="countdown" data-deadline="2026-12-15T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="tipografo-8e04"></span></dd></div></dl>
           </div>
-          <div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Juntar-se com sinal de US$ 80</a><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
+          <div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 800, sinal de US$ 200 agora</a><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
         </article>
 
         <article class="card req">
           <div class="card-body">
-            <div class="row between"><div class="row"><span class="badge st-finalizado">Atendido</span><span class="eyebrow">Fotografia e vídeo</span><span class="tag">BR</span><span class="badge badge-outline"><i data-icon="plus"></i>1 extra atendido</span></div><span class="tag">ped-1b6j8</span></div>
+            <div class="row"><span class="badge st-finalizado">Atendido</span><span class="eyebrow">Fotografia e vídeo</span><span class="tag">BR</span></div>
             <h3 class="req-title"><a href="pedido.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></h3>
-            <ul class="crit"><li>Atendido em 08/10/2026 por <span class="handle" data-handle="cartografo-5a77"></span>, validado pela curadoria (Verificado)</li><li>Prévia em 06/10; os 3 interessados confirmaram e pagaram o restante até 08/10 e têm as 118 fotografias no cofre</li><li>1 extra atendido junto: plantas e cortes da reforma (2020), para 2 interessados</li></ul>
-            <dl class="kv-row"><div><dt>Por interessado</dt><dd>US$ 200</dd></div><div><dt>Interessados</dt><dd>3</dd></div><div><dt>Recompensa total</dt><dd>US$ 600</dd></div><div><dt>Prazo</dt><dd>—</dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="quartzo-a1f0"></span></dd></div></dl>
+            <ul class="crit"><li>Atendido em 08/10/2026 por <span class="handle" data-handle="cartografo-5a77"></span>, validado pela curadoria (Verificado)</li><li>Prévia em 06/10; as 3 pessoas pagaram os 75 % restantes até 08/10 e têm as 118 fotografias no cofre</li></ul>
+            <dl class="kv-row"><div><dt>Por pessoa</dt><dd>US$ 200</dd></div><div><dt>Pessoas</dt><dd>3</dd></div><div><dt>Recompensa total</dt><dd>US$ 600</dd></div><div><dt>Prazo</dt><dd>—</dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="quartzo-a1f0"></span></dd></div></dl>
           </div>
           <div class="card-foot"><a class="btn btn-sm btn-primary" href="prova.html"><i data-icon="badge-check"></i>Prova do atendimento</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
         </article>
 
         <article class="card req">
           <div class="card-body">
-            <div class="row between"><div class="row"><span class="badge st-ativo">Aberto</span><span class="eyebrow">Governo e políticas públicas</span><span class="tag">CL</span><span class="badge badge-outline"><i data-icon="lightbulb"></i>1 proposta de extra</span></div><span class="tag">ped-5r2k8</span></div>
+            <div class="row"><span class="badge st-ativo">Aberto</span><span class="eyebrow">Governo e políticas públicas</span><span class="tag">CL</span></div>
             <h3 class="req-title"><a href="pedido.html">Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos</a></h3>
             <ul class="crit"><li>Todas as concessões de portos públicos (Valparaíso, San Antonio, Talcahuano, Iquique, Antofagasta e demais), com concessionária, prazo e valor</li><li>Fonte oficial anexada (empresas portuárias estatais ou Ministério de Obras Públicas), com data</li><li>CSV em espanhol com dicionário de dados; resumo em português ou inglês é bem-vindo</li></ul>
-            <dl class="kv-row"><div><dt>Por interessado</dt><dd class="wax">US$ 300</dd></div><div><dt>Interessados</dt><dd>3</dd></div><div><dt>Recompensa total</dt><dd>US$ 900</dd></div><div><dt>Prazo</dt><dd>20/12 · <span class="countdown" data-deadline="2026-12-20T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="salitre-2e9c"></span></dd></div><div><dt>Idioma</dt><dd>espanhol</dd></div></dl>
-            <span class="cover-note"><i data-icon="trending-up"></i>Cobrir o valor exige US$ 330 ou mais (sinal de US$ 33); os 3 interessados teriam 48 h para igualar ou sair.</span>
+            <dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 300</dd></div><div><dt>Pessoas</dt><dd>3</dd></div><div><dt>Recompensa total</dt><dd>US$ 900</dd></div><div><dt>Sinais pagos</dt><dd>US$ 225</dd></div><div><dt>Prazo</dt><dd>20/12 · <span class="countdown" data-deadline="2026-12-20T23:59:00-03:00"></span></dd></div><div><dt>Aberto por</dt><dd><span class="handle" data-handle="salitre-2e9c"></span></dd></div></dl>
           </div>
-          <div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Juntar-se com sinal de US$ 30</a><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
+          <div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 300, sinal de US$ 75 agora</a><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="upload"></i>Atender este pedido</a><a class="btn btn-sm btn-ghost" href="pedido.html">Detalhes</a></div>
         </article>
 
         <article class="card flat" style="grid-column: 1 / -1">
           <div class="empty">
             <i data-icon="file-search"></i>
             <h4>Não achou o que procura?</h4>
-            <p>Descreva a informação, defina critérios de aceite claros e o valor por interessado (a partir de US$ 50) e deposite o sinal de 10 % na carteira do pedido. Ou abra um pedido por unidade e pague cada foto ou documento aceito. O pedido passa pela curadoria antes de ficar público.</p>
+            <p>Descreva a informação, defina critérios de aceite claros e o valor por pessoa (a partir de US$ 50) e pague o sinal de 25 % na carteira do pedido. Ou abra um pedido por unidade e pague cada foto ou documento aceito. O pedido passa pela curadoria antes de ficar público.</p>
             <a class="btn btn-primary" href="../buyer/pedidos.html"><i data-icon="plus"></i>Fazer um pedido</a>
           </div>
         </article>
@@ -154,12 +145,12 @@
     <div class="container">
       <div class="section-head"><div><p class="eyebrow">Como funciona</p><h2>Do pedido ao acesso: sinal, prévia e o resto</h2></div><a class="btn btn-ghost" href="como-funciona.html">Ver tudo<i data-icon="arrow-right"></i></a></div>
       <div class="grid cols-3">
-        <div class="card"><div class="card-body stack-sm"><div class="how-step"><span class="n">1</span><div><b>Alguém abre o pedido e deposita o sinal</b><p class="small muted">Título, descrição, critérios de aceite, formato, prazo (até 90 dias) e o valor por interessado. Quem abre deposita um sinal de pelo menos 10 % na carteira do pedido, criada quando a curadoria aprova o pedido. O sinal evita pedidos falsos e mostra a quem atende que existe dinheiro de verdade.</p></div></div></div></div>
-        <div class="card"><div class="card-body stack-sm"><div class="how-step"><span class="n">2</span><div><b>Outras contas se juntam ou cobrem o valor</b><p class="small muted">Juntar-se é entrar pelo mesmo valor, com o mesmo sinal de 10 %; a recompensa total é valor por interessado × interessados. Cobrir é subir o valor em 10 % ou mais: os outros têm 48 h para igualar (sinal de 10 % da diferença) ou sair, com o sinal de volta. Interessados podem ainda criar <b>extras</b>: sub-itens opcionais com valor e carteira próprios.</p></div></div></div></div>
-        <div class="card"><div class="card-body stack-sm"><div class="how-step"><span class="n">3</span><div><b>Alguém atende: prévia e depois o resto</b><p class="small muted">Durante a análise o pedido fica travado. Aprovado o atendimento, cada interessado recebe uma prévia e tem 72 h para pagar os 90 % restantes e receber tudo no cofre. Recusa só com motivo, decidida pela curadoria em até 48 h. Sem atendimento até o prazo, cada sinal volta.</p></div></div></div></div>
+        <div class="card"><div class="card-body stack-sm"><div class="how-step"><span class="n">1</span><div><b>Alguém abre o pedido e paga o sinal</b><p class="small muted">Título, descrição, critérios de aceite, formato, prazo (até 90 dias) e o valor por pessoa. Quem abre paga um sinal de 25 % desse valor na carteira do pedido, criada quando a curadoria aprova o pedido. O sinal evita pedidos falsos e mostra a quem atende que existe dinheiro de verdade.</p></div></div></div></div>
+        <div class="card"><div class="card-body stack-sm"><div class="how-step"><span class="n">2</span><div><b>Outras pessoas entram ou sobem o valor</b><p class="small muted">Entrar é pagar o mesmo sinal de 25 % e esperar: em US$ 800, paga agora US$ 200 e o resto, US$ 600, só depois da prévia. Quem aceita pagar mais sobe o valor (no mínimo 10 % acima); os outros têm 48 h para completar o sinal. Quem não completa deixa de participar, e o sinal fica no pedido.</p></div></div></div></div>
+        <div class="card"><div class="card-body stack-sm"><div class="how-step"><span class="n">3</span><div><b>Alguém atende: prévia e depois o resto</b><p class="small muted">Durante a análise o pedido fica travado. Aprovado o atendimento, cada pessoa recebe uma prévia e tem 72 h para pagar os 75 % restantes e receber tudo no cofre; quem não paga perde o sinal. Contestação só com motivo, decidida pela curadoria em até 48 h. Sem atendimento até o prazo, os sinais voltam.</p></div></div></div></div>
       </div>
-      <p class="small muted mt-2"><b>Pedido por unidade:</b> quem pede define o que vale como uma unidade, o valor por unidade e o limite, com sinal de 10 % do orçamento. Qualquer conta envia em lotes; quem pediu vê a prévia de cada lote e paga só as unidades aceitas.</p>
-      <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">Anonimato nos dois lados</span>Quem abriu o pedido, os interessados e quem atende só se veem por pseudônimo. Perguntas públicas a quem abriu passam por moderação. Nenhum valor é pago fora da plataforma: tudo entra na carteira do pedido e sai dela só para quem atendeu ou em reembolsos.</div></div>
+      <p class="small muted mt-2"><b>Pedido por unidade:</b> quem pede define o que vale como uma unidade, o valor por unidade e o limite, com sinal de 25 % do orçamento. Qualquer conta envia em lotes; quem pediu vê a prévia de cada lote e paga só as unidades aceitas.</p>
+      <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">Anonimato nos dois lados</span>Quem abriu o pedido, os participantes e quem atende só se veem por pseudônimo. Perguntas públicas a quem abriu passam por moderação. Nenhum valor é pago fora da plataforma: tudo entra na carteira do pedido e sai dela só para quem atendeu ou em reembolsos.</div></div>
     </div>
   </section>
 
@@ -170,14 +161,15 @@
           <div class="card-head"><i data-icon="file-search"></i><h3>Regras para quem pede ou se junta</h3></div>
           <div class="card-body">
             <ul class="rules">
-              <li>Valor por interessado a partir de US$ 50. Você deposita agora um sinal de pelo menos 10 %, da sua carteira para a carteira do pedido; quem se junta entra pelo mesmo valor, com o mesmo sinal.</li>
+              <li>Valor por pessoa a partir de US$ 50. Você paga agora um sinal de 25 %, da sua carteira para a carteira do pedido; quem entra paga o mesmo sinal. Ex.: em US$ 800, paga agora US$ 200 e o resto, US$ 600, só depois da prévia.</li>
               <li>Prazo entre 7 e 90 dias. Pode ser estendido uma vez, antes de vencer, se ninguém tiver atendido.</li>
               <li>Critérios de aceite objetivos: a curadoria confere cada um no atendimento e recusa pedidos vagos.</li>
-              <li>Se alguém cobrir o valor (mínimo +10 %), você tem 48 h para igualar, depositando 10 % da diferença, ou sair com o sinal de volta ao endereço de origem. Quem não responde sai automaticamente.</li>
+              <li>Se alguém subir o valor (no mínimo 10 % acima), você tem 48 h para completar o sinal até os novos 25 %. Quem não completa deixa de participar, e o sinal que já pagou fica no pedido.</li>
               <li>Nada de pedir dados pessoais, conteúdo íntimo, credenciais, material protegido ou sob sigilo. O pedido passa pela mesma política de conteúdo dos itens.</li>
-              <li>Aprovado um atendimento, você vê uma prévia e tem 72 h para pagar os 90 % restantes e receber tudo no cofre. Recusar exige motivo; sem resposta em 72 h, o sinal vai para quem atendeu.</li>
-              <li>Pedido por unidade: você define o que vale como uma unidade, o valor por unidade e o limite; o sinal é 10 % do orçamento. Você vê a prévia de cada lote e paga só as unidades aceitas; sem resposta em 72 h, o lote é pago com o sinal.</li>
-              <li>Interessados são públicos (pseudônimo e data de entrada).</li>
+              <li>Aprovado um atendimento, você vê uma prévia e tem 72 h para pagar os 75 % restantes e receber tudo no cofre. Quem não paga perde o sinal, que vai para quem atendeu. Se a prévia não corresponde ao pedido, conteste com motivo; a curadoria decide em até 48 h.</li>
+              <li>O sinal não volta por desistência. Ele só volta se o pedido expirar sem atendimento.</li>
+              <li>Pedido por unidade: você define o que vale como uma unidade, o valor por unidade e o limite; o sinal é 25 % do orçamento. Você vê a prévia de cada lote e paga só as unidades aceitas; sem resposta em 72 h, o lote é pago com o sinal.</li>
+              <li>Quem participa é público (pseudônimo e data de entrada).</li>
             </ul>
           </div>
         </div>
@@ -189,10 +181,10 @@
               <li>Ao entrar em curadoria, o pedido trava: a recompensa total não muda até a decisão.</li>
               <li>A curadoria confere os critérios de aceite um a um. Se faltar algum, você recebe a lista e tem 7 dias para reenviar; nesse intervalo o pedido destrava.</li>
               <li>Vale o primeiro atendimento validado. Um segundo atendimento pode ser publicado como item normal, sem a recompensa.</li>
-              <li>Aprovado, cada interessado vê uma prévia e tem 72 h para pagar o restante; quem não responde deixa o sinal para você. Quanto você recebe e como: <a class="link" href="vendedor.html">Para vendedores</a>.</li>
+              <li>Aprovado, cada participante vê uma prévia e tem 72 h para pagar os 75 % restantes; quem não paga deixa o sinal para você. Quanto você recebe e como: <a class="link" href="vendedor.html">Para vendedores</a>.</li>
               <li>Em pedidos por unidade, envie em lotes: duplicadas e ilegíveis são descartadas e você recebe pelas unidades aceitas.</li>
-              <li>Tem algo próximo do que foi pedido? Proponha um extra: a proposta fica pública no pedido e só vira extra quando um interessado a cria e paga. Quem propôs não tem exclusividade para atender.</li>
-              <li>Você nunca vê os interessados além do pseudônimo; eles nunca veem quem atendeu até a validação.</li>
+              <li>Tem algo próximo do que foi pedido? Proponha um extra: a proposta fica pública no pedido e só vira extra quando um participante a cria e paga. Quem propôs não tem exclusividade para atender.</li>
+              <li>Você nunca vê os participantes além do pseudônimo; eles nunca veem quem atendeu até a validação.</li>
             </ul>
           </div>
         </div>

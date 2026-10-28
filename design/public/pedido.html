@@ -35,6 +35,7 @@
     .qa .meta { color: var(--muted); font-size: var(--fs-xs); }
     .side .card-body { padding: 18px; }
     .side-foot { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
+    .side .btn-block { white-space: normal; text-align: center; }
     .math { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface-2); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
     .math b { font-family: var(--font-display); font-size: var(--fs-md); }
     .math .op { color: var(--muted); }
@@ -79,7 +80,7 @@
                 <li><div><b>Entrar</b><span>Quem quer a mesma informação entra pelo mesmo valor: paga agora US$ 200 (sinal de 25 %) e espera. O resto, US$ 600, só depois da prévia. Recompensa total = valor por pessoa × pessoas, e todos recebem o mesmo acesso.</span></div></li>
                 <li><div><b>Subir o valor</b><span>Qualquer conta pode aceitar pagar mais, no mínimo 10 % acima (hoje: mín. US$ 880, sinal de US$ 220). Quem sobe paga 25 % do novo valor, que passa a valer para todos.</span></div></li>
                 <li><div><b>Completar o sinal</b><span>Quando o valor sobe, cada participante é avisado para completar o sinal até os novos 25 % (paga 25 % da diferença) em até 48 h, nunca além do prazo do pedido. Quem não completa deixa de participar, e o sinal que já pagou fica no pedido: vai para quem atender ou volta só se o pedido expirar sem atendimento.</span></div></li>
-                <li><div><b>Sem volta</b><span>O sinal não volta por desistência. Não existe sair do pedido com o sinal de volta: ele só volta se o pedido expirar sem atendimento.</span></div></li>
+                <li><div><b>Sem volta</b><span>O sinal não volta por desistência. Quem desiste não recebe o sinal: ele só volta se o pedido expirar sem atendimento.</span></div></li>
                 <li><div><b>Mesmo valor, sempre</b><span>A qualquer momento, todos os participantes ativos entraram pelo mesmo valor. Se alguém sobe o valor e ninguém completa, fica sozinho: compra com exclusividade de fato.</span></div></li>
                 <li><div><b>Atender e prévia</b><span>Um vendedor envia o material; o pedido trava (sem entradas nem subidas de valor) e a curadoria confere os critérios e a lei. Aprovado, cada participante recebe uma prévia (amostra, páginas com tarja, miniaturas com marca d’água) e tem 72 h para pagar os 75 % restantes (hoje US$ 600) e receber tudo no cofre. Quem não paga perde o sinal, que vai para quem atendeu.</span></div></li>
                 <li><div><b>Contestar</b><span>Se a prévia não corresponde ao que foi pedido, conteste em 72 h com o motivo; a curadoria decide em até 48 h. Se não corresponde, o atendimento cai e o pedido continua aberto.</span></div></li>
@@ -247,7 +248,7 @@
               </div>
             </div>
 
-            <div data-variant="igualar">
+            <div data-variant="completar">
               <div class="card-body stack">
                 <div class="dev-note"><span class="tag">exemplo</span>visão de <b>@coruja-7f3a</b> em 19/10, antes de completar o sinal</div>
                 <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Valor subiu: complete o sinal até 20/10 14:00</span><span class="handle" data-handle="quartzo-a1f0"></span> subiu o valor para US$ 800 por pessoa em 18/10. Seu sinal é de US$ 125 (25 % de US$ 500). Para continuar, complete até os novos 25 %: +US$ 75.</div></div>
@@ -321,7 +322,7 @@
   </div></div>
 
   <!-- Seletor de estados do painel (ferramenta de desenvolvimento) -->
-  <div class="variant-switch"><span class="vs-label">Estado</span><button class="active" data-show="aberto">Aberto</button><button data-show="igualar">Valor subiu (participante)</button><button data-show="travado">Travado</button></div>
+  <div class="variant-switch"><span class="vs-label">Estado</span><button class="active" data-show="aberto">Aberto</button><button data-show="completar">Valor subiu (participante)</button><button data-show="travado">Travado</button></div>
 </main>
 </body>
 </html>
