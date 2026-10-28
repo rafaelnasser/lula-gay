@@ -34,7 +34,7 @@
 
 ## Fase 2 · Expansão (meses 4–6)
 - **Leilão** (aberto, lacrado, holandês), **Camadas**, **Assinatura**.
-- Metas estendidas, preço escalonado, compra em grupo.
+- Preço escalonado, compra em grupo.
 - Análise expressa e destaque pagos; Conta Pro com alertas.
 - Instagram/Threads; cards por canal; melhores horários.
 - Reputação v2 (selos: Rompeu lacres, Fonte recorrente, Verificado 10×).

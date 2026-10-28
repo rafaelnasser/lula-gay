@@ -29,7 +29,7 @@ Convenções que valem para todos os modelos:
 | 9 | **Licença** | Direitos de uso por finalidade (editorial, comercial, exclusiva) | Muitos | V3 |
 | 10 | **Consulta paga** | Comprador faz uma pergunta e paga pela resposta verificada | Um | V3 |
 
-Modificadores (combináveis): **compra com exclusividade (buyout)**, edição limitada, preço escalonado por volume, metas estendidas, prévias por marco, pague o que quiser com mínimo, tudo-ou-nada vs. flexível, compra em grupo, marca d'água obrigatória, somente leitura (sem download).
+Modificadores (combináveis): **compra com exclusividade (buyout)**, edição limitada, preço escalonado por volume, prévias por marco, pague o que quiser com mínimo, tudo-ou-nada vs. flexível, compra em grupo, marca d'água obrigatória, somente leitura (sem download).
 
 ---
 
@@ -97,18 +97,18 @@ Por que ondas e não um por um: com mais de mil apoiadores, liberar individualme
 - *Tudo ou nada* (padrão): se a meta não for atingida no prazo, cada apoio volta ao endereço de origem automaticamente, sem ondas.
 - *Flexível*: o vendedor pode optar por liberar com o que arrecadou se tiver passado de um piso (ex.: 70 % da meta). Deve ser declarado antes de publicar.
 
-**Metas estendidas.** O vendedor pode definir níveis acima da meta que destravam material adicional (ex.: US$ 80 mil libera o relatório; US$ 120 mil libera também as entrevistas em áudio). Cada nível é um asset separado no envio.
+**Tudo ao bater a meta.** Ao bater 100 % da meta, todo o material do item é liberado, pela fila de ondas. Não existem metas estendidas nem material guardado para um segundo patamar: tudo o que o vendedor envia entra na meta.
 
 **Mecânicas de engajamento.**
 - Barra de progresso pública, número de apoiadores e tempo restante.
-- **Linha do tempo do lacre** na página do item: barra de prazo (publicado → hoje → encerra, com o dia atual marcado), ritmo dos últimos dias e previsão de rompimento, e uma barra própria para cada marco (25, 50, 75, 90, 100 % e meta estendida) com a data em que foi batido e quantos apoiadores havia.
+- **Linha do tempo do lacre** na página do item: barra de prazo (publicado → hoje → encerra, com o dia atual marcado), ritmo dos últimos dias e previsão de rompimento, e uma barra própria para cada marco (25, 50, 75, 90 e 100 %) com a data em que foi batido e quantos apoiadores havia.
 - **Prévias por marco**: o vendedor escolhe, no envio, uma prévia extra para cada marco (ex.: índice dos documentos aos 25 %, uma página sem tarjas aos 50 %, um mapa e 3 min de áudio aos 75 %). A curadoria aprova junto com o item. Ao bater o marco, a prévia é liberada ao público e publicada nas redes com o anúncio do marco. É o que mostra ao público o que está por vir.
 - Marcos automáticos postados nas redes: 25 %, 50 %, 75 %, 90 %, meta batida, cada um com a prévia correspondente.
 - Compartilhamento com link de referência anônimo (contador por link, sem identificar quem compartilhou).
 
 **Regras de custódia.** Os apoios ficam na carteira do item até o resultado. Se a meta for batida, 72 h após a última onda (quando o conteúdo fica público) a plataforma separa a comissão, executa reembolsos procedentes e entrega a carteira ao vendedor. Se falhar, cada apoio volta ao endereço de origem.
 
-**Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, 500, outro) com a onda correspondente, fila de liberação (ondas, topo da fila, sua posição), metas estendidas em lista, atualizações do vendedor.
+**Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, 500, outro) com a onda correspondente, fila de liberação (ondas, topo da fila, sua posição), o que é liberado ao bater a meta, atualizações do vendedor.
 
 **Comissão.** 10 %.
 
@@ -245,7 +245,6 @@ Um item publicado para muitos compradores pode trazer, ao lado do preço normal 
 | Compra com exclusividade | Valor que encerra o anúncio e entrega o item a um único comprador | Cópias, Lacre coletivo, Camadas |
 | Edição limitada | Teto de unidades | Cópias, Camadas, Licença |
 | Preço escalonado | Preço sobe conforme vende | Cópias |
-| Metas estendidas | Níveis acima da meta destravam extras | Lacre coletivo, Pedido |
 | Pague o que quiser | Valor livre acima de um mínimo | Cópias (itens de interesse público) |
 | Tudo ou nada / flexível | Regra de falha da arrecadação | Lacre coletivo, Pedido |
 | Compra em grupo | Preço fixo de exclusividade dividido entre N compradores que entram juntos; fecha ao completar N | Exclusivo |

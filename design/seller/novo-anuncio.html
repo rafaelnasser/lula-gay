@@ -23,8 +23,8 @@
     .counter { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); font-weight: 400; }
     .field > label.row { justify-content: space-between; }
     .foot-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
-    .stretch-row { display: grid; grid-template-columns: minmax(130px, 170px) 1fr auto; gap: 10px; align-items: center; }
-    @media (max-width: 600px) { .stretch-row { grid-template-columns: 1fr; } }
+    .cfg-row { display: grid; grid-template-columns: minmax(130px, 170px) 1fr auto; gap: 10px; align-items: center; }
+    @media (max-width: 600px) { .cfg-row { grid-template-columns: 1fr; } }
     .switch .desc { display: block; color: var(--muted); font-size: var(--fs-xs); font-weight: 400; }
     .switch > span:last-child { min-width: 0; }
     .sim .big { font-family: var(--font-display); font-size: var(--fs-2xl); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
@@ -138,7 +138,7 @@
             <div class="file-row"><span class="file-icon"><i data-icon="file-text"></i></span><div class="grow"><div class="file-name truncate">transcricoes-revisadas-v2.pdf</div><div class="file-meta">312 páginas · 6,8 MB · hash local <code>5e9b…d2c4</code> · começa quando o anterior terminar</div></div><div class="progress thin"><div class="progress-bar" data-width="0%"></div></div><span class="badge">Na fila</span></div>
           </div>
           <div>
-            <div class="row between"><span class="small"><b>2,2 GB</b> de 20 GB · 3 arquivos</span><span class="xs muted">Limite por item no MVP: 20 GB. Material maior: divida em metas estendidas.</span></div>
+            <div class="row between"><span class="small"><b>2,2 GB</b> de 20 GB · 3 arquivos</span><span class="xs muted">Limite por item no MVP: 20 GB. Material maior: fale com a curadoria antes de enviar.</span></div>
             <div class="progress thin mt-1"><div class="progress-bar" data-width="11%"></div></div>
           </div>
           <div class="grid cols-2">
@@ -265,20 +265,13 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                       </div>
                     </fieldset>
                     <fieldset>
-                      <legend>Metas estendidas</legend>
-                      <div class="stack-sm">
-                        <div class="stretch-row"><div class="input-group"><span class="affix">US$</span><input class="input num" value="18.000,00" aria-label="Valor da meta estendida"></div><input class="input" value="Áudios brutos sem edição (40 WAV, 9,2 GB) · arquivo a adicionar no passo 2" aria-label="O que a meta estendida destrava"><button class="icon-btn" data-toast="Meta estendida removida" aria-label="Remover meta estendida"><i data-icon="trash"></i></button></div>
-                        <div class="row"><button class="btn btn-sm" data-toast="Nova linha de meta estendida adicionada"><i data-icon="plus"></i>Adicionar meta estendida</button><span class="xs muted">Cada nível destrava um arquivo adicional, analisado pela curadoria como parte do item.</span></div>
-                      </div>
-                    </fieldset>
-                    <fieldset>
                       <legend>Prévias por marco</legend>
                       <div class="stack-sm">
                         <p class="xs muted">A cada marco batido, uma prévia extra é liberada ao público e publicada nas redes junto com o anúncio do marco. Escolha entre as prévias geradas no passo 3; a curadoria aprova cada uma. É o que mantém os apoiadores animados entre um marco e outro.</p>
-                        <div class="stretch-row"><span class="affix" style="border-radius:var(--r-sm)">25 %</span><select class="select" aria-label="Prévia do marco de 25 %"><option>Índice das 40 entrevistas (nome do bairro e ano, sem nomes)</option><option>Trecho de 60 s de uma entrevista</option><option>Página 1 da transcrição com tarjas</option><option>Nenhuma</option></select></div>
-                        <div class="stretch-row"><span class="affix" style="border-radius:var(--r-sm)">50 %</span><select class="select" aria-label="Prévia do marco de 50 %"><option>Trecho de 60 s de uma entrevista</option><option>Índice das 40 entrevistas</option><option>Página 1 da transcrição com tarjas</option><option>Nenhuma</option></select></div>
-                        <div class="stretch-row"><span class="affix" style="border-radius:var(--r-sm)">75 %</span><select class="select" aria-label="Prévia do marco de 75 %"><option>Página 1 da transcrição com tarjas</option><option>Trecho de 60 s de uma entrevista</option><option>Índice das 40 entrevistas</option><option>Nenhuma</option></select></div>
-                        <div class="stretch-row"><span class="affix" style="border-radius:var(--r-sm)">90 %</span><select class="select" aria-label="Prévia do marco de 90 %"><option>Trecho de 3 min de uma entrevista (voz alterada)</option><option>Nenhuma</option></select></div>
+                        <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">25 %</span><select class="select" aria-label="Prévia do marco de 25 %"><option>Índice das 40 entrevistas (nome do bairro e ano, sem nomes)</option><option>Trecho de 60 s de uma entrevista</option><option>Página 1 da transcrição com tarjas</option><option>Nenhuma</option></select></div>
+                        <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">50 %</span><select class="select" aria-label="Prévia do marco de 50 %"><option>Trecho de 60 s de uma entrevista</option><option>Índice das 40 entrevistas</option><option>Página 1 da transcrição com tarjas</option><option>Nenhuma</option></select></div>
+                        <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">75 %</span><select class="select" aria-label="Prévia do marco de 75 %"><option>Página 1 da transcrição com tarjas</option><option>Trecho de 60 s de uma entrevista</option><option>Índice das 40 entrevistas</option><option>Nenhuma</option></select></div>
+                        <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">90 %</span><select class="select" aria-label="Prévia do marco de 90 %"><option>Trecho de 3 min de uma entrevista (voz alterada)</option><option>Nenhuma</option></select></div>
                         <span class="xs muted">Marcos de 25, 50, 75 e 90 % são fixos. Na página do item, cada marco mostra sua própria barra, a data em que foi batido e a prévia que libera.</span>
                       </div>
                     </fieldset>
@@ -301,7 +294,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                     <fieldset>
                       <legend>Preço escalonado</legend>
                       <div class="stack-sm">
-                        <div class="stretch-row"><div class="input-group"><span class="affix">Primeiras</span><input class="input num" value="50" aria-label="Quantidade da primeira faixa"></div><div class="input-group"><span class="affix">US$</span><input class="input num" value="45,00" aria-label="Preço da primeira faixa"></div><span class="xs muted">depois, US$ 60,00</span></div>
+                        <div class="cfg-row"><div class="input-group"><span class="affix">Primeiras</span><input class="input num" value="50" aria-label="Quantidade da primeira faixa"></div><div class="input-group"><span class="affix">US$</span><input class="input num" value="45,00" aria-label="Preço da primeira faixa"></div><span class="xs muted">depois, US$ 60,00</span></div>
                         <button class="btn btn-sm" data-toast="Nova faixa de preço adicionada"><i data-icon="plus"></i>Adicionar faixa</button>
                       </div>
                     </fieldset>
@@ -440,7 +433,6 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                     </div>
                     <span class="xs muted">Cada marco batido é postado no X, no Telegram e no Bluesky com a prévia correspondente.</span>
                   </dd>
-                  <dt>Meta estendida</dt><dd>US$ 18.000 · libera também os áudios brutos sem edição (40 WAV, 9,2 GB)</dd>
                   <dt>Exclusividade</dt><dd>US$ 40.000 · quem pagar leva o item só para si; o anúncio encerra e os apoios são devolvidos · declaração de exclusividade de 24 meses</dd>
                   <dt>Modificadores</dt><dd>Marca d'água por entitlement · download permitido</dd>
                   <dt>Você recebe</dt><dd><b>US$ 10.800</b> se a meta bater (90 %) · <b>US$ 36.000</b> se alguém comprar a exclusividade · a carteira do item é entregue a você na finalização, com a frase de recuperação, para transferir como quiser</dd>
