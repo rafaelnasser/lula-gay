@@ -121,7 +121,7 @@ Reconciliação diária: soma dos `payment.received_amount` confirmados por cart
 ```
 Ativo ──(soma ≥ meta)──► Rompido ──► Onda 1 (≥ faixa 1, na hora) ──(janela 48/72 h)──► Onda 2 ──(janela)──► Onda 3 ──(72 h)──► Público + Finalizado (10 %, carteira entregue)
   │
-  └──(prazo vence, soma < meta)──► Falhou ──► Reembolsos à origem ──► Finalizado
+  └──(prazo vence, soma < meta)──► Não bateu ──► Garantido = último marco batido (10 %, carteira entregue) + reembolso à origem do que entrou depois ──► Finalizado
 ```
 
 **Compra (cópias/exclusivo)**

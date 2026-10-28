@@ -7,7 +7,7 @@ Convenções que valem para todos os modelos:
 - O comprador paga da própria carteira cripto direto para a **carteira do item** (uma por item, criada na aprovação). O dinheiro fica lá até a **finalização**: venda concluída e janela de disputa de 72 h vencida, lacre rompido, atendimento validado ou vendedor encerra as vendas. Na finalização a plataforma separa 10 % e entrega a carteira do item ao vendedor (frase de recuperação, uma única vez). Ver `03 §6`.
 - Toda compra gera um **entitlement** (direito de acesso) para a conta compradora. Conteúdo nunca é enviado por fora; é acessado no **cofre**.
 - Todo item tem **prazo**: data de encerramento definida pelo vendedor (mínimo 24 h, máximo 90 dias; renovável para modelos abertos).
-- A **comissão da plataforma é única: 10 %**, separada só na finalização, em todos os modelos. Nada é cobrado se um lacre coletivo falhar. Detalhes em `09-monetizacao-e-metricas.md`.
+- A **comissão da plataforma é única: 10 %**, separada só na finalização, em todos os modelos. Se um lacre coletivo falhar, a comissão incide só sobre o valor garantido ao vendedor pelos marcos batidos. Detalhes em `09-monetizacao-e-metricas.md`.
 - Todo pagamento é em cripto (USDT e USDC em Polygon, Tron e Base; Bitcoin on-chain em Exclusivo e Cópias). Preços em US$; stablecoins 1:1.
 - Itens de muitos compradores (Cópias, Lacre coletivo, Camadas) podem ter um **valor de exclusividade**: quem pagar leva o item só para si e o anúncio encerra. Ver "Compra com exclusividade" abaixo.
 - Se o vendedor cancelar um item antes da finalização, cada pagamento volta ao endereço de origem a partir da carteira do item (descontada a taxa de rede) e o vendedor recebe uma penalidade de reputação.
@@ -29,7 +29,7 @@ Convenções que valem para todos os modelos:
 | 9 | **Licença** | Direitos de uso por finalidade (editorial, comercial, exclusiva) | Muitos | V3 |
 | 10 | **Consulta paga** | Comprador faz uma pergunta e paga pela resposta verificada | Um | V3 |
 
-Modificadores (combináveis): **compra com exclusividade (buyout)**, edição limitada, preço escalonado por volume, prévias por marco, pague o que quiser com mínimo, tudo-ou-nada vs. flexível, compra em grupo, marca d'água obrigatória, somente leitura (sem download).
+Modificadores (combináveis): **compra com exclusividade (buyout)**, edição limitada, preço escalonado por volume, prévias por marco, pague o que quiser com mínimo, marcos garantidos vs. flexível, compra em grupo, marca d'água obrigatória, somente leitura (sem download).
 
 ---
 
@@ -94,7 +94,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 Por que ondas e não um por um: com mais de mil apoiadores, liberar individualmente levaria meses; as faixas mantêm a ordem justa e um calendário curto. Quem apoiou ganha o selo "Rompeu este lacre" no perfil.
 
 **Regras de arrecadação.**
-- *Tudo ou nada* (padrão): se a meta não for atingida no prazo, cada apoio volta ao endereço de origem automaticamente, sem ondas.
+- *Marcos garantidos* (padrão): cada marco batido (25, 50, 75 e 90 %) libera uma prévia ao público e passa a ser do vendedor, porque paga essa prévia. Se o prazo vencer antes de 100 %, fica com o vendedor o valor do **último marco batido** e **o que entrou depois volta** aos apoiadores, ao endereço de origem, menos a taxa de rede, em ordem de chegada (o apoio que cruzou o marco volta só na parte acima dele). Exemplo: meta US$ 80.000, prazo vence em 88 % (US$ 70.400): o último marco batido é 75 %, então US$ 60.000 ficam com o vendedor e US$ 10.400 voltam. Sem nenhum marco batido (abaixo de 25 %), tudo volta. O conteúdo completo só é liberado se a meta bater.
 - *Flexível*: o vendedor pode optar por liberar com o que arrecadou se tiver passado de um piso (ex.: 70 % da meta). Deve ser declarado antes de publicar.
 
 **Tudo ao bater a meta.** Ao bater 100 % da meta, todo o material do item é liberado, pela fila de ondas. Não existem metas estendidas nem material guardado para um segundo patamar: tudo o que o vendedor envia entra na meta.
@@ -106,7 +106,7 @@ Por que ondas e não um por um: com mais de mil apoiadores, liberar individualme
 - Marcos automáticos postados nas redes: 25 %, 50 %, 75 %, 90 %, meta batida, cada um com a prévia correspondente.
 - Compartilhamento com link de referência anônimo (contador por link, sem identificar quem compartilhou).
 
-**Regras de custódia.** Os apoios ficam na carteira do item até o resultado. Se a meta for batida, 72 h após a última onda (quando o conteúdo fica público) a plataforma separa a comissão, executa reembolsos procedentes e entrega a carteira ao vendedor. Se falhar, cada apoio volta ao endereço de origem.
+**Regras de custódia.** Os apoios ficam na carteira do item até o resultado. Se a meta for batida, 72 h após a última onda (quando o conteúdo fica público) a plataforma separa a comissão, executa reembolsos procedentes e entrega a carteira ao vendedor. Se falhar, aplica-se a regra dos marcos garantidos: o valor do último marco batido fica com o vendedor (com 10 % de comissão) e o que entrou depois volta aos apoiadores.
 
 **Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, 500, outro) com a onda correspondente, fila de liberação (ondas, topo da fila, sua posição), o que é liberado ao bater a meta, atualizações do vendedor.
 
@@ -246,7 +246,7 @@ Um item publicado para muitos compradores pode trazer, ao lado do preço normal 
 | Edição limitada | Teto de unidades | Cópias, Camadas, Licença |
 | Preço escalonado | Preço sobe conforme vende | Cópias |
 | Pague o que quiser | Valor livre acima de um mínimo | Cópias (itens de interesse público) |
-| Tudo ou nada / flexível | Regra de falha da arrecadação | Lacre coletivo, Pedido |
+| Marcos garantidos / flexível | Regra de falha da arrecadação | Lacre coletivo |
 | Compra em grupo | Preço fixo de exclusividade dividido entre N compradores que entram juntos; fecha ao completar N | Exclusivo |
 | Marca d'água | Visível ou invisível, por entitlement | Todos |
 | Somente leitura | Sem download; só visualizador seguro | Documento, imagem, vídeo |

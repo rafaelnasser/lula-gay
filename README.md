@@ -45,7 +45,7 @@ design/      protótipo navegável em HTML estático
 
 - **Conta sem identidade**: pseudônimo gerado + senha, passkey ou arquivo de acesso (um arquivo-chave que o usuário escolhe para entrar) + frase de recuperação de 12 palavras. Sem e-mail, telefone, CPF.
 - **Só cripto, sem guardar saldo de ninguém.** Cada item aprovado ganha uma carteira cripto própria; compradores e apoiadores pagam direto nela, da própria carteira. Na finalização, a plataforma separa os 10 % de comissão, executa reembolsos pendentes e entrega a carteira ao vendedor (frase de recuperação, uma única vez), destruindo a própria cópia da chave. Nenhum real, nenhum parceiro de pagamento, nenhum KYC.
-- **Comissão única de 10 %** em todos os modelos. Nada é cobrado se um lacre coletivo falhar.
+- **Comissão única de 10 %** em todos os modelos. Num lacre que não bate a meta, o valor do último marco batido fica com o vendedor (pagou as prévias já liberadas) e só o que entrou depois volta aos apoiadores.
 - **Compra com exclusividade.** Em Cópias, Lacre coletivo e Camadas, o vendedor pode definir um valor pelo qual um único comprador leva o item e o anúncio encerra (apoios devolvidos).
 - **Nada é publicado sem curadoria**. Checklist em 7 blocos, nível de autenticidade público, regra de dois olhos em categorias de risco alto, escalonamento jurídico.
 - **MVP com 4 modelos**: Cópias, Exclusivo, Lacre coletivo e Pedido com recompensa. Os outros 6 entram nas fases 2 e 3.

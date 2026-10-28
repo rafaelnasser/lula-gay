@@ -139,13 +139,13 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 
 ### `buyer/pagamentos.html` · Pagamentos
 - Não existe carteira interna, saldo, depósito nem saque. A tela lista os pagamentos que esta conta fez para carteiras de itens: item, o que foi pago (cópia, apoio, camada, assinatura, entrada em pedido, igualar valor), valor, rede, endereço derivado, confirmações, status (aguardando, confirmado, reembolsado ao endereço de origem) e txid com link para o explorador.
-- Reembolsos recebidos (lacres que falharam, disputas procedentes, buyout em lacre coletivo) com txid.
+- Reembolsos recebidos (parte de lacres que não bateram a meta, disputas procedentes, buyout em lacre coletivo) com txid.
 - Guia "Como pagar": use uma carteira que você controla (MetaMask, Trust, Ledger, carteira de celular), nunca direto de uma corretora; envie o valor exato; reembolsos voltam ao endereço de origem; redes aceitas e confirmações exigidas.
 
 ### `buyer/checkout.html` · Checkout (variantes)
 - Resumo do item, variantes do que está sendo pago: cópia, exclusivo, apoio (valor livre), lance lacrado, camada, licença, assinatura, **pedido** (juntar-se pelo valor por interessado / cobrir com mínimo de +10 % / igualar a diferença dentro da janela), **exclusividade (buyout)** com as consequências e um aceite explícito.
 - Pagamento direto: escolha da rede, endereço derivado só para este pagamento, QR, valor exato, aviso "pague de uma carteira que você controla; reembolsos voltam ao endereço de origem", contador de confirmações e liberação automática do acesso.
-- O que acontece depois (acesso ao confirmar / fica na carteira do item até a finalização / reembolso automático à origem se o lacre falhar).
+- O que acontece depois (acesso ao confirmar / fica na carteira do item até a finalização / se o lacre não bater a meta: o que entrou até o último marco batido fica com o vendedor, o resto volta à origem; o checkout diz em qual caso o novo apoio está).
 - Transparência: "o que registramos sobre esta compra". Valor em US$ e o débito equivalente em USDT.
 - Aceite dos termos do modelo e botão de confirmação. Tela de sucesso (variante) com link para o cofre ou apoios.
 
@@ -159,7 +159,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Aviso de sessão de visualização expira em 15 min (renova automaticamente). Download desabilitado quando o item é somente leitura.
 
 ### `buyer/apoios.html`
-- Lista de lacres apoiados com progresso, valor apoiado, posição na fila e onda (quando recebe), status (em andamento / rompido · sua onda recebe em… / público / falhou e reembolsado), prazo, botão "Apoiar mais", "Compartilhar" (link anônimo), "Ver no cofre" quando liberado.
+- Lista de lacres apoiados com progresso, valor apoiado, posição na fila e onda (quando recebe), status (em andamento / rompido · sua onda recebe em… / público / não bateu a meta · garantido ao vendedor ou reembolsado), e para cada apoio se ele já está garantido ao vendedor (entrou antes do último marco) ou volta se falhar, prazo, botão "Apoiar mais", "Compartilhar" (link anônimo), "Ver no cofre" quando liberado.
 - Aba "Pedidos" com os pedidos de que o usuário participa (valor por interessado pago, recompensa total, status).
 - Total apoiado e selos ("Rompeu 3 lacres").
 
@@ -178,7 +178,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 - Acompanhar: linha do tempo (aberta → em análise → resolvida), resposta da curadoria, resultado (reembolso total/parcial/mantida) e valor devolvido ao endereço de origem, com txid.
 
 ### `buyer/notificacoes.html` (compartilhada)
-- Lista agrupada por dia; tipos: curadoria (aprovado/ajustes), lacre (marco/rompido/falhou), pagamento (confirmado/reembolsado), mensagem, disputa, carteira do item (finalizada, frase disponível), segurança (novo login). Filtro por tipo e "marcar todas como lidas". Preferências de push.
+- Lista agrupada por dia; tipos: curadoria (aprovado/ajustes), lacre (marco/rompido/não bateu a meta), pagamento (confirmado/reembolsado), mensagem, disputa, carteira do item (finalizada, frase disponível), segurança (novo login). Filtro por tipo e "marcar todas como lidas". Preferências de push.
 
 ### `buyer/configuracoes.html` (compartilhada)
 - Abas: **Segurança** (senha, passkeys, arquivo de acesso com gerar novo / trocar PIN / revogar, TOTP, sessões ativas com dispositivo, data e método usado, PIN do cofre, encerrar todas), **Recuperação** (ver frase exige senha; status "confirmada em dd/mm"), **Privacidade** (apagar mensagens ao encerrar, permitir marca d'água invisível; o pseudônimo é sempre público), **Notificações** (push por tipo), **Aparência** (tema), **Conta** (exportar dados que existem sobre a conta, excluir conta com condição de nenhum item com carteira em andamento).
@@ -194,7 +194,7 @@ Final: "Conta criada" com o pseudônimo, botão "Ir para o catálogo".
 1. **Tipos e categoria**: cards de tipo com seleção múltipla (documento, dados, imagem, vídeo, áudio, texto, código), categoria (select) com nível de risco exibido, **país(es) a que a informação se refere (ou Global) e idioma do material**, vinculação opcional a um pedido existente.
 2. **Arquivos**: dropzone, lista de arquivos com progresso e hash local, relatório de metadados removidos (ex.: "EXIF: GPS, dispositivo; DOCX: autor"), alertas da triagem automática (ex.: "detectamos 12 nomes próprios"), limite 20 GB.
 3. **Prévia e descrição**: título (até 120), resumo (até 280), descrição (markdown restrito) e tags **preenchidos automaticamente** a partir da transcrição e do OCR dos arquivos (processados na própria infraestrutura), com selo "sugerido", botões "Gerar de novo" e "Limpar"; em branco quando os arquivos não puderem ser lidos; tags editáveis (Enter adiciona, clique remove); seleção de prévias geradas (borradas/tarjadas) com opção de marcar o que a curadoria pode mostrar, tags, aviso "a curadoria pode reescrever título e resumo".
-4. **Modelo de venda**: prévias por marco (25/50/75/90 %) escolhidas entre as prévias do passo 3; cards dos modelos (Cópias, Exclusivo, Lacre coletivo, Pedido, Leilão, Camadas, Assinatura, Janela, Licença) com os da V2/V3 marcados "em breve"; **a configuração abaixo muda conforme o modelo marcado** (Cópias: preço, limite, preço escalonado; Exclusivo: preço, ofertas, declaração de 24 meses; Lacre coletivo: meta, prazo, tudo-ou-nada/flexível, faixas das ondas e janela de 48 h ou 72 h com o calendário resultante; Pedido: pedido vinculado e critérios); **valor de exclusividade (opcional) em Cópias, Lacre coletivo e Camadas**, com explicação do que acontece ao ser pago; simulação de ganho líquido; modificadores (marca d'água, somente leitura; garantia de exclusividade só no Exclusivo).
+4. **Modelo de venda**: prévias por marco (25/50/75/90 %) escolhidas entre as prévias do passo 3; cards dos modelos (Cópias, Exclusivo, Lacre coletivo, Pedido, Leilão, Camadas, Assinatura, Janela, Licença) com os da V2/V3 marcados "em breve"; **a configuração abaixo muda conforme o modelo marcado** (Cópias: preço, limite, preço escalonado; Exclusivo: preço, ofertas, declaração de 24 meses; Lacre coletivo: meta, prazo, marcos garantidos (padrão) ou flexível, faixas das ondas e janela de 48 h ou 72 h com o calendário resultante; Pedido: pedido vinculado e critérios); **valor de exclusividade (opcional) em Cópias, Lacre coletivo e Camadas**, com explicação do que acontece ao ser pago; simulação de ganho líquido; modificadores (marca d'água, somente leitura; garantia de exclusividade só no Exclusivo).
 5. **Declarações**: 6 checkboxes com texto completo (origem lícita; titularidade ou direito de venda; sem dados pessoais de terceiros sem base legal; sem conteúdo íntimo/menores; sem credenciais; não é informação privilegiada de mercado nem sob sigilo legal), nota de que o pseudônimo é sempre exibido (não existe opção de escondê-lo), aviso de que as declarações ficam registradas.
 6. **Revisão e envio**: resumo completo em quatro blocos com "editar" (conteúdo: tipos, categoria, país e idioma, arquivos com tamanho e hash, triagem; prévia: título, resumo, prévias públicas, tags; modelo: meta e prazo, arrecadação, liberação, os cinco marcos com a prévia que cada um libera, exclusividade, modificadores, quanto você recebe; declarações e pseudônimo), prazo estimado da curadoria (48 h), "o que acontece agora", botão "Enviar para curadoria". Tela de sucesso.
 

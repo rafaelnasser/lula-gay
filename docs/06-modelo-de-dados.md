@@ -92,7 +92,7 @@ Sem e-mail, telefone, nome, IP.
 // exclusive
 { "price": 2500000, "accept_offers": true, "min_offer": 1500000, "exclusivity_months": 24, "guarantee_holdback_pct": 20 }
 // crowdfund
-{ "goal": 8000000, "raised": 5412000, "backers": 1187, "buyout_price": 25000000, "all_or_nothing": true, "flexible_min_pct": null, "release_waves": {"tiers": [50000000, 10000000], "window_h": 48},  "milestone_previews": {"25": "preview_id", "50": "preview_id", "75": "preview_id", "90": "preview_id"} }
+{ "goal": 8000000, "raised": 5412000, "backers": 1187, "buyout_price": 25000000, "failure_rule": "milestones_kept", "flexible_min_pct": null, "release_waves": {"tiers": [50000000, 10000000], "window_h": 48},  "milestone_previews": {"25": "preview_id", "50": "preview_id", "75": "preview_id", "90": "preview_id"} }
 // auction
 { "kind": "open" | "sealed_first" | "sealed_second" | "dutch", "start_price": 1500000, "reserve": 2000000, "increment": 50000, "anti_snipe_min": 10, "dutch": {"step": 100000, "every_min": 60, "floor": 800000} }
 // tiers
@@ -131,7 +131,7 @@ Sem e-mail, telefone, nome, IP.
 `id, listing_id, buyer_id, kind (copy|exclusive|buyout|tier|license|window|back_issue), amount, fee, status (created|paid|delivered|settled|disputed|refunded|partially_refunded), tier_id null, license_kind null, dispute_deadline_at, settled_at`
 
 ### pledge (lacre coletivo)
-`id, listing_id, backer_id, amount, status (held|released|refunded), created_at`
+`id, listing_id, backer_id, amount, kept_amount (parte garantida ao vendedor se o lacre falhar), status (held|released|kept|partially_refunded|refunded), created_at`
 
 ### bid / offer
 `id, listing_id, bidder_id, amount, kind (open|sealed|dutch_accept|offer), status (active|outbid|won|lost|withdrawn|accepted|rejected|countered), payment_id → payment (lance pago na hora; reembolsado se não vencer)`
@@ -202,7 +202,7 @@ closed → archived
 `created → paid → delivered → settled` · `delivered → disputed → refunded | partially_refunded | settled`
 
 ### pledge.status
-`held → released` (meta batida) · `held → refunded` (falhou ou item removido)
+`held → released` (meta batida) · `held → kept` (lacre não bateu a meta, apoio até o último marco batido) · `held → refunded` (entrou depois do último marco, nenhum marco batido ou item removido; o apoio que cruzou o marco é parcialmente reembolsado)
 
 ### bid.status
 `active → outbid` · `active → won | lost` · `active → withdrawn` (só em holandês antes de aceitar)

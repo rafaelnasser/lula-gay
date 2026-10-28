@@ -14,7 +14,7 @@
 
 ## 2. Comissão
 
-**10 % em todos os modelos.** Uma única regra, fácil de comunicar ("você fica com 90 %"), cobrada só na finalização, por transferência da carteira do item para a carteira da plataforma. Nada é cobrado se um lacre coletivo falhar ou se um pedido não for atendido. Taxas de rede de reembolsos saem do valor devolvido.
+**10 % em todos os modelos.** Uma única regra, fácil de comunicar ("você fica com 90 %"), cobrada só na finalização, por transferência da carteira do item para a carteira da plataforma. Num lacre que não bate a meta, a comissão incide só sobre o valor garantido ao vendedor pelos marcos batidos; nada é cobrado se nenhum marco foi batido ou se um pedido não for atendido. Taxas de rede de reembolsos saem do valor devolvido.
 
 **Custos de pagamento da plataforma:** HSM, nós e indexadores por rede, taxas de rede das transferências de comissão (uma por item finalizado). Estimativa: 0,2 % a 0,4 % do volume.
 
