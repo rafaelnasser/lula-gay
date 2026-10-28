@@ -376,7 +376,7 @@
       { key: 'painel', label: 'Painel', icon: 'home', to: 'seller/painel.html' },
       { key: 'anuncios', label: 'Meus anúncios', icon: 'archive', to: 'seller/anuncios.html', count: 6 },
       { key: 'novo-anuncio', label: 'Novo anúncio', icon: 'plus', to: 'seller/novo-anuncio.html' },
-      { key: 'pedidos', label: 'Pedidos abertos', icon: 'file-search', to: 'seller/pedidos.html', count: 6 },
+      { key: 'pedidos', label: 'Pedidos abertos', icon: 'file-search', to: 'seller/pedidos.html', count: 7 },
       { label: 'Conta' },
       { key: 'carteiras', label: 'Carteiras dos itens', icon: 'wallet', to: 'seller/carteiras.html' },
       { key: 'reputacao', label: 'Reputação', icon: 'award', to: 'seller/reputacao.html' },
