@@ -42,7 +42,7 @@ Os posts são gerados automaticamente a partir do item e revisados por um humano
 **Lançamento · Lacre coletivo**
 > Lacre coletivo aberto · Jornalismo e investigação
 > 18 meses de apuração sobre a cadeia do ouro ilegal no Pará. Documentos públicos e entrevistas.
-> Meta: US$ 80.000. Quando bater, libera em ondas (quem apoiou mais recebe antes) e depois fica público.
+> Meta: US$ 80.000. Quando bater, fica público para todo mundo.
 > Apoie a partir de US$ 10 · lacre.app/p/4m2x9
 
 **Marco (50 %)**
@@ -51,11 +51,8 @@ Os posts são gerados automaticamente a partir do item e revisados por um humano
 > Faltam 15 dias para romper o lacre. lacre.app/p/4m2x9
 
 **Lacre rompido**
-> LACRE ROMPIDO. 1.187 pessoas bateram a meta de [título].
-> Liberação em ondas, do maior apoio para o menor: onda 1 agora, onda 2 em 48 h, onda 3 em 96 h. Público em [data, 7 dias]. Prova: lacre.app/p/4m2x9
-
-**Aberto ao público** (no dia da finalização)
-> ABERTO A TODOS: [título]. 1.187 apoiadores pagaram para tirar isto do lacre. Leia agora: lacre.app/p/4m2x9
+> LACRE ROMPIDO. 1.187 pessoas liberaram para todo mundo: [título].
+> Aberto a todos agora. Leia: lacre.app/p/4m2x9
 
 **Vendido · Exclusivo**
 > Vendido a um único comprador: [título]. O item saiu do catálogo e será destruído dos nossos servidores. A prova permanece: lacre.app/p/7q1z3

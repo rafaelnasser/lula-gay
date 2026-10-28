@@ -224,7 +224,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           <div class="choice-cards">
             <label class="choice"><input type="radio" name="modelo" data-switch="copias"><span class="choice-title"><i data-icon="copy"></i>Cópias</span><span class="choice-desc">Preço fixo, vários compradores, com ou sem limite de unidades.</span><span class="choice-meta">Entrega imediata a cada compra</span></label>
             <label class="choice"><input type="radio" name="modelo" data-switch="exclusivo"><span class="choice-title"><i data-icon="crown"></i>Exclusivo</span><span class="choice-desc">Um único comprador leva; o item sai do catálogo.</span><span class="choice-meta">Preço fixo ou oferta · 24 meses de exclusividade</span></label>
-            <label class="choice"><input type="radio" name="modelo" data-switch="coletivo" checked><span class="choice-title"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="choice-desc">Meta em US$ e prazo. Batida a meta, libera em ondas do maior apoio para o menor; o público recebe no fim.</span><span class="choice-meta">Nada é cobrado se a meta não bater</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="coletivo" checked><span class="choice-title"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="choice-desc">Meta em US$ e prazo. Cada marco libera uma prévia; ao bater a meta, tudo fica público para todos.</span><span class="choice-meta">Se não bater, você fica com o último marco batido</span></label>
             <label class="choice"><input type="radio" name="modelo" data-switch="pedido"><span class="choice-title"><i data-icon="file-search"></i>Pedido</span><span class="choice-desc">Atende um pedido com recompensa já publicado.</span><span class="choice-meta">Recompensa paga na validação da curadoria</span></label>
             <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="gavel"></i>Leilão<span class="badge">em breve</span></span><span class="choice-desc">Aberto, lacrado (segundo preço) ou holandês.</span><span class="choice-meta">V2</span></label>
             <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="layers"></i>Camadas<span class="badge">em breve</span></span><span class="choice-desc">Níveis com preços crescentes; o comprador prova antes.</span><span class="choice-meta">V2</span></label>
@@ -242,21 +242,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                       <div class="field"><label for="meta">Meta</label><div class="input-group"><span class="affix">US$</span><input id="meta" class="input num" value="12.000,00" data-sim></div><span class="hint">Mínimo US$ 1.000. Apoios a partir de US$ 10.</span></div>
                       <div class="field"><label for="prazo">Prazo</label><select id="prazo" class="select"><option>7 dias · até 03/11/2026</option><option>14 dias · até 10/11/2026</option><option selected>30 dias · até 26/11/2026</option><option>60 dias · até 26/12/2026</option><option>90 dias · até 25/01/2027</option></select><span class="hint">Entre 24 h e 90 dias. Marcos de 25/50/75/90 % são postados automaticamente.</span></div>
                     </div>
-                    <fieldset>
-                      <legend>Fila de liberação (ondas)</legend>
-                      <p class="small muted">Quando a meta bater, o conteúdo sai em ondas, do maior apoio para o menor (soma de cada apoiador; empate por data). O público recebe por último, na finalização. Sugestão do Lacre já preenchida.</p>
-                      <div class="form-grid">
-                        <div class="field"><label for="onda1">Onda 1 · na hora do rompimento</label><div class="input-group"><span class="affix">a partir de US$</span><input id="onda1" class="input num" value="500,00"></div></div>
-                        <div class="field"><label for="onda2">Onda 2 · depois de 1 janela</label><div class="input-group"><span class="affix">a partir de US$</span><input id="onda2" class="input num" value="100,00"></div></div>
-                      </div>
-                      <p class="xs muted mt-1">Onda 3: os demais apoios (US$ 10 até o valor da onda 2), depois de 2 janelas.</p>
-                      <div class="form-grid mt-1">
-                        <label class="radio"><input type="radio" name="janela" value="48" checked><span>Janela de 48 h<span class="desc">Onda 2 em 48 h, onda 3 em 96 h, público em 7 dias.</span></span></label>
-                        <label class="radio"><input type="radio" name="janela" value="72"><span>Janela de 72 h<span class="desc">Onda 2 em 72 h, onda 3 em 144 h, público em 9 dias.</span></span></label>
-                      </div>
-                      <div class="panel mt-1"><div class="label">Calendário depois do rompimento</div><p class="small" id="ondas-cal"><b>Onda 1</b> na hora · <b>Onda 2</b> +48 h · <b>Onda 3</b> +96 h · <b>Público e finalização</b> +168 h (7 dias), quando você recebe.</p></div>
-                      <p class="xs muted mt-1">A fila é pública na página do item (posição, pseudônimo, total e onda). Quem apoia mais sobe de onda. Apoiadores ganham o selo “Rompeu este lacre”.</p>
-                    </fieldset>
+                    <div class="alert alert-wax"><i data-icon="unlock"></i><div><span class="alert-title">Ao bater a meta, tudo fica público</span>Cada marco (25, 50, 75 e 90 %) libera uma prévia ao público. Ao bater 100 %, todo o conteúdo fica público para todos ao mesmo tempo, com post nas redes. Quem apoiou ganha o selo “Rompeu este lacre”.</div></div>
                     <fieldset>
                       <legend>Regra de arrecadação</legend>
                       <div class="form-grid">
@@ -350,7 +336,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <div class="card-body stack-sm">
                 <h3>Você recebe 90 %</h3>
                 <div><div class="xs muted" id="s-meta-label">Meta de US$ 12.000,00 batida</div><div class="big ok" id="s-liq">US$ 10.800,00</div></div>
-                <p class="xs muted" id="s-note">Você recebe quando o conteúdo fica público, 7 dias após o rompimento. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.</p>
+                <p class="xs muted" id="s-note">Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.</p>
                 <hr style="margin:4px 0">
                 <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 36.000,00</b></p>
                 <p class="xs muted">90 % de <span id="s-excl-base">US$ 40.000,00</span> para você. O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</p>
@@ -422,7 +408,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                   <dt>Modelo</dt><dd><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></dd>
                   <dt>Meta e prazo</dt><dd><b>US$ 12.000</b> em 30 dias · até 26/11/2026 às 23:59 · apoios a partir de US$ 10</dd>
                   <dt>Arrecadação</dt><dd>Marcos garantidos · se a meta não bater, você fica com o valor do último marco batido (25 % = US$ 3.000, 50 % = US$ 6.000, 75 % = US$ 9.000, 90 % = US$ 10.800, menos 10 %) e o que entrou depois volta aos apoiadores</dd>
-                  <dt>Liberação</dt><dd>Em ondas, do maior apoio para o menor: <b>≥ US$ 500</b> na hora · <b>US$ 100–499</b> +48 h · <b>US$ 10–99</b> +96 h · <b>público e finalização</b> +7 dias · post nas redes no rompimento e na abertura ao público · apoiadores ganham o selo “Rompeu este lacre”</dd>
+                  <dt>Liberação</dt><dd>Pública para todos ao bater a meta, com post nas redes · cada marco libera uma prévia · apoiadores ganham o selo “Rompeu este lacre”</dd>
                   <dt>Marcos e prévias</dt><dd>
                     <div class="stack-sm" style="margin-top:4px">
                       <div class="row between"><span><b>25 %</b> · US$ 3.000</span><span class="small muted">libera o índice das 40 entrevistas (sem nomes)</span></div>
@@ -503,7 +489,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           if (m === 'coletivo') {
             var meta = num('meta'), excl = num('excl');
             label.textContent = 'Meta de ' + usd(meta) + ' batida'; set('s-liq', usd(meta * 0.90));
-            note.textContent = 'Você recebe quando o conteúdo fica público, 7 dias após o rompimento. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.';
+            note.textContent = 'Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.';
             set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl)); exclRow.hidden = false; exclNote.hidden = false;
           } else if (m === 'copias') {
             var preco = num('preco'), lim = num('lim') || 0, excl2 = num('excl2');
@@ -524,14 +510,6 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
         document.querySelectorAll('[data-sim]').forEach(function (el) { el.addEventListener('input', sim); });
         document.addEventListener('change', function (e) { if (e.target.matches('[data-switch]')) sim(); });
         sim();
-      })();
-    </script>
-    <script>
-      (function () {
-        var cal = document.getElementById('ondas-cal'); if (!cal) return;
-        var t = { '48': '<b>Onda 1</b> na hora · <b>Onda 2</b> +48 h · <b>Onda 3</b> +96 h · <b>Público e finalização</b> +168 h (7 dias), quando você recebe.',
-                  '72': '<b>Onda 1</b> na hora · <b>Onda 2</b> +72 h · <b>Onda 3</b> +144 h · <b>Público e finalização</b> +216 h (9 dias), quando você recebe.' };
-        document.querySelectorAll('input[name="janela"]').forEach(function (r) { r.addEventListener('change', function () { cal.innerHTML = t[r.value]; }); });
       })();
     </script>
   </main>

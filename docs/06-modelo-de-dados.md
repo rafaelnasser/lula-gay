@@ -92,7 +92,7 @@ Sem e-mail, telefone, nome, IP.
 // exclusive
 { "price": 2500000, "accept_offers": true, "min_offer": 1500000, "exclusivity_months": 24, "guarantee_holdback_pct": 20 }
 // crowdfund
-{ "goal": 8000000, "raised": 5412000, "backers": 1187, "buyout_price": 25000000, "failure_rule": "milestones_kept", "flexible_min_pct": null, "release_waves": {"tiers": [50000000, 10000000], "window_h": 48},  "milestone_previews": {"25": "preview_id", "50": "preview_id", "75": "preview_id", "90": "preview_id"} }
+{ "goal": 8000000, "raised": 5412000, "backers": 1187, "buyout_price": 25000000, "failure_rule": "milestones_kept", "flexible_min_pct": null,  "milestone_previews": {"25": "preview_id", "50": "preview_id", "75": "preview_id", "90": "preview_id"} }
 // auction
 { "kind": "open" | "sealed_first" | "sealed_second" | "dutch", "start_price": 1500000, "reserve": 2000000, "increment": 50000, "anti_snipe_min": 10, "dutch": {"step": 100000, "every_min": 60, "floor": 800000} }
 // tiers
@@ -140,7 +140,7 @@ Sem e-mail, telefone, nome, IP.
 `id, listing_id, subscriber_id, period_start, period_end, status (active|paused|cancelled), price_locked`
 
 ### entitlement
-`id, account_id, listing_id, source (order|pledge|subscription|request|public_release), payment_id, wave null (1|2|3, lacre coletivo), available_at (quando o acesso abre), asset_scope (all|tier:t1), can_download bool, watermark_id text, expires_at null, revoked_at null`
+`id, account_id, listing_id, source (order|pledge|subscription|request|public_release), payment_id, available_at (quando o acesso abre), asset_scope (all|tier:t1), can_download bool, watermark_id text, expires_at null, revoked_at null`
 
 ### review / review_check / decision
 `review (id, listing_id, listing_version, reviewer_id, role (first|second|legal), started_at, finished_at, authenticity_proposed, notes, status)`
@@ -191,7 +191,7 @@ draft → submitted → triage → in_review → (changes_requested ⇄ submitte
 in_review → escalated → in_review
 in_review → approved → active (publicação imediata; carteira do item criada)
 in_review → rejected
-active → funded (crowdfund) → releasing (ondas 1, 2, 3) → public + settled (72 h após a última onda) → closed
+active → funded (crowdfund) → public (na hora, para todos) → settled (72 h depois) → closed
 active → sold (exclusive/auction/window, ou buyout em copies/crowdfund/tiers: apoios reembolsados) → settled (comissão separada, carteira entregue) → closed
 active → closed (deadline ou vendedor encerra as vendas) → settled (finalização)
 active → suspended (denúncia) → active | removed

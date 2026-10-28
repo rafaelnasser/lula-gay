@@ -81,23 +81,15 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 É o modelo mais característico da plataforma e o que gera mais conversa nas redes.
 
-**Como funciona.** O vendedor define uma **meta** em US$ e um **prazo**. Qualquer pessoa pode apoiar com qualquer valor a partir de um mínimo (US$ 10). Quando a soma atinge a meta, o lacre é rompido e o conteúdo é liberado em ondas, do maior apoio para o menor; o público recebe por último.
+**Como funciona.** O vendedor define uma **meta** em US$ e um **prazo**. Qualquer pessoa pode apoiar com qualquer valor a partir de um mínimo (US$ 10). Quando a soma atinge a meta, o lacre é rompido e todo o conteúdo fica público para todos ao mesmo tempo.
 
-**Liberação em ondas, do maior apoio para o menor.** Não é justo quem apoiou com US$ 10 receber junto com quem apoiou com US$ 2.000. Quando o lacre rompe:
-1. **Fila de liberação.** Os apoiadores são ordenados pelo total que cada um pagou (soma dos apoios); empate: quem apoiou antes vem primeiro.
-2. **Três ondas por faixa de valor**, definidas pelo vendedor no envio (sugestão da plataforma): **onda 1**, apoios a partir de US$ 500, recebe na hora do rompimento; **onda 2**, de US$ 100 a 499, recebe depois de uma janela; **onda 3**, de US$ 10 a 99, depois de duas janelas. A **janela** entre ondas é de **48 h ou 72 h**, à escolha do vendedor (padrão 48 h).
-3. **Público por último.** O conteúdo fica público na **finalização**, 72 h depois da última onda (com janela de 48 h: 7 dias após o rompimento). É o mesmo momento em que a plataforma separa os 10 % e entrega a carteira ao vendedor. O rompimento e a abertura ao público são postados nas redes.
-4. **Subir na fila.** Quem já apoiou pode apoiar mais e sobe de onda (conta o total). O checkout mostra em que onda o valor coloca a pessoa.
-5. **Fila pública.** A página do item mostra posição, pseudônimo, total apoiado, onda e quando cada um recebe. Cada apoiador vê a própria posição em Apoios.
-6. **Disputa:** 72 h a partir do momento em que a onda do apoiador recebeu. A compra com exclusividade (buyout) continua encerrando o lacre e devolvendo todos os apoios.
-
-Por que ondas e não um por um: com mais de mil apoiadores, liberar individualmente levaria meses; as faixas mantêm a ordem justa e um calendário curto. Quem apoiou ganha o selo "Rompeu este lacre" no perfil.
+**Liberação pública, de uma vez.** Cada marco (25, 50, 75 e 90 %) libera uma prévia ao público, postada nas redes. Ao bater 100 %, todo o conteúdo fica público para todos ao mesmo tempo, inclusive quem não apoiou, e o rompimento é postado nas redes. É o modelo de bem público da plataforma: não há fila, ondas nem acesso antecipado para quem apoiou mais; quem quer vender para poucos usa Cópias ou Exclusivo. Quem apoiou ganha o selo "Rompeu este lacre" no perfil.
 
 **Regras de arrecadação.**
 - *Marcos garantidos* (padrão): cada marco batido (25, 50, 75 e 90 %) libera uma prévia ao público e passa a ser do vendedor, porque paga essa prévia. Se o prazo vencer antes de 100 %, fica com o vendedor o valor do **último marco batido** e **o que entrou depois volta** aos apoiadores, ao endereço de origem, menos a taxa de rede, em ordem de chegada (o apoio que cruzou o marco volta só na parte acima dele). Exemplo: meta US$ 80.000, prazo vence em 88 % (US$ 70.400): o último marco batido é 75 %, então US$ 60.000 ficam com o vendedor e US$ 10.400 voltam. Sem nenhum marco batido (abaixo de 25 %), tudo volta. O conteúdo completo só é liberado se a meta bater.
 - *Flexível*: o vendedor pode optar por liberar com o que arrecadou se tiver passado de um piso (ex.: 70 % da meta). Deve ser declarado antes de publicar.
 
-**Tudo ao bater a meta.** Ao bater 100 % da meta, todo o material do item é liberado, pela fila de ondas. Não existem metas estendidas nem material guardado para um segundo patamar: tudo o que o vendedor envia entra na meta.
+**Tudo ao bater a meta.** Ao bater 100 % da meta, todo o material do item é liberado ao público. Não existem metas estendidas nem material guardado para um segundo patamar: tudo o que o vendedor envia entra na meta.
 
 **Mecânicas de engajamento.**
 - Barra de progresso pública, número de apoiadores e tempo restante.
@@ -106,9 +98,9 @@ Por que ondas e não um por um: com mais de mil apoiadores, liberar individualme
 - Marcos automáticos postados nas redes: 25 %, 50 %, 75 %, 90 %, meta batida, cada um com a prévia correspondente.
 - Compartilhamento com link de referência anônimo (contador por link, sem identificar quem compartilhou).
 
-**Regras de custódia.** Os apoios ficam na carteira do item até o resultado. Se a meta for batida, 72 h após a última onda (quando o conteúdo fica público) a plataforma separa a comissão, executa reembolsos procedentes e entrega a carteira ao vendedor. Se falhar, aplica-se a regra dos marcos garantidos: o valor do último marco batido fica com o vendedor (com 10 % de comissão) e o que entrou depois volta aos apoiadores.
+**Regras de custódia.** Os apoios ficam na carteira do item até o resultado. Se a meta for batida, 72 h após a liberação pública a plataforma separa a comissão, executa reembolsos procedentes e entrega a carteira ao vendedor. Se falhar, aplica-se a regra dos marcos garantidos: o valor do último marco batido fica com o vendedor (com 10 % de comissão) e o que entrou depois volta aos apoiadores.
 
-**Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, 500, outro) com a onda correspondente, fila de liberação (ondas, topo da fila, sua posição), o que é liberado ao bater a meta, atualizações do vendedor.
+**Interface.** Barra de progresso, meta, arrecadado, apoiadores, prazo, botões de valores sugeridos (US$ 20, 50, 100, 250, outro), quanto já está garantido ao vendedor pelos marcos batidos, o que é liberado ao bater a meta, atualizações do vendedor.
 
 **Comissão.** 10 %.
 
