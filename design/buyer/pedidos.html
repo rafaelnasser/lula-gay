@@ -66,7 +66,7 @@
   <div class="stat-grid mb-3">
     <div class="stat"><span class="label">Abertos por você</span><span class="value">2</span><span class="delta flat">1 aberto (ped-2c8d1) · 1 aguardando o sinal (ped-3n7q1)</span></div>
     <div class="stat"><span class="label">Você participa</span><span class="value">2</span><span class="delta flat">1 aberto · 1 atendido</span></div>
-    <div class="stat"><span class="label">Seu sinal nos pedidos</span><span class="value">US$ 200,00</span><span class="delta flat"><i data-icon="lock"></i>ped-2c8d1 · faltam US$ 600 depois da prévia · US$ 100 retidos no ped-7f1a3</span></div>
+    <div class="stat"><span class="label">Seu sinal nos pedidos</span><span class="value">US$ 200,00</span><span class="delta flat"><i data-icon="lock"></i>ped-2c8d1 · faltam US$ 600 depois da prévia</span></div>
     <div class="stat"><span class="label">Acessos recebidos</span><span class="value">1</span><span class="delta up"><i data-icon="vault"></i>ped-1b6j8 no cofre</span></div>
   </div>
 
@@ -137,7 +137,7 @@
                 <span>12/10</span><span>Abriu o pedido a US$ 500 por pessoa · sinal de 25 %: 125 USDT · Polygon · txid <span class="mono">0x6e02…b4d7</span> · confirmado (12 de 12)</span><b>US$ 125,00</b>
                 <span>20/10</span><span>Completou o sinal (o valor subiu US$ 300) · 25 % da diferença: 75 USDT · Polygon · txid <span class="mono">0x9b47…2e1c</span> · confirmado (12 de 12)</span><b>US$ 75,00</b>
               </div>
-              <p class="xs muted">O sinal fica na carteira do pedido e não volta por desistência. Ele volta ao seu endereço de origem só se o pedido expirar sem atendimento.</p>
+              <p class="xs muted">O sinal fica na carteira do pedido. Se você desistir, ele fica com o Lacre como taxa de desistência; só volta ao seu endereço de origem se o prazo acabar sem nenhum vendedor.</p>
             </div>
             <ol class="fluxo">
               <li class="feito"><b>1 · Sinal</b><span>US$ 200 pagos (25 %)</span></li>
@@ -194,11 +194,11 @@
               <a class="btn btn-sm btn-ghost" href="../public/pedido.html"><i data-icon="external-link"></i>Página pública</a>
               <button class="btn btn-sm btn-ghost" data-copy="https://lacre.app/r/2c8d1"><i data-icon="link"></i>Copiar link</button>
             </div>
-            <p class="xs muted"><b>O sinal não volta por desistência.</b> Ele vai para quem atender ou volta só se o pedido expirar sem atendimento. Cobrir sobe o valor para todos (mínimo +10 %; a US$ 880, o sinal é de US$ 220): cada participante tem 48 h para completar o sinal (25 % da diferença); quem não completa deixa de participar e o sinal fica no pedido. Se ninguém completar, você fica sozinho e compra com exclusividade de fato.</p>
+            <p class="xs muted"><b>O sinal não volta por desistência:</b> fica com o Lacre como taxa de serviço, nunca com quem atende. Só volta se o prazo acabar sem nenhum vendedor. Cobrir sobe o valor para todos (mínimo +10 %; a US$ 880, o sinal é de US$ 220): cada participante tem 48 h para completar o sinal (25 % da diferença); quem não completa deixa de participar e o sinal fica com o Lacre. Se ninguém completar, você fica sozinho e compra com exclusividade de fato.</p>
           </div>
 
           <div data-variant="subiu" class="stack-sm">
-            <div class="alert alert-warn"><i data-icon="trending-up"></i><div><span class="alert-title">Valor subiu: complete o sinal até 20/10 14:00 (+US$ 75)</span><span class="handle" data-handle="quartzo-a1f0"></span> subiu o valor em 18/10 às 14:00: de US$ 500 para US$ 800 por pessoa. Você pagou US$ 125 de sinal; para continuar, complete até os novos 25 %: +US$ 75. Sem isso até 20/10 às 14:00, você deixa de participar e o sinal de US$ 125 fica no pedido: vai para quem atender ou volta só se o pedido expirar sem atendimento.</div></div>
+            <div class="alert alert-warn"><i data-icon="trending-up"></i><div><span class="alert-title">Valor subiu: complete o sinal até 20/10 14:00 (+US$ 75)</span><span class="handle" data-handle="quartzo-a1f0"></span> subiu o valor em 18/10 às 14:00: de US$ 500 para US$ 800 por pessoa. Você pagou US$ 125 de sinal; para continuar, complete até os novos 25 %: +US$ 75. Sem isso até 20/10 às 14:00, você deixa de participar e o sinal de US$ 125 fica com o Lacre como taxa de desistência.</div></div>
             <dl class="kv-row">
               <div><dt>Valor por pessoa</dt><dd>US$ 800,00 <span class="xs muted">(antes US$ 500,00)</span></dd></div>
               <div><dt>Pessoas</dt><dd>3 · 2 precisam completar o sinal</dd></div>
@@ -277,24 +277,26 @@
         </div>
       </article>
 
-      <!-- ped-7f1a3 · você não completou o sinal e deixou de participar · sinal retido -->
+      <!-- ped-7f1a3 · você não completou o sinal e deixou de participar · o sinal ficou com o Lacre -->
       <article class="card pedido">
         <div class="card-body">
           <div class="row"><span class="badge st-expirado">Você deixou de participar</span><span class="badge badge-outline">Entrou em 02/09</span><span class="tag">ped-7f1a3</span><span class="tag">BR</span><span class="xs muted">História e acervos</span></div>
           <h3><a href="../public/pedido.html">Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)</a></h3>
           <dl class="kv-row">
             <div><dt>Valor por pessoa</dt><dd>US$ 800,00 <span class="xs muted">(era US$ 400,00)</span></dd></div>
-            <div><dt>Seu sinal</dt><dd>US$ 100,00 · retido no pedido</dd></div>
+            <div><dt>Seu sinal</dt><dd>US$ 100,00 · ficou com o Lacre (taxa de desistência)</dd></div>
+            <div><dt>Hoje</dt><dd>1 pessoa · sinal US$ 200</dd></div>
             <div><dt>Prazo</dt><dd>15/12/2026</dd></div>
           </dl>
           <div class="panel">
             <div class="pay-ledger">
               <span>02/09</span><span>Juntou-se a US$ 400 por pessoa · sinal de 25 %: 100 USDT · Polygon · confirmado (12 de 12)</span><b>US$ 100,00</b>
               <span>18/09</span><span>O valor subiu para US$ 800 · 48 h para completar o sinal (+US$ 100)</span><b>—</b>
-              <span>20/09</span><span>Você não completou o sinal e deixou de participar · o sinal de US$ 100 fica no pedido</span><b>—</b>
+              <span>20/09</span><span>Você não completou o sinal e deixou de participar · o sinal de US$ 100 ficou com o Lacre como taxa de desistência</span><b>—</b>
             </div>
-            <p class="xs muted mt-1">O sinal não volta por desistência. Ele vai para quem atender o pedido, ou volta ao seu endereço de origem só se o pedido expirar sem atendimento, em 15/12.</p>
+            <p class="xs muted mt-1">O sinal de quem desiste fica com o Lacre como taxa de serviço e nunca vai para quem atende: assim ninguém sobe o valor a níveis absurdos para ficar com o sinal dos outros.</p>
           </div>
+          <div class="row"><a class="btn btn-sm" href="../seller/pedidos.html"><i data-icon="send"></i>Atender este pedido</a><span class="xs muted">Como você já não participa, pode atendê-lo: até US$ 720 líquidos para quem entregar.</span></div>
         </div>
       </article>
     </div>
@@ -305,10 +307,10 @@
         <div class="card-body how small">
           <div class="how-step"><span class="n">1</span><div><b>Abrir com sinal.</b> Você define quanto paga pela informação (mínimo US$ 100), o prazo (até 90 dias) e o que quer, e paga o sinal de 25 % para criar o pedido. A curadoria confere em até 48 h; se recusar, o sinal volta. O sinal evita pedidos falsos e mostra a quem entrega que existe dinheiro de verdade.</div></div>
           <div class="how-step"><span class="n">2</span><div><b>Juntar-se.</b> Quem quer a mesma informação pelo mesmo valor paga o mesmo sinal de 25 % e espera. Recompensa total = valor por pessoa × número de pessoas. Todos recebem o mesmo acesso.</div></div>
-          <div class="how-step"><span class="n">3</span><div><b>Subir o valor e completar o sinal.</b> Qualquer conta pode subir o valor (mínimo +10 %), pagando 25 % do novo valor. Cada participante tem 48 h para completar o sinal (25 % da diferença); quem não completa deixa de participar e o sinal que já pagou fica no pedido. Quem sobe e não é acompanhado fica sozinho.</div></div>
-          <div class="how-step"><span class="n">4</span><div><b>Atendimento e prévia.</b> Um vendedor envia o material e o pedido trava. Se a curadoria aprovar, cada participante recebe uma prévia (amostra, páginas com tarja, miniaturas com marca d'água) e tem 72 h para responder.</div></div>
-          <div class="how-step"><span class="n">5</span><div><b>Pagar ou contestar.</b> Pague os 75 % restantes e receba tudo no cofre na hora. Quem não paga perde o sinal, que vai para quem atendeu. Se a prévia não corresponde ao pedido, conteste em 72 h com o motivo; a curadoria decide em até 48 h e, se não corresponde, o atendimento cai e o pedido continua aberto.</div></div>
-          <div class="how-step"><span class="n">6</span><div><b>Sem volta.</b> O sinal não volta por desistência. Ele só volta se o pedido expirar sem atendimento.</div></div>
+          <div class="how-step"><span class="n">3</span><div><b>Subir o valor e completar o sinal.</b> Qualquer conta pode subir o valor (mínimo +10 %), pagando 25 % do novo valor. Cada participante tem 48 h para completar o sinal (25 % da diferença); quem não completa deixa de participar e o sinal que já pagou fica com o Lacre como taxa de desistência. Quem sobe e não é acompanhado fica sozinho.</div></div>
+          <div class="how-step"><span class="n">4</span><div><b>Atendimento e prévia.</b> Um vendedor envia o material e o pedido trava. Quem participa do pedido não pode atendê-lo; quem já deixou de participar pode. Se a curadoria aprovar, cada participante recebe uma prévia (amostra, páginas com tarja, miniaturas com marca d'água) e tem 72 h para responder.</div></div>
+          <div class="how-step"><span class="n">5</span><div><b>Pagar ou contestar.</b> Pague os 75 % restantes e receba tudo no cofre na hora. Quem não paga desiste: o sinal fica com o Lacre como taxa de desistência, nunca com quem atendeu. Se a prévia não corresponde ao pedido, conteste em 72 h com o motivo; a curadoria decide em até 48 h e, se não corresponde, o atendimento cai e o pedido continua aberto, sem perda de sinal.</div></div>
+          <div class="how-step"><span class="n">6</span><div><b>Sem volta.</b> O sinal de quem desiste fica com o Lacre como taxa de serviço, para que ninguém suba o valor só para ficar com o sinal dos outros. Ele só volta se o prazo acabar sem nenhum vendedor, a quem ainda participa.</div></div>
           <div class="how-step"><span class="n">7</span><div><b>Extras.</b> Qualquer pessoa do pedido pode adicionar um extra: um bônus opcional para algo próximo ou complementar ao pedido, com valor por pessoa próprio (mínimo US$ 10), prazo até o do pedido e carteira própria. Passa pela curadoria e começa com um sinal de 25 %. Vendedores podem propor um extra; ele só existe quando alguém do pedido o cria.</div></div>
           <div class="how-step"><span class="n">8</span><div><b>Entrar em um extra.</b> Só quem está no pedido, com o mesmo valor do extra e o mesmo fluxo: sinal de 25 %, prévia e os 75 % depois. Subir exige +10 % e, se o valor subir, 48 h para completar o sinal. Até 5 extras abertos por pedido.</div></div>
           <div class="how-step"><span class="n">9</span><div><b>Independência.</b> Não entrar no extra não muda sua participação no pedido. Quem deixa de participar do pedido deixa também os extras; os sinais não voltam por desistência. Um extra pode ser atendido por outro vendedor e em outro momento que o principal.</div></div>
@@ -322,9 +324,8 @@
         <div class="card-body stack-sm">
           <dl class="kv">
             <dt>ped-2c8d1</dt><dd>US$ 200,00 <span class="xs muted">· 125 + 75 USDT · faltam US$ 600 depois da prévia</span></dd>
-            <dt>ped-7f1a3</dt><dd>US$ 100,00 <span class="xs muted">· retido: você deixou de participar</span></dd>
             <dt>ped-3n7q1</dt><dd><span class="muted">US$ 75,00 a pagar · endereço válido até 28/10 09:14</span></dd>
-            <dt><b>Total</b></dt><dd><b>US$ 300,00</b> <span class="xs muted">· 200 ativos + 100 retidos</span></dd>
+            <dt><b>Total</b></dt><dd><b>US$ 200,00</b></dd>
           </dl>
           <p class="xs muted">Pague de uma carteira que você controla, nunca direto de uma corretora: reembolsos voltam ao endereço de origem.</p>
           <a class="link xs" href="../buyer/pagamentos.html">Ver em Pagamentos</a>
@@ -408,8 +409,8 @@
           <div class="field" data-variant="unica"><span class="label">Sinal</span><div class="paga-agora" aria-live="polite"><div class="pa-title">Para criar o pedido você paga agora: <b id="np-agora">US$ 75,00</b> <span class="pa-pct">(sinal de 25 %)</span></div><div class="pa-sub" id="np-resto">O resto, US$ 225,00, só se aparecer quem entregue e você aprovar a prévia. O sinal não volta se você desistir.</div></div></div>
           <div class="panel small stack-sm full" data-variant="unica">
             <div class="row start"><i data-icon="users" class="ico brass"></i><div><b>Acesso igual para todas as pessoas no pedido.</b> Quem entrar paga o mesmo valor que você e recebe o mesmo conteúdo. Ninguém entra pagando menos.</div></div>
-            <div class="row start"><i data-icon="eye" class="ico brass"></i><div><b>Prévia antes de pagar o resto.</b> Quando um atendimento for aprovado, você vê uma prévia e tem 72 h para pagar os 75 % restantes ou contestar com motivo. Quem não paga perde o sinal.</div></div>
-            <div class="row start"><i data-icon="trending-up" class="ico brass"></i><div><b>O valor pode subir.</b> Qualquer conta pode subir o valor (mínimo +10 %); aí cada participante tem 48 h para completar o sinal (25 % da diferença). Quem não completa deixa de participar, e o sinal fica no pedido.</div></div>
+            <div class="row start"><i data-icon="eye" class="ico brass"></i><div><b>Prévia antes de pagar o resto.</b> Quando um atendimento for aprovado, você vê uma prévia e tem 72 h para pagar os 75 % restantes ou contestar com motivo. Quem não paga desiste, e o sinal fica com o Lacre como taxa de desistência.</div></div>
+            <div class="row start"><i data-icon="trending-up" class="ico brass"></i><div><b>O valor pode subir.</b> Qualquer conta pode subir o valor (mínimo +10 %); aí cada participante tem 48 h para completar o sinal (25 % da diferença). Quem não completa deixa de participar, e o sinal fica com o Lacre.</div></div>
           </div>
           <div class="field full" data-variant="unidade"><label for="nu-unidade">O que vale como uma unidade</label><textarea id="nu-unidade" class="textarea">Uma foto por hotel de Florianópolis do quadro de tarifas de balcão de outubro de 2026, legível, com o nome do hotel e a data visíveis. Sem pessoas no enquadramento.</textarea><span class="hint">A curadoria valida cada lote contra estes critérios. A triagem automática descarta duplicadas e ilegíveis.</span></div>
           <div class="field" data-variant="unidade"><label for="nu-valor">Quanto você paga por unidade</label><div class="input-group"><span class="affix">US$</span><input id="nu-valor" class="input num" value="1,50" inputmode="decimal"></div></div>

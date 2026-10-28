@@ -5,6 +5,7 @@
 | Fonte | Como | Quando |
 |---|---|---|
 | **Comissão de 10 %** | Separada da carteira do item na finalização, em todos os modelos | MVP |
+| **Sinais de desistência** | Sinal de 25 % de quem desiste de um pedido com recompensa (não completa o sinal ou não paga o restante depois da prévia) fica com o Lacre como taxa de serviço | MVP |
 | **Taxa de rede dos reembolsos** | Descontada do valor devolvido (não é receita) | MVP |
 | **Análise expressa** | Vendedor paga para ter SLA de 24 h na curadoria (fila prioritária) | V2 |
 | **Destaque no catálogo** | Posição fixa na vitrine por 7 dias, marcado como "Destaque" | V2 |

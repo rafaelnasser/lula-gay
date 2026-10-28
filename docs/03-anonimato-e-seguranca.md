@@ -80,7 +80,7 @@ Pipeline executado em um worker isolado antes de qualquer humano ver o arquivo:
 
 **Moedas e redes.** USDT e USDC em Polygon, Tron e Base, por terem taxas baixas: um lacre com 1.187 apoios pode precisar de 1.187 reembolsos. Bitcoin on-chain só em Exclusivo e Cópias (poucos pagamentos, poucos reembolsos). Lightning não, porque uma invoice não é reembolsável à origem. Preços em US$; stablecoins valem 1:1.
 
-**Comissão.** Única: **10 %**, separada só na finalização. Num lacre que não bate a meta, incide só sobre o valor garantido ao vendedor pelos marcos batidos; nada é cobrado se nenhum marco foi batido ou se um pedido expirar.
+**Comissão.** Única: **10 %**, separada só na finalização. Num lacre que não bate a meta, incide só sobre o valor garantido ao vendedor pelos marcos batidos; nada é cobrado se nenhum marco foi batido ou se um pedido expirar. Em pedidos com recompensa, o sinal de quem desiste fica com o Lacre como taxa de serviço.
 
 **O que a plataforma guarda.** A chave da carteira do item, no HSM, só até a entrega. Os endereços de origem dos pagamentos, só até a finalização, para reembolsos. O histórico de pagamentos por item (valor, rede, txid, confirmações), para a prova pública e para disputas. **Nunca um saldo de usuário.**
 
