@@ -13,9 +13,24 @@
     .handle > span:not(.rep) { white-space: nowrap; }
     .item-card .item-foot .handle { flex: none; }
     a.preview { display: block; }
-    .catalog { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 24px; align-items: start; }
-    @media (max-width: 900px) { .catalog { grid-template-columns: 1fr; } .catalog .sticky { position: static; } }
-    .filters .card-body { padding: 16px; display: flex; flex-direction: column; gap: 20px; }
+    /* filtros recolhidos: botão + chips dos filtros ativos; painel abre sob a barra */
+    .catalog-bar { align-items: flex-start; }
+    .filters-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; min-width: 0; flex: 1 1 320px; }
+    #filters-toggle { gap: 8px; }
+    #filters-toggle .fcount { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 99px; background: var(--brass); color: var(--bg); font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+    #filters-toggle .chev { transition: transform .15s; }
+    #filters-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    #filters-toggle[aria-expanded="true"] { border-color: var(--brass); }
+    .active-filters .chip { padding: 4px 6px 4px 10px; gap: 4px; font-size: var(--fs-xs); }
+    .active-filters .chip .chip-k { color: var(--muted); }
+    .active-filters .chip button { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; color: var(--muted); }
+    .active-filters .chip button:hover { background: var(--surface-3); color: var(--fg); }
+    .active-filters .chip button svg { width: 12px; height: 12px; }
+    .filters-panel { margin-bottom: 16px; }
+    #country-bar { margin-bottom: 12px; }
+    .filters-panel .filters-grid { padding: 16px 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px 28px; align-items: start; }
+    .filters-panel .card-foot { justify-content: space-between; }
+    .country-list { display: flex; flex-direction: column; gap: 8px; max-height: 236px; overflow: auto; padding-right: 4px; }
     .filter-group { display: flex; flex-direction: column; gap: 8px; }
     .filter-group h4 { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-family: var(--font-body); }
     .filter-group .cnt { color: var(--muted-2); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
@@ -54,24 +69,36 @@
   <section class="section tight">
     <div class="container">
       <div class="catalog">
-        <!-- Filtros laterais -->
-        <aside class="card filters sticky">
-          <div class="card-head"><h3>Filtros</h3><div class="actions"><button class="btn btn-sm btn-ghost" data-toast="Filtros limpos">Limpar</button></div></div>
-          <div class="card-body">
+          <div class="alert alert-anon" id="country-bar" hidden><i data-icon="globe"></i><div class="row between grow"><span id="country-bar-text"></span><span class="row"><button class="btn btn-sm" data-locale-open id="country-bar-change"></button><button class="btn btn-sm btn-ghost" data-country="GLOBAL" id="country-bar-all"></button></span></div></div>
+          <div class="toolbar catalog-bar">
+            <div class="filters-row">
+              <button class="btn" id="filters-toggle" aria-expanded="false" aria-controls="filters-panel"><i data-icon="sliders"></i>Filtros<span class="fcount" id="filters-count" hidden>0</span><i data-icon="chevron-down" class="chev"></i></button>
+              <div class="chips active-filters" id="active-filters" aria-live="polite"></div>
+            </div>
+            <div class="right">
+              <select class="select" aria-label="Ordenar por"><option>Mais recentes</option><option>Mais apoiados</option><option>Encerrando primeiro</option><option>Menor preço</option><option>Maior preço</option></select>
+              <div class="segmented"><button class="active" data-toast="Visualização em grade" aria-label="Grade"><i data-icon="grid"></i></button><button data-toast="Visualização em lista" aria-label="Lista"><i data-icon="list"></i></button></div>
+            </div>
+          </div>
+          <div class="card filters-panel" id="filters-panel" hidden>
+            <div class="card-head"><h3>Filtros</h3><div class="actions"><button class="btn btn-sm btn-ghost" id="filters-clear">Limpar</button><button class="icon-btn" id="filters-close" aria-label="Fechar filtros"><i data-icon="x"></i></button></div></div>
+            <div class="filters-grid">
             <div class="filter-group">
               <h4>País</h4>
-              <div class="search"><i data-icon="search"></i><input class="input" placeholder="Buscar país…" aria-label="Buscar país"></div>
-              <label class="check"><input type="checkbox" checked><span class="grow">Brasil</span><span class="cnt">112</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Estados Unidos</span><span class="cnt">64</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Global (vários países)</span><span class="cnt">38</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Argentina</span><span class="cnt">31</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Portugal</span><span class="cnt">27</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">México</span><span class="cnt">22</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Reino Unido</span><span class="cnt">19</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Alemanha</span><span class="cnt">14</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Índia</span><span class="cnt">12</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Chile</span><span class="cnt">9</span></label>
-              <label class="check"><input type="checkbox" checked><span class="grow">Bangladesh</span><span class="cnt">3</span></label>
+              <div class="search"><i data-icon="search"></i><input class="input" id="country-search" placeholder="Buscar país…" aria-label="Buscar país"></div>
+              <div class="country-list">
+              <label class="check" data-code="BR"><input type="checkbox" checked><span class="grow">Brasil</span><span class="cnt">112</span></label>
+              <label class="check" data-code="US"><input type="checkbox" checked><span class="grow">Estados Unidos</span><span class="cnt">64</span></label>
+              <label class="check" data-code="GLOBAL"><input type="checkbox" checked><span class="grow">Global (vários países)</span><span class="cnt">38</span></label>
+              <label class="check" data-code="AR"><input type="checkbox" checked><span class="grow">Argentina</span><span class="cnt">31</span></label>
+              <label class="check" data-code="PT"><input type="checkbox" checked><span class="grow">Portugal</span><span class="cnt">27</span></label>
+              <label class="check" data-code="MX"><input type="checkbox" checked><span class="grow">México</span><span class="cnt">22</span></label>
+              <label class="check" data-code="GB"><input type="checkbox" checked><span class="grow">Reino Unido</span><span class="cnt">19</span></label>
+              <label class="check" data-code="DE"><input type="checkbox" checked><span class="grow">Alemanha</span><span class="cnt">14</span></label>
+              <label class="check" data-code="IN"><input type="checkbox" checked><span class="grow">Índia</span><span class="cnt">12</span></label>
+              <label class="check" data-code="CL"><input type="checkbox" checked><span class="grow">Chile</span><span class="cnt">9</span></label>
+              <label class="check" data-code="BD"><input type="checkbox" checked><span class="grow">Bangladesh</span><span class="cnt">3</span></label>
+              </div>
               <button class="btn btn-sm btn-ghost" data-toast="Lista completa: 41 países">Mais 30 países</button>
             </div>
             <div class="filter-group">
@@ -119,21 +146,11 @@
               <label class="radio"><input type="radio" name="st"><span>Financiado (lacre rompido)</span></label>
               <label class="radio"><input type="radio" name="st"><span>Encerrando em 24 h</span></label>
             </div>
-            <button class="btn btn-primary btn-block" data-toast="Filtros aplicados · 351 itens">Aplicar filtros</button>
-          </div>
-        </aside>
-
-        <!-- Grade -->
-        <div>
-          <div class="alert alert-anon" id="country-bar" hidden><i data-icon="globe"></i><div class="row between grow"><span id="country-bar-text"></span><span class="row"><button class="btn btn-sm" data-locale-open id="country-bar-change"></button><button class="btn btn-sm btn-ghost" data-country="GLOBAL" id="country-bar-all"></button></span></div></div>
-          <div class="toolbar">
-            <span class="small muted" id="grid-count">Mostrando 1–12 de 351 itens</span>
-            <div class="right">
-              <select class="select" aria-label="Ordenar por"><option>Mais recentes</option><option>Mais apoiados</option><option>Encerrando primeiro</option><option>Menor preço</option><option>Maior preço</option></select>
-              <div class="segmented"><button class="active" data-toast="Visualização em grade" aria-label="Grade"><i data-icon="grid"></i></button><button data-toast="Visualização em lista" aria-label="Lista"><i data-icon="list"></i></button></div>
             </div>
+            <div class="card-foot"><span class="small muted">Os filtros ficam guardados enquanto você navega pelo catálogo.</span><button class="btn btn-primary" id="filters-apply">Aplicar filtros</button></div>
           </div>
-          <div class="grid cols-2" id="grade">
+          <p class="small muted mb-2" id="grid-count">Mostrando 1–12 de 351 itens</p>
+          <div class="grid cols-3" id="grade">
             <article class="card item-card">
               <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
               <div class="item-body">
@@ -237,7 +254,6 @@
             <span class="small muted">Página 1 de 30</span>
             <div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm" data-toast="Página 2 do catálogo">2</button><button class="btn btn-sm" data-toast="Página 3 do catálogo">3</button><span class="btn btn-sm btn-ghost">…</span><button class="btn btn-sm" data-toast="Página 30 do catálogo">30</button><button class="btn btn-sm" data-toast="Página 2 do catálogo">›</button></div>
           </div>
-        </div>
       </div>
     </div>
   </section>
@@ -314,12 +330,61 @@
       if (mine.length) {
         cards.forEach(function (c) { c.hidden = mine.indexOf(c) < 0; });
         txt.innerHTML = '<b>' + t('Itens de {country}', { country: name }) + '</b> · ' + mine.length + ' / ' + cards.length;
-        document.getElementById('grid-count').textContent = mine.length + ' · ' + name;
+        document.getElementById('grid-count').textContent = mine.length + ' / ' + cards.length + ' · ' + name;
         document.querySelectorAll('.filter-group .check').forEach(function (lb) { var inp = lb.querySelector('input'), nm = lb.querySelector('.grow'); if (inp && nm && lb.closest('.filter-group').querySelector('h4') && lb.closest('.filter-group').querySelector('h4').textContent.trim() === 'País') inp.checked = nm.textContent.trim().indexOf(namePt) === 0; });
       } else {
         txt.textContent = t('Nenhum item de {country} ainda. Mostrando todos os países.', { country: name });
       }
     });
+  </script>
+  <script>
+    // Filtros recolhidos: botão "Filtros" com contador, chips dos filtros ativos e painel sob a barra.
+    (function () {
+      var btn = document.getElementById('filters-toggle'), panel = document.getElementById('filters-panel');
+      var chipsEl = document.getElementById('active-filters'), countEl = document.getElementById('filters-count');
+      var groups = Array.prototype.slice.call(panel.querySelectorAll('.filter-group'));
+      var inputs = Array.prototype.slice.call(panel.querySelectorAll('input'));
+      var defaults = inputs.map(function (i) { return i.type === 'checkbox' || i.type === 'radio' ? i.checked : i.value; });
+      function t(s, v) { return window.Lacre && window.Lacre.t ? window.Lacre.t(s, v) : s; }
+      function setOpen(open) { panel.hidden = !open; btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+      function label(lb) { var g = lb.querySelector('.grow') || lb.querySelector('span'); return g ? g.textContent.trim() : ''; }
+      function resetGroup(g) { inputs.forEach(function (inp, k) { if (g.contains(inp)) { if (inp.type === 'checkbox' || inp.type === 'radio') inp.checked = defaults[k]; else inp.value = defaults[k]; } }); }
+      function isDefault(g) { return inputs.every(function (inp, k) { return !g.contains(inp) || ((inp.type === 'checkbox' || inp.type === 'radio') ? inp.checked === defaults[k] : inp.value === defaults[k]); }); }
+      function chip(key, text, onRemove) {
+        var c = document.createElement('span'); c.className = 'chip';
+        c.innerHTML = '<span class="chip-k">' + key + ':</span> ' + text + ' <button type="button" aria-label="' + t('Remover filtro') + ' ' + text + '">' + window.Lacre.icon('x') + '</button>';
+        c.querySelector('button').addEventListener('click', onRemove); chipsEl.appendChild(c);
+      }
+      function filterCountries() {
+        var g = groups[0], all = isDefault(g), codes = [];
+        g.querySelectorAll('.check[data-code]').forEach(function (lb) { if (lb.querySelector('input').checked) codes.push(lb.dataset.code); });
+        var cards = Array.prototype.slice.call(document.querySelectorAll('#grade .item-card')), shown = 0;
+        cards.forEach(function (c) { var tg = c.querySelector('.item-meta .tag'), code = tg ? tg.textContent.trim().toUpperCase() : 'GLOBAL'; var ok = all || codes.indexOf(code) >= 0; c.hidden = !ok; if (ok) shown++; });
+        document.getElementById('grid-count').textContent = all ? t('Mostrando 1–12 de 351 itens') : shown + ' / ' + cards.length + ' · ' + codes.map(function (c) { return window.Lacre.locale.countryName(c); }).join(', ');
+        var bar = document.getElementById('country-bar'); if (bar && all) bar.hidden = true;
+      }
+      function summarize() {
+        chipsEl.innerHTML = ''; var n = 0;
+        groups.forEach(function (g) {
+          if (isDefault(g)) return;
+          var key = g.querySelector('h4').textContent.trim(), parts = [];
+          g.querySelectorAll('.check, .radio').forEach(function (lb) { if (lb.querySelector('input').checked) parts.push(label(lb)); });
+          var nums = g.querySelectorAll('input.input:not(#country-search)'); if (nums.length) { var a = nums[0].value, b = nums[1] && nums[1].value; if (a || b) parts.push('US$ ' + (a || '0') + '–' + (b || '∞')); }
+          var text = parts.length ? (parts.length > 2 ? parts.slice(0, 2).join(', ') + ' +' + (parts.length - 2) : parts.join(', ')) : t('nenhum');
+          n++; chip(key, text, function () { resetGroup(g); if (g === groups[0]) filterCountries(); summarize(); });
+        });
+        countEl.hidden = !n; countEl.textContent = n;
+      }
+      btn.addEventListener('click', function () { setOpen(panel.hidden); });
+      document.getElementById('filters-close').addEventListener('click', function () { setOpen(false); btn.focus(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { setOpen(false); btn.focus(); } });
+      document.getElementById('filters-clear').addEventListener('click', function () { groups.forEach(resetGroup); filterCountries(); summarize(); window.toast(t('Filtros limpos · 351 itens')); });
+      document.getElementById('filters-apply').addEventListener('click', function () { filterCountries(); summarize(); setOpen(false); window.toast(t('Filtros aplicados')); btn.focus(); });
+      var cs = document.getElementById('country-search');
+      cs.addEventListener('input', function () { var q = cs.value.trim().toLowerCase(); groups[0].querySelectorAll('.check[data-code]').forEach(function (lb) { lb.hidden = q && label(lb).toLowerCase().indexOf(q) < 0; }); });
+      // roda depois do filtro padrão por país (que marca só o país detectado)
+      document.addEventListener('lacre:ready', function () { summarize(); });
+    })();
   </script>
 </main>
 </body>
