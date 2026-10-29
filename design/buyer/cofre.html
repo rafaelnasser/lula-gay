@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cofre · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .ent { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; align-items: start; }
+    .ent > * { min-width: 0; }
+    .ent .preview { aspect-ratio: 16 / 10; border-radius: var(--r-sm); }
+    @media (max-width: 700px) { .ent { grid-template-columns: 1fr; } .ent .preview { max-width: 220px; } }
+    .ent .title { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-md); line-height: 1.3; }
+    .ent .title a:hover { color: var(--brass); }
+    .ent .meta { font-size: var(--fs-xs); color: var(--muted); display: flex; gap: 6px 10px; flex-wrap: wrap; align-items: center; }
+    .ent .kv { font-size: var(--fs-xs); }
+    .wm-note { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); background: var(--surface-2); border: 1px dashed var(--border-2); border-radius: 6px; padding: 3px 8px; max-width: 100%; }
+    .wm-note svg { width: 12px; height: 12px; color: var(--brass); flex: none; }
+    .ent-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding-top: 4px; }
+    .alert .alert-actions { margin-left: auto; flex: none; }
+    @media (max-width: 600px) { .alert { flex-wrap: wrap; } .alert .alert-actions { margin-left: 0; } .ent .badge { white-space: normal; } }
+  </style>
+</head>
+<body data-shell="buyer" data-page="cofre" data-title="Cofre" data-root="../">
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Minha conta</p>
+        <h1 class="mt-1">Cofre</h1>
+        <p class="sub">Tudo o que você pode acessar. O conteúdo nunca sai por fora: é visto no visualizador seguro ou baixado com marca d'água do seu entitlement.</p>
+      </div>
+      <div class="actions">
+        <span class="badge badge-outline badge-lg"><i data-icon="lock-keyhole"></i>PIN do cofre conferido às 14:05 · sessão até 18:05</span>
+        <a class="btn" href="../public/explorar.html"><i data-icon="compass"></i>Explorar</a>
+      </div>
+    </div>
+
+    <div class="stat-grid mb-3">
+      <div class="stat"><span class="label">Acessos</span><span class="value">9</span><span class="delta flat">2 compras · 1 camada · 1 assinatura · 3 apoios · 1 pedido atendido · 1 licença</span></div>
+      <div class="stat"><span class="label">Disponíveis agora</span><span class="value">8</span><span class="delta up"><i data-icon="trending-up"></i>+1 esta semana</span></div>
+      <div class="stat"><span class="label">Aguardando liberação</span><span class="value">1</span><span class="delta flat">lacre coletivo em 68 %</span></div>
+      <div class="stat"><span class="label">Janela de disputa aberta</span><span class="value">1</span><span class="delta flat">encerra em <span class="countdown" data-deadline="2026-10-28T14:20:00-03:00"></span></span></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="chips">
+        <button class="chip active" data-toast="Filtro: todos (9 acessos)">Todos <b>9</b></button>
+        <button class="chip" data-toast="Filtro: compras (2)"><i data-icon="copy"></i>Compra</button>
+        <button class="chip" data-toast="Filtro: apoios (3)"><i data-icon="hand-coins"></i>Apoio</button>
+        <button class="chip" data-toast="Filtro: assinaturas (1)"><i data-icon="repeat"></i>Assinatura</button>
+        <button class="chip" data-toast="Filtro: pedidos atendidos (1)"><i data-icon="file-search"></i>Pedido</button>
+        <button class="chip" data-toast="Filtro: licenças (1)"><i data-icon="scale"></i>Licença</button>
+        <button class="chip" data-toast="Filtro: camadas (1)"><i data-icon="layers"></i>Camada</button>
+      </div>
+      <div class="right">
+        <select class="select" style="width:auto" aria-label="Status"><option>Status: todos</option><option>Disponível (8)</option><option>Aguardando liberação (1)</option><option>Expirado (0)</option><option>Revogado (0)</option></select>
+        <select class="select" style="width:auto" aria-label="Ordenar"><option>Mais recentes</option><option>Mais antigos</option><option>Por item</option></select>
+      </div>
+    </div>
+
+    <div class="alert alert-warn mb-3"><i data-icon="hourglass"></i><div><span class="alert-title">Janela de disputa aberta · 12.400 licitações municipais do Nordeste</span>Se o conteúdo entregue não corresponder à prévia aprovada, abra a disputa até 28/10 às 14:20. Depois de 72 h sem disputa, o pagamento vai para o vendedor.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/disputa.html"><i data-icon="flag"></i>Abrir disputa</a></div></div>
+
+    <div class="stack">
+      <!-- 1 · compra com download -->
+      <div class="card"><div class="card-body ent">
+        <div class="preview" data-type="dados"><div class="preview-tag"><span class="badge">Dados e bases</span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Compra · 21/10</span><span class="tag">ENT-3F9A</span></div>
+          <div class="title"><a href="../buyer/visualizador.html">12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</a></div>
+          <div class="meta"><span>lcr-9f2k7</span><span>CSV/XLSX + anexo PDF · 48 MB · 4 arquivos</span><span class="handle" data-handle="lanterna-b31d"></span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+          <dl class="kv">
+            <dt>Direitos</dt><dd>Download permitido, com marca d'água · visualizador seguro</dd>
+            <dt>Disputa</dt><dd>Aberta até 28/10 · 14:20 · o vendedor entregou a versão 2 do pacote em 25/10 e a janela de 72 h reabriu</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Marca d'água: @coruja-7f3a · ENT-3F9A em todas as páginas do PDF e na primeira linha do CSV</span>
+          <div class="ent-actions">
+            <a class="btn btn-primary btn-sm" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir no visualizador</a>
+            <button class="btn btn-sm" data-toast="Preparando download com marca d'água ENT-3F9A (48 MB)…"><i data-icon="download"></i>Baixar</button>
+            <a class="btn btn-sm btn-outline" href="../buyer/disputa.html"><i data-icon="flag"></i>Abrir disputa</a>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 2 · compra somente leitura -->
+      <div class="card"><div class="card-body ent">
+        <div class="preview" data-type="documento"><div class="preview-tag"><span class="badge">História e acervos</span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópia</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Compra · 02/10</span><span class="tag">ENT-8C21</span></div>
+          <div class="title"><a href="../buyer/visualizador.html">1.200 páginas de jornais operários de São Paulo (1917–1930) digitalizadas em 600 dpi</a></div>
+          <div class="meta"><span>lcr-5t6w1</span><span>PDF · 1.200 páginas · 2,1 GB</span><span class="handle" data-handle="arquivista-0d2e"></span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+          <dl class="kv">
+            <dt>Direitos</dt><dd>Somente leitura: sem download, só no visualizador seguro</dd>
+            <dt>Disputa</dt><dd>Janela terminada em 05/10 · o pagamento foi para o vendedor</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Marca d'água visível no visualizador: @coruja-7f3a · ENT-8C21</span>
+          <div class="ent-actions">
+            <a class="btn btn-primary btn-sm" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir no visualizador</a>
+            <button class="btn btn-sm" disabled title="Item somente leitura"><i data-icon="download"></i>Baixar</button>
+            <span class="xs muted">download desabilitado pelo vendedor</span>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 3 · camada 1 -->
+      <div class="card"><div class="card-body ent">
+        <div class="preview" data-type="documento"><div class="preview-tag"><span class="badge">Educação e métodos</span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camada 1 de 3</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Compra · 23/10</span><span class="tag">ENT-5K7D</span></div>
+          <div class="title"><a href="../buyer/visualizador.html">Como uma operação de última milha cortou 31 % do custo: playbook, planilhas e modelo de roteirização</a></div>
+          <div class="meta"><span>lcr-3c7r8</span><span>Sumário executivo (PDF, 14 p.) + 10 gráficos (PNG)</span><span class="handle" data-handle="bussola-c4e1"></span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span></div>
+          <dl class="kv">
+            <dt>Direitos</dt><dd>Download permitido, com marca d'água</dd>
+            <dt>Camadas</dt><dd>Você tem até a camada 1. Subir para a camada 2 (playbook) custa a diferença: US$ 700</dd>
+            <dt>Disputa</dt><dd>Janela encerrada em 26/10</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Marca d'água: @coruja-7f3a · ENT-5K7D no PDF e nos 10 PNG</span>
+          <div class="ent-actions">
+            <a class="btn btn-primary btn-sm" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir no visualizador</a>
+            <button class="btn btn-sm" data-toast="Preparando download com marca d'água ENT-5K7D (6 MB)…"><i data-icon="download"></i>Baixar</button>
+            <a class="btn btn-sm btn-outline" href="../buyer/checkout.html"><i data-icon="layers"></i>Subir para a camada 2 · US$ 700</a>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 4 · assinatura -->
+      <div class="card"><div class="card-body ent">
+        <div class="preview" data-type="documento"><div class="preview-tag"><span class="badge">Ciência e pesquisa</span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="badge st-ativo">Ativa · renova em 25/11</span><span class="badge badge-outline">Desde 25/10</span><span class="tag">ENT-9A2M</span></div>
+          <div class="title"><a href="../buyer/visualizador.html">Monitor semanal de patentes do setor farmacêutico brasileiro</a></div>
+          <div class="meta"><span>lcr-6d1k5</span><span>Texto + planilha · toda sexta</span><span class="handle" data-handle="prisma-66af"></span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></div>
+          <dl class="kv">
+            <dt>Edições</dt><dd>nº 43 (24/10) disponível · nº 42 (17/10) avulsa por US$ 90 · próxima em 31/10</dd>
+            <dt>Direitos</dt><dd>Somente leitura; planilha da edição pode ser baixada com marca d'água</dd>
+            <dt>Cobrança</dt><dd>US$ 190,00 por mês, pagos da sua carteira cripto a cada renovação (endereço derivado novo, válido por 24 h). Sem pagamento até a data, pausa sem multa</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Marca d'água: @coruja-7f3a · ENT-9A2M em cada edição</span>
+          <div class="ent-actions">
+            <a class="btn btn-primary btn-sm" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir edição nº 43</a>
+            <button class="btn btn-sm" data-toast="Preparando download da planilha da edição nº 43 com marca d'água ENT-9A2M…"><i data-icon="download"></i>Baixar planilha</button>
+            <button class="btn btn-sm btn-ghost" data-toast="Assinatura pausada. Você mantém acesso até 24/11."><i data-icon="pause"></i>Pausar assinatura</button>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 5 · apoio aguardando liberação -->
+      <div class="card wax-edge"><div class="card-body ent">
+        <div class="preview" data-type="documento"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-triagem">Aguardando liberação</span><span class="badge badge-outline">Apoio · US$ 250,00 em 22/10 e 25/10</span></div>
+          <div class="title"><a href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></div>
+          <div class="meta"><span>lcr-4m2x9</span><span>PDF 212 p., 31 áudios, planilhas</span><span class="handle" data-handle="sextante-21c9"></span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></div>
+          <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
+          <div class="meta"><span><b class="wax">US$ 54.120</b> de US$ 80.000 · 68 %</span><span>1.187 apoiadores</span><span>encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b></span></div>
+          <dl class="kv">
+            <dt>Liberação</dt><dd>Ao bater 100 %, todo o conteúdo fica público para todos ao mesmo tempo, e o acesso também aparece aqui. O conteúdo já está enviado e analisado: a liberação é automática</dd>
+            <dt>Se não bater a meta</dt><dd>Os 100 USDT de 22/10 ficam com o vendedor (entraram antes do marco 50 %, já garantido); os 150 USDT de 25/10 voltam ao endereço de origem se o prazo (15/11) vencer antes do marco 75 %, descontada só a taxa de rede</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Marca d'água será gerada na liberação, com um novo entitlement</span>
+          <div class="ent-actions">
+            <a class="btn btn-wax btn-sm" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Apoiar mais</a>
+            <a class="btn btn-sm" href="../buyer/apoios.html"><i data-icon="activity"></i>Acompanhar em Apoios</a>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- apoio · lacre rompido e público em 12/10 -->
+      <div class="card"><div class="card-body ent">
+        <div class="preview" data-type="audio"><div class="preview-tag"><span class="badge">Governo e políticas públicas</span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Apoio · US$ 300,00 em 20/09</span><span class="tag">ENT-7C1D</span></div>
+          <div class="title"><a href="../buyer/visualizador.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</a></div>
+          <div class="meta"><span>lcr-7w3n8</span><span>TXT + PDF · 1.420 páginas · índice e planilha de falas</span><span class="handle" data-handle="lanterna-b31d"></span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+          <dl class="kv">
+            <dt>Liberação</dt><dd>público desde 12/10, quando o lacre rompeu · também no seu cofre</dd>
+            <dt>Direitos</dt><dd>Download permitido, com marca d'água</dd>
+            <dt>Disputa</dt><dd>Sua janela terminou em 15/10 (72 h após a liberação)</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Marca d'água: @coruja-7f3a · ENT-7C1D no PDF e nos TXT</span>
+          <div class="ent-actions">
+            <a class="btn btn-primary btn-sm" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir no visualizador</a>
+            <button class="btn btn-sm" data-toast="Preparando download com marca d'água ENT-7C1D (TXT + PDF)…"><i data-icon="download"></i>Baixar</button>
+            <a class="btn btn-sm btn-ghost" href="../buyer/apoios.html"><i data-icon="hand-coins"></i>Ver em Apoios</a>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- apoio · lacre rompido e público em 01/10 · reclamação DSP-0203 paga pelo fundo de garantia -->
+      <div class="card"><div class="card-body ent">
+        <div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">Governo e políticas públicas</span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Apoio · US$ 50,00 em 01/10 · reembolsado em 10/10</span><span class="tag">ENT-5B2C</span></div>
+          <div class="title"><a href="../buyer/visualizador.html">Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos</a></div>
+          <div class="meta"><span>lcr-2d9r4</span><span>planilha + mapa + fotos</span><span class="handle" data-handle="estenografo-7b3c"></span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></div>
+          <dl class="kv">
+            <dt>Liberação</dt><dd>público desde 01/10 às 10:10, quando o lacre rompeu · também no seu cofre</dd>
+            <dt>Reclamação</dt><dd>DSP-0203 aceita depois da sua janela (até 04/10 10:10): 50 USDT devolvidos ao endereço de origem pelo fundo de garantia em 10/10 · acesso mantido</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Marca d'água: @coruja-7f3a · ENT-5B2C na planilha e nas fotos</span>
+          <div class="ent-actions">
+            <a class="btn btn-primary btn-sm" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir no visualizador</a>
+            <a class="btn btn-sm btn-outline" href="../buyer/disputa.html"><i data-icon="gavel"></i>Ver reclamação DSP-0203</a>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 6 · pedido atendido -->
+      <div class="card"><div class="card-body ent">
+        <div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido atendido</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Pedido atendido em 08/10 · você e mais 2 pessoas · US$ 200 cada</span><span class="tag">ENT-2P9Q</span></div>
+          <div class="title"><a href="../buyer/visualizador.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></div>
+          <div class="meta"><span>ped-1b6j8</span><span>86 JPG · 1,4 GB</span><span class="handle" data-handle="cartografo-5a77"></span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+          <dl class="kv">
+            <dt>Acesso</dt><dd>Sinal de US$ 50 em 28/09; prévia em 06/10; você pagou os US$ 150 restantes em 07/10, e o material completo chegou aqui na hora. Atendido em 08/10, quando as 3 pessoas confirmaram (recompensa total de US$ 600); depois de 72 h sem disputa, o pagamento foi para quem atendeu (11/10)</dd>
+            <dt>Direitos</dt><dd>Download permitido, com marca d'água</dd>
+            <dt>Disputa</dt><dd>Janela terminada em 11/10</dd>
+            <dt>Extra</dt><dd>1 extra deste pedido ("Plantas e cortes do Pacaembu usados na reforma (2020)") foi atendido para outras 2 pessoas; você não entrou</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Marca d'água: @coruja-7f3a · ENT-2P9Q em cada imagem (invisível + canto inferior)</span>
+          <div class="ent-actions">
+            <a class="btn btn-primary btn-sm" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir galeria</a>
+            <button class="btn btn-sm" data-toast="Preparando download com marca d'água ENT-2P9Q (1,4 GB)…"><i data-icon="download"></i>Baixar</button>
+            <a class="btn btn-sm btn-ghost" href="../public/pedido.html"><i data-icon="file-search"></i>Ver pedido</a>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 7 · licença editorial -->
+      <div class="card"><div class="card-body ent">
+        <div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div></div>
+        <div class="stack-sm">
+          <div class="row"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença editorial</span><span class="badge st-liberado">Disponível</span><span class="badge badge-outline">Licença · 08/10 · válida até 08/10/2027</span><span class="tag">ENT-7L4E</span></div>
+          <div class="title"><a href="../buyer/visualizador.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></div>
+          <div class="meta"><span>lcr-2n8v4</span><span>RAW + JPG · 9,8 GB · 340 arquivos</span><span class="handle" data-handle="cartografo-5a77"></span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+          <dl class="kv">
+            <dt>Direitos</dt><dd>Uso editorial: uma publicação, 12 meses, território Brasil · alta resolução sem marca d'água</dd>
+            <dt>Contrato</dt><dd>LIC-2N8V4-7L4E (PDF) com os pseudônimos das partes e o hash do pacote</dd>
+            <dt>Disputa</dt><dd>Janela encerrada em 11/10</dd>
+          </dl>
+          <span class="wm-note"><i data-icon="stamp"></i>Sem marca d'água visível (licença). O contrato e um marcador invisível identificam ENT-7L4E</span>
+          <div class="ent-actions">
+            <a class="btn btn-primary btn-sm" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir galeria</a>
+            <button class="btn btn-sm" data-toast="Download de 9,8 GB preparado em 4 partes. Links válidos por 24 h."><i data-icon="download"></i>Baixar pacote</button>
+            <button class="btn btn-sm" data-toast="Contrato LIC-2N8V4-7L4E.pdf baixado"><i data-icon="scroll-text"></i>Baixar contrato</button>
+            <a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="grid cols-2 mt-3">
+      <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">A marca d'água identifica a conta, não a pessoa</span>Cada entitlement gera uma marca única (pseudônimo + código). Se um arquivo vazar, sabemos de qual acesso saiu; nada liga isso a uma identidade.</div></div>
+      <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Expirados e revogados</span>Nenhum no momento. Um acesso é revogado se o item for removido por violação ou se uma disputa sua for procedente com reembolso total; nesse caso o pagamento volta ao seu endereço de origem.</div></div>
+    </div>
+  </main>
+</body>
+</html>

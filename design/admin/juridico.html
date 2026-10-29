@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jurídico · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contornos de bugs do CSS compartilhado: .sidebar-backdrop vira célula do grid acima de 1000 px; filhos de grid sem min-width 0 estouram em telas estreitas */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    .grid > *, .split > *, .split-3 > *, .form-grid > * { min-width: 0; }
+    .tl-item.ok, .tl-item.warn, .tl-item.danger, .tl-item.info, .tl-item.brass, .tl-item.wax { color: inherit; }
+    .acts { text-align: right; white-space: nowrap; }
+    .ico { display: inline-flex; align-items: center; vertical-align: middle; }
+    .ico svg { width: 15px; height: 15px; }
+    .table td .title { font-weight: 600; display: block; max-width: 44ch; }
+    .legal-text { font-size: var(--fs-sm); line-height: 1.6; }
+    .textarea.tall { min-height: 220px; }
+    .points { display: flex; flex-direction: column; gap: 8px; font-size: var(--fs-sm); }
+    .points > div { display: flex; gap: 10px; align-items: flex-start; }
+    .points .ico { margin-top: 2px; }
+    .req > * { min-width: 0; }
+    .req { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px; }
+    @media (max-width: 900px) { .req { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-shell="admin" data-page="juridico" data-root="../" data-title="Jurídico">
+  <main>
+    <div class="page-head">
+      <div>
+        <h1>Jurídico</h1>
+        <p class="sub">Carla S. · Jurídico · 5 escalonamentos (1 internacional), 2 pedidos de titulares (proteção de dados) e 1 ordem judicial em cumprimento. Cada item é avaliado pelas leis do país de origem e pela jurisdição da sede. Prazo padrão: 5 dias úteis para parecer, 15 dias para titulares.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" data-toast="Modelo de parecer aberto em branco"><i data-icon="file-text"></i>Novo parecer</button>
+        <button class="btn btn-ghost" data-toast="Caixa juridico@ sincronizada · nenhuma notificação nova"><i data-icon="refresh"></i>Sincronizar juridico@</button>
+      </div>
+    </div>
+
+    <div class="stat-grid mb-3">
+      <div class="stat"><span class="label">Escalonamentos</span><span class="value">5</span><span class="delta flat">prazo mais próximo: 31/10</span></div>
+      <div class="stat"><span class="label">Pedidos de titulares</span><span class="value">2</span><span class="delta flat">SLA 15 dias · 1 vence em 8 dias</span></div>
+      <div class="stat"><span class="label">Ordens judiciais</span><span class="value">1</span><span class="delta down"><i data-icon="alert-triangle"></i>prazo 05/11</span></div>
+      <div class="stat"><span class="label">Pareceres no mês</span><span class="value">11</span><span class="delta up"><i data-icon="trending-up"></i>SLA 5 dias úteis em 80 %</span></div>
+    </div>
+
+    <div data-tabs>
+      <div class="tabs">
+        <a class="tab active" data-tab="esc" href="#"><i data-icon="scale"></i>Escalonamentos <span class="count">5</span></a>
+        <a class="tab" data-tab="tit" href="#"><i data-icon="user-check"></i>Pedidos de titulares (proteção de dados) <span class="count">2</span></a>
+        <a class="tab" data-tab="ord" href="#"><i data-icon="gavel"></i>Notificações e ordens judiciais <span class="count">1</span></a>
+      </div>
+
+      <div class="tab-panel active" data-panel="esc">
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Item</th><th>País</th><th>Motivo</th><th>Risco</th><th>Curador</th><th>Escalado em</th><th>Prazo</th><th>Status</th><th class="acts"></th></tr></thead>
+            <tbody>
+              <tr class="selected"><td><span class="title">Relatório de inspeção de 90 barragens de rejeito (ANM, 2024), consolidado com georreferenciamento e histórico de autuações</span><span class="sub">lcr-6b2v7 · Governo e políticas públicas · Lacre coletivo</span></td><td><span class="tag">BR</span></td><td>Terceiros (12 pessoas) · empresas em contexto de autuação (90)</td><td><span class="badge risk-alto">Alto</span></td><td>Ana R.</td><td>26/10</td><td class="num">03/11</td><td><span class="badge st-analise">Em análise</span></td><td class="acts"><a class="btn btn-sm btn-primary" href="#parecer">Parecer</a></td></tr>
+              <tr><td><span class="title">Fotos aéreas de 50 condomínios irregulares em APA de Brasília</span><span class="sub">lcr-7h4k1 · Fotografia e vídeo · Licença</span></td><td><span class="tag">BR</span></td><td>Terceiros · imóveis e moradores identificáveis em 14 fotos</td><td><span class="badge risk-alto">Alto</span></td><td>Ana R.</td><td>24/10</td><td class="num danger">31/10</td><td><span class="badge st-ajustes">Parecer em redação</span></td><td class="acts"><button class="btn btn-sm" data-toast="Rascunho do parecer: aprovar com redação (borrar placas e fachadas em 14 fotos)">Abrir</button></td></tr>
+              <tr><td><span class="title">Registro de 2.300 fábricas têxteis de Bangladesh com resultados de auditorias públicas de segurança (2014–2025)</span><span class="sub">lcr-7e2m4 · Dados e bases · Cópias · reanálise v2 · item ativo</span></td><td><span class="tag">BD</span></td><td>Terceiros · 2.300 nomes de auditores em laudos públicos de Bangladesh · dúvida: proteção de dados equivalente e lei da sede permitem manter?</td><td><span class="badge risk-alto">Alto</span></td><td>Ana R.</td><td>26/10</td><td class="num">03/11</td><td><span class="badge st-analise">Em análise</span></td><td class="acts"><button class="btn btn-sm" data-toast="Rascunho: auditores assinam laudos públicos em função regulada (BD); tendência: manter nomes, tarjar contatos e registros profissionais">Abrir</button></td></tr>
+              <tr><td><span class="title">Metodologia de precificação dinâmica de um app de delivery, enviada por ex-funcionário</span><span class="sub">lcr-1q9x5 · Negócios e mercado · Exclusivo</span></td><td><span class="tag">BR</span></td><td>Segredo comercial · possível violação de dever de confidencialidade (lei do país de origem: Lei 9.279, art. 195)</td><td><span class="badge risk-alto">Alto</span></td><td>Bruno M.</td><td>26/10</td><td class="num">04/11</td><td><span class="badge st-triagem">Aguarda documentos</span></td><td class="acts"><button class="btn btn-sm" data-toast="Pedido ao vendedor em 26/10: contrato de trabalho e cláusulas de confidencialidade, sem dados pessoais">Abrir</button></td></tr>
+              <tr><td><span class="title">Contratos de patrocínio de 12 clubes de futebol (2020–2025) com fontes públicas</span><span class="sub">lcr-3f8d2 · Jornalismo e investigação · Cópias</span></td><td><span class="tag">BR</span></td><td>Direitos autorais (minutas de terceiros) · risco de difamação em 3 trechos</td><td><span class="badge risk-alto">Alto</span></td><td>Bruno M.</td><td>27/10</td><td class="num">05/11</td><td><span class="badge st-escalado">Novo</span></td><td class="acts"><button class="btn btn-sm" data-toast="Escalonamento assumido por Carla S.">Assumir</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="split mt-3" id="parecer">
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>lcr-6b2v7 · contexto do escalonamento</h3><span class="badge st-escalado">Escalado em 26/10 às 15:20</span><div class="actions"><a class="btn btn-sm" href="../admin/analise.html"><i data-icon="clipboard-check"></i>Abrir no workbench</a></div></div>
+              <div class="card-body stack">
+                <p class="small">Ana R. escalou após concluir os blocos 1, 2, 3, 5 e 7. Motivos: documento de origem institucional (ANM), 12 pessoas identificáveis e 90 empresas nomeadas em contexto de autuação. Pedido: confirmar base legal para manter nomes de servidores, decidir sobre o número de CREA e validar a manutenção das razões sociais.</p>
+                <div class="points">
+                  <div><span class="ico ok"><i data-icon="check-circle"></i></span><span><b>Origem lícita.</b> 90 relatórios obtidos por pedidos de acesso à informação (Lei 12.527/2011) respondidos pela ANM; ofícios com protocolo anexados. Segurança de barragens tem transparência obrigatória (Lei 12.334/2010, art. 20, e SNISB público).</span></div>
+                  <div><span class="ico warn"><i data-icon="alert-triangle"></i></span><span><b>Pessoas naturais.</b> 11 responsáveis técnicos e representantes de empreendedores: não exercem função pública. Recomendação: tarjar nome e número de CREA (identificador profissional vinculado a pessoa natural) por minimização.</span></div>
+                  <div><span class="ico ok"><i data-icon="check-circle"></i></span><span><b>Servidor da ANM.</b> Agente público no exercício da função, em documento público: pode ser mantido pela lei do país de origem (LGPD, art. 7º, § 3º; Lei 12.527, art. 7º), compatível com a jurisdição da sede.</span></div>
+                  <div><span class="ico ok"><i data-icon="check-circle"></i></span><span><b>Empresas.</b> Razões sociais em autuações publicadas no DOU: fato público, sem segredo comercial. Manter, com a descrição deixando claro que são atos administrativos da ANM.</span></div>
+                  <div><span class="ico info"><i data-icon="info"></i></span><span><b>Honra.</b> Nenhuma afirmação do vendedor sobre pessoas: o pacote é a compilação dos documentos. Título original ("podem ceder", "não divulga") já reescrito pela curadoria.</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="card card-sm">
+              <div class="card-head"><h3>Anexos</h3><div class="actions"><button class="btn btn-sm" data-toast="Anexo adicionado ao parecer"><i data-icon="paperclip"></i>Anexar</button></div></div>
+              <div class="card-body stack-sm">
+                <div class="file-row"><span class="file-icon"><i data-icon="file-text"></i></span><div class="grow"><div class="file-name truncate">oficios-LAI-ANM-2025-2026.pdf</div><div class="file-meta">14 páginas · 6 respostas a pedidos de acesso à informação · protocolos conferidos no portal</div></div><span class="badge badge-ok"><i data-icon="check"></i>conferido</span></div>
+                <div class="file-row"><span class="file-icon"><i data-icon="file-text"></i></span><div class="grow"><div class="file-name truncate">consulta-SIGBM-2026-10-26.pdf</div><div class="file-meta">30 relatórios conferidos na fonte · gerado pela curadoria</div></div><span class="badge badge-ok"><i data-icon="check"></i>conferido</span></div>
+                <div class="file-row"><span class="file-icon"><i data-icon="scroll-text"></i></span><div class="grow"><div class="file-name truncate">parecer-CS-2026-041.md</div><div class="file-meta">rascunho · última edição hoje às 09:10 · será registrado na auditoria com hash</div></div><span class="badge badge-warn">rascunho</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Parecer · Carla S.</h3><span class="badge badge-outline">prazo 03/11</span></div>
+            <div class="card-body stack">
+              <fieldset>
+                <legend>Decisão</legend>
+                <div class="stack-sm">
+                  <label class="radio"><input type="radio" name="par"><span>Aprovar<span class="desc">Sem alterações no conteúdo.</span></span></label>
+                  <label class="radio"><input type="radio" name="par" checked><span>Aprovar com redação<span class="desc">Tarjar 11 nomes e números de CREA em nova versão; manter servidor da ANM e razões sociais.</span></span></label>
+                  <label class="radio"><input type="radio" name="par"><span>Rejeitar<span class="desc">Exige código de motivo e fundamento.</span></span></label>
+                </div>
+              </fieldset>
+              <div class="field"><label for="fund">Fundamento legal</label>
+                <textarea id="fund" class="textarea tall legal-text">1. Regime aplicável: proteção de dados (GDPR, LGPD e equivalentes), combinando a lei do país de origem da informação (Brasil) com a jurisdição da sede. Pela LGPD (Lei 13.709/2018), art. 7º, IX (legítimo interesse) e § 3º, dados cujo acesso é público devem ser tratados considerando a finalidade, a boa-fé e o interesse público que justificaram sua disponibilização; o mesmo resultado decorre do GDPR, art. 6º, 1, f. Os relatórios foram obtidos via Lei 12.527/2011 (arts. 3º, 7º e 8º) e a segurança de barragens é matéria de transparência obrigatória (Lei 12.334/2010, art. 20).
+2. Agentes públicos: nome de servidor da ANM no exercício da função pode ser mantido (LGPD, art. 7º, § 3º; Lei 12.527, art. 7º, VII). 
+3. Pessoas naturais sem função pública (responsáveis técnicos e representantes): aplicar minimização (LGPD, art. 6º, III; GDPR, art. 5º, 1, c) e tarjar nome e número de CREA em nova versão do asset. A informação relevante (empreendedor, estrutura, anomalia, autuação) permanece íntegra.
+4. Empresas: razões sociais em autuações publicadas no DOU são fato público; não há segredo comercial nem dado pessoal.
+5. Honra: o item não contém afirmações do vendedor sobre pessoas; é compilação de atos administrativos. Título curado remove insinuação de sigilo.
+Conclusão: aprovar com redação. Sem ressalvas ao modelo (lacre coletivo com marcos garantidos e liberação pública ao bater a meta).</textarea>
+                <span class="hint">O parecer é registrado na auditoria com hash encadeado e fica anexado à prova pública como "revisão jurídica: sim".</span></div>
+              <label class="check"><input type="checkbox" checked><span>Exigir confirmação da nova versão (v2) antes da aprovação final</span></label>
+              <label class="check"><input type="checkbox" checked><span>Incluir aviso na página pública: "contém nomes de agentes públicos no exercício da função"</span></label>
+              <label class="check"><input type="checkbox"><span>Pedir ao vendedor documento adicional antes de concluir</span></label>
+              <div class="row">
+                <button class="btn btn-primary" data-toast="Parecer registrado: aprovar com redação · curadores notificados · SLA do item retomado"><i data-icon="stamp"></i>Registrar parecer</button>
+                <button class="btn" data-toast="Devolvido à curadoria com observações, sem parecer final">Devolver com observações</button>
+                <button class="btn btn-ghost" data-toast="Pergunta enviada ao vendedor pela conversa interna">Perguntar ao vendedor</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-head"><h3>PAR-2026-038 · enquadramento da carteira do item</h3><span class="badge st-analise">Em revisão externa</span><span class="badge badge-outline">prazo 30/11 · validar antes do lançamento</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../admin/financeiro.html"><i data-icon="wallet"></i>Carteiras dos itens</a></div></div>
+          <div class="card-body points">
+            <div><span class="ico ok"><i data-icon="check-circle"></i></span><span><b>Sem saldo, sem saque.</b> A plataforma não guarda cripto de usuários: cada item tem a própria carteira, criada na aprovação; a comissão de 10 % é separada só na finalização e a carteira é entregue ao vendedor pela frase de recuperação. Não existe carteira interna, depósito nem saque, o que afasta o enquadramento como corretora ou custodiante permanente.</span></div>
+            <div><span class="ico warn"><i data-icon="alert-triangle"></i></span><span><b>Custódia temporária das chaves.</b> Da aprovação até a entrega, a chave da carteira do item fica no HSM da plataforma. Em algumas jurisdições isso pode ser lido como custódia temporária (Lei 14.478/2022 no Brasil; MiCA na UE). Parecer externo sobre a sede e esse enquadramento em elaboração; criação e destruição de cada chave registradas na auditoria.</span></div>
+            <div><span class="ico info"><i data-icon="info"></i></span><span><b>Fase 2 · escrow on-chain.</b> Contrato em USDC (Base ou Polygon) guarda os fundos; a plataforma só assina a liberação ou o reembolso e o contrato paga o vendedor em um endereço dele. Elimina a custódia temporária e a entrega de frase. Especificação em revisão com o jurídico.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="tit">
+        <div class="alert alert-info mb-2"><i data-icon="info"></i><div><span class="alert-title">Pedidos de titulares de dados (GDPR, LGPD e equivalentes)</span>Qualquer pessoa que afirme estar identificada em um item, em qualquer país, pode pedir revisão pelo formulário público. Prazo de resposta documentada: 15 dias, avaliado pela lei do país de origem do item e pela jurisdição da sede. Saídas possíveis: nova versão com redação, retirada do item ou manutenção com fundamento (interesse público ou fonte pública). O contato informado pelo titular fica fora da plataforma, no canal jurídico.</div></div>
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3>TIT-0031 · lcr-9f2k7 · 12.400 licitações municipais do Nordeste</h3><span class="badge st-analise">Em análise</span><span class="badge badge-outline">recebido 20/10 · prazo 04/11 · 8 dias</span></div>
+            <div class="card-body req">
+              <div class="stack-sm">
+                <p class="small"><b>Alegação.</b> A pessoa afirma constar como sócia de empresa vencedora em 41 licitações e pede a remoção do nome da base.</p>
+                <p class="small"><b>Verificação.</b> A base traz CNPJ e razão social dos vencedores, sem nome de sócios. O nome aparece apenas em 3 linhas do campo "representante legal" copiado de atas públicas de 2019 (PE).</p>
+                <dl class="kv"><dt>Vendedor</dt><dd><span class="handle" data-handle="lanterna-b31d"></span></dd><dt>Compradores</dt><dd>37 cópias · todos receberão a v2 automaticamente</dd><dt>Saída provável</dt><dd>Nova versão sem o campo "representante legal" (3 linhas) e manutenção do restante por fonte pública</dd></dl>
+              </div>
+              <div class="stack-sm">
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">20/10 · 16:44</div><div class="what">Pedido recebido pelo formulário público · protocolo gerado</div></div>
+                  <div class="tl-item info"><div class="when">21/10 · 09:30</div><div class="what">Carla S. assumiu · item mantido ativo (sem suspensão)</div></div>
+                  <div class="tl-item info"><div class="when">24/10 · 11:15</div><div class="what">Vendedor consultado: concorda em remover o campo</div></div>
+                </div>
+                <div class="row"><button class="btn btn-primary btn-sm" data-toast="Resposta documentada enviada ao titular · nova versão v2 solicitada à curadoria">Responder e gerar v2</button><button class="btn btn-sm" data-toast="Manutenção com fundamento registrada (fonte pública)">Manter com fundamento</button><button class="btn btn-sm btn-danger" data-toast="Item suspenso preventivamente até a nova versão">Suspender item</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>TIT-0032 · lcr-2n8v4 · 340 fotografias da enchente de 2024 em Porto Alegre</h3><span class="badge st-ajustes">Redação em curso</span><span class="badge badge-outline">recebido 24/10 · prazo 08/11 · 12 dias</span></div>
+            <div class="card-body req">
+              <div class="stack-sm">
+                <p class="small"><b>Alegação.</b> Pessoa identificável em 3 fotografias (rosto e fachada da residência) pede remoção das imagens.</p>
+                <p class="small"><b>Verificação.</b> Confirmado em 3 de 340 fotos (ids 112, 113 e 240). Não há interesse público que exija o rosto; a cena permanece documentada sem ele.</p>
+                <dl class="kv"><dt>Vendedor</dt><dd><span class="handle" data-handle="cartografo-5a77"></span></dd><dt>Licenças vendidas</dt><dd>5 editoriais · licenciados notificados da v2</dd><dt>Saída</dt><dd>Nova versão com rosto e número da casa borrados nas 3 fotos · resposta ao titular com prazo de 7 dias</dd></dl>
+              </div>
+              <div class="stack-sm">
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">24/10 · 19:02</div><div class="what">Pedido recebido · protocolo gerado</div></div>
+                  <div class="tl-item info"><div class="when">26/10 · 10:00</div><div class="what">Carla S. confirmou as 3 fotos · redação solicitada à curadoria</div></div>
+                  <div class="tl-item warn"><div class="when">Hoje · 09:00</div><div class="what">Ana R. preparando v2 (3 imagens) · publicação prevista 28/10</div></div>
+                </div>
+                <div class="row"><button class="btn btn-primary btn-sm" data-toast="Resposta documentada enviada ao titular: nova versão em 28/10">Responder ao titular</button><button class="btn btn-sm" data-toast="Lembrete enviado à curadoria">Cobrar a v2</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="ord">
+        <div class="card">
+          <div class="card-head"><h3>OJ-2026-014 · ordem judicial</h3><span class="badge st-ajustes">Em cumprimento</span><span class="badge badge-danger"><i data-icon="clock"></i>prazo 05/11 · <span class="countdown" data-deadline="2026-11-05T23:59:00-03:00"></span></span></div>
+          <div class="card-body req">
+            <div class="stack">
+              <dl class="kv">
+                <dt>Recebida em</dt><dd>24/10/2026 às 10:12 · canal <code>juridico@</code> · ofício assinado digitalmente (assinatura válida) · recebido por cooperação internacional, como exige a jurisdição da sede</dd>
+                <dt>Registro de recebimento</dt><dd>24/10 às 10:40 · Carla S. · protocolo interno OJ-2026-014 · hash do ofício <code>b91d…40ce</code> registrado na auditoria</dd>
+                <dt>Processo</dt><dd>0012345-67.2026.8.26.0100 · 12ª Vara Cível · São Paulo (número conferido no portal do tribunal)</dd>
+                <dt>O que determina</dt><dd>Fornecimento de dados cadastrais e registros de acesso da conta vendedora do item lcr-4m2x9 no período de 01/09 a 20/10/2026, em 10 dias úteis, sob sigilo</dd>
+                <dt>O que existe</dt><dd>Pseudônimo, data de criação da conta, lista de itens e o histórico de pagamentos de cada item (valor, rede, txid). Não há saldo de usuário: a plataforma não guarda cripto de ninguém; a chave da carteira de um item fica no HSM só até a finalização. Registros de acesso (data, hora e endereço IP) guardados pelo prazo exigido pela jurisdição da sede, em sistema separado e cifrado, nunca consultado pelo marketplace. <b>Não existem</b> nome, e-mail, telefone, CPF ou endereço.</dd>
+                <dt>Comunicação ao vendedor</dt><dd>Não permitida neste caso (sigilo determinado na ordem). Registro do motivo na auditoria.</dd>
+              </dl>
+              <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Cumprimento com o mínimo necessário</span>A resposta informa exatamente o que a plataforma guarda e entrega só o período determinado. Nada é inferido, cruzado ou acrescentado. Texto padrão revisado em 25/10.</div></div>
+            </div>
+            <div class="stack">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">24/10 · 10:12</div><div class="what">Ofício recebido em juridico@</div></div>
+                <div class="tl-item ok"><div class="when">24/10 · 10:40</div><div class="what">Recebimento registrado · Carla S. · autenticidade da assinatura conferida</div></div>
+                <div class="tl-item info"><div class="when">25/10 · 15:00</div><div class="what">Parecer interno: cumprir com o mínimo necessário; sem comunicação ao vendedor</div></div>
+                <div class="tl-item warn"><div class="when">Hoje · 09:35</div><div class="what">Extração do período 01/09–20/10 solicitada a Marcos L. (acesso de 2 pessoas, registrado)</div></div>
+                <div class="tl-item"><div class="when">até 05/11</div><div class="what">Resposta protocolada no processo</div></div>
+              </div>
+              <div class="stack-sm">
+                <div class="field"><label for="resp">Registro de resposta</label><textarea id="resp" class="textarea" placeholder="Data e hora do protocolo, número do protocolo no tribunal, quem assinou e resumo do que foi entregue…"></textarea></div>
+                <div class="row"><button class="btn btn-primary" data-toast="Resposta registrada · auditoria atualizada · prazo cumprido"><i data-icon="stamp"></i>Registrar resposta</button><button class="btn" data-toast="Comprovante de recebimento (PDF com hash) gerado">Ver registro de recebimento</button><button class="btn btn-ghost" data-toast="Pedido de esclarecimento ao juízo redigido (escopo do período)">Pedir esclarecimento</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="xs muted mt-2">Notificações extrajudiciais: nenhuma pendente. Última recebida em 02/10 (direitos autorais sobre lcr-5t6w1), encerrada em 09/10 por falta de titularidade do notificante · acervo em domínio público.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

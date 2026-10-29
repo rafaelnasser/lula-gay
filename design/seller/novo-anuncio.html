@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Novo anúncio · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* app.css só oculta .sidebar-backdrop no modo celular; fora dele o div vira célula do grid e empurra o conteúdo para a coluna da barra lateral */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    /* ao empilhar colunas, app.css usa 1fr (mínimo automático): sem isto, tabelas e hashes dentro de .grid/.split alargam a página no celular */
+    .grid > *, .split > * { min-width: 0; }
+    .tabs .tab svg { width: 14px; height: 14px; }
+    /* app.css não define a exibição dos blocos do assistente; regra local */
+    [data-wizard] > [data-step] { display: none; }
+    [data-wizard] > [data-step].active { display: block; }
+    .choice.soon { opacity: .55; cursor: not-allowed; }
+    .choice.soon:hover { border-color: var(--border-2); }
+    .choice .choice-title .badge { margin-left: auto; font-weight: 500; }
+    .counter { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); font-weight: 400; }
+    .field > label.row { justify-content: space-between; }
+    .foot-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    .cfg-row { display: grid; grid-template-columns: minmax(130px, 170px) 1fr auto; gap: 10px; align-items: center; }
+    @media (max-width: 600px) { .cfg-row { grid-template-columns: 1fr; } }
+    .switch .desc { display: block; color: var(--muted); font-size: var(--fs-xs); font-weight: 400; }
+    .switch > span:last-child { min-width: 0; }
+    .sim .big { font-family: var(--font-display); font-size: var(--fs-2xl); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+    .preview-pick { display: flex; flex-direction: column; gap: 8px; }
+    .preview-pick .preview { aspect-ratio: 16 / 10; border-radius: var(--r-sm); }
+    .legend-plain { font-weight: 400; color: var(--muted); }
+    .success { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .success .narrow-block { width: 100%; max-width: 560px; text-align: left; }
+    .how-step .n { flex: none; }
+  </style>
+</head>
+<body data-shell="seller" data-page="novo-anuncio" data-root="../" data-title="Novo anúncio">
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Assistente de envio · 6 passos</p>
+        <h1>Novo anúncio</h1>
+        <p class="sub">Rascunho <span class="mono">lcr-8k1n2</span> · salvo automaticamente às 10:42 · depois do envio, a curadoria responde em até 48 h</p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" data-toast="Rascunho salvo às 10:43"><i data-icon="check"></i>Salvar rascunho</button>
+        <a class="btn" href="../seller/anuncios.html">Sair e continuar depois</a>
+      </div>
+    </div>
+
+    <div data-wizard class="stack">
+      <div class="alert alert-info" id="atender-banner" hidden><i data-icon="file-search"></i><div><span class="alert-title">Você está atendendo o pedido <span class="mono" id="ab-id"></span></span><span id="ab-text"></span> · <a class="link" id="ab-link" href="../public/pedido.html">ver o pedido</a>. O passo 4 já está marcado como <b>Pedido</b>, com os critérios de aceite; envie o material nos passos 1 a 3 como em qualquer item.</div></div>
+      <div class="stepper">
+        <div class="step active"><span class="n">1</span><span class="t">Tipo e categoria</span></div>
+        <div class="step"><span class="n">2</span><span class="t">Arquivos</span></div>
+        <div class="step"><span class="n">3</span><span class="t">Prévia e descrição</span></div>
+        <div class="step"><span class="n">4</span><span class="t">Modelo de venda</span></div>
+        <div class="step"><span class="n">5</span><span class="t">Declarações</span></div>
+        <div class="step"><span class="n">6</span><span class="t">Revisão e envio</span></div>
+      </div>
+
+      <!-- PASSO 1 -->
+      <section class="card active" data-step="1">
+        <div class="card-head"><h2>Passo 1 · Tipo e categoria</h2><span class="muted small">Define a triagem automática e quem analisa o item.</span></div>
+        <div class="card-body stack">
+          <fieldset>
+            <legend>Tipos de conteúdo <span class="legend-plain">· marque todos que se aplicam; um item pode reunir vários</span></legend>
+            <div class="choice-cards">
+              <label class="choice"><input type="checkbox" name="tipo" checked><span class="choice-title"><i data-icon="file-text"></i>Documento</span><span class="choice-desc">PDF, DOCX, digitalizações, relatórios.</span><span class="choice-meta">Prévia: 1ª página tarjada</span></label>
+              <label class="choice"><input type="checkbox" name="tipo" checked><span class="choice-title"><i data-icon="database"></i>Dados</span><span class="choice-desc">CSV, XLSX, JSON, GeoJSON, dumps SQL.</span><span class="choice-meta">Prévia: 10 linhas</span></label>
+              <label class="choice"><input type="checkbox" name="tipo"><span class="choice-title"><i data-icon="image"></i>Imagem</span><span class="choice-desc">JPG, PNG, RAW, TIFF, séries fotográficas.</span><span class="choice-meta">Prévia: borrada, com marca d'água</span></label>
+              <label class="choice"><input type="checkbox" name="tipo"><span class="choice-title"><i data-icon="video"></i>Vídeo</span><span class="choice-desc">MP4, MOV, MKV, material bruto.</span><span class="choice-meta">Prévia: 30 s em baixa resolução</span></label>
+              <label class="choice"><input type="checkbox" name="tipo" checked><span class="choice-title"><i data-icon="audio"></i>Áudio</span><span class="choice-desc">MP3, WAV, FLAC, com ou sem transcrição.</span><span class="choice-meta">Prévia: trecho de 30 s</span></label>
+              <label class="choice"><input type="checkbox" name="tipo"><span class="choice-title"><i data-icon="book-open"></i>Texto</span><span class="choice-desc">Relatos, análises, Markdown.</span><span class="choice-meta">Prévia: trecho escolhido por você</span></label>
+              <label class="choice"><input type="checkbox" name="tipo"><span class="choice-title"><i data-icon="code"></i>Código</span><span class="choice-desc">Scripts, notebooks, modelos, coletores.</span><span class="choice-meta">Prévia: árvore de pastas</span></label>
+            </div>
+          </fieldset>
+          <div class="form-grid">
+            <div class="field">
+              <label for="cat">Categoria</label>
+              <select id="cat" class="select">
+                <option selected>Jornalismo e investigação · risco alto</option>
+                <option>Dados e bases · risco baixo</option>
+                <option>Governo e políticas públicas · risco alto</option>
+                <option>Negócios e mercado · risco médio</option>
+                <option>Finanças · risco alto</option>
+                <option>Fotografia e vídeo · risco baixo</option>
+                <option>História e acervos · risco baixo</option>
+                <option>Educação e métodos · risco baixo</option>
+                <option>Ciência e pesquisa · risco médio</option>
+                <option>Saúde e meio ambiente · risco alto</option>
+                <option>Tecnologia e segurança · risco alto</option>
+              </select>
+              <span class="hint">O nível de risco vem da categoria. Risco alto: dois curadores independentes e, se houver pessoas identificáveis, revisão jurídica.</span>
+            </div>
+            <div class="field">
+              <label for="ped">Vincular a um pedido com recompensa (opcional)</label>
+              <select id="ped" class="select">
+                <option selected>Nenhum · anúncio avulso</option>
+                <option>ped-2c8d1 · Tempo de espera em UPAs de SP (2023–2025) · US$ 3.200 (4 interessados × US$ 800) · até 30/11</option>
+                <option>ped-9h2d5 · Editais de fomento cultural do RS em 2025 · US$ 2.100 (7 × US$ 300) · até 10/12</option>
+                <option>ped-7f1a3 · Catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 (1 × US$ 800) · até 15/12</option>
+              </select>
+              <span class="hint">Ao vincular, o modelo passa a ser Pedido com recompensa e os critérios de aceite do pedido entram no checklist da curadoria.</span>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="pais">País(es) a que a informação se refere</label>
+              <div class="row"><button class="chip active" type="button" data-toast="Brasil removido da lista de países"><span class="mono">BR</span> Brasil<i data-icon="x"></i></button><select id="pais" class="select" style="max-width:260px"><option selected>Adicionar outro país…</option><option>Global · não se refere a um país</option><option>AR · Argentina</option><option>CL · Chile</option><option>PT · Portugal</option><option>US · Estados Unidos</option><option>MX · México</option><option>GB · Reino Unido</option><option>DE · Alemanha</option><option>IN · Índia</option><option>BD · Bangladesh</option></select></div>
+              <span class="hint">Vira a etiqueta do catálogo (BR) e orienta a curadoria sobre a legislação aplicável. Use Global quando a informação não se refere a um país.</span>
+            </div>
+            <div class="field">
+              <label for="idioma">Idioma do material</label>
+              <select id="idioma" class="select"><option selected>Português</option><option>Espanhol</option><option>Inglês</option><option>Alemão</option><option>Bengali</option><option>Outro</option></select>
+              <span class="hint">Idioma predominante dos arquivos. A curadoria aloca quem lê o idioma; a página pública mostra “Brasil · português”.</span>
+            </div>
+          </div>
+          <div class="row">
+            <span class="badge risk-alto"><i data-icon="shield-alert"></i>Risco alto</span>
+            <span class="badge badge-outline"><i data-icon="users"></i>Dois curadores independentes</span>
+            <span class="badge badge-outline"><i data-icon="scale"></i>Jurídico se houver pessoas identificáveis</span>
+            <span class="xs muted">Prazo da primeira análise continua 48 h; o jurídico pausa o relógio.</span>
+          </div>
+        </div>
+        <div class="card-foot"><span class="xs muted">Passo 1 de 6 · rascunho salvo às 10:42</span><div class="foot-actions"><button class="btn btn-primary" data-step-go="2">Continuar<i data-icon="arrow-right"></i></button></div></div>
+      </section>
+
+      <!-- PASSO 2 -->
+      <section class="card" data-step="2">
+        <div class="card-head"><h2>Passo 2 · Arquivos</h2><span class="muted small">Cifrados no upload. Metadados removidos antes de qualquer pessoa ver.</span></div>
+        <div class="card-body stack">
+          <div class="dropzone"><i data-icon="upload"></i><strong>Arraste os arquivos ou clique para escolher</strong><span class="xs">Até 20 GB por item · SHA-256 calculado no seu navegador antes do envio · metadados removidos automaticamente</span></div>
+          <div class="stack-sm">
+            <div class="file-row"><span class="file-icon"><i data-icon="package"></i></span><div class="grow"><div class="file-name truncate">material-de-apoio.zip</div><div class="file-meta">1 DOCX, 1 PDF, 36 JPG · 418 MB · hash local <code>7c2e…91af</code> · igual ao do servidor</div></div><div class="progress thin"><div class="progress-bar ok" data-width="100%"></div></div><span class="badge badge-ok"><i data-icon="check"></i>Enviado</span></div>
+            <div class="file-row"><span class="file-icon"><i data-icon="audio"></i></span><div class="grow"><div class="file-name truncate">audios-entrevistas-01-40.zip</div><div class="file-meta">40 MP3 · 1,8 GB · hash local <code>a81d…3c07</code> · 1,15 GB enviados · 3 min restantes</div></div><div class="progress thin"><div class="progress-bar info" data-width="64%"></div></div><span class="badge badge-info"><i data-icon="upload"></i>64 %</span></div>
+            <div class="file-row"><span class="file-icon"><i data-icon="file-text"></i></span><div class="grow"><div class="file-name truncate">transcricoes-revisadas-v2.pdf</div><div class="file-meta">312 páginas · 6,8 MB · hash local <code>5e9b…d2c4</code> · começa quando o anterior terminar</div></div><div class="progress thin"><div class="progress-bar" data-width="0%"></div></div><span class="badge">Na fila</span></div>
+          </div>
+          <div>
+            <div class="row between"><span class="small"><b>2,2 GB</b> de 20 GB · 3 arquivos</span><span class="xs muted">Limite por item no MVP: 20 GB. Material maior: fale com a curadoria antes de enviar.</span></div>
+            <div class="progress thin mt-1"><div class="progress-bar" data-width="11%"></div></div>
+          </div>
+          <div class="grid cols-2">
+            <div class="stack-sm">
+              <h4>Relatório de metadados removidos</h4>
+              <div class="table-wrap">
+                <table class="table compact">
+                  <thead><tr><th>Arquivo</th><th>Campo removido</th><th>Valor (abreviado)</th></tr></thead>
+                  <tbody>
+                    <tr><td>material-de-apoio.zip › fotos/IMG_2231.jpg<span class="sub">e mais 35 fotos</span></td><td>EXIF GPS</td><td><code>−23.5<span class="redacted">xxx</span>, −46.6<span class="redacted">xxx</span></code></td></tr>
+                    <tr><td>material-de-apoio.zip › fotos/*.jpg</td><td>EXIF Dispositivo · Software</td><td><code>Apple iP… · 17.5</code></td></tr>
+                    <tr><td>material-de-apoio.zip › transcricoes.docx</td><td>DOCX Autor · Última modificação por</td><td><code>Ro<span class="redacted">xxxxxxx</span> · Ro<span class="redacted">xxxxxxx</span></code></td></tr>
+                    <tr><td>material-de-apoio.zip › transcricoes.docx</td><td>DOCX Empresa · 14 revisões</td><td><code>Sin<span class="redacted">xxxxxxxxx</span></code></td></tr>
+                    <tr><td>material-de-apoio.zip › roteiro.pdf</td><td>PDF Produtor · Autor</td><td><code>Microsoft® Word… · R<span class="redacted">xxxxxx</span></code></td></tr>
+                    <tr><td>audios-entrevistas-01-40.zip</td><td colspan="2" class="muted">ID3 (artista, comentário, software): disponível quando o upload concluir</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="xs muted">Os valores originais não ficam armazenados. A curadoria vê só este relatório e usa os metadados pré-remoção apenas para verificar autenticidade.</p>
+            </div>
+            <div class="stack-sm">
+              <h4>Triagem automática</h4>
+              <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">12 nomes próprios detectados nas transcrições</span>Amostras tarjadas: “seu Jo<span class="redacted">xxxx</span>”, “dona Ma<span class="redacted">xxxxx</span>”, “o fiscal Ne<span class="redacted">xxxx</span>”. Não bloqueia: a curadoria avalia cada menção. Você pode trocar por iniciais antes de enviar.</div></div>
+              <div class="alert alert-ok"><i data-icon="check-circle"></i><div><span class="alert-title">0 CPFs · 0 telefones · 0 e-mails</span>Nenhum padrão de dado pessoal estruturado encontrado.</div></div>
+              <div class="alert alert-ok"><i data-icon="check-circle"></i><div><span class="alert-title">Duplicidade: 0</span>Nenhum hash coincide com o catálogo nem com itens rejeitados.</div></div>
+              <div class="alert alert-ok"><i data-icon="shield-check"></i><div><span class="alert-title">Antivírus: ok</span>2 arquivos verificados, 1 aguardando. Executáveis são rejeitados por padrão.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-foot"><button class="btn btn-ghost" data-step-go="1"><i data-icon="arrow-left"></i>Voltar</button><div class="foot-actions"><span class="xs muted">Você pode continuar enquanto o upload termina.</span><button class="btn btn-primary" data-step-go="3">Continuar<i data-icon="arrow-right"></i></button></div></div>
+      </section>
+
+      <!-- PASSO 3 -->
+      <section class="card" data-step="3">
+        <div class="card-head"><h2>Passo 3 · Prévia e descrição</h2><span class="muted small">O que o público vê antes de comprar. Nada legível, nada que identifique você.</span></div>
+        <div class="card-body stack">
+          <div class="alert alert-info"><i data-icon="sparkles"></i><div class="grow"><span class="alert-title">Preenchido automaticamente a partir dos seus arquivos</span>Título, resumo, descrição e tags foram sugeridos pela leitura da transcrição e do OCR, nos nossos servidores (nada sai da infraestrutura). Revise tudo: você é o autor do que vai ao ar. Quando não for possível ler os arquivos, os campos ficam em branco.<div class="row mt-2"><button class="btn btn-sm" data-toast="Nova sugestão gerada a partir dos 3 arquivos"><i data-icon="refresh"></i>Gerar de novo</button><button class="btn btn-sm btn-ghost" data-toast="Campos limpos para preenchimento manual"><i data-icon="x"></i>Limpar e escrever do zero</button></div></div></div>
+          <div class="field">
+            <label class="row" for="titulo"><span>Título<span class="ai-badge"><i data-icon="sparkles"></i>sugerido</span></span><span class="counter"><span id="c-titulo">0</span>/120</span></label>
+            <input id="titulo" class="input" maxlength="120" data-count="#c-titulo" value="Entrevistas com 40 ex-cobradores de ônibus de SP sobre a extinção da função (áudio + transcrição)">
+            <span class="hint">Diga o que é, quanto e de quando. Sem adjetivos de escândalo.</span>
+          </div>
+          <div class="field">
+            <label class="row" for="resumo"><span>Resumo<span class="ai-badge"><i data-icon="sparkles"></i>sugerido</span></span><span class="counter"><span id="c-resumo">0</span>/280</span></label>
+            <textarea id="resumo" class="textarea" maxlength="280" data-count="#c-resumo" style="min-height:76px">Quarenta entrevistas em áudio (média de 38 min) com ex-cobradores de ônibus da capital paulista, gravadas entre 2024 e 2026, sobre a extinção da função. Inclui transcrição revisada e roteiro. Nenhum entrevistado é identificado.</textarea>
+          </div>
+          <div class="field">
+            <label for="desc">Descrição<span class="ai-badge"><i data-icon="sparkles"></i>sugerido</span> <span class="legend-plain">· Markdown restrito: títulos, negrito e listas</span></label>
+            <textarea id="desc" class="textarea" style="min-height:190px">## O que é
+40 entrevistas semiestruturadas com ex-cobradores de ônibus da cidade de São Paulo, gravadas entre mar/2024 e set/2026. Duração total: 25 h 40 min.
+
+## O que você recebe
+- 40 arquivos MP3 (6 entrevistados pediram alteração de voz)
+- Transcrição revisada em PDF (312 páginas) com marcação de tempo
+- Roteiro das entrevistas e notas de contexto (14 páginas)
+
+## Método
+Recrutamento por sindicato e indicação. Consentimento gravado no início de cada entrevista. Nomes substituídos por códigos (E01–E40).</textarea>
+          </div>
+          <fieldset>
+            <legend>Prévias geradas pela triagem <span class="legend-plain">· marque o que a curadoria pode mostrar ao público</span></legend>
+            <div class="grid cols-4">
+              <div class="preview-pick"><div class="preview" data-type="audio"><div class="preview-tag"><span class="badge">30 s</span></div><div class="preview-lock"><span data-seal></span></div></div><label class="check"><input type="checkbox" checked><span>Trecho de 30 s · entrevista E07<span class="desc">Tom de voz alterado · sem nomes</span></span></label></div>
+              <div class="preview-pick"><div class="preview" data-type="documento"><div class="preview-tag"><span class="badge">p. 1</span></div><div class="preview-lock"><span data-seal></span></div></div><label class="check"><input type="checkbox" checked><span>Página 1 da transcrição, tarjada<span class="desc">Códigos E01–E40 visíveis, falas borradas</span></span></label></div>
+              <div class="preview-pick"><div class="preview" data-type="dados"><div class="preview-tag"><span class="badge">10 linhas</span></div><div class="preview-lock"><span data-seal></span></div></div><label class="check"><input type="checkbox" checked><span>Índice das entrevistas<span class="desc">Código, duração, ano, zona de atuação</span></span></label></div>
+              <div class="preview-pick"><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">36 fotos</span></div><div class="preview-lock"><span data-seal></span></div></div><label class="check"><input type="checkbox"><span>Fotos de documentos do sindicato<span class="desc">Não recomendado: carimbos legíveis</span></span></label></div>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="tags">Tags<span class="ai-badge"><i data-icon="sparkles"></i>sugeridas</span></label>
+            <div class="tag-input"><span class="tag" title="Clique para remover">entrevistas</span><span class="tag" title="Clique para remover">transporte</span><span class="tag" title="Clique para remover">são paulo</span><span class="tag" title="Clique para remover">trabalho</span><span class="tag" title="Clique para remover">história oral</span><input id="tags" data-tag-input placeholder="Digite e pressione Enter…" aria-label="Adicionar tag"></div>
+            <span class="hint">Enter ou vírgula adiciona; clique em uma tag para removê-la. Até 10 tags.</span>
+          </div>
+          <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">A curadoria pode reescrever título e resumo</span>Para evitar sensacionalismo ou detalhes que identifiquem você. Você vê o diff e confirma a versão final antes da publicação (72 h para responder).</div></div>
+        </div>
+        <div class="card-foot"><button class="btn btn-ghost" data-step-go="2"><i data-icon="arrow-left"></i>Voltar</button><div class="foot-actions"><button class="btn btn-primary" data-step-go="4">Continuar<i data-icon="arrow-right"></i></button></div></div>
+      </section>
+
+      <!-- PASSO 4 -->
+      <section class="card" data-step="4">
+        <div class="card-head"><h2>Passo 4 · Modelo de venda</h2><span class="muted small">Escolha como vender. A configuração abaixo muda conforme o modelo. A curadoria pode sugerir outro antes de aprovar.</span></div>
+        <div class="card-body stack">
+          <div class="choice-cards">
+            <label class="choice"><input type="radio" name="modelo" data-switch="copias"><span class="choice-title"><i data-icon="copy"></i>Cópias</span><span class="choice-desc">Preço fixo, vários compradores, com ou sem limite de unidades.</span><span class="choice-meta">Entrega imediata a cada compra</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="exclusivo"><span class="choice-title"><i data-icon="crown"></i>Exclusivo</span><span class="choice-desc">Um único comprador leva; o item sai do catálogo.</span><span class="choice-meta">Preço fixo ou oferta · 24 meses de exclusividade</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="coletivo" checked><span class="choice-title"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="choice-desc">Meta em US$ e prazo. Cada marco libera uma prévia; ao bater a meta, tudo fica público para todos.</span><span class="choice-meta">Se não bater, você recebe 90 % do último marco batido</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="pedido"><span class="choice-title"><i data-icon="file-search"></i>Pedido</span><span class="choice-desc">Atende um pedido com recompensa já publicado.</span><span class="choice-meta">Recompensa paga na validação da curadoria</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="leilao"><span class="choice-title"><i data-icon="gavel"></i>Leilão</span><span class="choice-desc">Lacrado (segundo preço), aberto ou holandês; o maior lance leva o item só para si.</span><span class="choice-meta">Lances pagos na hora; quem não vence é reembolsado</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="camadas"><span class="choice-title"><i data-icon="layers"></i>Camadas</span><span class="choice-desc">Níveis com preços crescentes: o comprador paga a camada 1, vê se vale e sobe.</span><span class="choice-meta">Quem sobe de camada paga só a diferença</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="assinatura"><span class="choice-title"><i data-icon="repeat"></i>Assinatura</span><span class="choice-desc">Fonte recorrente: edições periódicas, acesso enquanto pagar.</span><span class="choice-meta">Cada edição passa pela curadoria em 24 h</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="janela"><span class="choice-title"><i data-icon="timer"></i>Janela exclusiva</span><span class="choice-desc">Um comprador paga pela dianteira por N dias; depois o item abre como Cópias.</span><span class="choice-meta">Dois preços públicos: a janela e o depois</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="licenca"><span class="choice-title"><i data-icon="scale"></i>Licença</span><span class="choice-desc">Fotos, vídeos e áudios: editorial, comercial ou exclusiva, com contrato gerado.</span><span class="choice-meta">Arquivo limpo só depois do pagamento</span></label>
+          </div>
+          <div class="split">
+            <div class="stack">
+              <div data-configs="coletivo">
+                <div data-config="coletivo" class="active">
+                  <div class="stack">
+                    <div class="row"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Configurar Lacre coletivo</span></div>
+                    <div class="form-grid">
+                      <div class="field"><label for="meta">Meta</label><div class="input-group"><span class="affix">US$</span><input id="meta" class="input num" value="12.000,00" data-sim></div><span class="hint">Mínimo US$ 1.000. Apoios a partir de US$ 10.</span></div>
+                      <div class="field"><label for="prazo">Prazo</label><select id="prazo" class="select"><option>7 dias · até 03/11/2026</option><option>14 dias · até 10/11/2026</option><option selected>30 dias · até 26/11/2026</option><option>60 dias · até 26/12/2026</option><option>90 dias · até 25/01/2027</option></select><span class="hint">Entre 24 h e 90 dias. Marcos de 25/50/75/90 % são postados automaticamente.</span></div>
+                    </div>
+                    <div class="alert alert-wax"><i data-icon="unlock"></i><div><span class="alert-title">Ao bater a meta, tudo fica público</span>Cada marco (25, 50, 75 e 90 %) libera uma prévia ao público. Ao bater 100 %, todo o conteúdo fica público para todos ao mesmo tempo, com post nas redes. Quem apoiou ganha o selo “Rompeu este lacre”.</div></div>
+                    <fieldset>
+                      <legend>Regra de arrecadação</legend>
+                      <div class="form-grid">
+                        <label class="radio"><input type="radio" name="arr" checked><span>Marcos garantidos (padrão)<span class="desc">Se o prazo vencer antes da meta, você recebe 90 % do valor do último marco batido (ele paga as prévias liberadas; o Lacre fica com 10 %) e o que entrou depois volta aos apoiadores. Sem marco batido, tudo volta.</span></span></label>
+                        <label class="radio"><input type="radio" name="arr"><span>Flexível<span class="desc">Libera com o que arrecadou se passar de um piso (70 % da meta = US$ 8.400). Precisa ser declarado antes de publicar.</span></span></label>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend>Prévias por marco</legend>
+                      <div class="stack-sm">
+                        <p class="xs muted">A cada marco batido, uma prévia extra é liberada ao público e publicada nas redes junto com o anúncio do marco. Escolha entre as prévias geradas no passo 3; a curadoria aprova cada uma. É o que mantém os apoiadores animados entre um marco e outro.</p>
+                        <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">25 %</span><select class="select" aria-label="Prévia do marco de 25 %"><option>Índice das 40 entrevistas (nome do bairro e ano, sem nomes)</option><option>Trecho de 60 s de uma entrevista</option><option>Página 1 da transcrição com tarjas</option><option>Nenhuma</option></select></div>
+                        <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">50 %</span><select class="select" aria-label="Prévia do marco de 50 %"><option>Trecho de 60 s de uma entrevista</option><option>Índice das 40 entrevistas</option><option>Página 1 da transcrição com tarjas</option><option>Nenhuma</option></select></div>
+                        <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">75 %</span><select class="select" aria-label="Prévia do marco de 75 %"><option>Página 1 da transcrição com tarjas</option><option>Trecho de 60 s de uma entrevista</option><option>Índice das 40 entrevistas</option><option>Nenhuma</option></select></div>
+                        <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">90 %</span><select class="select" aria-label="Prévia do marco de 90 %"><option>Trecho de 3 min de uma entrevista (voz alterada)</option><option>Nenhuma</option></select></div>
+                        <span class="xs muted">Marcos de 25, 50, 75 e 90 % são fixos. Na página do item, cada marco mostra sua própria barra, a data em que foi batido e a prévia que libera.</span>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend>Compra com exclusividade (opcional)<button type="button" class="help-btn" data-toggle-class="open" data-target="#help-excl" aria-controls="help-excl" aria-expanded="false" aria-label="O que é a compra com exclusividade?">?</button></legend>
+                      <div class="stack-sm">
+                        <div class="help-box" id="help-excl">
+                          <p><b>O que é:</b> um preço opcional para uma única pessoa levar o item só para ela antes de a meta ser batida. Desligado, ninguém pode fazer isso e o lacre segue até a meta.</p>
+                          <p><b>Exemplo:</b> sua meta é US$ 12.000 e você liga a exclusividade por US$ 60.000. Se uma redação pagar US$ 60.000 antes da meta, só ela recebe o conteúdo e você recebe US$ 54.000 (90 %). O anúncio encerra, cada apoio volta para quem apoiou e você não pode vender nem publicar o mesmo conteúdo por 24 meses.</p>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="excl-on" data-shows="#excl-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Enquanto a meta não for batida, um único comprador pode levar o item só para si pagando o valor que você definir.</span></span></label>
+                        <div class="field" id="excl-field" hidden><label for="excl">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl" class="input num" value="60.000,00" data-sim></div><span class="hint">Quem pagar leva o item só para si, o anúncio encerra na hora e os apoios são devolvidos. Sugestão: pelo menos 5× a meta.</span></div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+                <div data-config="copias">
+                  <div class="stack">
+                    <div class="row"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Configurar Cópias</span></div>
+                    <div class="form-grid">
+                      <div class="field"><label for="preco">Preço por cópia</label><div class="input-group"><span class="affix">US$</span><input id="preco" class="input num" value="60,00" data-sim></div><span class="hint">Mediana da categoria Jornalismo: US$ 120.</span></div>
+                      <div class="field"><label for="lim">Limite de unidades</label><div class="input-group"><input id="lim" class="input num" value="150" data-sim><span class="affix">cópias</span></div><span class="hint">Vazio = ilimitado. O catálogo mostra “x de 150 restantes”.</span></div>
+                    </div>
+                    <fieldset>
+                      <legend>Preço escalonado</legend>
+                      <div class="stack-sm">
+                        <div class="cfg-row"><div class="input-group"><span class="affix">Primeiras</span><input class="input num" value="50" aria-label="Quantidade da primeira faixa"></div><div class="input-group"><span class="affix">US$</span><input class="input num" value="45,00" aria-label="Preço da primeira faixa"></div><span class="xs muted">depois, US$ 60,00</span></div>
+                        <button class="btn btn-sm" data-toast="Nova faixa de preço adicionada"><i data-icon="plus"></i>Adicionar faixa</button>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend>Compra com exclusividade (opcional)<button type="button" class="help-btn" data-toggle-class="open" data-target="#help-excl2" aria-controls="help-excl2" aria-expanded="false" aria-label="O que é a compra com exclusividade?">?</button></legend>
+                      <div class="stack-sm">
+                        <div class="help-box" id="help-excl2">
+                          <p><b>O que é:</b> um preço opcional para uma única pessoa encerrar as vendas e ficar com o item só para ela. Desligado, as cópias seguem à venda normalmente.</p>
+                          <p><b>Exemplo:</b> você vende cópias a US$ 60 e liga a exclusividade por US$ 1.200. Depois de 8 cópias vendidas, alguém paga US$ 1.200: as vendas encerram, os 8 compradores mantêm o acesso e você recebe US$ 1.080 (90 %) pela exclusividade, além das cópias já vendidas. Você não pode vender nem publicar o mesmo conteúdo por 24 meses.</p>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="excl2-on" data-shows="#excl2-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Encerra as vendas de cópias; quem já comprou mantém o acesso.</span></span></label>
+                        <div class="field" id="excl2-field" hidden><label for="excl2">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl2" class="input num" value="1.200,00" data-sim></div><span class="hint">Quem pagar leva o item só para si e as vendas encerram na hora; quem já comprou mantém o acesso. Sugestão: pelo menos 20× o preço da cópia.</span></div>
+                      </div>
+                    </fieldset>
+                    <label class="switch"><input type="checkbox"><span class="track"></span><span>Renovação automática<span class="desc">Reabre o prazo de 90 dias ao vencer, enquanto houver unidades.</span></span></label>
+                  </div>
+                </div>
+                <div data-config="exclusivo">
+                  <div class="stack">
+                    <div class="row"><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Configurar Exclusivo</span></div>
+                    <div class="form-grid">
+                      <div class="field"><label for="preco-ex">Preço da exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="preco-ex" class="input num" value="9.000,00" data-sim></div><span class="hint">Um único comprador. Depois da venda o item sai do catálogo e o conteúdo é destruído dos nossos servidores após a janela de disputa.</span></div>
+                      <div class="field"><label for="prazo-ex">Prazo do anúncio</label><select id="prazo-ex" class="select"><option>30 dias · até 26/11/2026</option><option>60 dias</option><option>90 dias</option></select><span class="hint">Sem comprador no prazo, você pode renovar ou mudar o modelo.</span></div>
+                    </div>
+                    <fieldset>
+                      <legend>Ofertas</legend>
+                      <div class="stack-sm">
+                        <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Aceitar ofertas abaixo do preço<span class="desc">O comprador propõe um valor; você aceita, recusa ou contrapropõe em até 48 h. O valor fica reservado na carteira dele até a resposta.</span></span></label>
+                        <div class="field"><label for="min-oferta">Oferta mínima</label><div class="input-group"><span class="affix">US$</span><input id="min-oferta" class="input num" value="6.000,00"></div></div>
+                      </div>
+                    </fieldset>
+                    <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">Declaração de exclusividade</span>Ao vender, você declara que não venderá nem publicará o mesmo conteúdo em outro lugar por 24 meses. A declaração fica registrada no pseudônimo e o hash público permite provar qualquer violação.</div></div>
+                  </div>
+                </div>
+                <div data-config="pedido">
+                  <div class="stack">
+                    <div class="row"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Atender um pedido</span></div>
+                    <div class="field"><label for="pedido-sel">Pedido que você está atendendo</label><select id="pedido-sel" class="select" data-sim><option value="ped-9h2d5">ped-9h2d5 · Lista de todos os editais de fomento cultural municipais do RS em 2025 · US$ 2.100 · 7 pessoas × US$ 300</option><option value="ped-2c8d1">ped-2c8d1 · Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025) · US$ 3.200 · 4 × US$ 800</option><option value="ped-7f1a3">ped-7f1a3 · Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 · 1 × US$ 800</option><option value="ped-5r2k8">ped-5r2k8 · Contratos de concessão de portos no Chile (2000–2026) · US$ 900 · 3 × US$ 300</option><option value="ext-2c8d1-a">ped-2c8d1 · extra: Reclamações registradas na ouvidoria por UPA (2023–2025) · US$ 300 · 2 × US$ 150</option><option value="ext-9h2d5-a">ped-9h2d5 · extra: Projetos selecionados e valores pagos nos editais do RS (2025) · US$ 80 · 1 × US$ 80</option><option value="ped-8b4u2">ped-8b4u2 · por unidade: fotos dos boletins de urna de MG (2º turno 2026) · US$ 2 por foto válida · enviar um lote</option></select><span class="hint">Seu preço é a recompensa total: valor por pessoa × pessoas; você não define valor. Cada pessoa já pagou 25 % de sinal. Ao enviar, o pedido trava; aprovado pela curadoria, cada pessoa vê uma prévia do seu material e tem 72 h para pagar os 75 % restantes. Quem não pagar perde o sinal para o Lacre; você recebe 90 % do que cada pessoa pagou por inteiro. Um <b>extra</b> é atendido do mesmo jeito. Em <b>pedido por unidade</b>, você envia lotes e recebe por unidade aceita.</span></div>
+                    <div class="panel">
+                      <div class="label">Critérios de aceite do pedido</div>
+                      <ol class="small mt-1" style="margin:0;padding-left:20px" id="pedido-crit"><li>Município, órgão, objeto, valor total, prazo de inscrição, área cultural e link ou cópia do edital.</li><li>Pelo menos 90 % dos municípios do RS com edital publicado em 2025.</li><li>XLSX ou CSV, uma linha por edital, com fonte e data de coleta.</li><li>Nenhum nome de proponente ou contato.</li></ol>
+                      <p class="xs muted mt-1">A curadoria confere cada critério antes de validar o atendimento. Se dois vendedores entregarem, vale o primeiro validado; o segundo pode publicar o dele como item normal.</p>
+                    </div>
+                    <div class="alert alert-info" id="pedido-alert"><i data-icon="lock"></i><div><span class="alert-title" id="pedido-alert-title">Só para quem está no pedido</span><span id="pedido-alert-text">Quem abriu este pedido não permitiu venda posterior como Cópias: o conteúdo entregue fica só com as 7 pessoas do pedido.</span></div></div>
+                  </div>
+                </div>
+              <div data-config="leilao">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Configurar Leilão</span></div>
+                  <fieldset>
+                    <legend>Formato</legend>
+                    <div class="stack-sm">
+                      <label class="radio"><input type="radio" name="leilao-tipo" value="lacrado" checked data-sim><span>Lacrado, segundo preço (padrão)<span class="desc">Cada conta dá um único lance secreto, pago na hora. O maior leva e paga o segundo maior lance mais o incremento. Quem não vence é reembolsado ao endereço de origem no encerramento.</span></span></label>
+                      <label class="radio"><input type="radio" name="leilao-tipo" value="aberto" data-sim><span>Aberto<span class="desc">Lances visíveis (valor, nunca quem), com incremento mínimo e prorrogação automática de 10 min se houver lance nos últimos 10 min.</span></span></label>
+                      <label class="radio"><input type="radio" name="leilao-tipo" value="holandes" data-sim><span>Holandês (preço decrescente)<span class="desc">O preço começa alto e cai a cada intervalo até alguém comprar. Bom quando você não sabe quanto vale.</span></span></label>
+                    </div>
+                  </fieldset>
+                  <div class="form-grid">
+                    <div class="field"><label for="lance-min">Lance mínimo</label><div class="input-group"><span class="affix">US$</span><input id="lance-min" class="input num" value="5.000,00" data-sim></div><span class="hint">No holandês é o preço de partida; o preço cai até o preço de reserva.</span></div>
+                    <div class="field"><label for="incremento">Incremento mínimo</label><div class="input-group"><span class="affix">US$</span><input id="incremento" class="input num" value="250,00"></div><span class="hint">Lacrado: somado ao segundo maior lance. Aberto: diferença mínima entre lances. Holandês: queda a cada 6 h.</span></div>
+                    <div class="field"><label for="leilao-fim">Encerramento</label><input id="leilao-fim" class="input" value="12/11/2026 · 20:00 BRT" data-sim><span class="hint">Entre 3 e 30 dias depois da publicação. Só contas com carteira confirmada dão lances.</span></div>
+                    <div class="field"><label for="leilao-min-lances">Mínimo de lances</label><div class="input-group"><input id="leilao-min-lances" class="input num" value="2"><span class="affix">lances</span></div><span class="hint">Opcional. Com menos lances que isso, não há venda.</span></div>
+                  </div>
+                  <fieldset>
+                    <legend>Preço de reserva (opcional)</legend>
+                    <div class="stack-sm">
+                      <label class="switch"><input type="checkbox" id="reserva-on" data-shows="#reserva-field" checked data-sim><span class="track"></span><span>Só vender acima de um valor<span class="desc">Nunca é revelado. Se o maior lance não chegar nele, não há venda e todos os lances voltam.</span></span></label>
+                      <div class="field" id="reserva-field"><label for="reserva">Preço de reserva</label><div class="input-group"><span class="affix">US$</span><input id="reserva" class="input num" value="7.000,00" data-sim></div></div>
+                    </div>
+                  </fieldset>
+                  <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">Item exclusivo</span>O vencedor leva o item só para si: vale a declaração de exclusividade de 24 meses e o conteúdo é destruído dos nossos servidores após a janela de disputa.</div></div>
+                </div>
+              </div>
+              <div data-config="camadas">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Configurar Camadas</span></div>
+                  <p class="small muted">Divida o material em níveis com preços crescentes. O comprador paga a camada 1, vê se vale e sobe pagando só a diferença. Cada camada é um conjunto de arquivos do passo 2, analisado pela curadoria.</p>
+                  <fieldset>
+                    <legend>Camadas</legend>
+                    <div class="stack-sm">
+                      <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">Camada 1</span><input class="input" value="Índice das 40 entrevistas e 3 trechos de 5 min" aria-label="O que a camada 1 inclui"><div class="input-group"><span class="affix">US$</span><input class="input num" value="90,00" data-sim data-camada aria-label="Preço da camada 1"></div></div>
+                      <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">Camada 2</span><input class="input" value="Transcrições completas das 40 entrevistas" aria-label="O que a camada 2 inclui"><div class="input-group"><span class="affix">US$</span><input class="input num" value="390,00" data-sim data-camada aria-label="Preço da camada 2"></div></div>
+                      <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">Camada 3</span><input class="input" value="Áudios originais (18 h) e roteiro das entrevistas" aria-label="O que a camada 3 inclui"><div class="input-group"><span class="affix">US$</span><input class="input num" value="890,00" data-sim data-camada aria-label="Preço da camada 3"></div></div>
+                      <button class="btn btn-sm" data-toast="Camada 4 adicionada"><i data-icon="plus"></i>Adicionar camada</button>
+                    </div>
+                  </fieldset>
+                  <div class="form-grid">
+                    <div class="field"><label for="pacote">Pacote completo (com desconto)</label><div class="input-group"><span class="affix">US$</span><input id="pacote" class="input num" value="1.190,00" data-sim></div><span class="hint">Quem compra tudo de uma vez paga este valor; quem já tem camadas paga só a diferença.</span></div>
+                    <div class="field"><label for="lim-cam">Limite de compradores</label><div class="input-group"><input id="lim-cam" class="input num" value="" placeholder="ilimitado"><span class="affix">compradores</span></div><span class="hint">Vazio = ilimitado.</span></div>
+                  </div>
+                <fieldset>
+                  <legend>Compra com exclusividade (opcional)<button type="button" class="help-btn" data-toggle-class="open" data-target="#help-excl3" aria-controls="help-excl3" aria-expanded="false" aria-label="O que é a compra com exclusividade?">?</button></legend>
+                  <div class="stack-sm">
+                    <div class="help-box" id="help-excl3"><p><b>O que é:</b> um preço opcional para uma única pessoa encerrar as vendas e ficar com todas as camadas só para ela. Desligado, as camadas seguem à venda normalmente.</p><p><b>Exemplo:</b> você vende as camadas a US$ 90, US$ 390 e US$ 890 e liga a exclusividade por US$ 12.000. Alguém paga US$ 12.000: as vendas encerram, quem já comprou mantém o que tem e você recebe US$ 10.800 (90 %). Você não pode vender nem publicar o mesmo conteúdo por 24 meses.</p></div>
+                    <label class="switch"><input type="checkbox" id="excl3-on" data-shows="#excl3-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Encerra as vendas; quem já comprou mantém o acesso.</span></span></label>
+                    <div class="field" id="excl3-field" hidden><label for="excl3">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl3" class="input num" value="12.000,00" data-sim></div><span class="hint">Quem pagar leva tudo só para si e as vendas encerram na hora; quem já comprou mantém o acesso. Sugestão: pelo menos 10× o pacote.</span></div>
+                  </div>
+                </fieldset>
+                </div>
+              </div>
+              <div data-config="assinatura">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Configurar Assinatura</span></div>
+                  <p class="small muted">Você publica uma fonte: edições periódicas. O assinante paga por período, da própria carteira, e tem acesso a tudo que sair enquanto estiver ativo. Cada edição passa pela curadoria em até 24 h e tem carteira própria.</p>
+                  <div class="form-grid">
+                    <div class="field"><label for="periodo">Periodicidade</label><select id="periodo" class="select" data-sim><option value="mensal">Mensal</option><option value="quinzenal">Quinzenal</option><option value="semanal">Semanal</option></select><span class="hint">Se você atrasar mais de um período, o seguinte não é cobrado.</span></div>
+                    <div class="field"><label for="preco-ass">Preço por período</label><div class="input-group"><span class="affix">US$</span><input id="preco-ass" class="input num" value="90,00" data-sim></div><span class="hint">Mediana das fontes mensais: US$ 120.</span></div>
+                    <div class="field full"><label for="edicao">O que entra em cada edição</label><textarea id="edicao" class="textarea" style="min-height:70px">4 novas entrevistas transcritas por mês, com áudio, e um boletim com o que mudou nas linhas citadas.</textarea></div>
+                    <div class="field"><label for="primeira">Primeira edição</label><input id="primeira" class="input" value="05/11/2026" data-sim><span class="hint">Os arquivos do passo 2 são a edição 1.</span></div>
+                    <div class="field"><label for="minimo-ass">Assinantes para começar</label><div class="input-group"><input id="minimo-ass" class="input num" value="20" data-sim><span class="affix">assinantes</span></div><span class="hint">Opcional. Abaixo disso a fonte não começa e os pagamentos voltam.</span></div>
+                  </div>
+                  <fieldset>
+                    <legend>Edições anteriores</legend>
+                    <div class="stack-sm">
+                      <label class="switch"><input type="checkbox" id="avulsa-on" data-shows="#avulsa-field" checked data-sim><span class="track"></span><span>Vender edições anteriores avulsas<span class="desc">Quem não assina pode comprar uma edição antiga como Cópias.</span></span></label>
+                      <div class="field" id="avulsa-field"><label for="avulsa">Preço da edição avulsa</label><div class="input-group"><span class="affix">US$</span><input id="avulsa" class="input num" value="40,00" data-sim></div></div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+              <div data-config="janela">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Configurar Janela exclusiva</span></div>
+                  <p class="small muted">O modelo do furo: uma redação paga pela dianteira e, passada a janela, o material abre como Cópias a um preço menor. Os dois preços ficam públicos desde o início.</p>
+                  <div class="form-grid">
+                    <div class="field"><label for="preco-jan">Preço da janela</label><div class="input-group"><span class="affix">US$</span><input id="preco-jan" class="input num" value="6.000,00" data-sim></div><span class="hint">Um único comprador durante a janela.</span></div>
+                    <div class="field"><label for="dias-jan">Duração da janela</label><div class="input-group"><input id="dias-jan" class="input num" value="7" data-sim><span class="affix">dias</span></div><span class="hint">Conta a partir do pagamento. Sem comprador em 30 dias, o item abre como Cópias direto.</span></div>
+                    <div class="field"><label for="preco-dep">Preço depois, como Cópias</label><div class="input-group"><span class="affix">US$</span><input id="preco-dep" class="input num" value="120,00" data-sim></div><span class="hint">Aberto para todos quando a janela fechar.</span></div>
+                    <div class="field"><label for="lim-dep">Limite de cópias depois</label><div class="input-group"><input id="lim-dep" class="input num" value="" placeholder="ilimitado"><span class="affix">cópias</span></div><span class="hint">Vazio = ilimitado.</span></div>
+                  </div>
+                  <fieldset>
+                    <legend>Como vender a janela</legend>
+                    <div class="stack-sm">
+                      <label class="radio"><input type="radio" name="jan-modo" value="fixo" checked data-sim><span>Preço fixo (padrão)<span class="desc">Quem pagar primeiro leva a janela.</span></span></label>
+                      <label class="radio"><input type="radio" name="jan-modo" value="leilao" data-sim><span>Leilão lacrado de 72 h<span class="desc">O preço acima vira o lance mínimo; o maior lance leva a janela.</span></span></label>
+                    </div>
+                  </fieldset>
+                  <div class="alert alert-info"><i data-icon="info"></i><div>Durante a janela só o comprador tem acesso e o catálogo mostra “aberto para todos a partir de DD/MM”. Depois, quem compra uma cópia recebe o mesmo material.</div></div>
+                </div>
+              </div>
+              <div data-config="licenca">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Configurar Licença</span></div>
+                  <p class="small muted">Para fotos, vídeos e áudios. O comprador escolhe a finalidade e recebe o arquivo em alta resolução, sem marca d’água, com um contrato gerado na hora: pseudônimos das partes, hash do arquivo, finalidade, território e prazo.</p>
+                  <fieldset>
+                    <legend>Finalidades e preços</legend>
+                    <div class="stack-sm">
+                      <div class="cfg-row"><label class="switch"><input type="checkbox" id="lic-ed-on" checked data-sim><span class="track"></span><span>Editorial</span></label><span class="small muted">Uso em notícia, uma publicação, sem prazo.</span><div class="input-group"><span class="affix">US$</span><input id="lic-ed" class="input num" value="300,00" data-sim aria-label="Preço da licença editorial"></div></div>
+                      <div class="cfg-row"><label class="switch"><input type="checkbox" id="lic-com-on" checked data-sim><span class="track"></span><span>Comercial</span></label><span class="small muted">Campanha, com prazo e território definidos abaixo.</span><div class="input-group"><span class="affix">US$</span><input id="lic-com" class="input num" value="1.500,00" data-sim aria-label="Preço da licença comercial"></div></div>
+                      <div class="cfg-row"><label class="switch"><input type="checkbox" id="lic-ex-on" data-sim><span class="track"></span><span>Exclusiva</span></label><span class="small muted">Ninguém mais licencia; encerra as demais.</span><div class="input-group"><span class="affix">US$</span><input id="lic-ex" class="input num" value="9.000,00" data-sim aria-label="Preço da licença exclusiva"></div></div>
+                    </div>
+                  </fieldset>
+                  <div class="form-grid">
+                    <div class="field"><label for="lic-terr">Território (comercial)</label><select id="lic-terr" class="select" data-sim><option>Brasil</option><option>América Latina</option><option>Mundo</option></select></div>
+                    <div class="field"><label for="lic-prazo">Prazo (comercial)</label><select id="lic-prazo" class="select" data-sim><option>12 meses</option><option>24 meses</option><option>Sem prazo</option></select></div>
+                  </div>
+                  <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">Prévia com marca d’água</span>A prévia pública sempre leva marca d’água; o arquivo limpo só é entregue depois do pagamento, no cofre do comprador, junto com o contrato.</div></div>
+                </div>
+              </div>
+              </div>
+              <fieldset>
+                <legend>Modificadores</legend>
+                <div class="form-grid">
+                  <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Marca d'água por entitlement<span class="desc">Visível no rodapé das transcrições; invisível nos áudios.</span></span></label>
+                  <label class="switch"><input type="checkbox"><span class="track"></span><span>Somente leitura (sem download)<span class="desc">Só no visualizador seguro. Vale para documentos, imagens e vídeo.</span></span></label>
+                </div>
+              </fieldset>
+            </div>
+            <aside class="card flat sim">
+              <div class="card-body stack-sm">
+                <h3>Você recebe 90 %</h3>
+                <div><div class="xs muted" id="s-meta-label">Meta de US$ 12.000,00 batida</div><div class="big ok" id="s-liq">US$ 10.800,00</div></div>
+                <p class="xs muted" id="s-note">Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você recebe 90 % do valor do último marco batido; sem nenhum marco, os apoios voltam.</p>
+                <div class="stack-sm" id="s-excl-box" hidden>
+                  <hr style="margin:4px 0">
+                  <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 54.000,00</b></p>
+                  <p class="xs muted">90 % de <span id="s-excl-base">US$ 60.000,00</span> para você. <span id="s-excl-note">O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.</span></p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+        <div class="card-foot"><button class="btn btn-ghost" data-step-go="3"><i data-icon="arrow-left"></i>Voltar</button><div class="foot-actions"><button class="btn btn-primary" data-step-go="5">Continuar<i data-icon="arrow-right"></i></button></div></div>
+      </section>
+
+      <!-- PASSO 5 -->
+      <section class="card" data-step="5">
+        <div class="card-head"><h2>Passo 5 · Declarações</h2><span class="muted small">Seis declarações. Desmarque qualquer uma que não possa fazer: o envio fica bloqueado.</span></div>
+        <div class="card-body stack">
+          <div class="stack-sm">
+            <label class="check"><input type="checkbox" checked><span><b>Origem lícita.</b> Declaro que obtive este conteúdo de forma lícita: sem acesso não autorizado a sistemas, sem violar dever de confidencialidade e sem coação a qualquer pessoa.<span class="desc">Política de conteúdo, seção “O que não pode ser vendido”.</span></span></label>
+            <label class="check"><input type="checkbox" checked><span><b>Titularidade ou direito de venda.</b> Declaro que sou autor deste conteúdo ou tenho o direito de vendê-lo, com autorização gravada de todos os entrevistados para uso e comercialização das gravações e transcrições.<span class="desc">Lei 9.610/1998. A curadoria pode pedir, por mensagem, uma amostra dos consentimentos gravados.</span></span></label>
+            <label class="check"><input type="checkbox" checked><span><b>Sem dados pessoais de terceiros sem base legal.</b> Declaro que o conteúdo não contém dados pessoais de terceiros sem base legal. Pessoas citadas aparecem por código ou iniciais; dados de agentes públicos limitam-se ao exercício da função e vêm de fonte pública.<span class="desc">LGPD, Lei 13.709/2018. A triagem apontou 12 nomes próprios: a curadoria avalia cada um.</span></span></label>
+            <label class="check"><input type="checkbox" checked><span><b>Sem conteúdo íntimo nem menores.</b> Declaro que o conteúdo não inclui material íntimo ou sexual de qualquer pessoa, nem imagens, áudios ou dados de menores de 18 anos em contexto sensível.<span class="desc">ECA. Detecção com alta confiança bloqueia o envio e suspende a conta para revisão.</span></span></label>
+            <label class="check"><input type="checkbox" checked><span><b>Sem credenciais nem acessos.</b> Declaro que o conteúdo não contém senhas, chaves, tokens, acessos a sistemas, dados bancários ou de cartão, exploits nem instruções para invasão.<span class="desc">Bloqueio imediato na triagem quando detectado com alta confiança.</span></span></label>
+            <label class="check"><input type="checkbox" checked><span><b>Não é informação privilegiada de mercado nem está sob sigilo legal.</b> Declaro que o conteúdo não é informação privilegiada sobre companhia aberta, não permite manipulação de mercado e não está protegido por sigilo legal (judicial, fiscal, bancário, médico ou de defesa) obtido sem autorização.<span class="desc">Lei 6.385/1976, art. 27-D; Código Penal, violação de sigilo.</span></span></label>
+          </div>
+          <div class="grid cols-2">
+            <div class="panel stack-sm">
+              <div class="label">Como você aparece</div>
+              <p class="small muted mt-1">O item, a prova pública e os posts mostram o seu pseudônimo <span class="handle" data-handle="coruja-7f3a"></span> e a sua reputação. É a sua identidade no Lacre e não pode ser escondida: é o que dá confiança ao comprador.</p>
+            </div>
+            <div class="panel">
+              <div class="label">O que não pedimos</div>
+              <p class="small muted mt-1">Nenhuma assinatura, nome, CPF ou documento. A declaração vale pelo pseudônimo, pela data e pela versão do texto. É isso que fica registrado.</p>
+            </div>
+          </div>
+          <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">As declarações ficam registradas</span>Data e hora, versão do texto (v1.3 · out/2026) e vínculo ao pseudônimo <span class="handle" data-handle="coruja-7f3a"></span>, por item e por versão. Em caso de violação comprovada, o item é retirado, os compradores são reembolsados a partir da carteira do item (ou do fundo de garantia, se a carteira já tiver sido entregue) e a conta pode ser banida.</div></div>
+        </div>
+        <div class="card-foot"><button class="btn btn-ghost" data-step-go="4"><i data-icon="arrow-left"></i>Voltar</button><div class="foot-actions"><button class="btn btn-primary" data-step-go="6">Continuar<i data-icon="arrow-right"></i></button></div></div>
+      </section>
+
+      <!-- PASSO 6 -->
+      <section class="card" data-step="6">
+        <div class="card-head"><h2>Passo 6 · Revisão e envio</h2><span class="muted small">Confira tudo. Depois do envio, mudanças só por pedido da curadoria.</span></div>
+        <div class="card-body stack">
+          <div class="split">
+            <div class="stack">
+              <div class="card">
+                <div class="card-head"><h3>Conteúdo</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="#" data-step-go="1">Editar</a></div></div>
+                <div class="card-body"><dl class="kv">
+                  <dt>Tipos</dt><dd>Áudio · Documento · Dados</dd>
+                  <dt>Categoria</dt><dd>Jornalismo e investigação · <span class="badge risk-alto">risco alto</span> · dois curadores e jurídico se houver terceiros</dd>
+                  <dt>País · idioma</dt><dd><span class="tag">BR</span> Brasil · português</dd>
+                  <dt>Pedido vinculado</dt><dd>Nenhum · anúncio avulso</dd>
+                  <dt>Arquivos</dt><dd>entrevistas-01-40.zip (40 MP3 · 2,1 GB) · transcricao-revisada.pdf (312 p. · 48 MB) · roteiro-e-notas.pdf (14 p. · 1,2 MB) · 1 upload em andamento (64 %) · <a class="link" href="#" data-step-go="2">ver</a></dd>
+                  <dt>Hash do pacote</dt><dd><span class="mono">sha256: 8c1f…4e2a</span> · calculado no seu navegador; conferido pelo servidor ao fim do upload</dd>
+                  <dt>Triagem</dt><dd>Antivírus ok · metadados removidos (EXIF, autor, produtor) · 12 nomes próprios a avaliar · 0 CPFs · duplicidade 0</dd>
+                </dl></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><h3>Prévia e descrição</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="#" data-step-go="3">Editar</a></div></div>
+                <div class="card-body"><dl class="kv">
+                  <dt>Título</dt><dd>Entrevistas com 40 ex-cobradores de ônibus de SP sobre a extinção da função (áudio + transcrição) <span class="ai-badge"><i data-icon="sparkles"></i>revisado</span></dd>
+                  <dt>Resumo</dt><dd>Quarenta entrevistas em áudio (média de 38 min) com ex-cobradores de ônibus da capital paulista, gravadas entre 2024 e 2026, sobre a extinção da função. Inclui transcrição revisada e roteiro. Nenhum entrevistado é identificado.</dd>
+                  <dt>Descrição</dt><dd>3 seções · O que é, O que você recebe, Método · 128 palavras</dd>
+                  <dt>Prévias públicas</dt><dd>3 de 4 · trecho de 30 s (E07, voz alterada) · página 1 da transcrição tarjada · índice das entrevistas (10 linhas) · fotos do sindicato <b>não</b> liberadas</dd>
+                  <dt>Tags</dt><dd><span class="tag">entrevistas</span> <span class="tag">transporte</span> <span class="tag">são paulo</span> <span class="tag">trabalho</span> <span class="tag">história oral</span></dd>
+                </dl></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><h3>Modelo de venda</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="#" data-step-go="4">Editar</a></div></div>
+                <div class="card-body"><dl class="kv">
+                  <dt>Modelo</dt><dd id="r-modelo"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></dd>
+                  <dt class="r-oth" hidden>Configuração</dt><dd class="r-oth" id="r-cfg" hidden></dd>
+                  <dt class="r-col">Meta e prazo</dt><dd class="r-col"><b>US$ 12.000</b> em 30 dias · até 26/11/2026 às 23:59 · apoios a partir de US$ 10</dd>
+                  <dt class="r-col">Arrecadação</dt><dd class="r-col">Marcos garantidos · se a meta não bater, você recebe 90 % do valor do último marco batido (25 % = US$ 2.700, 50 % = US$ 5.400, 75 % = US$ 8.100, 90 % = US$ 9.720; o Lacre fica com 10 %) e o que entrou depois volta aos apoiadores</dd>
+                  <dt class="r-col">Liberação</dt><dd class="r-col">Pública para todos ao bater a meta, com post nas redes · cada marco libera uma prévia · apoiadores ganham o selo “Rompeu este lacre”</dd>
+                  <dt class="r-col">Marcos e prévias</dt><dd class="r-col">
+                    <div class="stack-sm" style="margin-top:4px">
+                      <div class="row between"><span><b>25 %</b> · US$ 3.000</span><span class="small muted">libera o índice das 40 entrevistas (sem nomes)</span></div>
+                      <div class="row between"><span><b>50 %</b> · US$ 6.000</span><span class="small muted">libera um trecho de 60 s de uma entrevista</span></div>
+                      <div class="row between"><span><b>75 %</b> · US$ 9.000</span><span class="small muted">libera a página 1 da transcrição com tarjas</span></div>
+                      <div class="row between"><span><b>90 %</b> · US$ 10.800</span><span class="small muted">libera 3 min de uma entrevista (voz alterada)</span></div>
+                      <div class="row between"><span><b>100 %</b> · US$ 12.000</span><span class="small muted">lacre rompido · conteúdo completo público</span></div>
+                    </div>
+                    <span class="xs muted">Cada marco batido é postado no X, no Telegram e no Bluesky com a prévia correspondente.</span>
+                  </dd>
+                  <dt class="r-exc">Exclusividade</dt><dd id="r-excl" class="r-exc">Desligada · ninguém pode levar o item só para si (opcional; dá para ligar no passo 4)</dd>
+                  <dt>Modificadores</dt><dd>Marca d'água por entitlement · download permitido</dd>
+                  <dt>Você recebe</dt><dd><span id="r-liq-col"><b>US$ 10.800</b> se a meta bater (90 %)<span id="r-excl-liq" hidden> · <b>US$ 54.000</b> se alguém comprar a exclusividade</span></span><span id="r-liq-oth" hidden></span> · a carteira do item é entregue a você na finalização, com a frase de recuperação, para transferir como quiser</dd>
+                </dl></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><h3>Declarações e identidade</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="#" data-step-go="5">Rever</a></div></div>
+                <div class="card-body"><dl class="kv">
+                  <dt>Declarações</dt><dd>6 de 6 aceitas · texto v1.3 (out/2026) · registradas com data, hora e pseudônimo</dd>
+                  <dt>Pseudônimo</dt><dd>Exibido como <span class="handle" data-handle="coruja-7f3a" data-rep="4,8 · 3 itens aprovados"></span> no item, na prova e nos posts</dd>
+                </dl></div>
+              </div>
+            </div>
+            <div class="stack">
+              <div class="alert alert-info"><i data-icon="clock"></i><div><span class="alert-title">Curadoria em até 48 h</span>Previsão da primeira resposta: 29/10, 10:50. Risco alto: dois curadores independentes. Se houver pessoas identificáveis, o jurídico analisa em até 5 dias úteis e o relógio pausa.</div></div>
+              <div class="card">
+                <div class="card-head"><h3>O que acontece agora</h3></div>
+                <div class="card-body stack">
+                  <div class="how-step"><span class="n">1</span><div><b>Triagem automática</b> · minutos<br><span class="small muted">Antivírus, remoção de metadados, varredura de dados pessoais, duplicidade e hash do pacote selado.</span></div></div>
+                  <div class="how-step"><span class="n">2</span><div><b>Análise humana</b> · até 48 h<br><span class="small muted">Checklist de 7 blocos e nível de autenticidade. Resultado: aprovado, aprovado com ajustes, ajustes solicitados ou rejeitado, sempre com código e texto.</span></div></div>
+                  <div class="how-step"><span class="n">3</span><div><b>Publicação e recebimento</b><br><span class="small muted">Página de prova com hash, carimbo de tempo e o endereço da carteira do item; post no X, Telegram e Bluesky; marcos automáticos. Você recebe 90 % na finalização, pela carteira do item.</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-foot"><button class="btn btn-ghost" data-step-go="5"><i data-icon="arrow-left"></i>Voltar</button><div class="foot-actions"><button class="btn" data-toast="Rascunho salvo · você pode enviar depois">Salvar como rascunho</button><button class="btn btn-primary btn-lg" data-step-go="7"><i data-icon="send"></i>Enviar para curadoria</button></div></div>
+      </section>
+
+      <!-- SUCESSO -->
+      <section class="card" data-step="7">
+        <div class="card-body success">
+          <div class="seal-lg" data-seal></div>
+          <span class="badge st-triagem">Em triagem</span>
+          <h2>Enviado para curadoria</h2>
+          <p class="lead" style="text-align:center">Prazo estimado: 48 h · código <b class="mono">lcr-3x8m1</b></p>
+          <div class="hash narrow-block"><code>sha256 do pacote: 9b4e1f0c7a2d5e8f3b6c1a4d7e0f2b5c8a1d4e7f0b3c6a9d2e5f8b1c4a7d0e3f</code><button class="btn btn-sm btn-ghost" data-copy="9b4e1f0c7a2d5e8f3b6c1a4d7e0f2b5c8a1d4e7f0b3c6a9d2e5f8b1c4a7d0e3f" aria-label="Copiar hash"><i data-icon="copy"></i></button></div>
+          <div class="timeline narrow-block">
+            <div class="tl-item ok"><div class="when">27/10 · 10:51</div><div class="what">Enviado · versão 1 · 3 arquivos · 2,2 GB · declarações v1.3 registradas</div></div>
+            <div class="tl-item info"><div class="when">agora</div><div class="what">Triagem automática · antivírus, metadados, dados pessoais, duplicidade</div></div>
+            <div class="tl-item"><div class="when">até 29/10 · 10:51</div><div class="what">Primeira análise humana · dois curadores (risco alto)</div></div>
+            <div class="tl-item"><div class="when">depois</div><div class="what">Decisão e, se aprovado, agendamento da publicação · você recebe a notificação aqui e no painel</div></div>
+          </div>
+          <div class="row" style="justify-content:center">
+            <a class="btn btn-primary" href="../seller/anuncios.html"><i data-icon="archive"></i>Ver meus anúncios</a>
+            <a class="btn" href="../seller/painel.html">Ir para o painel</a>
+            <button class="btn btn-ghost" data-step-go="1"><i data-icon="plus"></i>Criar outro anúncio</button>
+          </div>
+          <p class="xs muted narrow-block" style="text-align:center">Você pode cancelar o envio enquanto estiver em triagem. Em caso de ajustes solicitados, você tem 72 h para responder; sem resposta, o item volta para rascunho.</p>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (function () {
+        var usd = function (n) { return 'US$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+        var num = function (id) { var el = document.getElementById(id); return parseFloat((el.value || '0').replace(/\./g, '').replace(',', '.')) || 0; };
+        var set = function (id, txt) { document.getElementById(id).textContent = txt; };
+        var on = function (id) { var el = document.getElementById(id); return !!(el && el.checked); };
+        var usd0 = function (n) { return 'US$ ' + n.toLocaleString('pt-BR', { maximumFractionDigits: 0 }); };
+        document.querySelectorAll('[data-count]').forEach(function (el) {
+          var out = document.querySelector(el.dataset.count);
+          var upd = function () { out.textContent = el.value.length; out.parentElement.classList.toggle('danger', el.value.length > el.maxLength - 10); };
+          el.addEventListener('input', upd); upd();
+        });
+        function model() { var r = document.querySelector('[data-switch]:checked'); return r ? r.dataset.switch : 'coletivo'; }
+        var CHIP = { copias: ['copy', 'Cópias'], exclusivo: ['crown', 'Exclusivo'], coletivo: ['hand-coins', 'Lacre coletivo'], pedido: ['file-search', 'Pedido'], leilao: ['gavel', 'Leilão'], camadas: ['layers', 'Camadas'], assinatura: ['repeat', 'Assinatura'], janela: ['timer', 'Janela exclusiva'], licenca: ['scale', 'Licença'] };
+        // Pedidos que podem ser atendidos (os mesmos do mural). novo-anuncio.html?atender=<id> marca o modelo Pedido e vincula o pedido.
+        var ATENDER = {
+          'ped-9h2d5': { titulo: 'Lista de todos os editais de fomento cultural municipais do RS em 2025', resumo: 'US$ 300 por pessoa × 7 pessoas = US$ 2.100', prazo: '10/12/2026', total: 2100, pessoas: 7, crit: ['Município, órgão, objeto, valor total, prazo de inscrição, área cultural e link ou cópia do edital.', 'Pelo menos 90 % dos municípios do RS com edital publicado em 2025.', 'XLSX ou CSV, uma linha por edital, com fonte e data de coleta.', 'Nenhum nome de proponente ou contato.'] },
+          'ped-2c8d1': { titulo: 'Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV', resumo: 'US$ 800 por pessoa × 4 pessoas = US$ 3.200', prazo: '30/11/2026', total: 3200, pessoas: 4, crit: ['Todas as UPAs municipais ativas em cada mês (pelo menos 28 unidades), jan/2023 a dez/2025.', 'Uma linha por unidade e mês: tempo médio e mediano em minutos e volume de atendimentos.', 'Origem documentada: resposta de LAI com protocolo, planilha da SMS ou extração do sistema com data.', 'CSV UTF-8 com dicionário de dados em Markdown.', 'Nenhum dado de paciente ou de servidor identificável.', 'Totais mensais compatíveis com os relatórios anuais da SMS (tolerância de 2 %).'] },
+          'ped-7f1a3': { titulo: 'Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)', resumo: 'US$ 800 por pessoa × 1 pessoa = US$ 800', prazo: '15/12/2026', total: 800, pessoas: 1, copias: true, crit: ['Todas as páginas, inclusive capa, colofão e anúncios, na ordem original.', '400 dpi ou mais, PDF com OCR e imagens individuais em TIFF ou PNG.', 'Declaração de que o exemplar é de acervo próprio ou de uso permitido.', 'Sem marca d’água de terceiros nem páginas de outras edições.'] },
+          'ped-5r2k8': { titulo: 'Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos', resumo: 'US$ 300 por pessoa × 3 pessoas = US$ 900', prazo: '20/12/2026', total: 900, pessoas: 3, crit: ['Todas as concessões de portos públicos desde 2000, vigentes e encerradas.', 'Concessionária, porto, prazo, valor e data de assinatura.', 'Fonte oficial por linha (MTT, empresas portuárias estatais ou Diario Oficial), com data.', 'CSV em espanhol com dicionário de dados.'] },
+          'ext-2c8d1-a': { titulo: 'Extra do ped-2c8d1: Reclamações registradas na ouvidoria por UPA (2023–2025), por mês', resumo: 'US$ 150 por pessoa × 2 pessoas = US$ 300', prazo: '30/11/2026', total: 300, pessoas: 2, crit: ['Uma linha por unidade e mês.', 'Número de reclamações e tema principal.', 'CSV com dicionário de dados.'] },
+          'ext-9h2d5-a': { titulo: 'Extra do ped-9h2d5: Projetos selecionados e valores pagos nos editais de fomento cultural do RS (2025)', resumo: 'US$ 80 por pessoa × 1 pessoa = US$ 80', prazo: '10/12/2026', total: 80, pessoas: 1, crit: ['Uma linha por projeto selecionado.', 'Valor pago e data do pagamento.', 'Mesma planilha, aba própria.'] },
+          'ped-8b4u2': { titulo: 'Fotos dos boletins de urna (BU) afixados nas seções eleitorais de Minas Gerais no 2º turno de 2026 (25/10)', resumo: 'US$ 2 por foto válida · até 5.000 fotos · 1.112 válidas até agora', prazo: '30/11/2026', unidade: true, unit: 2, crit: ['Uma foto por BU, legível, com o QR code inteiro e o número da seção visível.', 'Sem pessoas, cabines ou cédulas; nunca fotos de votos ou documentos de eleitores (a curadoria recusa o lote).', 'A triagem descarta duplicadas e ilegíveis; não contam como unidade.', 'Envio em lotes; a curadoria valida cada lote antes do pagamento.'] }
+        };
+        var pedSel = document.getElementById('pedido-sel');
+        function pedidoAtual() { return ATENDER[pedSel.value] || ATENDER['ped-9h2d5']; }
+        function applyPedido() {
+          var c = pedidoAtual();
+          document.getElementById('pedido-crit').innerHTML = c.crit.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+          var title = document.getElementById('pedido-alert-title'), text = document.getElementById('pedido-alert-text');
+          if (c.unidade) { title.textContent = 'Lotes pagos por foto válida'; text.textContent = 'Cada lote tem carteira própria. A triagem descarta duplicadas e ilegíveis, a curadoria valida o lote e quem participa do pedido paga as fotos válidas em até 72 h depois da prévia (senão o lote é pago com o sinal).'; }
+          else if (c.copias) { title.textContent = 'Venda posterior permitida'; text.textContent = 'Quem abriu este pedido permitiu venda posterior como Cópias: depois de entregar, você pode vender o mesmo conteúdo como Cópias, nunca por menos que o valor por pessoa do pedido.'; }
+          else { title.textContent = 'Só para quem está no pedido'; text.textContent = 'Quem abriu este pedido não permitiu venda posterior como Cópias: o conteúdo entregue fica só com ' + (c.pessoas === 1 ? 'a pessoa' : 'as ' + c.pessoas + ' pessoas') + ' do pedido.'; }
+        }
+        pedSel.addEventListener('change', applyPedido);
+        var atenderId = new URLSearchParams(location.search).get('atender');
+        if (atenderId && ATENDER[atenderId]) {
+          var ab = ATENDER[atenderId];
+          pedSel.value = atenderId;
+          var pr = document.querySelector('[data-switch="pedido"]'); pr.checked = true;
+          document.getElementById('ab-id').textContent = atenderId.replace(/^ext-(.*)-[a-z]$/, 'ped-$1');
+          document.getElementById('ab-text').textContent = ab.titulo + ' · ' + ab.resumo + ' · prazo ' + ab.prazo;
+          document.getElementById('ab-link').href = '../public/pedido.html' + (atenderId.indexOf('ped-2c8d1') === 0 || atenderId === 'ext-2c8d1-a' ? '' : '?p=' + atenderId.replace(/^ext-(.*)-[a-z]$/, 'ped-$1')) + (atenderId.indexOf('ext-') === 0 ? '#extras' : '');
+          document.getElementById('atender-banner').hidden = false;
+          document.querySelector('.page-head h1').textContent = ab.unidade ? 'Enviar um lote' : 'Atender um pedido';
+          document.body.dataset.title = ab.unidade ? 'Enviar um lote' : 'Atender um pedido';
+          document.title = (ab.unidade ? 'Enviar um lote · ' : 'Atender ') + atenderId + ' · Lacre';
+        }
+        applyPedido();
+        var pick = function (name) { var r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ''; };
+        var val = function (id) { var el = document.getElementById(id); return el ? el.value : ''; };
+        function review(cfg, liq) {
+          var m = model();
+          var rm = document.getElementById('r-modelo'); rm.innerHTML = '<span class="model-chip" data-model="' + m + '"><i data-icon="' + CHIP[m][0] + '"></i>' + CHIP[m][1] + '</span>'; if (window.Lacre) Lacre.render(rm);
+          document.querySelectorAll('.r-col').forEach(function (el) { el.hidden = m !== 'coletivo'; });
+          document.querySelectorAll('.r-exc').forEach(function (el) { el.hidden = !(m === 'coletivo' || m === 'copias' || m === 'camadas'); });
+          document.querySelectorAll('.r-oth').forEach(function (el) { el.hidden = m === 'coletivo'; });
+          document.getElementById('r-liq-col').hidden = m !== 'coletivo'; document.getElementById('r-liq-oth').hidden = m === 'coletivo';
+          if (m !== 'coletivo') { set('r-cfg', cfg); set('r-liq-oth', liq); }
+        }
+        function sim() {
+          var m = model(), label = document.getElementById('s-meta-label'), note = document.getElementById('s-note');
+          var exclBox = document.getElementById('s-excl-box');
+          document.querySelectorAll('[data-shows]').forEach(function (cb) { document.querySelector(cb.dataset.shows).hidden = !cb.checked; });
+          var exOn = on('excl-on'), ex = num('excl'), rLiq = document.getElementById('r-excl-liq');
+          var exId = { coletivo: 'excl', copias: 'excl2', camadas: 'excl3' }[m], exOnM = exId ? on(exId + '-on') : false, exM = exId ? num(exId) : 0;
+          set('r-excl', exOnM ? usd0(exM) + ' · quem pagar leva o item só para si; as vendas encerram' + (m === 'coletivo' ? ' e os apoios são devolvidos' : ' e quem já comprou mantém o acesso') + ' · declaração de exclusividade de 24 meses' : 'Desligada · ninguém pode levar o item só para si (opcional; dá para ligar no passo 4)');
+          rLiq.hidden = !exOn; rLiq.querySelector('b').textContent = usd0(ex * 0.90);
+          if (m === 'coletivo') {
+            var meta = num('meta'), excl = num('excl');
+            label.textContent = 'Meta de ' + usd(meta) + ' batida'; set('s-liq', usd(meta * 0.90));
+            note.textContent = 'Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você recebe 90 % do valor do último marco batido; sem nenhum marco, os apoios voltam.';
+            set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl)); set('s-excl-note', 'O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.'); exclBox.hidden = !exOn;
+          } else if (m === 'copias') {
+            var preco = num('preco'), lim = num('lim') || 0, excl2 = num('excl2');
+            label.textContent = usd(preco) + ' × ' + (lim || '∞') + ' cópias'; set('s-liq', lim ? usd(preco * lim * 0.90) : usd(preco * 0.90) + ' por cópia');
+            note.textContent = 'Você recebe quando encerrar as vendas.';
+            set('s-excl', usd(excl2 * 0.90)); set('s-excl-base', usd(excl2)); set('s-excl-note', 'As vendas encerram na hora, quem já comprou mantém o acesso e vale a declaração de exclusividade de 24 meses.'); exclBox.hidden = !on('excl2-on');
+          } else if (m === 'exclusivo') {
+            var pe = num('preco-ex');
+            label.textContent = 'Venda exclusiva por ' + usd(pe); set('s-liq', usd(pe * 0.90));
+            note.textContent = 'Você recebe 72 h após a entrega, se não houver disputa.';
+            exclBox.hidden = true;
+          } else if (m === 'pedido') {
+            var c = pedidoAtual();
+            if (c.unidade) { label.textContent = 'Pedido por unidade · US$ 2 por foto válida (até 5.000)'; set('s-liq', usd(c.unit * 0.90) + ' por foto válida'); note.textContent = 'Você recebe por lote: quem participa paga as fotos válidas em até 72 h depois da prévia (senão o lote é pago com o sinal). 72 h depois, sem disputa, a carteira do lote é sua.'; }
+            else { label.textContent = 'Recompensa do pedido · ' + usd(c.total) + ' hoje (' + c.resumo.replace(/ = .*$/, '') + ')'; set('s-liq', usd(c.total * 0.90)); note.textContent = 'Novas pessoas podem entrar até você enviar o atendimento; aí o pedido trava. Aprovado pela curadoria, cada pessoa vê uma prévia e tem 72 h para pagar os 75 % restantes; você recebe 90 % do que cada uma pagou por inteiro.'; }
+            exclBox.hidden = true;
+          } else if (m === 'leilao') {
+            var tipo = pick('leilao-tipo'), lm = num('lance-min'), resOn = on('reserva-on'), res = num('reserva');
+            var tipoNome = { lacrado: 'lacrado (segundo preço)', aberto: 'aberto', holandes: 'holandês' }[tipo] || 'lacrado';
+            label.textContent = 'Leilão ' + tipoNome + ' · ' + (tipo === 'holandes' ? 'preço de partida ' : 'lance mínimo ') + usd(lm); set('s-liq', usd((resOn ? Math.max(res, lm) : lm) * 0.90) + ' ou mais');
+            note.textContent = 'Você recebe 90 % do lance vencedor, 72 h após a entrega ao vencedor, se não houver disputa.' + (resOn ? ' Abaixo do preço de reserva (' + usd(res) + ') não há venda.' : '') + ' Quem não vence é reembolsado ao endereço de origem no encerramento (' + val('leilao-fim') + ').';
+            exclBox.hidden = true;
+          } else if (m === 'camadas') {
+            var cams = Array.prototype.map.call(document.querySelectorAll('[data-camada]'), function (el) { return parseFloat((el.value || '0').replace(/\./g, '').replace(',', '.')) || 0; }), pac = num('pacote');
+            label.textContent = cams.length + ' camadas · pacote completo por ' + usd(pac); set('s-liq', usd(pac * 0.90) + ' por quem levar tudo');
+            note.textContent = 'Camada 1: ' + usd(cams[0] * 0.90) + ' por comprador; quem sobe de camada paga só a diferença. Você recebe a cada camada entregue, 72 h depois, se não houver disputa.';
+            set('s-excl', usd(num('excl3') * 0.90)); set('s-excl-base', usd(num('excl3'))); set('s-excl-note', 'As vendas encerram na hora, quem já comprou mantém o acesso e vale a declaração de exclusividade de 24 meses.'); exclBox.hidden = !on('excl3-on');
+          } else if (m === 'assinatura') {
+            var per = val('periodo'), pa = num('preco-ass'), mins = num('minimo-ass') || 0, perNome = { mensal: 'mês', quinzenal: 'quinzena', semanal: 'semana' }[per] || 'período';
+            label.textContent = 'Assinatura ' + per + ' · ' + usd(pa) + ' por assinante'; set('s-liq', usd(pa * 0.90) + ' por assinante e ' + perNome);
+            note.textContent = (mins ? 'Com ' + mins + ' assinantes: ' + usd(pa * mins * 0.90) + ' por ' + perNome + '. ' : '') + 'Cada edição tem carteira própria, entregue a você 72 h após a publicação.' + (on('avulsa-on') ? ' Edições avulsas: ' + usd(num('avulsa') * 0.90) + ' cada.' : '');
+            exclBox.hidden = true;
+          } else if (m === 'janela') {
+            var pj = num('preco-jan'), dj = num('dias-jan') || 0, pd = num('preco-dep');
+            label.textContent = 'Janela de ' + dj + ' dias por ' + usd(pj) + (pick('jan-modo') === 'leilao' ? ' (lance mínimo)' : ''); set('s-liq', usd(pj * 0.90) + ' pela janela');
+            note.textContent = 'Depois da janela: ' + usd(pd * 0.90) + ' por cópia. Você recebe a janela 72 h após a entrega e as cópias quando encerrar as vendas.';
+            exclBox.hidden = true;
+          } else if (m === 'licenca') {
+            var tipos = [];
+            if (on('lic-ed-on')) tipos.push('editorial ' + usd(num('lic-ed') * 0.90));
+            if (on('lic-com-on')) tipos.push('comercial ' + usd(num('lic-com') * 0.90) + ' (' + val('lic-terr') + ', ' + val('lic-prazo') + ')');
+            if (on('lic-ex-on')) tipos.push('exclusiva ' + usd(num('lic-ex') * 0.90));
+            label.textContent = 'Por licença vendida'; set('s-liq', tipos.length ? (on('lic-ed-on') ? usd(num('lic-ed') * 0.90) + ' editorial' : tipos[0]) : 'Nenhuma finalidade ligada');
+            note.textContent = (tipos.length ? 'Você recebe 90 % de cada licença: ' + tipos.join(' · ') + '. ' : 'Ligue pelo menos uma finalidade. ') + 'A exclusiva encerra as demais. Pagamento 72 h após cada entrega, se não houver disputa.';
+            exclBox.hidden = true;
+          }
+          // revisão (passo 6) segue o modelo escolhido
+          var cfgTxt = '', liqTxt = document.getElementById('s-liq').textContent + ' · ' + note.textContent;
+          if (m === 'copias') cfgTxt = usd0(num('preco')) + ' por cópia · ' + (num('lim') ? num('lim') + ' cópias' : 'sem limite') + ' · preço escalonado nas primeiras 50 (US$ 45)';
+          else if (m === 'exclusivo') cfgTxt = usd0(num('preco-ex')) + ' · ' + val('prazo-ex') + ' · ofertas a partir de ' + usd0(num('min-oferta')) + ' · declaração de exclusividade de 24 meses';
+          else if (m === 'pedido') cfgTxt = pedidoAtual().titulo + ' · ' + pedidoAtual().resumo + ' · prazo ' + pedidoAtual().prazo;
+          else if (m === 'leilao') cfgTxt = 'Leilão ' + ({ lacrado: 'lacrado, segundo preço', aberto: 'aberto', holandes: 'holandês' }[pick('leilao-tipo')] || '') + ' · lance mínimo ' + usd0(num('lance-min')) + ' · incremento ' + usd0(num('incremento')) + (on('reserva-on') ? ' · preço de reserva (não revelado)' : ' · sem reserva') + ' · encerra ' + val('leilao-fim');
+          else if (m === 'camadas') cfgTxt = Array.prototype.map.call(document.querySelectorAll('[data-camada]'), function (el, i) { return 'camada ' + (i + 1) + ' ' + usd0(parseFloat((el.value || '0').replace(/\./g, '').replace(',', '.')) || 0); }).join(' · ') + ' · pacote ' + usd0(num('pacote')) + ' · quem sobe paga só a diferença';
+          else if (m === 'assinatura') cfgTxt = 'Edição ' + val('periodo') + ' · ' + usd0(num('preco-ass')) + ' por período · primeira edição ' + val('primeira') + (num('minimo-ass') ? ' · começa com ' + num('minimo-ass') + ' assinantes' : '') + (on('avulsa-on') ? ' · edições anteriores avulsas por ' + usd0(num('avulsa')) : ' · sem venda avulsa');
+          else if (m === 'janela') cfgTxt = usd0(num('preco-jan')) + ' por ' + num('dias-jan') + ' dias (' + (pick('jan-modo') === 'leilao' ? 'leilão lacrado de 72 h' : 'preço fixo') + ') · depois ' + usd0(num('preco-dep')) + ' por cópia' + (num('lim-dep') ? ' · ' + num('lim-dep') + ' cópias' : ' · sem limite');
+          else if (m === 'licenca') cfgTxt = [on('lic-ed-on') ? 'editorial ' + usd0(num('lic-ed')) : '', on('lic-com-on') ? 'comercial ' + usd0(num('lic-com')) + ' (' + val('lic-terr') + ', ' + val('lic-prazo') + ')' : '', on('lic-ex-on') ? 'exclusiva ' + usd0(num('lic-ex')) : ''].filter(Boolean).join(' · ') + ' · contrato gerado automaticamente · prévia com marca d’água';
+          review(cfgTxt, liqTxt);
+        }
+        document.querySelectorAll('[data-sim]').forEach(function (el) { el.addEventListener('input', sim); });
+        document.addEventListener('change', function (e) { if (e.target.matches('[data-switch],[data-shows],[data-sim]')) sim(); });
+        sim();
+      })();
+    </script>
+  </main>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Notificações · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .day { margin-top: 20px; }
+    .day:first-child { margin-top: 0; }
+    .day h3 { font-size: var(--fs-sm); color: var(--muted); font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; padding-bottom: 6px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+    .day h3 span { font-weight: 500; text-transform: none; letter-spacing: 0; }
+    .list-item .li-icon.t-cur svg { color: var(--info); } .list-item .li-icon.t-lac svg { color: var(--wax-2); } .list-item .li-icon.t-dis svg { color: var(--warn); }
+    .list-item .li-icon.t-pag svg { color: var(--ok); } .list-item .li-icon.t-seg svg { color: var(--danger); }
+    .list-item .li-title .handle, .list-item .li-sub .handle { vertical-align: middle; font-size: var(--fs-xs); }
+    .list-item .li-sub .mono { font-family: var(--font-mono); }
+    .list-item .li-act { display: flex; align-items: center; gap: 8px; flex: none; }
+    .list-item .nd { width: 8px; height: 8px; border-radius: 50%; background: var(--brass); flex: none; }
+    .list-item .nd.off { background: transparent; }
+    .pref { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); }
+    .pref:last-child { border-bottom: 0; }
+    .pref .d { color: var(--muted); font-size: var(--fs-xs); }
+    @media (max-width: 600px) { .list-item .li-act .btn { display: none; } }
+  </style>
+</head>
+<body data-shell="buyer" data-page="notificacoes" data-root="../" data-title="Notificações">
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Compartilhada · comprador e vendedor</p>
+      <h1>Notificações</h1>
+      <p class="sub">4 não lidas · só dentro da plataforma e por push anônimo do navegador. Sem e-mail, sem SMS.</p>
+    </div>
+    <div class="actions">
+      <button class="btn" data-toast="34 notificações marcadas como lidas"><i data-icon="check"></i>Marcar todas como lidas</button>
+      <a class="btn btn-ghost" href="#preferencias"><i data-icon="sliders"></i>Preferências de push</a>
+    </div>
+  </div>
+
+  <div class="chips mb-3">
+    <button class="chip active" data-toast="Mostrando todas as notificações">Todas <b>34</b></button>
+    <button class="chip" data-toast="Filtro: curadoria">Curadoria <b>3</b></button>
+    <button class="chip" data-toast="Filtro: lacres">Lacres <b>4</b></button>
+    <button class="chip" data-toast="Filtro: pagamentos e reembolsos">Pagamentos <b>11</b></button>
+    <button class="chip" data-toast="Filtro: pedidos">Pedidos <b>9</b></button>
+    <button class="chip" data-toast="Filtro: mensagens">Mensagens <b>2</b></button>
+    <button class="chip" data-toast="Filtro: disputas">Disputas <b>2</b></button>
+    <button class="chip" data-toast="Filtro: carteiras dos itens (vendedor)">Carteiras dos itens <b>1</b></button>
+    <button class="chip" data-toast="Filtro: segurança">Segurança <b>2</b></button>
+  </div>
+
+  <div class="split">
+    <div class="card">
+      <div class="card-body">
+        <section class="day">
+          <h3>Hoje · 27/10 <span>2 não lidas</span></h3>
+          <div class="list">
+            <div class="list-item unread">
+              <span class="li-icon"><i data-icon="message-square"></i></span>
+              <div class="li-body">
+                <div class="li-title">Nova mensagem de <span class="handle" data-handle="lanterna-b31d"></span> sobre lcr-9f2k7</div>
+                <div class="li-sub">Mensagens · 11:03 · "O dicionário já está no pacote (dicionario.md, 14 KB)…"</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/mensagens.html">Responder</a><span class="nd"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="image"></i></span>
+              <div class="li-body">
+                <div class="li-title">Seu lote de 46 fotos no ped-8b4u2 foi aceito: 44 válidas, US$ 79,20 para você em 30/10</div>
+                <div class="li-sub">Pedidos · 10:50 · pedido por unidade de <span class="handle" data-handle="farol-3e9b"></span> · boletins de urna de MG, 2º turno · US$ 2 por foto válida · 2 descartadas pela triagem (duplicada ou ilegível) · quem pediu viu a prévia e pagou as 44 (US$ 88) · você recebe depois de 72 h sem disputa</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/pedidos.html">Ver lote</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item unread">
+              <span class="li-icon t-seg"><i data-icon="shield-alert"></i></span>
+              <div class="li-body">
+                <div class="li-title">Novo acesso à sua conta de um dispositivo Linux · Firefox</div>
+                <div class="li-sub">Segurança · 08:15 · entrada com senha + TOTP · se não foi você, encerre a sessão e troque a senha</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/configuracoes.html">Ver sessões</a><span class="nd"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-dis"><i data-icon="hourglass"></i></span>
+              <div class="li-body">
+                <div class="li-title">Janela de disputa de lcr-9f2k7 termina amanhã, 28/10 às 14:20</div>
+                <div class="li-sub">Disputas · 07:00 · o vendedor entregou a versão 2 do pacote em 25/10 e a janela de 72 h reabriu · depois de 72 h sem disputa, o pagamento vai para o vendedor</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/disputa.html">Abrir disputa</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>Ontem · 26/10 <span>2 não lidas</span></h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="li-icon t-lac"><i data-icon="hand-coins"></i></span>
+              <div class="li-body">
+                <div class="li-title"><span class="handle" data-handle="sextante-21c9"></span> publicou uma atualização em lcr-4m2x9</div>
+                <div class="li-sub">Lacres · 16:40 · "Os 31 áudios das entrevistas já foram analisados pela curadoria e saem junto com o relatório" · 68 % · faltam US$ 25.880</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../public/item.html">Ver</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item unread">
+              <span class="li-icon t-cur"><i data-icon="edit"></i></span>
+              <div class="li-body">
+                <div class="li-title">Ajustes solicitados em lcr-2z5q7</div>
+                <div class="li-sub">Curadoria · 11:05 · Ana R.: a prévia expõe coordenadas exatas das feiras; reduza a amostra para bairro e dia · responda em até 7 dias</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/anuncio.html">Responder</a><span class="nd"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="lightbulb"></i></span>
+              <div class="li-body">
+                <div class="li-title">Proposta de extra de <span class="handle" data-handle="prisma-66af"></span> no seu pedido ped-2c8d1</div>
+                <div class="li-sub">Pedidos · 10:20 · "Tempo de espera nas UBS da capital nos mesmos meses" · valor sugerido US$ 200 · aguardando alguém do pedido criar o extra · quem propôs não tem exclusividade para atender</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html#ped-2c8d1">Ver proposta</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item unread">
+              <span class="li-icon t-cur"><i data-icon="clipboard-check"></i></span>
+              <div class="li-body">
+                <div class="li-title">Seu item lcr-4g7h9 foi aprovado e publicado · carteira do item criada</div>
+                <div class="li-sub">Curadoria · 09:42 · Tabela de preços de medicamentos oncológicos em 15 países · Verificado parcialmente · post no X publicado · endereço da carteira na prova pública · recebendo pagamentos em Polygon</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/anuncio.html">Ver anúncio</a><span class="nd"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>25/10 <span>sábado</span></h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="message-square"></i></span>
+              <div class="li-body">
+                <div class="li-title"><span class="handle" data-handle="prisma-66af"></span> perguntou sobre o seu pedido ped-2c8d1</div>
+                <div class="li-sub">Mensagens · 19:05 · "UPAs estaduais e municipais entram nos critérios?"</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/mensagens.html">Responder</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="check-circle"></i></span>
+              <div class="li-body">
+                <div class="li-title">Pagamento de 150 USDT em lcr-4m2x9 confirmado (12 de 12)</div>
+                <div class="li-sub">Pagamentos · 18:25 · Polygon · txid <span class="mono">0x8d14…e0b9</span> · fica na carteira do lacre até o resultado (15/11) · total apoiado neste lacre: US$ 250,00 · entrou depois do marco 50 %: volta para você se o lacre falhar antes do marco 75 %</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/apoios.html">Apoios</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-cur"><i data-icon="hourglass"></i></span>
+              <div class="li-body">
+                <div class="li-title">lcr-0p4m3 entrou em análise com Bruno M.</div>
+                <div class="li-sub">Curadoria · 14:40 · Série histórica de tarifas de ônibus em 27 capitais · decisão prevista até 27/10</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/anuncios.html">Ver</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-lac"><i data-icon="flame"></i></span>
+              <div class="li-body">
+                <div class="li-title">lcr-4m2x9 bateu o marco 50 %: US$ 40.000 garantidos ao vendedor</div>
+                <div class="li-sub">Lacres · 09:35 · US$ 40.000 de US$ 80.000 · 884 apoiadores · prévia do marco liberada ao público · se o prazo vencer antes do marco 75 %, só o que entrar a partir de agora volta aos apoiadores · marco publicado no X</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../public/item.html">Ver</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="repeat"></i></span>
+              <div class="li-body">
+                <div class="li-title">Assinatura de lcr-6d1k5 ativada: 190 USDT confirmados (19 de 19)</div>
+                <div class="li-sub">Pagamentos · 09:12 · Tron · txid <span class="mono">7b2c…d4e9</span> · Monitor semanal de patentes do setor farmacêutico · próxima edição em 31/10</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Cofre</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>Semana passada <span>20 a 24/10</span></h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="li-icon t-seg"><i data-icon="key"></i></span>
+              <div class="li-body">
+                <div class="li-title">Nova passkey cadastrada: "ThinkPad · Firefox"</div>
+                <div class="li-sub">Segurança · 24/10 · 18:02 · você agora tem 2 passkeys</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/configuracoes.html">Ver</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="users"></i></span>
+              <div class="li-body">
+                <div class="li-title"><span class="handle" data-handle="relogio-2b7c"></span> se juntou ao seu pedido ped-2c8d1 (recompensa total US$ 3.200)</div>
+                <div class="li-sub">Pedidos · 24/10 · 16:15 · 4 pessoas × US$ 800 · sinal de US$ 200 confirmado na carteira do pedido</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html">Ver pedido</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="check-circle"></i></span>
+              <div class="li-body">
+                <div class="li-title">Pagamento de 190 USDT em lcr-3c7r8 (camada 1) confirmado (12 de 12)</div>
+                <div class="li-sub">Pagamentos · 23/10 · 14:05 · Base · txid <span class="mono">0x5c7e…9a02</span> · entregue no cofre (ENT-5K7D) · download com marca d'água</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Abrir</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="check-circle"></i></span>
+              <div class="li-body">
+                <div class="li-title">Pagamento de 100 USDT em lcr-4m2x9 confirmado (12 de 12)</div>
+                <div class="li-sub">Pagamentos · 22/10 · 20:12 · Polygon · txid <span class="mono">0x2a9c…41f7</span> · fica na carteira do lacre até o resultado</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/apoios.html">Apoios</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="layers"></i></span>
+              <div class="li-body">
+                <div class="li-title">Novo extra no pedido ped-2c8d1 (aprovado pela curadoria): Reclamações registradas na ouvidoria por UPA (2023–2025), por mês</div>
+                <div class="li-sub">Pedidos · 22/10 · 15:10 · criado por <span class="handle" data-handle="quartzo-a1f0"></span> a partir da proposta de <span class="handle" data-handle="lanterna-b31d"></span> · US$ 150 por pessoa · Entrar por US$ 150 é opcional: não entrar não muda sua participação no pedido</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html#ped-2c8d1">Ver extra</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="vault"></i></span>
+              <div class="li-body">
+                <div class="li-title">Pagamento de 490 USDT em lcr-9f2k7 confirmado: compra entregue no cofre</div>
+                <div class="li-sub">Pagamentos · 21/10 · 10:40 · Polygon · txid <span class="mono">0x9f2k…7a31</span> · download com marca d'água · janela de disputa: 72 h após o primeiro acesso</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Abrir</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="check-circle"></i></span>
+              <div class="li-body">
+                <div class="li-title">Sinal de 75 USDT em ped-2c8d1 confirmado: você completou o sinal (US$ 800)</div>
+                <div class="li-sub">Pagamentos · 20/10 · 11:20 · Polygon · txid <span class="mono">0x9b47…2e1c</span> · 25 % da diferença de US$ 300 · 3 pessoas × US$ 800 · faltam US$ 600 depois da prévia</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html">Ver pedido</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>Anteriores <span>outubro</span></h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="trending-up"></i></span>
+              <div class="li-body">
+                <div class="li-title">O valor do pedido ped-2c8d1 subiu para US$ 800: complete o sinal até 20/10 14:00 (+US$ 75)</div>
+                <div class="li-sub">Pedidos · 18/10 · 14:00 · <span class="handle" data-handle="quartzo-a1f0"></span> subiu o valor · seu sinal: US$ 125 · sem completar até lá, você deixa de participar e o sinal fica com o Lacre como taxa de desistência</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/checkout.html">Completar</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="rotate-ccw"></i></span>
+              <div class="li-body">
+                <div class="li-title">lcr-6c4t2 comprado com exclusividade: 40 USDT reembolsados ao seu endereço de origem</div>
+                <div class="li-sub">Pagamentos · 16/10 · 17:20 · Planilha de preços de leilões de gado em Mato Grosso · comprado com exclusividade por US$ 15.000 antes de romper: todos os apoios voltam inteiros · txid <span class="mono">0xb04d…3f1a</span> · só a taxa de rede descontada</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/apoios.html">Apoios</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="users"></i></span>
+              <div class="li-body">
+                <div class="li-title"><span class="handle" data-handle="farol-3e9b"></span> se juntou ao seu pedido ped-2c8d1 (recompensa total US$ 1.000)</div>
+                <div class="li-sub">Pedidos · 14/10 · 19:40 · 2 pessoas × US$ 500</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html">Ver pedido</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-lac"><i data-icon="unlock"></i></span>
+              <div class="li-body">
+                <div class="li-title">Lacre rompido: conteúdo público para todos · Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</div>
+                <div class="li-sub">Lacres · 12/10 · 23:14 · lcr-7w3n8 · meta de US$ 18.000 batida · todo o conteúdo público, com post nas redes · também no seu cofre (ENT-7C1D) · selo “Rompeu este lacre” no seu perfil</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Abrir</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="check-circle"></i></span>
+              <div class="li-body">
+                <div class="li-title">Sinal de 125 USDT em ped-2c8d1 confirmado: seu pedido está no mural</div>
+                <div class="li-sub">Pagamentos · 12/10 · 10:05 · Polygon · txid <span class="mono">0x6e02…b4d7</span> · carteira do pedido <span class="mono">0x2c8d…91af</span> · US$ 500 por pessoa · sinal de 25 % · os 75 % restantes só depois da prévia</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html">Ver pedido</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-dis"><i data-icon="gavel"></i></span>
+              <div class="li-body">
+                <div class="li-title">Reclamação DSP-0203 aceita: 50 USDT reembolsados ao endereço de origem pelo fundo de garantia</div>
+                <div class="li-sub">Disputas · 10/10 · 11:08 · lcr-2d9r4 (lacre rompido e público em 01/10; em 04/10 às 10:10, sem disputa, o pagamento foi para o vendedor) · reclamação de 08/10 às 22:10, depois da sua janela de 72 h, aceita excepcionalmente: conteúdo diferente da prova pública · txid <span class="mono">0x2d9r…51fe</span></div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/disputa.html">Ver decisão</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="vault"></i></span>
+              <div class="li-body">
+                <div class="li-title">Pedido ped-1b6j8 atendido: as 3 pessoas confirmaram a prévia</div>
+                <div class="li-sub">Pedidos · 08/10 · 15:30 · atendido por <span class="handle" data-handle="cartografo-5a77"></span> · recompensa total US$ 600 · seu material está no cofre desde 07/10 (ENT-2P9Q)</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Abrir</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="vault"></i></span>
+              <div class="li-body">
+                <div class="li-title">Pagamento de 150 USDT no ped-1b6j8 confirmado: material completo no cofre</div>
+                <div class="li-sub">Pagamentos · 07/10 · 09:15 · Polygon · txid <span class="mono">0x5f1c…a28d</span> · os 75 % restantes, depois da prévia · 86 JPG · ENT-2P9Q · 72 h para abrir disputa</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/cofre.html">Abrir</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="eye"></i></span>
+              <div class="li-body">
+                <div class="li-title">Prévia do atendimento disponível no ped-1b6j8: confirme em 72 h e pague os 75 % restantes</div>
+                <div class="li-sub">Pedidos · 06/10 · 14:20 · atendimento de <span class="handle" data-handle="cartografo-5a77"></span> aprovado pela curadoria (Ana R.) · 86 miniaturas com marca d'água · pague US$ 150 até 09/10 às 14:20 ou conteste com motivo · quem não paga desiste, e o sinal fica com o Lacre como taxa de desistência</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html">Ver prévia</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="wallet"></i></span>
+              <div class="li-body">
+                <div class="li-title">Carteira do lcr-5m8c4 pronta: frase de recuperação disponível</div>
+                <div class="li-sub">Carteiras dos itens · 05/10 · 10:30 · 88 vendas · US$ 11.880 líquidos · frase exibida uma única vez após senha + TOTP · recebida às 11:02</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../seller/carteiras.html">Ver carteira</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-lac"><i data-icon="unlock"></i></span>
+              <div class="li-body">
+                <div class="li-title">Lacre rompido: conteúdo público para todos · lcr-2d9r4</div>
+                <div class="li-sub">Lacres · 01/10 · 10:10 · Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos · meta batida, com o seu apoio · todo o conteúdo público, com post nas redes · também no seu cofre (ENT-5B2C) · selo “Rompeu este lacre” no seu perfil</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../public/item.html">Ver</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="check-circle"></i></span>
+              <div class="li-body">
+                <div class="li-title">Pagamento de 50 USDT em lcr-2d9r4 confirmado (12 de 12)</div>
+                <div class="li-sub">Pagamentos · 01/10 · 09:40 · Polygon · txid <span class="mono">0x4d0e…a9c3</span> · fica na carteira do lacre até o resultado</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/apoios.html">Apoios</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="day">
+          <h3>Setembro <span>20 a 30/09</span></h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="li-icon t-pag"><i data-icon="check-circle"></i></span>
+              <div class="li-body">
+                <div class="li-title">Sinal de 50 USDT em ped-1b6j8 confirmado: você se juntou ao pedido</div>
+                <div class="li-sub">Pagamentos · 28/09 · 21:50 · Polygon · txid <span class="mono">0xa31b…6f8e</span> · 3 pessoas × US$ 200 · o resto (US$ 150) só depois da prévia</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html">Ver pedido</a><span class="nd off"></span></div>
+            </div>
+            <div class="list-item">
+              <span class="li-icon"><i data-icon="log-out"></i></span>
+              <div class="li-body">
+                <div class="li-title">ped-7f1a3: você não completou o sinal e deixou de participar; o sinal de US$ 100 ficou com o Lacre como taxa de desistência</div>
+                <div class="li-sub">Pedidos · 20/09 · 14:00 · o valor por pessoa subiu para US$ 800 em 18/09 e o prazo de 48 h para completar o sinal (+US$ 100) terminou · o sinal de quem desiste fica com o Lacre como taxa de serviço, nunca com quem atende · como você não participa mais, pode atender este pedido</div>
+              </div>
+              <div class="li-act"><a class="btn btn-sm" href="../buyer/pedidos.html">Ver pedido</a><span class="nd off"></span></div>
+            </div>
+          </div>
+        </section>
+        <div class="table-foot mt-2"><span>34 de 55 notificações · guardamos 90 dias</span><button class="btn btn-sm" data-toast="Carregando notificações de agosto e setembro">Carregar mais</button></div>
+      </div>
+    </div>
+
+    <aside class="stack" id="preferencias">
+      <div class="card">
+        <div class="card-head"><h3>Push por tipo</h3><span class="badge badge-ok">push ativo</span></div>
+        <div class="card-body">
+          <div class="pref"><div><b>Curadoria</b><div class="d">aprovado e publicado, ajustes solicitados, rejeitado</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Lacres</b><div class="d">marcos de 25/50/75/90 % (prévia pública; cada um garantido ao vendedor), rompido (conteúdo público para todos), não bateu a meta (quanto fica garantido ao vendedor e quanto volta a você), atualizações do vendedor</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Pagamentos</b><div class="d">aguardando confirmação, confirmado, renovação de assinatura, reembolso enviado ao endereço de origem</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Pedidos</b><div class="d">o valor subiu (complete o sinal em 48 h), nova pessoa no pedido, novo extra, proposta de extra, prévia do atendimento (72 h para pagar os 75 % restantes), atendido (material no cofre), lote aceito (por unidade), deixou de participar</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Mensagens</b><div class="d">novas mensagens e perguntas nos seus pedidos</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Disputas</b><div class="d">janela terminando, abertura, resposta do vendedor, decisão</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Carteiras dos itens</b><div class="d">para quem vende: carteira pronta para receber, frase de recuperação disponível</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+          <div class="pref"><div><b>Segurança</b><div class="d">novo acesso, passkey, alteração de senha · sempre ativo</div></div><label class="switch"><input type="checkbox" checked disabled><span class="track"></span></label></div>
+          <div class="pref"><div><b>Resumo diário</b><div class="d">um único aviso às 09:00 em vez de notificações individuais (exceto segurança e janelas de 48 h dos pedidos)</div></div><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
+          <div class="row end mt-2"><button class="btn btn-primary btn-sm" data-toast="Preferências salvas"><i data-icon="check"></i>Salvar</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Dispositivos com push</h3></div>
+        <div class="card-body stack-sm small">
+          <div class="row between"><span><i data-icon="monitor" class="ico brass"></i> ThinkPad · Firefox <span class="xs muted">· desde 24/10</span></span><button class="btn btn-sm btn-ghost" data-toast="Push removido deste dispositivo">Remover</button></div>
+          <div class="row between"><span><i data-icon="smartphone" class="ico brass"></i> Android · Chrome <span class="xs muted">· desde 12/03</span></span><button class="btn btn-sm btn-ghost" data-toast="Push removido deste dispositivo">Remover</button></div>
+          <p class="xs muted">A assinatura push é anônima: o navegador recebe um endereço de entrega aleatório, sem identificador seu. Não tem relação com e-mail ou número.</p>
+        </div>
+      </div>
+      <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Sem canais externos</span>Não enviamos e-mail nem SMS porque não os temos. Um canal Telegram ou Signal pode entrar na V2, com aviso de que ele vincula um identificador externo à sua conta.</div></div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

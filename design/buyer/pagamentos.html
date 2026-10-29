@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pagamentos · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .split > * { min-width: 0; }
+    .tbl-pay td { white-space: nowrap; }
+    .tbl-pay td.wrap { white-space: normal; min-width: 200px; }
+    .tbl-pay td.wrap-sm { white-space: normal; min-width: 140px; }
+    .table td.st { white-space: normal; min-width: 170px; }
+    .table a.tx { font-family: var(--font-mono); font-size: var(--fs-xs); display: inline-flex; align-items: center; gap: 4px; color: var(--fg-2); }
+    .table a.tx svg { width: 12px; height: 12px; color: var(--muted); }
+    .table a.tx:hover { color: var(--brass); }
+    .table .badge + .sub { margin-top: 4px; }
+    .how { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; counter-reset: h; }
+    .how > div { padding: 16px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); }
+    .how > div::before { counter-increment: h; content: counter(h); display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; background: var(--brass-soft); color: var(--brass); font-weight: 700; font-size: var(--fs-xs); margin-bottom: 10px; }
+    .how h4 { font-size: var(--fs-md); margin-bottom: 6px; }
+    .how p { font-size: var(--fs-sm); color: var(--muted); }
+    @media (max-width: 480px) { .how { grid-template-columns: 1fr; } }
+    /* QR simulado: o código real é gerado a partir do endereço derivado */
+    .qr-mock { width: 148px; height: 148px; border-radius: 8px; background: repeating-conic-gradient(var(--fg) 0 25%, transparent 0 50%) 0 0/16px 16px; border: 8px solid var(--surface); box-shadow: 0 0 0 1px var(--border); flex: none; }
+    .addr-box { display: flex; gap: 16px; align-items: flex-start; }
+    .addr-box .qr-mock { width: 120px; height: 120px; background-size: 14px 14px; }
+    .addr-box > .stack-sm { flex: 1; min-width: 0; }
+    @media (max-width: 480px) { .addr-box { flex-direction: column; } }
+    .faq details { border-top: 1px solid var(--border); padding: 10px 0; font-size: var(--fs-sm); }
+    .faq details:last-child { border-bottom: 1px solid var(--border); }
+    .faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+    .faq summary::after { content: "+"; color: var(--muted); }
+    .faq details[open] summary::after { content: "–"; }
+    .faq p { color: var(--muted); margin-top: 6px; }
+  </style>
+</head>
+<body data-shell="buyer" data-page="pagamentos" data-title="Pagamentos" data-root="../">
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Comprador · pagamentos</p>
+        <h1 class="mt-1">Pagamentos</h1>
+        <p class="sub">Tudo o que esta conta pagou para carteiras de itens e de pedidos, com rede, confirmações e txid. Valores em US$; stablecoins valem 1:1.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" data-toast="Histórico exportado em CSV (15 pagamentos, 2 reembolsos)"><i data-icon="download"></i>Exportar CSV</button>
+        <button class="btn btn-primary" data-tab="como-pagar"><i data-icon="qr-code"></i>Como pagar</button>
+      </div>
+    </div>
+
+    <div class="alert alert-anon mb-3"><i data-icon="shield"></i><div><span class="alert-title">O Lacre não guarda saldo</span>Você paga da sua própria carteira direto para a carteira de cada item. Guardamos por pagamento: valor, rede, txid e confirmações. O seu endereço de origem fica registrado só enquanto pode haver reembolso.</div></div>
+
+    <div class="stat-grid mb-3">
+      <div class="stat"><span class="label">Pagamentos confirmados</span><span class="value">15 · US$ 3.030</span><span class="delta flat">9 itens e 3 pedidos · Polygon, Base e Tron</span></div>
+      <div class="stat"><span class="label">Aguardando confirmação</span><span class="value">0</span><span class="delta flat">nenhuma transação vista na rede sem confirmar</span></div>
+      <div class="stat"><span class="label">Em lacres ainda abertos</span><span class="value">US$ 250,00</span><span class="delta flat">lcr-4m2x9 · US$ 100 garantidos ao vendedor (marco 50 %) + US$ 150 que voltam se falhar antes do marco 75 %</span></div>
+      <div class="stat"><span class="label">Em pedidos abertos</span><span class="value">US$ 200,00</span><span class="delta flat">sinal no ped-2c8d1 (125 + 75) · faltam US$ 600 depois da prévia</span></div>
+      <div class="stat"><span class="label">Em disputa</span><span class="value">US$ 490,00</span><span class="delta flat">lcr-9f2k7 · DSP-0207 · na carteira do item até a decisão da curadoria</span></div>
+    </div>
+
+    <div data-tabs>
+      <div class="tabs">
+        <a class="tab active" data-tab="pagamentos" href="#">Pagamentos <span class="count">15</span></a>
+        <a class="tab" data-tab="reembolsos" href="#">Reembolsos recebidos <span class="count">2</span></a>
+        <a class="tab" data-tab="como-pagar" href="#">Como pagar</a>
+        <a class="tab" data-tab="redes" href="#">Redes aceitas</a>
+      </div>
+
+      <!-- ================= Pagamentos ================= -->
+      <div class="tab-panel active" data-panel="pagamentos">
+        <div class="toolbar">
+          <div class="chips">
+            <button class="chip active" data-toast="Filtro: tudo (15 pagamentos)">Tudo</button>
+            <button class="chip" data-toast="Filtro: itens (10 pagamentos)">Itens</button>
+            <button class="chip" data-toast="Filtro: pedidos (5 pagamentos)">Pedidos</button>
+            <button class="chip" data-toast="Filtro: em carteiras ainda abertas (5 pagamentos · US$ 940,00)">Em carteiras abertas</button>
+            <button class="chip" data-toast="Filtro: reembolsados (2 pagamentos · US$ 90,00)">Reembolsados</button>
+          </div>
+          <div class="right"><select class="select" style="width:auto" aria-label="Período"><option>Desde setembro</option><option>Outubro de 2026</option><option>Setembro de 2026</option><option>Tudo</option></select></div>
+        </div>
+        <div class="table-wrap">
+          <table class="table compact tbl-pay">
+            <thead><tr><th>Data</th><th>Item ou pedido</th><th>O que foi pago</th><th class="num">Valor</th><th>Status</th><th>Rede · endereço</th><th class="num">Conf.</th><th>Txid</th></tr></thead>
+            <tbody>
+              <tr><td class="num">25/10 · 19:30</td><td class="wrap"><b><a href="../public/item.html">Monitor semanal de patentes do setor farmacêutico brasileiro</a></b><span class="sub">lcr-6d1k5 · assinatura</span></td><td class="wrap-sm">Assinatura<span class="sub">período 25/10 a 24/11</span></td><td class="num">190,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">edições liberadas até 24/11</span></td><td>Tron<span class="sub mono">TQ6d…1k5P</span></td><td class="num">19/19</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (tronscan)">7b2c…d4e9<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">25/10 · 18:25</td><td class="wrap"><b><a href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></b><span class="sub">lcr-4m2x9 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">2º apoio · total US$ 250</span></td><td class="num">150,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">volta se falhar antes do marco 75 %</span></td><td>Polygon<span class="sub mono">0x4m2x…b7e1</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x8d14…e0b9<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">23/10 · 17:22</td><td class="wrap"><b><a href="../public/item.html">Como uma operação de última milha cortou 31 % do custo: playbook, planilhas e modelo de roteirização</a></b><span class="sub">lcr-3c7r8 · camadas</span></td><td class="wrap-sm">Camada 1<span class="sub">sumário executivo</span></td><td class="num">190,00 USDC</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">acesso no cofre · ENT-5K7D</span></td><td>Base<span class="sub mono">0x3c7r…8a2d</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (basescan)">0x5c7e…9a02<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">22/10 · 20:05</td><td class="wrap"><b><a href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></b><span class="sub">lcr-4m2x9 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">1º apoio</span></td><td class="num">100,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">garantido ao vendedor (antes do marco 50 %)</span></td><td>Polygon<span class="sub mono">0x4m2x…5f09</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2a9c…41f7<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">21/10 · 10:02</td><td class="wrap"><b><a href="../public/item.html">12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</a></b><span class="sub">lcr-9f2k7 · cópias · edição limitada</span></td><td class="wrap-sm">Cópia<span class="sub">38 de 100 · ENT-3F9A</span></td><td class="num">490,00 USDT</td><td class="st"><a class="badge st-analise status-link" href="../buyer/disputa.html" data-tip="Acompanhar a disputa">Em disputa<i data-icon="chevron-right"></i></a><span class="sub">DSP-0207 · aberta em 25/10 · na carteira do item até a decisão</span></td><td>Polygon<span class="sub mono">0x9f2k…b8e3</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…7a31<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">20/10 · 11:15</td><td class="wrap"><b><a href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></b><span class="sub">ped-2c8d1 · pedido com recompensa</span></td><td class="wrap-sm">Completou o sinal<span class="sub">25 % da diferença (US$ 300)</span></td><td class="num">75,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">na carteira do pedido · faltam US$ 600 depois da prévia</span></td><td>Polygon<span class="sub mono">0x2c8d…6e3b</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9b47…2e1c<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">12/10 · 09:40</td><td class="wrap"><b><a href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></b><span class="sub">ped-2c8d1 · pedido com recompensa</span></td><td class="wrap-sm">Abriu o pedido<span class="sub">sinal de 25 % (valor US$ 500)</span></td><td class="num">125,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">na carteira do pedido · volta só se o pedido expirar sem atendimento</span></td><td>Polygon<span class="sub mono">0x2c8d…1a4e</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x6e02…b4d7<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">08/10 · 15:30</td><td class="wrap"><b><a href="../public/item.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></b><span class="sub">lcr-2n8v4 · licença</span></td><td class="wrap-sm">Licença editorial<span class="sub">12 meses · Brasil · LIC-2N8V4-7L4E</span></td><td class="num">900,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">contrato e pacote no cofre</span></td><td>Polygon<span class="sub mono">0x2n8v…4a61</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2n8v…c3a0<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">07/10 · 19:20</td><td class="wrap"><b><a href="../public/pedido.html?p=ped-1b6j8">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></b><span class="sub">ped-1b6j8 · pedido com recompensa</span></td><td class="wrap-sm">Pagou os 75 % restantes<span class="sub">depois de aprovar a prévia</span></td><td class="num">150,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">material completo no cofre em 07/10</span></td><td>Polygon<span class="sub mono">0x1b6j…e907</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x1b6j…3c55<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">03/10 · 10:12</td><td class="wrap"><b><a href="../public/item.html">Planilha de preços de leilões de gado em 40 municípios de Mato Grosso (2019–2026)</a></b><span class="sub">lcr-6c4t2 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">meta US$ 6.000</span></td><td class="num">40,00 USDT</td><td class="st"><span class="badge st-arquivado">Reembolsado</span><span class="sub">item vendido com exclusividade em 16/10 · devolvido ao endereço de origem</span></td><td>Polygon<span class="sub mono">0x6c4t…2b7d</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x61c9…0d4b<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">02/10 · 18:40</td><td class="wrap"><b><a href="../public/item.html">1.200 páginas de jornais operários de São Paulo (1917–1930) digitalizadas em 600 dpi</a></b><span class="sub">lcr-5t6w1 · cópias ilimitadas</span></td><td class="wrap-sm">Cópia<span class="sub">ENT-5T6W</span></td><td class="num">120,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">acesso no cofre</span></td><td>Polygon<span class="sub mono">0x5t6w…9e27</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x5t6w…b1c8<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">01/10 · 09:40</td><td class="wrap"><b><a href="../public/item.html">Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos</a></b><span class="sub">lcr-2d9r4 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">rompido e público em 01/10</span></td><td class="num">50,00 USDT</td><td class="st"><span class="badge st-arquivado">Reembolsado</span><span class="sub">reclamação aceita em 10/10 (DSP-0203) · devolvido pelo fundo de garantia</span></td><td>Polygon<span class="sub mono">0x2d9r…4c1a</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x4d0e…a9c3<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">28/09 · 16:05</td><td class="wrap"><b><a href="../public/pedido.html?p=ped-1b6j8">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></b><span class="sub">ped-1b6j8 · pedido com recompensa</span></td><td class="wrap-sm">Entrou no pedido<span class="sub">sinal de 25 % (valor US$ 200)</span></td><td class="num">50,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">atendido em 08/10 · acesso no cofre</span></td><td>Polygon<span class="sub mono">0x1b6j…c42d</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xa31b…6f8e<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">20/09 · 12:20</td><td class="wrap"><b><a href="../public/item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</a></b><span class="sub">lcr-7w3n8 · lacre coletivo</span></td><td class="wrap-sm">Apoio<span class="sub">meta US$ 18.000</span></td><td class="num">300,00 USDT</td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">rompido e público em 12/10 · acesso no cofre (ENT-7C1D)</span></td><td>Polygon<span class="sub mono">0x7w3n…8f41</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xc7d2…58e1<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">02/09 · 11:00</td><td class="wrap"><b><a href="../public/pedido.html?p=ped-7f1a3">Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)</a></b><span class="sub">ped-7f1a3 · pedido com recompensa</span></td><td class="wrap-sm">Entrou no pedido<span class="sub">sinal de 25 % (valor US$ 400)</span></td><td class="num">100,00 USDT</td><td class="st"><span class="badge st-arquivado">Ficou com o Lacre</span><span class="sub">não completou o sinal quando o valor subiu para US$ 800 (18/09) · ficou com o Lacre (taxa de desistência) em 20/09</span></td><td>Polygon<span class="sub mono">0x7f1a…3d58</span></td><td class="num">12/12</td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x7f1a…92b6<i data-icon="external-link"></i></a></td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>15 pagamentos · US$ 3.030,00 confirmados · 2 reembolsados depois (US$ 90,00) · 1 em disputa · 1 sinal de desistência</span><span>Reconciliação on-chain: 27/10 · 14:10</span></div>
+        </div>
+        <p class="anon-note mt-2"><i data-icon="eye-off"></i><span>Quem olha a rede vê um pagamento para um endereço derivado, nunca o que foi comprado nem por quem. Compras aparecem ao vendedor só como contagem ("1 cópia vendida"); pessoas de um pedido aparecem pelo pseudônimo; apoios a lacres, só como contagem. O endereço da carteira de cada item é público na página de prova; os endereços derivados, não.</span></p>
+      </div>
+
+      <!-- ================= Reembolsos recebidos ================= -->
+      <div class="tab-panel" data-panel="reembolsos">
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Data</th><th>Item ou pedido</th><th>Motivo</th><th class="num">Devolvido</th><th>Status</th><th>Rede · devolvido para</th><th>Txid</th></tr></thead>
+            <tbody>
+              <tr><td class="num">16/10 · 17:20</td><td><b><a href="../public/item.html">Planilha de preços de leilões de gado em 40 municípios de Mato Grosso (2019–2026)</a></b><span class="sub">lcr-6c4t2 · lacre coletivo · apoio de 40,00 USDT em 03/10</span></td><td><span class="badge st-vendido">Vendido com exclusividade</span><span class="sub">outro comprador levou o item por US$ 15.000; os 118 apoios voltaram</span></td><td class="num">40,00 USDT<span class="sub">da carteira do lacre</span></td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">12/12</span></td><td>Polygon<span class="sub mono">0x7d2e…40b9 · seu endereço de origem</span></td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0xb04d…3f1a<i data-icon="external-link"></i></a></td></tr>
+              <tr><td class="num">10/10 · 16:40</td><td><b><a href="../public/item.html">Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos</a></b><span class="sub">lcr-2d9r4 · lacre coletivo · apoio de 50,00 USDT em 01/10 · rompido e público no mesmo dia · pago ao vendedor em 04/10</span></td><td><span class="badge badge-ok">Reclamação aceita</span><span class="sub">conteúdo diferente da prova pública · reclamação de 08/10 22:10, fora da janela de 72 h (até 04/10 10:10) e depois do pagamento ao vendedor · aceita excepcionalmente em 10/10 (DSP-0203)</span></td><td class="num">50,00 USDT<span class="sub">do fundo de garantia · já pago ao vendedor</span></td><td class="st"><span class="badge st-liquidada">Confirmado</span><span class="sub">12/12</span></td><td>Polygon<span class="sub mono">0x7d2e…40b9 · seu endereço de origem</span></td><td><a class="tx" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2d9r…51fe<i data-icon="external-link"></i></a></td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>2 reembolsos · US$ 90,00 · sempre ao endereço de origem do pagamento, descontada só a taxa de rede (≈ US$ 0,04 em Polygon)</span><span>Depois do reembolso, o endereço de origem é apagado do nosso banco; fica só o txid, público na rede.</span></div>
+        </div>
+        <div class="grid cols-3 mt-3">
+          <div class="card">
+            <div class="card-head"><h3>Quando há reembolso</h3></div>
+            <div class="card-body stack-sm small">
+              <div class="anon-note"><i data-icon="hand-coins"></i><span>Lacre que não bate a meta até o prazo: volta o que entrou depois do último marco batido (tudo, se nenhum marco foi batido). Comprado com exclusividade por outra pessoa: todos os apoios voltam. Em até 24 h.</span></div>
+              <div class="anon-note"><i data-icon="file-search"></i><span>Pedido cujo prazo acaba sem nenhum vendedor: o sinal volta. Por desistência, não: quem não completa o sinal ou não paga os 75 % depois da prévia perde o sinal, que fica com o Lacre como taxa de desistência.</span></div>
+              <div class="anon-note"><i data-icon="gavel"></i><span>Lance que não vence, oferta recusada, disputa ou reclamação aceita, item retirado antes de o pagamento ir para o vendedor.</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>De onde sai o dinheiro</h3></div>
+            <div class="card-body stack-sm small">
+              <p>Enquanto o pagamento não foi para o vendedor, da própria <b>carteira do item</b>.</p>
+              <p>Depois disso (como no lcr-2d9r4, já pago ao vendedor), do <b>fundo de garantia</b> do Lacre.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>O que é descontado</h3></div>
+            <div class="card-body stack-sm small">
+              <p>Só a <b>taxa de rede</b> do envio de volta (≈ US$ 0,04 em Polygon). Nada é cobrado por pedido que expira ou lance que não vence. Em lacre que falha, o valor até o último marco batido fica com o vendedor, que já liberou as prévias; o resto volta.</p>
+              <p>Por isso a insistência: pague de uma carteira que você controla. O que volta para o endereço de uma corretora não chega até você.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Como pagar ================= -->
+      <div class="tab-panel" data-panel="como-pagar">
+        <div class="split">
+          <div class="stack">
+            <div class="how">
+              <div><h4>Escolha a rede</h4><p>USDT ou USDC em Polygon, Tron ou Base. Bitcoin on-chain só em itens Exclusivo e Cópias. O checkout mostra as confirmações e a taxa típica de cada rede.</p></div>
+              <div><h4>Copie o endereço ou leia o QR</h4><p>Cada pagamento recebe um endereço derivado da carteira do item, gerado só para você, com o valor exato. Ele vale por 24 h; depois disso, gere outro no checkout.</p></div>
+              <div><h4>Envie o valor exato de uma carteira que você controla</h4><p>MetaMask, Trust, Ledger ou a carteira do celular. Nunca direto de uma corretora: reembolsos voltam ao endereço de origem, e a corretora não os repassa para você. A taxa de rede é paga na sua carteira.</p></div>
+              <div><h4>Aguarde as confirmações</h4><p>Polygon 12 · Tron 19 · Base 12 · Bitcoin 2. Ao atingir o número, o acesso é liberado sozinho (cópia, camada, licença, assinatura) ou o valor é somado ao lacre ou ao pedido. Você recebe uma notificação com o txid.</p></div>
+            </div>
+            <div class="alert alert-info"><i data-icon="book-open"></i><div><span class="alert-title">Primeira vez com cripto?</span>O guia mostra, em 10 minutos, como instalar a MetaMask, ativar a rede Polygon e colocar USDT na carteira. <a class="link" href="../public/guia-cripto.html">Guia em 10 minutos</a></div></div>
+            <div class="alert alert-danger"><i data-icon="alert-triangle"></i><div><span class="alert-title">Token ou rede errados podem se perder</span>USDT enviado por outra rede, ou outro token enviado ao endereço, não é reconhecido pelo checkout e não libera o acesso. Abra um chamado com o txid e tentamos devolver ao endereço de origem, sem garantia. Confira moeda e rede na sua carteira antes de enviar.</div></div>
+            <div class="faq">
+              <details><summary>Enviei um valor diferente do exato</summary><p>A menos: o pagamento fica "aguardando" e você completa a diferença no mesmo endereço dentro das 24 h; sem o complemento, o que entrou volta ao endereço de origem. A mais: o excedente segue para o vendedor junto com o pagamento.</p></details>
+              <details><summary>O endereço venceu antes de eu pagar</summary><p>Volte ao checkout e gere outro. Um pagamento que chega a um endereço vencido é devolvido ao endereço de origem, descontada a taxa de rede.</p></details>
+              <details><summary>Paguei direto de uma corretora</summary><p>O acesso é liberado normalmente. O problema é só o reembolso: se o lacre falhar ou a disputa for procedente, o valor volta ao endereço da corretora, e ela não o repassa para você. Abra um chamado na corretora com o txid; o Lacre não tem como interferir.</p></details>
+              <details><summary>Quanto tempo até o acesso?</summary><p>Polygon e Base ≈ 30 s, Tron ≈ 1 min, Bitcoin ≈ 20 min. O checkout acompanha a transação e libera sozinho; não precisa ficar na página.</p></details>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>Como aparece no checkout</h3><span class="badge st-aguardando">Aguardando pagamento</span></div>
+              <div class="card-body addr-box">
+                <div class="qr-mock" aria-label="QR code do endereço"></div>
+                <div class="stack-sm">
+                  <div class="xs muted">Endereço derivado da carteira do item lcr-4g7h9 · USDT · Polygon</div>
+                  <div class="hash"><code>0x4g7h…1d4a</code><button class="btn btn-sm btn-ghost" data-copy="0x4g7h…1d4a" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div>
+                  <dl class="kv"><dt>Valor</dt><dd><b>350,00 USDT</b> · exato</dd><dt>Validade</dt><dd>24 h a partir da geração</dd><dt>Libera</dt><dd>12 confirmações · ≈ 30 s</dd></dl>
+                  <a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="external-link"></i>Abrir um checkout</a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>Reembolsos</h3></div>
+              <div class="card-body stack-sm small">
+                <div class="anon-note"><i data-icon="rotate-ccw"></i><span>Voltam sempre ao endereço de origem do pagamento, a partir da carteira do item.</span></div>
+                <div class="anon-note"><i data-icon="percent"></i><span>Nada é cobrado: só a taxa de rede do envio de volta.</span></div>
+                <div class="anon-note"><i data-icon="clock"></i><span>Lacre que falha: o que entrou depois do último marco, em até 24 h após o prazo. Disputa procedente: na decisão da curadoria. Pedido expirado: no dia seguinte ao prazo.</span></div>
+                <a class="link xs" href="#" data-tab="reembolsos">Ver reembolsos recebidos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Redes aceitas ================= -->
+      <div class="tab-panel" data-panel="redes">
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Moeda</th><th>Rede</th><th class="num">Confirmações</th><th>Tempo típico</th><th>Taxa típica de rede</th><th>Onde é aceita</th></tr></thead>
+            <tbody>
+              <tr><td><b>USDT</b></td><td>Polygon</td><td class="num">12</td><td>≈ 30 s</td><td>≈ US$ 0,04, paga em POL na sua carteira</td><td>todos os modelos</td></tr>
+              <tr><td><b>USDC</b></td><td>Polygon</td><td class="num">12</td><td>≈ 30 s</td><td>≈ US$ 0,04 em POL</td><td>todos os modelos</td></tr>
+              <tr><td><b>USDT</b></td><td>Tron (TRC-20)</td><td class="num">19</td><td>≈ 1 min</td><td>≈ US$ 1,50 em TRX · varia com a energia da rede</td><td>todos os modelos</td></tr>
+              <tr><td><b>USDT</b></td><td>Base</td><td class="num">12</td><td>≈ 30 s</td><td>≈ US$ 0,02 em ETH</td><td>todos os modelos</td></tr>
+              <tr><td><b>USDC</b></td><td>Base</td><td class="num">12</td><td>≈ 30 s</td><td>≈ US$ 0,02 em ETH</td><td>todos os modelos</td></tr>
+              <tr><td><b>BTC</b></td><td>Bitcoin on-chain</td><td class="num">2</td><td>≈ 20 min</td><td>≈ US$ 2,00 · varia com a rede</td><td>só Exclusivo e Cópias</td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>Stablecoins valem 1:1: 1 USDT = 1 USDC = US$ 1. Em Bitcoin, o valor exato é fixado na cotação do momento em que o endereço é gerado e vale pelas mesmas 24 h.</span><span>Atualizado em 27/10 · 14:00</span></div>
+        </div>
+        <div class="grid cols-3 mt-3">
+          <div class="card">
+            <div class="card-head"><h3>Por que estas redes</h3></div>
+            <div class="card-body stack-sm small">
+              <p>Taxas baixas. Um lacre com 1.187 apoios pode precisar de 1.187 reembolsos, e cada um paga uma taxa de rede a partir da carteira do item.</p>
+              <p>Bitcoin on-chain entra só onde há poucos pagamentos e poucos reembolsos: Exclusivo e Cópias.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Lightning não é aceito</h3></div>
+            <div class="card-body stack-sm small">
+              <p>Uma invoice Lightning paga não pode ser reembolsada ao endereço de origem: não existe "origem" para devolver. Como lacres, pedidos e lances dependem de reembolso automático, o Lacre aceita Bitcoin só on-chain.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>O que confere on-chain</h3></div>
+            <div class="card-body stack-sm small">
+              <p>O endereço público da carteira de cada item está na página de prova. Qualquer pessoa confere quanto entrou: o lcr-4m2x9 mostra <span class="mono">0x4m2x…c21e</span> · Polygon · US$ 54.120 em 1.187 pagamentos.</p>
+              <a class="link xs" href="../public/prova.html">Ver uma página de prova</a>
+            </div>
+          </div>
+        </div>
+        <p class="xs muted mt-2">USDC em Tron não é aceito: a emissora encerrou o suporte à rede em 2024. Em Tron, use USDT.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

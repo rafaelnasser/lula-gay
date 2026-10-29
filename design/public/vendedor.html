@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Para vendedores · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
+    [id] { scroll-margin-top: 84px; }
+    .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .section-head p { color: var(--muted); margin-top: 6px; max-width: 60ch; }
+    .how-step p { color: var(--muted); font-size: var(--fs-sm); margin-top: 2px; }
+    .yes-no { list-style: none; margin: 0; padding: 0; }
+    .yes-no li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--fg-2); }
+    .yes-no li:first-child { border-top: 0; padding-top: 0; }
+    .yes-no svg { width: 16px; height: 16px; flex: none; margin-top: 2px; }
+    .yes-no.yes svg { color: var(--ok); } .yes-no.no svg { color: var(--danger); }
+    .readonly { background: var(--surface-3); color: var(--fg-2); }
+    .cta { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .cta p { max-width: 56ch; color: var(--fg-2); }
+  </style>
+</head>
+<body data-shell="public" data-page="vendedor" data-root="../">
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="glow"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Para vendedores</p>
+          <h1 class="display mt-1">Você define o preço. Nós garantimos o pagamento e o anonimato.</h1>
+          <p class="lead mt-2">Envie documentos, bases, fotos, vídeos, áudios ou apurações, de qualquer país. A curadoria analisa em até 48 h, emite uma prova pública e divulga nas redes. Você define o preço em US$. Cada item aprovado ganha uma carteira cripto própria: os pagamentos entram nela e chegam a você depois da janela de disputa. Ninguém sabe quem você é. Nem nós.</p>
+          <div class="row mt-3"><a class="btn btn-lg btn-primary" href="../auth/criar-conta.html"><i data-icon="user-x"></i>Criar conta anônima</a><a class="btn btn-lg" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Ver o assistente de envio</a></div>
+          <div class="row mt-3"><span class="badge badge-outline"><i data-icon="wallet"></i>Pagamento direto na carteira do item</span><span class="badge badge-outline"><i data-icon="eye-off"></i>Pseudônimo público, identidade nunca</span><span class="badge badge-outline"><i data-icon="globe"></i>Vendedores de 41 países · pt, en, es</span></div>
+        </div>
+        <div class="card raised">
+          <div class="card-head"><i data-icon="key"></i><h3>Como você recebe</h3></div>
+          <div class="card-body stack">
+            <div class="how-step"><span class="n"><i data-icon="vault"></i></span><div><b>Item aprovado ganha uma carteira</b><p class="small muted">Criada pela plataforma na aprovação, com o endereço público na prova. Compradores e apoiadores pagam direto nela, da própria carteira, em USDT ou USDC (Polygon, Tron, Base); Bitcoin em Exclusivo e Cópias.</p></div></div>
+            
+            <div class="how-step"><span class="n"><i data-icon="percent"></i></span><div><b>Você recebe 90 %</b><p class="small muted">O Lacre fica com 10 % de comissão. Você recebe 90 %. Depois da janela de disputa, a carteira do item passa a ser sua e você transfere para onde quiser (<a class="link" href="../seller/carteiras.html">Carteiras dos itens</a>). Se um lacre não bater a meta, você recebe 90 % do valor do último marco batido (o Lacre fica com os mesmos 10 %).</p></div></div>
+            <div class="how-step"><span class="n"><i data-icon="eye-off"></i></span><div><b>Ninguém sabe quem você é</b><p class="small muted">Nem o comprador, nem a curadoria, nem a plataforma. Só o seu pseudônimo.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Números -->
+  <section class="section tight band">
+    <div class="container">
+      <div class="stat-grid">
+        <div class="stat"><span class="label">Tempo mediano de curadoria</span><span class="value">36 h</span><span class="delta up"><i data-icon="trending-up"></i>91 % dentro de 48 h</span></div>
+        <div class="stat"><span class="label">Aprovação na primeira análise</span><span class="value">71 %</span><span class="delta flat">o resto volta com lista de ajustes</span></div>
+        <div class="stat"><span class="label">Mediana até a primeira venda</span><span class="value">4 dias</span><span class="delta flat">após a publicação</span></div>
+        <div class="stat"><span class="label">Pago a vendedores em outubro</span><span class="value">US$ 212 mil</span><span class="delta up"><i data-icon="trending-up"></i>+18 % vs. setembro</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabela comparativa -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div id="modelos"><p class="eyebrow">Modelos de venda</p><h2>Nove jeitos de vender</h2><p>Você escolhe no passo 4 do envio. A curadoria pode sugerir outro modelo ou preço; nunca impõe.</p></div>
+        <a class="btn btn-ghost" href="como-funciona.html">Regras de cada modelo<i data-icon="arrow-right"></i></a>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th>Modelo</th><th>Quem compra</th><th>Quando você recebe</th><th>Fase</th></tr></thead>
+          <tbody>
+            <tr><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">Preço fixo; limite de unidades, preço escalonado e valor de exclusividade opcionais</span></td><td>Muitos</td><td>Quando você encerra as vendas, após a última janela de disputa de 72 h</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="sub">Preço fixo, oferta ou ambos; exclusividade declarada por 24 meses</span></td><td>Um</td><td>72 h após a entrega, sem disputa aberta; conteúdo destruído dos servidores depois</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">Meta e prazo; marcos de 25, 50, 75 e 90 % com prévia pública, cada um garantido a você; ao bater a meta, tudo fica público para todos; valor de exclusividade opcional</span></td><td>Multidão, a partir de US$ 10</td><td>72 h após a liberação pública; se a meta não bater, no fim do prazo, 90 % do valor do último marco batido</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Atender um pedido</span><span class="sub">Você entrega o que foi pedido; cada pessoa já pagou um sinal de 25 %, vê uma prévia e paga os 75 % restantes. Você recebe 90 % do que cada pessoa pagou por inteiro; o sinal de quem desiste fica com o Lacre. Quem participa de um pedido não pode atendê-lo. Também há pedidos por unidade, pagos por envio aceito</span></td><td>As pessoas do pedido, todas pelo mesmo valor</td><td>72 h depois que as pessoas pagam os 75 % restantes</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span><span class="sub">Lances secretos, segundo preço, reserva opcional</span></td><td>Um</td><td>72 h após a entrega ao vencedor; lances perdedores voltam ao endereço de origem</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="sub">Sumário, relatório, planilhas, pacote; o comprador paga só a diferença para subir; valor de exclusividade opcional</span></td><td>Muitos</td><td>Quando você encerra as vendas, após a última janela de disputa</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="sub">Fonte semanal, quinzenal ou mensal; edições avulsas</span></td><td>Muitos, por período</td><td>Cada edição tem carteira própria, entregue 72 h após a publicação dela</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="sub">Editorial, comercial ou exclusiva, com contrato gerado</span></td><td>Muitos, por finalidade</td><td>Quando você encerra as licenças, após a última janela de disputa</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+            <tr><td><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span><span class="sub">Exclusividade por N dias, depois abre como Cópias</span></td><td>Um, depois muitos</td><td>Após a janela exclusiva e, depois, quando você encerra as cópias</td><td><span class="badge st-ativo">Disponível</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-foot"><span><b>Valor de exclusividade (opcional)</b> em Cópias, Lacre coletivo e Camadas: quem pagar leva o item só para si e o anúncio encerra na hora; em lacre coletivo os apoios são devolvidos, em cópias e camadas quem já comprou mantém o acesso. Sugestão de mínimo: 5× a meta ou 20× o preço unitário.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo a passo -->
+  <section class="section band">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Envio</p><h2>Seis passos, uma tela</h2><p>O assistente de envio guarda rascunhos. Você pode parar e voltar. Nada vai para a curadoria antes do passo 6.</p></div>
+        <a class="btn btn-primary" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Abrir o assistente</a>
+      </div>
+      <div class="stepper mb-3"><div class="step done"><span class="n">1</span><span class="t">Tipo</span></div><div class="step done"><span class="n">2</span><span class="t">Arquivos</span></div><div class="step done"><span class="n">3</span><span class="t">Prévia</span></div><div class="step done"><span class="n">4</span><span class="t">Modelo</span></div><div class="step done"><span class="n">5</span><span class="t">Declarações</span></div><div class="step done"><span class="n">6</span><span class="t">Envio</span></div></div>
+      <div class="grid cols-3">
+        <div class="card"><div class="card-body"><div class="how-step"><span class="n">1</span><div><b>Tipo e categoria</b><p>Documento, dados, imagem, vídeo, áudio, texto, código ou pacote, com o país e o idioma do conteúdo. A categoria mostra o nível de risco: alto significa dois curadores e, se houver terceiros, jurídico. Vincule a um pedido aberto, se for o caso.</p></div></div></div></div>
+        <div class="card"><div class="card-body"><div class="how-step"><span class="n">2</span><div><b>Arquivos</b><p>Até 20 GB por item. O hash SHA-256 é calculado no seu navegador. Metadados são removidos antes de qualquer humano ver (EXIF com GPS e dispositivo, autor em DOCX e PDF, tags de áudio) e você recebe o relatório.</p></div></div></div></div>
+        <div class="card"><div class="card-body"><div class="how-step"><span class="n">3</span><div><b>Prévia e descrição</b><p>Título até 120 caracteres, resumo até 280, descrição em Markdown restrito. Escolha as prévias geradas (borradas, tarjadas, 10 linhas, 30 s) e marque o que a curadoria pode mostrar.</p></div></div></div></div>
+        <div class="card"><div class="card-body"><div class="how-step"><span class="n">4</span><div><b>Modelo e preço</b><p>Preço em US$, limite, meta, prazo, prévias de cada marco (lacre coletivo) e, se quiser, o valor de exclusividade. Veja faixas de preço de itens semelhantes aprovados antes de enviar.</p></div></div></div></div>
+        <div class="card"><div class="card-body"><div class="how-step"><span class="n">5</span><div><b>Declarações</b><p>Seis declarações com texto completo: origem lícita, direito de venda, sem dados pessoais de terceiros, sem conteúdo íntimo ou de menores, sem credenciais, sem informação privilegiada ou sigilo legal. Seu pseudônimo aparece sempre no item, na prova e nos posts.</p></div></div></div></div>
+        <div class="card"><div class="card-body"><div class="how-step"><span class="n">6</span><div><b>Revisão e envio</b><p>Resumo de tudo e prazo estimado (48 h). Depois: triagem em minutos, análise humana, decisão com códigos, prova pública, post nas redes. Você acompanha em “Meus anúncios” e, após a aprovação, em “Carteiras dos itens”.</p></div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aceitamos / não aceitamos -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Política de conteúdo</p><h2>O que aceitamos e o que não aceitamos</h2><p>Resumo. A versão completa, com os códigos de rejeição, está nas políticas.</p></div>
+        <a class="btn btn-ghost" href="politicas.html">Política completa<i data-icon="arrow-right"></i></a>
+      </div>
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><i data-icon="check-circle"></i><h3>Pode ser vendido</h3></div>
+          <div class="card-body"><ul class="yes-no yes">
+            <li><i data-icon="check"></i>Informação de autoria própria: pesquisas, análises, métodos, relatos, fotografias, vídeos, áudios.</li>
+            <li><i data-icon="check"></i>Compilações e tratamentos de dados públicos. O valor é o trabalho de reunir, limpar e estruturar.</li>
+            <li><i data-icon="check"></i>Acervos e documentos históricos digitalizados cujo uso seja permitido.</li>
+            <li><i data-icon="check"></i>Apurações jornalísticas baseadas em fontes públicas, documentos lícitos e entrevistas consentidas.</li>
+            <li><i data-icon="check"></i>Documentos públicos de difícil acesso, reunidos e organizados.</li>
+            <li><i data-icon="check"></i>Material licenciado para revenda, com a licença anexada ao envio.</li>
+          </ul></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><i data-icon="x-circle"></i><h3>Não pode ser vendido</h3></div>
+          <div class="card-body"><ul class="yes-no no">
+            <li><i data-icon="x"></i>Dados pessoais de terceiros sem base legal: listas de documentos de identidade, telefones, endereços, cadastros, bases vazadas.</li>
+            <li><i data-icon="x"></i>Conteúdo íntimo ou sexual de qualquer pessoa; qualquer conteúdo envolvendo menores em contexto sensível.</li>
+            <li><i data-icon="x"></i>Credenciais, senhas, chaves, acessos, exploits ativos, instruções para invasão.</li>
+            <li><i data-icon="x"></i>Material protegido por direitos autorais sem autorização: livros, filmes, software, cursos de terceiros.</li>
+            <li><i data-icon="x"></i>Informação privilegiada sobre companhias abertas; documentos sob sigilo legal obtidos sem autorização.</li>
+            <li><i data-icon="x"></i>Acusações contra pessoas identificáveis sem documentação; segredos comerciais obtidos por violação de confidencialidade.</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="alert alert-info mt-3"><i data-icon="info"></i><div>Na dúvida, não publicamos. Vendedores novos podem ter até 3 itens em análise ao mesmo tempo até a primeira aprovação.</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <span data-seal class="seal-lg" style="display:inline-block"></span>
+        <h2 class="display">Crie uma conta e envie o primeiro item</h2>
+        <p>Dois minutos para criar a conta. Nenhum dado pessoal. O primeiro item entra na fila de curadoria no mesmo dia; a decisão chega em até 48 h.</p>
+        <div class="row"><a class="btn btn-lg btn-primary" href="../auth/criar-conta.html"><i data-icon="user-x"></i>Criar conta anônima</a><a class="btn btn-lg" href="../seller/novo-anuncio.html"><i data-icon="upload"></i>Ver o assistente de envio</a></div>
+        <p class="xs muted">Já tem conta? <a class="link" href="../auth/entrar.html">Entrar</a>. A mesma conta compra e vende.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

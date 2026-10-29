@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Explorar · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
+    a.preview { display: block; }
+    /* filtros recolhidos: botão + chips dos filtros ativos; painel abre sob a barra */
+    .catalog-bar { align-items: flex-start; }
+    .filters-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; min-width: 0; flex: 1 1 320px; }
+    #filters-toggle { gap: 8px; }
+    #filters-toggle .fcount { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 99px; background: var(--brass); color: var(--bg); font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+    #filters-toggle .chev { transition: transform .15s; }
+    #filters-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    #filters-toggle[aria-expanded="true"] { border-color: var(--brass); }
+    .active-filters .chip { padding: 4px 6px 4px 10px; gap: 4px; font-size: var(--fs-xs); }
+    .active-filters .chip .chip-k { color: var(--muted); }
+    .active-filters .chip button { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; color: var(--muted); }
+    .active-filters .chip button:hover { background: var(--surface-3); color: var(--fg); }
+    .active-filters .chip button svg { width: 12px; height: 12px; }
+    .filters-panel { margin-bottom: 16px; }
+    #country-bar { margin-bottom: 12px; }
+    .filters-panel .filters-grid { padding: 16px 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px 28px; align-items: start; }
+    .filters-panel .card-foot { justify-content: space-between; }
+    .country-list { display: flex; flex-direction: column; gap: 8px; max-height: 236px; overflow: auto; padding-right: 4px; }
+    .filter-group { display: flex; flex-direction: column; gap: 8px; }
+    .filter-group h4 { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-family: var(--font-body); }
+    .filter-group .cnt { color: var(--muted-2); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
+    .toolbar .select { width: auto; }
+    .segmented svg { width: 16px; height: 16px; display: block; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .section-head p { color: var(--muted); margin-top: 6px; max-width: 60ch; }
+  </style>
+</head>
+<body data-shell="public" data-page="explorar" data-root="../">
+<main>
+  <section class="section tight">
+    <div class="container">
+      <div class="page-head">
+        <div><p class="eyebrow">Catálogo</p><h1>Explorar</h1><p class="sub">351 itens ativos de 41 países. Todos passaram por curadoria humana antes de aparecer aqui, e todos têm uma prova pública. Interface em português, inglês e espanhol; preços em US$.</p></div>
+        <div class="actions"><a class="btn" href="#coletivos"><i data-icon="hand-coins"></i>Lacres coletivos</a><a class="btn" href="pedidos.html"><i data-icon="file-search"></i>Pedidos com recompensa</a></div>
+      </div>
+      <div class="search"><i data-icon="search"></i><input class="input lg" placeholder="Buscar por título, categoria, tag ou código do item (ex.: lcr-4m2x9)" aria-label="Buscar no catálogo"></div>
+      <div class="chips mt-2">
+        <button class="chip active" data-toast="Mostrando todas as categorias">Todas</button>
+        <button class="chip" data-toast="Filtro: Jornalismo e investigação (48 itens)">Jornalismo e investigação</button>
+        <button class="chip" data-toast="Filtro: Dados e bases (71 itens)">Dados e bases</button>
+        <button class="chip" data-toast="Filtro: Governo e políticas públicas (52 itens)">Governo e políticas públicas</button>
+        <button class="chip" data-toast="Filtro: Negócios e mercado (33 itens)">Negócios e mercado</button>
+        <button class="chip" data-toast="Filtro: Fotografia e vídeo (54 itens)">Fotografia e vídeo</button>
+        <button class="chip" data-toast="Filtro: História e acervos (31 itens)">História e acervos</button>
+        <button class="chip" data-toast="Filtro: Ciência e pesquisa (19 itens)">Ciência e pesquisa</button>
+        <button class="chip" data-toast="Filtro: Educação e métodos (14 itens)">Educação e métodos</button>
+        <button class="chip" data-toast="Filtro: Saúde e meio ambiente (11 itens)">Saúde e meio ambiente</button>
+        <button class="chip" data-toast="Filtro: Imóveis e urbanismo (10 itens)">Imóveis e urbanismo</button>
+        <button class="chip" data-toast="Filtro: Tecnologia e segurança (8 itens)">Tecnologia e segurança</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="catalog">
+          <div class="alert alert-anon" id="country-bar" hidden><i data-icon="globe"></i><div class="row between grow"><span id="country-bar-text"></span><span class="row"><button class="btn btn-sm" data-locale-open id="country-bar-change"></button><button class="btn btn-sm btn-ghost" data-country="GLOBAL" id="country-bar-all"></button></span></div></div>
+          <div class="toolbar catalog-bar">
+            <div class="filters-row">
+              <button class="btn" id="filters-toggle" aria-expanded="false" aria-controls="filters-panel"><i data-icon="sliders"></i>Filtros<span class="fcount" id="filters-count" hidden>0</span><i data-icon="chevron-down" class="chev"></i></button>
+              <div class="chips active-filters" id="active-filters" aria-live="polite"></div>
+            </div>
+            <div class="right">
+              <select class="select" aria-label="Ordenar por"><option>Mais recentes</option><option>Mais apoiados</option><option>Encerrando primeiro</option><option>Menor preço</option><option>Maior preço</option></select>
+              <div class="segmented"><button class="active" data-toast="Visualização em grade" aria-label="Grade"><i data-icon="grid"></i></button><button data-toast="Visualização em lista" aria-label="Lista"><i data-icon="list"></i></button></div>
+            </div>
+          </div>
+          <div class="card filters-panel" id="filters-panel" hidden>
+            <div class="card-head"><h3>Filtros</h3><div class="actions"><button class="btn btn-sm btn-ghost" id="filters-clear">Limpar</button><button class="icon-btn" id="filters-close" aria-label="Fechar filtros"><i data-icon="x"></i></button></div></div>
+            <div class="filters-grid">
+            <div class="filter-group">
+              <h4>País</h4>
+              <div class="search"><i data-icon="search"></i><input class="input" id="country-search" placeholder="Buscar país…" aria-label="Buscar país"></div>
+              <div class="country-list">
+              <label class="check" data-code="BR"><input type="checkbox" checked><span class="grow">Brasil</span><span class="cnt">112</span></label>
+              <label class="check" data-code="US"><input type="checkbox" checked><span class="grow">Estados Unidos</span><span class="cnt">64</span></label>
+              <label class="check" data-code="GLOBAL"><input type="checkbox" checked><span class="grow">Global (vários países)</span><span class="cnt">38</span></label>
+              <label class="check" data-code="AR"><input type="checkbox" checked><span class="grow">Argentina</span><span class="cnt">31</span></label>
+              <label class="check" data-code="PT"><input type="checkbox" checked><span class="grow">Portugal</span><span class="cnt">27</span></label>
+              <label class="check" data-code="MX"><input type="checkbox" checked><span class="grow">México</span><span class="cnt">22</span></label>
+              <label class="check" data-code="GB"><input type="checkbox" checked><span class="grow">Reino Unido</span><span class="cnt">19</span></label>
+              <label class="check" data-code="DE"><input type="checkbox" checked><span class="grow">Alemanha</span><span class="cnt">14</span></label>
+              <label class="check" data-code="IN"><input type="checkbox" checked><span class="grow">Índia</span><span class="cnt">12</span></label>
+              <label class="check" data-code="CL"><input type="checkbox" checked><span class="grow">Chile</span><span class="cnt">9</span></label>
+              <label class="check" data-code="BD"><input type="checkbox" checked><span class="grow">Bangladesh</span><span class="cnt">3</span></label>
+              </div>
+              <button class="btn btn-sm btn-ghost" data-toast="Lista completa: 41 países">Mais 30 países</button>
+            </div>
+            <div class="filter-group">
+              <h4>Idioma</h4>
+              <label class="check"><input type="checkbox" checked><span class="grow">Português</span><span class="cnt">139</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Inglês</span><span class="cnt">109</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Espanhol</span><span class="cnt">62</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Alemão</span><span class="cnt">14</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Outros</span><span class="cnt">27</span></label>
+            </div>
+            <div class="filter-group">
+              <h4>Modelo de venda</h4>
+              <label class="check"><input type="checkbox" checked><span class="grow">Cópias</span><span class="cnt">158</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Lacre coletivo</span><span class="cnt">5</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Exclusivo</span><span class="cnt">21</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Leilão lacrado</span><span class="cnt">7</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Camadas</span><span class="cnt">29</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Assinatura</span><span class="cnt">16</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Licença</span><span class="cnt">115</span></label>
+            </div>
+            <div class="filter-group">
+              <h4>Tipo de conteúdo</h4>
+              <label class="check"><input type="checkbox" checked><span class="grow">Documento</span><span class="cnt">108</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Dados (CSV, XLSX)</span><span class="cnt">93</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Imagem</span><span class="cnt">78</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Vídeo</span><span class="cnt">37</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Áudio</span><span class="cnt">15</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Pacote</span><span class="cnt">20</span></label>
+            </div>
+            <div class="filter-group">
+              <h4>Autenticidade</h4>
+              <label class="check"><input type="checkbox" checked><span class="grow">Verificado</span><span class="cnt">210</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Verificado parcialmente</span><span class="cnt">82</span></label>
+              <label class="check"><input type="checkbox" checked><span class="grow">Plausível</span><span class="cnt">55</span></label>
+              <label class="check"><input type="checkbox"><span class="grow">Não verificado</span><span class="cnt">4</span></label>
+            </div>
+            <div class="filter-group">
+              <h4>Faixa de preço</h4>
+              <div class="row nowrap"><div class="input-group grow"><span class="affix">US$</span><input class="input" placeholder="mín." aria-label="Preço mínimo"></div><div class="input-group grow"><span class="affix">US$</span><input class="input" placeholder="máx." aria-label="Preço máximo"></div></div>
+              <span class="xs muted">Para lacres coletivos, considera o menor apoio (US$ 10).</span>
+            </div>
+            <div class="filter-group">
+              <h4>Status</h4>
+              <label class="radio"><input type="radio" name="st" checked><span>Ativo</span></label>
+              <label class="radio"><input type="radio" name="st"><span>Financiado (lacre rompido)</span></label>
+              <label class="radio"><input type="radio" name="st"><span>Encerrando em 24 h</span></label>
+            </div>
+            </div>
+            <div class="card-foot"><span class="small muted">Os filtros ficam guardados enquanto você navega pelo catálogo.</span><button class="btn btn-primary" id="filters-apply">Aplicar filtros</button></div>
+          </div>
+          <p class="small muted mb-2" id="grid-count">Mostrando 1–12 de 351 itens</p>
+          <div class="grid cols-3" id="grade">
+            <article class="card item-card">
+              <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
+                <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
+                <div class="item-foot"><div><div class="price wax">US$ 54.120<small>de US$ 80.000</small></div><div class="xs muted">1.187 apoiadores · <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></div></div><span class="handle" data-handle="sextante-21c9"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Dados e bases</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 37/100</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</a></h3>
+                <div class="item-foot"><div class="price">US$ 490<small>63 restantes</small></div><span class="handle" data-handle="lanterna-b31d"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Negócios e mercado</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">Mercado de energia solar distribuída no Brasil: projeções 2026–2030, 120 páginas</a></h3>
+                <div class="item-foot"><div class="price">US$ 25.000<small>ou oferta · mín. US$ 15.000</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="imagem" href="item.html"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></h3>
+                <div class="item-foot"><div class="price">US$ 900<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">História e acervos</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias ilimitadas</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">1.200 páginas de jornais operários de São Paulo (1917–1930) digitalizadas em 600 dpi</a></h3>
+                <div class="item-foot"><div class="price">US$ 120<small>214 vendidas</small></div><span class="handle" data-handle="arquivista-0d2e"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="video" href="item.html"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">Filmagem aérea 4K das queimadas no Pantanal, agosto de 2025: 6 horas de material bruto</a></h3>
+                <div class="item-foot"><div class="price">US$ 2.400<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Educação e métodos</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">Como uma operação de última milha cortou 31% do custo: playbook, planilhas e modelo de roteirização</a></h3>
+                <div class="item-foot"><div class="price">US$ 190<small>4 camadas</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Ciência e pesquisa</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">Monitor semanal de patentes do setor farmacêutico brasileiro</a></h3>
+                <div class="item-foot"><div class="price">US$ 190<small>/mês</small></div><span class="handle" data-handle="prisma-66af"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="imagem" href="item.html"><div class="preview-tag"><span class="badge">História e acervos</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+                <h3 class="item-title"><a href="item.html">400 fotografias inéditas da construção de Brasília (1957–1960), acervo pessoal digitalizado</a></h3>
+                <div class="item-foot"><div><div class="price">7 lances<small>lacrados</small></div><div class="xs muted">encerra em <span class="countdown" data-deadline="2026-11-02T20:00:00-03:00"></span></div></div><span class="handle" data-handle="arquivista-0d2e"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Dados e bases</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 41/150</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BD</span></div>
+                <h3 class="item-title"><a href="item.html">Registro de 2.300 fábricas têxteis de Bangladesh com resultados de auditorias públicas de segurança (2014–2025)</a></h3>
+                <div class="item-foot"><div class="price">US$ 320<small>109 restantes</small></div><span class="handle" data-handle="meridiano-4b8e"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Imóveis e urbanismo</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="tag">PT</span></div>
+                <h3 class="item-title"><a href="item.html">Preços de aluguel por freguesia em Lisboa e Porto, série mensal 2015–2026, com fontes</a></h3>
+                <div class="item-foot"><div class="price">US$ 140<small>96 vendidas</small></div><span class="handle" data-handle="azulejo-1c6d"></span></div>
+              </div>
+            </article>
+            <article class="card item-card">
+              <a class="preview" data-type="audio" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
+              <div class="item-body">
+                <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="tag">AR</span></div>
+                <h3 class="item-title"><a href="item.html">Entrevistas em áudio com 25 ex-trabalhadores de minas de lítio em Jujuy, com transcrição em espanhol</a></h3>
+                <div class="progress"><div class="progress-bar wax" data-width="46%"></div></div>
+                <div class="item-foot"><div><div class="price wax">US$ 6.900<small>de US$ 15.000</small></div><div class="xs muted">312 apoiadores · <span class="countdown" data-deadline="2026-12-05T23:59:00-03:00"></span></div></div><span class="handle" data-handle="quebracho-8d1f"></span></div>
+              </div>
+            </article>
+          </div>
+          <div class="row between mt-3">
+            <span class="small muted">Página 1 de 30</span>
+            <div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm" data-toast="Página 2 do catálogo">2</button><button class="btn btn-sm" data-toast="Página 3 do catálogo">3</button><span class="btn btn-sm btn-ghost">…</span><button class="btn btn-sm" data-toast="Página 30 do catálogo">30</button><button class="btn btn-sm" data-toast="Página 2 do catálogo">›</button></div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lacres coletivos -->
+  <section class="section band" id="coletivos">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Lacre coletivo</p><h2>Lacres coletivos em andamento</h2><p>Uma meta em dólares, um prazo e o conteúdo completo já analisado pela curadoria. A cada marco, uma prévia fica pública; quando a soma dos apoios bate a meta, o lacre rompe e tudo fica público para todos. Se o prazo vencer antes, o valor até o último marco batido fica com o vendedor, que já liberou as prévias; o que entrou depois volta ao endereço de origem.</p></div>
+        <a class="btn btn-ghost" href="como-funciona.html">Como funciona o lacre coletivo<i data-icon="arrow-right"></i></a>
+      </div>
+      <div class="grid cols-3">
+        <article class="card item-card">
+          <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="badge badge-outline">Liberação pública</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
+            <div class="item-foot"><div><div class="price wax">US$ 54.120<small>de US$ 80.000</small></div><div class="xs muted">1.187 apoiadores · <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></div></div><span class="handle" data-handle="sextante-21c9"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Governo e políticas públicas</span><span class="badge badge-wax">Rompido hoje</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge badge-outline"><i data-icon="unlock"></i>Rompido hoje · aberto a todos</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">Base de 1.800 contratos de publicidade de prefeituras do interior de SP (2018–2025)</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="100%"></div></div>
+            <div class="item-foot"><div><div class="price wax">US$ 9.120<small>de US$ 9.000</small></div><div class="xs muted">203 apoiadores · rompido hoje às 10:40 · aberto a todos</div></div><span class="handle" data-handle="lanterna-b31d"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="audio" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="badge badge-outline">Liberação pública</span><span class="tag">AR</span></div>
+            <h3 class="item-title"><a href="item.html">Entrevistas em áudio com 25 ex-trabalhadores de minas de lítio em Jujuy, com transcrição em espanhol</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="46%"></div></div>
+            <div class="item-foot"><div><div class="price wax">US$ 6.900<small>de US$ 15.000</small></div><div class="xs muted">312 apoiadores · <span class="countdown" data-deadline="2026-12-05T23:59:00-03:00"></span></div></div><span class="handle" data-handle="quebracho-8d1f"></span></div>
+          </div>
+        </article>
+      </div>
+      <div class="row mt-3">
+        <span class="badge st-financiado">Financiado</span><span class="small muted">11 lacres já romperam. O conteúdo fica acessível a qualquer conta assim que o lacre rompe; basta entrar e abrir no cofre.</span>
+        <a class="small link" href="prova.html">Ver a prova de um lacre rompido</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estado vazio (exemplo) -->
+  <section class="section tight">
+    <div class="container">
+      <div class="row mb-2"><span class="badge badge-outline"><i data-icon="info"></i>Exemplo de estado vazio</span><span class="xs muted">Exibido no lugar da grade quando a busca ou os filtros não retornam itens.</span></div>
+      <div class="card">
+        <div class="empty">
+          <i data-icon="search"></i>
+          <h4>Nenhum resultado para “contratos da prefeitura de Manaus em 2022”</h4>
+          <p>Tente termos mais curtos, remova filtros ou troque a categoria. Se o que você procura ainda não existe no catálogo, publique um pedido com recompensa: alguém pode ter essa informação.</p>
+          <div class="row"><button class="btn" data-toast="Filtros limpos · 351 itens">Limpar filtros</button><a class="btn btn-primary" href="pedidos.html"><i data-icon="file-search"></i>Fazer um pedido</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    // Filtro padrão por país (detectado pelo navegador ou escolhido no seletor do cabeçalho).
+    document.addEventListener('lacre:ready', function () {
+      var L = window.Lacre.locale, t = window.Lacre.t;
+      var bar = document.getElementById('country-bar'), txt = document.getElementById('country-bar-text');
+      document.getElementById('country-bar-change').textContent = t('Trocar país');
+      document.getElementById('country-bar-all').textContent = t('Ver todos os países');
+      if (L.country === 'GLOBAL') return;
+      var name = L.countryName(L.country), namePt = L.countryName(L.country, 'pt');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('#grade .item-card'));
+      var mine = cards.filter(function (c) { var tg = c.querySelector('.item-meta .tag'); return tg && tg.textContent.trim() === L.country; });
+      bar.hidden = false;
+      if (mine.length) {
+        cards.forEach(function (c) { c.hidden = mine.indexOf(c) < 0; });
+        txt.innerHTML = '<b>' + t('Itens de {country}', { country: name }) + '</b> · ' + mine.length + ' / ' + cards.length;
+        document.getElementById('grid-count').textContent = mine.length + ' / ' + cards.length + ' · ' + name;
+        document.querySelectorAll('.filter-group .check').forEach(function (lb) { var inp = lb.querySelector('input'), nm = lb.querySelector('.grow'); if (inp && nm && lb.closest('.filter-group').querySelector('h4') && lb.closest('.filter-group').querySelector('h4').textContent.trim() === 'País') inp.checked = nm.textContent.trim().indexOf(namePt) === 0; });
+      } else {
+        txt.textContent = t('Nenhum item de {country} ainda. Mostrando todos os países.', { country: name });
+      }
+    });
+  </script>
+  <script>
+    // Filtros recolhidos: botão "Filtros" com contador, chips dos filtros ativos e painel sob a barra.
+    (function () {
+      var btn = document.getElementById('filters-toggle'), panel = document.getElementById('filters-panel');
+      var chipsEl = document.getElementById('active-filters'), countEl = document.getElementById('filters-count');
+      var groups = Array.prototype.slice.call(panel.querySelectorAll('.filter-group'));
+      var inputs = Array.prototype.slice.call(panel.querySelectorAll('input'));
+      var defaults = inputs.map(function (i) { return i.type === 'checkbox' || i.type === 'radio' ? i.checked : i.value; });
+      function t(s, v) { return window.Lacre && window.Lacre.t ? window.Lacre.t(s, v) : s; }
+      function setOpen(open) { panel.hidden = !open; btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+      function label(lb) { var g = lb.querySelector('.grow') || lb.querySelector('span'); return g ? g.textContent.trim() : ''; }
+      function resetGroup(g) { inputs.forEach(function (inp, k) { if (g.contains(inp)) { if (inp.type === 'checkbox' || inp.type === 'radio') inp.checked = defaults[k]; else inp.value = defaults[k]; } }); }
+      function isDefault(g) { return inputs.every(function (inp, k) { return !g.contains(inp) || ((inp.type === 'checkbox' || inp.type === 'radio') ? inp.checked === defaults[k] : inp.value === defaults[k]); }); }
+      function chip(key, text, onRemove) {
+        var c = document.createElement('span'); c.className = 'chip';
+        c.innerHTML = '<span class="chip-k">' + key + ':</span> ' + text + ' <button type="button" aria-label="' + t('Remover filtro') + ' ' + text + '">' + window.Lacre.icon('x') + '</button>';
+        c.querySelector('button').addEventListener('click', onRemove); chipsEl.appendChild(c);
+      }
+      function filterCountries() {
+        var g = groups[0], all = isDefault(g), codes = [];
+        g.querySelectorAll('.check[data-code]').forEach(function (lb) { if (lb.querySelector('input').checked) codes.push(lb.dataset.code); });
+        var cards = Array.prototype.slice.call(document.querySelectorAll('#grade .item-card')), shown = 0;
+        cards.forEach(function (c) { var tg = c.querySelector('.item-meta .tag'), code = tg ? tg.textContent.trim().toUpperCase() : 'GLOBAL'; var ok = all || codes.indexOf(code) >= 0; c.hidden = !ok; if (ok) shown++; });
+        document.getElementById('grid-count').textContent = all ? t('Mostrando 1–12 de 351 itens') : shown + ' / ' + cards.length + ' · ' + codes.map(function (c) { return window.Lacre.locale.countryName(c); }).join(', ');
+        var bar = document.getElementById('country-bar'); if (bar && all) bar.hidden = true;
+      }
+      function summarize() {
+        chipsEl.innerHTML = ''; var n = 0;
+        groups.forEach(function (g) {
+          if (isDefault(g)) return;
+          var key = g.querySelector('h4').textContent.trim(), parts = [];
+          g.querySelectorAll('.check, .radio').forEach(function (lb) { if (lb.querySelector('input').checked) parts.push(label(lb)); });
+          var nums = g.querySelectorAll('input.input:not(#country-search)'); if (nums.length) { var a = nums[0].value, b = nums[1] && nums[1].value; if (a || b) parts.push('US$ ' + (a || '0') + '–' + (b || '∞')); }
+          var text = parts.length ? (parts.length > 2 ? parts.slice(0, 2).join(', ') + ' +' + (parts.length - 2) : parts.join(', ')) : t('nenhum');
+          n++; chip(key, text, function () { resetGroup(g); if (g === groups[0]) filterCountries(); summarize(); });
+        });
+        countEl.hidden = !n; countEl.textContent = n;
+      }
+      btn.addEventListener('click', function () { setOpen(panel.hidden); });
+      document.getElementById('filters-close').addEventListener('click', function () { setOpen(false); btn.focus(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { setOpen(false); btn.focus(); } });
+      document.getElementById('filters-clear').addEventListener('click', function () { groups.forEach(resetGroup); filterCountries(); summarize(); window.toast(t('Filtros limpos · 351 itens')); });
+      document.getElementById('filters-apply').addEventListener('click', function () { filterCountries(); summarize(); setOpen(false); window.toast(t('Filtros aplicados')); btn.focus(); });
+      var cs = document.getElementById('country-search');
+      cs.addEventListener('input', function () { var q = cs.value.trim().toLowerCase(); groups[0].querySelectorAll('.check[data-code]').forEach(function (lb) { lb.hidden = q && label(lb).toLowerCase().indexOf(q) < 0; }); });
+      // roda depois do filtro padrão por país (que marca só o país detectado)
+      document.addEventListener('lacre:ready', function () { summarize(); });
+    })();
+  </script>
+</main>
+</body>
+</html>

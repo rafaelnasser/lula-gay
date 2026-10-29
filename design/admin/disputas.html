@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Disputas · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contornos de bugs do CSS compartilhado: .sidebar-backdrop vira célula do grid acima de 1000 px; filhos de grid sem min-width 0 estouram em telas estreitas */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    .grid > *, .split > *, .split-3 > *, .form-grid > * { min-width: 0; }
+    .tl-item.ok, .tl-item.warn, .tl-item.danger, .tl-item.info, .tl-item.brass, .tl-item.wax { color: inherit; }
+    .acts { text-align: right; white-space: nowrap; }
+    .ico { display: inline-flex; align-items: center; vertical-align: middle; }
+    .ico svg { width: 15px; height: 15px; }
+    .table td .title { font-weight: 600; display: block; max-width: 30ch; }
+    .table .handle { font-size: var(--fs-xs); }
+    .table .handle .identicon { width: 18px; height: 18px; border-radius: 5px; }
+    .cmp > *, .hist > * { min-width: 0; }
+    .cmp .tbl { overflow-x: auto; }
+    .quote { margin: 0; border-left: 3px solid var(--brass); padding: 10px 14px; background: var(--surface-2); border-radius: 0 var(--r) var(--r) 0; font-size: var(--fs-sm); }
+    .quote .by { display: block; margin-top: 6px; color: var(--muted); font-size: var(--fs-xs); }
+    .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .cmp { grid-template-columns: 1fr; } }
+    .cmp .doc-mock { font-size: 11px; padding: 14px 14px 22px; }
+    .cmp .doc-mock table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 9.5px; }
+    .cmp .doc-mock th, .cmp .doc-mock td { border: 1px solid #d9d4c7; padding: 3px 5px; text-align: left; white-space: nowrap; }
+    .cmp .doc-mock th { background: #ece8dd; }
+    .cmp .doc-mock td.miss { background: #f3d9d6; color: #8a2a24; font-style: italic; }
+    .cmp .doc-mock .cap { font-family: var(--font-mono); font-size: 9px; color: #666; margin-bottom: 8px; display: flex; justify-content: space-between; }
+    .hist { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (max-width: 600px) { .hist { grid-template-columns: 1fr; } }
+    .amount .input-group { max-width: 220px; }
+  </style>
+</head>
+<body data-shell="admin" data-page="disputas" data-root="../" data-title="Disputas">
+  <main>
+    <div class="page-head">
+      <div>
+        <h1>Disputas</h1>
+        <p class="sub">3 abertas · prazo de resolução de 5 dias · janela de abertura de 72 h após o acesso (no lacre coletivo, a partir da liberação pública) · reembolso sempre ao endereço de origem do pagamento, a partir da carteira do item. Disputa aberta nas 72 h adia a finalização do item até a decisão. Depois da finalização, só reclamações excepcionais, pagas pelo fundo de garantia (2 % de cada comissão).</p>
+      </div>
+      <div class="actions">
+        <button class="btn" data-toast="Filtro aplicado: só as minhas (Ana R.)"><i data-icon="filter"></i>Só as minhas</button>
+        <button class="btn btn-ghost" data-toast="Relatório de disputas do mês exportado (CSV)"><i data-icon="download"></i>Exportar</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Disputa</th><th>Prazo</th><th>Item</th><th>Motivo</th><th class="num">Valor</th><th>Comprador</th><th>Vendedor</th><th>Status</th><th class="acts"></th></tr></thead>
+        <tbody>
+          <tr class="selected"><td><b>DSP-0207</b><span class="sub">aberta 25/10 · 14:20</span></td><td class="num">30/10<span class="sub"><span class="countdown" data-deadline="2026-10-30T14:20:00-03:00"></span></span></td><td><span class="title">12.400 licitações municipais do Nordeste (2019–2025)</span><span class="sub">lcr-9f2k7 · Cópias</span></td><td>Conteúdo diferente da prévia</td><td class="num">US$ 490,00</td><td><span class="handle" data-handle="quartzo-a1f0"></span></td><td><span class="handle" data-handle="lanterna-b31d"></span></td><td><span class="badge st-analise">Em análise · Ana R.</span></td><td class="acts"><a class="btn btn-sm btn-primary" href="#dsp-0207">Detalhe</a></td></tr>
+          <tr><td><b>DSP-0208</b><span class="sub">aberta 25/10 · 18:05</span></td><td class="num">30/10<span class="sub">3 dias</span></td><td><span class="title">Como uma operação de última milha cortou 31% do custo · camada 1 (Sumário)</span><span class="sub">lcr-3c7r8 · Camadas</span></td><td>Conteúdo diferente da prévia</td><td class="num">US$ 190,00</td><td><span class="handle" data-handle="coruja-7f3a"></span></td><td><span class="handle" data-handle="bussola-c4e1"></span></td><td><span class="badge st-triagem">Aberta · sem responsável</span></td><td class="acts"><button class="btn btn-sm" data-toast="DSP-0208 atribuída a Ana R.">Assumir</button></td></tr>
+          <tr><td><b>DSP-0209</b><span class="sub">aberta hoje · 09:05</span></td><td class="num">01/11<span class="sub">5 dias</span></td><td><span class="title">1.200 páginas de jornais operários de São Paulo (1917–1930)</span><span class="sub">lcr-5t6w1 · Cópias</span></td><td>Arquivo corrompido (12 páginas ilegíveis no PDF 3 de 6)</td><td class="num">US$ 120,00</td><td><span class="handle" data-handle="farol-3e9b"></span></td><td><span class="handle" data-handle="arquivista-0d2e"></span></td><td><span class="badge st-analise">Em análise · Bruno M.</span></td><td class="acts"><button class="btn btn-sm" data-toast="Detalhe de DSP-0209: Bruno M. já reproduziu o erro em 12 páginas">Detalhe</button></td></tr>
+          <tr><td><b>DSP-0204</b><span class="sub">aberta 15/10</span></td><td class="num">resolvida 18/10<span class="sub">em 3 dias</span></td><td><span class="title">340 fotografias da enchente de 2024 em Porto Alegre · licença editorial</span><span class="sub">lcr-2n8v4 · Licença</span></td><td>Autenticidade (geolocalização divergente em 4 fotos)</td><td class="num">US$ 900,00</td><td><span class="handle" data-handle="farol-3e9b"></span></td><td><span class="handle" data-handle="cartografo-5a77"></span></td><td><span class="badge st-liquidada">Reembolso parcial · US$ 90,00</span><span class="sub">da carteira do item · item ativo · 90 USDT · Polygon · txid <a href="#" class="link" data-toast="Abriria o explorador da rede (polygonscan)">0x2n8v…a4c1</a> · ao endereço de origem</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="DSP-0204: 4 de 340 fotos com GPS deslocado em 300 m · reembolso de 10 % · Ana R.">Ver</button></td></tr>
+          <tr><td><b>DSP-0205</b><span class="sub">aberta 19/10</span></td><td class="num">resolvida 22/10<span class="sub">em 3 dias</span></td><td><span class="title">Monitor semanal de patentes do setor farmacêutico · edição avulsa #40</span><span class="sub">lcr-6d1k5 · Assinatura</span></td><td>Conteúdo diferente da prévia</td><td class="num">US$ 90,00</td><td><span class="handle" data-handle="quartzo-a1f0"></span></td><td><span class="handle" data-handle="prisma-66af"></span></td><td><span class="badge st-rejeitado">Improcedente · venda mantida</span><span class="sub">sem reembolso · conta como improcedente para o comprador</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="DSP-0205: a edição entregou o que a prévia descrevia · mantida por Bruno M.">Ver</button></td></tr>
+          <tr><td><b>DSP-0203</b><span class="sub">reclamação 08/10 22:10 · fora da janela</span></td><td class="num">resolvida 10/10<span class="sub">em 2 dias</span></td><td><span class="title">Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos</span><span class="sub">lcr-2d9r4 · Lacre coletivo · rompido e público 01/10 10:10 · janela de disputa até 04/10 10:10 · finalizado 04/10 10:10 sem disputa aberta</span></td><td>Conteúdo diferente da prova pública (faltavam as 300 obras de PE anunciadas) · reclamação 4 dias e 12 h depois da janela e da finalização, aceita excepcionalmente</td><td class="num">US$ 50,00</td><td><span class="handle" data-handle="coruja-7f3a"></span></td><td><span class="handle" data-handle="estenografo-7b3c"></span></td><td><span class="badge st-liquidada">Reembolso total · US$ 50,00</span><span class="sub">do <b>fundo de garantia</b> · reclamação excepcional após a finalização (carteira já entregue ao vendedor) · 50 USDT · Polygon · txid <a href="#" class="link" data-toast="Abriria o explorador da rede (polygonscan)">0x2d9r…51fe</a> · ao endereço de origem</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="DSP-0203: lcr-2d9r4 rompeu e ficou público em 01/10 10:10; a janela de disputa fechou em 04/10 10:10, junto com a finalização. A reclamação de @coruja-7f3a em 08/10 22:10 foi aceita excepcionalmente porque o conteúdo não correspondia à prova pública (1.500 obras anunciadas, 1.200 entregues) · fundo de garantia em 10/10 · Ana R. · reputação do vendedor rebaixada">Ver</button></td></tr>
+          <tr><td><b>DSP-0199</b><span class="sub">aberta 28/09</span></td><td class="num">resolvida 01/10<span class="sub">em 3 dias</span></td><td><span class="title">Guia de acesso a dados do SUS: 60 fontes, endpoints e scripts de coleta</span><span class="sub">lcr-5m8c4 · Cópias · finalizado em 05/10</span></td><td>Arquivo corrompido (ZIP dos scripts não abria)</td><td class="num">US$ 150,00</td><td><span class="handle" data-handle="farol-3e9b"></span></td><td><span class="handle" data-handle="coruja-7f3a"></span></td><td><span class="badge st-liquidada">Reembolso total · US$ 150,00</span><span class="sub">da carteira do item · antes da finalização · 150 USDT · Polygon · txid <a href="#" class="link" data-toast="Abriria o explorador da rede (polygonscan)">0x5m8c…91af</a> · ao endereço de origem</span></td><td class="acts"><button class="btn btn-sm btn-ghost" data-toast="DSP-0199: arquivo corrompido confirmado · reembolso executado em 01/10 · v2 do pacote publicada em 30/09 para os demais compradores · Bruno M.">Ver</button></td></tr>
+        </tbody>
+      </table>
+      <div class="table-foot"><span>7 disputas desde 28/09 · 3 reembolsos executados (2 da carteira do item, 1 do fundo de garantia) · 1 improcedente · taxa de disputa procedente por curador que aprovou: 0,8 % (meta: abaixo de 2 %)</span></div>
+    </div>
+
+    <div class="page-head mt-4" id="dsp-0207">
+      <div>
+        <p class="eyebrow">DSP-0207 · lcr-9f2k7 · aberta em 25/10 às 14:20, 27 h após o acesso (dentro das 72 h)</p>
+        <h2>Conteúdo diferente da prévia · US$ 490,00 · pagamento na carteira do item, ainda não finalizado</h2>
+        <div class="row mt-1"><span class="badge st-analise">Em análise · Ana R.</span><span class="badge badge-danger"><i data-icon="clock"></i>resolver até 30/10 · <span class="countdown" data-deadline="2026-10-30T14:20:00-03:00"></span></span><span class="muted small">Comprador</span><span class="handle" data-handle="quartzo-a1f0" data-rep="6 compras · desde jun/2026"></span><span class="muted small">Vendedor</span><span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 12 itens"></span></div>
+      </div>
+      <div class="actions"><a class="btn" href="../public/item.html"><i data-icon="external-link"></i>Página pública</a><a class="btn btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Prova</a></div>
+    </div>
+
+    <div class="split">
+      <div class="stack">
+        <div class="card">
+          <div class="card-head"><h3>Alegação do comprador</h3></div>
+          <div class="card-body stack">
+            <blockquote class="quote">"A prévia prometia valores homologados e a coluna está vazia em 2.100 linhas. Comprei justamente para cruzar valor estimado com valor homologado por município, e para 2019 e 2020 em PE e MA não dá para fazer."<span class="by"><span class="handle" data-handle="quartzo-a1f0"></span> · 25/10 às 14:20 · motivo selecionado: conteúdo diferente da prévia</span></blockquote>
+            <div class="stack-sm">
+              <div class="file-row"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">captura-coluna-vazia.png</div><div class="file-meta">1.440×900 · filtro na coluna valor_homologado mostrando 2.100 linhas em branco · metadados removidos</div></div><button class="btn btn-sm" data-toast="Anexo aberto no visualizador interno">Abrir</button></div>
+              <div class="file-row"><span class="file-icon"><i data-icon="image"></i></span><div class="grow"><div class="file-name truncate">previa-publica-recorte.png</div><div class="file-meta">820×410 · recorte da amostra pública com a coluna preenchida</div></div><button class="btn btn-sm" data-toast="Anexo aberto no visualizador interno">Abrir</button></div>
+            </div>
+            <blockquote class="quote"><b>Resposta do vendedor</b> · 26/10 às 18:40: "Os portais de PE e MA não publicaram valor homologado para 2.100 certames de 2019–2020. A coluna está vazia por ausência na fonte, e isso está documentado no README do pacote (seção 4). A amostra pública foi gerada aleatoriamente pela plataforma a partir de 2023."<span class="by"><span class="handle" data-handle="lanterna-b31d"></span> · pela conversa interna · prazo de 48 h cumprido</span></blockquote>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Prévia pública × conteúdo entregue</h3><span class="badge badge-outline">coluna valor_homologado</span></div>
+          <div class="card-body stack">
+            <div class="cmp">
+              <div>
+                <p class="eyebrow mb-1">Prévia pública aprovada · amostra de 20 linhas (2023)</p>
+                <div class="doc-mock">
+                  <div class="cap"><span>amostra_publica.csv · 14/10 · valores em BRL (moeda da fonte)</span><span>6 de 20 linhas</span></div>
+                  <div class="tbl"><table><thead><tr><th>uf</th><th>ano</th><th>objeto</th><th>estimado</th><th>homologado</th></tr></thead><tbody>
+                    <tr><td>BA</td><td>2023</td><td>merenda</td><td>1.240.000</td><td>1.198.400</td></tr>
+                    <tr><td>CE</td><td>2023</td><td>asfalto</td><td>3.900.000</td><td>3.712.000</td></tr>
+                    <tr><td>PB</td><td>2023</td><td>remédios</td><td>480.000</td><td>455.900</td></tr>
+                    <tr><td>RN</td><td>2023</td><td>transporte</td><td>2.100.000</td><td>2.080.000</td></tr>
+                    <tr><td>SE</td><td>2023</td><td>iluminação</td><td>760.000</td><td>742.100</td></tr>
+                    <tr><td>PI</td><td>2023</td><td>resíduos</td><td>5.400.000</td><td>5.390.000</td></tr>
+                  </tbody></table></div>
+                  <span class="wm">prévia · lacre.app/p/9f2k7</span>
+                </div>
+              </div>
+              <div>
+                <p class="eyebrow mb-1">Conteúdo entregue · linhas 2.081 a 2.086 de 12.400 (2019–2020)</p>
+                <div class="doc-mock">
+                  <div class="cap"><span>licitacoes_ne_2019_2025.csv · e3d1…77a0</span><span>filtro: homologado vazio</span></div>
+                  <div class="tbl"><table><thead><tr><th>uf</th><th>ano</th><th>objeto</th><th>estimado</th><th>homologado</th></tr></thead><tbody>
+                    <tr><td>PE</td><td>2019</td><td>merenda</td><td>980.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>PE</td><td>2019</td><td>drenagem</td><td>4.150.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>MA</td><td>2019</td><td>transporte</td><td>1.720.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>MA</td><td>2020</td><td>EPIs</td><td>610.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>PE</td><td>2020</td><td>testes</td><td>2.300.000</td><td class="miss">vazio</td></tr>
+                    <tr><td>MA</td><td>2020</td><td>cestas</td><td>890.000</td><td class="miss">vazio</td></tr>
+                  </tbody></table></div>
+                  <span class="wm">curadoria · Ana R.</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-grid">
+              <div class="stat"><span class="label">Linhas</span><span class="value">12.400</span><span class="delta flat">como descrito</span></div>
+              <div class="stat"><span class="label">valor_homologado vazio</span><span class="value">2.100</span><span class="delta down"><i data-icon="trending-down"></i>17 % · PE e MA · 2019–2020</span></div>
+              <div class="stat"><span class="label">Prévia</span><span class="value">0 vazios</span><span class="delta flat">amostra só com 2023</span></div>
+              <div class="stat"><span class="label">README do pacote</span><span class="value">§ 4</span><span class="delta flat">lacuna documentada</span></div>
+            </div>
+            <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Leitura da curadoria</span>O conteúdo corresponde ao que foi analisado e aprovado; a lacuna existe na fonte e está documentada no README. Porém a descrição pública não a mencionava e a amostra, gerada só com linhas de 2023, não permitia percebê-la. Prévia parcialmente enganosa por omissão: cabe reembolso parcial e correção da descrição.</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Linha do tempo</h3></div>
+          <div class="card-body">
+            <div class="timeline">
+              <div class="tl-item ok"><div class="when">24/10 · 11:02</div><div class="what">Compra de 1 cópia por <span class="handle" data-handle="quartzo-a1f0"></span> · 490 USDT · Polygon · confirmado (12/12) às 11:09 · entrega imediata no cofre (ENT-7C2A)</div></div>
+              <div class="tl-item warn"><div class="when">25/10 · 14:20</div><div class="what">Disputa aberta · 2 anexos · pagamento identificado na carteira do item (txid <code>0x9f2k…7a31</code>) · endereço de origem guardado para um eventual reembolso</div></div>
+              <div class="tl-item info"><div class="when">26/10 · 09:00</div><div class="what">Ana R. assumiu · vendedor notificado com prazo de 48 h para responder</div></div>
+              <div class="tl-item info"><div class="when">26/10 · 18:40</div><div class="what">Vendedor respondeu pela conversa interna · README § 4 conferido</div></div>
+              <div class="tl-item brass"><div class="when">Hoje · 10:30</div><div class="what">Comparação prévia × conteúdo concluída · 2.100 linhas confirmadas · proposta de resolução em elaboração</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="hist">
+          <div class="card card-sm">
+            <div class="card-head"><h3>Vendedor</h3></div>
+            <div class="card-body stack-sm">
+              <span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · desde fev/2025"></span>
+              <dl class="kv"><dt>Itens</dt><dd>12 publicados · 4 aprovados nos últimos 12 meses</dd><dt>Disputas</dt><dd>1 aberta (esta) · <b>0 perdidas</b></dd><dt>Cópias vendidas</dt><dd>37 deste item · 0 outras disputas</dd><dt>Reincidência</dt><dd>não</dd></dl>
+            </div>
+          </div>
+          <div class="card card-sm">
+            <div class="card-head"><h3>Comprador</h3></div>
+            <div class="card-body stack-sm">
+              <span class="handle" data-handle="quartzo-a1f0" data-rep="desde jun/2026"></span>
+              <dl class="kv"><dt>Compras</dt><dd>6 · US$ 1.830 no total</dd><dt>Disputas</dt><dd>2 abertas em 4 meses · <b>1 anterior improcedente</b> (DSP-0205)</dd><dt>Limite</dt><dd>uma nova improcedente limita o direito de disputa</dd></dl>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Pagamento em disputa</h3><span class="badge badge-outline"><i data-icon="wallet"></i>carteira do item · lcr-9f2k7</span></div>
+          <div class="card-body">
+            <dl class="kv">
+              <dt>Valor</dt><dd>490 USDT (US$ 490,00) · Polygon · confirmado 12/12 em 24/10 às 11:09</dd>
+              <dt>txid</dt><dd><code>0x9f2k…7a31</code> <button class="btn btn-sm btn-ghost" data-copy="0x9f2k7a31" aria-label="Copiar txid"><i data-icon="copy"></i></button> <a class="btn btn-sm btn-ghost" href="#" data-toast="Abriria o explorador da rede (polygonscan)" aria-label="Abrir no explorador"><i data-icon="external-link"></i></a></dd>
+              <dt>Endereço de origem</dt><dd><code>0x7d2e…40b9</code> · carteira própria do comprador, não de corretora · guardado só até a finalização, para reembolso</dd>
+              <dt>Endereço derivado</dt><dd><code>0x9f2k…b8e3</code> · um por pagamento, com o valor exato</dd>
+              <dt>Carteira do item</dt><dd><code>0x9f2k…c0d4</code> · recebido US$ 18.130 em 37 pagamentos · item ativo, <b>não finalizado</b></dd>
+              <dt>Origem do reembolso</dt><dd>carteira do item, ao endereço de origem. Enquanto esta disputa estiver aberta, lcr-9f2k7 não pode ser finalizado: a carteira só é entregue ao vendedor sem disputa aberta. Depois da finalização, só reclamações excepcionais, pagas pelo fundo de garantia.</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Resolução</h3><span class="badge badge-outline">decide até 30/10</span></div>
+          <div class="card-body stack">
+            <fieldset>
+              <legend>Decisão</legend>
+              <div class="stack-sm">
+                <label class="radio"><input type="radio" name="res"><span>Reembolso total · US$ 490,00<span class="desc">490 USDT da carteira do item ao endereço de origem (Polygon). Acesso ao item revogado.</span></span></label>
+                <label class="radio"><input type="radio" name="res" checked><span>Reembolso parcial<span class="desc">Comprador mantém o acesso. O valor sai da carteira do item para o endereço de origem do pagamento.</span></span></label>
+                <div class="field amount"><label for="val">Valor do reembolso parcial</label><div class="input-group"><span class="affix">US$</span><input id="val" class="input num" value="85,00"></div><span class="hint">Proporcional às 2.100 linhas sem valor homologado (17 % de US$ 490, arredondado) · 85 USDT · Polygon · ao endereço de origem</span></div>
+                <label class="radio"><input type="radio" name="res"><span>Manter a venda · improcedente<span class="desc">Conta como disputa improcedente para o comprador.</span></span></label>
+              </div>
+            </fieldset>
+            <div class="field"><label for="nota">Nota da resolução</label><textarea id="nota" class="textarea">O conteúdo corresponde ao aprovado e a lacuna de 2.100 valores homologados (PE e MA, 2019–2020) existe na fonte e está documentada no README § 4. A descrição pública, porém, não informava a lacuna e a amostra foi gerada só com 2023. Reembolso parcial de US$ 85,00 (17 %) ao endereço de origem do pagamento, a partir da carteira do item; acesso mantido. Vendedor deve atualizar a descrição e a amostra (nova versão da prévia) em 72 h. Sem rebaixamento de reputação: não há reincidência.</textarea><span class="hint">A nota vai para as duas partes, sem identificar a curadora.</span></div>
+            <label class="check"><input type="checkbox" checked><span>Exigir do vendedor nova versão da descrição e da amostra pública<span class="desc">Prazo de 72 h; o item continua ativo.</span></span></label>
+            <label class="check"><input type="checkbox"><span>Rebaixar reputação do vendedor<span class="desc">Só em reincidência ou prévia deliberadamente enganosa.</span></span></label>
+            <div class="row">
+              <button class="btn btn-primary" data-toast="DSP-0207 resolvida: 85 USDT enviados da carteira do item ao endereço de origem de @quartzo-a1f0 (Polygon) · txid registrado na prova e na auditoria · partes notificadas"><i data-icon="gavel"></i>Resolver</button>
+              <button class="btn" data-toast="Pedido de informação enviado ao comprador · prazo de resolução pausa por até 48 h">Pedir mais informações</button>
+              <button class="btn btn-ghost" data-toast="Disputa encaminhada à curadora sênior para segunda opinião">Segunda opinião</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que cada parte vê</span>Comprador e vendedor veem o motivo, a resolução, o valor e a nota. Nenhum deles vê o outro além do pseudônimo. A equipe não vê nada além do pseudônimo, do item e do histórico de pagamentos do item (valor, rede, txid, endereço de origem).</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

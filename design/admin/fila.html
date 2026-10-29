@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fila de análise · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contornos de bugs do CSS compartilhado: .sidebar-backdrop vira célula do grid acima de 1000 px; filhos de grid sem min-width 0 estouram em telas estreitas */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    .grid > *, .split > *, .split-3 > *, .form-grid > * { min-width: 0; }
+    .tl-item.ok, .tl-item.warn, .tl-item.danger, .tl-item.info, .tl-item.brass, .tl-item.wax { color: inherit; }
+    .acts { text-align: right; white-space: nowrap; }
+    .ico { display: inline-flex; align-items: center; vertical-align: middle; }
+    .ico svg { width: 16px; height: 16px; }
+    .toolbar .select { width: auto; flex: 1 1 150px; max-width: 230px; }
+    .tri { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+    .prio { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; background: var(--surface-3); color: var(--fg-2); }
+    .prio.hot { background: var(--danger-soft); color: var(--danger); }
+    .prio.mid { background: var(--warn-soft); color: var(--warn); }
+    .table td .title { font-weight: 600; display: block; max-width: 34ch; }
+    .table .sub .handle { font-size: var(--fs-xs); }
+    .table .sub .handle .identicon { width: 16px; height: 16px; border-radius: 4px; }
+    tr.exp td { background: var(--surface-2); padding: 0; }
+    tr.exp.collapsed { display: none; }
+    .exp-grid > * { min-width: 0; }
+    .exp-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; font-size: var(--fs-sm); position: sticky; left: 0; width: min(calc(100vw - 282px), 1286px); padding: 16px 18px 18px; }
+    @media (max-width: 1000px) { .exp-grid { width: calc(100vw - 34px); } }
+    .exp-grid h4 { font-size: var(--fs-sm); margin-bottom: 8px; }
+    @media (max-width: 800px) { .exp-grid { grid-template-columns: 1fr; } }
+    .legend-tri { display: flex; gap: 16px; flex-wrap: wrap; font-size: var(--fs-xs); color: var(--muted); margin: 0 0 14px; align-items: center; }
+  </style>
+</head>
+<body data-shell="admin" data-page="fila" data-root="../" data-title="Fila de análise">
+  <main>
+    <div class="page-head">
+      <div>
+        <h1>Fila de análise</h1>
+        <p class="sub">23 itens de 4 países (BR 19 · AR 1 · BD 1 · Global 2) · 7 de risco alto · 2 fora do SLA de 48 h · ordenação padrão: risco, depois idade do envio, depois valor estimado.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" data-toast="Próximo item sem responsável atribuído a Ana R.: lcr-5w2n8 (risco alto)"><i data-icon="user-check"></i>Assumir o próximo</button>
+        <a class="btn btn-primary" href="../admin/analise.html"><i data-icon="clipboard-check"></i>Minhas análises · 6</a>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search"><i data-icon="search"></i><input class="input" placeholder="Buscar por título, slug, pseudônimo ou hash…" aria-label="Buscar na fila"></div>
+      <select class="select" aria-label="Status"><option>Status: todos (23)</option><option>Na fila (7)</option><option>Em análise (9)</option><option>Escalado ao jurídico (5)</option><option>Ajustes solicitados (2)</option></select>
+      <select class="select" aria-label="Risco"><option>Risco: todos</option><option>Alto (7)</option><option>Médio (6)</option><option>Baixo (10)</option></select>
+      <select class="select" aria-label="Categoria"><option>Categoria: todas</option><option>Governo e políticas públicas (4)</option><option>Dados e bases (5)</option><option>Jornalismo e investigação (4)</option><option>Negócios e mercado (2)</option><option>Fotografia e vídeo (2)</option><option>Saúde e meio ambiente (2)</option><option>Ciência e pesquisa (2)</option><option>História e acervos (1)</option><option>Imóveis e urbanismo (1)</option></select>
+      <select class="select" aria-label="País"><option>País: todos</option><option>Brasil · BR (19)</option><option>Argentina · AR (1)</option><option>Bangladesh · BD (1)</option><option>Global (2)</option></select>
+      <select class="select" aria-label="Modelo"><option>Modelo: todos</option><option>Cópias (14)</option><option>Lacre coletivo (3)</option><option>Exclusivo (2)</option><option>Licença (2)</option><option>Pedido (1)</option><option>Assinatura (1)</option></select>
+      <select class="select" aria-label="Responsável"><option>Responsável: qualquer</option><option>Ana R. (7)</option><option>Bruno M. (6)</option><option>Sem responsável (7)</option><option>Com o jurídico (5)</option></select>
+      <select class="select" aria-label="Idade"><option>Idade: qualquer</option><option>Fora do SLA · mais de 48 h (2)</option><option>24 a 48 h (8)</option><option>Menos de 24 h (13)</option></select>
+      <div class="right">
+        <select class="select" aria-label="Ordenação"><option>Ordenar: prioridade</option><option>Mais antigos primeiro</option><option>Maior valor estimado</option><option>Categoria</option></select>
+        <button class="btn btn-ghost" data-toast="Filtros limpos"><i data-icon="x"></i>Limpar</button>
+      </div>
+    </div>
+
+    <div class="legend-tri">
+      <span><b>Triagem automática:</b></span>
+      <span><span class="ico ok"><i data-icon="shield-check"></i></span> antivírus limpo</span>
+      <span><span class="badge badge-warn">PII 12</span> dados pessoais detectados (contagem)</span>
+      <span><span class="badge badge-ok">PII 0</span> nenhum dado pessoal</span>
+      <span><span class="badge badge-danger">dup</span> hash coincide com item existente ou rejeitado</span>
+      <span><span class="badge badge-info"><i data-icon="users"></i>2 olhos</span> exige dois curadores independentes</span>
+      <span><span class="tag">BR</span> país da informação (código ISO) · avaliada pelas leis do país de origem e da sede</span>
+      <span><span class="badge badge-outline">Extra de pedido</span> extras de pedido passam pela mesma triagem (conteúdo), em até 24 h</span>
+    </div>
+    <div class="legend-tri">
+      <span><b>Status:</b></span>
+      <span><span class="badge st-triagem">Na fila</span> <span class="badge st-analise">Em análise</span> <span class="badge st-escalado">Escalado</span> azul: com a equipe</span>
+      <span><span class="badge st-ajustes">Ajustes solicitados</span> âmbar: aguardando o vendedor · SLA pausado · reenvios sem limite</span>
+      <span><span class="badge st-aprovado">Aprovado</span> verde: publicado na hora, com a carteira do item</span>
+      <span><span class="badge st-rejeitado">Rejeitado</span> vermelho: decisão final · reenvio só como novo item</span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr><th>#</th><th>Item</th><th>Categoria</th><th>País</th><th>Modelo</th><th>Risco</th><th>Na fila</th><th>Triagem</th><th>Responsável(is)</th><th>Dois olhos</th><th class="acts">Ações</th></tr>
+        </thead>
+        <tbody>
+          <tr class="selected">
+            <td><span class="prio hot">1</span></td>
+            <td><span class="title">Relatório de inspeção de 90 barragens de rejeito (ANM, 2024), consolidado com georreferenciamento e histórico de autuações</span><span class="sub">lcr-6b2v7 · <span class="handle" data-handle="lanterna-b31d"></span></span></td>
+            <td>Governo e políticas públicas</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">meta US$ 30.000</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">37 h<span class="sub"><span class="badge st-analise">Em análise</span></span><span class="sub">SLA pausado · jurídico</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 4 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="12 nomes próprios · 0 CPFs · 0 telefones">PII 12</span><span class="muted xs">dup 0</span></span></td>
+            <td>Ana R. + Bruno M.<span class="sub">jurídico: Carla S. · prazo 03/11</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><button class="btn btn-sm btn-ghost" data-toggle-class="collapsed" data-target="#exp-6b2v7" aria-label="Recolher resumo"><i data-icon="chevron-up"></i></button> <a class="btn btn-sm btn-primary" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr class="exp" id="exp-6b2v7">
+            <td colspan="11">
+              <div class="exp-grid">
+                <div>
+                  <h4>Resumo da triagem automática · concluída em 25/10 às 22:09 (4 min após o envio)</h4>
+                  <dl class="kv">
+                    <dt>Antivírus</dt><dd><span class="ok">Limpo</span> · 4 arquivos (PDF, CSV, XLSX, GeoJSON) · 3 motores</dd>
+                    <dt>Dados pessoais</dt><dd>0 CPFs · 0 telefones · 0 e-mails · <b>12 nomes próprios</b> em 7 páginas. Amostras tarjadas: "Resp. técnico: <span class="redacted">xxxxxxxxxxxx</span>", "Eng. <span class="redacted">xxxxxxxxxxxxxx</span>, CREA-MG <span class="redacted">xxxxxx</span>", "Representante: <span class="redacted">xxxxxxxxx</span>"</dd>
+                    <dt>Duplicidade</dt><dd>0 · nenhum hash coincide com o catálogo nem com itens rejeitados</dd>
+                    <dt>Conteúdo proibido</dt><dd>0 · sem credenciais, chaves, executáveis ou conteúdo sexual</dd>
+                    <dt>Metadados removidos</dt><dd>PDF: autor, produtor, datas · XLSX: autor, empresa, última modificação · CSV e GeoJSON: nenhum metadado presente</dd>
+                    <dt>Integridade</dt><dd>hash do cliente = hash do servidor <span class="ico ok"><i data-icon="check-circle"></i></span> <code>7c2e…9b41</code> · 51,1 MB</dd>
+                    <dt>OCR</dt><dd>212 páginas indexadas para busca interna</dd>
+                    <dt>Declarações</dt><dd>6 de 6 aceitas em 25/10 às 22:05 · texto versão 1.2</dd>
+                  </dl>
+                </div>
+                <div class="stack-sm">
+                  <h4>Por que está no topo</h4>
+                  <p class="small">Categoria de risco alto (dois olhos e jurídico por padrão), pessoas identificáveis em documento de origem institucional e 90 empresas citadas em contexto de autuação. Valor estimado: US$ 30.000 de meta.</p>
+                  <h4>Andamento</h4>
+                  <div class="timeline">
+                    <div class="tl-item ok"><div class="when">25/10 · 22:05</div><div class="what">Enviado · triagem concluída às 22:09</div></div>
+                    <div class="tl-item info"><div class="when">26/10 · 09:30</div><div class="what">1ª análise · Ana R. · 5 de 7 blocos concluídos</div></div>
+                    <div class="tl-item warn"><div class="when">26/10 · 15:20</div><div class="what">Escalado ao jurídico · Carla S. · SLA pausado</div></div>
+                    <div class="tl-item info"><div class="when">Hoje · 10:20</div><div class="what">2ª análise · Bruno M. · em andamento, sem ver as notas da 1ª</div></div>
+                  </div>
+                  <div class="row"><a class="btn btn-sm btn-primary" href="../admin/analise.html"><i data-icon="clipboard-check"></i>Abrir no workbench</a><a class="btn btn-sm" href="../admin/juridico.html"><i data-icon="scale"></i>Ver no jurídico</a></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">2</span></td>
+            <td><span class="title">Fotos aéreas de 50 condomínios irregulares em APA de Brasília</span><span class="sub">lcr-7h4k1 · <span class="handle" data-handle="cartografo-5a77"></span></span></td>
+            <td>Fotografia e vídeo</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="sub">editorial US$ 1.200 · comercial US$ 6.000</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">44 h<span class="sub"><span class="badge st-escalado">Escalado</span></span><span class="sub">SLA pausado · jurídico</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 50 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="badge badge-outline" data-tip="EXIF: GPS e dispositivo removidos de 50 fotos">GPS</span></span></td>
+            <td>Ana R.<span class="sub">jurídico: Carla S. · 2ª análise pendente</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">3</span></td>
+            <td><span class="title">Registro de 2.300 fábricas têxteis de Bangladesh com resultados de auditorias públicas de segurança (2014–2025)</span><span class="sub">lcr-7e2m4 · reanálise v2 · <span class="handle" data-handle="meridiano-4b8e"></span></span></td>
+            <td>Dados e bases</td>
+            <td><span class="tag">BD</span><span class="sub">inglês</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 320 · limite 150 · 41 vendidas</span></td>
+            <td><span class="badge risk-alto">Alto</span><span class="sub">elevado pela curadora</span></td>
+            <td class="num">29 h<span class="sub"><span class="badge st-escalado">Escalado</span></span><span class="sub">item ativo · v2 inclui auditorias de 2025</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 3 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="2.300 nomes de auditores em relatórios públicos de Bangladesh">PII 2.300</span><span class="muted xs">dup 0</span></span></td>
+            <td>Ana R.<span class="sub">jurídico: Carla S. · leis de BD e da sede</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">4</span></td>
+            <td><span class="title">Metodologia de precificação dinâmica de um app de delivery, enviada por ex-funcionário</span><span class="sub">lcr-1q9x5 · <span class="handle" data-handle="alicate-2d7e"></span> · conta criada em 19/10, 0 itens</span></td>
+            <td>Negócios e mercado</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="sub">US$ 40.000</span></td>
+            <td><span class="badge risk-alto">Alto</span><span class="sub"><span class="badge badge-danger">segredo comercial</span></span></td>
+            <td class="num">27 h<span class="sub"><span class="badge st-escalado">Escalado</span></span><span class="sub">SLA pausado · jurídico</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 3 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="3 nomes próprios em cabeçalhos de e-mail interno">PII 3</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.<span class="sub">jurídico: Carla S. · aguarda documentos do vendedor</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">5</span></td>
+            <td><span class="title">Contratos de patrocínio de 12 clubes de futebol (2020–2025) com fontes públicas</span><span class="sub">lcr-3f8d2 · <span class="handle" data-handle="sextante-21c9"></span></span></td>
+            <td>Jornalismo e investigação</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 650 · limite 50</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">22 h<span class="sub"><span class="badge st-analise">Em análise</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 38 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="41 nomes próprios: dirigentes e signatários">PII 41</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.<span class="sub">2ª análise pendente · jurídico recomendado</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">6</span></td>
+            <td><span class="title">Indicadores de mortalidade materna por hospital em 5 estados (2018–2025), compilados do DataSUS</span><span class="sub">lcr-5w2n8 · <span class="handle" data-handle="ampulheta-4e9c"></span></span></td>
+            <td>Saúde e meio ambiente</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 380</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">19 h<span class="sub"><span class="badge st-triagem">Na fila</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td class="muted">—</td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><button class="btn btn-sm btn-primary" data-toast="lcr-5w2n8 atribuído a Ana R. como primeira análise">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio hot">7</span></td>
+            <td><span class="title">Entrevistas em áudio com 25 ex-trabalhadores de minas de lítio em Jujuy, com transcrição em espanhol</span><span class="sub">lcr-9w5t2 · reanálise v2 · <span class="handle" data-handle="quebracho-8d1f"></span></span></td>
+            <td>Jornalismo e investigação</td>
+            <td><span class="tag">AR</span><span class="sub">espanhol</span></td>
+            <td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="sub">meta US$ 15.000 · US$ 6.900 arrecadados</span></td>
+            <td><span class="badge risk-alto">Alto</span></td>
+            <td class="num">16 h<span class="sub"><span class="badge st-analise">Em análise</span></span><span class="sub">item ativo · 5 entrevistas novas no pacote (edição)</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 30 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok" data-tip="Vozes alteradas e nomes removidos pelo vendedor">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.<span class="sub">2ª análise pendente · transcrição em espanhol</span></td>
+            <td><span class="badge badge-info"><i data-icon="users"></i>sim</span></td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio mid">8</span></td>
+            <td><span class="title">Transcrição de 140 h de audiências públicas da Câmara do Rio sobre a revisão do Plano Diretor</span><span class="sub">lcr-9d3m6 · <span class="handle" data-handle="estenografo-7b3c"></span></span></td>
+            <td>Governo e políticas públicas</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 220</span></td>
+            <td><span class="badge risk-medio">Médio</span></td>
+            <td class="num"><span class="danger">51 h</span><span class="sub"><span class="badge st-analise">Em análise</span></span><span class="sub danger">fora do SLA · 3 h</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 148 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-warn" data-tip="86 nomes: vereadores e expositores em sessão pública">PII 86</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.</td>
+            <td class="muted">não</td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio mid">9</span></td>
+            <td><span class="title">Série histórica de tarifas de ônibus em 27 capitais (1994–2026) com fontes</span><span class="sub">lcr-0p4m3 · <span class="handle" data-handle="coruja-7f3a"></span></span></td>
+            <td>Governo e políticas públicas</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 90</span></td>
+            <td><span class="badge risk-medio">Médio</span></td>
+            <td class="num"><span class="danger">49 h</span><span class="sub"><span class="badge st-analise">Em análise</span></span><span class="sub danger">fora do SLA · 1 h</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td>Bruno M.</td>
+            <td class="muted">não</td>
+            <td class="acts"><a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">10</span></td>
+            <td><span class="title">Pesquisa: 1.200 entrevistas com motoristas de app em 5 capitais</span><span class="sub">lcr-4c6t9 · <span class="handle" data-handle="bussola-c4e1"></span></span></td>
+            <td>Ciência e pesquisa</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 290</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">15 h<span class="sub"><span class="badge st-triagem">Na fila</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 3 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok" data-tip="Respostas anonimizadas pelo vendedor; sem identificadores">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td class="muted">—</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="lcr-4c6t9 atribuído a Ana R.">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">11</span></td>
+            <td><span class="title">Dataset de 5 anos de preços de combustíveis por posto (ANP) tratado</span><span class="sub">lcr-8e2r5 · <span class="handle" data-handle="lanterna-b31d"></span></span></td>
+            <td>Dados e bases</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 180</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">12 h<span class="sub"><span class="badge st-triagem">Na fila</span></span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 6 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="badge badge-danger" data-tip="2 arquivos idênticos a um item rejeitado em 09/2026 (R10)">dup 2</span></span></td>
+            <td class="muted">—</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="lcr-8e2r5 atribuído a Ana R.">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">12</span></td>
+            <td><span class="title">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026) · atendimento ao pedido ped-4k9e2</span><span class="sub">lcr-3j8w5 · atendimento de <span class="handle" data-handle="bussola-c4e1"></span></span></td>
+            <td>Imóveis e urbanismo</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span><span class="sub">5 pessoas × US$ 290 = US$ 1.450 · travado desde 22/10</span><span class="sub">sinais de 25 % pagos: US$ 362,50 · aprovado, cada pessoa recebe a prévia e tem 72 h para pagar os 75 % restantes; quem não pagar perde o sinal, que fica com o Lacre como taxa de desistência</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">5 d<span class="sub"><span class="badge st-ajustes">Ajustes solicitados</span></span><span class="sub">aguardando o vendedor · prazo pausado · pedido travado</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="badge badge-warn" data-tip="Critério de aceite do pedido: faltam as fontes de 2015 a 2017">fontes</span></span></td>
+            <td>Bruno M.</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="Pendências enviadas em 24/10: anexar as fontes de 2015 a 2017 (critério de aceite do pedido) · reenvio sem limite"><i data-icon="message-square"></i>Pendências</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">13</span></td>
+            <td><span class="title">Monitor semanal de patentes do setor farmacêutico · edição #43</span><span class="sub">lcr-6v1b8 · edição de lcr-6d1k5 · <span class="handle" data-handle="prisma-66af"></span></span></td>
+            <td>Ciência e pesquisa</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span><span class="sub">212 assinantes · US$ 190/mês</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">5 h<span class="sub"><span class="badge st-triagem">Na fila</span></span><span class="sub">SLA 24 h · edição</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="muted xs">dup 0</span></span></td>
+            <td class="muted">—</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="lcr-6v1b8 atribuído a Ana R. · comparação com a edição #42 aberta">Assumir</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="prio">14</span></td>
+            <td><span class="title">Mapeamento de 3.100 feiras livres do estado de SP com dias, horários e geolocalização</span><span class="sub">lcr-2z5q7 · <span class="handle" data-handle="coruja-7f3a"></span></span></td>
+            <td>Dados e bases</td>
+            <td><span class="tag">BR</span><span class="sub">português</span></td>
+            <td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="sub">US$ 240</span></td>
+            <td><span class="badge risk-baixo">Baixo</span></td>
+            <td class="num">3 d<span class="sub"><span class="badge st-ajustes">Ajustes solicitados</span></span><span class="sub">aguardando o vendedor · prazo pausado</span></td>
+            <td><span class="tri"><span class="ico ok" data-tip="Antivírus: 2 arquivos limpos"><i data-icon="shield-check"></i></span><span class="badge badge-ok">PII 0</span><span class="badge badge-warn" data-tip="R11: a prévia expõe coordenadas exatas; reduzir amostra">prévia</span></span></td>
+            <td>Bruno M.</td>
+            <td class="muted">não</td>
+            <td class="acts"><button class="btn btn-sm" data-toast="Pendências enviadas em 26/10: reduzir amostra da prévia e arredondar coordenadas"><i data-icon="message-square"></i>Pendências</button> <a class="btn btn-sm" href="../admin/analise.html">Abrir</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="table-foot">
+        <span>Mostrando 14 de 23 itens · 7 sem responsável · atualizado há 2 min</span>
+        <div class="pagination"><button class="btn btn-sm" disabled>‹</button><button class="btn btn-sm btn-primary" data-toast="Você já está na página 1">1</button><button class="btn btn-sm" data-toast="Página 2: 9 itens de risco baixo e médio">2</button><button class="btn btn-sm" data-toast="Página 2: 9 itens de risco baixo e médio">›</button></div>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-head"><h3>Decididos hoje</h3><span class="badge st-aprovado">5 aprovados</span><span class="badge badge-outline">1 extra de pedido</span><span class="badge st-rejeitado">1 rejeitado</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../admin/publicacao.html"><i data-icon="megaphone"></i>Fila de publicação · 6</a></div></div>
+      <div class="table-wrap" style="border:0;border-radius:0">
+        <table class="table compact">
+          <thead><tr><th>Hora</th><th>Item</th><th>Decisão</th><th>Por</th><th>Efeito</th></tr></thead>
+          <tbody>
+            <tr><td class="num">11:05</td><td><span class="title">Modelo de previsão de demanda de energia para o Nordeste, com código e dados de treino</span><span class="sub">lcr-8q4w3 · Tecnologia e segurança · Camadas · <span class="handle" data-handle="bussola-c4e1"></span></span></td><td><a class="badge st-aprovado status-link" href="../public/item.html" data-tip="Abrir a página pública do item">Aprovado · publicado às 11:05<i data-icon="chevron-right"></i></a></td><td>Bruno M. + Ana R.</td><td class="small">carteira do item criada · Base · USDC · post de lançamento na fila (29/10 às 14:00)</td></tr>
+            <tr><td class="num">10:50</td><td><span class="title">Levantamento de 600 pontos de ônibus sem acessibilidade em Curitiba, com fotos</span><span class="sub">lcr-2d9f6 · Governo e políticas públicas · Cópias · US$ 75 · <span class="handle" data-handle="cartografo-5a77"></span></span></td><td><a class="badge st-aprovado status-link" href="../public/item.html" data-tip="Abrir a página pública do item">Aprovado · publicado às 10:50<i data-icon="chevron-right"></i></a></td><td>Ana R.</td><td class="small">carteira do item criada · Polygon · USDT · post na fila (29/10 às 12:00)</td></tr>
+            <tr><td class="num">10:30</td><td><span class="title">Projetos selecionados e valores pagos nos editais de fomento cultural do RS (2025) · extra do pedido ped-9h2d5</span><span class="sub">ext-9h2d5-a · <span class="badge badge-outline">Extra de pedido</span> US$ 80 por pessoa · criado hoje às 09:20 por <span class="handle" data-handle="farol-3e9b"></span>, participante do pedido, a partir da proposta de <span class="handle" data-handle="arquivista-0d2e"></span> (25/10)</span></td><td><a class="badge st-aprovado status-link" href="../public/pedido.html" data-tip="Abrir o pedido com o extra">Aprovado · visível no pedido às 10:30<i data-icon="chevron-right"></i></a></td><td>Bruno M.</td><td class="small">triagem de conteúdo em 1 h 10 (SLA 24 h) · carteira do extra criada · Polygon · USDT · não entrar no extra não muda a participação no pedido</td></tr>
+            <tr><td class="num">10:05</td><td><span class="title">Base de contratos de publicidade de 26 governos estaduais (2019–2025)</span><span class="sub">lcr-7n3x4 · Governo e políticas públicas · Lacre coletivo · meta US$ 20.000 · <span class="handle" data-handle="sextante-21c9"></span></span></td><td><a class="badge st-aprovado status-link" href="../public/item.html" data-tip="Abrir a página pública do item">Aprovado · publicado às 10:05<i data-icon="chevron-right"></i></a></td><td>Ana R. + Bruno M. · jurídico</td><td class="small">carteira do item criada · Polygon · USDT · post na fila (28/10 às 18:00)</td></tr>
+            <tr><td class="num">09:40</td><td><span class="title">Acervo de 1.400 cartazes de cinema brasileiro (1950–1990) digitalizados</span><span class="sub">lcr-9a5c2 · História e acervos · Cópias · US$ 160 · <span class="handle" data-handle="tipografo-8e04"></span></span></td><td><a class="badge st-aprovado status-link" href="../public/item.html" data-tip="Abrir a página pública do item">Aprovado · publicado às 09:40<i data-icon="chevron-right"></i></a></td><td>Bruno M.</td><td class="small">carteira do item criada · Polygon · USDT · post na fila (28/10 às 16:00)</td></tr>
+            <tr><td class="num">09:05</td><td><span class="title">Base de 48 mil CPFs de beneficiários de um programa habitacional, com endereços</span><span class="sub">lcr-1h6b9 · Dados e bases · Cópias · US$ 900 · <span class="handle" data-handle="martelo-9c2e"></span></span></td><td><span class="badge st-rejeitado">Rejeitado · R01</span></td><td>Ana R.</td><td class="small">dados pessoais de terceiros sem base legal · reenvio só como novo item · conta marcada para revisão · auditoria registrada</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-foot xs muted">Aprovar publica na hora: a página do item, a prova pública e a carteira do item (rede e moeda escolhidas pelo vendedor) são criadas no mesmo instante. Só o post nas redes passa pela fila de publicação.</div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-head"><h3>Lotes de pedido por unidade</h3><span class="badge badge-outline">ped-8b4u2 · 1.112 de 5.000 fotos válidas</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../public/pedido.html?p=ped-8b4u2"><i data-icon="external-link"></i>Ver o pedido</a></div></div>
+      <div class="card-body small">
+        <p><b>Fotos dos boletins de urna (BU) afixados nas seções eleitorais de Minas Gerais no 2º turno de 2026 (25/10)</b> · aberto por <span class="handle" data-handle="farol-3e9b"></span> em 26/10 · US$ 2 por foto válida · limite 5.000 · orçamento US$ 10.000 · sinal de 25 % pago: US$ 2.500 · prazo 30/11 · critério: uma foto por BU, legível, com o QR code inteiro e o número da seção visível.</p>
+      </div>
+      <div class="table-wrap" style="border:0;border-radius:0">
+        <table class="table compact">
+          <thead><tr><th>Lote</th><th>Enviado por</th><th>Triagem</th><th>Validação</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="selected"><td><b>Lote 3 · 192 fotos</b><span class="sub">US$ 384 · US$ 2 por foto válida</span></td><td><span class="handle" data-handle="tipografo-8e04"></span></td><td>201 enviadas · 9 duplicadas descartadas (hash)</td><td>amostragem de 10 % (20 fotos) · regra "sem pessoas, cabines ou cédulas" · Bruno M. · 26/10 14:00</td><td><span class="badge st-aguardando">Validado · aguardando o comprador</span><span class="sub">prévia com marca d'água enviada a <span class="handle" data-handle="farol-3e9b"></span> · paga US$ 384 até 29/10 14:00; sem resposta, o lote é pago com o sinal (sobram US$ 2.116)</span></td></tr>
+            <tr><td><b>Lotes 1 e 2 · 920 fotos</b><span class="sub">US$ 1.840</span></td><td>37 contas<span class="sub">inclui <span class="handle" data-handle="coruja-7f3a"></span> · 44 válidas</span></td><td>119 duplicadas ou ilegíveis descartadas</td><td>amostragem de 10 % · curadoria</td><td><span class="badge st-liquidada">Pagos · US$ 1.840</span><span class="sub">quem enviou recebe 90 % após 72 h sem disputa</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-foot xs muted">Lotes passam pela triagem automática (duplicadas por hash e ilegíveis) e pela validação da curadoria por amostragem, com as mesmas regras de conteúdo. Fotos com pessoas, cabines, cédulas ou documentos de eleitores são recusadas: sigilo do voto e dados pessoais.</div>
+    </div>
+  </main>
+</body>
+</html>

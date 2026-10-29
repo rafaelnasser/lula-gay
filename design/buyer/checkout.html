@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Checkout · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .split > * { min-width: 0; }
+    .split { grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr); }
+    @media (max-width: 960px) { .split { grid-template-columns: 1fr; } }
+    .btn-block { white-space: normal; text-align: center; }
+    .tl-item .what { color: var(--fg); }
+    .item-sum { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 16px; align-items: start; }
+    .item-sum .preview { aspect-ratio: 4 / 3; border-radius: var(--r-sm); }
+    @media (max-width: 480px) { .item-sum { grid-template-columns: 1fr; } }
+    .total { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .total .price { font-size: var(--fs-2xl); line-height: 1.1; }
+    .conv { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); text-align: right; }
+    .tier { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); flex-wrap: wrap; }
+    .tier:last-child { border-bottom: 0; }
+    .tier .t-price { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .people .list-item { padding: 7px 0; }
+    .tab-panel { padding-top: 0; }
+    /* Bloco "Pagamento direto" (estampado em cada variante a partir do <template id="pay-tpl">) */
+    .qr-mock { width: 120px; height: 120px; border-radius: 8px; background: repeating-conic-gradient(var(--fg) 0 25%, transparent 0 50%) 0 0/14px 14px; border: 8px solid var(--surface); box-shadow: 0 0 0 1px var(--border); flex: none; }
+    .pay-box { display: flex; gap: 14px; align-items: flex-start; }
+    .pay-box > .stack-sm { flex: 1; min-width: 0; }
+    @media (max-width: 440px) { .pay-box { flex-direction: column; } }
+    .net-switch { flex-wrap: wrap; }
+    .flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .flow svg { width: 14px; height: 14px; color: var(--muted-2); flex: none; }
+    .flow .badge { cursor: pointer; }
+    .pay.locked > .card-body { opacity: .4; pointer-events: none; }
+    .progress-marks span { white-space: nowrap; }
+    .ped-lote { display: none; }
+    [data-variant="pedido"]:has(.tab-panel[data-panel="lote"].active) .ped-main { display: none; }
+    [data-variant="pedido"]:has(.tab-panel[data-panel="lote"].active) .ped-lote { display: flex; }
+    .thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+    .thumbs > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .thumbs .preview { aspect-ratio: 4 / 3; border-radius: 6px; }
+    .thumbs .preview-lock .seal { width: 22px; height: 22px; }
+    .thumbs .preview-tag { left: 4px; top: 4px; }
+    .thumbs .preview-tag .badge { font-size: 9px; padding: 0 5px; }
+    .doc-mock.mini { padding: 10px 12px; font-size: 10px; }
+    .doc-mock.mini h5 { font-size: 11px; margin-bottom: 6px; }
+    .doc-mock.mini .line { height: 6px; margin: 5px 0; }
+    .doc-mock.mini .redacted { display: block; height: 6px; margin: 5px 0; }
+    details.refuse { border: 1px solid var(--border); border-radius: var(--r); padding: 10px 14px; background: var(--surface); }
+    details.refuse summary { cursor: pointer; font-weight: 600; font-size: var(--fs-sm); }
+    .done-head { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .done-head svg { width: 52px; height: 52px; color: var(--ok); }
+  </style>
+</head>
+<body data-shell="buyer" data-page="checkout" data-title="Checkout" data-root="../">
+  <main class="content narrow">
+    <div data-variants="copia">
+      <div class="variant-switch"><span class="vs-label">Variante</span><button data-show="copia">Cópia</button><button data-show="exclusivo">Exclusivo</button><button data-show="exclusividade">Exclusividade</button><button data-show="apoio">Apoio</button><button data-show="lance">Lance</button><button data-show="camada">Camada</button><button data-show="licenca">Licença</button><button data-show="assinatura">Assinatura</button><button data-show="pedido">Pedido</button><button data-show="sucesso">Sucesso</button></div>
+      <div class="crumbs mb-2"><a href="../public/explorar.html">Catálogo</a><i data-icon="chevron-right"></i><a href="../public/item.html">Item</a><i data-icon="chevron-right"></i><span>Checkout</span></div>
+
+      <!-- ===================== CÓPIA ===================== -->
+      <div data-variant="copia">
+        <div class="page-head"><div><p class="eyebrow">Checkout · cópia</p><h1>Comprar uma cópia</h1><p class="sub">Você paga da sua carteira para a carteira do item. Acesso no cofre ao confirmar. Janela de disputa de 72 h.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · edição limitada</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge">Dados e bases</span><span class="tag">BR</span></div>
+                <h3>12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</h3>
+                <div class="xs muted">lcr-9f2k7 · CSV/XLSX · 48 MB · 37 de 100 vendidas · 2 curadores</div>
+                <dl class="kv">
+                  <dt>Vendedor</dt><dd><span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 9 itens"></span></dd>
+                  <dt>Direitos</dt><dd>Download permitido, com marca d'água por entitlement</dd>
+                  <dt>Disputa</dt><dd>72 h após o primeiro acesso; reembolso ao endereço de origem</dd>
+                  <dt>Carteira do item</dt><dd><a class="link" href="../public/prova.html">0x9f2k…c0d4 · Polygon · 37 pagamentos</a> · prova sha256 3f9a…c21e</dd>
+                  <dt>Exclusividade</dt><dd>Este item tem valor de exclusividade: US$ 35.000 · <button type="button" class="link" data-show="exclusividade">ver condições</button></dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 490,00 USDT da sua carteira para o endereço derivado deste pagamento, na carteira do item</div></div>
+                <div class="tl-item ok"><div class="when">≈ 30 s</div><div class="what">12 confirmações: acesso no cofre, visualizador seguro e download com marca d'água "@coruja-7f3a · ENT-…"</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa. Se o conteúdo não corresponder à prévia, a curadoria compara os dois e decide em até 5 dias; o reembolso sai da carteira do item para o seu endereço de origem</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack" data-gate>
+            <dl class="kv"><dt>Preço</dt><dd>US$ 490,00</dd><dt>Taxas</dt><dd>Nenhuma para quem compra. Só a taxa de rede, paga na sua carteira (≈ US$ 0,04 em Polygon)</dd></dl>
+            <div class="total"><span class="small muted">Você paga</span><div><div class="price">US$ 490,00</div><div class="conv">= 490,00 USDT · 1:1</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor, data, rede, txid e o entitlement gerado. O seu endereço de origem fica guardado só enquanto pode haver reembolso. O vendedor vê apenas "1 cópia vendida".</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Cópias<span class="desc">Uso pessoal, sem revenda ou redistribuição. A marca d'água identifica a conta, não a pessoa.</span></span></label>
+            <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+            <div class="card pay" data-pay data-item="item lcr-9f2k7" data-usd="490,00" data-polygon="0x9f2k…b8e3" data-tron="TQ9f…k7P2" data-base="0x9f2k…b40e" data-bitcoin="bc1q…9f2k" data-txid="0x9f2k…7a31" data-done="Acesso liberado no cofre" data-done-note="Entitlement ENT-3F9A emitido: visualizador e download com marca d'água. Janela de disputa de 72 h a partir do primeiro acesso." data-success="sucesso"></div>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== EXCLUSIVO ===================== -->
+      <div data-variant="exclusivo">
+        <div class="page-head"><div><p class="eyebrow">Checkout · exclusivo</p><h1>Comprar exclusividade</h1><p class="sub">Um único comprador. O item sai do catálogo e o conteúdo é destruído nos servidores após a entrega.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="badge">Negócios e mercado</span><span class="tag">BR</span></div>
+                <h3>Mercado de energia solar distribuída no Brasil: projeções 2026–2030, 120 páginas</h3>
+                <div class="xs muted">lcr-7q1z3 · PDF · 120 páginas · 2 ofertas recebidas (maior oferta não revelada)</div>
+                <dl class="kv">
+                  <dt>Vendedor</dt><dd><span class="handle" data-handle="bussola-c4e1" data-rep="4,6 · 5 itens"></span></dd>
+                  <dt>Exclusividade</dt><dd>24 meses declarados: o vendedor não vende nem publica o mesmo material em outro lugar</dd>
+                  <dt>Após a venda</dt><dd>Item marcado "Vendido"; a chave do conteúdo é destruída 72 h depois da entrega; fica só o hash na prova</dd>
+                  <dt>Oferta</dt><dd>Mínimo US$ 15.000. É vinculante: você paga o valor ofertado para um endereço derivado; recusada ou sem resposta em 48 h, volta ao seu endereço de origem</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 25.000,00 USDT (ou 0,36550 BTC) para o endereço derivado deste pagamento, na carteira do item</div></div>
+                <div class="tl-item ok"><div class="when">ao confirmar</div><div class="what">Acesso no cofre e cessão de direitos padronizada gerada com os pseudônimos e o hash; o item sai do catálogo</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa; a prévia sai da página pública. Disputa procedente: reembolso da carteira do item ao seu endereço de origem</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor. A chave do conteúdo é destruída nos servidores; fica só o hash na prova</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack" data-gate>
+            <dl class="kv"><dt>Preço</dt><dd>US$ 25.000,00</dd><dt>Taxas</dt><dd>Nenhuma para quem compra; só a taxa de rede, na sua carteira</dd><dt>Em Bitcoin</dt><dd>0,36550 BTC · 1 BTC = US$ 68.400 no momento em que o endereço é gerado</dd></dl>
+            <div class="total"><span class="small muted">Você paga</span><div><div class="price">US$ 25.000,00</div><div class="conv">= 25.000,00 USDT · 1:1</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor, data, rede, txid e a cessão de direitos com os dois pseudônimos. O vendedor não vê quem comprou.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Exclusivo<span class="desc">Compra vinculante; sem devolução fora da janela de disputa.</span></span></label>
+            <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+            <div class="card pay" data-pay data-item="item lcr-7q1z3" data-usd="25.000,00" data-polygon="0x7q1z…3c9e" data-tron="TQ7q…1z3D" data-base="0x7q1z…e82b" data-bitcoin="bc1q…7q1z" data-txid="0x7q1z…d41a" data-done="Acesso liberado no cofre" data-done-note="Cessão de direitos gerada com os pseudônimos e o hash; o item saiu do catálogo. Disputa aberta por 72 h."></div>
+            <button class="btn btn-block" data-toast="Oferta mínima: US$ 15.000,00. Você paga o valor ofertado para um endereço derivado; recusada ou sem resposta em 48 h, volta ao seu endereço de origem."><i data-icon="send"></i>Ou fazer uma oferta (mín. US$ 15.000)</button>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== EXCLUSIVIDADE (buyout) ===================== -->
+      <div data-variant="exclusividade">
+        <div class="page-head"><div><p class="eyebrow">Checkout · compra com exclusividade</p><h1>Comprar com exclusividade</h1><p class="sub">Você leva o item só para si e o anúncio encerra na hora, para todos. Valor definido pelo vendedor; a curadoria pode sugerir outro.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · edição limitada</span><span class="badge badge-brass"><i data-icon="crown"></i>Exclusividade disponível</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+                <h3>12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</h3>
+                <div class="xs muted">lcr-9f2k7 · CSV/XLSX · 48 MB · preço por cópia US$ 490 · <b>37 cópias já vendidas</b> · 63 restantes · vendedor <span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 9 itens"></span></div>
+                <dl class="kv">
+                  <dt>Neste item (cópias)</dt><dd>Os 37 compradores anteriores mantêm o acesso que já receberam. A partir desta compra, ninguém mais recebe o item.</dd>
+                  <dt>Em lacre coletivo</dt><dd>Se fosse um lacre (ex.: lcr-4m2x9, exclusividade US$ 250.000), os 1.187 apoios voltariam aos endereços de origem e o conteúdo não seria liberado ao público.</dd>
+                  <dt>Vendedor</dt><dd>Assina a declaração de exclusividade por 24 meses: não vende nem publica o mesmo material em outro lugar</dd>
+                  <dt>Conteúdo</dt><dd>Destruído dos servidores 72 h após a entrega (fica só o hash na prova pública, marcada "vendido com exclusividade")</dd>
+                  <dt>Prova</dt><dd><a class="link" href="../public/prova.html">sha256 3f9a…c21e</a> · a prévia sai do catálogo na hora</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 35.000,00 USDT (ou 0,51170 BTC) para o endereço derivado deste pagamento, na carteira do item</div></div>
+                <div class="tl-item ok"><div class="when">ao confirmar</div><div class="what">O anúncio encerra na hora: item marcado "Vendido com exclusividade", prévia fora do catálogo, acesso no cofre e cessão de direitos com os pseudônimos e o hash</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa. Os 37 compradores anteriores são avisados de que o item encerrou; o acesso deles continua</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor. A chave do conteúdo é destruída nos servidores; fica só o hash na prova</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack" data-gate>
+            <dl class="kv"><dt>Exclusividade</dt><dd>US$ 35.000,00</dd><dt>Taxas</dt><dd>Nenhuma para quem compra; só a taxa de rede, na sua carteira</dd><dt>Em Bitcoin</dt><dd>0,51170 BTC · 1 BTC = US$ 68.400 no momento em que o endereço é gerado</dd></dl>
+            <div class="total"><span class="small muted">Você paga</span><div><div class="price">US$ 35.000,00</div><div class="conv">= 35.000,00 USDT · 1:1</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, valor, data, rede, txid e a cessão de direitos com os dois pseudônimos. Os compradores anteriores e o vendedor não veem quem comprou.</div></div>
+            <label class="check"><input type="checkbox"><span>Entendo que esta compra encerra o anúncio para todos<span class="desc">Compra vinculante. Quem já comprou mantém o acesso; ninguém mais recebe. O conteúdo é destruído dos servidores após 72 h.</span></span></label>
+            <label class="check"><input type="checkbox"><span>Aceito os termos da compra com exclusividade<span class="desc">Declaração de exclusividade do vendedor por 24 meses. Você paga só o preço e a taxa da rede.</span></span></label>
+            <p class="xs muted" data-gate-note hidden>Marque os dois aceites para gerar o endereço de pagamento. Enquanto isso, o item continua à venda por cópia e outro comprador pode levar a exclusividade.</p>
+            <div class="card pay" data-pay data-item="item lcr-9f2k7" data-usd="35.000,00" data-polygon="0x9f2k…e5c8" data-tron="TQ9f…k7B1" data-base="0x9f2k…0d7a" data-bitcoin="bc1q…2k7x" data-txid="0x9f2k…b83d" data-done="Item seu com exclusividade" data-done-note="Anúncio fechado para todos. Acesso no cofre e cessão de direitos emitida; os 37 compradores anteriores foram avisados."></div>
+            <button class="btn btn-ghost btn-sm btn-block" data-show="copia">Prefiro só uma cópia · US$ 490,00</button>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== APOIO ===================== -->
+      <div data-variant="apoio">
+        <div class="page-head"><div><p class="eyebrow">Checkout · lacre coletivo</p><h1>Apoiar este lacre</h1><p class="sub">Valor livre a partir de US$ 10. Fica na carteira do lacre até o resultado da meta. Ao bater a meta, tudo fica público para todos.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="badge">Jornalismo e investigação</span><span class="tag">BR</span></div>
+                <h3>Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</h3>
+                <div class="xs muted">lcr-4m2x9 · PDF 212 p., 31 áudios, planilhas · vendedor <span class="handle" data-handle="sextante-21c9" data-rep="4,9 · 12 itens · Verificado 9×"></span></div>
+                <div class="goal-head"><span class="raised">US$ 54.120</span><span class="goal">meta US$ 80.000 · 68 %</span></div>
+                <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
+                <div class="progress-marks"><span style="left:25%">25 %</span><span style="left:50%">50 %</span><span style="left:75%">75 %</span><span style="left:90%">90 %</span></div>
+                <div class="xs muted">1.187 apoiadores · encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b></div>
+                <dl class="kv">
+                  <dt>Carteira do lacre</dt><dd><a class="link" href="../public/prova.html">0x4m2x…c21e · Polygon · USDT · 1.187 pagamentos</a> · confere on-chain</dd>
+                  <dt>Liberação</dt><dd>Ao bater a meta, tudo fica público para todos, com post nas redes. Quem apoiou ganha o selo "Rompeu este lacre"</dd>
+                  <dt>Marcos</dt><dd>25 % batido em 22/10 e 50 % em 25/10 às 09:35: cada marco liberou uma prévia ao público e ficou garantido ao vendedor (US$ 40.000 hoje). Próximo: 75 % = US$ 60.000</dd>
+                  <dt>Se falhar</dt><dd>O valor do último marco batido fica com o vendedor; o que entrou depois volta aos apoiadores, ao endereço de origem, menos a taxa de rede. Abaixo de 25 %, tudo volta. As prévias continuam públicas; o conteúdo completo não sai</dd>
+                  <dt>O que libera</dt><dd>Tudo ao bater US$ 80.000: relatório, planilhas, anexos e os 31 áudios das entrevistas</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia o apoio para o endereço derivado deste pagamento, na carteira do lacre. Após 12 confirmações, soma ao arrecadado e aparece em Apoios</div></div>
+                <div class="tl-item info"><div class="when">até 15/11</div><div class="what">A cada marco (75 % = US$ 60.000, depois 90 %), uma nova prévia sai ao público e o valor do marco fica garantido ao vendedor. Marcos postados nas redes, sem citar apoiadores</div></div>
+                <div class="tl-item wax"><div class="when">meta batida</div><div class="what">O lacre rompe: todo o conteúdo fica público para todos, com post nas redes. Selo "Rompeu este lacre" no seu perfil e 72 h para abrir disputa</div></div>
+                <div class="tl-item ok"><div class="when">+72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
+                <div class="tl-item"><div class="when">prazo vence antes da meta</div><div class="what">O valor do último marco batido fica com o vendedor (hoje US$ 40.000, marco 50 %). O que entrou depois volta aos endereços de origem, menos a taxa de rede, em até 24 h. As prévias continuam públicas; o conteúdo completo não sai</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack" data-gate>
+            <div class="field"><label>Valor do apoio</label>
+              <div class="amount-options" data-target="#apoio-valor"><button class="btn active" data-amount="50">US$ 50</button><button class="btn" data-amount="100">US$ 100</button><button class="btn" data-amount="250">US$ 250</button><button class="btn" data-amount="500">US$ 500</button></div>
+              <div class="input-group"><span class="affix">US$</span><input id="apoio-valor" class="input num" value="50" data-amount-input><span class="affix">outro valor</span></div>
+              <span class="hint">Mínimo US$ 10 · sem máximo: você paga da sua carteira</span>
+            </div>
+            <div class="alert alert-info"><i data-icon="flag"></i><div><span class="alert-title">Se o lacre não bater a meta</span>Já garantido ao vendedor: US$ 40.000 (marco 50 %). Seu apoio entra depois do marco 50 %: se o prazo vencer antes do marco 75 %, ele volta para você; se o lacre passar de 75 % e falhar depois, ele fica com o vendedor.<p class="xs mt-1">Seus apoios anteriores: US$ 100 de 22/10 já garantido ao vendedor (entrou antes do marco 50 %) · US$ 150 de 25/10 volta para você se falhar antes do marco 75 %.</p></div></div>
+            <dl class="kv"><dt>Você já apoiou</dt><dd>US$ 250,00 neste lacre (22/10 e 25/10)</dd><dt>Taxas</dt><dd>Nenhuma para quem apoia; só a taxa de rede, na sua carteira</dd></dl>
+            <div class="total"><span class="small muted">Você apoia com</span><div><div class="price wax" data-usd-view>US$ 50,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este apoio</span>Item, valor, data, rede e txid. A página pública mostra só a contagem de apoiadores; seu pseudônimo não aparece.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do Lacre coletivo<span class="desc">Fica na carteira do lacre até o resultado. Ao bater a meta, tudo fica público para todos. Se o prazo vencer antes da meta, o valor até o último marco batido fica com o vendedor e só o que entrou depois volta ao meu endereço de origem.</span></span></label>
+            <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+            <div class="card pay" data-pay data-item="lacre lcr-4m2x9" data-usd="50,00" data-usd-from="#apoio-valor" data-polygon="0x4m2x…7c02" data-tron="TQ4m…2x9W" data-base="0x4m2x…51be" data-txid="0x4m2x…6f1e" data-done="Apoio registrado" data-done-note="Somado ao arrecadado. Fica na carteira do lacre até 15/11: meta batida, tudo fica público para todos; se o prazo vencer antes do marco 75 %, este apoio volta ao seu endereço de origem."></div>
+            <a class="btn btn-ghost btn-sm btn-block" href="../buyer/apoios.html">Ver meus apoios</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== LANCE ===================== -->
+      <div data-variant="lance">
+        <div class="page-head"><div><p class="eyebrow">Checkout · leilão lacrado</p><h1>Enviar um lance lacrado</h1><p class="sub">Um único lance secreto, pago na hora para a carteira do item. Vence o maior; paga o segundo maior mais o incremento.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado · segundo preço</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge">História e acervos</span><span class="tag">BR</span></div>
+                <h3>400 fotografias inéditas da construção de Brasília (1957–1960), acervo pessoal digitalizado</h3>
+                <div class="xs muted">lcr-1w9s6 · 400 imagens TIFF + JPG · vendedor <span class="handle" data-handle="arquivista-0d2e" data-rep="4,8 · 7 itens"></span></div>
+                <dl class="kv">
+                  <dt>Lances</dt><dd>7 lacrados · reserva não revelada · incremento US$ 50</dd>
+                  <dt>Encerra em</dt><dd><b class="countdown" data-deadline="2026-11-02T20:00:00-03:00"></b> · 02/11 às 20:00</dd>
+                  <dt>Segundo preço</dt><dd>O vencedor paga o segundo maior lance + US$ 50, não o próprio lance; a diferença volta ao endereço de origem. Dar o valor que o item vale para você é a melhor estratégia</dd>
+                  <dt>Reserva</dt><dd>Se nenhum lance alcançar a reserva, não há venda e todos os lances voltam aos endereços de origem</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">O lance é pago na hora para o endereço derivado deste pagamento e fica na carteira do item até o encerramento. Não pode ser alterado</div></div>
+                <div class="tl-item info"><div class="when">02/11 · 20:00</div><div class="what">Abertura dos lances. Ninguém vê quem deu lance, nem o vendedor</div></div>
+                <div class="tl-item ok"><div class="when">se vencer</div><div class="what">Paga o segundo preço + US$ 50; a diferença volta ao seu endereço de origem; entrega no cofre e 72 h para disputa. Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
+                <div class="tl-item"><div class="when">se não vencer</div><div class="what">O lance volta integralmente ao endereço de origem no encerramento, descontada só a taxa de rede. Por isso leilões só aceitam redes baratas</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack" data-gate>
+            <div class="field"><label for="lance">Seu lance único</label><div class="input-group"><span class="affix">US$</span><input id="lance" class="input num" value="1.200,00"></div><span class="hint">Mínimo US$ 500,00 (lance inicial). O valor inteiro é pago agora e fica na carteira do item até 02/11</span></div>
+            <dl class="kv"><dt>Na carteira do item até</dt><dd>02/11 · 20:00</dd><dt>Se vencer por US$ 950</dt><dd>paga US$ 950 + US$ 50 = US$ 1.000; US$ 200 voltam ao seu endereço</dd><dt>Taxas</dt><dd>Nenhuma para quem dá lance; só a taxa de rede, na sua carteira</dd></dl>
+            <div class="total"><span class="small muted">Você paga agora</span><div><div class="price" data-usd-view>US$ 1.200,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre este lance</span>Item, valor, data, rede e txid. Os outros participantes veem apenas "8 lances lacrados".</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do Leilão lacrado<span class="desc">Lance vinculante e irreversível. Se vencer, a compra é automática.</span></span></label>
+            <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+            <div class="card pay" data-pay data-item="item lcr-1w9s6" data-usd="1.200,00" data-usd-from="#lance" data-polygon="0x1w9s…6d2f" data-tron="TQ1w…9s6R" data-base="0x1w9s…a93c" data-txid="0x1w9s…4e7b" data-done="Lance lacrado registrado" data-done-note="Fica na carteira do item até 02/11 às 20:00. Se vencer, a diferença para o segundo preço volta à origem; se não vencer, tudo volta ao endereço de origem."></div>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== CAMADA ===================== -->
+      <div data-variant="camada">
+        <div class="page-head"><div><p class="eyebrow">Checkout · camadas</p><h1>Subir para a camada 2</h1><p class="sub">Você já tem a camada 1. Paga só a diferença, para a carteira do item.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="badge">Educação e métodos</span><span class="tag">BR</span></div>
+                <h3>Como uma operação de última milha cortou 31 % do custo: playbook, planilhas e modelo de roteirização</h3>
+                <div class="xs muted">lcr-3c7r8 · pacote · vendedor <span class="handle" data-handle="bussola-c4e1" data-rep="4,6 · 5 itens"></span> · exclusividade do item: US$ 20.000</div>
+                <div>
+                  <div class="tier"><span><span class="badge badge-ok"><i data-icon="check"></i>Você tem</span> Camada 1 · sumário executivo e 10 gráficos</span><span class="t-price muted">US$ 190 · pago em 23/10 (Base)</span></div>
+                  <div class="tier"><span><span class="badge badge-brass">Selecionada</span> Camada 2 · playbook completo (PDF, 64 p.)</span><span class="t-price">US$ 890 · diferença US$ 700</span></div>
+                  <div class="tier"><span>Camada 3 · planilhas e modelo de roteirização (XLSX)</span><span class="t-price muted">US$ 1.900 · + US$ 1.010 depois</span></div>
+                  <div class="tier"><span>Pacote completo · tudo com desconto</span><span class="t-price muted">US$ 2.400 · + US$ 2.210 agora</span></div>
+                </div>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 700,00 USDT (a diferença) para o endereço derivado deste pagamento, na carteira do item</div></div>
+                <div class="tl-item ok"><div class="when">ao confirmar</div><div class="what">O mesmo entitlement (ENT-5K7D) passa a cobrir a camada 2 no cofre</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa da camada 2, independente da camada 1; reembolso ao endereço de origem</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack" data-gate>
+            <dl class="kv"><dt>Camada 2</dt><dd>US$ 890,00</dd><dt>Já pago (camada 1)</dt><dd>− US$ 190,00</dd><dt>Taxas</dt><dd>Nenhuma para quem compra; só a taxa de rede, na sua carteira</dd></dl>
+            <div class="total"><span class="small muted">Você paga a diferença</span><div><div class="price">US$ 700,00</div><div class="conv">= 700,00 USDT · 1:1</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, camada, valor, data, rede e txid. O vendedor vê "1 upgrade para a camada 2".</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Camadas<span class="desc">Cada camada é um asset analisado pela curadoria. Direitos iguais aos da camada 1: download com marca d'água.</span></span></label>
+            <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+            <div class="card pay" data-pay data-item="item lcr-3c7r8" data-usd="700,00" data-polygon="0x3c7r…92ab" data-tron="TQ3c…7r8E" data-base="0x3c7r…d105" data-txid="0x3c7r…77c4" data-done="Camada 2 liberada no cofre" data-done-note="O entitlement ENT-5K7D passou a cobrir o playbook completo. Janela de disputa de 72 h para a camada 2."></div>
+            <a class="btn btn-ghost btn-sm btn-block" href="../buyer/cofre.html">Ver no cofre</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== LICENÇA ===================== -->
+      <div data-variant="licenca">
+        <div class="page-head"><div><p class="eyebrow">Checkout · licença</p><h1>Licenciar as fotografias</h1><p class="sub">Escolha a finalidade. O contrato padrão é gerado na hora com os pseudônimos e o hash do pacote.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="badge">Fotografia e vídeo</span><span class="tag">BR</span></div>
+                <h3>340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</h3>
+                <div class="xs muted">lcr-2n8v4 · RAW + JPG · 9,8 GB · vendedor <span class="handle" data-handle="cartografo-5a77" data-rep="4,9 · 8 itens"></span></div>
+                <div class="choice-cards">
+                  <label class="choice"><input type="radio" name="lic" checked><span class="choice-title"><i data-icon="newspaper"></i>Editorial · US$ 900</span><span class="choice-desc">Uso em notícia, uma publicação, 12 meses, Brasil.</span><span class="choice-meta">= 900,00 USDT</span></label>
+                  <label class="choice"><input type="radio" name="lic"><span class="choice-title"><i data-icon="megaphone"></i>Comercial · US$ 4.500</span><span class="choice-desc">Campanha, prazo e território definidos (12 meses, Brasil).</span><span class="choice-meta">= 4.500,00 USDT</span></label>
+                  <label class="choice"><input type="radio" name="lic"><span class="choice-title"><i data-icon="crown"></i>Exclusiva · US$ 25.000</span><span class="choice-desc">Ninguém mais licencia; encerra as demais licenças.</span><span class="choice-meta">= 25.000,00 USDT</span></label>
+                </div>
+                <p class="xs muted">Entrega em alta resolução sem marca d'água após a confirmação. A prévia pública continua com marca d'água.</p>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 900,00 USDT para o endereço derivado deste pagamento, na carteira do item</div></div>
+                <div class="tl-item ok"><div class="when">ao confirmar</div><div class="what">Contrato LIC-2N8V4-… em PDF e download do pacote no cofre, sem marca d'água</div></div>
+                <div class="tl-item info"><div class="when">até 72 h</div><div class="what">Janela de disputa (arquivo corrompido, conteúdo diferente da prévia); reembolso ao endereço de origem</div></div>
+                <div class="tl-item"><div class="when">após 72 h</div><div class="what">Depois de 72 h sem disputa, o pagamento vai para o vendedor</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack" data-gate>
+            <dl class="kv"><dt>Licença editorial</dt><dd>US$ 900,00</dd><dt>Taxas</dt><dd>Nenhuma para quem licencia; só a taxa de rede, na sua carteira</dd></dl>
+            <div class="total"><span class="small muted">Você paga</span><div><div class="price">US$ 900,00</div><div class="conv">= 900,00 USDT · 1:1</div></div></div>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta compra</span>Item, finalidade, valor, data, rede e txid. O contrato cita apenas os pseudônimos das partes e o hash.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos da licença editorial<span class="desc">Uma publicação, 12 meses, território Brasil. Crédito ao pseudônimo opcional. Sem sublicenciar.</span></span></label>
+            <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+            <div class="card pay" data-pay data-item="item lcr-2n8v4" data-usd="900,00" data-polygon="0x2n8v…9c17" data-tron="TQ2n…8v4L" data-base="0x2n8v…c8f3" data-txid="0x2n8v…19e0" data-done="Licença emitida" data-done-note="Contrato LIC-2N8V4-7L4E disponível no cofre, com download do pacote em alta resolução."></div>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== ASSINATURA ===================== -->
+      <div data-variant="assinatura">
+        <div class="page-head"><div><p class="eyebrow">Checkout · assinatura</p><h1>Assinar a fonte</h1><p class="sub">Acesso a todas as edições enquanto a assinatura estiver ativa. Cada período é um pagamento novo, da sua carteira para a carteira do item.</p></div></div>
+        <div class="split">
+          <div class="stack">
+            <div class="card"><div class="card-body item-sum">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura · semanal</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="badge">Ciência e pesquisa</span><span class="tag">BR</span></div>
+                <h3>Monitor semanal de patentes do setor farmacêutico brasileiro</h3>
+                <div class="xs muted">lcr-6d1k5 · texto + planilha toda sexta · 212 assinantes · última edição nº 43 em 24/10 · vendedor <span class="handle" data-handle="prisma-66af" data-rep="4,7 · 44 edições"></span></div>
+                <dl class="kv">
+                  <dt>Período</dt><dd>Mensal · US$ 190 · pago no início de cada período</dd>
+                  <dt>Renovação</dt><dd>3 dias antes de vencer, você recebe um endereço derivado novo para o período seguinte. Sem pagamento até o vencimento, a assinatura pausa, sem multa</dd>
+                  <dt>Atraso do vendedor</dt><dd>Se ele pular mais de um período, o seu período é estendido pelo mesmo tempo</dd>
+                  <dt>Edições antigas</dt><dd>Avulsas por US$ 90 cada, no cofre</dd>
+                </dl>
+              </div>
+            </div></div>
+            <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+              <div class="timeline">
+                <div class="tl-item ok"><div class="when">agora</div><div class="what">Você envia 190,00 USDT para o endereço derivado deste pagamento. Ao confirmar, a edição nº 43 é liberada no cofre, somente leitura</div></div>
+                <div class="tl-item info"><div class="when">toda sexta</div><div class="what">Nova edição passa pela curadoria (SLA 24 h) e aparece no cofre com notificação</div></div>
+                <div class="tl-item"><div class="when">24/11</div><div class="what">Notificação com o endereço derivado do próximo período (US$ 190,00, válido até 27/11). Sem pagamento, a assinatura pausa; pague quando quiser para retomar</div></div>
+              </div>
+            </div></div>
+          </div>
+          <div class="card"><div class="card-body stack" data-gate>
+            <dl class="kv"><dt>1º período</dt><dd>27/10 a 26/11 · US$ 190,00</dd><dt>Próximo pagamento</dt><dd>até 27/11 · US$ 190,00 · endereço enviado em 24/11</dd><dt>Taxas</dt><dd>Nenhuma para quem assina; só a taxa de rede, na sua carteira</dd></dl>
+            <div class="total"><span class="small muted">Você paga agora</span><div><div class="price">US$ 190,00</div><div class="conv">= 190,00 USDT · 1:1</div></div></div>
+            <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Avisar 3 dias antes de cada vencimento, com o endereço do próximo período</span></label>
+            <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos sobre esta assinatura</span>Item, período, valor, data, rede e txid. O vendedor vê só o número de assinantes.</div></div>
+            <label class="check"><input type="checkbox" checked><span>Aceito os termos do modelo Assinatura<span class="desc">Pagamento por período; cancelamento a qualquer momento, sem reembolso do período corrente.</span></span></label>
+            <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+            <div class="card pay" data-pay data-item="item lcr-6d1k5" data-usd="190,00" data-polygon="0x6d1k…5b27" data-tron="TQ6d…k5Q7" data-base="0x6d1k…e04a" data-txid="0x6d1k…38cf" data-done="Assinatura ativa" data-done-note="Edição nº 43 já disponível no cofre. Período 27/10 a 26/11; o endereço do próximo período chega em 24/11."></div>
+            <a class="btn btn-ghost btn-sm btn-block" href="../public/item.html">Voltar ao item</a>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ===================== PEDIDO COM RECOMPENSA (entrar · subir o valor · completar o sinal · extra · criar extra · confirmar a prévia · lote por unidade) ===================== -->
+      <div data-variant="pedido">
+        <div data-tabs>
+          <div class="page-head"><div><p class="eyebrow">Checkout · pedido com recompensa</p><h1>Pedido com recompensa</h1><p class="sub">Todas as pessoas no pedido pagam o mesmo valor e recebem o mesmo acesso. Agora você paga o sinal de 25 %; os 75 % restantes, depois de aprovar a prévia de um atendimento. O sinal não volta por desistência. Pedidos por unidade pagam por lote aceito.</p></div><div class="actions"><div class="segmented wrap"><button type="button" class="active" data-tab="entrar">Entrar</button><button type="button" data-tab="subir">Subir o valor</button><button type="button" data-tab="completar">Completar o sinal</button><button type="button" data-tab="extra">Entrar no extra</button><button type="button" data-tab="criar-extra">Criar um extra</button><button type="button" data-tab="confirmar">Confirmar a prévia</button><button type="button" data-tab="lote">Pagar lote</button></div></div></div>
+          <div class="split">
+            <div class="stack ped-main">
+              <div class="card"><div class="card-body item-sum">
+                <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+                <div class="stack-sm">
+                  <div class="row"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido com recompensa</span><span class="badge st-ativo">Aberto</span><span class="badge">Saúde e meio ambiente</span><span class="tag">BR</span></div>
+                  <h3>Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</h3>
+                  <div class="xs muted">ped-2c8d1 · aberto em 12/10 por <span class="handle" data-handle="coruja-7f3a"></span> · prazo 30/11/2026</div>
+                  <div class="stat-grid"><div class="stat"><span class="label">Valor por pessoa</span><span class="value">US$ 800</span><span class="delta flat">subir exige ≥ US$ 880</span></div><div class="stat"><span class="label">Pessoas</span><span class="value">4</span><span class="delta flat">pseudônimo e data públicos</span></div><div class="stat"><span class="label">Recompensa total</span><span class="value">US$ 3.200</span><span class="delta flat">4 × US$ 800 · sinais US$ 800</span></div></div>
+                  <dl class="kv">
+                    <dt>Carteira do pedido</dt><dd><a class="link" href="../public/pedido.html">0x2c8d…91af · Polygon · USDT · 6 pagamentos</a> · confere on-chain</dd>
+                    <dt>Sinais depositados</dt><dd>US$ 800 (25 % de cada pessoa) · faltam US$ 600 por pessoa, pagos só depois da prévia</dd>
+                    <dt>Atendimento</dt><dd>Quem atende envia o material; o pedido trava e a curadoria confere critérios e lei. Aprovado, cada pessoa vê uma prévia e tem 72 h para pagar os 75 % restantes; quem não pagar perde o sinal</dd>
+                  </dl>
+                  <div class="list people">
+                    <div class="list-item"><span class="handle" data-handle="coruja-7f3a"></span><span class="xs muted">abriu em 12/10 com US$ 500 (sinal US$ 125) · completou o sinal em 20/10 (+US$ 75)</span></div>
+                    <div class="list-item"><span class="handle" data-handle="farol-3e9b"></span><span class="xs muted">entrou em 14/10 (sinal US$ 125) · completou em 19/10 (+US$ 75)</span></div>
+                    <div class="list-item"><span class="handle" data-handle="quartzo-a1f0"></span><span class="xs muted">subiu o valor em 18/10 · US$ 500 → US$ 800 (sinal US$ 200)</span></div>
+                    <div class="list-item"><span class="handle" data-handle="relogio-2b7c"></span><span class="xs muted">entrou em 24/10 (sinal US$ 200)</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-foot"><div class="stack-sm grow">
+                <div class="row between"><b class="small">Extras deste pedido</b><span class="xs muted">bônus opcionais · 1 aberto · 1 proposta · limite 5</span></div>
+                <div class="list people">
+                  <div class="list-item"><span class="li-icon"><i data-icon="plus"></i></span><div class="li-body"><div class="li-title">Reclamações registradas na ouvidoria por UPA (2023–2025), por mês</div><div class="li-sub">ext-2c8d1-a · US$ 150 por pessoa · 2 pessoas · total US$ 300 · sinais US$ 75 · aberto · você não entrou</div></div><button type="button" class="btn btn-sm" data-tab="extra">Entrar no extra</button></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="lightbulb"></i></span><div class="li-body"><div class="li-title">Tempo de espera nas UBS da capital nos mesmos meses</div><div class="li-sub">Proposta de extra · <span class="handle" data-handle="prisma-66af"></span> · 26/10 · valor sugerido US$ 200 · aguardando alguém do pedido criar o extra</div></div><button type="button" class="btn btn-sm" data-tab="criar-extra">Criar um extra</button></div>
+                </div>
+              </div></div>
+            </div>
+              <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga o sinal de 25 % para o endereço derivado deste pagamento, na carteira do pedido. Seu pseudônimo e a data entram na lista pública de pessoas do pedido</div></div>
+                  <div class="tl-item info"><div class="when">enquanto aberto</div><div class="what">Qualquer conta pode subir o valor (mínimo +10 %). Quando subir, cada pessoa tem 48 h para completar o sinal (25 % da diferença); quem não completar deixa de participar e o sinal fica com o Lacre como taxa de desistência. Quem sobe de novo reinicia a janela</div></div>
+                  <div class="tl-item wax"><div class="when">atendimento</div><div class="what">Um vendedor envia o material: pedido travado. Aprovado pela curadoria, cada pessoa vê uma prévia e tem 72 h para pagar os 75 % restantes (US$ 600) ou contestar a prévia. Quem não pagar perde o sinal, que fica com o Lacre como taxa de desistência</div></div>
+                  <div class="tl-item ok"><div class="when">confirmou</div><div class="what">Material completo no cofre na hora. Depois de 72 h sem disputa, o pagamento vai para quem atendeu</div></div>
+                  <div class="tl-item"><div class="when">30/11</div><div class="what">Sem atendimento até o prazo, cada sinal volta ao endereço de origem, descontada só a taxa de rede</div></div>
+                </div>
+              </div></div>
+            </div>
+            <div class="stack ped-lote">
+              <div class="card"><div class="card-body item-sum">
+                <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+                <div class="stack-sm">
+                  <div class="row"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido por unidade</span><span class="badge st-ativo">Aberto</span><span class="badge">Governo e políticas públicas</span><span class="tag">BR</span></div>
+                  <h3>Fotos dos boletins de urna (BU) afixados nas seções eleitorais de Minas Gerais no 2º turno de 2026 (25/10)</h3>
+                  <div class="xs muted">ped-8b4u2 · aberto em 26/10 por <span class="handle" data-handle="farol-3e9b"></span> · prazo 30/11/2026</div>
+                  <div class="stat-grid"><div class="stat"><span class="label">Por foto válida</span><span class="value">US$ 2</span><span class="delta flat">limite 5.000 fotos</span></div><div class="stat"><span class="label">Fotos válidas</span><span class="value">1.112</span><span class="delta flat">de 1.240 enviadas por 38 pessoas</span></div><div class="stat"><span class="label">Orçamento</span><span class="value">US$ 10.000</span><span class="delta flat">sinal de US$ 2.500 (25 %)</span></div></div>
+                  <div class="progress"><div class="progress-bar" data-width="22%"></div></div>
+                  <dl class="kv">
+                    <dt>Vale como 1 foto</dt><dd>Uma foto por BU, legível, com o QR code inteiro e o número da seção visível. Sem pessoas, cabines ou cédulas no enquadramento</dd>
+                    <dt>Triagem</dt><dd>128 descartadas antes da curadoria (duplicadas pelo hash ou ilegíveis)</dd>
+                    <dt>Carteira do pedido</dt><dd><a class="link" href="../public/pedido.html">0x8b4u…2d61 · Polygon · USDT</a></dd>
+                  </dl>
+                  <div class="list people">
+                    <div class="list-item"><span class="li-icon"><i data-icon="check"></i></span><div class="li-body"><div class="li-title">Lote 1 · 520 fotos · US$ 1.040</div><div class="li-sub">pago em 26/10</div></div><span class="badge st-liquidada">Pago</span></div>
+                    <div class="list-item"><span class="li-icon"><i data-icon="check"></i></span><div class="li-body"><div class="li-title">Lote 2 · 400 fotos · US$ 800</div><div class="li-sub">pago em 27/10</div></div><span class="badge st-liquidada">Pago</span></div>
+                    <div class="list-item"><span class="li-icon"><i data-icon="image"></i></span><div class="li-body"><div class="li-title">Lote 3 · 192 fotos · US$ 384</div><div class="li-sub">prévia enviada · pagar até 29/10 às 14:00</div></div><span class="badge st-aguardando">Aguardando você</span></div>
+                  </div>
+                </div>
+              </div></div>
+              <div class="card"><div class="card-head"><h3>O que acontece depois</h3></div><div class="card-body">
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga as 192 fotos aceitas da sua carteira e recebe os originais no cofre na hora</div></div>
+                  <div class="tl-item info"><div class="when">72 h</div><div class="what">Janela de disputa para foto que não atenda aos critérios. Depois de 72 h sem disputa, o pagamento vai para quem enviou</div></div>
+                  <div class="tl-item"><div class="when">sem resposta</div><div class="what">Até 29/10 às 14:00 sem resposta, o lote é pago com o sinal (sobram US$ 2.116). Se o sinal acabar, o pedido pausa até novo depósito</div></div>
+                  <div class="tl-item"><div class="when">30/11 ou 5.000 fotos</div><div class="what">O pedido termina e o sinal que sobrar volta ao seu endereço de origem</div></div>
+                </div>
+              </div></div>
+            </div>
+            <div class="card"><div class="card-body">
+              <div class="tab-panel active" data-panel="entrar"><div class="stack" data-gate>
+                <p class="xs muted">Como uma conta que ainda não participa vê o pedido hoje.</p>
+                <dl class="kv"><dt>Valor por pessoa</dt><dd>US$ 800,00 · igual para todos</dd><dt>Com você</dt><dd>5 pessoas · a recompensa total passa a US$ 4.000,00</dd><dt>Se o valor subir</dt><dd>48 h para completar o sinal (25 % da diferença); sem completar, você deixa de participar e o sinal fica com o Lacre como taxa de desistência</dd><dt>Prazo</dt><dd>30/11 · sem atendimento, o sinal volta à origem</dd></dl>
+                <dl class="kv"><dt>Paga agora</dt><dd><b>US$ 200,00</b> (sinal de 25 %)</dd><dt>Depois da prévia</dt><dd><b>US$ 600,00</b> · os 75 % restantes, em 72 h, para receber tudo no cofre</dd></dl>
+                <div class="total"><span class="small muted">Paga agora</span><div><div class="price">US$ 200,00</div><div class="conv">= 200,00 USDT · 1:1</div></div></div>
+                <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que registramos</span>Pedido, valor, data, rede e txid. Quem entra é público: pseudônimo e data de entrada aparecem na página do pedido. O endereço de origem fica guardado só enquanto pode haver reembolso.</div></div>
+                <label class="check"><input type="checkbox" checked><span>Aceito os termos do Pedido com recompensa<span class="desc">Valor igual para todos; sinal de 25 % agora e os 75 % restantes só depois de aprovar a prévia; se o valor subir, 48 h para completar o sinal. O sinal não volta por desistência: se eu não completar o sinal ou não pagar os 75 % depois da prévia, ele fica com o Lacre como taxa de desistência. Volta só se o prazo acabar sem nenhum vendedor.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="200,00" data-polygon="0x2c8d…4f7b" data-tron="TQ2c…8d1K" data-base="0x2c8d…9a03" data-txid="0x2c8d…e5c2" data-done="Você entrou no pedido" data-done-note="Recompensa total: US$ 4.000,00. Seu sinal fica na carteira do pedido; quando um atendimento for aprovado, você recebe a prévia e tem 72 h para pagar os 75 % restantes (US$ 600)."></div>
+                <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
+              </div></div>
+              <div class="tab-panel" data-panel="subir"><div class="stack" data-gate>
+                <p class="xs muted">Como uma conta que ainda não participa vê o pedido hoje. Quem já participa paga 25 % da diferença.</p>
+                <div class="field"><label for="subir-valor">Novo valor por pessoa</label><div class="input-group"><span class="affix">US$</span><input id="subir-valor" class="input num" value="880,00"></div><span class="hint">Mínimo US$ 880,00 (+10 % sobre os US$ 800 atuais). Vira o valor por pessoa para todos. O sinal é calculado: 25 % dele.</span></div>
+                <dl class="kv"><dt>Hoje</dt><dd>4 pessoas × US$ 800 = US$ 3.200</dd><dt>Se as 4 completarem</dt><dd>5 × US$ 880 = US$ 4.400,00</dd><dt>Se ninguém completar</dt><dd>só você: US$ 880,00 · compra com exclusividade de fato</dd><dt>Paga agora</dt><dd><b data-usd-view>US$ 220,00</b> (sinal de 25 %)</dd><dt>Depois da prévia</dt><dd><b data-rest>US$ 660,00</b> · os 75 % restantes do novo valor</dd></dl>
+                <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">As outras 4 pessoas terão 48 h para completar o sinal</span>A janela vai até 29/10 às 14:12 e nunca passa do prazo do pedido. Quem não completar deixa de participar e o sinal dele fica com o Lacre como taxa de desistência. Se ninguém completar, você fica sozinho. Se alguém subir acima de você, você terá 48 h para completar.</div></div>
+                <div class="total"><span class="small muted">Paga agora</span><div><div class="price" data-usd-view>US$ 220,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
+                <label class="check"><input type="checkbox" checked><span>Entendo que subir o valor obriga as outras pessoas do pedido a completar o sinal<span class="desc">Vinculante. O sinal não volta por desistência. Se o pedido for atendido, você recebe o mesmo acesso que quem completar.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="220,00" data-usd-from="#subir-valor" data-usd-factor="0.25" data-polygon="0x2c8d…b2d6" data-tron="TQ2c…8dK4" data-base="0x2c8d…7e19" data-txid="0x2c8d…0a9f" data-done="Valor por pessoa: US$ 880" data-done-note="As outras 4 pessoas foram avisadas: completar o sinal até 29/10 às 14:12. Seu sinal fica na carteira do pedido."></div>
+                <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
+              </div></div>
+              <div class="tab-panel" data-panel="completar"><div class="stack" data-gate>
+                <p class="xs muted">Como <span class="handle" data-handle="coruja-7f3a"></span> viu o pedido em 19/10, depois de <span class="handle" data-handle="quartzo-a1f0"></span> subir o valor. Hoje já completou.</p>
+                <div class="alert alert-warn"><i data-icon="hourglass"></i><div><span class="alert-title">Valor subiu: complete o sinal até 20/10 14:00</span>De US$ 500 para US$ 800 por pessoa, em 18/10 às 14:00. Para continuar, complete o sinal: 25 % da diferença de US$ 300. Se não completar em 48 h, você deixa de participar e o sinal de US$ 125 fica com o Lacre como taxa de desistência.</div></div>
+                <dl class="kv"><dt>Você pagou</dt><dd>sinal de US$ 125,00 em 12/10 (abriu o pedido com US$ 500)</dd><dt>Valor atual</dt><dd>US$ 800,00 por pessoa</dd><dt>Paga agora</dt><dd><b>US$ 75,00</b> (completa o sinal: 25 % da diferença de US$ 300)</dd><dt>Depois da prévia</dt><dd><b>US$ 600,00</b> (os 75 % restantes de US$ 800)</dd></dl>
+                <div class="total"><span class="small muted">Paga agora</span><div><div class="price">US$ 75,00</div><div class="conv">= 75,00 USDT · 1:1</div></div></div>
+                <label class="check"><input type="checkbox" checked><span>Completar o sinal para o novo valor<span class="desc">Se o valor subir de novo, você terá outras 48 h para completar.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="75,00" data-polygon="0x2c8d…6e3b" data-tron="TQ2c…8d6E" data-base="0x2c8d…3b1c" data-valid="até 20/10 · 14:00, fim da janela para completar o sinal" data-txid="0x9b47…2e1c" data-done="Sinal completo" data-done-note="Seu sinal soma US$ 200,00 na carteira do pedido. Se o valor subir de novo, você terá outras 48 h para completar."></div>
+                <p class="xs muted">Não quer continuar? Basta não completar: você deixa de participar e o sinal de US$ 125 fica com o Lacre como taxa de desistência. O sinal não volta por desistência.</p>
+              </div></div>
+              <div class="tab-panel" data-panel="extra"><div class="stack" data-gate>
+                <p class="xs muted">Extra: bônus opcional dentro do pedido, com valor por pessoa e carteira próprios. Só quem está no pedido principal entra.</p>
+                <div class="panel stack-sm">
+                  <div class="row between"><span class="badge badge-brass">Extra · ext-2c8d1-a</span><span class="badge st-ativo">Aberto</span></div>
+                  <b>Reclamações registradas na ouvidoria por UPA (2023–2025), por mês</b>
+                  <div class="xs muted">Proposto por <span class="handle" data-handle="lanterna-b31d"></span> em 21/10 ("tenho a base da ouvidoria, não os tempos de espera") · criado por <span class="handle" data-handle="quartzo-a1f0"></span> em 22/10 · aprovado pela curadoria em 22/10 (Bruno M.)</div>
+                  <div class="xs muted">Critérios: por unidade e mês · número de reclamações e tema · CSV · prazo 30/11, o mesmo do pedido</div>
+                </div>
+                <dl class="kv"><dt>Valor por pessoa</dt><dd>US$ 150,00 · igual para todos no extra</dd><dt>Pessoas</dt><dd>2 · <span class="handle" data-handle="quartzo-a1f0"></span> (22/10) · <span class="handle" data-handle="relogio-2b7c"></span> (25/10)</dd><dt>Com você</dt><dd>3 pessoas · total US$ 450,00 · sinais depositados US$ 75</dd><dt>Paga agora</dt><dd><b>US$ 37,50</b> (sinal de 25 %)</dd><dt>Depois da prévia</dt><dd><b>US$ 112,50</b> · os 75 % restantes, se você confirmar o atendimento do extra</dd><dt>Carteira do extra</dt><dd><a class="link" href="../public/pedido.html">0x2c8e…7b40 · Polygon · USDT · 2 pagamentos</a> · diferente da carteira do pedido</dd></dl>
+                <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Não entrar no extra não muda sua participação no pedido</span>Seu sinal de US$ 200 continua no pedido principal. Quem deixa de participar do pedido principal deixa também os extras.</div></div>
+                <div class="total"><span class="small muted">Paga agora</span><div><div class="price">US$ 37,50</div><div class="conv">= 37,50 USDT · 1:1 · valor US$ 150</div></div></div>
+                <label class="check"><input type="checkbox" checked><span>Aceito os termos do extra<span class="desc">Mesmas regras do pedido: sinal de 25 % agora, os 75 % restantes depois da prévia; o sinal não volta por desistência; se o valor subir, 48 h para completar o sinal. Acesso no cofre só para quem está no extra.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="extra ext-2c8d1-a" data-usd="37,50" data-polygon="0x2c8e…a91d" data-tron="TQ2c…8eA3" data-base="0x2c8e…5f02" data-txid="0x2c8e…c47b" data-done="Você entrou no extra" data-done-note="Extra com 3 pessoas · total US$ 450,00. Seu sinal de US$ 37,50 fica na carteira do extra; os 75 % restantes, US$ 112,50, só depois da prévia."></div>
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga o sinal de 25 % para o endereço derivado deste pagamento, na carteira do extra. Seu pseudônimo entra na lista de pessoas do extra</div></div>
+                  <div class="tl-item info"><div class="when">enquanto aberto</div><div class="what">Qualquer pessoa do pedido pode entrar no extra ou subir o valor (mínimo +10 %); quando subir, 48 h para completar o sinal</div></div>
+                  <div class="tl-item wax"><div class="when">atendimento</div><div class="what">Pode ser atendido por outro vendedor e em outro momento que o principal. Aprovado: prévia para as pessoas do extra; quem confirmar paga os 75 % restantes e recebe no cofre; quem não pagar perde o sinal, que fica com o Lacre como taxa de desistência. Depois de 72 h sem disputa, o pagamento de quem confirmou vai para quem atendeu</div></div>
+                  <div class="tl-item"><div class="when">30/11</div><div class="what">Extra expirado: cada sinal volta ao endereço de origem, descontada só a taxa de rede</div></div>
+                </div>
+                <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
+              </div></div>
+              <div class="tab-panel" data-panel="criar-extra"><div class="stack" data-gate>
+                <p class="xs muted">Você está criando um extra a partir da proposta de <span class="handle" data-handle="prisma-66af"></span> (26/10, valor sugerido US$ 200). Quem propôs não tem exclusividade para atender.</p>
+                <div class="panel stack-sm">
+                  <div class="row between"><span class="badge badge-brass">Novo extra · ped-2c8d1</span><span class="badge st-triagem">Vai à curadoria</span></div>
+                  <b>Tempo de espera nas UBS da capital nos mesmos meses</b>
+                  <div class="xs muted">Critérios: por unidade e mês · minutos médios e medianos · CSV · prazo 30/11 (o do pedido, nunca além dele) · 2º extra aberto do pedido (limite 5)</div>
+                </div>
+                <div class="field"><label for="extra-valor">Valor por pessoa</label><div class="input-group"><span class="affix">US$</span><input id="extra-valor" class="input num" value="200,00"></div><span class="hint">Mínimo US$ 10. É o que cada pessoa do pedido paga pelo extra. O sinal é calculado: 25 % dele.</span></div>
+                <dl class="kv"><dt>Paga agora</dt><dd><b data-usd-view>US$ 50,00</b> (sinal de 25 %)</dd><dt>Depois da prévia</dt><dd><b data-rest>US$ 150,00</b> · os 75 % restantes, só se você confirmar o atendimento</dd></dl>
+                <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Passa pela curadoria antes de aparecer para as outras pessoas do pedido</span>Você paga agora o sinal e, se a curadoria recusar, ele volta ao seu endereço de origem. Aprovado, o extra entra em "Extras deste pedido", com você dentro.</div></div>
+                <div class="total"><span class="small muted">Paga agora</span><div><div class="price" data-usd-view>US$ 50,00</div><div class="conv">em USDT ou USDC · 1:1</div></div></div>
+                <label class="check"><input type="checkbox" checked><span>Entendo que o extra é independente do pedido principal<span class="desc">Não entrar no extra não muda a participação de ninguém no pedido. Sair do pedido principal retira também dos extras.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="extra novo do ped-2c8d1" data-usd="50,00" data-usd-from="#extra-valor" data-usd-factor="0.25" data-polygon="0x2c8f…31e6" data-tron="TQ2c…8fB7" data-base="0x2c8f…d904" data-txid="0x2c8f…6a2e" data-done="Extra enviado à curadoria" data-done-note="Carteira do extra criada para o seu sinal. Recusado pela curadoria: o sinal volta ao seu endereço de origem. Aprovado: aparece em Extras deste pedido, com você dentro."></div>
+                <div class="timeline">
+                  <div class="tl-item ok"><div class="when">agora</div><div class="what">Você paga o sinal de 25 % para o endereço derivado da carteira nova do extra; o extra entra na fila da curadoria, ainda invisível para os outros</div></div>
+                  <div class="tl-item info"><div class="when">em análise</div><div class="what">Mesmas regras de conteúdo do pedido. Recusado: o sinal volta ao endereço de origem</div></div>
+                  <div class="tl-item wax"><div class="when">aprovado</div><div class="what">Visível em "Extras deste pedido": as outras pessoas do pedido podem entrar com sinal de 25 % (US$ 50) e vendedores podem atender, inclusive quem propôs</div></div>
+                  <div class="tl-item"><div class="when">30/11</div><div class="what">Sem atendimento até o prazo, cada sinal volta ao endereço de origem</div></div>
+                </div>
+                <a class="btn btn-ghost btn-sm btn-block" href="../public/pedido.html">Voltar ao pedido</a>
+              </div></div>
+              <div class="tab-panel" data-panel="confirmar"><div class="stack" data-gate>
+                <p class="xs muted">Simulação: como você vê o pedido quando um atendimento é aprovado pela curadoria.</p>
+                <div class="alert alert-wax"><i data-icon="hourglass"></i><div><span class="alert-title">Confirmar a prévia e pagar o restante</span>Você tem 72 h a partir da prévia. Resta <b class="countdown" data-rel-hours="70"></b> para pagar os 75 % restantes ou contestar a prévia.</div></div>
+                <div class="panel stack-sm">
+                  <div class="row between"><span class="small">Atendimento de <span class="handle" data-handle="bussola-c4e1"></span></span><span class="badge st-aprovado">Aprovado · Bruno M.</span></div>
+                  <div class="table-wrap"><table class="table compact"><thead><tr><th>Unidade</th><th>Mês</th><th class="num">Espera média</th></tr></thead><tbody>
+                    <tr><td>UPA zona leste 1</td><td>01/2023</td><td class="num"><span class="redacted" style="width:5ch"></span></td></tr>
+                    <tr><td>UPA zona sul 3</td><td>01/2023</td><td class="num"><span class="redacted" style="width:5ch"></span></td></tr>
+                    <tr><td>UPA centro 2</td><td>01/2023</td><td class="num"><span class="redacted" style="width:5ch"></span></td></tr>
+                  </tbody></table></div>
+                  <div class="grid cols-2">
+                    <div class="doc-mock mini"><h5>Dicionário de dados</h5><div class="line"></div><span class="redacted"></span><div class="line short"></div></div>
+                    <div class="doc-mock mini"><h5>Fontes e método</h5><div class="line"></div><div class="line short"></div><span class="redacted"></span></div>
+                  </div>
+                  <div class="xs muted">upas-sp-2023-2025.csv · 4.608 linhas (128 UPAs × 36 meses) · 1,9 MB · dicionário de dados e fontes · critérios conferidos: por unidade e mês, 2023–2025, CSV</div>
+                </div>
+                <dl class="kv"><dt>Valor por pessoa</dt><dd>US$ 800,00</dd><dt>Sinal já pago</dt><dd>US$ 200,00 (25 %, em 12/10 e 20/10)</dd><dt>Paga agora</dt><dd><b>US$ 600,00</b> (os 75 % restantes)</dd></dl>
+                <div class="total"><span class="small muted">Paga agora · tudo no cofre</span><div><div class="price">US$ 600,00</div><div class="conv">= 600,00 USDT · 1:1</div></div></div>
+                <label class="check"><input type="checkbox"><span>Confirmo que a prévia é o que eu pedi<span class="desc">Pago o restante e recebo o material completo no cofre na hora. Tenho 72 h para abrir disputa se o arquivo completo não bater com a prévia.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque a confirmação para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="pedido ped-2c8d1" data-usd="600,00" data-polygon="0x2c8d…c8e4" data-tron="TQ2c…8dC1" data-base="0x2c8d…57a0" data-txid="0x2c8d…d3b6" data-done="Material completo no cofre" data-done-note="O CSV completo, o dicionário de dados e as fontes estão no seu cofre. 72 h para abrir disputa; depois, o pagamento vai para quem atendeu."></div>
+                <details class="refuse"><summary>Contestar a prévia</summary>
+                  <div class="stack-sm mt-1">
+                    <div class="field"><label for="rec-motivo">Motivo</label><select id="rec-motivo" class="select"><option>A prévia não corresponde ao que foi pedido</option><option>Período ou unidades incompletos</option><option>Formato diferente do pedido (CSV)</option><option>Outro motivo</option></select></div>
+                    <div class="field"><label for="rec-texto">Explique</label><textarea id="rec-texto" class="textarea" rows="3" placeholder="Ex.: faltam os meses de 2025 em 31 unidades"></textarea></div>
+                    <button type="button" class="btn btn-outline" data-toast="Contestação enviada à curadoria. Decisão em até 48 h; se a prévia não corresponder ao pedido, você não perde o sinal."><i data-icon="flag"></i>Enviar contestação</button>
+                    <p class="xs muted">A curadoria decide em até 48 h. Se a prévia não corresponde ao pedido, o atendimento cai, você não perde o sinal e o pedido segue aberto. Se corresponde, a contestação não vale: pague os 75 % ou o sinal fica com o Lacre como taxa de desistência.</p>
+                  </div>
+                </details>
+                <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Não quer pagar os 75 %?</span>Quem não paga em 72 h perde o sinal de US$ 200, que fica com o Lacre como taxa de desistência, e não recebe o material. Contestar só vale se a prévia não corresponder ao pedido.</div></div>
+              </div></div>
+              <div class="tab-panel" data-panel="lote"><div class="stack" data-gate>
+                <p class="xs muted">Pedido por unidade: como <span class="handle" data-handle="farol-3e9b"></span>, que abriu o ped-8b4u2, vê o lote 3. Cada participante paga os lotes; hoje só quem abriu está no pedido.</p>
+                <div class="row between"><b class="small">Prévia do lote 3 · 192 fotos válidas</b><span class="xs muted">miniaturas com marca d'água</span></div>
+                <div class="thumbs">
+                  <div><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">prévia</span></div><div class="preview-lock"><span data-seal></span></div></div><span class="xs muted">seção 0187</span></div>
+                  <div><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">prévia</span></div><div class="preview-lock"><span data-seal></span></div></div><span class="xs muted">seção 0042</span></div>
+                  <div><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">prévia</span></div><div class="preview-lock"><span data-seal></span></div></div><span class="xs muted">seção 0315</span></div>
+                  <div><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">prévia</span></div><div class="preview-lock"><span data-seal></span></div></div><span class="xs muted">seção 0108</span></div>
+                  <div><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">prévia</span></div><div class="preview-lock"><span data-seal></span></div></div><span class="xs muted">seção 0256</span></div>
+                  <div><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">prévia</span></div><div class="preview-lock"><span data-seal></span></div></div><span class="xs muted">seção 0091</span></div>
+                  <div><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">prévia</span></div><div class="preview-lock"><span data-seal></span></div></div><span class="xs muted">seção 0174</span></div>
+                  <div><div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">prévia</span></div><div class="preview-lock"><span data-seal></span></div></div><span class="xs muted">seção 0233</span></div>
+                </div>
+                <p class="xs muted">+184 fotos na prévia completa · lote validado pela curadoria (Ana R.)</p>
+                <dl class="kv"><dt>Paga agora</dt><dd><b>US$ 384,00</b> (192 fotos aceitas × US$ 2)</dd><dt>Sinal no pedido</dt><dd>US$ 2.500 (25 % do orçamento) · intacto</dd><dt>Prazo do lote</dt><dd>até 29/10 às 14:00</dd></dl>
+                <div class="alert alert-warn"><i data-icon="hourglass"></i><div><span class="alert-title">Sem resposta, o lote é pago com o sinal</span>Se você não pagar até 29/10 às 14:00, as 192 fotos são pagas com o seu sinal (sobram US$ 2.116) e os originais vão para o seu cofre do mesmo jeito. Isso protege quem enviou.</div></div>
+                <div class="total"><span class="small muted">Paga agora</span><div><div class="price">US$ 384,00</div><div class="conv">= 384,00 USDT · 1:1</div></div></div>
+                <label class="check"><input type="checkbox" checked><span>Aceito as 192 fotos validadas<span class="desc">Originais no cofre na hora. Foto que não atenda aos critérios: disputa em até 72 h.</span></span></label>
+                <p class="xs muted" data-gate-note hidden>Marque o aceite para gerar o endereço de pagamento.</p>
+                <div class="card pay" data-pay data-item="pedido ped-8b4u2" data-usd="384,00" data-polygon="0x8b4u…a3c7" data-tron="TQ8b…4u2F" data-base="0x8b4u…6e18" data-valid="até 29/10 · 14:00, prazo do lote" data-txid="0x8b4u…f09d" data-done="Lote 3 pago" data-done-note="As 192 fotos em resolução original estão no seu cofre. Depois de 72 h sem disputa, o pagamento vai para quem enviou."></div>
+                <div class="alert alert-anon"><i data-icon="shield-alert"></i><div>Nunca fotos de votos, cabines ou documentos de eleitores: a curadoria recusa (sigilo do voto e dados pessoais).</div></div>
+              </div></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== SUCESSO ===================== -->
+      <div data-variant="sucesso">
+        <div class="card" style="max-width:640px;margin:24px auto 0">
+          <div class="card-body stack">
+            <div class="done-head">
+              <i data-icon="check-circle"></i>
+              <p class="eyebrow">Pagamento confirmado · 12/12</p>
+              <h1>Acesso liberado no cofre</h1>
+              <p class="muted small">12.400 licitações municipais do Nordeste (2019–2025) já está disponível para <span class="handle" data-handle="coruja-7f3a"></span>.</p>
+            </div>
+            <dl class="kv panel">
+              <dt>Pagamento</dt><dd>490,00 USDT · Polygon · endereço derivado 0x9f2k…b8e3</dd>
+              <dt>Txid</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x9f2k…7a31</a> · visto às 10:03 · confirmado às 10:04</dd>
+              <dt>Entitlement</dt><dd class="mono">ENT-3F9A · marca d'água "@coruja-7f3a · ENT-3F9A"</dd>
+              <dt>Data</dt><dd>21/10/2026 · 10:04</dd>
+              <dt>Disputa</dt><dd>janela de 72 h a partir do primeiro acesso no cofre · reembolso ao endereço de origem</dd>
+              <dt>Hash do pacote</dt><dd><a class="link" href="../public/prova.html">sha256 3f9a…c21e · ver prova pública</a></dd>
+            </dl>
+            <div class="grid cols-2">
+              <a class="btn btn-primary btn-lg" href="../buyer/cofre.html"><i data-icon="vault"></i>Abrir no cofre</a>
+              <a class="btn btn-lg" href="../buyer/visualizador.html"><i data-icon="maximize"></i>Abrir no visualizador</a>
+            </div>
+            <div class="row"><a class="btn btn-ghost btn-sm" href="../buyer/apoios.html"><i data-icon="hand-coins"></i>Ver meus apoios</a><a class="btn btn-ghost btn-sm" href="../public/explorar.html"><i data-icon="compass"></i>Continuar explorando</a><a class="btn btn-ghost btn-sm" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Ver em Pagamentos</a></div>
+            <div class="alert alert-info"><i data-icon="info"></i><div>Baixou o arquivo? Confira o hash com <code>sha256sum licitacoes-2019-2025.zip</code> e compare com a prova pública. O vendedor recebeu apenas "1 cópia vendida".</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloco "Pagamento direto", estampado pelo script em cada <div class="card pay" data-pay …>. Atributos por variante: data-item ("item lcr-…", "lacre lcr-…" ou "pedido ped-…"),
+         data-usd (valor em US$), data-polygon / data-tron / data-base / data-bitcoin (endereço derivado por rede; só as redes presentes são oferecidas), validade de 24 h contada de agora (sem data-valid)
+         ou data-valid (texto fixo), data-txid (estados simulados), data-done / data-done-note (estado final), data-success (variante aberta por "Já enviei"), data-usd-from (campo de valor livre), data-usd-factor (0.25 = sinal de 25 %); [data-rest] mostra o restante. -->
+    <template id="pay-tpl">
+      <div class="card-head"><h3>Pagamento direto</h3><span class="badge st-aguardando" data-pay-badge>Aguardando pagamento</span></div>
+      <div class="card-body stack-sm">
+        <div class="row between"><span class="small strong">Rede</span><div class="segmented net-switch" data-net-switch></div></div>
+        <div class="pay-box">
+          <div class="qr-mock" aria-label="QR code do endereço"></div>
+          <div class="stack-sm">
+            <div class="xs muted">Endereço derivado da carteira do <span data-f="item"></span>, só para este pagamento · <span data-f="net"></span></div>
+            <div class="hash"><code data-f="addr"></code><button type="button" class="btn btn-sm btn-ghost" data-copy="" aria-label="Copiar endereço"><i data-icon="copy"></i></button></div>
+            <dl class="kv"><dt>Valor exato</dt><dd class="strong" data-f="amount"></dd><dt data-pay-validity>Validade</dt><dd data-pay-validity>24 h · vence em <span class="countdown" data-deadline=""></span></dd><dt>Libera com</dt><dd><span data-f="conf"></span> confirmações · <span data-f="time"></span></dd></dl>
+          </div>
+        </div>
+        <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div>Pague de uma carteira que você controla (MetaMask, Trust, Ledger, carteira de celular), nunca direto de uma corretora: reembolsos voltam ao endereço de origem.</div></div>
+        <a class="link xs" href="../public/guia-cripto.html"><i data-icon="book-open"></i> Primeira vez com cripto? Guia em 10 minutos</a>
+        <div class="flow"><button type="button" class="badge st-aguardando" data-pay-state="1">Aguardando pagamento</button><i data-icon="arrow-right"></i><button type="button" class="badge st-rascunho" data-pay-state="2">Visto na rede</button><i data-icon="arrow-right"></i><button type="button" class="badge st-rascunho" data-pay-state="3">Confirmado</button><i data-icon="arrow-right"></i><button type="button" class="badge st-rascunho" data-pay-state="4">Acesso liberado</button></div>
+        <p class="xs muted" data-pay-note></p>
+        <div class="row between"><button type="button" class="btn btn-primary" data-pay-check><i data-icon="refresh"></i>Já enviei, verificar na rede</button><span class="xs muted">Verificamos a rede a cada 20 s. Protótipo: clique nos estados para simular.</span></div>
+      </div>
+    </template>
+
+    <script>
+      (function () {
+        // Pagamento direto: estampa o <template> em cada [data-pay], troca a rede, segue o valor livre e simula os estados da transação.
+        var NETS = {
+          polygon: { label: 'USDT · Polygon', unit: 'USDT', conf: 12, time: '≈ 30 s', explorer: 'polygonscan' },
+          tron: { label: 'USDT · Tron', unit: 'USDT', conf: 19, time: '≈ 1 min', explorer: 'tronscan' },
+          base: { label: 'USDC · Base', unit: 'USDC', conf: 12, time: '≈ 30 s', explorer: 'basescan' },
+          bitcoin: { label: 'Bitcoin', unit: 'BTC', conf: 2, time: '≈ 20 min', explorer: 'mempool.space' }
+        };
+        document.querySelectorAll('[data-rel-hours]').forEach(function (el) { el.dataset.deadline = new Date(Date.now() + parseFloat(el.dataset.relHours) * 36e5).toISOString(); });
+        var BTC_USD = 68400, tpl = document.getElementById('pay-tpl');
+        var fmt = function (n, d) { return n.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d }); };
+        var parse = function (s) { return parseFloat(String(s).replace(/\./g, '').replace(',', '.')) || 0; };
+        var q = function (el, sel) { return el.querySelector(sel); };
+        function amount(pay) { var usd = parse(pay.dataset.usd), k = pay.dataset.net; return k === 'bitcoin' ? fmt(usd / BTC_USD, 5) + ' BTC' : fmt(usd, 2) + ' ' + NETS[k].unit; }
+        function setState(pay, s) {
+          var d = pay.dataset, n = NETS[d.net], cls = ['st-aguardando', 'st-analise', 'st-liquidada', 'st-liberado']; s = +s; d.state = s;
+          var label = ['Aguardando pagamento', 'Visto na rede · 3/' + n.conf, 'Confirmado · ' + n.conf + '/' + n.conf, d.done][s - 1];
+          var note = ['Nenhuma transação vista ainda. O acesso é liberado sozinho quando as confirmações chegarem; você não precisa ficar nesta página.',
+            'Transação ' + d.txid + ' vista às 14:13 · 3 de ' + n.conf + ' confirmações (' + n.explorer + ').',
+            n.conf + ' de ' + n.conf + ' confirmações às 14:14 · txid ' + d.txid + ' registrado na carteira do ' + d.item + '.', d.doneNote][s - 1];
+          pay.querySelectorAll('[data-pay-state]').forEach(function (b, i) { b.className = 'badge ' + (i + 1 < s ? 'st-liquidada' : i + 1 === s ? cls[i] : 'st-rascunho'); });
+          q(pay, '[data-pay-badge]').className = 'badge ' + cls[s - 1]; q(pay, '[data-pay-badge]').textContent = label;
+          q(pay, '[data-pay-note]').textContent = note;
+          pay.querySelectorAll('[data-pay-validity]').forEach(function (el) { el.style.display = s === 1 ? '' : 'none'; });
+        }
+        function setNet(pay, k) {
+          var d = pay.dataset, n = NETS[k]; d.net = k;
+          pay.querySelectorAll('[data-net]').forEach(function (b) { b.classList.toggle('active', b.dataset.net === k); });
+          q(pay, '[data-f="net"]').textContent = n.label; q(pay, '[data-f="addr"]').textContent = d[k]; q(pay, '[data-copy]').dataset.copy = d[k];
+          q(pay, '[data-f="amount"]').textContent = amount(pay); q(pay, '[data-f="conf"]').textContent = n.conf; q(pay, '[data-f="time"]').textContent = n.time;
+          setState(pay, d.state || 1);
+        }
+        document.querySelectorAll('[data-pay]').forEach(function (pay) {
+          var d = pay.dataset; pay.appendChild(tpl.content.cloneNode(true));
+          Object.keys(NETS).forEach(function (k) { if (d[k]) { var b = document.createElement('button'); b.type = 'button'; b.dataset.net = k; b.textContent = NETS[k].label; q(pay, '[data-net-switch]').appendChild(b); } });
+          q(pay, '[data-f="item"]').textContent = d.item; q(pay, '[data-pay-state="4"]').textContent = d.done;
+          if (d.valid) q(pay, 'dd[data-pay-validity]').textContent = d.valid; else q(pay, '[data-deadline]').dataset.deadline = new Date(Date.now() + 864e5 - 12e4).toISOString();
+          var chk = q(pay, '[data-pay-check]'); if (d.success) chk.setAttribute('data-show', d.success); else chk.setAttribute('data-toast', 'Nenhuma transação encontrada ainda. Verificamos a rede a cada 20 s.');
+          if (d.usdFrom) {
+            var inp = document.querySelector(d.usdFrom), scope = pay.closest('.tab-panel') || pay.closest('[data-variant]');
+            var f = parseFloat(d.usdFactor || '1');
+            var sync = function () {
+              var v = parse(inp.value), now = v * f; d.usd = fmt(now, 2); q(pay, '[data-f="amount"]').textContent = amount(pay);
+              scope.querySelectorAll('[data-usd-view]').forEach(function (el) { el.textContent = 'US$ ' + fmt(now, 2); });
+              scope.querySelectorAll('[data-rest]').forEach(function (el) { el.textContent = 'US$ ' + fmt((el.dataset.rest ? parse(el.dataset.rest) : v) - now, 2); });
+            };
+            inp.addEventListener('input', sync);
+            document.addEventListener('click', function (e) { var a = e.target.closest('.amount-options[data-target="' + d.usdFrom + '"] [data-amount]'); if (a) setTimeout(sync, 0); });
+          }
+          setNet(pay, Object.keys(NETS).filter(function (k) { return d[k]; })[0]);
+        });
+        document.addEventListener('click', function (e) {
+          var b = e.target.closest('[data-net],[data-pay-state]'); if (!b) return;
+          var pay = b.closest('[data-pay]'); if (b.dataset.net) setNet(pay, b.dataset.net); else setState(pay, b.dataset.payState);
+        });
+        // Aceites: o bloco de pagamento só destrava com todas as caixas do [data-gate] marcadas (na compra com exclusividade, as duas começam desmarcadas).
+        document.querySelectorAll('[data-gate]').forEach(function (g) {
+          var boxes = g.querySelectorAll('.check input'), pay = q(g, '[data-pay]'), note = q(g, '[data-gate-note]');
+          var sync = function () { var ok = Array.prototype.every.call(boxes, function (c) { return c.checked; }); pay.classList.toggle('locked', !ok); if (note) note.hidden = ok; };
+          boxes.forEach(function (c) { c.addEventListener('change', sync); }); sync();
+        });
+      })();
+    </script>
+  </main>
+</body>
+</html>

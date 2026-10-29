@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Configurações · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .tabs .tab svg { width: 14px; height: 14px; }
+    .pref { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); }
+    .pref:last-child { border-bottom: 0; }
+    .pref .d { color: var(--muted); font-size: var(--fs-xs); margin-top: 2px; max-width: 60ch; }
+    .pref .switch { flex: none; margin-top: 2px; }
+    .dev { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); }
+    .dev:last-child { border-bottom: 0; }
+    .dev .dv-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--surface-3); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .dev .dv-icon svg { width: 18px; height: 18px; color: var(--brass); }
+    .words.blur-text { filter: blur(6px); }
+    .exists { columns: 2; column-gap: 24px; font-size: var(--fs-sm); margin: 0; padding-left: 18px; }
+    .exists li { break-inside: avoid; margin-bottom: 4px; }
+    @media (max-width: 600px) { .exists { columns: 1; } }
+    .danger-zone { border-color: var(--danger); }
+    .danger-zone .card-head { border-bottom-color: var(--danger); }
+  </style>
+</head>
+<body data-shell="buyer" data-page="configuracoes" data-root="../" data-title="Configurações">
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Compartilhada · comprador e vendedor</p>
+      <h1>Configurações</h1>
+      <p class="sub">Conta <span class="handle" data-handle="coruja-7f3a"></span> · criada em mar/2026 · o pseudônimo não pode ser alterado.</p>
+    </div>
+    <div class="actions"><span class="badge badge-ok"><i data-icon="shield-check"></i>TOTP ativo</span><span class="badge badge-ok"><i data-icon="key"></i>2 passkeys</span><span class="badge badge-ok"><i data-icon="file-lock"></i>arquivo de acesso</span><span class="badge badge-outline"><i data-icon="eye-off"></i>sem e-mail, telefone ou nome</span></div>
+  </div>
+
+  <div data-tabs>
+    <div class="tabs">
+      <a class="tab active" data-tab="seg" href="#seg"><i data-icon="lock"></i>Segurança</a>
+      <a class="tab" data-tab="rec" href="#rec"><i data-icon="key"></i>Recuperação</a>
+      <a class="tab" data-tab="pri" href="#pri"><i data-icon="eye-off"></i>Privacidade</a>
+      <a class="tab" data-tab="not" href="#not"><i data-icon="bell"></i>Notificações</a>
+      <a class="tab" data-tab="apa" href="#apa"><i data-icon="sun"></i>Aparência</a>
+      <a class="tab" data-tab="con" href="#con"><i data-icon="user"></i>Conta</a>
+    </div>
+
+    <!-- ===================== SEGURANÇA ===================== -->
+    <div class="tab-panel active" data-panel="seg">
+      <div class="grid cols-2 mb-2">
+        <form class="card" data-submit-toast="Senha alterada. As outras sessões foram encerradas.">
+          <div class="card-head"><h3>Senha</h3><span class="badge badge-outline">alterada em 12/03/2026</span></div>
+          <div class="card-body stack-sm">
+            <div class="field"><label for="s-atual">Senha atual</label><input id="s-atual" class="input" type="password" autocomplete="current-password"></div>
+            <div class="field"><label for="s-nova">Nova senha</label><input id="s-nova" class="input" type="password" autocomplete="new-password" placeholder="Mínimo 12 caracteres"><span class="hint">Frase longa vale mais que símbolos. Não reutilize senha de outro serviço.</span></div>
+            <div class="field"><label for="s-conf">Confirmar nova senha</label><input id="s-conf" class="input" type="password" autocomplete="new-password"></div>
+            <div class="row between"><span class="xs muted">Exige o código TOTP na confirmação.</span><button type="submit" class="btn btn-primary btn-sm"><i data-icon="check"></i>Alterar senha</button></div>
+          </div>
+        </form>
+        <div class="card">
+          <div class="card-head"><h3>Passkeys</h3><span class="badge badge-ok">2 cadastradas</span></div>
+          <div class="card-body">
+            <div class="dev"><span class="dv-icon"><i data-icon="monitor"></i></span><div class="grow"><b>ThinkPad · Firefox</b><div class="xs muted">cadastrada em 24/10/2026 · último uso hoje às 08:15</div></div><button class="btn btn-sm btn-ghost" data-toast="Passkey removida. Você ainda tem 1 passkey e a senha.">Remover</button></div>
+            <div class="dev"><span class="dv-icon"><i data-icon="smartphone"></i></span><div class="grow"><b>Pixel 8 · Chrome</b><div class="xs muted">cadastrada em 12/03/2026 · último uso 25/10 às 21:40</div></div><button class="btn btn-sm btn-ghost" data-toast="Passkey removida. Você ainda tem 1 passkey e a senha.">Remover</button></div>
+            <div class="row between mt-2"><span class="xs muted">Com passkey você entra sem senha. Tenha ao menos duas, em dispositivos diferentes.</span><button class="btn btn-sm" data-toast="O navegador vai pedir a confirmação do dispositivo"><i data-icon="plus"></i>Cadastrar passkey</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Arquivo de acesso</h3><span class="badge badge-ok"><i data-icon="check"></i>ativo · com PIN</span></div>
+          <div class="card-body stack-sm">
+            <div class="file-row"><span class="file-icon"><i data-icon="key"></i></span><div class="grow"><div class="file-name">coruja-7f3a.lacre</div><div class="file-meta">gerado em 12/03/2026 · impressão digital 9F3A-C21E-7B04-D5A1 · último uso 20/10 às 01:12 (Tor Browser)</div></div></div>
+            <p class="xs muted">Para entrar, você escolhe o arquivo e digita o PIN. O arquivo contém uma chave privada cifrada; o Lacre guarda só a chave pública. Não é possível baixar de novo: se perdeu, gere outro (o antigo deixa de valer na hora).</p>
+            <div class="row">
+              <button class="btn btn-sm" data-toast="Exige senha + TOTP. O novo arquivo é baixado uma única vez e o anterior é revogado."><i data-icon="refresh"></i>Gerar novo arquivo</button>
+              <button class="btn btn-sm" data-toast="PIN alterado. O arquivo precisa ser baixado de novo."><i data-icon="key"></i>Trocar PIN</button>
+              <button class="btn btn-sm btn-danger" data-toast="Arquivo de acesso revogado. Senha e passkeys continuam valendo."><i data-icon="ban"></i>Revogar</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Autenticação em duas etapas (TOTP)</h3><span class="badge badge-ok" id="totp-badge"><i data-icon="shield-check"></i>ativo desde 12/03/2026</span></div>
+          <div class="card-body stack-sm small">
+            <p>App autenticador no celular. Exigido para entrar com senha, receber a carteira de um item finalizado (frase de recuperação do item), ver a frase de recuperação da conta e excluir a conta.</p>
+            <div class="row" id="totp-on-actions"><button class="btn btn-sm" data-modal-open="m-backup"><i data-icon="list"></i>Códigos de backup</button><button class="btn btn-sm" data-modal-open="m-app"><i data-icon="qr-code"></i>Trocar de app</button><button class="btn btn-sm btn-danger" data-modal-open="m-totp"><i data-icon="x"></i>Desativar</button></div><div class="row" id="totp-off-actions" hidden><button class="btn btn-sm btn-primary" data-modal-open="m-app"><i data-icon="shield-check"></i>Ativar de novo</button><span class="xs muted">Sem TOTP, a conta fica protegida só pela senha e pelas passkeys.</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>PIN do cofre</h3><label class="switch" style="margin-left:auto"><input type="checkbox" checked><span class="track"></span><span class="small">ativo</span></label></div>
+          <div class="card-body stack-sm small">
+            <p>Pede um PIN de 6 dígitos para abrir qualquer item no visualizador, mesmo com a sessão aberta. Útil em computador compartilhado.</p>
+            <div class="row"><button class="btn btn-sm" data-toast="Informe o PIN atual e o novo"><i data-icon="lock-keyhole"></i>Alterar PIN</button><span class="xs muted">Bloqueia após 5 tentativas erradas; destrava com a senha.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Sessões ativas</h3><span class="badge badge-outline">4</span><div class="actions"><button class="btn btn-sm btn-danger" data-toast="3 sessões encerradas. Esta continua aberta."><i data-icon="log-out"></i>Encerrar todas as outras</button></div></div>
+        <div class="table-wrap" style="border:0;border-radius:0">
+          <table class="table">
+            <thead><tr><th>Dispositivo</th><th>Navegador</th><th>Criada em</th><th>Última atividade</th><th>Entrada</th><th class="text-right"></th></tr></thead>
+            <tbody>
+              <tr class="selected"><td><b>Linux</b><span class="sub">esta sessão</span></td><td>Firefox 131</td><td class="num">27/10 · 08:15</td><td class="num">agora</td><td>senha + TOTP</td><td class="text-right"><span class="badge badge-brass">atual</span></td></tr>
+              <tr><td><b>Android</b></td><td>Chrome 130</td><td class="num">25/10 · 21:40</td><td class="num">26/10 · 23:10</td><td>passkey</td><td class="text-right"><button class="btn btn-sm" data-toast="Sessão do Android encerrada">Encerrar</button></td></tr>
+              <tr><td><b>Windows</b></td><td>Edge 130</td><td class="num">19/10 · 12:02</td><td class="num">24/10 · 18:33</td><td>senha + TOTP</td><td class="text-right"><button class="btn btn-sm" data-toast="Sessão do Windows encerrada">Encerrar</button></td></tr>
+              <tr><td><b>Linux</b><span class="sub">via Tor</span></td><td>Tor Browser 14</td><td class="num">14/10 · 22:51</td><td class="num">20/10 · 01:12</td><td>arquivo de acesso + PIN</td><td class="text-right"><button class="btn btn-sm" data-toast="Sessão do Tor Browser encerrada">Encerrar</button></td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>Não registramos IP nas sessões. Mostramos só sistema, navegador e horários. Sessões expiram após 30 dias sem uso.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== RECUPERAÇÃO ===================== -->
+    <div class="tab-panel" data-panel="rec">
+      <div class="grid cols-2">
+        <form class="card" data-submit-toast="Senha e TOTP conferidos. A frase fica visível por 60 s (protótipo).">
+          <div class="card-head"><h3>Frase de recuperação da conta</h3><span class="badge badge-ok"><i data-icon="check"></i>Frase confirmada em 12/03/2026</span></div>
+          <div class="card-body stack-sm">
+            <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">É a única saída</span>Sem e-mail ou telefone, não existe "esqueci minha senha". Quem tiver as 12 palavras controla a conta. Guarde fora do computador.</div></div>
+            <p class="xs muted">Esta é a frase da sua <b>conta</b>. Ela não é a frase de recuperação de uma carteira de item: essa é entregue uma única vez, na finalização, em Carteiras dos itens, e não fica guardada aqui nem em lugar nenhum da plataforma.</p>
+            <div class="form-grid">
+              <div class="field"><label for="r-senha">Senha para ver a frase</label><input id="r-senha" class="input" type="password" autocomplete="current-password"></div>
+              <div class="field"><label for="r-totp">Código TOTP</label><input id="r-totp" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div>
+            </div>
+            <div class="words blur-text" aria-hidden="true"><span>amanhecer</span><span>bússola</span><span>lacre</span><span>moinho</span><span>sextante</span><span>tinta</span><span>veleiro</span><span>granito</span><span>harpa</span><span>cometa</span><span>argila</span><span>farol</span></div>
+            <div class="row between"><span class="xs muted">Exibida por 60 s, uma vez por sessão. Nunca fotografe a tela.</span><button type="submit" class="btn btn-primary btn-sm"><i data-icon="eye"></i>Ver frase</button></div>
+          </div>
+        </form>
+        <div class="stack">
+          <form class="card" data-submit-toast="As 3 palavras conferem. Sua cópia está correta.">
+            <div class="card-head"><h3>Testar a sua cópia</h3><span class="badge badge-outline">último teste 12/03/2026</span></div>
+            <div class="card-body stack-sm">
+              <p class="small">Confirme 3 palavras da sua cópia. Não mostramos a frase; só dizemos se conferem.</p>
+              <div class="grid cols-3">
+                <div class="field"><label for="w3">Palavra 3</label><input id="w3" class="input mono" autocomplete="off"></div>
+                <div class="field"><label for="w7">Palavra 7</label><input id="w7" class="input mono" autocomplete="off"></div>
+                <div class="field"><label for="w11">Palavra 11</label><input id="w11" class="input mono" autocomplete="off"></div>
+              </div>
+              <div class="row end"><button type="submit" class="btn btn-sm"><i data-icon="check"></i>Verificar</button></div>
+            </div>
+          </form>
+          <div class="card">
+            <div class="card-head"><h3>Gerar nova frase</h3></div>
+            <div class="card-body stack-sm small">
+              <p>Use se achar que alguém viu a sua frase. A atual deixa de valer assim que a nova for confirmada com 3 palavras.</p>
+              <button class="btn btn-outline btn-sm" data-toast="Exige senha + TOTP. A nova frase é mostrada uma única vez."><i data-icon="refresh"></i>Gerar nova frase</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== PRIVACIDADE ===================== -->
+    <div class="tab-panel" data-panel="pri">
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><h3>Privacidade</h3></div>
+          <div class="card-body">
+            <div class="pref"><div><b>Apagar mensagens ao encerrar o item</b><div class="d">Em vez de esperar os 90 dias de retenção, as conversas são apagadas dos dois lados quando o item encerra. Disputas abertas pausam a exclusão.</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Permitir marca d'água invisível nos meus downloads</b><div class="d">Identifica a sua conta (não você) se um arquivo vazar. Itens que exigem marca d'água não dependem desta opção; aqui você aceita também nos demais.</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Modo Tor-friendly (sem CDN)</b><div class="d">Páginas e prévias servidas direto dos nossos servidores, sem CDN de terceiros. Mais lento, menos terceiros no caminho. Espelho .onion disponível em Políticas › Anonimato.</div></div><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
+            <div class="row end mt-2"><button class="btn btn-primary btn-sm" data-toast="Preferências de privacidade salvas"><i data-icon="check"></i>Salvar</button></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">O que nunca pedimos</span>Nome, e-mail, telefone, CPF ou documento. Não há campo para isso em nenhuma tela. O que existe sobre a conta está listado em <a class="link" href="#con" data-tab="con">Conta</a>.</div></div>
+          <div class="card">
+            <div class="card-head"><h3>Como você aparece</h3></div>
+            <div class="card-body stack-sm small">
+              <div class="row between"><span>Para compradores e vendedores</span><span class="handle" data-handle="coruja-7f3a" data-rep="4,8 · 3 itens"></span></div>
+              <div class="row between"><span>No catálogo, no item e na prova</span><span class="handle" data-handle="coruja-7f3a"></span></div>
+              <div class="row between"><span>Para a curadoria</span><span class="muted">pseudônimo, histórico e conteúdo enviado</span></div>
+              <div class="row between"><span>Para o público nas redes</span><span class="muted">só o que a prova pública mostra</span></div>
+              <p class="xs muted">O pseudônimo aparece sempre: é a sua reputação. Não existe opção de ocultá-lo. Não há nome, e-mail ou documento por trás dele.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== NOTIFICAÇÕES ===================== -->
+    <div class="tab-panel" data-panel="not">
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><h3>Push por tipo</h3><span class="badge badge-ok">push ativo em 2 dispositivos</span></div>
+          <div class="card-body">
+            <div class="pref"><div><b>Curadoria</b><div class="d">aprovado e publicado, ajustes solicitados, rejeitado</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Lacres</b><div class="d">marcos de 25/50/75/90 % (prévia pública; cada um garantido ao vendedor), rompido (conteúdo público para todos), não bateu a meta (quanto fica garantido ao vendedor e quanto volta a você), atualizações do vendedor</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Pagamentos</b><div class="d">aguardando confirmação, confirmado, renovação de assinatura, reembolso enviado ao endereço de origem</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Pedidos</b><div class="d">o valor subiu (complete o sinal em 48 h), nova pessoa no pedido, novo extra, proposta de extra, prévia do atendimento (72 h para pagar os 75 % restantes), atendido (material no cofre), lote aceito (por unidade), deixou de participar</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Mensagens</b><div class="d">novas mensagens e perguntas nos seus pedidos</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Disputas</b><div class="d">janela terminando, abertura, resposta do vendedor, decisão</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Carteiras dos itens</b><div class="d">para quem vende: carteira pronta para receber, frase de recuperação disponível</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="pref"><div><b>Segurança</b><div class="d">novo acesso, passkey, alteração de senha · sempre ativo</div></div><label class="switch"><input type="checkbox" checked disabled><span class="track"></span></label></div>
+            <div class="pref"><div><b>Resumo diário</b><div class="d">um único aviso às 09:00 em vez de notificações individuais (exceto segurança)</div></div><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
+            <div class="row between mt-2"><a class="link xs" href="../buyer/notificacoes.html">Ver notificações</a><button class="btn btn-primary btn-sm" data-toast="Preferências de notificação salvas"><i data-icon="check"></i>Salvar</button></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3>Dispositivos com push</h3></div>
+            <div class="card-body">
+              <div class="dev"><span class="dv-icon"><i data-icon="monitor"></i></span><div class="grow"><b>ThinkPad · Firefox</b><div class="xs muted">desde 24/10 · entrega anônima</div></div><button class="btn btn-sm btn-ghost" data-toast="Push removido deste dispositivo">Remover</button></div>
+              <div class="dev"><span class="dv-icon"><i data-icon="smartphone"></i></span><div class="grow"><b>Android · Chrome</b><div class="xs muted">desde 12/03 · entrega anônima</div></div><button class="btn btn-sm btn-ghost" data-toast="Push removido deste dispositivo">Remover</button></div>
+            </div>
+          </div>
+          <div class="alert alert-anon"><i data-icon="bell"></i><div>A assinatura push é anônima: o navegador recebe um endereço de entrega aleatório, sem identificador seu. Não enviamos e-mail nem SMS porque não os temos.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== APARÊNCIA ===================== -->
+    <div class="tab-panel" data-panel="apa">
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><h3>Tema</h3></div>
+          <div class="card-body stack">
+            <div class="row between">
+              <div><b class="small">Modo de cor</b><div class="xs muted">"Sistema" segue a preferência do dispositivo.</div></div>
+              <div class="segmented" id="theme-seg"><button class="active" data-theme-set=""><i data-icon="monitor"></i> Sistema</button><button data-theme-set="light"><i data-icon="sun"></i> Claro</button><button data-theme-set="dark"><i data-icon="moon"></i> Escuro</button></div>
+            </div>
+            <div class="row between">
+              <div><b class="small">Alternar agora</b><div class="xs muted">O mesmo botão da barra superior.</div></div>
+              <button class="btn" data-theme-toggle aria-label="Alternar tema"></button>
+            </div>
+            <div class="row between">
+              <div><b class="small">Reduzir animações</b><div class="xs muted">Segue "reduzir movimento" do sistema por padrão.</div></div>
+              <label class="switch"><input type="checkbox"><span class="track"></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Leitura</h3></div>
+          <div class="card-body stack">
+            <div class="row between"><div><b class="small">Densidade</b><div class="xs muted">Tabelas e listas.</div></div><div class="segmented"><button class="active" data-toast="Densidade confortável">Confortável</button><button data-toast="Densidade compacta aplicada">Compacta</button></div></div>
+            <div class="row between"><div><b class="small">Moeda de referência</b><div class="xs muted">US$ em toda a interface; USDT e USDC valem 1:1. Equivalente na moeda local em breve.</div></div><div class="segmented"><button class="active" data-toast="Moeda de referência: US$">US$</button><button data-toast="Equivalente na moeda local: em breve">Local · em breve</button></div></div>
+            <div class="field"><label for="idioma">Idioma da interface</label><select id="idioma" class="select"><option>Português</option><option>English</option><option>Español</option></select><span class="hint">Muda só a interface. Itens e pedidos mantêm o idioma original, indicado em cada card.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== CONTA ===================== -->
+    <div class="tab-panel" data-panel="con">
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><h3>Exportar o que existe sobre a conta</h3></div>
+          <div class="card-body stack-sm">
+            <p class="small">Tudo o que o Lacre guarda sobre <span class="handle" data-handle="coruja-7f3a"></span>, em JSON assinado e CSV. Esta lista é completa, e não inclui nenhum saldo: a plataforma não guarda saldo de ninguém.</p>
+            <ol class="exists">
+              <li>pseudônimo e data de criação (mar/2026)</li>
+              <li>hash da senha, chaves públicas das 2 passkeys e do arquivo de acesso (não as privadas)</li>
+              <li>hash da frase de recuperação (não a frase)</li>
+              <li>segredo TOTP cifrado</li>
+              <li>preferências (tema, notificações, privacidade)</li>
+              <li>pagamentos feitos (item, valor, rede, txid, confirmações) e reembolsos recebidos</li>
+              <li>endereços de origem dos pagamentos em itens ainda não finalizados (apagados na finalização)</li>
+              <li>itens enviados, versões, declarações aceitas e decisões da curadoria</li>
+              <li>para itens seus: histórico de pagamentos recebidos na carteira de cada item e registro da entrega da carteira (frase entregue, chave destruída)</li>
+              <li>compras, apoios, pedidos (abriu, entrou, completou o sinal, deixou de participar) e entitlements (ENT-…)</li>
+              <li>mensagens ainda não expiradas</li>
+              <li>disputas e denúncias feitas ou recebidas</li>
+              <li>reputação e selos</li>
+              <li>dispositivos de push (endereço aleatório, sem identificador)</li>
+            </ol>
+            <p class="xs muted">Não existe e, portanto, não é exportado: nome, e-mail, telefone, CPF, IP das sessões, saldo, endereço de origem depois da finalização do item, chave de carteira de item depois da entrega (destruída). Registros de acesso ficam em sistema separado (6 meses, Marco Civil) e só saem por ordem judicial.</p>
+            <div class="row between"><span class="xs muted">Fica disponível aqui por 24 h.</span><button class="btn btn-sm" data-toast="Exportação em preparo. Pronta em até 10 min, protegida pela sua senha."><i data-icon="download"></i>Gerar exportação</button></div>
+          </div>
+        </div>
+        <div class="card danger-zone">
+          <div class="card-head"><h3>Excluir conta</h3><span class="badge badge-danger">irreversível</span></div>
+          <div class="card-body stack-sm small">
+            <p>Condições para excluir:</p>
+            <div class="checklist">
+              <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Nenhum item com carteira em andamento.</b> Hoje: lcr-4g7h9 (aprovado em 26/10, carteira recebendo pagamentos). Encerre as vendas e finalize, ou retire o item, em <a class="link" href="../seller/carteiras.html">Carteiras dos itens</a>.</div></div>
+              <div class="ck veto"><i data-icon="x-circle" class="ico danger"></i><div><b>Nenhum item em curadoria ou com ajustes pendentes.</b> Hoje: lcr-0p4m3 em análise e lcr-2z5q7 com ajustes solicitados. Retire-os em Meus anúncios.</div></div>
+              <div class="ck"><i data-icon="check-circle" class="ico ok"></i><div><b>Nenhuma disputa aberta.</b></div></div>
+              <div class="ck"><i data-icon="check-circle" class="ico ok"></i><div><b>Nenhum saldo a devolver</b>, porque não existe saldo. Seus pagamentos em lacres e pedidos abertos (US$ 250,00 no lcr-4m2x9 e US$ 200,00 de sinal no ped-2c8d1) não impedem a exclusão: se o lacre não bater a meta, volta ao endereço de origem só o que entrou depois do último marco batido (hoje US$ 150 dos seus US$ 250); se o prazo do pedido acabar sem nenhum vendedor, o sinal de US$ 200 volta (o sinal de quem desiste fica com o Lacre como taxa de serviço). Os reembolsos chegam mesmo sem conta; se derem certo, você perde o acesso.</div></div>
+            </div>
+            <p>O que acontece: o pseudônimo é marcado como excluído e nunca mais pode ser usado; acessos no cofre são revogados; mensagens são apagadas; itens finalizados saem do catálogo (a prova pública mantém só o hash e o endereço da carteira). O histórico de pagamentos por item (valor, rede, txid) é mantido sem identidade, para a prova pública e por obrigação contábil. A frase de recuperação da conta deixa de valer; as frases de carteiras de itens já entregues continuam suas, fora da plataforma. Não há como desfazer.</p>
+            <div class="row between"><span class="xs muted">Exige senha + TOTP.</span><button class="btn btn-danger btn-sm" aria-disabled="true" data-toast="Indisponível: nenhum item pode ter carteira em andamento, em curadoria ou com ajustes pendentes"><i data-icon="trash"></i>Excluir conta</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="m-totp"><div class="modal"><div class="modal-head"><h3>Desativar TOTP?</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Sem a segunda etapa, quem tiver a sua senha entra na conta e pode receber a carteira de um item finalizado. Passkeys continuam valendo.</p><div class="field"><label for="t-code">Código TOTP atual</label><input id="t-code" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div></div><div class="modal-foot"><button class="btn" data-modal-close>Manter ativo</button><button class="btn btn-danger" id="totp-off" data-modal-close data-toast="TOTP desativado. Recomendamos reativar.">Desativar</button></div></div></div>
+  <div class="modal-backdrop" id="m-backup"><div class="modal"><div class="modal-head"><h3>Códigos de backup</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Cada código entra uma vez no lugar do app autenticador. Guarde fora do computador. Restam <b>8 de 10</b>; gerar novos invalida estes.</p><div class="words" style="grid-template-columns:repeat(2,1fr)"><span>4K7Q-2MXE</span><span>9PLA-6RTV</span><span>H2ND-8YCB</span><span>Q7WS-1FKM</span><span>ZB3T-5JGP</span><span>M8XR-4DQL</span><span>C6VY-9HNA</span><span>T1EK-7SBW</span></div><div class="row"><button class="btn btn-sm" data-copy="4K7Q-2MXE 9PLA-6RTV H2ND-8YCB Q7WS-1FKM ZB3T-5JGP M8XR-4DQL C6VY-9HNA T1EK-7SBW"><i data-icon="copy"></i>Copiar os 8</button><button class="btn btn-sm btn-ghost" data-modal-close data-toast="10 códigos novos gerados; os antigos deixaram de valer"><i data-icon="refresh"></i>Gerar novos</button></div></div><div class="modal-foot"><button class="btn" data-modal-close>Fechar</button></div></div></div>
+  <div class="modal-backdrop" id="m-app"><div class="modal"><div class="modal-head"><h3 id="m-app-title">Trocar de app autenticador</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Leia o QR no novo app (ou copie a chave) e confirme com o código que ele mostrar. O app antigo deixa de valer ao confirmar.</p><div class="row" style="gap:16px;align-items:flex-start"><div style="width:132px;height:132px;flex:none;border-radius:var(--r-sm);background:repeating-conic-gradient(var(--fg) 0 25%, var(--bg) 0 50%) 0 0 / 12px 12px;border:6px solid var(--bg);outline:1px solid var(--border)"></div><div class="stack-sm" style="flex:1;min-width:0"><div class="field"><label for="t-key">Chave manual</label><div class="hash wrap"><code id="t-key">LACR E7Q2 9MXT 4KDB 8NWA 3PFV</code><button class="btn btn-sm btn-ghost" data-copy="#t-key" aria-label="Copiar chave"><i data-icon="copy"></i></button></div></div><div class="field"><label for="t-new">Código do novo app</label><input id="t-new" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div></div></div></div><div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-primary" id="totp-on" data-modal-close data-toast="TOTP confirmado no novo app">Confirmar</button></div></div></div>
+
+  <script>
+    // TOTP: desativar e reativar mudam o cartão (estado só no protótipo)
+    (function () {
+      var badge = document.getElementById('totp-badge'), onA = document.getElementById('totp-on-actions'), offA = document.getElementById('totp-off-actions');
+      function setTotp(active) {
+        badge.className = active ? 'badge badge-ok' : 'badge badge-outline';
+        badge.innerHTML = (window.Lacre ? window.Lacre.icon(active ? 'shield-check' : 'shield') : '') + (active ? 'ativo desde 27/10/2026' : 'desativado em 27/10/2026');
+        onA.hidden = !active; offA.hidden = active;
+        document.getElementById('m-app-title').textContent = active ? 'Trocar de app autenticador' : 'Ativar TOTP';
+      }
+      document.getElementById('totp-off').addEventListener('click', function () { setTotp(false); });
+      document.getElementById('totp-on').addEventListener('click', function () { setTotp(true); });
+    })();
+    // seletor de tema (sistema / claro / escuro): usa a mesma chave de armazenamento do app.js
+    document.querySelectorAll('#theme-seg [data-theme-set]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = b.dataset.themeSet;
+        try { t ? localStorage.setItem('lacre-theme', t) : localStorage.removeItem('lacre-theme'); } catch (e) {}
+        if (t) document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme');
+        document.querySelectorAll('#theme-seg button').forEach(function (x) { x.classList.toggle('active', x === b); });
+        var dark = t === 'dark' || (!t && !window.matchMedia('(prefers-color-scheme: light)').matches);
+        if (window.Lacre) document.querySelectorAll('[data-theme-toggle]').forEach(function (x) { x.innerHTML = window.Lacre.icon(dark ? 'sun' : 'moon'); });
+      });
+    });
+  </script>
+</main>
+</body>
+</html>

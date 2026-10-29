@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contas · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .split > *, .grid > * { min-width: 0; }
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } } /* contorno: backdrop vira item do grid .app no desktop (bug em app.css) */
+    .card-head .actions { flex-wrap: wrap; }
+    .list-item.absent .li-icon { background: transparent; border: 1px dashed var(--border-2); }
+    .list-item.absent .li-icon svg { color: var(--muted-2); }
+    .list-item.absent .li-title { color: var(--fg-2); text-decoration: line-through; text-decoration-color: var(--muted-2); }
+    .table td:first-child, .table td .sub { white-space: nowrap; }
+    .table .handle { display: inline-flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; }
+    .obs { display: grid; gap: 10px; }
+    .obs .panel { display: flex; flex-direction: column; gap: 8px; }
+  </style>
+</head>
+<body data-shell="admin" data-page="contas" data-root="../" data-title="Contas">
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Operação · contas pseudônimas</p>
+        <h1>Contas</h1>
+        <p class="sub">Busca por pseudônimo. Nenhuma conta tem nome, e-mail, telefone, documento ou endereço. Tudo o que a equipe pode ver sobre uma conta está listado no detalhe, por completo.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" data-toast="Lista exportada (CSV): 10 contas, só pseudônimo e métricas"><i data-icon="download"></i>Exportar</button>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search"><i data-icon="search"></i><input class="input mono" value="lanterna" placeholder="Buscar pseudônimo…" aria-label="Buscar pseudônimo"></div>
+      <select class="select"><option>Todos os status</option><option>Ativa</option><option>Restrita</option><option>Banida</option></select>
+      <select class="select"><option>Todos os riscos</option><option>Baixo</option><option>Médio</option><option>Alto</option></select>
+      <div class="right"><span class="xs muted">10 contas em observação · 4.312 no total</span></div>
+    </div>
+
+    <div class="table-wrap mb-3">
+      <table class="table compact">
+        <thead><tr><th>Pseudônimo</th><th>País dos itens</th><th>Criada em</th><th class="num">Itens</th><th class="num">Disputas</th><th class="num">Denúncias</th><th class="num">Em carteiras de itens em andamento</th><th>Risco</th><th>Status</th><th class="cell-actions"></th></tr></thead>
+        <tbody>
+          <tr class="selected"><td><span class="handle" data-handle="lanterna-b31d" data-rep="4,7"></span></td><td><span class="tag">BR</span></td><td class="num">14/02/2026</td><td class="num">12</td><td class="num">1<span class="sub">aberta · DSP-0207</span></td><td class="num">1</td><td class="num">US$ 18.130,00<span class="sub">lcr-9f2k7 · cópias · 37 pagamentos</span></td><td><span class="badge risk-baixo">Baixo · 12</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><a class="btn btn-sm" href="#detalhe">Abrir</a></td></tr>
+          <tr><td><span class="handle" data-handle="sextante-21c9" data-rep="4,9"></span></td><td><span class="tag">BR</span></td><td class="num">08/01/2026</td><td class="num">12</td><td class="num">1<span class="sub">ganha</span></td><td class="num">1</td><td class="num">US$ 54.120,00<span class="sub">lcr-4m2x9 · lacre coletivo · 1.187 pagamentos</span></td><td><span class="badge risk-baixo">Baixo · 6</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @sextante-21c9 aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="cartografo-5a77" data-rep="4,9"></span></td><td><span class="tag">BR</span></td><td class="num">21/03/2026</td><td class="num">9</td><td class="num">0</td><td class="num">1<span class="sub">DN-2041 · item suspenso</span></td><td class="num">US$ 1.800,00<span class="sub">lcr-2n8v4 · 2 licenças · item suspenso</span></td><td><span class="badge risk-baixo">Baixo · 14</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @cartografo-5a77 aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="coruja-7f3a" data-rep="4,8"></span></td><td><span class="tag">BR</span></td><td class="num">12/03/2026</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">US$ 0,00<span class="sub">lcr-4g7h9 · 0 pagamentos · lcr-5m8c4 entregue em 05/10</span></td><td><span class="badge risk-baixo">Baixo · 9</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @coruja-7f3a aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="bussola-c4e1" data-rep="4,5"></span></td><td><span class="tag">BR</span></td><td class="num">02/05/2026</td><td class="num">5</td><td class="num">2<span class="sub">1 perdida · DSP-0202 · 1 aberta · DSP-0208</span></td><td class="num">0</td><td class="num">US$ 71.280,00<span class="sub">lcr-1k6p3 reembolsando apoios · lcr-7n3q8 a finalizar · lcr-3c7r8</span></td><td><span class="badge risk-medio">Médio · 38</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @bussola-c4e1 aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="quebracho-8d1f" data-rep="4,6"></span></td><td><span class="tag">AR</span></td><td class="num">11/04/2026</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">US$ 6.900,00<span class="sub">lcr-9w5t2 · lacre coletivo · 312 pagamentos</span></td><td><span class="badge risk-baixo">Baixo · 15</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @quebracho-8d1f aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="meridiano-4b8e" data-rep="4,4"></span></td><td><span class="tag">BD</span></td><td class="num">30/07/2026</td><td class="num">2</td><td class="num">0</td><td class="num">1<span class="sub">DN-2051 · nova · titular LG-0112</span></td><td class="num">US$ 13.120,00<span class="sub">lcr-7e2m4 · cópias · 41 pagamentos</span></td><td><span class="badge risk-medio">Médio · 34</span></td><td><span class="badge st-ativo">Ativa</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @meridiano-4b8e aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="granito-55ab" data-rep="3,6"></span></td><td><span class="tag">BR</span></td><td class="num">19/06/2026</td><td class="num">4</td><td class="num">2<span class="sub">perdidas</span></td><td class="num">1</td><td class="num">US$ 5.425,00<span class="sub">lcr-4h8d2 · finalização bloqueada</span></td><td><span class="badge risk-alto">Alto · 71</span></td><td><span class="badge st-suspenso">Restrita</span><span class="sub">finalizações até 10/11</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @granito-55ab aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="sinal-9e4b" data-rep="—"></span></td><td><span class="tag">BR</span></td><td class="num">28/08/2026</td><td class="num">1<span class="sub">removido · R01</span></td><td class="num">0</td><td class="num">1<span class="sub">DN-2022 · ação tomada</span></td><td class="num">US$ 0,00<span class="sub">lcr-7x2d4 · 12 pagamentos devolvidos</span></td><td><span class="badge risk-alto">Alto · 64</span></td><td><span class="badge st-suspenso">Restrita</span><span class="sub">envios até 30/11</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @sinal-9e4b aberto">Abrir</button></td></tr>
+          <tr><td><span class="handle" data-handle="espelho-c9d2" data-rep="—"></span></td><td><span class="muted">—</span></td><td class="num">03/09/2026</td><td class="num">0<span class="sub">1 rejeitado · R04</span></td><td class="num">0</td><td class="num">0</td><td class="num">US$ 0,00<span class="sub">nenhuma carteira criada</span></td><td><span class="badge risk-alto">Alto · 95</span></td><td><span class="badge st-banido">Banida</span></td><td class="cell-actions"><button class="btn btn-sm" data-toast="Detalhe de @espelho-c9d2 aberto">Abrir</button></td></tr>
+        </tbody>
+      </table>
+      <div class="table-foot"><span>Mostrando 10 de 10 · filtro: em observação</span><span>País = país principal dos itens da conta (código ISO), nunca da pessoa: a conta não tem país. Risco = disputas perdidas, denúncias procedentes, rejeições, idade da conta e reembolsos por disputa. Nunca usa dados de identidade.</span></div>
+    </div>
+
+    <div class="split" id="detalhe">
+      <div class="stack">
+        <div class="card">
+          <div class="card-head">
+            <span class="handle lg" data-handle="lanterna-b31d" data-rep="4,7 · 12 itens · Verificado 8×"></span>
+            <span class="badge st-ativo">Ativa</span>
+            <span class="badge risk-baixo">Risco baixo · 12/100</span>
+            <div class="actions">
+              <button class="btn btn-sm" data-modal-open="m-advertir"><i data-icon="alert-triangle"></i>Advertir</button>
+              <button class="btn btn-sm" data-modal-open="m-envios"><i data-icon="upload"></i>Restringir envios</button>
+              <button class="btn btn-sm" data-modal-open="m-finalizacoes"><i data-icon="lock"></i>Bloquear finalizações</button>
+              <button class="btn btn-sm btn-danger" data-modal-open="m-banir"><i data-icon="ban"></i>Banir</button>
+            </div>
+          </div>
+          <div class="card-body stack">
+            <dl class="kv-row">
+              <div><dt>Itens</dt><dd>12 <span class="muted xs">10 ativos · 2 finalizados</span></dd></div>
+              <div><dt>País dos itens</dt><dd><span class="tag">BR</span> <span class="muted xs">12 de 12 · a conta em si não tem país</span></dd></div>
+              <div><dt>Finalizações</dt><dd>9 <span class="muted xs">US$ 38.900 entregues · 9 frases recebidas</span></dd></div>
+              <div><dt>Em carteiras em andamento</dt><dd>US$ 18.130,00 <span class="muted xs">1 carteira · lcr-9f2k7</span></dd></div>
+              <div><dt>Pagamentos feitos</dt><dd>4 <span class="muted xs">US$ 1.120 · como compradora</span></dd></div>
+              <div><dt>Nenhum saldo</dt><dd><span class="muted xs">a plataforma não guarda dinheiro da conta</span></dd></div>
+              <div><dt>Disputas</dt><dd>1 <span class="muted xs">aberta · DSP-0207 · adia a finalização de lcr-9f2k7</span></dd></div>
+              <div><dt>Denúncias</dt><dd>1 <span class="muted xs">aberta</span></dd></div>
+            </dl>
+            <div class="grid cols-2">
+              <div>
+                <h3 class="mb-1">O que existe sobre esta conta</h3>
+                <p class="xs muted mb-2">Lista completa. É a mesma que a conta vê em Configurações › Conta.</p>
+                <div class="list">
+                  <div class="list-item"><span class="li-icon"><i data-icon="user"></i></span><div class="li-body"><div class="li-title">Pseudônimo <span class="mono">@lanterna-b31d</span></div><div class="li-sub">Imutável. O identicon é derivado dele; não há avatar enviado.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="calendar"></i></span><div class="li-body"><div class="li-title">Data de criação · 14/02/2026</div><div class="li-sub">Granularidade de dia. A hora não é guardada.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="key"></i></span><div class="li-body"><div class="li-title">Hash da senha (Argon2id)</div><div class="li-sub">Não reversível. A senha em si nunca é armazenada.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="fingerprint"></i></span><div class="li-body"><div class="li-title">Chave pública de passkey · 1</div><div class="li-sub">Registrada em 14/02/2026. Só a parte pública.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="lock-keyhole"></i></span><div class="li-body"><div class="li-title">Hash da frase de recuperação</div><div class="li-sub">Serve para validar, não para recuperar. Confirmada em 14/02.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="archive"></i></span><div class="li-body"><div class="li-title">12 itens</div><div class="li-sub">Com versões, hashes, prévias e decisões da curadoria.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="receipt"></i></span><div class="li-body"><div class="li-title">Histórico de pagamentos · 216 recebidos nos itens, 4 feitos</div><div class="li-sub">Por item: valor, rede, txid e confirmações. Serve à prova pública e às disputas. Nenhum saldo.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="qr-code"></i></span><div class="li-body"><div class="li-title">37 endereços de origem · só até a finalização de lcr-9f2k7</div><div class="li-sub">Guardados para reembolsar ao endereço de origem; apagados na finalização. Os das 9 carteiras já entregues não existem mais.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="message-square"></i></span><div class="li-body"><div class="li-title">2 conversas</div><div class="li-sub">Vinculadas a itens. Expiram 90 dias após a finalização do item.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="award"></i></span><div class="li-body"><div class="li-title">Reputação 4,7 e preferências</div><div class="li-sub">Tema, notificações push (assinatura anônima), pseudônimo visível.</div></div></div>
+                  <div class="list-item"><span class="li-icon"><i data-icon="shield-check"></i></span><div class="li-body"><div class="li-title">Nenhuma identidade · nenhum IP no marketplace</div><div class="li-sub">Não existe nenhum campo que ligue este pseudônimo a uma pessoa.</div></div></div>
+                </div>
+              </div>
+              <div>
+                <h3 class="mb-1">O que NÃO existe</h3>
+                <p class="xs muted mb-2">Nem aqui, nem em backup, nem em terceiros: o Lacre não usa intermediário de pagamento.</p>
+                <div class="list">
+                  <div class="list-item absent"><span class="li-icon"><i data-icon="x"></i></span><div class="li-body"><div class="li-title">Nome</div></div></div>
+                  <div class="list-item absent"><span class="li-icon"><i data-icon="x"></i></span><div class="li-body"><div class="li-title">E-mail</div></div></div>
+                  <div class="list-item absent"><span class="li-icon"><i data-icon="x"></i></span><div class="li-body"><div class="li-title">Telefone</div></div></div>
+                  <div class="list-item absent"><span class="li-icon"><i data-icon="x"></i></span><div class="li-body"><div class="li-title">CPF ou qualquer documento</div></div></div>
+                  <div class="list-item absent"><span class="li-icon"><i data-icon="x"></i></span><div class="li-body"><div class="li-title">Endereço postal</div></div></div>
+                  <div class="list-item absent"><span class="li-icon"><i data-icon="x"></i></span><div class="li-body"><div class="li-title">Endereço IP</div><div class="li-sub">Registros de acesso exigidos por lei ficam em sistema separado, cifrados, por 6 meses, acessíveis só por procedimento jurídico. Não são consultáveis daqui.</div></div></div>
+                  <div class="list-item absent"><span class="li-icon"><i data-icon="x"></i></span><div class="li-body"><div class="li-title">Saldo ou carteira interna</div><div class="li-sub">O dinheiro fica na carteira de cada item até a finalização; depois, a frase de recuperação vai ao vendedor e a cópia da chave é destruída.</div></div></div>
+                  <div class="list-item absent"><span class="li-icon"><i data-icon="x"></i></span><div class="li-body"><div class="li-title">Dispositivo, localização, contatos</div></div></div>
+                </div>
+                <button class="btn btn-sm btn-outline mt-2" data-toast="Relatório gerado · idêntico ao que a conta exporta em Configurações › Conta"><i data-icon="file-text"></i>Gerar relatório para a conta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Itens da conta</h3><span class="badge badge-outline">12</span><div class="actions"><a class="btn btn-sm btn-ghost" href="../admin/fila.html">Ver na fila</a></div></div>
+          <div class="table-wrap" style="border:0;border-radius:0">
+            <table class="table compact">
+              <thead><tr><th>Item</th><th>Modelo</th><th>Status</th><th class="num">Vendas</th><th>Última decisão</th></tr></thead>
+              <tbody>
+                <tr><td><b>12.400 licitações municipais do Nordeste (2019–2025)</b><span class="sub">lcr-9f2k7 · Dados e bases · v2</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 37/100</span></td><td><span class="badge st-ativo">Ativo</span></td><td class="num">US$ 18.130</td><td class="small">03/10 · v2 com redação · Carla S.</td></tr>
+                <tr><td><b>Relatório de inspeção de 90 barragens de rejeito (ANM, 2024)</b><span class="sub">lcr-6b2v7 · Governo e políticas públicas</span></td><td><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></td><td><span class="badge st-analise">Em análise</span><span class="sub">dois olhos · jurídico</span></td><td class="num">—</td><td class="small">17/10 · escalado · Ana R.</td></tr>
+              </tbody>
+            </table>
+            <div class="table-foot"><span>Mostrando 2 de 12</span><button class="btn btn-sm" data-toast="Lista completa dos 12 itens aberta">Ver todos</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <div class="card-head"><h3>Composição do risco</h3><span class="badge risk-baixo">12/100</span></div>
+          <div class="card-body stack-sm">
+            <div class="hbar"><span>Denúncias abertas · 1</span><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">+8</span></div>
+            <div class="hbar"><span>Conta nova (&lt; 90 dias)</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="num">0</span></div>
+            <div class="hbar"><span>Disputas perdidas · 0</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="num">0</span></div>
+            <div class="hbar"><span>Rejeições · 0</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="num">0</span></div>
+            <div class="hbar"><span>Pagamentos reembolsados · 2 %</span><div class="track"><div class="fill" style="width:20%"></div></div><span class="num">+4</span></div>
+            <div class="hbar"><span>Aprovações · 12</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="num">−</span></div>
+            <p class="xs muted mt-1">Acima de 60 a conta entra em observação; acima de 85 as finalizações passam por aprovação de 2 pessoas. Recalculado a cada evento.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Histórico de ações na conta</h3></div>
+          <div class="card-body">
+            <div class="timeline">
+              <div class="tl-item ok"><div class="when">14/02/2026</div><div class="what">Conta criada · passkey registrada</div></div>
+              <div class="tl-item ok"><div class="when">20/02/2026</div><div class="what">Primeiro item aprovado · Bruno M.</div></div>
+              <div class="tl-item brass"><div class="when">03/10/2026 · 15:48</div><div class="what">lcr-9f2k7 · nova versão v2 com redação · pedido LG-0094 · Carla S.</div></div>
+              <div class="tl-item info"><div class="when">17/10/2026 · 11:20</div><div class="what">lcr-6b2v7 · escalado ao jurídico · Ana R.</div></div>
+              <div class="tl-item warn"><div class="when">25/10/2026 · 14:20</div><div class="what">DSP-0207 aberta sobre lcr-9f2k7 · conteúdo diferente da prévia · em análise (Ana R.)</div></div>
+              <div class="tl-item warn"><div class="when">26/10/2026 · 19:12</div><div class="what">Denúncia DN-2049 recebida sobre lcr-9f2k7 · nova</div></div>
+            </div>
+            <div class="alert alert-ok mt-2"><i data-icon="check-circle"></i><div>Nenhuma advertência, restrição ou banimento nesta conta.</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Outras contas em observação</h3></div>
+          <div class="card-body obs">
+            <div class="panel">
+              <div class="row between"><span class="handle" data-handle="granito-55ab"></span><span class="badge st-suspenso">Restrita</span></div>
+              <div class="small">Finalizações bloqueadas até <b>10/11/2026</b> · 2 disputas perdidas (DSP-0200, DSP-0201) · aplicado em 22/10 por Marcos L. · Administrador. Pagamentos continuam entrando na carteira de lcr-4h8d2 (US$ 5.425) e reembolsos continuam saindo dela; só a finalização espera.</div>
+              <div class="row"><button class="btn btn-sm" data-toast="Bloqueio de finalizações de @granito-55ab reaberto para revisão">Rever bloqueio</button><a class="btn btn-sm btn-ghost" href="../admin/disputas.html">Ver disputas</a></div>
+            </div>
+            <div class="panel">
+              <div class="row between"><span class="handle" data-handle="espelho-c9d2"></span><span class="badge st-banido">Banida</span></div>
+              <div class="small">Motivo <b>R04 · credenciais/acesso</b> · item rejeitado e removido em 20/10 · Marcos L. · Administrador. Nenhuma carteira de item: o único item foi rejeitado antes da aprovação, então não há nada a reembolsar. Conteúdo com chave destruída após 30 dias.</div>
+              <div class="row"><button class="btn btn-sm" data-toast="Item rejeitado de @espelho-c9d2 aberto em modo leitura · R04">Ver item rejeitado</button><a class="btn btn-sm btn-ghost" href="../admin/auditoria.html">account.ban na auditoria</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- modais de ação -->
+    <div class="modal-backdrop" id="m-advertir"><div class="modal">
+      <div class="modal-head"><h3>Advertir <span class="mono">@lanterna-b31d</span></h3><button class="icon-btn" data-modal-close><i data-icon="x"></i></button></div>
+      <div class="modal-body stack">
+        <div class="field"><label for="a-mot">Motivo (obrigatório)</label><select id="a-mot" class="select"><option>Selecione…</option><option>R01 dados pessoais de terceiros</option><option>R02 direitos autorais</option><option>R11 prévia enganosa</option><option>Tentativa de contato externo em mensagens</option><option>R13 outro (texto obrigatório)</option></select></div>
+        <div class="field"><label for="a-txt">Mensagem à conta</label><textarea id="a-txt" class="textarea" rows="3" placeholder="O que foi observado e o que esperamos que mude."></textarea></div>
+        <div class="alert alert-warn"><i data-icon="scroll-text"></i><div>Registrado na auditoria como <code>account.warn</code> por Ana R. · Curadora sênior, com hash encadeado. Não pode ser apagado.</div></div>
+      </div>
+      <div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-primary" data-modal-close data-toast="Advertência registrada · account.warn · a conta recebe a mensagem nas notificações">Advertir</button></div>
+    </div></div>
+
+    <div class="modal-backdrop" id="m-envios"><div class="modal">
+      <div class="modal-head"><h3>Restringir envios de <span class="mono">@lanterna-b31d</span></h3><button class="icon-btn" data-modal-close><i data-icon="x"></i></button></div>
+      <div class="modal-body stack">
+        <div class="field"><label for="e-mot">Motivo (obrigatório)</label><select id="e-mot" class="select"><option>Selecione…</option><option>R01 dados pessoais de terceiros</option><option>R08 fabricação/falsificação</option><option>R09 duplicidade reincidente</option><option>R10 qualidade insuficiente reincidente</option><option>R13 outro (texto obrigatório)</option></select></div>
+        <div class="form-grid">
+          <div class="field"><label for="e-dur">Duração</label><select id="e-dur" class="select"><option>7 dias</option><option selected>30 dias</option><option>Até data específica</option><option>Até decisão da curadoria</option></select></div>
+          <div class="field"><label for="e-fim">Termina em</label><input id="e-fim" class="input" value="26/11/2026"></div>
+        </div>
+        <div class="field"><label for="e-txt">Detalhe (visível à conta)</label><textarea id="e-txt" class="textarea" rows="3"></textarea></div>
+        <div class="alert alert-warn"><i data-icon="scroll-text"></i><div>Itens já ativos continuam à venda. Registrado na auditoria como <code>account.restrict</code> (envios) por Ana R. · Curadora sênior.</div></div>
+      </div>
+      <div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-primary" data-modal-close data-toast="Envios restritos por 30 dias · account.restrict registrado na auditoria">Restringir envios</button></div>
+    </div></div>
+
+    <div class="modal-backdrop" id="m-finalizacoes"><div class="modal">
+      <div class="modal-head"><h3>Bloquear finalizações de <span class="mono">@lanterna-b31d</span></h3><button class="icon-btn" data-modal-close><i data-icon="x"></i></button></div>
+      <div class="modal-body stack">
+        <div class="field"><label for="s-mot">Motivo (obrigatório)</label><select id="s-mot" class="select"><option>Selecione…</option><option>Disputas perdidas reincidentes</option><option>Denúncia procedente com reembolso pendente</option><option>Item retirado com pagamentos a devolver</option><option>Indício de fraude em lacre ou pedido</option><option>R13 outro (texto obrigatório)</option></select></div>
+        <div class="form-grid">
+          <div class="field"><label for="s-dur">Duração</label><select id="s-dur" class="select"><option>7 dias</option><option selected>Até data específica</option><option>Até os reembolsos pendentes serem executados</option><option>Indeterminada (exige administrador)</option></select></div>
+          <div class="field"><label for="s-fim">Termina em</label><input id="s-fim" class="input" value="10/11/2026"></div>
+        </div>
+        <div class="field"><label for="s-txt">Detalhe (visível à conta)</label><textarea id="s-txt" class="textarea" rows="3"></textarea></div>
+        <div class="alert alert-warn"><i data-icon="scroll-text"></i><div>Os pagamentos continuam entrando nas carteiras dos itens e os reembolsos continuam saindo delas. Só a finalização (comissão e entrega da frase) fica bloqueada. Registrado na auditoria como <code>account.restrict</code> (finalizações) por Ana R. · Curadora sênior.</div></div>
+      </div>
+      <div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-primary" data-modal-close data-toast="Finalizações bloqueadas até 10/11 · account.restrict registrado na auditoria">Bloquear finalizações</button></div>
+    </div></div>
+
+    <div class="modal-backdrop" id="m-banir"><div class="modal">
+      <div class="modal-head"><h3>Banir <span class="mono">@lanterna-b31d</span></h3><button class="icon-btn" data-modal-close><i data-icon="x"></i></button></div>
+      <div class="modal-body stack">
+        <div class="alert alert-danger"><i data-icon="ban"></i><div><span class="alert-title">Irreversível para este pseudônimo</span>Itens saem do catálogo, envios e finalizações são bloqueados, conversas encerram. O histórico de pagamentos é mantido. Exige segunda confirmação de um administrador (Marcos L.).</div></div>
+        <div class="field"><label for="b-mot">Motivo (obrigatório)</label><select id="b-mot" class="select"><option>Selecione…</option><option>R03 conteúdo íntimo/sexual</option><option>R04 credenciais/acesso</option><option>R05 sigilo legal</option><option>R01 dados pessoais em escala (base vazada)</option><option>Fraude em disputas ou lacres</option><option>R13 outro (texto obrigatório)</option></select></div>
+        <div class="field"><label for="b-sal">Carteiras de itens em andamento (US$ 18.130,00 · lcr-9f2k7)</label><select id="b-sal" class="select"><option selected>Reembolsar cada pagamento ao endereço de origem (padrão)</option><option>Finalizar e entregar a frase após os reembolsos pendentes (exige administrador)</option></select></div>
+        <div class="field"><label for="b-txt">Fundamento (vai para a auditoria)</label><textarea id="b-txt" class="textarea" rows="3"></textarea></div>
+        <label class="check"><input type="checkbox"><span>Confirmo o motivo e o fundamento acima.<span class="desc">Registrado como <code>account.ban</code> com hash encadeado.</span></span></label>
+      </div>
+      <div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-danger" data-modal-close data-toast="Banimento proposto · aguardando confirmação de Marcos L. (administrador) · account.ban.propose na auditoria">Propor banimento</button></div>
+    </div></div>
+  </main>
+</body>
+</html>

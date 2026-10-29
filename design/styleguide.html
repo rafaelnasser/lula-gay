@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Design system · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/app.css">
+  <script src="assets/app.js" defer></script>
+  <style>
+    .sg-section { padding-block: 32px; border-bottom: 1px solid var(--border); }
+    .sg-section h2 { margin-bottom: 6px; }
+    .sg-section > p { color: var(--muted); margin-bottom: 18px; max-width: 70ch; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+    .swatch { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; font-size: var(--fs-xs); }
+    .swatch div { height: 48px; }
+    .swatch span { display: block; padding: 6px 8px; font-family: var(--font-mono); color: var(--muted); }
+    .demo { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    pre.code { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 14px; font-size: var(--fs-xs); overflow-x: auto; margin: 10px 0 0; color: var(--fg-2); }
+    .type-row { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px dashed var(--border); }
+    .type-row code { color: var(--muted); }
+  </style>
+</head>
+<body data-shell="public" data-page="styleguide" data-root="./">
+<main>
+  <section class="section tight">
+    <div class="container">
+      <p class="eyebrow">Design system</p>
+      <h1 class="display">Componentes do Lacre</h1>
+      <p class="lead mt-2">Tokens, tipografia e componentes usados em todas as telas do protótipo. Cada bloco mostra o resultado e o HTML necessário. Alterne o tema no cabeçalho para conferir o modo claro.</p>
+    </div>
+  </section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Cores</h2>
+    <p>Superfícies em tinta azulada, latão para ações principais, vermelho-lacre para a marca e para o financiamento coletivo. Semânticas fixas para status.</p>
+    <div class="swatches">
+      <div class="swatch"><div style="background:var(--bg)"></div><span>--bg</span></div>
+      <div class="swatch"><div style="background:var(--surface)"></div><span>--surface</span></div>
+      <div class="swatch"><div style="background:var(--surface-3)"></div><span>--surface-3</span></div>
+      <div class="swatch"><div style="background:var(--border-2)"></div><span>--border-2</span></div>
+      <div class="swatch"><div style="background:var(--fg)"></div><span>--fg</span></div>
+      <div class="swatch"><div style="background:var(--muted)"></div><span>--muted</span></div>
+      <div class="swatch"><div style="background:var(--brass)"></div><span>--brass</span></div>
+      <div class="swatch"><div style="background:var(--wax)"></div><span>--wax</span></div>
+      <div class="swatch"><div style="background:var(--ok)"></div><span>--ok</span></div>
+      <div class="swatch"><div style="background:var(--warn)"></div><span>--warn</span></div>
+      <div class="swatch"><div style="background:var(--danger)"></div><span>--danger</span></div>
+      <div class="swatch"><div style="background:var(--info)"></div><span>--info</span></div>
+    </div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Tipografia</h2>
+    <p>Archivo para títulos e números de destaque, IBM Plex Sans para interface, IBM Plex Mono para pseudônimos, hashes e códigos.</p>
+    <div class="type-row"><code>.display</code><div class="display">Informação com lacre</div></div>
+    <div class="type-row"><code>h1</code><h1>Painel do comprador</h1></div>
+    <div class="type-row"><code>h2</code><h2>Lacres coletivos em andamento</h2></div>
+    <div class="type-row"><code>h3</code><h3>O que a curadoria verificou</h3></div>
+    <div class="type-row"><code>.lead</code><p class="lead">Anonimato total entre as partes. Curadoria humana obrigatória. Prova pública de cada item.</p></div>
+    <div class="type-row"><code>body</code><p>Texto corrido de interface. O conteúdo completo foi analisado antes de ir ao ar. A liberação é automática quando a meta é batida.</p></div>
+    <div class="type-row"><code>.eyebrow</code><p class="eyebrow">Jornalismo e investigação</p></div>
+    <div class="type-row"><code>.mono / .hash</code><div class="hash"><code>sha256: 3f9a7c0e1d4b8a2f6e5c9d0b7a1e3f4c2d6b8a9e0f1c3d5b7a9e2f4c6d8bc21e</code><button class="btn btn-sm btn-ghost" data-copy="3f9a7c0e1d4b8a2f6e5c9d0b7a1e3f4c2d6b8a9e0f1c3d5b7a9e2f4c6d8bc21e"><i data-icon="copy"></i></button></div></div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Botões</h2>
+    <p>Latão para a ação principal da tela. Vermelho-lacre apenas para apoiar um lacre coletivo. Perigo só para ações destrutivas da curadoria.</p>
+    <div class="demo">
+      <button class="btn btn-primary"><i data-icon="lock"></i>Comprar cópia · US$ 490</button>
+      <button class="btn btn-wax"><i data-icon="hand-coins"></i>Apoiar com US$ 50</button>
+      <button class="btn">Fazer uma oferta</button>
+      <button class="btn btn-outline">Ver prova</button>
+      <button class="btn btn-ghost"><i data-icon="share"></i>Compartilhar</button>
+      <button class="btn btn-success"><i data-icon="check"></i>Aprovar</button>
+      <button class="btn btn-danger"><i data-icon="x"></i>Rejeitar</button>
+      <button class="btn btn-sm">Pequeno</button>
+      <button class="btn btn-lg btn-primary">Grande</button>
+      <button class="btn" disabled>Desabilitado</button>
+      <button class="icon-btn"><i data-icon="bell"></i><span class="dot"></span></button>
+      <div class="btn-group"><button class="btn active">Grade</button><button class="btn">Lista</button></div>
+    </div>
+    <pre class="code">&lt;button class="btn btn-primary"&gt;&lt;i data-icon="lock"&gt;&lt;/i&gt;Comprar cópia · US$ 490&lt;/button&gt;
+&lt;button class="btn btn-wax" data-toast="Apoio registrado"&gt;Apoiar com US$ 50&lt;/button&gt;</pre>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Badges, status, autenticidade, risco e modelos</h2>
+    <p>Um único mapa de classes para os status de item em todas as telas (<code>.st-*</code>). Autenticidade sempre com ícone (<code>.auth-*</code>).</p>
+    <div class="demo mb-2">
+      <span class="badge st-rascunho">Rascunho</span><span class="badge st-triagem">Em triagem</span><span class="badge st-analise">Em análise</span><span class="badge st-ajustes">Ajustes solicitados</span><span class="badge st-aprovado">Aprovado</span><span class="badge st-aprovado">Aprovado</span><span class="badge st-ativo">Ativo</span><span class="badge st-financiado">Financiado</span><span class="badge st-vendido">Vendido</span><span class="badge st-finalizado">Finalizado</span><span class="badge st-rejeitado">Rejeitado</span><span class="badge st-suspenso">Suspenso</span><span class="badge st-escalado">Escalado</span>
+    </div>
+    <div class="demo mb-2">
+      <span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span>
+      <span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span>
+      <span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span>
+      <span class="badge auth-nao"><i data-icon="shield-alert"></i>Não verificado</span>
+      <span class="badge risk-baixo">Risco baixo</span><span class="badge risk-medio">Risco médio</span><span class="badge risk-alto">Risco alto</span>
+      <span class="badge badge-brass">Destaque</span>
+    </div>
+    <div class="demo">
+      <span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span>
+      <span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span>
+      <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+      <span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span>
+      <span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span>
+      <span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span>
+      <span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Assinatura</span>
+      <span class="model-chip" data-model="janela"><i data-icon="timer"></i>Janela exclusiva</span>
+      <span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span>
+      <span class="tag">dataset</span><span class="tag">licitações</span>
+    </div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Pseudônimos e identicons</h2>
+    <p>O identicon é derivado do pseudônimo, sem upload de avatar. Equipe interna aparece com nome e papel.</p>
+    <div class="demo">
+      <span class="handle" data-handle="coruja-7f3a" data-rep="4,8 · 3 itens"></span>
+      <span class="handle lg" data-handle="sextante-21c9" data-rep="4,9 · 12 itens · Verificado 9×"></span>
+      <span class="handle" data-handle="lanterna-b31d"></span>
+      <span class="handle" data-handle="cartografo-5a77"></span>
+      <span class="handle" data-handle="arquivista-0d2e"></span>
+    </div>
+    <pre class="code">&lt;span class="handle" data-handle="coruja-7f3a" data-rep="4,8 · 3 itens"&gt;&lt;/span&gt;</pre>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Prévia selada e card de item</h2>
+    <p>Nenhuma prévia é legível. O tipo de conteúdo muda a textura; o selo indica que o conteúdo está lacrado.</p>
+    <div class="grid cols-3">
+      <article class="card item-card">
+        <div class="preview" data-type="documento"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></div>
+        <div class="item-body">
+          <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span></div>
+          <h3 class="item-title">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</h3>
+          <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
+          <div class="item-foot"><div><div class="price wax">US$ 54.120<small>de US$ 80.000</small></div><div class="xs muted">1.187 apoiadores · <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></div></div><span class="handle" data-handle="sextante-21c9"></span></div>
+        </div>
+      </article>
+      <article class="card item-card">
+        <div class="preview" data-type="dados"><div class="preview-tag"><span class="badge">Dados e bases</span></div><div class="preview-lock"><span data-seal></span></div></div>
+        <div class="item-body">
+          <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 37/100</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+          <h3 class="item-title">12.400 licitações municipais do Nordeste (2019–2025), consolidadas e limpas, com vencedores e valores</h3>
+          <div class="item-foot"><div class="price">US$ 490</div><span class="handle" data-handle="lanterna-b31d"></span></div>
+        </div>
+      </article>
+      <article class="card item-card">
+        <div class="preview" data-type="imagem"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></div>
+        <div class="item-body">
+          <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+          <h3 class="item-title">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</h3>
+          <div class="item-foot"><div class="price">US$ 900<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+        </div>
+      </article>
+    </div>
+    <div class="grid cols-4 mt-2">
+      <div class="preview sm" data-type="video"><div class="preview-lock"><span data-seal></span></div></div>
+      <div class="preview sm" data-type="audio"><div class="preview-lock"><span data-seal></span></div></div>
+      <div class="preview sm" data-type="mapa"><div class="preview-lock"><span data-seal></span></div></div>
+      <div class="doc-mock"><h5>Relatório de inspeção</h5><div class="line"></div><div class="line short"></div><p>Responsável técnico: <span class="redacted">xxxxxxxxxxxx</span>, CREA <span class="redacted">xxxxx</span>.</p><div class="line"></div><span class="wm">@coruja-7f3a · ENT-3F9A</span></div>
+    </div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Progresso, estatísticas e gráficos simples</h2>
+    <p>Barras em latão por padrão; vermelho-lacre para financiamento coletivo. Estatísticas com rótulo em caixa alta e número tabular.</p>
+    <div class="grid cols-2">
+      <div class="card"><div class="card-body stack-sm">
+        <div class="goal-head"><span class="raised">US$ 54.120</span><span class="goal">meta US$ 80.000 · 68 %</span></div>
+        <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
+        <div class="progress-marks"><span style="left:25%">25 %</span><span style="left:50%">50 %</span><span style="left:75%">75 %</span><span style="left:100%">meta</span></div>
+      </div></div>
+      <div class="stat-grid">
+        <div class="stat"><span class="label">Na fila</span><span class="value">23</span><span class="delta down"><i data-icon="trending-down"></i>−4 vs. ontem</span></div>
+        <div class="stat"><span class="label">SLA 48 h</span><span class="value">91 %</span><span class="delta up"><i data-icon="trending-up"></i>+3 pts</span></div>
+        <div class="stat"><span class="label">GMV do mês</span><span class="value">US$ 184 mil</span><span class="delta up"><i data-icon="trending-up"></i>+22 %</span></div>
+        <div class="stat"><span class="label">Disputas</span><span class="value">3</span><span class="delta flat">estável</span></div>
+      </div>
+    </div>
+    <div class="grid cols-2 mt-2">
+      <div class="card"><div class="card-head"><h3>Envios por dia</h3></div><div class="card-body">
+        <div class="bars labeled"><div class="bar" style="height:40%" data-label="seg"></div><div class="bar" style="height:65%" data-label="ter"></div><div class="bar" style="height:55%" data-label="qua"></div><div class="bar" style="height:90%" data-label="qui"></div><div class="bar" style="height:70%" data-label="sex"></div><div class="bar muted" style="height:25%" data-label="sáb"></div><div class="bar muted" style="height:20%" data-label="dom"></div></div>
+      </div></div>
+      <div class="card"><div class="card-head"><h3>Rejeições por código</h3></div><div class="card-body stack-sm">
+        <div class="hbar"><span>R01 dados pessoais</span><div class="track"><div class="fill" style="width:72%"></div></div><span class="num">18</span></div>
+        <div class="hbar"><span>R02 direitos autorais</span><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">10</span></div>
+        <div class="hbar"><span>R10 qualidade</span><div class="track"><div class="fill" style="width:28%"></div></div><span class="num">7</span></div>
+        <div class="hbar"><span>R09 duplicidade</span><div class="track"><div class="fill" style="width:16%"></div></div><span class="num">4</span></div>
+      </div></div>
+    </div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Tabela</h2>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Item</th><th>Modelo</th><th>Status</th><th class="num">Valor</th><th>Prazo</th><th class="cell-actions"></th></tr></thead>
+        <tbody>
+          <tr><td><b>Série histórica de tarifas de ônibus em 27 capitais</b><span class="sub">lcr-0p4m3 · Governo e políticas públicas</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td><span class="badge st-analise">Em análise</span></td><td class="num">US$ 90</td><td class="num">—</td><td class="cell-actions"><button class="btn btn-sm">Abrir</button></td></tr>
+          <tr><td><b>Mapeamento de 3.100 feiras livres do estado de SP</b><span class="sub">lcr-2z5q7 · Dados e bases</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span></td><td><span class="badge st-ajustes">Ajustes solicitados</span></td><td class="num">US$ 240</td><td class="num">—</td><td class="cell-actions"><button class="btn btn-sm">Responder</button></td></tr>
+          <tr><td><b>Guia de acesso a dados do SUS</b><span class="sub">lcr-5m8c4 · Tecnologia e segurança</span></td><td><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 88</span></td><td><span class="badge st-finalizado">Finalizado</span></td><td class="num">US$ 150</td><td class="num">30/09</td><td class="cell-actions"><button class="btn btn-sm">Ver</button></td></tr>
+        </tbody>
+      </table>
+      <div class="table-foot"><span>Mostrando 3 de 6</span><div class="pagination"><button class="btn btn-sm">‹</button><button class="btn btn-sm btn-primary">1</button><button class="btn btn-sm">2</button><button class="btn btn-sm">›</button></div></div>
+    </div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Formulários</h2>
+    <div class="grid cols-2">
+      <div class="stack">
+        <div class="field"><label for="f1">Título do item</label><input id="f1" class="input" placeholder="Até 120 caracteres" value="Série histórica de tarifas de ônibus em 27 capitais (1994–2026)"><span class="hint">A curadoria pode reescrever para evitar sensacionalismo.</span></div>
+        <div class="field"><label for="f2">Preço por cópia</label><div class="input-group"><span class="affix">US$</span><input id="f2" class="input num" value="90,00"></div></div>
+        <div class="field invalid"><label for="f3">Meta do lacre coletivo</label><div class="input-group"><span class="affix">US$</span><input id="f3" class="input" value="300"></div><span class="error"><i data-icon="alert-circle"></i>Meta mínima é US$ 1.000.</span></div>
+        <div class="field"><label for="f4">Categoria</label><select id="f4" class="select"><option>Governo e políticas públicas · risco médio</option><option>Dados e bases · risco baixo</option></select></div>
+        <div class="search"><i data-icon="search"></i><input class="input" placeholder="Buscar no catálogo…"></div>
+      </div>
+      <div class="stack">
+        <label class="check"><input type="checkbox" checked><span>Declaro que sou autor ou tenho direito de vender este conteúdo.<span class="desc">A declaração fica registrada e vinculada ao seu pseudônimo.</span></span></label>
+        <label class="switch"><input type="checkbox" checked><span class="track"></span><span>Avisar por push a cada marco batido</span></label>
+        <div class="segmented"><button class="active">Grade</button><button>Lista</button></div>
+        <div class="choice-cards">
+          <label class="choice"><input type="radio" name="m" checked><span class="choice-title"><i data-icon="copy"></i>Cópias</span><span class="choice-desc">Preço fixo, vários compradores.</span><span class="choice-meta">Comissão 10 %</span></label>
+          <label class="choice"><input type="radio" name="m"><span class="choice-title"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="choice-desc">Meta batida libera o conteúdo.</span><span class="choice-meta">Comissão 10 %</span></label>
+        </div>
+        <div class="amount-options" data-target="#amt"><button class="btn active" data-amount="20">US$ 20</button><button class="btn" data-amount="50">US$ 50</button><button class="btn" data-amount="100">US$ 100</button><button class="btn" data-amount="250">US$ 250</button></div>
+        <div class="input-group"><span class="affix">US$</span><input id="amt" class="input" value="20" data-amount-input></div>
+        <div class="dropzone"><i data-icon="upload"></i><strong>Arraste os arquivos ou clique para escolher</strong><span class="xs">Até 20 GB por item · metadados removidos automaticamente</span></div>
+        <div class="file-row"><span class="file-icon"><i data-icon="file-text"></i></span><div class="grow"><div class="file-name truncate">relatorio-barragens-2024.pdf</div><div class="file-meta">212 páginas · 48 MB · sha256 3f9a…c21e</div></div><div class="progress thin"><div class="progress-bar ok" data-width="100%"></div></div><span class="badge badge-ok"><i data-icon="check"></i>Enviado</span></div>
+        <div class="words"><span>amanhecer</span><span>bússola</span><span>lacre</span><span>moinho</span><span>sextante</span><span>tinta</span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Abas, passos, linha do tempo, alertas</h2>
+    <div class="grid cols-2">
+      <div class="stack">
+        <div data-tabs>
+          <div class="tabs"><a class="tab active" data-tab="a" href="#">Visão geral</a><a class="tab" data-tab="b" href="#">Curadoria <span class="count">2</span></a><a class="tab" data-tab="c" href="#">Publicação</a></div>
+          <div class="tab-panel active" data-panel="a">Conteúdo da aba Visão geral.</div>
+          <div class="tab-panel" data-panel="b">Conteúdo da aba Curadoria.</div>
+          <div class="tab-panel" data-panel="c">Conteúdo da aba Publicação.</div>
+        </div>
+        <div class="stepper"><div class="step done"><span class="n">1</span><span class="t">Tipo</span></div><div class="step done"><span class="n">2</span><span class="t">Arquivos</span></div><div class="step active"><span class="n">3</span><span class="t">Prévia</span></div><div class="step"><span class="n">4</span><span class="t">Modelo</span></div><div class="step"><span class="n">5</span><span class="t">Declarações</span></div><div class="step"><span class="n">6</span><span class="t">Envio</span></div></div>
+        <div class="timeline">
+          <div class="tl-item ok"><div class="when">24/10 · 09:12</div><div class="what">Enviado para curadoria</div></div>
+          <div class="tl-item ok"><div class="when">24/10 · 09:14</div><div class="what">Triagem automática concluída · metadados removidos, 0 alertas</div></div>
+          <div class="tl-item info"><div class="when">25/10 · 14:40</div><div class="what">Em análise · Bruno M.</div></div>
+          <div class="tl-item warn"><div class="when">26/10 · 11:05</div><div class="what">Ajustes solicitados · prévia expõe coordenadas exatas</div></div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Compra anônima</span>Registramos item, valor e data. Nada mais. Nenhum dado seu é compartilhado com o vendedor.</div></div>
+        <div class="alert alert-info"><i data-icon="info"></i><div>A curadoria responde em até 48 h. Você será notificado aqui.</div></div>
+        <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Guarde a frase de recuperação agora</span>Ela é mostrada uma única vez. A cópia do Lacre é destruída quando você fechar esta tela.</div></div>
+        <div class="alert alert-danger"><i data-icon="x-circle"></i><div><span class="alert-title">Rejeitado · R01</span>O arquivo contém CPFs de sócios. Remova a coluna e reenvie como novo item.</div></div>
+        <div class="alert alert-ok"><i data-icon="check-circle"></i><div>Lacre rompido. Acesso liberado no seu cofre.</div></div>
+        <div class="alert alert-wax"><i data-icon="hand-coins"></i><div>Faltam US$ 25.880 para romper este lacre. 19 dias restantes.</div></div>
+        <div class="row"><button class="btn" data-modal-open="demo-modal">Abrir modal</button><button class="btn" data-toast="Enviado para curadoria">Mostrar toast</button></div>
+        <div class="empty"><i data-icon="inbox"></i><h4>Nenhum item ainda</h4><p>Quando você comprar ou apoiar algo, aparece aqui.</p><a class="btn btn-primary" href="public/explorar.html">Explorar o catálogo</a></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Mensagens</h2>
+    <div class="chat" style="min-height:360px">
+      <div class="threads">
+        <div class="thread active"><span class="identicon" data-handle="lanterna-b31d"></span><div class="grow"><div class="t-title truncate">12.400 licitações municipais…</div><div class="t-sub">@lanterna-b31d · há 2 h</div></div></div>
+        <div class="thread"><span class="identicon" data-handle="sextante-21c9"></span><div class="grow"><div class="t-title truncate">Cadeia do ouro ilegal no Pará…</div><div class="t-sub">@sextante-21c9 · ontem</div></div></div>
+      </div>
+      <div class="conv">
+        <div class="conv-head"><span class="handle" data-handle="lanterna-b31d"></span><span class="badge st-ativo">Item ativo</span></div>
+        <div class="conv-body">
+          <div class="msg system">Conversa vinculada ao item lcr-9f2k7. Expira 90 dias após o encerramento. Dados de contato são bloqueados automaticamente.</div>
+          <div class="msg me">A base inclui licitações de consórcios intermunicipais?<span class="when">10:02</span></div>
+          <div class="msg them">Inclui 412 licitações de consórcios, marcadas na coluna tipo_ente.<span class="when">10:40</span></div>
+          <div class="msg me filtered">Pode me mandar por e-mail? [e-mail removido]<span class="when">10:41 · trecho bloqueado pelo filtro de anonimato</span></div>
+        </div>
+        <div class="conv-foot"><div class="input-group"><input class="input" placeholder="Escreva uma mensagem…"><button class="btn btn-primary"><i data-icon="send"></i></button></div></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sg-section"><div class="container">
+    <h2>Card social e post do X</h2>
+    <div class="grid cols-2">
+      <div class="social-card"><div class="preview" data-type="documento"></div><div class="row between"><span class="badge">Jornalismo e investigação</span><span class="badge badge-wax">Lacre coletivo</span></div><div class="sc-title">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</div><div><div class="progress thin" style="background:rgba(255,255,255,.15)"><div class="progress-bar wax" style="width:68%"></div></div><div class="sc-foot mt-1"><span>US$ 54.120 / 80.000 · 1.187 apoiadores</span><span>sha256 3f9a…c21e · lacre.app/p/4m2x9</span></div></div></div>
+      <div class="x-card"><div class="x-head"><span data-seal style="width:36px;height:36px;display:inline-block"></span><div><div class="x-name">Lacre</div><div class="x-at">@lacre · 2 h</div></div></div><div class="x-body">Lacre coletivo aberto · Jornalismo e investigação
+18 meses de apuração sobre a cadeia do ouro ilegal no Pará. Documentos públicos e entrevistas.
+Meta: US$ 80.000. Quando bater, fica público para todo mundo.
+Apoie a partir de US$ 10 · lacre.app/p/4m2x9</div><div class="x-foot"><span>142 respostas</span><span>1,2 mil reposts</span><span>4,8 mil curtidas</span><span>310 mil visualizações</span></div></div>
+    </div>
+  </div></section>
+
+  <div class="modal-backdrop" id="demo-modal"><div class="modal"><div class="modal-head"><h3>Confirmar apoio</h3><button class="icon-btn" data-modal-close><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p>Você vai apoiar <b>Cadeia do ouro ilegal no Pará</b> com <b>US$ 50,00</b>.</p><p class="small muted">O valor vai para a carteira do item. Se a meta não bater até 15/11, ele volta ao seu endereço de origem se tiver entrado depois do último marco batido; até o marco, fica com o vendedor, que pagou as prévias liberadas.</p></div><div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-wax" data-modal-close data-toast="Apoio de US$ 50 registrado">Confirmar apoio</button></div></div></div>
+</main>
+</body>
+</html>

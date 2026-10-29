@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Políticas · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
+    [id] { scroll-margin-top: 84px; }
+    .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
+    .pol { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 40px; align-items: start; }
+    @media (max-width: 900px) { .pol { grid-template-columns: minmax(0, 1fr); gap: 24px; } .pol .sticky { position: static; } }
+    .toc { display: flex; flex-direction: column; gap: 2px; font-size: var(--fs-sm); }
+    .toc a { padding: 7px 10px; border-left: 2px solid var(--border); color: var(--fg-2); }
+    .toc a:hover { color: var(--fg); border-color: var(--brass); background: var(--surface-2); }
+    .toc .toc-note { padding: 10px; font-size: var(--fs-xs); color: var(--muted); }
+    .pol-section { margin-bottom: 56px; }
+    .pol-section h2 { font-size: var(--fs-2xl); margin-bottom: 14px; }
+    .pol-section h3 { margin-top: 24px; margin-bottom: 8px; }
+    .pol-section > p, .pol-section li { color: var(--fg-2); }
+    .pol-section > p { max-width: 72ch; }
+    .pol-section > p + p { margin-top: 10px; }
+    .pol-section ul, .pol-section ol { padding-left: 22px; margin: 8px 0; max-width: 72ch; }
+    .pol-section li + li { margin-top: 6px; }
+    .yes-no { list-style: none; margin: 0; padding: 0; max-width: none; }
+    .yes-no li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid var(--border); font-size: var(--fs-sm); }
+    .yes-no li:first-child { border-top: 0; padding-top: 0; }
+    .yes-no li + li { margin-top: 0; }
+    .yes-no svg { width: 16px; height: 16px; flex: none; margin-top: 2px; }
+    .yes-no.yes svg { color: var(--ok); } .yes-no.no svg { color: var(--danger); }
+    .table-wrap { margin-top: 10px; }
+  </style>
+</head>
+<body data-shell="public" data-page="politicas" data-root="../">
+<main>
+  <section class="section tight">
+    <div class="container">
+      <p class="eyebrow">Políticas</p>
+      <h1 class="display mt-1">O que pode, o que não pode e o que não prometemos</h1>
+      <p class="lead mt-2">Textos curtos, sem juridiquês onde não precisa. Esta é a versão em português; interface e políticas existem também em inglês e espanhol. Esta é a versão 1.2, em vigor desde 01/10/2026. Toda prova pública registra a versão aplicada ao item.</p>
+      <div class="row mt-2"><span class="badge badge-brass">v1.2 · em vigor</span><span class="badge badge-outline"><i data-icon="calendar"></i>Atualizada em 01/10/2026</span><span class="badge badge-outline"><i data-icon="globe"></i>pt · en · es</span><a class="small link" href="#versoes">Ver o histórico de versões</a></div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="pol">
+        <aside class="sticky">
+          <nav class="toc" aria-label="Índice das políticas">
+            <a href="#conteudo">Política de conteúdo</a>
+            <a href="#anonimato">Anonimato e seus limites</a>
+            <a href="#curadoria">Curadoria</a>
+            <a href="#disputas">Disputas e reembolsos</a>
+            <a href="#taxas">Taxas</a>
+            <a href="#juridico">Pedidos jurídicos e de titulares</a>
+            <a href="#termos">Termos resumidos</a>
+            <a href="#versoes">Versões da política</a>
+            <span class="toc-note">Dúvidas sobre um item específico: use “Denunciar” na página de prova dele.</span>
+          </nav>
+        </aside>
+
+        <div>
+          <!-- Conteúdo -->
+          <section class="pol-section" id="conteudo">
+            <h2>Política de conteúdo</h2>
+            <p>O Lacre vende informação: documentos, bases de dados, fotografias, vídeos, áudios, relatos, métodos e apurações. Toda publicação passa por análise humana completa. A lista abaixo é a regra pública que a curadoria aplica.</p>
+            <div class="grid cols-2 mt-3">
+              <div class="card">
+                <div class="card-head"><i data-icon="check-circle"></i><h3>Pode ser vendido</h3></div>
+                <div class="card-body"><ul class="yes-no yes">
+                  <li><i data-icon="check"></i>Informação de autoria própria: pesquisas, análises, métodos, relatos, fotografias, vídeos, áudios.</li>
+                  <li><i data-icon="check"></i>Compilações e tratamentos de dados públicos. O valor é o trabalho de reunir, limpar e estruturar, e isso deve estar claro na descrição.</li>
+                  <li><i data-icon="check"></i>Acervos e documentos históricos digitalizados cujo uso seja permitido.</li>
+                  <li><i data-icon="check"></i>Apurações jornalísticas baseadas em fontes públicas, documentos lícitos e entrevistas consentidas.</li>
+                  <li><i data-icon="check"></i>Documentos públicos de difícil acesso, reunidos e organizados.</li>
+                  <li><i data-icon="check"></i>Material licenciado para revenda, com a licença anexada ao envio.</li>
+                </ul></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><i data-icon="x-circle"></i><h3>Não pode ser vendido</h3></div>
+                <div class="card-body"><ul class="yes-no no">
+                  <li><i data-icon="x"></i>Dados pessoais de terceiros sem base legal: listas de documentos de identidade (CPF, DNI, SSN), telefones, endereços, cadastros, bases vazadas.</li>
+                  <li><i data-icon="x"></i>Conteúdo íntimo ou sexual de qualquer pessoa; qualquer conteúdo envolvendo menores em contexto sensível.</li>
+                  <li><i data-icon="x"></i>Credenciais, senhas, chaves, acessos, exploits ativos, instruções para invasão.</li>
+                  <li><i data-icon="x"></i>Material protegido por direitos autorais sem autorização: livros, filmes, software, cursos de terceiros.</li>
+                  <li><i data-icon="x"></i>Informação privilegiada sobre companhias abertas ou que permita manipulação de mercado.</li>
+                  <li><i data-icon="x"></i>Documentos sob sigilo legal (judicial, fiscal, bancário, médico, de defesa) obtidos sem autorização.</li>
+                  <li><i data-icon="x"></i>Acusações contra pessoas identificáveis sem documentação que as sustente.</li>
+                  <li><i data-icon="x"></i>Segredos comerciais obtidos por violação de dever de confidencialidade.</li>
+                  <li><i data-icon="x"></i>Qualquer coisa que a equipe não consiga avaliar com segurança. Na dúvida, não publicamos.</li>
+                </ul></div>
+              </div>
+            </div>
+            <h3>O que fazemos com o que você envia</h3>
+            <ul>
+              <li>Removemos metadados automaticamente (autor, GPS, dispositivo, software, tags de áudio) antes de qualquer pessoa da equipe ver o arquivo.</li>
+              <li>Analisamos todo o conteúdo antes de publicar qualquer parte dele. A prévia pública é escolhida pela curadoria.</li>
+              <li>Guardamos o conteúdo cifrado, com uma chave por item. Itens exclusivos vendidos são destruídos dos nossos servidores após a janela de disputa; fica só o hash.</li>
+              <li>Registramos um hash público do pacote, com carimbo de tempo, para provar integridade.</li>
+            </ul>
+            <p>Dados de pessoas públicas no exercício da função pública são aceitáveis quando vêm de fonte pública. Trechos que exigem redação são tarjados em uma nova versão do arquivo; a anterior fica inacessível.</p>
+            <p>A plataforma é global. A curadoria avalia dados pessoais, direitos autorais e sigilo pelas leis do país de origem da informação e pelas da jurisdição da sede. Todo item e pedido traz país e idioma.</p>
+          </section>
+
+          <!-- Anonimato -->
+          <section class="pol-section" id="anonimato">
+            <h2>Anonimato e seus limites</h2>
+            <p>A promessa pública é: anonimato total entre as partes e para o público, e nenhum dado de identidade no marketplace. Abaixo, o que isso cobre e o que não cobre. Preferimos dizer agora do que no primeiro incidente.</p>
+            <h3>O que prometemos</h3>
+            <ul>
+              <li>Vendedores e compradores nunca sabem quem é o outro. A plataforma também não precisa saber quem são.</li>
+              <li>Nenhuma conta exige nome, e-mail, telefone, CPF ou documento. Em nenhuma tela.</li>
+              <li>Não armazenamos identidade. Se o banco de dados vazar, vazam pseudônimos e históricos de itens e de pagamentos.</li>
+              <li>Arquivos enviados têm metadados removidos antes de qualquer pessoa da equipe ver.</li>
+              <li>A curadoria vê o conteúdo, mas não vê quem enviou além do pseudônimo e do histórico dele. Todo acesso da equipe fica em log imutável.</li>
+            </ul>
+            <h3>O que não prometemos</h3>
+            <ul>
+              <li><b>Anonimato contra o Estado em caso de ordem judicial.</b> Dinheiro entra e sai só em cripto, mas a corretora ou o P2P onde você comprou a cripto conhece a sua identidade, e transações on-chain são públicas e analisáveis. Não guardamos esse vínculo; uma ordem judicial dirigida à sua corretora e a nós pode reconstruí-lo.</li>
+              <li><b>Proteção contra o seu próprio comportamento.</b> Quem escreve o nome dentro do documento, reutiliza uma carteira de cripto rastreável ou dá detalhes na descrição se identifica sozinho. A interface avisa nesses pontos.</li>
+              <li><b>Impossibilidade de captura de tela.</b> Marca d’água e termos desencorajam; nada impede.</li>
+            </ul>
+            <h3>Dinheiro e identidade</h3>
+            <p>Nenhuma moeda fiduciária (real, dólar, euro) entra ou sai da plataforma. Não há PIX, cartão, boleto, parceiro de pagamento nem voucher, e a plataforma não faz KYC. Você obtém cripto por conta própria, em uma corretora ou P2P, fora do Lacre, e paga da sua própria carteira para a carteira do item.</p>
+            <p>Cada item ou pedido aprovado ganha uma carteira própria, criada em hardware seguro (HSM), com o endereço público na página de prova. Cada pagamento usa um endereço derivado novo, com valor exato, nunca reutilizado e nunca vinculado a identidade. Na finalização, a plataforma executa reembolsos pendentes, entrega a carteira ao vendedor (frase de recuperação, uma única vez, após senha e TOTP) e destrói a própria cópia da chave. Reembolsos voltam ao endereço de origem do pagamento; por isso pague sempre de uma carteira que você controla, nunca direto de uma corretora.</p>
+            <div class="grid cols-2 mt-2">
+              <div class="card">
+                <div class="card-head"><i data-icon="database"></i><h3>O que guardamos sobre dinheiro</h3></div>
+                <div class="card-body"><ul class="yes-no yes">
+                  <li><i data-icon="check"></i>A chave da carteira do item, no HSM, só até a entrega ao vendedor. Depois, destruída, com registro na auditoria.</li>
+                  <li><i data-icon="check"></i>O endereço de origem de cada pagamento, só até a finalização, para poder reembolsar.</li>
+                  <li><i data-icon="check"></i>O histórico de pagamentos por item: valor, rede, txid e confirmações, para a prova pública e para disputas.</li>
+                </ul></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><i data-icon="x-circle"></i><h3>O que não guardamos</h3></div>
+                <div class="card-body"><ul class="yes-no no">
+                  <li><i data-icon="x"></i>Nenhum saldo de usuário. Não existe carteira interna, crédito, depósito nem saque.</li>
+                  <li><i data-icon="x"></i>Nenhum endereço de carteira seu depois da finalização do item.</li>
+                  <li><i data-icon="x"></i>Nenhum vínculo entre o seu pseudônimo e a corretora onde você comprou a cripto.</li>
+                </ul></div>
+              </div>
+            </div>
+            <h3>Registros de acesso e jurisdição da sede</h3>
+            <p>A plataforma é global, mas a entidade que a opera terá uma sede, e é a lei da sede que define a guarda de registros de acesso, a resposta a autoridades e o tratamento de ativos virtuais. A jurisdição da sede está a definir; quando for escolhida, esta seção dirá exatamente o que ela implica. Exemplos do que muda:</p>
+            <ul>
+              <li><b>Brasil:</b> o Marco Civil (Lei 12.965/2014, art. 15) exige guardar registros de acesso (data, hora e IP) por 6 meses, entregues por ordem judicial; a Lei 14.478/2022 rege os ativos virtuais.</li>
+              <li><b>União Europeia:</b> GDPR (dados pessoais, inclusive de terceiros citados nos itens), DSA (moderação, denúncias e transparência) e MiCA (guardar cripto de terceiros, mesmo temporariamente, pode exigir licença).</li>
+              <li><b>Estados Unidos:</b> DMCA (notificação e retirada por direitos autorais), regras de valores mobiliários e sanções (OFAC), com bloqueio de países sancionados nos pagamentos.</li>
+            </ul>
+            <p>Seja qual for a sede, o compromisso é o mesmo: registros de acesso, quando exigidos, ficam em um sistema separado do marketplace, cifrados, com a chave dividida entre duas pessoas, retenção exata pelo prazo legal e destruição automática. O marketplace nunca os consulta; eles só saem por ordem judicial, por procedimento registrado no log de auditoria. Independentemente da sede, a curadoria avalia cada item também pelas leis do país de origem da informação.</p>
+            <h3>O que existe sobre a sua conta</h3>
+            <p>Pseudônimo (imutável), hash da senha ou chave pública da passkey, hash da frase de recuperação (serve para validar, não para recuperar), segredo TOTP cifrado, data de criação, preferências, histórico de pagamentos por item e reputação. Nada mais.</p>
+            <div class="alert alert-anon mt-3"><i data-icon="shield"></i><div><span class="alert-title">Em uma frase</span>Não temos como dizer quem você é. Temos como dizer o que o seu pseudônimo fez, e a lei da sede pode nos obrigar a guardar quando e de onde ele acessou, por um prazo fixo, em cofre separado.</div></div>
+          </section>
+
+          <!-- Curadoria -->
+          <section class="pol-section" id="curadoria">
+            <h2>Curadoria</h2>
+            <p>A curadoria é o produto. Nada vai ao ar sem uma pessoa da equipe ler, ver ou ouvir todo o conteúdo. A esteira: enviado, triagem automática, fila, análise humana, decisão, publicação imediata com prova pública e carteira do item.</p>
+            <h3>Triagem automática</h3>
+            <p>Antivírus (executáveis são rejeitados); bloqueio imediato de nudez, indícios de menores, credenciais e dados de cartão; alerta de duplicidade por hash; varredura de dados pessoais com amostras tarjadas para a curadoria; OCR e transcrição apenas para busca interna; limite de 20 GB por item.</p>
+            <h3>Análise humana em 7 blocos</h3>
+            <ol>
+              <li><b>Legalidade</b> (veto): dados pessoais, conteúdo íntimo, credenciais, direitos autorais, informação privilegiada, sigilo legal, crimes contra a honra, incitação.</li>
+              <li><b>Autenticidade</b> (veto parcial): resulta em um dos quatro níveis públicos: Verificado, Verificado parcialmente, Plausível, Não verificado. “Não verificado” só é publicado em categorias de baixo risco, com aviso.</li>
+              <li><b>Qualidade e completude</b>: entrega o que promete; legível, organizado, completo; datas e volumes batem.</li>
+              <li><b>Prévia e descrição</b>: a prévia permite julgar sem entregar; título e descrição sem sensacionalismo; nada expõe terceiros nem o vendedor.</li>
+              <li><b>Preço e modelo</b>: coerência com volume e raridade; regras do modelo bem configuradas. A curadoria sugere; não impõe.</li>
+              <li><b>Terceiros e redação</b>: pessoas identificáveis listadas e decididas uma a uma; tarjas aplicadas em nova versão; empresas citadas avaliadas.</li>
+              <li><b>Duplicidade e interesse</b>: não é cópia de item publicado nem de material livre; categoria e tags corretas.</li>
+            </ol>
+            <h3>Dois olhos, jurídico e prazos</h3>
+            <p>Jornalismo e investigação, Governo, Finanças, Tecnologia e segurança e Saúde exigem dois curadores independentes; o segundo não vê as notas do primeiro até concluir. Itens que citam pessoa identificável, empresa em contexto negativo ou documento institucional vão ao jurídico antes da aprovação. Prazos: triagem em minutos; primeira análise humana em até 48 h (24 h para edições de assinatura); jurídico em até 5 dias úteis; resposta a ajustes do vendedor em até 24 h.</p>
+            <h3>Decisões e códigos de motivo</h3>
+            <div class="table-wrap">
+              <table class="table compact">
+                <thead><tr><th>Decisão</th><th>Efeito</th><th>O vendedor recebe</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="badge st-aprovado">Aprovado</span></td><td>Publicado na hora, com prova pública; carteira do item criada</td><td>Link da prova e endereço da carteira do item</td></tr>
+                  <tr><td><span class="badge st-aprovado">Aprovado com ajustes</span></td><td>Curadoria altera título, descrição ou prévia</td><td>Diff para confirmar em 72 h</td></tr>
+                  <tr><td><span class="badge st-ajustes">Ajustes solicitados</span></td><td>Volta ao vendedor</td><td>Lista de pendências com códigos</td></tr>
+                  <tr><td><span class="badge st-rejeitado">Rejeitado</span></td><td>Encerra; reenvio só como novo item</td><td>Código de motivo e texto</td></tr>
+                  <tr><td><span class="badge st-escalado">Escalado</span></td><td>Fila jurídica; o prazo pausa</td><td>“Em análise adicional”</td></tr>
+                  <tr><td><span class="badge st-rejeitado">Conta banida</span></td><td>Violação grave: menores, credenciais, fraude</td><td>Aviso final; a finalização dos itens em curso fica suspensa para análise</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small muted mt-2">Códigos: R01 dados pessoais de terceiros · R02 direitos autorais · R03 conteúdo íntimo/sexual · R04 credenciais/acesso · R05 sigilo legal · R06 informação privilegiada · R07 difamação sem suporte · R08 fabricação/falsificação · R09 duplicidade · R10 qualidade insuficiente · R11 prévia enganosa · R12 fora do escopo · R13 outro (texto obrigatório).</p>
+            <h3>Depois da publicação</h3>
+            <p>Qualquer pessoa, com ou sem conta, pode denunciar um item pela página de prova. A denúncia entra com prioridade alta e o item pode ser suspenso preventivamente (sai do catálogo, compras e apoios pausam) enquanto é reanalisado. Metas da curadoria: taxa de reversão abaixo de 1 % e disputas procedentes abaixo de 2 % por curador.</p>
+          </section>
+
+          <!-- Disputas -->
+          <section class="pol-section" id="disputas">
+            <h2>Disputas e reembolsos</h2>
+            <h3>Disputa do comprador</h3>
+            <p>Janela de 72 h após o primeiro acesso ao conteúdo; no lacre coletivo, 72 h a partir da liberação pública. Motivos: conteúdo diferente da prévia, arquivo corrompido, duplicidade, autenticidade, outro. A curadoria compara prévia e conteúdo (já tem os dois) e decide em até 5 dias: reembolso total, parcial ou manutenção da compra. O reembolso sai da carteira do item para o endereço de origem do pagamento, no mesmo valor pago, descontada só a taxa de rede.</p>
+            <p>Reincidência do vendedor rebaixa a reputação. Reincidência do comprador em disputas improcedentes limita o direito de disputa.</p>
+            <h3>Reembolsos automáticos</h3>
+            <ul>
+              <li><b>Lacre coletivo que não bateu a meta</b>: o valor do último marco batido (25, 50, 75 ou 90 % da meta) fica com o vendedor, com a comissão de 10 % do Lacre, porque pagou as prévias liberadas; os apoios que entraram depois desse marco voltam ao endereço de origem no fim do prazo, em ordem de chegada (o apoio que cruzou o marco volta só na parte acima dele), descontada só a taxa de rede. Sem nenhum marco batido, tudo volta e nada é cobrado. No lacre flexível, declarado antes de publicar, acima do piso (ex.: 70 %) o conteúdo é liberado ao público e o vendedor fica com tudo.</li>
+              <li><b>Pedido sem vendedor até o prazo</b>: os sinais voltam a quem ainda participa, ao endereço de origem, a partir da carteira do pedido. O sinal (25 % do valor por pessoa) não volta por desistência e fica com o Lacre como taxa de serviço, nunca com quem atende. Desistir é não completar o sinal em 48 h depois de uma subida de valor ou não pagar os 75 % restantes em 72 h depois de uma prévia aprovada. Se a prévia não corresponde ao pedido, a contestação com motivo é decidida pela curadoria em até 48 h; procedente, o atendimento cai, sem perda de sinal. Quem participa de um pedido não pode atendê-lo.</li>
+              <li><b>Oferta recusada ou lance perdido</b>: o valor pago ao endereço derivado do item volta ao endereço de origem assim que o vendedor responde ou o leilão encerra.</li>
+              <li><b>Compra com exclusividade em lacre coletivo</b>: todos os apoios voltam automaticamente aos endereços de origem e os apoiadores são notificados; em cópias e camadas, quem já comprou mantém o acesso.</li>
+              <li><b>Item retirado pelo vendedor antes da finalização</b>: todos os pagamentos voltam aos endereços de origem e o vendedor recebe penalidade de reputação.</li>
+            </ul>
+            <h3>Reversão de vendas</h3>
+            <p>Se um item for retirado por violação depois de vendas, os compradores são reembolsados ao endereço de origem. Antes da finalização, o reembolso sai da carteira do item. Depois da finalização, os fundos já estão com o vendedor: o reembolso sai do fundo de garantia da plataforma, formado por 2 % de cada comissão.</p>
+          </section>
+
+          <!-- Taxas -->
+          <section class="pol-section" id="taxas">
+            <h2>Taxas</h2>
+            <p>Comissão de <b>10 %</b> sobre cada venda, apoio ou recompensa, paga pelo vendedor. Quem compra paga só o preço e a taxa da rede. Não há mensalidade nem taxa de listagem.</p>
+            <p>Sinal de quem desiste: fica com o Lacre como taxa de serviço. Em um pedido com recompensa, quem não completa o sinal depois de uma subida de valor, ou não paga os 75 % restantes depois da prévia, perde o sinal para o Lacre, nunca para quem atende.</p>
+            <p>Nos reembolsos, a taxa da rede é descontada do valor devolvido; a plataforma não cobra nada sobre eles.</p>
+            <h3>Moedas e redes</h3>
+            <p>Nenhuma moeda fiduciária entra ou sai da plataforma. Os preços são em dólar (US$). USDT e USDC em Polygon, Tron e Base valem 1:1 com o dólar, sem conversão, e são aceitos em todos os modelos. Bitcoin on-chain é aceito só em Exclusivo e Cópias, pelo valor em US$ no momento do pagamento. Lightning não é aceito, porque uma invoice não é reembolsável à origem. O acesso é liberado ao atingir as confirmações da rede: Polygon 12, Tron 19, Base 12, Bitcoin 2.</p>
+            <h3>Finalização</h3>
+            <p>A finalização acontece quando a venda se conclui e a janela de disputa de 72 h vence (Exclusivo), 72 h depois da liberação pública ou quando o prazo vence antes da meta com algum marco batido (Lacre coletivo), 72 h depois que os participantes pagam o restante após a prévia (Pedido) ou quando o vendedor encerra as vendas, após a última janela de disputa (Cópias). Nela, a plataforma executa os reembolsos pendentes e entrega a carteira ao vendedor: a frase de recuperação é exibida uma única vez, na tela, após senha e TOTP, e a plataforma destrói a própria cópia da chave, com registro na auditoria.</p>
+            <p>No lacre coletivo, cada marco batido (25, 50, 75 e 90 % da meta) libera uma prévia pública e fica garantido ao vendedor. Ao bater a meta, todo o conteúdo fica público para todos ao mesmo tempo.</p>
+            <p>Você obtém cripto por conta própria, em corretora ou P2P, fora do Lacre. A plataforma não faz KYC e não intermedeia moeda fiduciária.</p>
+          </section>
+
+          <!-- Jurídico -->
+          <section class="pol-section" id="juridico">
+            <h2>Pedidos jurídicos e de titulares</h2>
+            <h3>Pedidos de titulares de dados (LGPD, GDPR ou equivalente)</h3>
+            <p>Quem afirma estar identificado em um item pode usar o formulário público na página de prova, marcando “Sou a pessoa citada”. O pedido é tratado pela lei do país de origem da informação (LGPD no Brasil, GDPR na União Europeia, CCPA na Califórnia ou equivalente) e pela da sede. O jurídico analisa em até 15 dias e responde de forma documentada, pelo protocolo. Saídas possíveis: redação de uma nova versão, retirada do item ou manutenção com fundamento (interesse público, fonte pública, exercício de função pública). O item pode ser suspenso preventivamente durante a análise.</p>
+            <h3>Ordens judiciais e notificações</h3>
+            <p>Mantemos um canal jurídico dedicado, registramos o recebimento de cada ordem e cumprimos com o mínimo necessário. Comunicamos o vendedor quando a ordem permitir. O que pode existir para entregar: pseudônimo, data de criação da conta, itens, apoios e compras, o histórico de pagamentos por item (valor, rede, txid, confirmações) e os registros de acesso do sistema separado, pelo prazo que a lei da sede exigir. O que não existe para entregar: nome, e-mail, telefone, documento, endereços de origem depois da finalização, a chave de uma carteira já entregue, conteúdo de itens exclusivos já vendidos.</p>
+            <h3>Ativos virtuais</h3>
+            <p>A plataforma controla a chave da carteira de cada item entre a aprovação e a finalização. Conforme a sede, isso pode ser lido como guarda temporária de ativos de terceiros e exigir autorização: no Brasil, a Lei 14.478/2022 e a regulamentação do Banco Central; na União Europeia, o MiCA; nos Estados Unidos, regras federais e estaduais. A operação segue parecer jurídico sobre esse enquadramento, e esta seção será atualizada quando a sede for definida, inclusive se a fase 2 migrar para contratos de escrow on-chain, em que os fundos ficam no contrato, a plataforma só assina liberações e reembolsos e o contrato paga o vendedor em um endereço dele.</p>
+            <h3>Transparência</h3>
+            <p>Publicamos a cada seis meses o número de ordens judiciais, notificações e pedidos de titulares recebidos, e quantos foram cumpridos total ou parcialmente. Sem detalhes que identifiquem casos.</p>
+          </section>
+
+          <!-- Termos -->
+          <section class="pol-section" id="termos">
+            <h2>Termos resumidos</h2>
+            <p>Resumo em linguagem simples. O texto completo dos termos de uso é anexo a esta política e prevalece em caso de conflito.</p>
+            <ul>
+              <li>A conta é um pseudônimo. Você é responsável pela senha, pela passkey e pela frase de recuperação. Sem a frase, não há como recuperar a conta; não temos e-mail para enviar nada.</li>
+              <li>Ao enviar um item, você faz seis declarações que ficam registradas: origem lícita, titularidade ou direito de venda, sem dados pessoais de terceiros sem base legal, sem conteúdo íntimo ou de menores, sem credenciais, sem informação privilegiada ou sigilo legal. Declaração falsa é motivo de banimento e de suspensão da finalização dos itens em curso para análise.</li>
+              <li>A curadoria decide o que publica e pode reescrever título, resumo e prévia com o seu aceite. Pode recusar sem precisar provar nada.</li>
+              <li>O pagamento fica na carteira do item até a finalização, depois da janela de disputa. Reembolsos voltam ao endereço de origem, descontada a taxa de rede.</li>
+              <li>O acesso a um conteúdo é pessoal e intransferível, com marca d’água por conta. Revender ou publicar conteúdo comprado viola os termos e identifica a conta, não a pessoa.</li>
+              <li>Mensagens só dentro da plataforma, com filtro de contatos externos; expiram 90 dias após o encerramento do item. A curadoria pode ler conversas em disputas ou denúncias, com registro.</li>
+              <li>Pagamentos só em cripto. Transações em blockchain são irreversíveis; conferir endereço e rede é responsabilidade de quem envia.</li>
+              <li>Itens de Cópias, Lacre coletivo e Camadas podem ter um valor de exclusividade. Quem pagar encerra o anúncio e leva o item só para si; apoios de lacre coletivo são devolvidos e compradores anteriores de cópias e camadas mantêm o acesso.</li>
+              <li>Lei aplicável: a da jurisdição da sede (a definir) para a plataforma; para o conteúdo de cada item, também as leis do país de origem da informação. Interface e políticas em português, inglês e espanhol; em caso de conflito entre versões, prevalece a da sede.</li>
+              <li>Maiores de 18 anos. Podemos suspender contas e itens por violação, com registro em auditoria. Exclusão de conta exige nenhum item com carteira em curso; o histórico de pagamentos é mantido.</li>
+            </ul>
+          </section>
+
+          <!-- Versões -->
+          <section class="pol-section" id="versoes">
+            <h2>Versões da política</h2>
+            <p>Cada prova pública registra a versão aplicada ao item. Mudanças valem para itens enviados a partir da data; itens já publicados seguem a versão da própria prova, salvo reanálise.</p>
+            <div class="table-wrap">
+              <table class="table compact">
+                <thead><tr><th>Versão</th><th>Em vigor desde</th><th>O que mudou</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="badge badge-brass">v1.2</span></td><td class="num">01/10/2026</td><td>Comissão única de 10 % em todos os modelos, paga pelo vendedor. Uma carteira cripto por item: pagamentos da carteira do comprador para a carteira do item (USDT, USDC; Bitcoin em Exclusivo e Cópias), preços em US$, carteira entregue ao vendedor na finalização; texto de anonimato e jurisdição revisado. País e idioma por item; compra com exclusividade em Cópias, Lacre coletivo e Camadas. Regra de dois olhos estendida a Saúde.</td></tr>
+                  <tr><td><span class="badge badge-outline">v1.1</span></td><td class="num">15/07/2026</td><td>Pedidos de titulares (LGPD) com prazo de 15 dias. Denúncia pública sem login. Suspensão preventiva durante reanálise. Códigos de rejeição R01–R13 publicados.</td></tr>
+                  <tr><td><span class="badge badge-outline">v1.0</span></td><td class="num">10/03/2026</td><td>Lançamento: política de conteúdo (pode/não pode), checklist em 7 blocos, quatro níveis de autenticidade, janela de disputa de 72 h, registros de acesso em sistema separado.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small muted mt-2">Dúvidas sobre esta página: use “Denunciar” na prova de um item ou a seção de contato jurídico acima. Não temos e-mail de suporte porque não temos e-mail de ninguém.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

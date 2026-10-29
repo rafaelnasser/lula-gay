@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Reputação · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr); gap: 16px; align-items: stretch; }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+    .stat.hero { justify-content: center; }
+    .stat.hero .stars { display: flex; gap: 2px; }
+    .stat.hero .stars svg { width: 18px; height: 18px; color: var(--brass); fill: var(--brass); }
+    .stat.hero .stars svg:last-child { fill: none; opacity: .55; }
+    .hero-grid .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .table th .handle { text-transform: none; letter-spacing: 0; }
+    .hbar { grid-template-columns: minmax(120px, 200px) 1fr max-content; }
+    .hbar .fill.ok { background: var(--ok); } .hbar .fill.info { background: var(--info); } .hbar .fill.brass { background: var(--brass); }
+    .choice.locked { opacity: .72; cursor: default; } .choice.locked .choice-title svg { color: var(--muted); }
+    .choice.earned { cursor: default; }
+    .delta-badge { font-family: var(--font-mono); font-size: var(--fs-xs); }
+    .tip { display: flex; gap: 10px; align-items: flex-start; font-size: var(--fs-sm); padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .tip:last-child { border-bottom: 0; }
+    .tip .n { width: 24px; height: 24px; border-radius: 50%; background: var(--brass-soft); color: var(--brass); font-weight: 700; font-size: var(--fs-xs); display: inline-flex; align-items: center; justify-content: center; flex: none; font-family: var(--font-display); }
+  </style>
+</head>
+<body data-shell="seller" data-page="reputacao" data-root="../" data-title="Reputação">
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Conta · vendedor</p>
+      <h1>Reputação</h1>
+      <p class="sub">A confiança aqui vem só do histórico do pseudônimo: itens aprovados, nível de autenticidade, disputas e tempo de resposta.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="../public/como-funciona.html#reputacao"><i data-icon="book-open"></i>Como é calculada</a>
+      <a class="btn btn-ghost" href="../seller/anuncios.html"><i data-icon="archive"></i>Meus anúncios</a>
+    </div>
+  </div>
+
+  <div class="hero-grid mb-2">
+    <div class="stat hero">
+      <span class="label">Nota geral</span>
+      <span class="value">4,8<small class="muted" style="font-size: var(--fs-md); font-family: var(--font-body); font-weight: 500"> / 5</small></span>
+      <span class="stars"><i data-icon="star"></i><i data-icon="star"></i><i data-icon="star"></i><i data-icon="star"></i><i data-icon="star"></i></span>
+      <span class="delta up"><i data-icon="trending-up"></i>+0,02 em 26/10 · lcr-4g7h9 aprovado</span>
+      <span class="handle mt-1" data-handle="coruja-7f3a" data-rep="desde mar/2026 · 3 itens aprovados"></span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><span class="label">Aprovações</span><span class="value">3 de 5</span><span class="delta flat">envios decididos · 1 rejeitado (R01) · 1 com ajustes</span></div>
+      <div class="stat"><span class="label">Autenticidade média</span><span class="value">3,7 / 4</span><span class="delta up"><i data-icon="badge-check"></i>Verificado 2× · Parcial 1×</span></div>
+      <div class="stat"><span class="label">Disputas perdidas</span><span class="value">0</span><span class="delta up"><i data-icon="gavel"></i>2 abertas · 2 mantidas a seu favor</span></div>
+      <div class="stat"><span class="label">Resposta mediana</span><span class="value">6 h</span><span class="delta up"><i data-icon="zap"></i>meta: até 12 h · 90 dias</span></div>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="stack">
+      <div class="card">
+        <div class="card-head"><h3>Componentes da nota</h3><span class="badge badge-outline">últimos 12 meses</span></div>
+        <div class="card-body stack-sm">
+          <div class="hbar">
+            <span>Aprovações (3 de 5 envios)</span>
+            <div class="track"><div class="fill info" style="width:60%"></div></div>
+            <span class="num">60 %</span>
+          </div>
+          <div class="hbar">
+            <span>Autenticidade média</span>
+            <div class="track"><div class="fill ok" style="width:92%"></div></div>
+            <span class="num">92 %</span>
+          </div>
+          <div class="hbar">
+            <span>Disputas a seu favor (2 de 2)</span>
+            <div class="track"><div class="fill ok" style="width:100%"></div></div>
+            <span class="num">100 %</span>
+          </div>
+          <div class="hbar">
+            <span>Respostas em até 12 h</span>
+            <div class="track"><div class="fill brass" style="width:90%"></div></div>
+            <span class="num">90 %</span>
+          </div>
+          <div class="hbar">
+            <span>Entrega conforme a prévia</span>
+            <div class="track"><div class="fill ok" style="width:100%"></div></div>
+            <span class="num">100 %</span>
+          </div>
+          <div class="panel mt-1 small">
+            <b>Como a nota é calculada.</b> Toda conta começa em 5,0. Rejeição por legalidade (R01 a R08) tira 0,3; por qualidade ou prévia (R09 a R12) tira 0,1; cada disputa perdida tira 0,2; mediana de resposta acima de 24 h tira 0,1 por mês. Item aprovado como <b>Verificado</b> devolve 0,05 e como <b>Verificado parcialmente</b>, 0,02 (até 0,3 no total). Penalidades de rejeição expiram em 12 meses. Sua conta: 5,0 − 0,3 + 0,05 + 0,05 + 0,02 = <b>4,82</b>.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Histórico</h3><span class="badge badge-outline">8 eventos</span></div>
+        <div class="card-body">
+          <div class="timeline">
+            <div class="tl-item ok"><div class="when">26/10/2026 · 09:42</div><div class="what">lcr-4g7h9 aprovado e publicado · carteira do item criada · Verificado parcialmente <span class="delta-badge ok">+0,02 → 4,82</span></div></div>
+            <div class="tl-item danger"><div class="when">05/10/2026 · 15:20</div><div class="what">lcr-9r3t1 rejeitado · R01 dados pessoais de terceiros (CPFs de sócios) <span class="delta-badge danger">−0,30 → 4,80</span><div class="xs muted">expira em 05/10/2027</div></div></div>
+            <div class="tl-item ok"><div class="when">05/10/2026</div><div class="what">lcr-5m8c4 finalizado · 88 vendas · 0 disputas procedentes · carteira do item entregue (frase recebida, chave destruída)</div></div>
+            <div class="tl-item ok"><div class="when">22/09/2026 · 11:48</div><div class="what">Disputa DSP-0171 (lcr-5m8c4, motivo "duplicado") mantida a seu favor · Ana R. <span class="delta-badge muted">0,00</span></div></div>
+            <div class="tl-item brass"><div class="when">18/08/2026</div><div class="what">Selo "Resposta rápida" conquistado · mediana de 6 h em 90 dias</div></div>
+            <div class="tl-item ok"><div class="when">14/07/2026 · 16:10</div><div class="what">lcr-1x4d7 aprovado · Verificado (Levantamento de 180 ciclovias de São Paulo) <span class="delta-badge ok">+0,05 → 5,10 → teto 5,0</span></div></div>
+            <div class="tl-item ok"><div class="when">02/06/2026 · 10:05</div><div class="what">lcr-5m8c4 aprovado · Verificado (Guia de acesso a dados do SUS) <span class="delta-badge ok">+0,05 → 5,0</span></div></div>
+            <div class="tl-item"><div class="when">15/03/2026</div><div class="what">Conta criada · nota inicial 5,0</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Selos</h3><span class="badge badge-brass">2 de 6</span></div>
+        <div class="card-body">
+          <div class="choice-cards">
+            <div class="choice selected earned">
+              <span class="choice-title"><i data-icon="zap"></i>Resposta rápida</span>
+              <span class="choice-desc">Mediana de resposta abaixo de 12 h por 90 dias.</span>
+              <span class="choice-meta"><i data-icon="check" class="ico ok"></i> conquistado em 18/08/2026</span>
+            </div>
+            <div class="choice selected earned">
+              <span class="choice-title"><i data-icon="badge-check"></i>Primeiro Verificado</span>
+              <span class="choice-desc">Um item aprovado com nível Verificado.</span>
+              <span class="choice-meta"><i data-icon="check" class="ico ok"></i> conquistado em 02/06/2026</span>
+            </div>
+            <div class="choice locked">
+              <span class="choice-title"><i data-icon="badge-check"></i>Verificado 10×</span>
+              <span class="choice-desc">10 itens aprovados com nível Verificado. Você tem 2.</span>
+              <div class="progress thin"><div class="progress-bar" data-width="20%"></div></div>
+              <span class="choice-meta">2 de 10</span>
+            </div>
+            <div class="choice locked">
+              <span class="choice-title"><i data-icon="unlock"></i>Rompeu lacres</span>
+              <span class="choice-desc">Um lacre coletivo seu bateu a meta. lcr-8k1n2 ainda está em rascunho.</span>
+              <div class="progress thin"><div class="progress-bar wax" data-width="0%"></div></div>
+              <span class="choice-meta">0 de 1</span>
+            </div>
+            <div class="choice locked">
+              <span class="choice-title"><i data-icon="repeat"></i>Fonte recorrente</span>
+              <span class="choice-desc">Assinatura com 6 edições aprovadas no prazo.</span>
+              <div class="progress thin"><div class="progress-bar" data-width="0%"></div></div>
+              <span class="choice-meta">0 de 6</span>
+            </div>
+            <div class="choice locked">
+              <span class="choice-title"><i data-icon="users"></i>100 compradores</span>
+              <span class="choice-desc">Cem contas diferentes com acesso a itens seus.</span>
+              <div class="progress thin"><div class="progress-bar" data-width="88%"></div></div>
+              <span class="choice-meta">88 de 100</span>
+            </div>
+          </div>
+          <p class="xs muted mt-2">Selos aparecem ao lado do pseudônimo no catálogo, na página do item e na prova pública.</p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="stack">
+      <div class="alert alert-anon"><i data-icon="fingerprint"></i><div><span class="alert-title">A reputação é do pseudônimo</span>Ela pertence a <b>@coruja-7f3a</b>. Não é transferível, não pode ser vendida nem migrada para outra conta, e um pseudônimo novo começa do zero. É o único histórico que existe sobre você aqui; por isso ele vale.</div></div>
+
+      <div class="card">
+        <div class="card-head"><h3>Como melhorar</h3></div>
+        <div class="card-body">
+          <div class="tip"><span class="n">1</span><div>Responda aos ajustes de <b>lcr-2z5q7</b> (prévia com coordenadas exatas). Ajustes resolvidos em até 72 h mantêm a mediana de resposta. <a class="link" href="../seller/anuncio.html">Responder</a></div></div>
+          <div class="tip"><span class="n">2</span><div>Antes de reenviar bases com empresas, remova colunas de pessoas físicas (CPF, sócios). A rejeição R01 pesa −0,3 até 05/10/2027.</div></div>
+          <div class="tip"><span class="n">3</span><div>Anexe fonte oficial ou a procedência documentada do material no passo 3 do envio para subir de Parcial a Verificado: +0,05 por item e progresso no selo Verificado 10×.</div></div>
+          <div class="tip"><span class="n">4</span><div>Publique o lacre coletivo <b>lcr-8k1n2</b> (entrevistas com ex-cobradores): lacres rompidos dão selo e os marcos nas redes trazem compradores. <a class="link" href="../seller/novo-anuncio.html">Continuar rascunho</a></div></div>
+          <div class="tip"><span class="n">5</span><div>Mantenha a resposta em até 12 h também nas perguntas públicas do item; elas contam na mediana.</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Comparativo</h3><span class="badge badge-outline">vendedor de alta reputação</span></div>
+        <div class="table-wrap" style="border:0;border-radius:0">
+          <table class="table compact">
+            <thead><tr><th></th><th>Você</th><th><span class="handle" data-handle="sextante-21c9"></span></th></tr></thead>
+            <tbody>
+              <tr><td>Nota</td><td class="num"><b>4,8</b></td><td class="num"><b>4,9</b></td></tr>
+              <tr><td>Itens aprovados</td><td class="num">3</td><td class="num">12</td></tr>
+              <tr><td>Rejeições (12 meses)</td><td class="num">1</td><td class="num">0</td></tr>
+              <tr><td>Verificado</td><td class="num">2</td><td class="num">9</td></tr>
+              <tr><td>Disputas perdidas</td><td class="num">0 de 2</td><td class="num">0 de 5</td></tr>
+              <tr><td>Resposta mediana</td><td class="num">6 h</td><td class="num">3 h</td></tr>
+              <tr><td>Lacres rompidos</td><td class="num">0</td><td class="num">4</td></tr>
+              <tr><td>Selos</td><td class="num">2</td><td class="num">5</td></tr>
+              <tr><td>Desde</td><td class="num">mar/2026</td><td class="num">set/2025</td></tr>
+            </tbody>
+          </table>
+          <div class="table-foot"><span>Comparativo com dados públicos do pseudônimo. Nenhum dado pessoal existe de nenhum dos dois.</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

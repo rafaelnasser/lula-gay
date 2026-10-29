@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pedido ped-2c8d1 · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
+    [id] { scroll-margin-top: 84px; }
+    .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
+    .criteria { counter-reset: c; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .criteria li { counter-increment: c; display: grid; grid-template-columns: 30px 1fr; gap: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); font-size: var(--fs-sm); align-items: start; }
+    .criteria li::before { content: counter(c); width: 26px; height: 26px; border-radius: 50%; background: var(--brass-soft); color: var(--brass); font-weight: 700; font-family: var(--font-display); display: inline-flex; align-items: center; justify-content: center; font-size: var(--fs-xs); }
+    .criteria li b { display: block; }
+    .criteria li span { color: var(--fg-2); }
+    .rules { counter-reset: r; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    @media (max-width: 700px) { .rules { grid-template-columns: 1fr; } }
+    .rules li { counter-increment: r; display: grid; grid-template-columns: 26px 1fr; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); font-size: var(--fs-sm); align-items: start; }
+    .rules li::before { content: counter(r); width: 22px; height: 22px; border-radius: 50%; background: var(--wax-soft); color: var(--wax-2); font-weight: 700; font-family: var(--font-display); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
+    .rules li b { display: block; }
+    .rules li span { color: var(--fg-2); }
+    .who { display: flex; flex-direction: column; }
+    .who .w { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 0; border-top: 1px solid var(--border); font-size: var(--fs-sm); }
+    .who .w:first-child { border-top: 0; padding-top: 0; }
+    .who .w .meta { color: var(--muted); font-size: var(--fs-xs); }
+    .qa { display: flex; flex-direction: column; gap: 12px; }
+    .qa .q { padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); display: flex; flex-direction: column; gap: 10px; font-size: var(--fs-sm); }
+    .qa .a { padding-left: 14px; border-left: 2px solid var(--brass); color: var(--fg-2); }
+    .qa .meta { color: var(--muted); font-size: var(--fs-xs); }
+    .side .card-body { padding: 18px; }
+    .side-foot { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
+    .side .btn-block { white-space: normal; text-align: center; }
+    .math { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface-2); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+    .math b { font-family: var(--font-display); font-size: var(--fs-md); }
+    .math .op { color: var(--muted); }
+    .dev-note { font-size: var(--fs-xs); color: var(--muted); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .extra { padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); display: flex; flex-direction: column; gap: 10px; }
+    .extra.proposal { border-style: dashed; background: var(--surface-2); }
+    .extra-title { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-md); line-height: 1.3; }
+    .crit { margin: 0; padding-left: 18px; font-size: var(--fs-sm); color: var(--fg-2); }
+    .crit li + li { margin-top: 3px; }
+    .timeline .what .handle { vertical-align: middle; }
+    @media (max-width: 900px) { .split .sticky { position: static; } }
+  </style>
+</head>
+<body data-shell="public" data-page="pedidos" data-root="../">
+<main>
+  <section class="section tight">
+    <div class="container">
+      <div class="crumbs mb-2"><a href="pedidos.html">Pedidos com recompensa</a><i data-icon="chevron-right"></i><a href="pedidos.html" id="crumb-cat">Saúde e meio ambiente</a><i data-icon="chevron-right"></i><span class="mono" id="crumb-id">ped-2c8d1</span></div>
+      <div class="stack-sm" id="ped-head" style="margin-bottom:24px">
+        <p class="eyebrow" id="ped-eyebrow">Pedido com recompensa · Saúde e meio ambiente · Brasil · português · aberto em 12/10/2026</p>
+        <h1 class="mt-1" id="ped-title">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</h1>
+        <div class="row mt-2" id="ped-chips"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span><span class="badge st-ativo">Aberto</span><span class="badge badge-outline"><i data-icon="users"></i>Mesmo valor para todos os participantes</span><span class="badge badge-outline"><i data-icon="database"></i>Dataset · CSV</span><span class="badge badge-outline"><i data-icon="globe"></i>Brasil · português</span></div>
+        <div class="row mt-2" id="ped-by"><span class="small muted">Aberto por</span><span class="handle" data-handle="coruja-7f3a" data-rep="4,8 · 3 itens aprovados"></span><span class="small muted">· aprovado pela curadoria em 12/10 (Bruno M.) · carteira do pedido criada no mesmo dia</span></div>
+      </div>
+      <div class="split side-first">
+        <!-- Coluna principal -->
+        <div class="stack-lg">
+          <!-- Como funciona (recolhido; o clique abre) -->
+          <div class="card collapsible" id="como-funciona">
+            <button class="card-head" type="button" data-toggle-class="open" data-target="#como-funciona" aria-expanded="false" aria-controls="como-funciona-body"><i data-icon="scale"></i><span class="h3">Como funciona este pedido</span><span class="actions"><span class="badge badge-outline" id="rules-badge">sinal de 25 % · prévia antes do resto</span><span class="chev"><i data-icon="chevron-down"></i></span></span></button>
+            <div class="card-body stack-sm" id="como-funciona-body">
+              <ol class="rules" id="rules-list">
+                <li><div><b>Abrir com sinal</b><span>Quem abre define o valor por pessoa, o prazo (até 90 dias), o que quer e os critérios de aceite, e paga na carteira do pedido um sinal de 25 % desse valor. A carteira é criada quando a curadoria aprova o pedido.</span></div></li>
+                <li><div><b>Entrar</b><span>Quem quer a mesma informação entra pelo mesmo valor: paga agora <span data-f="sinal">US$ 200</span> (sinal de 25 %) e espera. O resto, <span data-f="resto">US$ 600</span>, só depois da prévia. Recompensa total = valor por pessoa × pessoas, e todos recebem o mesmo acesso.</span></div></li>
+                <li><div><b>Subir o valor</b><span>Qualquer conta pode aceitar pagar mais, no mínimo 10 % acima (hoje: mín. <span data-f="minSubir">US$ 880</span>, sinal de <span data-f="sinalSubir">US$ 220</span>). Quem sobe paga 25 % do novo valor, que passa a valer para todos.</span></div></li>
+                <li><div><b>Completar o sinal</b><span>Quando o valor sobe, cada participante é avisado para completar o sinal até os novos 25 % (paga 25 % da diferença) em até 48 h, nunca além do prazo do pedido. Quem não completa deixa de participar, e o sinal que já pagou fica com o Lacre como taxa de desistência.</span></div></li>
+                <li><div><b>Sem volta</b><span>O sinal de quem desiste fica com o Lacre como taxa de serviço e nunca vai para quem atende. Assim ninguém consegue subir o valor a níveis absurdos e atender o próprio pedido para ficar com o sinal dos outros. Os sinais só voltam se o prazo acabar sem nenhum vendedor.</span></div></li>
+                <li><div><b>Mesmo valor, sempre</b><span>A qualquer momento, todos os participantes ativos entraram pelo mesmo valor. Se alguém sobe o valor e ninguém completa, fica sozinho: compra com exclusividade de fato.</span></div></li>
+                <li><div><b>Atender e prévia</b><span>Um vendedor envia o material; o pedido trava (sem entradas nem subidas de valor) e a curadoria confere os critérios e a lei. Aprovado, cada participante recebe uma prévia (amostra, páginas com tarja, miniaturas com marca d’água) e tem 72 h para pagar os 75 % restantes (hoje <span data-f="resto">US$ 600</span>) e receber tudo no cofre. Quem não paga deixa de participar, e o sinal fica com o Lacre como taxa de desistência. Quem participa do pedido não pode atendê-lo; quem já deixou de participar pode.</span></div></li>
+                <li><div><b>Contestar</b><span>Se a prévia não corresponde ao que foi pedido, conteste em 72 h com o motivo; a curadoria decide em até 48 h. Se não corresponde, o atendimento cai e o pedido continua aberto, sem perda de sinal.</span></div></li>
+                <li><div><b>Expirar</b><span>Sem nenhum vendedor até <span data-f="prazo">30/11/2026</span>, os sinais voltam a quem ainda participa, ao endereço de origem, menos a taxa de rede.</span></div></li>
+                <li><div><b>Extras (bônus opcionais)</b><span>Qualquer participante pode criar um sub-item para algo próximo do pedido, com valor por pessoa (mín. US$ 10), prazo (nunca além do principal) e carteira próprios; paga o sinal de 25 % ao criar e a curadoria aprova antes de aparecer. Só participantes do principal entram, pelas mesmas regras (sinal de 25 %, subir o valor no mínimo 10 % acima, 48 h para completar o sinal, prévia antes do resto). Não entrar no extra não muda nada no principal; quem deixa o principal deixa também os extras. Vendedores podem propor um extra, que só nasce quando um participante o cria. Até 5 abertos por pedido.</span></div></li>
+              </ol>
+              <p class="xs muted" id="rules-note">Por que o sinal: evita pedidos falsos e garante a quem atende que existe dinheiro de verdade. Janela de 48 h, aumento mínimo do valor e sinal de 25 % são parâmetros da plataforma. Pague sempre de uma carteira que você controla, nunca direto de uma corretora: reembolsos voltam ao endereço de origem.</p>
+            </div>
+          </div>
+
+          <div class="prose" id="descricao">
+            <h2 style="margin-top:0">O que estamos procurando</h2>
+            <p>A série mensal de tempo médio de espera (da triagem ao atendimento médico) nas UPAs municipais de São Paulo, de janeiro de 2023 a dezembro de 2025, por unidade. A Secretaria Municipal de Saúde publica só médias anuais agregadas. Os dados por unidade existem no sistema de regulação e já foram fornecidos parcialmente por LAI em 2024, para seis unidades.</p>
+            <p>Queremos a série completa, consolidada e com a origem documentada, para cruzar com os dados de lotação por unidade. Não procuramos opiniões nem reportagens: procuramos o dado bruto, limpo e rastreável. As quatro pessoas entraram pelo mesmo valor, cada uma com sinal de 25 %, e recebem o mesmo acesso.</p>
+          </div>
+
+          <!-- Participantes -->
+          <div class="card" id="participantes">
+            <div class="card-head"><i data-icon="users"></i><h3>Quem está no pedido</h3><div class="actions"><span class="badge badge-outline" id="who-badge">4 × US$ 800 = US$ 3.200 · sinais US$ 800</span></div></div>
+            <div class="card-body">
+              <div class="who" id="who-list">
+                <div class="w"><span class="handle" data-handle="coruja-7f3a"></span><span class="meta">abriu em 12/10 (sinal US$ 125) · completou o sinal em 20/10 (+US$ 75)</span></div>
+                <div class="w"><span class="handle" data-handle="farol-3e9b"></span><span class="meta">entrou em 14/10 (sinal US$ 125) · completou o sinal em 19/10 (+US$ 75)</span></div>
+                <div class="w"><span class="handle" data-handle="quartzo-a1f0"></span><span class="meta">subiu o valor para US$ 800 em 18/10 (sinal US$ 200)</span></div>
+                <div class="w"><span class="handle" data-handle="relogio-2b7c"></span><span class="meta">entrou em 24/10 (sinal US$ 200)</span></div>
+              </div>
+              <p class="xs muted mt-2" id="who-note">Quem participa é público: pseudônimo e data de entrada. Como todos entram pelo mesmo valor, a página mostra só o valor atual, o número de pessoas e o total. Cada pessoa já pagou US$ 200 de sinal; faltam US$ 600 por pessoa, pagos só depois da prévia de um atendimento aprovado. Ninguém deixou o pedido até agora.</p>
+            </div>
+          </div>
+
+          <!-- Extras -->
+          <div class="card" id="extras">
+            <div class="card-head"><i data-icon="plus"></i><h3>Extras deste pedido</h3><div class="actions"><span class="badge badge-outline" id="extras-badge">1 aberto · 1 proposta · até 5 abertos</span><button class="btn btn-sm btn-primary" data-modal-open="m-extra"><i data-icon="plus"></i>Adicionar um extra</button></div></div>
+            <div class="card-body stack" id="extras-body">
+              <p class="small muted">Um extra é um bônus opcional dentro do pedido: um sub-item para algo próximo ou complementar ao que foi pedido, com valor por pessoa, prazo e carteira próprios, e o mesmo sinal de 25 %. Só participantes do pedido principal podem criar ou entrar. <b>Não entrar no extra não muda sua participação no pedido principal.</b></p>
+              <div class="extra">
+                <div class="row between"><div class="row"><span class="tag">ext-2c8d1-a</span><span class="badge st-ativo">Aberto</span><span class="badge badge-outline"><i data-icon="database"></i>Dataset · CSV</span></div><span class="xs muted">prazo 30/11/2026 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></span></div>
+                <b class="extra-title">Reclamações registradas na ouvidoria por UPA (2023–2025), por mês</b>
+                <p class="xs muted">proposto por <span class="handle" data-handle="lanterna-b31d"></span> em 21/10 (“tenho a base da ouvidoria, não os tempos de espera”) · criado por <span class="handle" data-handle="quartzo-a1f0"></span> em 22/10 · aprovado pela curadoria em 22/10 (Bruno M.)</p>
+                <ul class="crit"><li>Uma linha por unidade e mês</li><li>Número de reclamações e tema principal</li><li>CSV com dicionário de dados</li></ul>
+                <dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 150</dd></div><div><dt>Pessoas</dt><dd>2</dd></div><div><dt>Total</dt><dd>US$ 300</dd></div><div><dt>Sinais</dt><dd>US$ 75</dd></div><div><dt>Carteira do extra</dt><dd><span class="mono">0x2c8e…7b40</span> · Polygon · USDT · 2 pagamentos · <a class="link" href="#" data-toast="Abriria o explorador da rede (polygonscan)">conferir</a></dd></div></dl>
+                <div class="who">
+                  <div class="w"><span class="handle" data-handle="quartzo-a1f0"></span><span class="meta">criou e entrou em 22/10</span></div>
+                  <div class="w"><span class="handle" data-handle="relogio-2b7c"></span><span class="meta">entrou em 25/10</span></div>
+                </div>
+                <div class="alert alert-info"><i data-icon="info"></i><div>Visão de <span class="handle" data-handle="coruja-7f3a"></span>: você está no pedido principal (completou o sinal em 20/10) e não entrou neste extra. <span class="handle" data-handle="farol-3e9b"></span> também não entrou. Os dois continuam no pedido principal normalmente.</div></div>
+                <div class="row"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar no extra por US$ 150, sinal de US$ 37,50 agora</a><a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="trending-up"></i>Subir o valor (mín. US$ 165, sinal de US$ 41,25)</a><span class="xs muted">só para quem está no pedido · faltam US$ 112,50 por pessoa depois da prévia · ao subir o valor, as 2 pessoas do extra têm 48 h para completar o sinal</span></div>
+              </div>
+              <div>
+                <span class="label">Propostas de vendedores</span>
+                <div class="extra proposal mt-1">
+                  <div class="row between"><div class="row"><span class="badge st-aguardando">Proposta de extra</span><span class="xs muted">aguardando um participante criar o extra</span></div><span class="xs muted">26/10</span></div>
+                  <b class="extra-title">Tempo de espera nas UBS da capital nos mesmos meses</b>
+                  <p class="xs muted">proposta de <span class="handle" data-handle="prisma-66af"></span> · valor sugerido US$ 200 por pessoa · fica pública aqui com o pseudônimo; quem propôs não tem exclusividade para atender</p>
+                  <div class="row"><button class="btn btn-sm btn-primary" data-modal-open="m-extra"><i data-icon="plus"></i>Criar extra a partir desta proposta</button><span class="xs muted">só quem está no pedido · ao criar, você paga o sinal de 25 %</span></div>
+                </div>
+                <p class="xs muted mt-1">Vendedores com algo próximo do pedido podem <a class="link" href="../seller/pedidos.html">propor um extra</a>: título, descrição e valor sugerido. Um extra é atendido como um pedido, por qualquer vendedor e em outro momento que o principal; expirado, devolve cada pagamento ao endereço de origem.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="criterios">
+            <div class="card-head"><i data-icon="clipboard-check"></i><h3>Critérios de aceite</h3><div class="actions"><span class="badge badge-outline" id="crit-badge">6 critérios · todos obrigatórios</span></div></div>
+            <div class="card-body">
+              <ol class="criteria" id="crit-list">
+                <li><div><b>Cobertura</b><span>Todas as UPAs municipais ativas em cada mês (pelo menos 28 unidades), de jan/2023 a dez/2025, sem lacunas superiores a um mês por unidade.</span></div></li>
+                <li><div><b>Granularidade</b><span>Uma linha por unidade e mês, com tempo médio e mediano de espera em minutos e volume de atendimentos no mês.</span></div></li>
+                <li><div><b>Origem documentada</b><span>Documento oficial anexado ao pacote: resposta de LAI com número de protocolo, planilha publicada pela SMS ou extração do sistema com data.</span></div></li>
+                <li><div><b>Formato</b><span>CSV UTF-8, separador vírgula, cabeçalho em snake_case, mais um dicionário de dados em Markdown descrevendo cada coluna.</span></div></li>
+                <li><div><b>Sem dados pessoais</b><span>Nenhuma informação de paciente ou de servidor identificável. Isso é também regra da curadoria (bloco 1); não passa sem isso.</span></div></li>
+                <li><div><b>Consistência</b><span>Totais mensais compatíveis com os relatórios anuais publicados pela SMS, com tolerância de 2 %.</span></div></li>
+              </ol>
+              <p class="xs muted mt-2">A curadoria confere cada critério no atendimento. Se faltar um, o vendedor recebe a lista do que ajustar e tem 7 dias para reenviar.</p>
+            </div>
+          </div>
+
+          <div class="grid cols-2">
+            <div class="card">
+              <div class="card-head"><i data-icon="database"></i><h3>Formato esperado</h3></div>
+              <div class="card-body"><dl class="kv" id="formato-kv">
+                <dt>Tipo</dt><dd>Dataset</dd>
+                <dt>Arquivos</dt><dd>1 CSV, 1 dicionário (MD), anexos de origem (PDF)</dd>
+                <dt>Tamanho estimado</dt><dd>Menos de 5 MB</dd>
+                <dt>Colunas mínimas</dt><dd class="mono xs">unidade, mes, espera_media_min, espera_mediana_min, atendimentos, fonte</dd>
+                <dt>Acesso</dt><dd>Cada participante recebe acesso completo no cofre, com download</dd>
+              </dl></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><i data-icon="calendar"></i><h3>Prazo e acesso</h3></div>
+              <div class="card-body"><dl class="kv" id="prazo-kv">
+                <dt>Prazo</dt><dd>30/11/2026 · 23:59 BRT · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></dd>
+                <dt>Se atendido</dt><dd>Cada pessoa recebe uma prévia e tem 72 h para pagar os US$ 600 restantes e receber tudo no cofre; quem não paga deixa de participar e o sinal fica com o Lacre</dd>
+                <dt>Durante a curadoria</dt><dd>Pedido travado: sem entradas nem subidas de valor até a decisão</dd>
+                <dt>Se expirar</dt><dd>Sem nenhum vendedor, os sinais voltam a quem ainda participa (US$ 200 por pessoa), menos a taxa de rede</dd>
+              </dl></div>
+            </div>
+          </div>
+
+          <!-- Histórico -->
+          <div class="card" id="historico">
+            <div class="card-head"><i data-icon="clock"></i><h3>Histórico do pedido</h3><div class="actions"><span class="badge badge-outline wrap" id="hist-badge">principal: 6 pagamentos de sinal · 0 desistências · 1 extra</span></div></div>
+            <div class="card-body">
+              <div class="timeline" id="hist-list">
+                <div class="tl-item ok"><div class="when">12/10/2026</div><div class="what"><span class="handle" data-handle="coruja-7f3a"></span> abriu o pedido · US$ 500 por pessoa · sinal de US$ 125 · aprovado pela curadoria (Bruno M.), carteira do pedido criada, pagamento confirmado (Polygon)</div></div>
+                <div class="tl-item ok"><div class="when">14/10</div><div class="what"><span class="handle" data-handle="farol-3e9b"></span> entrou · US$ 500 · sinal de US$ 125 · total US$ 1.000</div></div>
+                <div class="tl-item wax"><div class="when">18/10</div><div class="what"><span class="handle" data-handle="quartzo-a1f0"></span> subiu o valor · US$ 800 por pessoa · sinal de US$ 200 · prazo para completar o sinal até 20/10 às 14:00</div></div>
+                <div class="tl-item ok"><div class="when">19/10</div><div class="what"><span class="handle" data-handle="farol-3e9b"></span> completou o sinal (+US$ 75)</div></div>
+                <div class="tl-item ok"><div class="when">20/10</div><div class="what"><span class="handle" data-handle="coruja-7f3a"></span> completou o sinal (+US$ 75) · prazo encerrado sem desistências · 3 pessoas × US$ 800</div></div>
+                <div class="tl-item info"><div class="when">21/10</div><div class="what"><span class="handle" data-handle="lanterna-b31d"></span> propôs um extra: reclamações da ouvidoria por UPA · aguardando um participante criar</div></div>
+                <div class="tl-item ok"><div class="when">22/10</div><div class="what">Extra ext-2c8d1-a criado por <span class="handle" data-handle="quartzo-a1f0"></span> a partir da proposta · US$ 150 por pessoa · sinal de US$ 37,50 · aprovado pela curadoria (Bruno M.) · carteira do extra criada (0x2c8e…7b40)</div></div>
+                <div class="tl-item ok"><div class="when">24/10</div><div class="what"><span class="handle" data-handle="relogio-2b7c"></span> entrou · US$ 800 · sinal de US$ 200 · total US$ 3.200</div></div>
+                <div class="tl-item ok"><div class="when">25/10</div><div class="what"><span class="handle" data-handle="relogio-2b7c"></span> entrou no extra · US$ 150 · sinal de US$ 37,50 · extra com 2 pessoas (US$ 300)</div></div>
+                <div class="tl-item info"><div class="when">26/10</div><div class="what"><span class="handle" data-handle="prisma-66af"></span> propôs um extra: tempo de espera nas UBS · US$ 200 sugeridos · aguardando um participante criar</div></div>
+                <div class="tl-item brass"><div class="when">hoje · 27/10</div><div class="what">4 pessoas × US$ 800 = US$ 3.200 · sinais pagos US$ 800 · faltam US$ 600 por pessoa, pagos só depois da prévia · 1 extra aberto (2 × US$ 150) · nenhum atendimento em curadoria</div></div>
+                <div class="tl-item"><div class="when">até 30/11</div><div class="what">Atendimento aprovado (prévia, 72 h para pagar os 75 % restantes) ou fim do prazo sem vendedor, com os sinais de volta a quem ainda participa</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carteira do pedido -->
+          <div class="card" id="carteira">
+            <div class="card-head"><i data-icon="vault"></i><h3>Carteira do pedido</h3><div class="actions"><span class="badge badge-outline"><i data-icon="globe"></i>Transparência on-chain</span></div></div>
+            <div class="card-body stack-sm">
+              <div class="hash wrap"><code id="addr-ped">0x2c8d…91af</code><button class="btn btn-sm btn-ghost" data-copy="#addr-ped" aria-label="Copiar endereço da carteira do pedido"><i data-icon="copy"></i></button></div>
+              <dl class="kv-row" id="carteira-kv"><div><dt>Rede</dt><dd>Polygon</dd></div><div><dt>Moeda</dt><dd>USDT</dd></div><div><dt>Recebido</dt><dd>US$ 800 em sinais</dd></div><div><dt>Pagamentos</dt><dd>6</dd></div><div><dt>Criada em</dt><dd>12/10/2026</dd></div></dl>
+              <p class="small" id="carteira-text">Criada pela plataforma quando a curadoria aprovou o pedido. Cada sinal (entrada, subida de valor ou complemento) vai para um endereço derivado próprio, com valor exato. Qualquer pessoa pode conferir on-chain quanto entrou. Os 75 % restantes entram aqui depois da prévia de um atendimento aprovado; se o prazo acabar sem nenhum vendedor, os sinais voltam a quem ainda participa. Sinais de quem desiste vão para o Lacre como taxa de serviço.</p>
+              <div class="row"><a class="btn btn-sm" href="#" data-toast="Abriria o explorador da rede (polygonscan)"><i data-icon="external-link"></i>Conferir no explorador</a><a class="link small" href="como-funciona.html">Como o dinheiro funciona</a></div>
+            </div>
+          </div>
+
+          <div class="card" id="perguntas">
+            <div class="card-head"><i data-icon="message-square"></i><h3>Perguntas públicas a quem abriu o pedido</h3><div class="actions"><span class="badge badge-outline" id="qa-badge">2 respondidas</span></div></div>
+            <div class="card-body stack">
+              <div class="qa" id="qa-list">
+                <div class="q"><div class="row between"><span class="handle" data-handle="quartzo-a1f0"></span><span class="meta">20/10 · moderada por Bruno M.</span></div><div>Dados de 2022 contam para o critério de cobertura, se eu conseguir?</div><div class="a">Não contam para o critério, mas são bem-vindos como coluna extra no mesmo CSV. O que define o aceite é jan/2023 a dez/2025 completo.<div class="meta mt-1">Resposta de quem abriu o pedido · 20/10</div></div></div>
+                <div class="q"><div class="row between"><span class="handle" data-handle="lanterna-b31d"></span><span class="meta">23/10 · moderada por Ana R.</span></div><div>Aceita uma série que inclua também as UPAs de gestão estadual na capital?</div><div class="a">Aceito, desde que haja uma coluna indicando a gestão (municipal ou estadual) e as municipais estejam completas.<div class="meta mt-1">Resposta de quem abriu o pedido · 23/10</div></div></div>
+              </div>
+              <form class="stack-sm" data-submit-toast="Pergunta enviada para moderação. Aparece aqui quando a curadoria aprovar.">
+                <div class="field"><label for="pergunta">Faça uma pergunta pública</label><textarea id="pergunta" class="textarea" style="min-height:80px" placeholder="Perguntas passam por moderação antes de aparecer. Não inclua contatos ou dados pessoais."></textarea></div>
+                <div class="row end"><button class="btn" type="submit"><i data-icon="send"></i>Enviar pergunta</button></div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel lateral (3 estados) -->
+        <aside class="sticky">
+          <div class="card raised side" data-variants="aberto" id="painel">
+            <div data-variant="aberto">
+              <div class="card-body stack">
+                <div><span class="label">Valor por pessoa</span><div class="price price-xl wax mt-1">US$ 800</div><div class="row mt-1"><span class="badge badge-outline"><i data-icon="users"></i>4 pessoas</span><span class="badge badge-outline"><i data-icon="timer"></i>encerra em <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></span></div></div>
+                <div class="math"><span>4 pessoas</span><span class="op">×</span><span>US$ 800</span><span class="op">=</span><b>US$ 3.200</b></div>
+                <div><div class="row between small"><span>Sinais pagos: <b>US$ 800</b> de US$ 3.200</span><span class="muted">25 %</span></div><div class="progress thin mt-1"><div class="progress-bar wax" data-width="25%"></div></div></div>
+                <a class="btn btn-wax btn-lg btn-block" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 800, sinal de US$ 200 agora</a>
+                <a class="btn btn-block" href="../buyer/checkout.html"><i data-icon="trending-up"></i>Subir o valor (mín. US$ 880, sinal de US$ 220)</a>
+                <p class="xs muted">Paga agora US$ 200 (sinal de 25 %). O resto, US$ 600, só depois da prévia. O sinal não volta por desistência. Se você subir o valor, as 4 pessoas têm 48 h para completar o sinal; quem não completar deixa de participar.</p>
+                <div class="alert alert-wax"><i data-icon="unlock"></i><div>Todos entram pelo mesmo valor e recebem o mesmo acesso. O sinal só volta se ninguém atender até 30/11/2026.</div></div>
+                <hr style="margin:4px 0">
+                <div>
+                  <a class="btn btn-primary btn-block" href="../seller/novo-anuncio.html?atender=ped-2c8d1"><i data-icon="upload"></i>Atender este pedido</a>
+                  <p class="xs muted mt-1">Para vendedores. O atendimento passa pela curadoria como qualquer item; enquanto ela decide, o pedido fica travado. Aprovado, cada participante vê uma prévia e paga o restante. Quem participa do pedido não pode atendê-lo (<a class="link" href="vendedor.html">como os vendedores recebem</a>).</p>
+                </div>
+                <dl class="kv">
+                  <dt>Para entrar</dt><dd>US$ 200 agora (sinal de 25 %); US$ 600 depois da prévia</dd>
+                  <dt>Subir o valor</dt><dd>US$ 880 ou mais (+10 %), sinal de US$ 220</dd>
+                  <dt>Pagamento</dt><dd>Da sua carteira, em USDT ou USDC · Polygon, Tron ou Base</dd>
+                  <dt>Aberto por</dt><dd><span class="handle" data-handle="coruja-7f3a"></span></dd>
+                  <dt>Curadoria do pedido</dt><dd>Aprovado em 12/10 · Bruno M.</dd>
+                  <dt>Extras</dt><dd>1 aberto · US$ 150 por pessoa · <a class="link" href="#extras">ver</a></dd>
+                </dl>
+              </div>
+            </div>
+
+            <div data-variant="completar">
+              <div class="card-body stack">
+                <div class="dev-note"><span class="tag">exemplo</span>visão de <b>@coruja-7f3a</b> em 19/10, antes de completar o sinal</div>
+                <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Valor subiu: complete o sinal até 20/10 14:00</span><span class="handle" data-handle="quartzo-a1f0"></span> subiu o valor para US$ 800 por pessoa em 18/10. Seu sinal é de US$ 125 (25 % de US$ 500). Para continuar, complete até os novos 25 %: +US$ 75.</div></div>
+                <div class="math"><span>Seu sinal</span><b>US$ 125</b><span class="op">→</span><span>novo sinal</span><b>US$ 200</b></div>
+                <a class="btn btn-wax btn-lg btn-block" href="../buyer/checkout.html"><i data-icon="arrow-up-right"></i>Completar o sinal (+US$ 75)</a>
+                <p class="xs muted">Se não completar até 20/10 às 14:00, você deixa de participar e os US$ 125 ficam com o Lacre como taxa de desistência. O sinal não volta por desistência. O resto (US$ 600) só depois da prévia.</p>
+                <dl class="kv">
+                  <dt>Já em US$ 800</dt><dd><span class="handle" data-handle="quartzo-a1f0"></span> (subiu o valor) e <span class="handle" data-handle="farol-3e9b"></span> (completou em 19/10)</dd>
+                  <dt>Falta completar</dt><dd>Você</dd>
+                  <dt>Prazo do pedido</dt><dd>30/11/2026 · as 48 h nunca passam dele</dd>
+                </dl>
+              </div>
+            </div>
+
+            <div data-variant="travado">
+              <div class="card-body stack">
+                <div class="dev-note"><span class="tag">exemplo</span>estado do pedido com um atendimento em curadoria</div>
+                <div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">Pedido travado: atendimento em curadoria</span>Um vendedor enviou o conteúdo em 27/10. Até a decisão (48 h a partir do início da análise), não há entradas nem subidas de valor.</div></div>
+                <div><span class="label">Valor por pessoa</span><div class="price price-xl mt-1">US$ 800</div><div class="row mt-1"><span class="badge badge-outline"><i data-icon="users"></i>4 pessoas</span><span class="badge st-analise">travado desde 27/10</span></div></div>
+                <div class="math"><span>4 pessoas</span><span class="op">×</span><span>US$ 800</span><span class="op">=</span><b>US$ 3.200</b></div>
+                <div class="small">Sinais pagos: <b>US$ 800</b> de US$ 3.200</div>
+                <button class="btn btn-wax btn-lg btn-block" disabled><i data-icon="lock"></i>Entrar por US$ 800, sinal de US$ 200 agora</button>
+                <button class="btn btn-block" disabled><i data-icon="lock"></i>Subir o valor</button>
+                <dl class="kv">
+                  <dt>Se aprovado</dt><dd>Cada pessoa recebe uma prévia do atendimento e tem 72 h para pagar os 75 % restantes (US$ 600); pago, o material completo vai para o cofre na hora</dd>
+                  <dt>Se contestar</dt><dd>Com motivo, dentro das 72 h; a curadoria decide em até 48 h. Se a prévia não corresponde, o atendimento cai e o pedido continua aberto</dd>
+                  <dt>Sem pagamento</dt><dd>Em 72 h, a pessoa deixa de participar e o sinal (US$ 200) fica com o Lacre como taxa de desistência</dd>
+                  <dt>Se rejeitado</dt><dd>O pedido destrava e volta a aceitar entradas e subidas de valor</dd>
+                  <dt>Quem atende</dt><dd>Não mostramos até a decisão</dd>
+                  <dt>Extras</dt><dd>O extra ext-2c8d1-a continua aberto: o atendimento do principal não trava os extras</dd>
+                </dl>
+              </div>
+            </div>
+
+            <div class="side-foot">
+              <div class="anon-note"><i data-icon="shield"></i><span>Participação pública por pseudônimo (quem entrou e quando). Registramos valor, data e o endereço de origem do pagamento, este só para reembolsos. Quem atende nunca vê os participantes além do pseudônimo.</span></div>
+              <a class="btn btn-sm btn-ghost" href="prova.html#denunciar"><i data-icon="flag"></i>Denunciar este pedido</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight band">
+    <div class="container">
+      <div class="row between mb-2"><h2>Outros pedidos</h2><a class="btn btn-sm btn-ghost" href="pedidos.html">Ver o mural<i data-icon="arrow-right"></i></a></div>
+      <div class="grid cols-3" id="outros-grid">
+        <article class="card" data-href="pedido.html?p=ped-9h2d5"><div class="card-body stack-sm"><div class="row between"><span class="row" style="gap:8px"><span class="eyebrow">Governo e políticas públicas</span><span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div><b><a href="pedido.html?p=ped-9h2d5">Lista de todos os editais de fomento cultural municipais do RS em 2025</a></b><dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 300</dd></div><div><dt>Pessoas</dt><dd>7</dd></div><div><dt>Total</dt><dd>US$ 2.100</dd></div><div><dt>Prazo</dt><dd>10/12</dd></div></dl></div><div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 300, sinal de US$ 75 agora</a><a class="btn btn-sm btn-primary" href="../seller/novo-anuncio.html?atender=ped-9h2d5"><i data-icon="upload"></i>Atender este pedido</a></div></article>
+        <article class="card" data-href="pedido.html?p=ped-4k9e2"><div class="card-body stack-sm"><div class="row between"><span class="row" style="gap:8px"><span class="eyebrow">Negócios e mercado</span><span class="tag">BR</span></span><span class="badge st-analise">Travado</span></div><b><a href="pedido.html?p=ped-4k9e2">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</a></b><dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 290</dd></div><div><dt>Pessoas</dt><dd>5</dd></div><div><dt>Total</dt><dd>US$ 1.450</dd></div><div><dt>Prazo</dt><dd>20/11</dd></div></dl></div><div class="card-foot"><button class="btn btn-sm btn-wax" disabled><i data-icon="lock"></i>Entrar por US$ 290 · travado</button></div></article>
+        <article class="card" data-href="pedido.html?p=ped-5r2k8"><div class="card-body stack-sm"><div class="row between"><span class="row" style="gap:8px"><span class="eyebrow">Governo e políticas públicas</span><span class="tag">CL</span></span><span class="badge st-ativo">Aberto</span></div><b><a href="pedido.html?p=ped-5r2k8">Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos</a></b><dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 300</dd></div><div><dt>Pessoas</dt><dd>3</dd></div><div><dt>Total</dt><dd>US$ 900</dd></div><div><dt>Prazo</dt><dd>20/12</dd></div></dl></div><div class="card-foot"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 300, sinal de US$ 75 agora</a><a class="btn btn-sm btn-primary" href="../seller/novo-anuncio.html?atender=ped-5r2k8"><i data-icon="upload"></i>Atender este pedido</a></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal: adicionar um extra -->
+  <div class="modal-backdrop" id="m-extra"><div class="modal wide">
+    <div class="modal-head"><h3>Adicionar um extra a este pedido</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+    <div class="modal-body">
+      <p class="small muted mb-2">Só participantes ativos do pedido principal. Até 5 extras abertos por pedido. Ao criar, você paga o sinal de 25 % na carteira do extra; o resto só depois da prévia de um atendimento aprovado.</p>
+      <form class="form-grid" data-submit-toast="Extra enviado à curadoria. Sinal de US$ 50 ao endereço derivado do extra; ele aparece no pedido após a aprovação.">
+        <div class="field full"><label for="ex-titulo">Título</label><input id="ex-titulo" class="input" value="Tempo de espera nas UBS da capital nos mesmos meses"></div>
+        <div class="field full"><label for="ex-desc">Descrição</label><textarea id="ex-desc" class="textarea" style="min-height:80px">Série mensal de tempo de espera nas UBS do município de São Paulo, jan/2023 a dez/2025, por unidade, complementar aos dados das UPAs.</textarea></div>
+        <div class="field full"><label for="ex-crit">Critérios de aceite (curtos)</label><textarea id="ex-crit" class="textarea" style="min-height:60px">Uma linha por unidade e mês; origem documentada; CSV com dicionário de dados.</textarea></div>
+        <div class="field"><label for="ex-valor">Valor por pessoa</label><div class="input-group"><span class="affix">US$</span><input id="ex-valor" class="input num" value="200" aria-label="Valor por pessoa"></div><span class="hint">Mínimo US$ 10. Sugerido na proposta: US$ 200.</span></div>
+        <div class="field"><label for="ex-prazo">Prazo</label><input id="ex-prazo" class="input" value="30/11/2026" readonly><span class="hint">Por padrão o do pedido; nunca além dele.</span></div>
+        <div class="alert alert-warn full"><i data-icon="alert-triangle"></i><div>Passa pela curadoria antes de aparecer; você paga o sinal de 25 % ao criar, da sua carteira; ele não volta por desistência. Não entrar no extra não muda a participação de ninguém no pedido principal.</div></div>
+        <div class="form-actions full"><button class="btn" type="button" data-modal-close>Cancelar</button><button class="btn btn-primary" type="submit"><i data-icon="plus"></i>Criar extra com sinal de US$ 50</button></div>
+      </form>
+    </div>
+  </div></div>
+
+  <!-- Seletor de estados do painel (ferramenta de desenvolvimento) -->
+  <div class="variant-switch"><span class="vs-label">Estado</span><button class="active" data-show="aberto">Aberto</button><button data-show="completar">Valor subiu (participante)</button><button data-show="travado">Travado</button></div>
+
+    <script>
+      // Outros pedidos: pedido.html?p=<id> mostra um dos pedidos do mural com os mesmos blocos desta página.
+      // O HTML estático acima é o ped-2c8d1; os demais vêm deste mapa (dados de exemplo iguais aos do mural e do README).
+      (function () {
+        var id = new URLSearchParams(location.search).get('p');
+        if (!id || id === 'ped-2c8d1') return;
+        var usd = function (n) { return 'US$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }); };
+        var h = function (handle, rep) { return '<span class="handle" data-handle="' + handle + '"' + (rep ? ' data-rep="' + rep + '"' : '') + '></span>'; };
+        var cd = function (iso) { return '<span class="countdown" data-deadline="' + iso + '"></span>'; };
+        var plural = function (n, um, varios) { return n + ' ' + (n === 1 ? um : varios); };
+        var P = {
+          'ped-9h2d5': {
+            id: 'ped-9h2d5', cat: 'Governo e políticas públicas', pais: 'BR', paisNome: 'Brasil', idioma: 'português', tipo: 'Planilha · XLSX ou CSV', tipoIcon: 'table',
+            titulo: 'Lista de todos os editais de fomento cultural municipais do RS em 2025', abertoEm: '25/09/2026', autor: 'farol-3e9b', rep: '4,6 · 2 itens aprovados', aprovadoEm: '25/09', curador: 'Ana R.',
+            status: 'aberto', valor: 300, pessoas: 7, sinaisPagos: 525, prazo: '10/12/2026', prazoISO: '2026-12-10T23:59:00-03:00',
+            desc: ['Todos os editais de fomento à cultura publicados por prefeituras do Rio Grande do Sul em 2025 (Política Nacional Aldir Blanc e recursos próprios), com link ou cópia, valor total, prazo de inscrição e área cultural. Cada prefeitura publica no próprio site ou diário oficial; não existe consolidação estadual.', 'Queremos a lista completa, em planilha, com a fonte em cada linha, para medir quanto do dinheiro chegou às cidades pequenas. Não procuramos análises: procuramos a lista bruta, conferível edital por edital.'],
+            crit: [['Conteúdo', 'Município, órgão, objeto, valor total, prazo de inscrição, área cultural e link ou cópia do edital.'], ['Cobertura', 'Pelo menos 90 % dos municípios do RS com edital publicado em 2025; a curadoria compara com os diários oficiais.'], ['Formato', 'XLSX ou CSV, uma linha por edital, com fonte e data de coleta em cada linha.'], ['Sem dados pessoais', 'Nenhum nome de proponente ou contato. É também regra da curadoria (bloco 1); não passa sem isso.']],
+            formato: [['Tipo', 'Planilha'], ['Arquivos', '1 XLSX ou CSV; cópias dos editais em PDF são bem-vindas'], ['Tamanho estimado', 'Menos de 20 MB'], ['Colunas mínimas', '<span class="mono xs">municipio, orgao, objeto, valor_total, prazo_inscricao, area, link, fonte, data_coleta</span>'], ['Acesso', 'Cada participante recebe acesso completo no cofre, com download']],
+            quem: [['farol-3e9b', 'abriu em 25/09 (sinal US$ 75)'], ['guaiba-2b7e', 'entrou em 27/09 (sinal US$ 75)'], ['minuano-8a5c', 'entrou em 30/09 (sinal US$ 75)'], ['pampa-1f7b', 'entrou em 03/10 (sinal US$ 75)'], ['charrua-4e2d', 'entrou em 08/10 (sinal US$ 75)'], ['veleta-6d3a', 'entrou em 12/10 (sinal US$ 75)'], ['amarra-9c1e', 'entrou em 21/10 (sinal US$ 75)']],
+            quemNote: 'Quem participa é público: pseudônimo e data de entrada. Cada pessoa já pagou US$ 75 de sinal; faltam US$ 225 por pessoa, pagos só depois da prévia de um atendimento aprovado. Ninguém deixou o pedido até agora. Um atendimento foi recusado pela curadoria em 16/10 (critério 2) e o pedido voltou a aberto.',
+            histBadge: 'principal: 7 pagamentos de sinal · 0 desistências · 1 atendimento recusado · 1 extra',
+            hist: [['ok', '25/09/2026', h('farol-3e9b') + ' abriu o pedido · US$ 300 por pessoa · sinal de US$ 75 · aprovado pela curadoria (Ana R.), carteira do pedido criada, pagamento confirmado (Polygon)'], ['ok', '27/09', h('guaiba-2b7e') + ' entrou · sinal de US$ 75 · total US$ 600'], ['ok', '30/09', h('minuano-8a5c') + ' entrou · total US$ 900'], ['ok', '03/10', h('pampa-1f7b') + ' entrou · total US$ 1.200'], ['ok', '08/10', h('charrua-4e2d') + ' entrou · total US$ 1.500'], ['ok', '12/10', h('veleta-6d3a') + ' entrou · total US$ 1.800'], ['info', '14/10', 'Um vendedor enviou um atendimento · pedido travado'], ['warn', '16/10', 'Curadoria recusou o atendimento (critério 2: cobertura abaixo de 90 %) · pedido destravado, volta a aceitar entradas'], ['ok', '21/10', h('amarra-9c1e') + ' entrou · 7 pessoas × US$ 300 = US$ 2.100'], ['ok', '27/10 · 09:20', 'Extra ext-9h2d5-a criado por ' + h('farol-3e9b') + ' a partir da proposta de ' + h('arquivista-0d2e') + ' (25/10) · US$ 80 por pessoa · sinal de US$ 20 · aprovado pela curadoria às 10:30 (Bruno M.)'], ['brass', 'hoje · 27/10', '7 pessoas × US$ 300 = US$ 2.100 · sinais pagos US$ 525 · faltam US$ 225 por pessoa, pagos só depois da prévia · 1 extra aberto (1 × US$ 80) · nenhum atendimento em curadoria'], ['', 'até 10/12', 'Atendimento aprovado (prévia, 72 h para pagar os 75 % restantes) ou fim do prazo sem vendedor, com os sinais de volta a quem ainda participa']],
+            carteira: { addr: '0x9e2d…4c7a', rede: 'Polygon', moeda: 'USDT', recebido: 'US$ 525 em sinais', pagamentos: '7', criada: '25/09/2026' },
+            extra: { id: 'ext-9h2d5-a', titulo: 'Projetos selecionados e valores pagos nos editais de fomento cultural do RS (2025)', tipo: 'Planilha · XLSX ou CSV', tipoIcon: 'table', valor: 80, pessoas: 1, sinais: 20, prazo: '10/12/2026', prazoISO: '2026-12-10T23:59:00-03:00', origem: 'proposto por ' + h('arquivista-0d2e') + ' em 25/10 · criado por ' + h('farol-3e9b') + ' em 27/10 · aprovado pela curadoria em 27/10 (Bruno M.)', crit: ['Uma linha por projeto selecionado', 'Valor pago e data do pagamento', 'Mesma planilha, aba própria'], addr: '0x9e2e…1b08', quem: [['farol-3e9b', 'criou e entrou em 27/10']] },
+            qa: []
+          },
+          'ped-4k9e2': {
+            id: 'ped-4k9e2', cat: 'Negócios e mercado', pais: 'BR', paisNome: 'Brasil', idioma: 'português', tipo: 'Dataset · CSV', tipoIcon: 'database',
+            titulo: 'Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)', abertoEm: '02/10/2026', autor: 'relogio-2b7c', rep: '4,4 · 1 item aprovado', aprovadoEm: '02/10', curador: 'Ana R.',
+            status: 'travado', travado: { desde: '22/10', enviadoEm: '22/10', analise: '23/10 · Bruno M.', decisao: '29/10' }, valor: 290, pessoas: 5, sinaisPagos: 362.5, prazo: '20/11/2026', prazoISO: '2026-11-20T23:59:00-03:00',
+            desc: ['A série mensal do preço mediano do metro quadrado de aluguel por bairro de Belo Horizonte, de janeiro de 2015 a setembro de 2026, com apartamentos e casas separados. Os portais de anúncios mostram só o momento atual; as séries históricas por bairro existem nas bases das imobiliárias e de quem raspou os portais ao longo dos anos.', 'Queremos a série completa, com metodologia e fonte documentadas, para cruzar com os dados de renda e de transporte por bairro. Não procuramos estimativas: procuramos preços observados em anúncios, tratados de forma transparente.'],
+            crit: [['Granularidade', 'Preço mediano do m² por bairro e mês, com apartamentos e casas separados e o número de anúncios por célula.'], ['Cobertura', 'Pelo menos 100 bairros com série contínua de jan/2015 a set/2026, sem lacunas superiores a dois meses.'], ['Metodologia', 'Fonte dos anúncios, método de coleta e tratamento de outliers documentados em um arquivo à parte.'], ['Formato', 'CSV UTF-8 com dicionário de dados em Markdown; nenhum dado de anunciante ou de imóvel identificável.']],
+            formato: [['Tipo', 'Dataset'], ['Arquivos', '1 CSV, 1 dicionário (MD), 1 nota de metodologia (MD ou PDF)'], ['Tamanho estimado', 'Menos de 10 MB'], ['Colunas mínimas', '<span class="mono xs">bairro, mes, tipo, preco_m2_mediano, anuncios, fonte</span>'], ['Acesso', 'Cada participante recebe acesso completo no cofre, com download']],
+            quem: [['relogio-2b7c', 'abriu em 02/10 (sinal US$ 72,50)'], ['horizonte-5c2a', 'entrou em 05/10 (sinal US$ 72,50)'], ['serra-9d4f', 'entrou em 09/10 (sinal US$ 72,50)'], ['savassi-1e8b', 'entrou em 15/10 (sinal US$ 72,50)'], ['pampulha-7a3c', 'entrou em 20/10 (sinal US$ 72,50)']],
+            quemNote: 'Quem participa é público: pseudônimo e data de entrada. Cada pessoa já pagou US$ 72,50 de sinal; faltam US$ 217,50 por pessoa, pagos só depois da prévia. O pedido está travado desde 22/10: um atendimento está em curadoria e, até a decisão, ninguém entra nem sobe o valor.',
+            histBadge: 'principal: 5 pagamentos de sinal · 0 desistências · 1 atendimento em curadoria',
+            hist: [['ok', '02/10/2026 · 11:20', h('relogio-2b7c') + ' abriu o pedido · US$ 290 por pessoa · sinal de US$ 72,50 · aprovado pela curadoria (Ana R.), carteira do pedido criada, pagamento confirmado (Polygon)'], ['ok', '05/10', h('horizonte-5c2a') + ' entrou · total US$ 580'], ['ok', '09/10', h('serra-9d4f') + ' entrou · total US$ 870'], ['ok', '15/10', h('savassi-1e8b') + ' entrou · total US$ 1.160'], ['ok', '20/10', h('pampulha-7a3c') + ' entrou · 5 pessoas × US$ 290 = US$ 1.450'], ['info', '22/10 · 16:48', 'Um vendedor enviou um atendimento (dataset, 12 MB). Triagem automática: metadados removidos, 0 alertas. Pedido travado: sem entradas nem subidas de valor até a decisão'], ['info', '23/10 · 09:30', 'Em análise · Bruno M. confere os 4 critérios de aceite e a autenticidade'], ['brass', 'hoje · 27/10', 'Travado · 5 pessoas × US$ 290 = US$ 1.450 · sinais pagos US$ 362,50 · decisão prevista até 29/10'], ['', 'até 29/10', 'Aprovado: cada pessoa recebe uma prévia e tem 72 h para pagar os US$ 217,50 restantes ou contestar com motivo. Recusado: o pedido destrava e volta a aberto até 20/11']],
+            carteira: { addr: '0x4b9e…2d61', rede: 'Polygon', moeda: 'USDT', recebido: 'US$ 362,50 em sinais', pagamentos: '5', criada: '02/10/2026' },
+            extra: null, qa: []
+          },
+          'ped-7f1a3': {
+            id: 'ped-7f1a3', cat: 'História e acervos', pais: 'BR', paisNome: 'Brasil', idioma: 'português', tipo: 'Documento · PDF ou TIFF', tipoIcon: 'book-open',
+            titulo: 'Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)', abertoEm: '28/08/2026', autor: 'tipografo-8e04', rep: '4,9 · 6 itens aprovados', aprovadoEm: '28/08', curador: 'Ana R.',
+            status: 'aberto', valor: 800, pessoas: 1, sinaisPagos: 200, prazo: '15/12/2026', prazoISO: '2026-12-15T23:59:00-03:00',
+            desc: ['O catálogo oficial da 1ª Bienal de São Paulo (1951), publicado pelo Museu de Arte Moderna, esgotado há décadas. Existem exemplares em bibliotecas e coleções particulares, mas nenhuma digitalização completa disponível ao público.', 'Queremos o catálogo inteiro, em alta resolução e com OCR, para pesquisa sobre as obras e os anunciantes da época. Reproduções parciais ou fotos de celular não atendem.'],
+            crit: [['Completude', 'Todas as páginas, inclusive capa, colofão e anúncios, na ordem original.'], ['Qualidade', '400 dpi ou mais, PDF com OCR e imagens individuais em TIFF ou PNG, sem cortes.'], ['Origem', 'Declaração de que o exemplar digitalizado é de acervo próprio ou de uso permitido pelo detentor.'], ['Sem marcas', 'Nenhuma marca d’água de terceiros nem páginas de outras edições misturadas.']],
+            formato: [['Tipo', 'Documento digitalizado'], ['Arquivos', '1 PDF com OCR e uma imagem TIFF ou PNG por página'], ['Tamanho estimado', 'Até 2 GB'], ['Acesso', 'Cada participante recebe acesso completo no cofre, com download']],
+            quem: [['tipografo-8e04', 'abriu em 28/08 (sinal US$ 100) · subiu o valor para US$ 800 em 18/09 (+US$ 100)']],
+            quemNote: 'Quem participa é público: pseudônimo e data de entrada. Hoje há 1 pessoa no pedido, com US$ 200 de sinal pagos; faltam US$ 600, pagos só depois da prévia. Uma pessoa entrou em 02/09 e deixou o pedido em 20/09 por não completar o sinal depois da subida de valor; o sinal dela ficou com o Lacre como taxa de serviço.',
+            histBadge: 'principal: 3 pagamentos de sinal · 1 desistência · 0 extras',
+            hist: [['ok', '28/08/2026', h('tipografo-8e04') + ' abriu o pedido · US$ 400 por pessoa · sinal de US$ 100 · aprovado pela curadoria (Ana R.), carteira do pedido criada, pagamento confirmado (Polygon)'], ['ok', '02/09', 'Uma segunda pessoa entrou · US$ 400 · sinal de US$ 100 · total US$ 800'], ['wax', '18/09', h('tipografo-8e04') + ' subiu o valor · US$ 800 por pessoa · sinal de US$ 200 (+US$ 100) · prazo para completar o sinal até 20/09 às 14:00'], ['warn', '20/09', 'A segunda pessoa não completou o sinal e deixou de participar · os US$ 100 dela ficaram com o Lacre como taxa de desistência · 1 pessoa × US$ 800'], ['brass', 'hoje · 27/10', '1 pessoa × US$ 800 = US$ 800 · sinais pagos US$ 200 · faltam US$ 600, pagos só depois da prévia · nenhum atendimento em curadoria'], ['', 'até 15/12', 'Atendimento aprovado (prévia, 72 h para pagar os 75 % restantes) ou fim do prazo sem vendedor, com o sinal de volta a quem ainda participa']],
+            carteira: { addr: '0x7f1a…3bd2', rede: 'Polygon', moeda: 'USDT', recebido: 'US$ 200 em sinais', pagamentos: '3 (um sinal de US$ 100, de quem desistiu, foi para o Lacre em 20/09)', criada: '28/08/2026' },
+            extra: null, qa: []
+          },
+          'ped-5r2k8': {
+            id: 'ped-5r2k8', cat: 'Governo e políticas públicas', pais: 'CL', paisNome: 'Chile', idioma: 'espanhol', tipo: 'Planilha · CSV', tipoIcon: 'table',
+            titulo: 'Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos', abertoEm: '10/10/2026', autor: 'salitre-2e9c', rep: '4,5 · 1 item aprovado', aprovadoEm: '10/10', curador: 'Ana R.',
+            status: 'aberto', valor: 300, pessoas: 3, sinaisPagos: 225, prazo: '20/12/2026', prazoISO: '2026-12-20T23:59:00-03:00',
+            desc: ['Todas as concessões de portos públicos chilenos desde 2000 (Valparaíso, San Antonio, Talcahuano, Iquique, Antofagasta e demais), com a concessionária, o prazo, o valor e a data de assinatura de cada contrato. As empresas portuárias estatais publicam partes; ninguém consolidou a série.', 'Queremos a lista completa, em espanhol, com a fonte oficial em cada linha, para acompanhar as renovações previstas até 2030. Um resumo em português ou inglês é bem-vindo, mas não obrigatório.'],
+            crit: [['Cobertura', 'Todas as concessões de portos públicos desde 2000, vigentes e encerradas.'], ['Conteúdo', 'Concessionária, porto, prazo, valor e data de assinatura de cada contrato.'], ['Fonte', 'Fonte oficial por linha (MTT, empresas portuárias estatais ou Diario Oficial), com data.'], ['Formato', 'CSV em espanhol com dicionário de dados; resumo em português ou inglês é bem-vindo.']],
+            formato: [['Tipo', 'Planilha'], ['Arquivos', '1 CSV, 1 dicionário (MD), anexos de origem (PDF)'], ['Tamanho estimado', 'Menos de 20 MB'], ['Colunas mínimas', '<span class="mono xs">puerto, concesionaria, fecha_firma, plazo, valor, fuente</span>'], ['Acesso', 'Cada participante recebe acesso completo no cofre, com download']],
+            quem: [['salitre-2e9c', 'abriu em 10/10 (sinal US$ 75)'], ['andino-7b2c', 'entrou em 14/10 (sinal US$ 75)'], ['caleta-3e8d', 'entrou em 19/10 (sinal US$ 75)']],
+            quemNote: 'Quem participa é público: pseudônimo e data de entrada. Cada pessoa já pagou US$ 75 de sinal; faltam US$ 225 por pessoa, pagos só depois da prévia de um atendimento aprovado. Ninguém deixou o pedido até agora.',
+            histBadge: 'principal: 3 pagamentos de sinal · 0 desistências · 1 proposta de extra',
+            hist: [['ok', '10/10/2026', h('salitre-2e9c') + ' abriu o pedido · US$ 300 por pessoa · sinal de US$ 75 · aprovado pela curadoria (Ana R.), carteira do pedido criada, pagamento confirmado (Polygon)'], ['ok', '14/10', h('andino-7b2c') + ' entrou · total US$ 600'], ['ok', '19/10', h('caleta-3e8d') + ' entrou · 3 pessoas × US$ 300 = US$ 900'], ['info', '24/10', h('coruja-7f3a') + ' propôs um extra: contratos de concessão de aeroportos no Chile · US$ 200 sugeridos · aguardando um participante criar'], ['brass', 'hoje · 27/10', '3 pessoas × US$ 300 = US$ 900 · sinais pagos US$ 225 · faltam US$ 225 por pessoa, pagos só depois da prévia · nenhum atendimento em curadoria'], ['', 'até 20/12', 'Atendimento aprovado (prévia, 72 h para pagar os 75 % restantes) ou fim do prazo sem vendedor, com os sinais de volta a quem ainda participa']],
+            carteira: { addr: '0x5c2b…8e4a', rede: 'Polygon', moeda: 'USDT', recebido: 'US$ 225 em sinais', pagamentos: '3', criada: '10/10/2026' },
+            extra: null, proposta: { titulo: 'Contratos de concessão de aeroportos no Chile (2000–2026)', por: 'coruja-7f3a', em: '24/10', valor: 200 }, qa: []
+          },
+          'ped-1b6j8': {
+            id: 'ped-1b6j8', cat: 'Fotografia e vídeo', pais: 'BR', paisNome: 'Brasil', idioma: 'português', tipo: 'Fotos · JPG ou RAW', tipoIcon: 'camera',
+            titulo: 'Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)', abertoEm: '20/09/2026', autor: 'quartzo-a1f0', rep: '4,7 · 2 itens aprovados', aprovadoEm: '20/09', curador: 'Bruno M.',
+            status: 'atendido', atendido: { em: '08/10/2026', por: 'cartografo-5a77', previaEm: '06/10', previa: '86 miniaturas com marca d’água', entregue: '118 fotografias em resolução original', carteiraEm: '11/10' }, valor: 200, pessoas: 3, sinaisPagos: 150, prazo: '—', prazoISO: '',
+            desc: ['Fotografias dos espaços internos do Estádio do Pacaembu (vestiários, túnel, tribunas cobertas, salas administrativas e o museu) feitas entre 2019 e 2020, antes do início da reforma. Os registros oficiais mostram as fachadas; o interior quase não foi documentado em alta resolução.', 'O pedido foi atendido: as 3 pessoas receberam 118 fotografias no cofre em 08/10/2026. A página fica como registro público.'],
+            crit: [['Quantidade', 'Mínimo de 40 fotos de áreas internas (vestiários, túnel, tribunas cobertas, salas).'], ['Data', 'Data visível nos metadados antes da remoção, ou em registro à parte.'], ['Autoria', 'Autoria própria ou licença do autor anexada.'], ['Formato', 'JPG ou RAW em resolução original, sem marca d’água.']],
+            formato: [['Tipo', 'Fotos'], ['Arquivos', '118 JPG em resolução original (entregues)'], ['Tamanho', '1,4 GB'], ['Acesso', 'As 3 pessoas têm as fotos no cofre, com download']],
+            quem: [['quartzo-a1f0', 'abriu em 20/09 (sinal US$ 50) · pagou os 75 % restantes em 08/10'], ['farol-3e9b', 'entrou em 25/09 (sinal US$ 50) · pagou em 08/10'], ['coruja-7f3a', 'entrou em 28/09 (sinal US$ 50) · pagou em 07/10']],
+            quemNote: 'Quem participa é público: pseudônimo e data de entrada. As 3 pessoas pagaram o sinal (US$ 50) e, depois da prévia, os US$ 150 restantes; todas receberam o material completo no cofre.',
+            histBadge: 'principal: 3 sinais · 3 pagamentos do restante · 0 desistências · 1 extra atendido junto',
+            hist: [['ok', '20/09/2026', h('quartzo-a1f0') + ' abriu o pedido · US$ 200 por pessoa · sinal de US$ 50 · aprovado pela curadoria (Bruno M.), carteira do pedido criada'], ['ok', '25/09', h('farol-3e9b') + ' entrou · total US$ 400'], ['ok', '28/09', h('coruja-7f3a') + ' entrou · 3 pessoas × US$ 200 = US$ 600'], ['ok', '30/09', 'Extra ext-1b6j8-a criado por ' + h('quartzo-a1f0') + ': plantas e cortes do Pacaembu usados na reforma (2020) · US$ 100 por pessoa · 2 pessoas'], ['info', '04/10', h('cartografo-5a77') + ' enviou o atendimento (118 fotos) · pedido travado'], ['ok', '06/10', 'Curadoria aprovou (Ana R.) · prévia para as 3 pessoas: 86 miniaturas com marca d’água · 72 h para pagar os 75 % restantes'], ['ok', '07/10', h('coruja-7f3a') + ' pagou os US$ 150 restantes'], ['ok', '08/10', h('quartzo-a1f0') + ' e ' + h('farol-3e9b') + ' pagaram · as 3 pessoas confirmaram · pedido atendido · material completo no cofre de cada uma'], ['ok', '11/10', 'Depois de 72 h sem disputa, a carteira do pedido foi entregue a quem atendeu'], ['brass', 'hoje · 27/10', 'Atendido · 3 pessoas × US$ 200 = US$ 600 pagos por inteiro · 1 extra atendido junto (2 × US$ 100)']],
+            carteira: { addr: '0x1b6a…9f2e', rede: 'Polygon', moeda: 'USDT', recebido: 'US$ 600 (sinais e restante)', pagamentos: '6', criada: '20/09/2026' },
+            extra: { id: 'ext-1b6j8-a', titulo: 'Plantas e cortes do Pacaembu usados na reforma (2020)', tipo: 'Documento · PDF', tipoIcon: 'file-text', valor: 100, pessoas: 2, sinais: 200, prazo: '—', prazoISO: '', atendido: true, origem: 'criado por ' + h('quartzo-a1f0') + ' em 30/09 · atendido por ' + h('cartografo-5a77') + ' em 08/10, junto com o principal', crit: ['Plantas baixas e cortes em PDF', 'Com a data do projeto', 'Origem documentada'], addr: '0x1b6b…4e07', quem: [['quartzo-a1f0', 'criou e entrou em 30/09 · pagou em 08/10'], ['farol-3e9b', 'entrou em 01/10 · pagou em 08/10']] },
+            qa: [['relogio-2b7c', '02/10 · moderada por Ana R.', 'Fotos de 2018 contam, se forem dos mesmos espaços?', 'Não contam para o critério, mas são bem-vindas em pasta separada. O que define o aceite é 2019–2020.', '02/10']]
+          },
+          'ped-8b4u2': {
+            id: 'ped-8b4u2', cat: 'Governo e políticas públicas', pais: 'BR', paisNome: 'Brasil', idioma: 'português', tipo: 'Fotos · JPG', tipoIcon: 'camera',
+            titulo: 'Fotos dos boletins de urna (BU) afixados nas seções eleitorais de Minas Gerais no 2º turno de 2026 (25/10)', abertoEm: '26/10/2026', autor: 'farol-3e9b', rep: '4,6 · 2 itens aprovados', aprovadoEm: '26/10', curador: 'Bruno M.',
+            status: 'unidade', unidade: { valor: 2, nome: 'foto válida', limite: 5000, orcamento: 10000, sinal: 2500, validas: 1112, enviadas: 1240, pessoasEnviaram: 38, lotesPagos: '2 lotes · 920 fotos · US$ 1.840', aguardando: '1 lote · 192 fotos · US$ 384 · até 29/10 às 14:00' }, valor: 10000, pessoas: 1, sinaisPagos: 2500, prazo: '30/11/2026', prazoISO: '2026-11-30T23:59:00-03:00',
+            desc: ['Uma foto de cada boletim de urna (BU) afixado na porta das seções eleitorais de Minas Gerais depois do fim da votação do 2º turno, em 25/10/2026. O BU é um documento público, impresso pela própria urna e fixado por lei para qualquer pessoa fotografar; o objetivo é um conjunto aberto para conferir os totais por seção.', 'Pedido por unidade: pagamos US$ 2 por foto válida, até 5.000 fotos. Vale uma foto por BU, legível, com o QR code inteiro e o número da seção visível. Nunca fotos de votos, cabines ou documentos de eleitores: a curadoria recusa o lote.'],
+            crit: [['Uma foto por BU', 'Legível, inteira, com o QR code completo e o número da zona e da seção visíveis.'], ['Sem pessoas nem votos', 'Sem pessoas, cabines ou cédulas no enquadramento; nunca fotos de votos ou de documentos de eleitores (sigilo do voto e dados pessoais). A curadoria recusa o lote.'], ['Sem duplicadas', 'A triagem descarta fotos repetidas do mesmo BU e fotos ilegíveis; não contam como unidade.'], ['Lotes', 'Envio em lotes de qualquer tamanho; a curadoria valida cada lote por amostragem antes do pagamento.']],
+            formato: [['Tipo', 'Fotos'], ['Arquivos', 'JPG, uma foto por BU, resolução original'], ['Lotes', 'Qualquer tamanho; cada lote tem carteira própria'], ['Acesso', 'As fotos válidas de cada lote pago entram no cofre de quem participa']],
+            quem: [['farol-3e9b', 'abriu em 26/10 (sinal US$ 2.500, 25 % do orçamento)']],
+            quemNote: 'Quem participa é público: pseudônimo e data de entrada. Quem entra paga o mesmo sinal e o mesmo valor por foto válida e recebe as mesmas fotos; quem entra depois paga do sinal as fotos já validadas. As 38 pessoas que enviaram fotos aparecem só na validação de cada lote.',
+            histBadge: 'por unidade: 1 sinal · 3 lotes enviados · 2 pagos · 1 aguardando confirmação',
+            hist: [['ok', '26/10/2026', h('farol-3e9b') + ' abriu o pedido · US$ 2 por foto válida · limite 5.000 (orçamento US$ 10.000) · sinal de US$ 2.500 · aprovado pela curadoria (Bruno M.), carteira do pedido criada'], ['ok', '26/10', 'Lote L-0409 · 876 fotos válidas de 940 · validado pela curadoria · pago (US$ 1.752)'], ['ok', '27/10 · 09:12', 'Lote L-0412 · 44 fotos válidas de 46 · validado · pago (US$ 88) depois da prévia'], ['info', '27/10', 'Lote L-0415 · 192 fotos válidas de 254 · validado · aguardando confirmação de quem participa (até 29/10 às 14:00; sem resposta, é pago com o sinal)'], ['brass', 'hoje · 27/10', '1.112 de 5.000 fotos válidas (22 %) · 1.240 enviadas por 38 pessoas · 128 duplicadas ou ilegíveis · US$ 1.840 pagos em 2 lotes · US$ 384 a confirmar'], ['', 'até 30/11', 'O pedido fecha ao chegar a 5.000 fotos válidas ou no prazo; o que sobrar do sinal volta a quem participa']],
+            carteira: { addr: '0x8b4u…a3c7', rede: 'Polygon', moeda: 'USDT', recebido: 'US$ 2.500 (sinal)', pagamentos: '1 sinal · 2 lotes pagos (US$ 1.840)', criada: '26/10/2026' },
+            extra: null, qa: []
+          }
+        };
+        var p = P[id]; if (!p) return;
+        var T = p.valor * p.pessoas, S = p.valor * .25, Rr = p.valor * .75, M = p.valor * 1.1, MS = M * .25;
+        var pessoasTxt = plural(p.pessoas, 'pessoa', 'pessoas');
+        var $ = function (sel) { return document.querySelector(sel); };
+        var setHtml = function (sel, html) { var el = $(sel); if (el) el.innerHTML = html; };
+        var setText = function (sel, txt) { var el = $(sel); if (el) el.textContent = txt; };
+        var statusBadge = { aberto: '<span class="badge st-ativo">Aberto</span>', travado: '<span class="badge st-analise">Travado: atendimento em curadoria</span>', atendido: '<span class="badge st-finalizado">Atendido</span>', unidade: '<span class="badge st-ativo">Aberto</span>' }[p.status];
+        var u = p.unidade;
+
+        // Cabeçalho
+        document.title = 'Pedido ' + p.id + ' · Lacre';
+        setText('#crumb-cat', p.cat); setText('#crumb-id', p.id);
+        setText('#ped-eyebrow', 'Pedido com recompensa' + (u ? ' · por unidade' : '') + ' · ' + p.cat + ' · ' + p.paisNome + ' · ' + p.idioma + ' · aberto em ' + p.abertoEm);
+        setText('#ped-title', p.titulo);
+        setHtml('#ped-chips', '<span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido</span>' + statusBadge + (u ? '<span class="badge badge-brass"><i data-icon="layers"></i>Por unidade</span>' : '<span class="badge badge-outline"><i data-icon="users"></i>Mesmo valor para todos os participantes</span>') + '<span class="badge badge-outline"><i data-icon="' + p.tipoIcon + '"></i>' + p.tipo + '</span><span class="badge badge-outline"><i data-icon="globe"></i>' + p.paisNome + ' · ' + p.idioma + '</span>');
+        setHtml('#ped-by', '<span class="small muted">Aberto por</span>' + h(p.autor, p.rep) + '<span class="small muted">· aprovado pela curadoria em ' + p.aprovadoEm + ' (' + p.curador + ') · carteira do pedido criada no mesmo dia</span>');
+
+        // Como funciona: os números das regras seguem o pedido; por unidade tem regras próprias
+        if (u) {
+          setText('#rules-badge', 'sinal de 25 % do orçamento · pago por lote válido');
+          setHtml('#rules-list', [['Abrir com sinal', 'Quem abre define o que vale como uma unidade (critérios), o valor por unidade, o limite e o prazo. Orçamento = valor × limite; paga na carteira do pedido um sinal de 25 % do orçamento (aqui US$ 2.500). A carteira é criada quando a curadoria aprova.'], ['Entrar', 'Outras pessoas podem entrar pelas mesmas condições: mesmo valor por unidade e mesmo sinal. Cada participante paga os lotes validados e recebe as mesmas unidades; quem entra depois paga do sinal as unidades já validadas. A recompensa por unidade passa a ser o valor × pessoas.'], ['Enviar lotes', 'Qualquer vendedor envia um lote de unidades; a triagem descarta duplicadas e ilegíveis e a curadoria valida o lote (critérios e lei). Cada lote tem carteira própria.'], ['Pagar o lote', 'Validado, cada participante vê uma prévia do lote e tem 72 h para pagar as unidades válidas. Sem resposta, o lote é pago com o sinal. Depois de 72 h sem disputa, a carteira do lote é entregue a quem enviou.'], ['Sem volta', 'Quem deixa o pedido antes do prazo perde o que sobrou do seu sinal, que fica com o Lacre como taxa de serviço e nunca vai para quem enviou. No fim do prazo, a sobra do sinal volta a quem continua.'], ['Encerrar', 'O pedido fecha ao atingir o limite ou o prazo. Lotes enviados depois não são aceitos.']].map(function (r) { return '<li><div><b>' + r[0] + '</b><span>' + r[1] + '</span></div></li>'; }).join(''));
+          setText('#rules-note', 'Por que o sinal: evita pedidos falsos e garante a quem envia que existe dinheiro de verdade. Pague sempre de uma carteira que você controla, nunca direto de uma corretora: reembolsos voltam ao endereço de origem.');
+        } else {
+          var F = { sinal: usd(S), resto: usd(Rr), minSubir: usd(M), sinalSubir: usd(MS), prazo: p.prazo };
+          document.querySelectorAll('#rules-list [data-f]').forEach(function (el) { if (F[el.dataset.f]) el.textContent = F[el.dataset.f]; });
+        }
+
+        // Descrição, critérios, formato, prazo
+        setHtml('#descricao', '<h2 style="margin-top:0">O que estamos procurando</h2>' + p.desc.map(function (t) { return '<p>' + t + '</p>'; }).join(''));
+        setText('#crit-badge', p.crit.length + ' critérios · todos obrigatórios');
+        setHtml('#crit-list', p.crit.map(function (c) { return '<li><div><b>' + c[0] + '</b><span>' + c[1] + '</span></div></li>'; }).join(''));
+        setHtml('#formato-kv', p.formato.map(function (c) { return '<dt>' + c[0] + '</dt><dd>' + c[1] + '</dd>'; }).join(''));
+        var prazoKv = u ? [['Prazo', p.prazo + ' · 23:59 BRT · ' + cd(p.prazoISO)], ['Lotes', 'Validados pela curadoria; cada participante tem 72 h para pagar as unidades válidas, senão o lote é pago com o sinal'], ['Se fechar', 'Ao atingir ' + u.limite.toLocaleString('pt-BR') + ' unidades ou no prazo, o que sobrar do sinal volta a quem participa'], ['Lotes depois do fim', 'Não são aceitos']]
+          : p.status === 'atendido' ? [['Prazo', 'Encerrado · atendido em ' + p.atendido.em], ['Prévia', p.atendido.previaEm + ' · ' + p.atendido.previa], ['Entrega', 'As ' + p.pessoas + ' pessoas pagaram os 75 % restantes e receberam ' + p.atendido.entregue + ' no cofre'], ['Carteira do pedido', 'Entregue a quem atendeu em ' + p.atendido.carteiraEm + ', depois de 72 h sem disputa']]
+          : [['Prazo', p.prazo + ' · 23:59 BRT · ' + cd(p.prazoISO)], ['Se atendido', 'Cada pessoa recebe uma prévia e tem 72 h para pagar os ' + usd(Rr) + ' restantes e receber tudo no cofre; quem não paga deixa de participar e o sinal fica com o Lacre'], ['Durante a curadoria', 'Pedido travado: sem entradas nem subidas de valor até a decisão'], ['Se expirar', 'Sem nenhum vendedor, os sinais voltam a quem ainda participa (' + usd(S) + ' por pessoa), menos a taxa de rede']];
+        setHtml('#prazo-kv', prazoKv.map(function (c) { return '<dt>' + c[0] + '</dt><dd>' + c[1] + '</dd>'; }).join(''));
+
+        // Quem está no pedido
+        setText('#who-badge', u ? '1 pessoa · sinal US$ 2.500 · 38 enviaram fotos' : p.pessoas + ' × ' + usd(p.valor) + ' = ' + usd(T) + ' · sinais ' + usd(p.sinaisPagos));
+        setHtml('#who-list', p.quem.map(function (w) { return '<div class="w">' + h(w[0]) + '<span class="meta">' + w[1] + '</span></div>'; }).join(''));
+        setText('#who-note', p.quemNote);
+
+        // Extras
+        var ex = p.extra, exHtml = '<p class="small muted">Um extra é um bônus opcional dentro do pedido: um sub-item para algo próximo ou complementar ao que foi pedido, com valor por pessoa, prazo e carteira próprios, e o mesmo sinal de 25 %. Só participantes do pedido principal podem criar ou entrar. <b>Não entrar no extra não muda sua participação no pedido principal.</b></p>';
+        if (ex) {
+          exHtml += '<div class="extra"><div class="row between"><div class="row"><span class="tag">' + ex.id + '</span>' + (ex.atendido ? '<span class="badge st-finalizado">Atendido</span>' : '<span class="badge st-ativo">Aberto</span>') + '<span class="badge badge-outline"><i data-icon="' + ex.tipoIcon + '"></i>' + ex.tipo + '</span></div><span class="xs muted">' + (ex.prazoISO ? 'prazo ' + ex.prazo + ' · ' + cd(ex.prazoISO) : 'encerrado') + '</span></div><b class="extra-title">' + ex.titulo + '</b><p class="xs muted">' + ex.origem + '</p><ul class="crit">' + ex.crit.map(function (c) { return '<li>' + c + '</li>'; }).join('') + '</ul><dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">' + usd(ex.valor) + '</dd></div><div><dt>Pessoas</dt><dd>' + ex.pessoas + '</dd></div><div><dt>Total</dt><dd>' + usd(ex.valor * ex.pessoas) + '</dd></div><div><dt>' + (ex.atendido ? 'Pago' : 'Sinais') + '</dt><dd>' + usd(ex.sinais) + '</dd></div><div><dt>Carteira do extra</dt><dd><span class="mono">' + ex.addr + '</span> · Polygon · USDT · <a class="link" href="#" data-toast="Abriria o explorador da rede (polygonscan)">conferir</a></dd></div></dl><div class="who">' + ex.quem.map(function (w) { return '<div class="w">' + h(w[0]) + '<span class="meta">' + w[1] + '</span></div>'; }).join('') + '</div>' + (ex.atendido ? '' : '<div class="row"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar no extra por ' + usd(ex.valor) + ', sinal de ' + usd(ex.valor * .25) + ' agora</a><a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="trending-up"></i>Subir o valor (mín. ' + usd(ex.valor * 1.1) + ', sinal de ' + usd(ex.valor * 1.1 * .25) + ')</a><span class="xs muted">só para quem está no pedido · faltam ' + usd(ex.valor * .75) + ' por pessoa depois da prévia</span></div>') + '</div>';
+        } else {
+          exHtml += '<div class="alert alert-info"><i data-icon="info"></i><div>Nenhum extra ainda. Quem participa pode criar um pelo botão acima; vendedores com algo próximo podem propor.</div></div>';
+        }
+        if (p.proposta) {
+          exHtml += '<div><span class="label">Propostas de vendedores</span><div class="extra proposal mt-1"><div class="row between"><div class="row"><span class="badge st-aguardando">Proposta de extra</span><span class="xs muted">aguardando um participante criar o extra</span></div><span class="xs muted">' + p.proposta.em + '</span></div><b class="extra-title">' + p.proposta.titulo + '</b><p class="xs muted">proposta de ' + h(p.proposta.por) + ' · valor sugerido ' + usd(p.proposta.valor) + ' por pessoa · fica pública aqui com o pseudônimo; quem propôs não tem exclusividade para atender</p><div class="row"><button class="btn btn-sm btn-primary" data-modal-open="m-extra"><i data-icon="plus"></i>Criar extra a partir desta proposta</button><span class="xs muted">só quem está no pedido · ao criar, você paga o sinal de 25 %</span></div></div></div>';
+        }
+        setHtml('#extras-body', exHtml);
+        setText('#extras-badge', (ex ? (ex.atendido ? '1 atendido' : '1 aberto') : '0 abertos') + (p.proposta ? ' · 1 proposta' : '') + ' · até 5 abertos');
+        if (p.status === 'atendido' || u) { var addBtn = $('#extras [data-modal-open]'); if (addBtn && p.status === 'atendido') addBtn.remove(); }
+
+        // Histórico, carteira, perguntas
+        setText('#hist-badge', p.histBadge);
+        setHtml('#hist-list', p.hist.map(function (t) { return '<div class="tl-item' + (t[0] ? ' ' + t[0] : '') + '"><div class="when">' + t[1] + '</div><div class="what">' + t[2] + '</div></div>'; }).join(''));
+        setText('#addr-ped', p.carteira.addr);
+        setHtml('#carteira-kv', '<div><dt>Rede</dt><dd>' + p.carteira.rede + '</dd></div><div><dt>Moeda</dt><dd>' + p.carteira.moeda + '</dd></div><div><dt>Recebido</dt><dd>' + p.carteira.recebido + '</dd></div><div><dt>Pagamentos</dt><dd>' + p.carteira.pagamentos + '</dd></div><div><dt>Criada em</dt><dd>' + p.carteira.criada + '</dd></div>');
+        if (u) setText('#carteira-text', 'Criada pela plataforma quando a curadoria aprovou o pedido. O sinal (25 % do orçamento) fica aqui; cada lote validado tem carteira própria, paga por quem participa depois da prévia ou, sem resposta em 72 h, com o sinal. Qualquer pessoa pode conferir on-chain quanto entrou e quanto foi pago por lote. No fim do prazo, o que sobrar do sinal volta a quem participa.');
+        else if (p.status === 'atendido') setText('#carteira-text', 'Criada pela plataforma quando a curadoria aprovou o pedido. Cada sinal e cada pagamento do restante foi para um endereço derivado próprio, com valor exato. Depois de 72 h sem disputa, em ' + p.atendido.carteiraEm + ', a carteira foi entregue a quem atendeu, com a frase de recuperação; o Lacre não guarda mais a chave.');
+        setText('#qa-badge', p.qa.length ? p.qa.length + (p.qa.length === 1 ? ' respondida' : ' respondidas') : 'nenhuma ainda');
+        setHtml('#qa-list', p.qa.length ? p.qa.map(function (q) { return '<div class="q"><div class="row between">' + h(q[0]) + '<span class="meta">' + q[1] + '</span></div><div>' + q[2] + '</div><div class="a">' + q[3] + '<div class="meta mt-1">Resposta de quem abriu o pedido · ' + q[4] + '</div></div></div>'; }).join('') : '<p class="small muted">Nenhuma pergunta pública ainda. A primeira resposta aparece aqui depois da moderação.</p>');
+
+        // Painel lateral
+        var side = '';
+        var atender = '<div><a class="btn btn-primary btn-block" href="../seller/novo-anuncio.html?atender=' + p.id + '"><i data-icon="upload"></i>' + (u ? 'Enviar fotos' : 'Atender este pedido') + '</a><p class="xs muted mt-1">Para vendedores. ' + (u ? 'Envie um lote de fotos; a triagem descarta duplicadas e ilegíveis e a curadoria valida o lote. Validado, quem participa vê uma prévia e paga as fotos válidas em 72 h; senão, o lote é pago com o sinal.' : 'O atendimento passa pela curadoria como qualquer item; enquanto ela decide, o pedido fica travado. Aprovado, cada participante vê uma prévia e paga o restante. Quem participa do pedido não pode atendê-lo') + ' (<a class="link" href="vendedor.html">como os vendedores recebem</a>).</p></div>';
+        if (p.status === 'aberto') {
+          var pct = Math.round(p.sinaisPagos / T * 100);
+          side = '<div class="card-body stack"><div><span class="label">Valor por pessoa</span><div class="price price-xl wax mt-1">' + usd(p.valor) + '</div><div class="row mt-1"><span class="badge badge-outline"><i data-icon="users"></i>' + pessoasTxt + '</span><span class="badge badge-outline"><i data-icon="timer"></i>encerra em ' + cd(p.prazoISO) + '</span></div></div>' +
+            '<div class="math"><span>' + pessoasTxt + '</span><span class="op">×</span><span>' + usd(p.valor) + '</span><span class="op">=</span><b>' + usd(T) + '</b></div>' +
+            '<div><div class="row between small"><span>Sinais pagos: <b>' + usd(p.sinaisPagos) + '</b> de ' + usd(T) + '</span><span class="muted">' + pct + ' %</span></div><div class="progress thin mt-1"><div class="progress-bar wax" data-width="' + pct + '%"></div></div></div>' +
+            '<a class="btn btn-wax btn-lg btn-block" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por ' + usd(p.valor) + ', sinal de ' + usd(S) + ' agora</a>' +
+            '<a class="btn btn-block" href="../buyer/checkout.html"><i data-icon="trending-up"></i>Subir o valor (mín. ' + usd(M) + ', sinal de ' + usd(MS) + ')</a>' +
+            '<p class="xs muted">Paga agora ' + usd(S) + ' (sinal de 25 %). O resto, ' + usd(Rr) + ', só depois da prévia. O sinal não volta por desistência. Se você subir o valor, ' + (p.pessoas === 1 ? 'a pessoa que está no pedido tem' : 'as ' + p.pessoas + ' pessoas têm') + ' 48 h para completar o sinal; quem não completar deixa de participar.</p>' +
+            '<div class="alert alert-wax"><i data-icon="unlock"></i><div>Todos entram pelo mesmo valor e recebem o mesmo acesso. O sinal só volta se ninguém atender até ' + p.prazo + '.</div></div><hr style="margin:4px 0">' + atender +
+            '<dl class="kv"><dt>Para entrar</dt><dd>' + usd(S) + ' agora (sinal de 25 %); ' + usd(Rr) + ' depois da prévia</dd><dt>Subir o valor</dt><dd>' + usd(M) + ' ou mais (+10 %), sinal de ' + usd(MS) + '</dd><dt>Pagamento</dt><dd>Da sua carteira, em USDT ou USDC · Polygon, Tron ou Base</dd><dt>Aberto por</dt><dd>' + h(p.autor) + '</dd><dt>Curadoria do pedido</dt><dd>Aprovado em ' + p.aprovadoEm + ' · ' + p.curador + '</dd><dt>Extras</dt><dd>' + (ex ? '1 aberto · ' + usd(ex.valor) + ' por pessoa · <a class="link" href="#extras">ver</a>' : 'nenhum ainda · <a class="link" href="#extras">criar</a>') + '</dd></dl></div>';
+        } else if (p.status === 'travado') {
+          side = '<div class="card-body stack"><div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">Pedido travado: atendimento em curadoria</span>Um vendedor enviou o conteúdo em ' + p.travado.enviadoEm + '. Até a decisão (prevista até ' + p.travado.decisao + '), não há entradas nem subidas de valor.</div></div>' +
+            '<div><span class="label">Valor por pessoa</span><div class="price price-xl mt-1">' + usd(p.valor) + '</div><div class="row mt-1"><span class="badge badge-outline"><i data-icon="users"></i>' + pessoasTxt + '</span><span class="badge st-analise">travado desde ' + p.travado.desde + '</span></div></div>' +
+            '<div class="math"><span>' + pessoasTxt + '</span><span class="op">×</span><span>' + usd(p.valor) + '</span><span class="op">=</span><b>' + usd(T) + '</b></div><div class="small">Sinais pagos: <b>' + usd(p.sinaisPagos) + '</b> de ' + usd(T) + '</div>' +
+            '<button class="btn btn-wax btn-lg btn-block" disabled><i data-icon="lock"></i>Entrar por ' + usd(p.valor) + ', sinal de ' + usd(S) + ' agora</button><button class="btn btn-block" disabled><i data-icon="lock"></i>Subir o valor</button>' +
+            '<dl class="kv"><dt>Se aprovado</dt><dd>Cada pessoa recebe uma prévia do atendimento e tem 72 h para pagar os 75 % restantes (' + usd(Rr) + '); pago, o material completo vai para o cofre na hora</dd><dt>Se contestar</dt><dd>Com motivo, dentro das 72 h; a curadoria decide em até 48 h. Se a prévia não corresponde, o atendimento cai e o pedido continua aberto</dd><dt>Sem pagamento</dt><dd>Em 72 h, a pessoa deixa de participar e o sinal (' + usd(S) + ') fica com o Lacre como taxa de desistência</dd><dt>Se rejeitado</dt><dd>O pedido destrava e volta a aceitar entradas e subidas de valor até ' + p.prazo + '</dd><dt>Quem atende</dt><dd>Não mostramos até a decisão</dd><dt>Em análise</dt><dd>' + p.travado.analise + '</dd></dl></div>';
+        } else if (p.status === 'atendido') {
+          var a = p.atendido;
+          side = '<div class="card-body stack"><div class="alert alert-ok"><i data-icon="check-circle"></i><div><span class="alert-title">Atendido em ' + a.em + '</span>As ' + p.pessoas + ' pessoas viram a prévia em ' + a.previaEm + ', pagaram os 75 % restantes e receberam ' + a.entregue + ' no cofre.</div></div>' +
+            '<div><span class="label">Valor por pessoa</span><div class="price price-xl mt-1">' + usd(p.valor) + '</div><div class="row mt-1"><span class="badge badge-outline"><i data-icon="users"></i>' + pessoasTxt + '</span><span class="badge st-finalizado">encerrado</span></div></div>' +
+            '<div class="math"><span>' + pessoasTxt + '</span><span class="op">×</span><span>' + usd(p.valor) + '</span><span class="op">=</span><b>' + usd(T) + '</b></div><div class="small">Pago por inteiro: <b>' + usd(T) + '</b> (sinais e restante)</div>' +
+            '<a class="btn btn-primary btn-lg btn-block" href="prova.html"><i data-icon="badge-check"></i>Prova do atendimento</a><p class="xs muted">Este pedido está encerrado: não aceita entradas nem atendimentos. A página fica como registro público.</p>' +
+            '<dl class="kv"><dt>Quem atendeu</dt><dd>' + h(a.por) + ' · Verificado pela curadoria</dd><dt>Prévia</dt><dd>' + a.previaEm + ' · ' + a.previa + '</dd><dt>Entrega</dt><dd>' + a.entregue + ', no cofre de cada participante</dd><dt>Carteira do pedido</dt><dd>Entregue a quem atendeu em ' + a.carteiraEm + ', depois de 72 h sem disputa</dd><dt>Aberto por</dt><dd>' + h(p.autor) + '</dd><dt>Extras</dt><dd>1 atendido junto · <a class="link" href="#extras">ver</a></dd></dl></div>';
+        } else if (u) {
+          var upct = Math.round(u.validas / u.limite * 100);
+          side = '<div class="card-body stack"><div><span class="label">Por unidade</span><div class="price price-xl wax mt-1">' + usd(u.valor) + ' <span class="small" style="font-size:var(--fs-sm);font-weight:500">por ' + u.nome + '</span></div><div class="row mt-1"><span class="badge badge-outline"><i data-icon="users"></i>' + pessoasTxt + '</span><span class="badge badge-outline"><i data-icon="timer"></i>encerra em ' + cd(p.prazoISO) + '</span></div></div>' +
+            '<div class="math"><span>' + u.limite.toLocaleString('pt-BR') + ' fotos</span><span class="op">×</span><span>' + usd(u.valor) + '</span><span class="op">=</span><b>' + usd(u.orcamento) + '</b></div>' +
+            '<div><div class="row between small"><span><b>' + u.validas.toLocaleString('pt-BR') + ' de ' + u.limite.toLocaleString('pt-BR') + '</b> fotos válidas</span><span class="muted">' + upct + ' % · ' + u.enviadas.toLocaleString('pt-BR') + ' enviadas por ' + u.pessoasEnviaram + ' pessoas</span></div><div class="progress thin mt-1"><div class="progress-bar wax" data-width="' + upct + '%"></div></div></div>' +
+            '<a class="btn btn-wax btn-lg btn-block" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por ' + usd(u.valor) + ' por foto, sinal de ' + usd(u.sinal) + ' agora</a>' +
+            '<p class="xs muted">Paga agora ' + usd(u.sinal) + ' (25 % do orçamento). Cada lote validado é pago por foto válida, depois da prévia; as fotos já validadas (' + u.validas.toLocaleString('pt-BR') + ') são pagas do seu sinal ao entrar. O sinal não volta por desistência.</p>' +
+            '<div class="alert alert-wax"><i data-icon="unlock"></i><div>Todos pagam o mesmo por foto válida e recebem as mesmas fotos. O que sobrar do sinal volta no fim do prazo, em ' + p.prazo + '.</div></div><hr style="margin:4px 0">' + atender +
+            '<dl class="kv"><dt>Orçamento</dt><dd>' + usd(u.orcamento) + ' (' + u.limite.toLocaleString('pt-BR') + ' × ' + usd(u.valor) + ')</dd><dt>Sinal pago</dt><dd>' + usd(u.sinal) + ' (25 % do orçamento)</dd><dt>Lotes pagos</dt><dd>' + u.lotesPagos + '</dd><dt>Aguardando confirmação</dt><dd>' + u.aguardando + '</dd><dt>Pagamento</dt><dd>Da sua carteira, em USDT ou USDC · Polygon, Tron ou Base</dd><dt>Aberto por</dt><dd>' + h(p.autor) + '</dd><dt>Curadoria do pedido</dt><dd>Aprovado em ' + p.aprovadoEm + ' · ' + p.curador + '</dd></dl></div>';
+        }
+        var painel = $('#painel');
+        painel.querySelectorAll('[data-variant]').forEach(function (v) { v.remove(); });
+        var wrap = document.createElement('div'); wrap.setAttribute('data-variant', p.status); wrap.innerHTML = side;
+        painel.insertBefore(wrap, painel.querySelector('.side-foot'));
+        painel.setAttribute('data-variants', p.status);
+        var vs = $('.variant-switch'); if (vs) vs.remove();
+
+        // Outros pedidos: os três mais próximos, sem este
+        var outros = { 'ped-2c8d1': { cat: 'Saúde e meio ambiente', pais: 'BR', titulo: 'Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV', valor: 800, pessoas: 4, prazo: '30/11', status: 'aberto' }, 'ped-9h2d5': { cat: 'Governo e políticas públicas', pais: 'BR', titulo: P['ped-9h2d5'].titulo, valor: 300, pessoas: 7, prazo: '10/12', status: 'aberto' }, 'ped-4k9e2': { cat: 'Negócios e mercado', pais: 'BR', titulo: P['ped-4k9e2'].titulo, valor: 290, pessoas: 5, prazo: '20/11', status: 'travado' }, 'ped-5r2k8': { cat: 'Governo e políticas públicas', pais: 'CL', titulo: P['ped-5r2k8'].titulo, valor: 300, pessoas: 3, prazo: '20/12', status: 'aberto' } };
+        var lista = Object.keys(outros).filter(function (k) { return k !== id; }).slice(0, 3);
+        setHtml('#outros-grid', lista.map(function (k) {
+          var o = outros[k], href = 'pedido.html' + (k === 'ped-2c8d1' ? '' : '?p=' + k), s = o.valor * .25;
+          var foot = o.status === 'travado' ? '<button class="btn btn-sm btn-wax" disabled><i data-icon="lock"></i>Entrar por ' + usd(o.valor) + ' · travado</button>' : '<a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por ' + usd(o.valor) + ', sinal de ' + usd(s) + ' agora</a><a class="btn btn-sm btn-primary" href="../seller/novo-anuncio.html?atender=' + k + '"><i data-icon="upload"></i>Atender este pedido</a>';
+          return '<article class="card" data-href="' + href + '"><div class="card-body stack-sm"><div class="row between"><span class="row" style="gap:8px"><span class="eyebrow">' + o.cat + '</span><span class="tag">' + o.pais + '</span></span>' + (o.status === 'travado' ? '<span class="badge st-analise">Travado</span>' : '<span class="badge st-ativo">Aberto</span>') + '</div><b><a href="' + href + '">' + o.titulo + '</a></b><dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">' + usd(o.valor) + '</dd></div><div><dt>Pessoas</dt><dd>' + o.pessoas + '</dd></div><div><dt>Total</dt><dd>' + usd(o.valor * o.pessoas) + '</dd></div><div><dt>Prazo</dt><dd>' + o.prazo + '</dd></div></dl></div><div class="card-foot">' + foot + '</div></article>';
+        }).join(''));
+      })();
+    </script>
+</main>
+</body>
+</html>

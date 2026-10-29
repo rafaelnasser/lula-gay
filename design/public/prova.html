@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Prova lcr-4m2x9 · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
+    [id] { scroll-margin-top: 84px; }
+    .seal-lg { display: inline-block; }
+    .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
+    .proof-head { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .proof-head h1 { max-width: 28ch; }
+    .proof-head .row { justify-content: center; }
+    .code { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 14px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--fg-2); overflow-x: auto; margin: 0; white-space: pre; line-height: 1.6; }
+    .code b { color: var(--brass); font-weight: 500; }
+    .staff { display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm); }
+    .staff .av { width: 32px; height: 32px; border-radius: 8px; background: var(--brass-soft); color: var(--brass); font-weight: 700; font-size: var(--fs-xs); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .staff .role { color: var(--muted); font-size: var(--fs-xs); display: block; }
+    .steps { margin: 0; padding-left: 20px; font-size: var(--fs-sm); color: var(--fg-2); }
+    .steps li + li { margin-top: 6px; }
+    .copy-cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  </style>
+</head>
+<body data-shell="public" data-page="prova" data-root="../">
+<main>
+  <section class="section tight">
+    <div class="container narrow">
+      <div class="proof-head">
+        <span data-seal class="seal-lg"></span>
+        <p class="eyebrow">Prova de curadoria · lacre.app/p/4m2x9</p>
+        <h1 class="display">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</h1>
+        <div class="row"><span class="badge">Jornalismo e investigação</span><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-ativo">Ativo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="tag">lcr-4m2x9</span><span class="tag">BR · português</span></div>
+        <p class="small muted" style="max-width:64ch">Página pública, sem login, estável para sempre. Ela prova que este conteúdo existia, foi analisado por pessoas e tinha exatamente este hash em 20/10/2026, antes do primeiro apoio. Nenhum post nas redes sai sem ela.</p>
+        <div class="row"><a class="btn btn-primary" href="item.html"><i data-icon="arrow-right"></i>Ver item</a><button class="btn" data-copy="https://lacre.app/p/4m2x9"><i data-icon="share"></i>Compartilhar</button><span id="denunciar"></span><button class="icon-btn" data-modal-open="m-denuncia" data-tip="Reportar este item" aria-label="Reportar este item" style="color:var(--muted-2)"><i data-icon="flag"></i></button></div>
+      </div>
+      <div class="card mt-3">
+        <div class="card-body stack-sm">
+          <div class="goal-head"><span class="raised">US$ 54.120</span><span class="goal">meta US$ 80.000 · 68 % · 1.187 apoiadores · encerra em <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></span></div>
+          <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
+          <div class="progress-marks"><span style="left:25%">25 %</span><span style="left:50%">50 %</span><span style="left:75%">75 %</span><span style="left:100%">meta</span></div>
+          <p class="xs muted">Arrecadado conferido on-chain na carteira do item (reconciliação a cada minuto). Ao bater a meta, todo o conteúdo fica público para todos ao mesmo tempo. Prazo 15/11/2026: se vencer antes da meta, fica com o vendedor o valor do último marco batido (hoje US$ 40.000, marco 50 %) e o resto volta aos apoiadores.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container narrow stack">
+      <!-- Hash -->
+      <div class="card">
+        <div class="card-head"><i data-icon="hash"></i><h3>Hash SHA-256 do pacote selado</h3><div class="actions"><span class="badge badge-outline">5 arquivos · 2,5 GB</span></div></div>
+        <div class="card-body stack-sm">
+          <div class="hash wrap"><code id="hash-pacote">3f9a7c0e1d4b8a2f6e5c9d0b7a1e3f4c2d6b8a9e0f1c3d5b7a9e2f4c6d8bc21e</code><button class="btn btn-sm btn-ghost" data-copy="#hash-pacote" aria-label="Copiar hash do pacote"><i data-icon="copy"></i></button></div>
+          <p class="xs muted">O pacote é o conjunto dos arquivos abaixo mais o manifesto JSON com os hashes individuais. Calculado no servidor no envio e conferido com o hash calculado no navegador do vendedor; os dois bateram.</p>
+          <div class="table-wrap">
+            <table class="table compact">
+              <thead><tr><th>Arquivo</th><th class="num">Tamanho</th><th>SHA-256</th><th>Escopo</th></tr></thead>
+              <tbody>
+                <tr><td><b>relatorio-apuracao-ouro-para.pdf</b><span class="sub">212 páginas · PDF com OCR</span></td><td class="num">61 MB</td><td><span class="copy-cell mono xs">a71c4e9b…3a5d9e6f<button class="btn btn-sm btn-ghost" data-copy="a71c4e9b03d5f82e6c1b9a7d4f0e2c8b5a3d7e1f9c6b0a4d8e2f7c1b3a5d9e6f" aria-label="Copiar"><i data-icon="copy"></i></button></span></td><td><span class="badge badge-wax">meta</span></td></tr>
+                <tr><td><b>processos-anm-2008-2026.xlsx</b><span class="sub">4 abas</span></td><td class="num">3,4 MB</td><td><span class="copy-cell mono xs">5e2d8c1a…7b2e8f1d<button class="btn btn-sm btn-ghost" data-copy="5e2d8c1a7f4b0e9d3c6a2b8f1e7d4c0a9b5e3f2d8c7a1b6e0f4d9c3a7b2e8f1d" aria-label="Copiar"><i data-icon="copy"></i></button></span></td><td><span class="badge badge-wax">meta</span></td></tr>
+                <tr><td><b>notas-fiscais-compra-ouro.csv</b><span class="sub">18.400 linhas</span></td><td class="num">9,2 MB</td><td><span class="copy-cell mono xs">c93f1b7e…1d5a9c4e<button class="btn btn-sm btn-ghost" data-copy="c93f1b7e2a6d0c5f8e4b1a9d7c3e6f0b2d8a5c1e9f4b7d3a0c6e2f8b1d5a9c4e" aria-label="Copiar"><i data-icon="copy"></i></button></span></td><td><span class="badge badge-wax">meta</span></td></tr>
+                <tr><td><b>anexos-documentos-publicos.zip</b><span class="sub">140 arquivos</span></td><td class="num">310 MB</td><td><span class="copy-cell mono xs">0b6e3a9d…4c7e0f3b<button class="btn btn-sm btn-ghost" data-copy="0b6e3a9d5c2f8e1b7a4d0c6f3e9b2a5d8c1f7e4b0a3d6c9e2f5b8a1d4c7e0f3b" aria-label="Copiar"><i data-icon="copy"></i></button></span></td><td><span class="badge badge-wax">meta</span></td></tr>
+                <tr><td><b>entrevistas-audio-transcricoes.zip</b><span class="sub">31 áudios + transcrições</span></td><td class="num">2,1 GB</td><td><span class="copy-cell mono xs">7d4a0f2c…3e5b0d7a<button class="btn btn-sm btn-ghost" data-copy="7d4a0f2c9e6b1d8a3f5c7e0b4d9a2c6f1e8b5d3a7c0f4e9b2d6a1c8f3e5b0d7a" aria-label="Copiar"><i data-icon="copy"></i></button></span></td><td><span class="badge badge-wax">meta</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carimbo e equipe -->
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><i data-icon="stamp"></i><h3>Carimbo de tempo e curadoria</h3></div>
+          <div class="card-body">
+            <dl class="kv">
+              <dt>Aprovado em</dt><dd><b>20/10/2026 · 16:42:07 BRT</b><br><span class="muted xs">19:42:07 UTC · assinatura da plataforma sobre hash + data</span></dd>
+              <dt>Política aplicada</dt><dd>Curadoria v1.2 · <a class="link" href="politicas.html#versoes">ver versões</a></dd>
+              <dt>Autenticidade</dt><dd><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></dd>
+              <dt>Curadores</dt><dd>2 independentes (regra de dois olhos)</dd>
+              <dt>Revisão jurídica</dt><dd>Sim · parecer em 19/10: aprovar com redação</dd>
+              <dt>Publicado em</dt><dd>21/10/2026 · 10:00 BRT · X, Telegram, Bluesky</dd>
+              <dt>Âncora externa</dt><dd>OpenTimestamps · em breve (V2)</dd>
+            </dl>
+            <div class="panel small mt-2"><b>O que “Verificado parcialmente” significa aqui</b><p class="muted mt-1">Documentos públicos conferidos na fonte (ANM, Ibama, TJPA, respostas de LAI com protocolo). Entrevistas consistentes entre si e com os documentos, mas não verificáveis uma a uma. Escala pública de quatro níveis: Verificado, Verificado parcialmente, Plausível, Não verificado.</p></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><i data-icon="users"></i><h3>Quem analisou</h3></div>
+          <div class="card-body stack-sm">
+            <div class="staff"><span class="av">AR</span><div><b>Ana R.</b><span class="role">Curadora sênior · primeira análise · 15/10</span></div></div>
+            <div class="staff"><span class="av">BM</span><div><b>Bruno M.</b><span class="role">Curador · segunda análise, independente · 16/10</span></div></div>
+            <div class="staff"><span class="av">CS</span><div><b>Carla S.</b><span class="role">Jurídico · parecer: aprovar com redação (14 trechos) · 19/10</span></div></div>
+            <div class="staff"><span class="av">DT</span><div><b>Diego T.</b><span class="role">Publicação · post e card nas redes · 21/10</span></div></div>
+            <p class="xs muted">A segunda análise não vê as notas da primeira até concluir a própria. A equipe assina com nome e papel; usuários, nunca.</p>
+            <div class="alert alert-info"><i data-icon="info"></i><div>Checklist de 7 blocos concluído: legalidade, autenticidade, qualidade, prévia, preço e modelo, terceiros e redação, duplicidade.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prévia aprovada e vendedor -->
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-head"><i data-icon="eye"></i><h3>Prévia aprovada</h3></div>
+          <div class="card-body stack-sm">
+            <div class="preview lg" data-type="documento"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></div>
+            <div class="doc-mock"><h5>Relatório · Capítulo 4 · Fluxo das notas fiscais</h5><div class="line"></div><div class="line short"></div><p>Entre 2021 e 2023, a empresa <span class="redacted">xxxxxxxxxxxxxxxx</span> emitiu 1.248 notas de compra de ouro em <span class="redacted">xxxxxxxxx</span>, município sem lavra autorizada. O responsável técnico, <span class="redacted">xxxxxxxxxxxx</span>, assina também…</p><div class="line"></div><div class="line short"></div><span class="wm">prévia pública · lcr-4m2x9</span></div>
+            <p class="xs muted">Escolhida pela curadoria entre as prévias geradas automaticamente. Tarjas aplicadas em nova versão do arquivo; a versão original ficou inacessível.</p>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><i data-icon="user"></i><h3>Vendedor</h3></div>
+            <div class="card-body">
+              <span class="handle lg" data-handle="sextante-21c9" data-rep="4,9 · 12 itens aprovados · Verificado 9×"></span>
+              <dl class="kv-row mt-2"><div><dt>Lacres rompidos</dt><dd>3</dd></div><div><dt>Disputas perdidas</dt><dd>0</dd></div><div><dt>Desde</dt><dd>out/2025</dd></div></dl>
+              <div class="anon-note mt-2"><i data-icon="shield"></i><span>O pseudônimo do vendedor aparece sempre: é a base da reputação dele. Nenhum dado de identidade existe por trás dele.</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><i data-icon="activity"></i><h3>Status do item</h3></div>
+            <div class="card-body">
+              <dl class="kv">
+                <dt>Status</dt><dd><span class="badge st-ativo">Ativo</span></dd>
+                <dt>Modelo</dt><dd>Lacre coletivo · marcos garantidos (25, 50, 75 e 90 %) · liberação pública ao bater a meta</dd>
+                <dt>Garantido ao vendedor</dt><dd>US$ 40.000 (marco 50 %, batido em 25/10) · volta aos apoiadores se falhar antes do 75 %: US$ 14.120</dd>
+                <dt>Prazo</dt><dd>15/11/2026 · 23:59 BRT</dd>
+                <dt>País · idioma</dt><dd>Brasil · português</dd>
+                <dt>Exclusividade</dt><dd>À venda por US$ 250.000 até a meta ser batida</dd>
+                <dt>Denúncias</dt><dd>0 abertas · 0 procedentes</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linha do tempo -->
+      <div class="card">
+        <div class="card-head"><i data-icon="clock"></i><h3>Linha do tempo pública</h3></div>
+        <div class="card-body">
+          <div class="timeline">
+            <div class="tl-item ok"><div class="when">14/10/2026 · 09:12</div><div class="what">Enviado para curadoria pelo vendedor · versão 1 · hash calculado no navegador</div></div>
+            <div class="tl-item ok"><div class="when">14/10 · 09:15</div><div class="what">Triagem automática concluída · metadados removidos (PDF: autor e software; áudios: tags ID3) · antivírus limpo · alerta de PII encaminhado à curadoria</div></div>
+            <div class="tl-item info"><div class="when">15/10 e 16/10</div><div class="what">Primeira e segunda análises, independentes · categoria de risco alto</div></div>
+            <div class="tl-item info"><div class="when">17/10</div><div class="what">Escalado ao jurídico · pessoas identificáveis e documentos de origem institucional</div></div>
+            <div class="tl-item ok"><div class="when">19/10 · 15:20</div><div class="what">Parecer jurídico: aprovar com redação · 14 trechos tarjados em nova versão · título reescrito e aceito pelo vendedor</div></div>
+            <div class="tl-item brass"><div class="when">20/10 · 16:42</div><div class="what">Aprovado · Verificado parcialmente · política v1.2 · hash do pacote registrado · carteira do item criada (0x4m2x…c21e) · esta prova emitida</div></div>
+            <div class="tl-item ok"><div class="when">21/10 · 10:00</div><div class="what">Publicado · lacre aberto · post no X, Telegram e Bluesky com o link desta prova</div></div>
+            <div class="tl-item wax"><div class="when">22/10 · 14:10</div><div class="what">Marco 25 % · US$ 20.300 · 488 apoiadores · US$ 20.000 garantidos ao vendedor</div></div>
+            <div class="tl-item wax"><div class="when">25/10 · 09:35</div><div class="what">Marco 50 % · US$ 40.120 · 912 apoiadores · US$ 40.000 garantidos ao vendedor</div></div>
+            <div class="tl-item"><div class="when">até 15/11/2026</div><div class="what">Próximos marcos: 75 %, 90 %, meta batida (lacre rompido: tudo público na hora; finalização 72 h depois) ou fim do prazo antes da meta: o valor do último marco batido fica com o vendedor e o que entrou depois volta ao endereço de origem</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carteira do item -->
+      <div class="card" id="carteira">
+        <div class="card-head"><i data-icon="vault"></i><h3>Carteira do item</h3><div class="actions"><span class="badge badge-outline"><i data-icon="globe"></i>Transparência on-chain</span></div></div>
+        <div class="card-body stack-sm">
+          <div class="hash wrap"><code id="addr-item">0x4m2x…c21e</code><button class="btn btn-sm btn-ghost" data-copy="#addr-item" aria-label="Copiar endereço da carteira do item"><i data-icon="copy"></i></button></div>
+          <dl class="kv-row"><div><dt>Rede</dt><dd>Polygon</dd></div><div><dt>Moeda</dt><dd>USDT</dd></div><div><dt>Recebido</dt><dd>US$ 54.120</dd></div><div><dt>Pagamentos</dt><dd>1.187</dd></div><div><dt>Criada em</dt><dd>20/10/2026 · na aprovação</dd></div></dl>
+          <p class="small">Qualquer pessoa pode conferir on-chain quanto entrou.</p>
+          <div class="row"><a class="btn btn-sm" href="#" data-toast="Abriria o explorador da rede (polygonscan)"><i data-icon="external-link"></i>Conferir no explorador</a><a class="link small" href="como-funciona.html">Como o dinheiro funciona</a></div>
+          <p class="xs muted">Cada apoio foi pago para um endereço derivado próprio, com valor exato. Se a meta não bater até 15/11, fica com o vendedor o valor do último marco batido (hoje US$ 40.000); os apoios que entraram depois dele voltam ao endereço de origem, descontada só a taxa de rede.</p>
+        </div>
+      </div>
+
+      <!-- Como verificar -->
+      <div class="card" id="verificar">
+        <div class="card-head"><i data-icon="scan"></i><h3>Como verificar o que você recebeu</h3></div>
+        <div class="card-body stack">
+          <ol class="steps">
+            <li>Abra o item no seu cofre e baixe o arquivo (quando o item permite download). O cofre também mostra o manifesto do pacote.</li>
+            <li>No terminal, calcule o SHA-256 do arquivo baixado:</li>
+          </ol>
+          <pre class="code">$ sha256sum relatorio-apuracao-ouro-para.pdf
+<b>a71c4e9b03d5f82e6c1b9a7d4f0e2c8b5a3d7e1f9c6b0a4d8e2f7c1b3a5d9e6f</b>  relatorio-apuracao-ouro-para.pdf
+
+# macOS:   shasum -a 256 relatorio-apuracao-ouro-para.pdf
+# Windows: certutil -hashfile relatorio-apuracao-ouro-para.pdf SHA256</pre>
+          <ol class="steps" start="3">
+            <li>Compare o resultado com o hash do arquivo nesta página. Se for igual, o arquivo é exatamente o que a curadoria analisou em 20/10/2026. Qualquer byte diferente muda o hash inteiro.</li>
+          </ol>
+          <div class="field"><label for="cmp">Cole um hash para comparar</label><div class="input-group"><input id="cmp" class="input mono" value="a71c4e9b03d5f82e6c1b9a7d4f0e2c8b5a3d7e1f9c6b0a4d8e2f7c1b3a5d9e6f" aria-label="Hash para comparar"><button class="btn btn-primary" data-toast="Hash idêntico ao do arquivo relatorio-apuracao-ouro-para.pdf (meta base)">Comparar</button></div><span class="hint">A comparação acontece no seu navegador. Nada é enviado aos nossos servidores.</span></div>
+          <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Arquivos com marca d’água</span>Quando o item exige marca d’água por conta, o arquivo baixado tem um hash próprio. Nesse caso o cofre exibe os dois hashes, o do original e o do seu exemplar, e a assinatura da plataforma que liga um ao outro.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <div class="modal-backdrop" id="m-denuncia"><div class="modal wide">
+    <div class="modal-head"><h3>Reportar este item</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+    <div class="modal-body">
+      <p class="small muted mb-2">Sem login. A denúncia entra na fila da curadoria com prioridade alta; o item pode ser suspenso enquanto é reanalisado. Resposta em até 5 dias; pedidos de titular de dados (LGPD, GDPR ou equivalente) em até 15.</p>
+      <form class="form-grid" data-submit-toast="Denúncia recebida · protocolo DEN-2026-0417. A curadoria responde em até 5 dias.">
+        <div class="field"><label for="d-motivo">Motivo</label><select id="d-motivo" class="select"><option>Dados pessoais de terceiros</option><option>Direitos autorais</option><option>Falsificação ou fabricação</option><option>Conteúdo ilegal</option><option>Sou a pessoa citada (pedido de titular de dados)</option><option>Outro</option></select></div>
+        <div class="field"><label for="d-trecho">Onde está o problema (opcional)</label><input id="d-trecho" class="input" placeholder="Ex.: página 47 do relatório"></div>
+        <div class="field full"><label for="d-desc">Descrição</label><textarea id="d-desc" class="textarea" style="min-height:90px" placeholder="Descreva o problema com precisão. Não inclua dados pessoais de outras pessoas."></textarea></div>
+        <div class="field full"><label for="d-contato">Contato para resposta (opcional)</label><input id="d-contato" class="input" placeholder="Deixe em branco para acompanhar só pelo protocolo"><span class="hint">Só o jurídico vê; apagado ao encerrar o caso. Não registramos quem denunciou.</span></div>
+        <label class="check full"><input type="checkbox"><span>Declaro que as informações são verdadeiras. Denúncias falsas reiteradas são bloqueadas.</span></label>
+        <div class="form-actions full"><button class="btn" type="button" data-modal-close>Cancelar</button><button class="btn btn-danger" type="submit"><i data-icon="flag"></i>Enviar denúncia</button></div>
+      </form>
+    </div>
+  </div></div>
+  <script>if (location.hash === '#denunciar') { window.addEventListener('load', function () { var m = document.getElementById('m-denuncia'); if (m) m.classList.add('open'); }); }</script>
+</main>
+</body>
+</html>

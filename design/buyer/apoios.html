@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Apoios · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contorna bug do app.css: .sidebar-backdrop não tem display:none fora do breakpoint móvel e ocupa a 2ª coluna do grid */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none !important; } }
+    svg.ico { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+    .row.start > div { flex: 1 1 0; min-width: 0; }
+    @media (min-width: 901px) { .split { grid-template-columns: minmax(0, 1fr) 300px; } }
+    .apoio .item-row { align-items: start; }
+    @media (min-width: 701px) { .apoio .item-row { grid-template-columns: 120px minmax(0, 1fr) auto; } }
+    .apoio .item-row .actions { display: flex; flex-direction: column; gap: 8px; min-width: 200px; }
+    .apoio .item-row .actions .btn { justify-content: flex-start; }
+    @media (max-width: 700px) { .apoio .item-row .actions { flex-direction: row; flex-wrap: wrap; min-width: 0; } }
+    .selo { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface-2); }
+    .selo .s-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--brass-soft); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .selo .s-icon svg { width: 18px; height: 18px; color: var(--brass); }
+    .selo.locked { opacity: .7; } .selo.locked .s-icon { background: var(--surface-3); } .selo.locked .s-icon svg { color: var(--muted); }
+    .mini-ledger { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content; gap: 4px 12px; font-size: var(--fs-xs); color: var(--muted); font-variant-numeric: tabular-nums; }
+    .mini-ledger b { color: var(--fg-2); font-weight: 500; }
+    .mini-ledger .mono { font-family: var(--font-mono); }
+    .mini-ledger .regra { display: block; margin-top: 2px; color: var(--fg-2); font-weight: 500; }
+    .mini-ledger .regra svg { width: 12px; height: 12px; vertical-align: -2px; color: var(--brass); }
+    .mini-ledger .regra.volta svg { color: var(--info); }
+    .se-falhar { border-left: 3px solid var(--warn); background: var(--surface); border-radius: var(--r-sm); padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; }
+  </style>
+</head>
+<body data-shell="buyer" data-page="apoios" data-root="../" data-title="Apoios">
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Minha conta</p>
+      <h1>Apoios</h1>
+      <p class="sub">Lacres coletivos que você apoiou e pedidos com recompensa de que você participa. Cada pagamento fica na carteira do próprio lacre ou pedido até o resultado.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="../public/pedidos.html"><i data-icon="file-search"></i>Mural de pedidos</a>
+      <a class="btn btn-wax" href="../public/explorar.html#coletivos"><i data-icon="hand-coins"></i>Lacres em andamento</a>
+    </div>
+  </div>
+
+  <div class="stat-grid mb-3">
+    <div class="stat"><span class="label">Apoiado em lacres</span><span class="value">US$ 640,00</span><span class="delta flat">4 lacres · 5 apoios</span></div>
+    <div class="stat"><span class="label">Na carteira do lacre</span><span class="value">US$ 250,00</span><span class="delta flat"><i data-icon="lock"></i>lcr-4m2x9 · US$ 100 já garantidos ao vendedor (marco 50 %)</span></div>
+    <div class="stat"><span class="label">Lacres rompidos</span><span class="value">2</span><span class="delta up"><i data-icon="unlock"></i>conteúdo público · selo no seu perfil</span></div>
+    <div class="stat"><span class="label">Reembolsado à origem</span><span class="value">US$ 90,00</span><span class="delta flat"><i data-icon="rotate-ccw"></i>1 compra com exclusividade · 1 reclamação aceita (fundo de garantia)</span></div>
+  </div>
+
+  <div class="split">
+    <div data-tabs>
+      <div class="tabs">
+        <a class="tab active" data-tab="lacres" href="#lacres">Lacres apoiados <span class="count">4</span></a>
+        <a class="tab" data-tab="pedidos" href="#pedidos">Pedidos <span class="count">2</span></a>
+      </div>
+
+      <div class="tab-panel active" data-panel="lacres">
+        <div class="stack">
+          <div class="alert alert-anon"><i data-icon="shield"></i><div><span class="alert-title">Público ao romper, pagamento rastreável</span>Cada marco (25, 50, 75 e 90 %) libera uma prévia ao público. Ao bater 100 %, todo o conteúdo fica público para todos ao mesmo tempo, com post nas redes, e quem apoiou ganha o selo “Rompeu este lacre”. Cada apoio é um pagamento da sua carteira cripto para um endereço derivado seu na carteira do lacre. Se o prazo vencer antes da meta, o vendedor fica com o valor do último marco batido (ele pagou as prévias já liberadas) e volta a você, ao endereço de origem, só o que entrou depois dele; sem nenhum marco batido, tudo volta. Uma compra com exclusividade devolve todos os apoios, inteiros.</div></div>
+
+          <!-- lcr-4m2x9 · em andamento -->
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="documento"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row">
+                  <span class="badge st-ativo">Em andamento</span>
+                  <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                  <span class="tag">lcr-4m2x9</span><span class="tag">BR</span>
+                </div>
+                <h3><a href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
+                <div class="row small muted"><span class="handle" data-handle="sextante-21c9" data-rep="4,9 · 12 itens"></span><span>Jornalismo e investigação</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></div>
+                <div class="goal-head"><span class="raised">US$ 54.120</span><span class="goal">meta US$ 80.000 · 68 % · 1.187 apoiadores · 1.187 pagamentos na carteira do lacre</span></div>
+                <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
+                <div class="row small"><span><i data-icon="timer" class="ico brass"></i> Encerra em <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span> (15/11)</span><span class="muted">Ao bater 100 %, todo o conteúdo fica público para todos ao mesmo tempo, com post nas redes.</span></div>
+                <div class="panel">
+                  <div class="row between"><b class="small">Você apoiou US$ 250,00 em 2 pagamentos</b><span class="badge badge-wax"><i data-icon="lock"></i>na carteira do lacre</span></div>
+                  <div class="mini-ledger mt-1">
+                    <span>22/10</span><span>20:12 · 100 USDT · Polygon · txid <span class="mono">0x2a9c…41f7</span> · confirmado (12 de 12)<span class="regra"><i data-icon="lock"></i> garantido ao vendedor: entrou antes do marco 50 %</span></span><b>US$ 100,00</b>
+                    <span>25/10</span><span>18:25 · 150 USDT · Polygon · txid <span class="mono">0x8d14…e0b9</span> · confirmado (12 de 12)<span class="regra volta"><i data-icon="rotate-ccw"></i> volta para você se o lacre falhar antes do marco 75 %</span></span><b>US$ 150,00</b>
+                  </div>
+                  <div class="se-falhar mt-1">
+                    <b class="xs">Se o lacre não bater a meta</b>
+                    <span class="xs muted">Já garantido ao vendedor: <b>US$ 40.000</b> (marco 50 %, batido em 25/10 às 09:35), que pagou as prévias já liberadas. Se o prazo (15/11) vencer antes do marco 75 % (US$ 60.000), o vendedor fica com o valor do último marco batido e o que entrou depois dele, hoje US$ 14.120, volta aos apoiadores, ao endereço de origem, menos a taxa de rede. O conteúdo completo não é liberado; as prévias continuam públicas.</span>
+                    <span class="xs">Para você, hoje: <b>US$ 100 ficam com o vendedor</b> · <b>US$ 150 voltam</b>. Se o lacre passar de 75 % e falhar depois, os US$ 150 também ficam com o vendedor.</span>
+                  </div>
+                  <p class="xs muted mt-1">Fica na carteira do lacre até o resultado. Carteira pública <a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x4m2x…c21e</a>: qualquer pessoa confere on-chain quanto entrou. Ao bater a meta, tudo é liberado, inclusive os 31 áudios. Faltam US$ 25.880.</p>
+                  <p class="xs muted mt-1"><i data-icon="crown" class="ico"></i> Este lacre tem valor de exclusividade (US$ 250.000). Se alguém comprar, seus 2 pagamentos voltam integralmente aos endereços de origem.</p>
+                </div>
+              </div>
+              <div class="actions">
+                <a class="btn btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Apoiar mais</a>
+                <button class="btn" data-copy="https://lacre.app/p/4m2x9?via=an0n-k7x2" data-tip="Link com contador anônimo"><i data-icon="link"></i>Compartilhar link anônimo</button>
+                <a class="btn btn-ghost" href="../public/item.html"><i data-icon="arrow-right"></i>Ver item e atualizações</a>
+                <a class="btn btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Prova e carteira pública</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- lcr-7w3n8 · lacre rompido e público em 12/10 -->
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="audio"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row">
+                  <span class="badge st-rompido"><i data-icon="unlock"></i>Lacre rompido</span>
+                  <span class="badge st-finalizado">Público desde 12/10</span>
+                  <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                  <span class="tag">lcr-7w3n8</span><span class="tag">BR</span>
+                </div>
+                <h3><a href="../public/item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</a></h3>
+                <div class="row small muted"><span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 8 itens"></span><span>Governo e políticas públicas</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <div class="goal-head"><span class="raised">US$ 19.240</span><span class="goal">meta US$ 18.000 batida em 12/10 · 107 % · 612 apoiadores</span></div>
+                <div class="progress"><div class="progress-bar wax" data-width="100%"></div></div>
+                <div class="row small"><span><i data-icon="check-circle" class="ico ok"></i> Rompido e público em 12/10 · selo “Rompeu este lacre” no seu perfil</span></div>
+                <div class="panel">
+                  <div class="row between"><b class="small">Você apoiou US$ 300,00 em 1 pagamento</b><span class="badge badge-ok"><i data-icon="check"></i>acesso no cofre</span></div>
+                  <div class="mini-ledger mt-1">
+                    <span>20/09</span><span>300 USDT · Polygon · txid <span class="mono">0xc7d2…58e1</span> · confirmado (12 de 12)</span><b>US$ 300,00</b>
+                    <span>12/10</span><span>Lacre rompido · conteúdo público para todos · acesso também no seu cofre (ENT-7C1D)</span><b>—</b>
+                    <span>15/10</span><span>Depois de 72 h sem disputa, o pagamento foi para o vendedor</span><b>—</b>
+                  </div>
+                  <p class="xs muted mt-1">Pacote: 200 h de transcrição em TXT e PDF (1.420 páginas), índice por sessão e planilha de falas por vereador. Download com marca d'água da sua conta.</p>
+                </div>
+              </div>
+              <div class="actions">
+                <a class="btn btn-primary" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a>
+                <a class="btn" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova pública</a>
+                <button class="btn btn-ghost" data-copy="https://lacre.app/p/7w3n8"><i data-icon="share"></i>Compartilhar</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- lcr-2d9r4 · lacre rompido · reclamação fora das 72 h paga pelo fundo de garantia (DSP-0203) -->
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row">
+                  <span class="badge st-rompido"><i data-icon="unlock"></i>Lacre rompido</span>
+                  <span class="badge st-finalizado">Público desde 01/10</span>
+                  <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                  <span class="tag">lcr-2d9r4</span><span class="tag">BR</span>
+                </div>
+                <h3><a href="../public/item.html">Mapa de 1.200 obras públicas paradas no Nordeste, com fotos e empenhos</a></h3>
+                <div class="row small muted"><span class="handle" data-handle="estenografo-7b3c" data-rep="4,4 · 3 itens"></span><span>Governo e políticas públicas</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></div>
+                <div class="goal-head"><span class="raised">US$ 9.350</span><span class="goal">meta US$ 9.000 batida em 01/10 · 104 % · 187 apoiadores</span></div>
+                <div class="progress"><div class="progress-bar wax" data-width="100%"></div></div>
+                <div class="row small"><span><i data-icon="alert-triangle" class="ico warn"></i> Público desde 01/10, com 1.200 obras em vez das 1.500 anunciadas na prova · descrição corrigida em 10/10</span></div>
+                <div class="panel">
+                  <div class="row between"><b class="small">Você apoiou US$ 50,00 · reembolsado pelo fundo de garantia em 10/10</b><span class="badge badge-outline"><i data-icon="rotate-ccw"></i>reembolsado</span></div>
+                  <div class="mini-ledger mt-1">
+                    <span>01/10</span><span>50 USDT · Polygon · txid <span class="mono">0x4d0e…a9c3</span> · confirmado (12 de 12)</span><b>US$ 50,00</b>
+                    <span>01/10</span><span>Lacre rompido às 10:10, com o seu apoio · conteúdo público para todos · acesso também no seu cofre (ENT-5B2C)</span><b>—</b>
+                    <span>04/10</span><span>Às 10:10, depois de 72 h sem disputa, o pagamento foi para o vendedor</span><b>—</b>
+                    <span>08/10</span><span>Sua reclamação DSP-0203 às 22:10, depois da sua janela de 72 h: conteúdo diferente da prova pública · aceita excepcionalmente</span><b>—</b>
+                    <span>10/10</span><span>Reembolso ao endereço de origem pelo fundo de garantia (o pagamento já tinha ido para o vendedor) · txid <span class="mono">0x2d9r…51fe</span></span><b>+US$ 50,00</b>
+                  </div>
+                  <p class="xs muted mt-1">Depois das 72 h o pagamento já tinha ido para o vendedor; por isso só reclamações excepcionais são aceitas, e o reembolso sai do fundo de garantia da plataforma. O conteúdo continua público.</p>
+                </div>
+              </div>
+              <div class="actions">
+                <a class="btn btn-primary" href="../buyer/disputa.html"><i data-icon="gavel"></i>Ver a reclamação DSP-0203</a>
+                <a class="btn" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a>
+                <a class="btn btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova pública</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- lcr-6c4t2 · comprado com exclusividade antes de romper (não é falha) · reembolso total ao endereço de origem -->
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row">
+                  <span class="badge st-vendido"><i data-icon="crown"></i>Vendido com exclusividade</span>
+                  <span class="badge badge-outline"><i data-icon="rotate-ccw"></i>todos os apoios devolvidos</span>
+                  <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                  <span class="tag">lcr-6c4t2</span><span class="tag">BR</span>
+                </div>
+                <h3><a href="../public/item.html">Planilha de preços de leilões de gado em 40 municípios de Mato Grosso (2019–2026)</a></h3>
+                <div class="row small muted"><span class="handle" data-handle="bussola-c4e1" data-rep="4,5 · 6 itens"></span><span>Negócios e mercado</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span></div>
+                <div class="goal-head"><span class="raised muted">US$ 2.350</span><span class="goal">meta US$ 6.000 · 39 % · 118 apoiadores · terminou em 16/10 por compra com exclusividade (US$ 15.000)</span></div>
+                <div class="progress"><div class="progress-bar" data-width="39%" style="background: var(--muted-2)"></div></div>
+                <div class="panel">
+                  <div class="row between"><b class="small">Você apoiou US$ 40,00 · reembolsado ao seu endereço de origem em 16/10</b><span class="badge badge-outline"><i data-icon="rotate-ccw"></i>reembolsado</span></div>
+                  <div class="mini-ledger mt-1">
+                    <span>03/10</span><span>40 USDT · Polygon · txid <span class="mono">0x61c9…0d4b</span> · confirmado (12 de 12)</span><b>US$ 40,00</b>
+                    <span>16/10</span><span>Reembolso ao endereço de origem · 40 USDT menos a taxa de rede (≈ US$ 0,04) · txid <span class="mono">0xb04d…3f1a</span></span><b>+US$ 40,00</b>
+                  </div>
+                  <p class="xs muted mt-1">Um único comprador pagou o valor de exclusividade. Não é uma falha do lacre: a compra com exclusividade devolve todos os apoios, inteiros, sem marcos garantidos ao vendedor. O item saiu do catálogo e o conteúdo não será liberado ao público. Todos os 118 pagamentos voltaram aos endereços de origem a partir da carteira do lacre. Nenhuma taxa sobre o seu apoio.</p>
+                </div>
+              </div>
+              <div class="actions">
+                <a class="btn" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Ver em Pagamentos</a>
+                <a class="btn btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Registro na prova pública</a>
+                <button class="btn btn-ghost" data-toast="Você será avisado se este vendedor publicar um novo lacre"><i data-icon="bell"></i>Avisar se voltar</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="pedidos">
+        <div class="stack">
+          <div class="alert alert-info"><i data-icon="info"></i><div><span class="alert-title">Como funciona</span>Quem se junta a um pedido paga um sinal de 25 % do valor por pessoa; todos têm o mesmo valor, e a recompensa total é o valor vezes o número de pessoas. Quando um atendimento é aprovado, você vê uma prévia e tem 72 h para pagar os 75 % restantes ou contestar com motivo. Se o valor subir, você tem 48 h para completar o sinal. O sinal de quem desiste fica com o Lacre como taxa de serviço; só volta se o prazo acabar sem nenhum vendedor. Hoje: <b>US$ 200,00</b> de sinal no ped-2c8d1 (faltam US$ 600 depois da prévia) · 1 pedido atendido.</div></div>
+
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="dados"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="badge st-ativo">Aberto</span><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido com recompensa</span><span class="badge badge-outline">Aberto por você</span><span class="tag">ped-2c8d1</span><span class="tag">BR</span></div>
+                <h3><a href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></h3>
+                <div class="row small muted"><span>Saúde e meio ambiente</span><span>Prazo 30/11/2026 · <span class="countdown" data-deadline="2026-11-30T23:59:00-03:00"></span></span><span>0 atendimentos em curadoria</span></div>
+                <dl class="kv-row">
+                  <div><dt>Valor por pessoa</dt><dd>US$ 800,00</dd></div>
+                  <div><dt>Pessoas</dt><dd>4</dd></div>
+                  <div><dt>Recompensa total</dt><dd class="wax">US$ 3.200,00</dd></div>
+                  <div><dt>Seu sinal</dt><dd>US$ 200,00 · 125 em 12/10 + 75 em 20/10</dd></div>
+                  <div><dt>Falta depois da prévia</dt><dd>US$ 600,00</dd></div>
+                  <div><dt>Carteira do pedido</dt><dd><a class="link mono" href="#" data-toast="Abriria o explorador da rede (polygonscan)">0x2c8d…91af</a> · Polygon</dd></div>
+                </dl>
+                <p class="xs muted">Seu sinal fica na carteira do pedido. Quando um atendimento for aprovado, você vê a prévia e tem 72 h para pagar os US$ 600 restantes ou contestar com motivo. Se desistir, o sinal fica com o Lacre como taxa de desistência; ele só volta ao seu endereço de origem se o prazo acabar sem nenhum vendedor.</p>
+                <p class="xs muted"><i data-icon="layers" class="ico brass"></i> Extras deste pedido: 1 aberto (Reclamações registradas na ouvidoria por UPA · US$ 150 por pessoa · você não entrou) · 1 proposta pendente. Não entrar no extra não muda sua participação no pedido.</p>
+              </div>
+              <div class="actions">
+                <a class="btn btn-primary" href="../buyer/checkout.html"><i data-icon="arrow-up-right"></i>Cobrir o valor (mín. US$ 880)</a>
+                <a class="btn btn-ghost" href="../buyer/pedidos.html"><i data-icon="arrow-right"></i>Acompanhar em Meus pedidos</a>
+                <button class="btn btn-ghost" data-copy="https://lacre.app/r/2c8d1"><i data-icon="share"></i>Compartilhar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card apoio">
+            <div class="item-row">
+              <div class="preview" data-type="imagem"><div class="preview-lock"><span data-seal></span></div></div>
+              <div class="stack-sm">
+                <div class="row"><span class="badge st-liberado"><i data-icon="check"></i>Atendido · acesso liberado</span><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Pedido com recompensa</span><span class="badge badge-outline">Você se juntou · 28/09</span><span class="tag">ped-1b6j8</span><span class="tag">BR</span></div>
+                <h3><a href="../public/pedido.html">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a></h3>
+                <div class="row small muted"><span>Fotografia e vídeo</span><span>Atendido em 08/10 por <span class="handle" data-handle="cartografo-5a77"></span> · validado pela curadoria (Ana R.)</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span></div>
+                <dl class="kv-row">
+                  <div><dt>Valor por pessoa</dt><dd>US$ 200,00</dd></div>
+                  <div><dt>Pessoas</dt><dd>3</dd></div>
+                  <div><dt>Recompensa total</dt><dd>US$ 600,00</dd></div>
+                  <div><dt>Você pagou</dt><dd>US$ 200,00 · sinal de 50 em 28/09 + 150 em 07/10, depois da prévia</dd></div>
+                  <div><dt>Entrega</dt><dd>86 JPG · 1,4 GB · ENT-2P9Q</dd></div>
+                </dl>
+                <p class="xs muted">Depois de 72 h sem disputa, o pagamento foi para quem atendeu (11/10). Você e mais 2 pessoas têm o mesmo acesso. 1 extra atendido para outras 2 pessoas; você não entrou.</p>
+              </div>
+              <div class="actions">
+                <a class="btn btn-primary" href="../buyer/cofre.html"><i data-icon="vault"></i>Abrir no cofre</a>
+                <a class="btn" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova pública</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <aside class="stack">
+      <div class="card">
+        <div class="card-head"><h3>Seus selos</h3><span class="badge badge-brass">2 conquistados</span></div>
+        <div class="card-body stack-sm">
+          <div class="selo"><span class="s-icon"><i data-icon="unlock"></i></span><div><b class="small">Rompeu 2 lacres</b><div class="xs muted">Apoiou lacres coletivos que bateram a meta · 01/10 e 12/10/2026</div></div></div>
+          <div class="selo"><span class="s-icon"><i data-icon="calendar"></i></span><div><b class="small">Apoiador desde mar/2026</b><div class="xs muted">Primeiro apoio registrado em 15/03/2026</div></div></div>
+          <div class="selo locked"><span class="s-icon"><i data-icon="flame"></i></span><div><b class="small">Rompeu 3 lacres</b><div class="xs muted">Falta 1 · o lcr-4m2x9 conta quando bater a meta</div><div class="progress thin mt-1"><div class="progress-bar wax" data-width="67%"></div></div></div></div>
+          <div class="selo locked"><span class="s-icon"><i data-icon="target"></i></span><div><b class="small">Pedido atendido 3×</b><div class="xs muted">1 pedido de que você participou foi atendido · faltam 2</div><div class="progress thin mt-1"><div class="progress-bar" data-width="33%"></div></div></div></div>
+          <p class="xs muted">Selos ficam no seu pseudônimo e aparecem no seu perfil público.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Carteira do lacre e reembolso</h3></div>
+        <div class="card-body stack-sm small">
+          <div class="row start"><i data-icon="wallet" class="ico brass"></i><div>Você paga da sua carteira cripto (USDT ou USDC em Polygon, Tron ou Base) para um endereço derivado seu na carteira do lacre. Fica lá até o resultado: não rende nem pode ser usado em outra compra.</div></div>
+          <div class="row start"><i data-icon="unlock" class="ico brass"></i><div>Cada marco (25, 50, 75 e 90 %) libera uma prévia ao público. Ao bater 100 %, todo o conteúdo fica público para todos ao mesmo tempo, com post nas redes.</div></div>
+          <div class="row start"><i data-icon="clock" class="ico brass"></i><div>Você tem 72 h a partir da liberação para abrir disputa. Depois de 72 h sem disputa, o pagamento vai para o vendedor.</div></div>
+          <div class="row start"><i data-icon="rotate-ccw" class="ico brass"></i><div>Meta não batida: o vendedor fica com o valor do último marco batido (25, 50, 75 ou 90 %), que pagou as prévias já liberadas; o que entrou depois volta ao endereço de origem no fim do prazo, menos a taxa de rede. Sem marco batido, tudo volta e nada é cobrado.</div></div>
+          <div class="row start"><i data-icon="crown" class="ico brass"></i><div>Compra com exclusividade: o anúncio termina e todos os apoios voltam aos endereços de origem no mesmo dia.</div></div>
+          <div class="row start"><i data-icon="alert-triangle" class="ico brass"></i><div>Pague de uma carteira que você controla, nunca direto de uma corretora: reembolsos voltam ao endereço de origem.</div></div>
+          <div class="row start"><i data-icon="eye-off" class="ico brass"></i><div>Registramos item, valor, rede, txid e o endereço de origem, que fica só com a plataforma enquanto puder haver reembolso.</div></div>
+          <a class="link xs" href="../public/como-funciona.html">Como funciona um lacre coletivo</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

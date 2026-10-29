@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Análise · lcr-6b2v7 · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    /* contornos de bugs do CSS compartilhado: .sidebar-backdrop vira célula do grid acima de 1000 px; filhos de grid sem min-width 0 estouram em telas estreitas */
+    @media (min-width: 1001px) { .sidebar-backdrop { display: none; } }
+    .grid > *, .split > *, .split-3 > *, .form-grid > * { min-width: 0; }
+    .ico { display: inline-flex; align-items: center; vertical-align: middle; }
+    .ico svg { width: 15px; height: 15px; }
+    .card-head h3 { font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    .card-head .badge { margin-left: 4px; }
+    .card-sm .card-head { padding: 12px 16px; }
+    .viewer-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: var(--fs-xs); color: var(--muted); margin-bottom: 10px; }
+    .viewer-bar .pg { font-family: var(--font-mono); color: var(--fg-2); }
+    .doc-page { font-size: 12px; min-height: 300px; }
+    .doc-page .meta { font-family: var(--font-mono); font-size: 9px; color: #666; display: flex; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+    .doc-page p { margin: 6px 0; }
+    .doc-page .sel { background: var(--brass-soft); outline: 1.5px dashed var(--brass); color: inherit; padding: 0 2px; }
+    .doc-page + .doc-page { margin-top: 10px; opacity: .85; }
+    .tab-panel.file { padding-top: 12px; }
+    .file-tabs > .tabs { flex-wrap: wrap; overflow: visible; }
+    mark.sel { background: var(--brass-soft); color: inherit; outline: 1px dashed var(--brass); padding: 0 2px; }
+    .kv.tight { gap: 5px 14px; }
+    .tri-grid > *, .cmp-grid > * { min-width: 0; }
+    .tri-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .tri-grid .panel { font-size: var(--fs-xs); }
+    .tri-grid .panel b { display: block; font-size: var(--fs-sm); margin-bottom: 2px; }
+    .segmented.sm button { padding: 3px 8px; font-size: var(--fs-xs); }
+    .decision { display: flex; flex-direction: column; gap: 12px; }
+    @media (min-width: 1101px) { .decision { max-height: calc(100vh - var(--topbar-h) - 40px); overflow-y: auto; padding-right: 2px; scrollbar-width: thin; } }
+    .auth-levels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .auth-levels .choice { padding: 10px 12px; }
+    .ck .desc { display: block; color: var(--muted); font-size: var(--fs-xs); margin-top: 2px; }
+    .ck .ck-title { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-weight: 600; }
+    .decide .btn { justify-content: flex-start; }
+    .decide .btn small { margin-left: auto; font-weight: 500; opacity: .8; }
+    .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 600px) { .cmp-grid, .tri-grid { grid-template-columns: 1fr; } }
+    .head-badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+    .page-head h1 { font-size: var(--fs-xl); max-width: 60ch; }
+    .what-next > b { display: flex; align-items: center; gap: 6px; }
+    .checklist .ck.ck-sub { margin-left: 18px; padding: 8px 10px; }
+    .what-next ul { margin: 6px 0 0; padding-left: 18px; }
+    .what-next li { margin: 3px 0; }
+  </style>
+</head>
+<body data-shell="admin" data-page="analise" data-root="../" data-title="Análise · lcr-6b2v7">
+  <main>
+    <div class="crumbs"><a href="../admin/fila.html">Fila de análise</a><i data-icon="chevron-right"></i><span>lcr-6b2v7</span><i data-icon="chevron-right"></i><span>1ª análise · Ana R.</span></div>
+    <div class="page-head mt-1">
+      <div>
+        <p class="eyebrow">Governo e políticas públicas · BR · português · pacote · versão 1 · enviado em 25/10 às 22:05</p>
+        <h1>Relatório de inspeção de 90 barragens de rejeito (ANM, 2024), consolidado com georreferenciamento e histórico de autuações</h1>
+        <div class="head-badges">
+          <span class="badge st-analise">Em análise</span>
+          <span class="badge risk-alto">Risco alto</span>
+          <span class="badge badge-info"><i data-icon="users"></i>Dois olhos · Ana R. + Bruno M.</span>
+          <span class="badge st-escalado"><i data-icon="scale"></i>Jurídico · Carla S. · prazo 03/11</span>
+          <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo · meta US$ 30.000</span>
+          <span class="badge badge-outline"><i data-icon="crown"></i>Exclusividade · US$ 90.000</span>
+          <span class="badge badge-outline"><i data-icon="hourglass"></i>Na fila há 37 h · SLA pausado</span>
+        </div>
+      </div>
+      <div class="actions">
+        <span class="handle" data-handle="lanterna-b31d" data-rep="4,7 · 4 aprovados"></span>
+        <button class="btn" data-toast="Pergunta de controle enviada ao vendedor pela conversa interna (prazo de resposta: 48 h)"><i data-icon="message-square"></i>Pergunta de controle</button>
+        <button class="btn btn-ghost" data-toast="Nenhuma versão anterior: este é o primeiro envio (v1)"><i data-icon="layers"></i>Versões</button>
+      </div>
+    </div>
+
+    <div class="split-3">
+      <!-- ESQUERDA · visualizador seguro -->
+      <section class="stack">
+        <div class="card">
+          <div class="card-head"><h3>Conteúdo lacrado</h3><span class="badge badge-outline">4 arquivos · 51,1 MB</span><div class="actions"><button class="btn btn-sm btn-ghost" data-toast="Visualizador em tela cheia (sessão de 15 min)"><i data-icon="maximize"></i></button></div></div>
+          <div class="card-body file-tabs" data-tabs>
+            <div class="tabs">
+              <a class="tab active" data-tab="pdf" href="#"><i data-icon="file-text"></i>relatorio-consolidado.pdf <span class="count">212 p.</span></a>
+              <a class="tab" data-tab="csv" href="#"><i data-icon="table"></i>barragens.csv</a>
+              <a class="tab" data-tab="xlsx" href="#"><i data-icon="database"></i>autuacoes.xlsx</a>
+              <a class="tab" data-tab="geo" href="#"><i data-icon="map-pin"></i>mapa.geojson</a>
+            </div>
+            <div class="tab-panel file active" data-panel="pdf">
+              <div class="viewer-bar"><button class="btn btn-sm btn-ghost" data-toast="Página 13"><i data-icon="chevron-left"></i></button><span class="pg">p. 14 / 212</span><button class="btn btn-sm btn-ghost" data-toast="Página 15"><i data-icon="chevron-right"></i></button><span class="muted">·</span><div class="segmented sm"><button class="active" data-toast="Zoom atual: 100 %">100 %</button><button data-toast="Zoom 125 %">125 %</button><button data-toast="Zoom 150 %">150 %</button></div><span class="muted">· 48 MB · OCR indexado</span></div>
+              <div class="doc-mock doc-page">
+                <div class="meta"><span>ANM · RELATÓRIO DE INSPEÇÃO REGULAR DE SEGURANÇA · 2024</span><span>p. 14</span></div>
+                <h5>Barragem B-17 · Mina Serra Azul Leste (MG)</h5>
+                <p>Empreendedor: Mineração Serra do Espinhaço S.A. · Categoria de risco: alta · Dano potencial associado: alto · Nível de emergência: 1 (ativo desde 03/2024).</p>
+                <p>Responsável técnico pela inspeção: <span class="redacted">xxxxxxxxxxxxxxxxxx</span>, CREA-MG <span class="redacted">xxxxxx</span>. Representante do empreendedor: <span class="redacted">xxxxxxxxxxxxx</span>.</p>
+                <div class="line"></div><div class="line"></div><div class="line short"></div>
+                <p><mark class="sel">Anomalia 3.2: surgência no pé do talude de jusante, vazão estimada de 0,8 L/s, sem transporte de sólidos. Autuação nº 2024/0812 lavrada em 14/05/2024 (art. 9º, Lei 12.334/2010).</mark></p>
+                <div class="line"></div><div class="line short"></div>
+                <p>Servidor responsável (ANM): <span class="redacted">xxxxxxxxxxxxxx</span>, matrícula <span class="redacted">xxxxxxx</span>.</p>
+                <span class="wm">curadoria · Ana R. · v1 · não distribuir</span>
+              </div>
+            </div>
+            <div class="tab-panel file" data-panel="csv">
+              <div class="viewer-bar"><span class="pg">90 linhas × 31 colunas</span><span>· 112 KB · separador ; · UTF-8 · mostrando 5 linhas</span></div>
+              <div class="table-wrap"><table class="table compact"><thead><tr><th>id</th><th>empreendedor</th><th>uf</th><th>risco</th><th>dpa</th><th>resp_tecnico</th><th class="num">lat</th><th class="num">long</th></tr></thead><tbody>
+                <tr><td>B-01</td><td>Alto Paraopeba Mineração Ltda.</td><td>MG</td><td>média</td><td>alto</td><td><span class="redacted">xxxxxxxxxx</span></td><td class="num">−20,21</td><td class="num">−44,08</td></tr>
+                <tr><td>B-02</td><td>Carajás Norte Minérios S.A.</td><td>PA</td><td>baixa</td><td>alto</td><td><span class="redacted">xxxxxxxxxxxx</span></td><td class="num">−6,07</td><td class="num">−50,16</td></tr>
+                <tr><td>B-17</td><td>Mineração Serra do Espinhaço S.A.</td><td>MG</td><td>alta</td><td>alto</td><td><span class="redacted">xxxxxxxxxxxxxxxxxx</span></td><td class="num">−19,87</td><td class="num">−43,41</td></tr>
+                <tr><td>B-44</td><td>Itabira Ferro e Aço Ltda.</td><td>MG</td><td>média</td><td>médio</td><td><span class="redacted">xxxxxxxxxxx</span></td><td class="num">−19,62</td><td class="num">−43,22</td></tr>
+                <tr><td>B-71</td><td>Rio Doce Bauxita S.A.</td><td>MT</td><td>baixa</td><td>médio</td><td><span class="redacted">xxxxxxxxx</span></td><td class="num">−15,59</td><td class="num">−56,10</td></tr>
+              </tbody></table></div>
+            </div>
+            <div class="tab-panel file" data-panel="xlsx">
+              <div class="viewer-bar"><span class="pg">1.204 linhas · 2 abas</span><span>· 2,1 MB · mostrando 4 linhas da aba "autuacoes"</span></div>
+              <div class="table-wrap"><table class="table compact"><thead><tr><th>data</th><th>barragem</th><th>empreendedor</th><th>infração</th><th class="num">multa (BRL)</th><th>situação</th></tr></thead><tbody>
+                <tr><td>14/05/2024</td><td>B-17</td><td>Mineração Serra do Espinhaço S.A.</td><td>Surgência não reportada</td><td class="num">1.250.000</td><td>em recurso</td></tr>
+                <tr><td>02/02/2024</td><td>B-02</td><td>Carajás Norte Minérios S.A.</td><td>PAE desatualizado</td><td class="num">180.000</td><td>paga</td></tr>
+                <tr><td>21/08/2023</td><td>B-44</td><td>Itabira Ferro e Aço Ltda.</td><td>Instrumentação inoperante</td><td class="num">420.000</td><td>paga</td></tr>
+                <tr><td>09/11/2023</td><td>B-71</td><td>Rio Doce Bauxita S.A.</td><td>Vistoria não realizada</td><td class="num">95.000</td><td>em recurso</td></tr>
+              </tbody></table></div>
+            </div>
+            <div class="tab-panel file" data-panel="geo">
+              <div class="viewer-bar"><span class="pg">90 feições (Point)</span><span>· 860 KB · WGS 84 · MG 61 · PA 18 · MT 11</span></div>
+              <div class="preview lg unlocked" data-type="mapa"><div class="preview-bottom"><span class="badge">90 barragens georreferenciadas</span><span class="badge">coordenadas com 2 casas decimais</span></div></div>
+              <p class="xs muted mt-1">Propriedades por feição: id, empreendedor, uf, categoria_risco, dpa, nivel_emergencia, autuacoes_total. Nenhum campo com pessoa natural.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Ferramentas de redação</h3><span class="badge badge-warn">3 seleções marcadas · 0 aplicadas</span></div>
+          <div class="card-body stack-sm">
+            <div class="row">
+              <button class="btn btn-sm" data-toast="Seleção da p. 14 marcada para tarja (nome do responsável técnico)"><i data-icon="eye-off"></i>Tarjar seleção</button>
+              <button class="btn btn-sm btn-primary" data-toast="Versão v2 gerada com 3 tarjas · v1 permanece cifrada e inacessível · novo hash calculado"><i data-icon="stamp"></i>Aplicar em nova versão (v2)</button>
+              <button class="btn btn-sm btn-ghost" data-toast="Última marcação desfeita"><i data-icon="rotate-ccw"></i>Desfazer</button>
+            </div>
+            <p class="xs muted">Tarjas são aplicadas em uma nova versão do asset; a anterior fica inacessível para compradores. O hash público será o da versão aprovada.</p>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Metadados removidos na triagem</h3><span class="badge badge-ok"><i data-icon="check"></i>relatório guardado</span></div>
+          <div class="card-body">
+            <dl class="kv tight">
+              <dt>relatorio-consolidado.pdf</dt><dd>Autor: removido (1 nome) · Produtor: LibreOffice 7.6 · Criado 12/03/2025 · Modificado 03/09/2026 · XMP removido</dd>
+              <dt>autuacoes.xlsx</dt><dd>Autor: removido · Empresa: removida (1 razão social) · Última modificação por: removido</dd>
+              <dt>barragens.csv</dt><dd>Sem metadados</dd>
+              <dt>mapa.geojson</dt><dd>Sem metadados · CRS declarado</dd>
+            </dl>
+            <p class="xs muted mt-1">O relatório original fica disponível só para a análise de autenticidade (Bloco 2). O autor do PDF coincide com o produtor declarado pelo vendedor.</p>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Busca no OCR</h3><span class="badge badge-outline">212 p. indexadas</span></div>
+          <div class="card-body stack-sm">
+            <div class="input-group"><div class="search grow"><i data-icon="search"></i><input class="input" value="CREA" aria-label="Buscar no texto"></div><button class="btn" data-toast="7 ocorrências de CREA em 6 páginas">Buscar</button></div>
+            <p class="small"><b>7 ocorrências</b> em 6 páginas: 14, 36, 58, 77, 120, 151, 198.</p>
+            <div class="panel small">…Responsável técnico: <span class="redacted">xxxxxxxxxxxxxx</span>, <mark class="sel">CREA</mark>-MG <span class="redacted">xxxxxx</span>, declara que a inspeção… <span class="muted">· p. 14</span> <button class="btn btn-sm btn-ghost" data-toast="Página 36">ir para p. 36</button></div>
+            <div class="panel small">…laudo assinado por engenheiro inscrito no <mark class="sel">CREA</mark>-PA sob nº <span class="redacted">xxxxxx</span>… <span class="muted">· p. 77</span> <button class="btn btn-sm btn-ghost" data-toast="Página 77">ir para p. 77</button></div>
+            <button class="btn btn-block" data-modal-open="cmp"><i data-icon="eye"></i>Comparar com a prévia</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CENTRO · ficha, vendedor, triagem, terceiros -->
+      <section class="stack">
+        <div class="card">
+          <div class="card-head"><h3>Ficha do item</h3><span class="badge badge-outline">v1</span></div>
+          <div class="card-body">
+            <dl class="kv">
+              <dt>Título enviado</dt><dd>"As 90 barragens que podem ceder: o relatório que a ANM não divulga"</dd>
+              <dt>Título curado</dt><dd><b>Relatório de inspeção de 90 barragens de rejeito (ANM, 2024), consolidado com georreferenciamento e histórico de autuações</b> <span class="badge badge-warn">aguarda aceite do vendedor</span></dd>
+              <dt>Resumo</dt><dd>90 relatórios de inspeção regular de 2024 obtidos via LAI, consolidados em uma base com coordenadas, categoria de risco, dano potencial e todas as autuações públicas de 2019 a 2024.</dd>
+              <dt>Categoria</dt><dd>Governo e políticas públicas · risco alto por padrão · dois olhos · jurídico por padrão</dd>
+              <dt>País · idioma</dt><dd><span class="tag">BR</span> Brasil · português · avaliado pelas leis do país de origem (Brasil) e da sede</dd>
+              <dt>Modelo e meta</dt><dd>Lacre coletivo · meta US$ 30.000 · marcos garantidos (25, 50, 75 e 90 %), cada um libera uma prévia ao público · tudo liberado ao público ao bater a meta · finalização 72 h depois</dd>
+              <dt>Carteira do item</dt><dd><span class="badge badge-outline"><i data-icon="wallet"></i>será criada na aprovação</span> rede e moeda escolhidas pelo vendedor: <b>Polygon · USDT</b> · endereço público na página de prova · um endereço derivado por apoio · se o prazo vencer antes da meta, fica com o vendedor o valor do último marco batido e o que entrou depois volta ao endereço de origem; sem marco batido, tudo volta</dd>
+              <dt>Exclusividade</dt><dd>US$ 90.000 (definida pelo vendedor) · encerra o anúncio e devolve todos os apoios · abaixo do mínimo sugerido de 5× a meta (US$ 150.000)</dd>
+              <dt>Prazo</dt><dd>até 20/12/2026 · 54 dias contados da publicação, que acontece na hora da aprovação</dd>
+              <dt>Tipo</dt><dd>Pacote · PDF (212 p.) + CSV + XLSX + GeoJSON</dd>
+              <dt>Tamanho</dt><dd>51,1 MB</dd>
+              <dt>Integridade</dt><dd>hash do cliente = hash do servidor <span class="ico ok"><i data-icon="check-circle"></i></span><div class="hash mt-1"><code>sha256: 7c2e4f90a1b3d5e6f7081920c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8091a9b41</code><button class="btn btn-sm btn-ghost" data-copy="7c2e4f90a1b3d5e6f7081920c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8091a9b41"><i data-icon="copy"></i></button></div></dd>
+              <dt>Origem declarada</dt><dd>Pedidos de acesso à informação (Lei 12.527) respondidos pela ANM entre 02/2025 e 08/2026 e consulta pública ao SIGBM. Ofícios anexados.</dd>
+              <dt>Declarações</dt><dd>6 de 6 aceitas em 25/10 às 22:05 · texto v1.2 · pseudônimo visível na página pública</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Vendedor</h3></div>
+          <div class="card-body">
+            <div class="row between"><span class="handle lg" data-handle="lanterna-b31d" data-rep="4,7 · desde fev/2025 · Dados e bases"></span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado 3×</span></div>
+            <dl class="kv-row mt-2">
+              <div><dt>Aprovados</dt><dd>4</dd></div>
+              <div><dt>Ajustes</dt><dd>1</dd></div>
+              <div><dt>Rejeitados</dt><dd>0</dd></div>
+              <div><dt>Disputas</dt><dd>0</dd></div>
+              <div><dt>Em análise</dt><dd>2</dd></div>
+            </dl>
+            <p class="xs muted mt-1">Histórico de decisões nos últimos 12 meses. Item mais recente: lcr-9f2k7 (Verificado, 37 cópias vendidas, 0 disputas). Em 02/2026 aceitou os ajustes solicitados em 24 h.</p>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Triagem automática</h3><span class="muted xs">25/10 · 22:09</span></div>
+          <div class="card-body">
+            <div class="tri-grid">
+              <div class="panel"><b><span class="ico ok"><i data-icon="shield-check"></i></span> Antivírus</b>4 arquivos limpos · 3 motores · sem executáveis ou macros</div>
+              <div class="panel"><b><span class="ico warn"><i data-icon="alert-triangle"></i></span> Dados pessoais</b>0 CPFs · 0 telefones · 0 e-mails · <b style="display:inline">12 nomes próprios</b> em 7 páginas<br>Amostras: "Resp. técnico: <span class="redacted">xxxxxxxxxxxx</span>" · "Eng. <span class="redacted">xxxxxxxxxxxxxx</span>, CREA-MG <span class="redacted">xxxxxx</span>" · "Representante: <span class="redacted">xxxxxxxxx</span>"</div>
+              <div class="panel"><b><span class="ico ok"><i data-icon="copy"></i></span> Duplicidade</b>0 · nenhum hash coincide com o catálogo nem com itens rejeitados</div>
+              <div class="panel"><b><span class="ico ok"><i data-icon="ban"></i></span> Conteúdo proibido</b>0 · sem credenciais, chaves, dados de cartão, nudez ou indícios de menores</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-sm" id="pessoas">
+          <div class="card-head"><h3>Pessoas identificáveis</h3><span class="badge badge-warn">12 menções</span><div class="actions"><button class="btn btn-sm" id="apply-sug"><i data-icon="sparkles"></i>Aplicar sugestão a todas</button></div></div>
+          <div class="table-wrap" style="border:0;border-radius:0">
+            <table class="table compact">
+              <thead><tr><th>#</th><th>Nome</th><th>Papel</th><th>Onde</th><th>Sugestão</th><th>Decisão</th></tr></thead>
+              <tbody>
+                <tr data-who="menção 1" data-sug="tarjar"><td>1</td><td><span class="redacted">xxxxxxxxxxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 14, 36</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 2" data-sug="tarjar"><td>2</td><td><span class="redacted">xxxxxxxxxxxxx</span></td><td>Representante do empreendedor</td><td>p. 14</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 3" data-sug="manter"><td>3</td><td><span class="redacted">xxxxxxxxxxxxxx</span></td><td>Servidor da ANM · fiscal</td><td>p. 14, 58, 120</td><td class="xs muted">Manter · função pública, fonte pública</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 4" data-sug="tarjar"><td>4</td><td><span class="redacted">xxxxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 36</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 5" data-sug="tarjar"><td>5</td><td><span class="redacted">xxxxxxxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 58</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 6" data-sug="tarjar"><td>6</td><td><span class="redacted">xxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 77</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 7" data-sug="tarjar"><td>7</td><td><span class="redacted">xxxxxxxxxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 77, 120</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 8" data-sug="tarjar"><td>8</td><td><span class="redacted">xxxxxxxxxxx</span></td><td>Representante do empreendedor</td><td>p. 120</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 9" data-sug="tarjar"><td>9</td><td><span class="redacted">xxxxxxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 151</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 10" data-sug="tarjar"><td>10</td><td><span class="redacted">xxxxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 151</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 11" data-sug="tarjar"><td>11</td><td><span class="redacted">xxxxxxxxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 198</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+                <tr data-who="menção 12" data-sug="tarjar"><td>12</td><td><span class="redacted">xxxxxxxxxxxxx</span></td><td>Responsável técnico</td><td>p. 198</td><td class="xs muted">Tarjar · pessoa natural</td><td><div class="segmented sm"><button>Manter</button><button>Tarjar</button></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-foot xs muted">Nomes em documento público não bastam para manter: a tarja é a regra para pessoas naturais sem função pública (GDPR, LGPD e equivalentes: minimização). Servidores no exercício da função ficam, quando a fonte é pública.</div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Empresas citadas</h3><span class="badge badge-outline">90</span><div class="actions"><button class="btn btn-sm btn-ghost" data-toast="Lista completa das 90 empresas exportada para a análise jurídica">Ver todas</button></div></div>
+          <div class="card-body">
+            <ul class="list">
+              <li class="list-item"><span class="li-icon"><i data-icon="building"></i></span><div class="li-body"><div class="li-title">Mineração Serra do Espinhaço S.A.</div><div class="li-sub">Citada em autuação pública · 7 autuações (2022–2024) · B-17 e B-23 · fonte: DOU e SIGBM</div></div><span class="badge badge-ok">manter</span></li>
+              <li class="list-item"><span class="li-icon"><i data-icon="building"></i></span><div class="li-body"><div class="li-title">Carajás Norte Minérios S.A.</div><div class="li-sub">Citada em autuação pública · 3 autuações · B-02, B-05, B-09</div></div><span class="badge badge-ok">manter</span></li>
+              <li class="list-item"><span class="li-icon"><i data-icon="building"></i></span><div class="li-body"><div class="li-title">Alto Paraopeba Mineração Ltda.</div><div class="li-sub">Citada em autuação pública · 2 autuações · B-01</div></div><span class="badge badge-ok">manter</span></li>
+              <li class="list-item"><span class="li-icon"><i data-icon="building"></i></span><div class="li-body"><div class="li-title">Itabira Ferro e Aço Ltda.</div><div class="li-sub">Citada em autuação pública · 4 autuações · B-44, B-45</div></div><span class="badge badge-ok">manter</span></li>
+              <li class="list-item"><span class="li-icon"><i data-icon="building"></i></span><div class="li-body"><div class="li-title">Rio Doce Bauxita S.A.</div><div class="li-sub">Citada em autuação pública · 1 autuação · B-71</div></div><span class="badge badge-ok">manter</span></li>
+            </ul>
+            <p class="xs muted mt-1">Nenhuma menção configura segredo comercial: autuações e categorias de risco são atos públicos da ANM. Contexto negativo em fonte pública mantém o item sob revisão jurídica (regra de escalonamento).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DIREITA · checklist, autenticidade, notas, decisão -->
+      <aside class="sticky decision">
+        <div class="card card-sm">
+          <div class="card-head"><h3>Checklist · 7 blocos</h3><span class="badge badge-info">5 de 7</span></div>
+          <div class="card-body stack-sm">
+            <div class="progress thin"><div class="progress-bar" data-width="71%"></div></div>
+            <div class="checklist">
+              <label class="ck veto"><input type="checkbox" checked><span><span class="ck-title">1 · Legalidade <span class="badge badge-danger">veto</span></span><span class="desc">9 itens · proteção de dados (GDPR, LGPD e equivalentes) com base em fonte pública · avaliado pelas leis do país de origem (Brasil) e da sede · sem sigilo legal (LAI) · sem credenciais · autoral: documentos públicos · concluído 26/10 14:50</span></span></label>
+              <label class="ck veto"><input type="checkbox" checked><span><span class="ck-title">2 · Autenticidade <span class="badge badge-danger">veto parcial</span></span><span class="desc">30 dos 90 relatórios conferidos no SIGBM e nos ofícios da LAI · metadados coerentes · datas consistentes</span></span></label>
+              <label class="ck"><input type="checkbox" checked><span><span class="ck-title">3 · Qualidade e completude</span><span class="desc">90 de 90 relatórios presentes · CSV e GeoJSON batem com o PDF (90 ids) · 1.204 autuações sem linhas vazias</span></span></label>
+              <label class="ck"><input type="checkbox"><span><span class="ck-title">4 · Prévia e descrição</span><span class="desc">Título reescrito aguarda aceite · prévia: p. 1 tarjada + amostra de 10 linhas sem resp_tecnico · pendente</span></span></label>
+              <label class="ck"><input type="checkbox" checked><span><span class="ck-title">5 · Preço e modelo</span><span class="desc">Meta US$ 30.000 coerente com 90 pedidos de LAI e 18 meses de trabalho · marcos garantidos · tudo público ao bater a meta · exclusividade US$ 90.000 abaixo da sugestão de 5× a meta: sugerir US$ 150.000</span></span></label>
+              <label class="ck ck-sub"><input type="checkbox" checked><span><span class="ck-title">5.1 · Marcos garantidos: cada prévia vale o valor do marco</span><span class="desc">25 % · US$ 7.500: índice dos 90 relatórios com categoria de risco · 50 % · US$ 15.000: relatório completo da B-17, tarjado · 75 % · US$ 22.500: mapa das 90 barragens · 90 % · US$ 27.000: autuações de 2024 em MG. Se o lacre falhar, o vendedor fica com o valor do último marco batido: cada prévia precisa valer esse valor · conferido</span></span></label>
+              <label class="ck"><input type="checkbox"><span><span class="ck-title">6 · Terceiros e redação</span><span class="desc">12 pessoas listadas · 90 empresas avaliadas · tarjas ainda não aplicadas (v2 pendente)</span></span></label>
+              <div class="ck flag"><span class="ico warn"><i data-icon="flag"></i></span><span><b id="pend">Bloco 6: 12 nomes aguardando decisão</b><span class="desc">Decida cada menção na tabela ao centro e aplique as tarjas em v2 antes de aprovar.</span></span></div>
+              <label class="ck"><input type="checkbox" checked><span><span class="ck-title">7 · Duplicidade e interesse</span><span class="desc">Compilação de material público com trabalho evidente de consolidação · categoria, país(es) e idioma corretos (BR · português)</span></span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Nível de autenticidade</h3></div>
+          <div class="card-body">
+            <div class="choice-cards auth-levels">
+              <label class="choice"><input type="radio" name="auth"><span class="choice-title"><i data-icon="badge-check"></i>Verificado</span><span class="choice-desc">Origem e integridade confirmadas na fonte oficial.</span></label>
+              <label class="choice"><input type="radio" name="auth" checked><span class="choice-title"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="choice-desc">30 de 90 relatórios conferidos; o restante é consistente.</span></label>
+              <label class="choice"><input type="radio" name="auth"><span class="choice-title"><i data-icon="shield"></i>Plausível</span><span class="choice-desc">Sem verificação possível, sem sinais de fabricação.</span></label>
+              <label class="choice"><input type="radio" name="auth"><span class="choice-title"><i data-icon="shield-alert"></i>Não verificado</span><span class="choice-desc">Não publica em categoria de risco alto.</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Notas internas</h3><span class="muted xs">só a equipe vê</span></div>
+          <div class="card-body stack-sm">
+            <textarea class="textarea" aria-label="Notas internas">26/10 14:50 · Conferi 30 relatórios no SIGBM (ids B-01 a B-30): texto e datas batem. Ofícios da LAI anexados têm protocolo válido. p. 77 cita número de CREA, não CPF — confirmar com Carla S. se identificador profissional entra na tarja. Título enviado é sensacionalista ("podem ceder", "não divulga"): os relatórios são públicos via LAI; reescrevi.</textarea>
+            <button class="btn btn-sm" data-toast="Nota salva e registrada na auditoria"><i data-icon="check"></i>Salvar nota</button>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Segunda análise</h3><span class="badge st-analise">em andamento</span></div>
+          <div class="card-body">
+            <p class="small"><b>Bruno M.</b> · Curador · iniciou hoje às 10:20 · 2 de 7 blocos.</p>
+            <p class="xs muted mt-1">As notas da primeira análise ficam ocultas até ele concluir. A aprovação exige concordância nos blocos 1 e 2; divergências vão à curadora sênior.</p>
+          </div>
+        </div>
+
+        <div class="card card-sm">
+          <div class="card-head"><h3>Decisão · 1ª análise</h3></div>
+          <div class="card-body stack-sm decide">
+            <button class="btn btn-success btn-block" data-toast="Voto registrado: aprovar. Vale após a 2ª análise (Bruno M.) e o parecer jurídico (Carla S.); com os três de acordo, o item é publicado na hora e a carteira do item é criada (Polygon · USDT)"><i data-icon="check"></i>Aprovar</button>
+            <button class="btn btn-primary btn-block" data-toast="Voto registrado: aprovar com ajustes (título reescrito e tarjas em v2). Aguarda Bruno M. e o jurídico; publica na hora em que o vendedor aceitar as edições, criando a carteira do item"><i data-icon="edit"></i>Aprovar com ajustes<small>recomendado</small></button>
+            <button class="btn btn-block" data-toast="Lista de pendências enviada ao vendedor com os códigos marcados · prazo da fila pausado"><i data-icon="message-square"></i>Solicitar ajustes</button>
+            <button class="btn btn-danger btn-block" data-toast="Rejeição exige código de motivo e texto · reenvio só como novo item · registrada na auditoria"><i data-icon="x"></i>Rejeitar</button>
+            <button class="btn btn-outline btn-block" data-toast="Já escalado em 26/10 às 15:20 · parecer de Carla S. previsto até 03/11"><i data-icon="scale"></i>Escalar ao jurídico<small>escalado 26/10</small></button>
+            <div class="panel small what-next"><b><span class="ico ok"><i data-icon="zap"></i></span> O que acontece ao aprovar</b>
+              <ul>
+                <li>Publicado <b>na hora</b>: página do item e prova pública com o hash da versão aprovada (v2). Não existe "agendado" para o item.</li>
+                <li>Carteira do item criada no HSM · Polygon · USDT · endereço público na prova · um endereço derivado por apoio.</li>
+                <li>Post de lançamento entra na fila de publicação (o post pode ser agendado; o item, não).</li>
+                <li>Comissão de 10 % separada só na finalização, sobre o que fica com o vendedor; se o lacre falhar sem marco batido, nada é cobrado.</li>
+                <li>Atendimento de pedido: aprovado, cada pessoa recebe a prévia do atendimento e tem 72 h para pagar os 75 % restantes; quem não pagar perde o sinal de 25 %, que fica com o Lacre como taxa de desistência, nunca com quem atendeu. Quem atendeu recebe 90 % do que cada pessoa pagou por inteiro. Contestação com motivo: a curadoria decide em até 48 h.</li>
+                <li>Extra de pedido (sub-item opcional): aprovado, fica visível dentro do pedido com carteira própria e valor por pessoa próprio; triagem de conteúdo em até 24 h.</li>
+              </ul>
+            </div>
+            <div class="field mt-1"><label for="codes">Códigos de motivo (ajustes ou rejeição)</label>
+              <select id="codes" class="select" multiple size="5" aria-label="Códigos de motivo">
+                <option selected>R01 · dados pessoais de terceiros</option><option>R02 · direitos autorais</option><option>R03 · conteúdo íntimo/sexual</option><option>R04 · credenciais/acesso</option><option>R05 · sigilo legal</option><option>R06 · informação privilegiada de mercado</option><option>R07 · difamação sem suporte</option><option>R08 · fabricação/falsificação</option><option>R09 · duplicidade</option><option>R10 · qualidade insuficiente</option><option selected>R11 · prévia enganosa</option><option>R12 · fora do escopo</option><option>R13 · outro (texto obrigatório)</option>
+              </select><span class="hint">Ctrl/Cmd + clique para vários. R01 e R11 marcados: tarjas e título.</span></div>
+            <div class="field"><label for="msg">Mensagem ao vendedor</label><textarea id="msg" class="textarea" aria-label="Mensagem ao vendedor">Aprovamos com ajustes. (1) Tarjamos 11 nomes de responsáveis técnicos e representantes em 7 páginas; mantivemos servidores da ANM no exercício da função, por fonte pública. (2) Reescrevemos o título: os relatórios são públicos via LAI e o original sugeria sigilo e colapso iminente. (3) Sugerimos elevar o valor de exclusividade para US$ 150.000 (5× a meta); a decisão é sua. Confirme as edições em 72 h ou responda por aqui. A prévia mostrará a p. 1 tarjada e 10 linhas da base sem a coluna de responsável técnico.</textarea></div>
+            <div class="alert alert-ok"><i data-icon="eye"></i><div><span class="alert-title">O que o vendedor verá</span><span class="badge st-aprovado">Aprovado com ajustes</span> · diff do título (antes/depois) · "11 trechos tarjados em uma nova versão" · códigos R01, R11 · botões "Aceitar edição" e "Responder" · prazo de 72 h · "ao aceitar, o item é publicado na hora e a carteira do item é criada (Polygon · USDT)". Enquanto o jurídico não conclui, ele vê apenas <b>"Em análise adicional"</b>.</div></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="modal-backdrop" id="cmp"><div class="modal wide">
+      <div class="modal-head"><h3>Prévia pública × conteúdo · p. 1</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div>
+      <div class="modal-body">
+        <div class="cmp-grid">
+          <div><p class="eyebrow mb-1">Prévia proposta (pública)</p><div class="doc-mock doc-page"><h5>Relatório de inspeção · 90 barragens</h5><div class="line"></div><div class="line short"></div><p class="blur-text">Empreendedor, categoria de risco e dano potencial associado por estrutura, com histórico de autuações 2019–2024.</p><p>Responsável técnico: <span class="redacted">xxxxxxxxxxxxxx</span></p><div class="line"></div><div class="line"></div><span class="wm">prévia · lacre.app/p/6b2v7</span></div></div>
+          <div><p class="eyebrow mb-1">Conteúdo (visão da curadoria)</p><div class="doc-mock doc-page"><h5>Relatório de inspeção · 90 barragens</h5><div class="line"></div><div class="line short"></div><p>Empreendedor, categoria de risco e dano potencial associado por estrutura, com histórico de autuações 2019–2024.</p><p>Responsável técnico: <span class="redacted">xxxxxxxxxxxxxx</span> (tarja pendente de aplicação em v2)</p><div class="line"></div><div class="line"></div><span class="wm">curadoria · Ana R.</span></div></div>
+        </div>
+        <p class="xs muted mt-2">A prévia não pode expor dados de terceiros nem a identidade do vendedor; os avisos e o nível de autenticidade aparecem junto dela na página pública.</p>
+      </div>
+      <div class="modal-foot"><button class="btn" data-modal-close>Fechar</button><button class="btn btn-primary" data-modal-close data-toast="Prévia aprovada para a página pública">Aprovar esta prévia</button></div>
+    </div></div>
+
+    <script>
+      (function () {
+        var pend = document.getElementById('pend');
+        var rows = document.querySelectorAll('#pessoas tbody tr');
+        function recount() {
+          var n = 0; rows.forEach(function (r) { if (!r.querySelector('.segmented .active')) n++; });
+          pend.textContent = n ? 'Bloco 6: ' + n + (n === 1 ? ' nome aguardando decisão' : ' nomes aguardando decisão') : 'Bloco 6: todas as 12 menções decididas';
+          pend.closest('.ck').classList.toggle('flag', n > 0);
+        }
+        function pick(btn) { btn.parentNode.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); }); btn.classList.add('active'); }
+        rows.forEach(function (r) { r.querySelectorAll('.segmented button').forEach(function (b) { b.addEventListener('click', function () { pick(b); recount(); if (window.toast) window.toast(r.dataset.who + ': ' + b.textContent.toLowerCase()); }); }); });
+        document.getElementById('apply-sug').addEventListener('click', function () {
+          rows.forEach(function (r) { var want = r.dataset.sug === 'manter' ? 0 : 1; pick(r.querySelectorAll('.segmented button')[want]); });
+          recount(); if (window.toast) window.toast('Sugestão aplicada: 11 tarjar, 1 manter');
+        });
+      })();
+    </script>
+  </main>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Recuperar conta · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    main { width: 100%; max-width: 560px; }
+    .auth-card { max-width: 560px; }
+    [data-wizard] > [data-step].stack.active { display: flex; }
+    .words .w { position: relative; counter-increment: w; display: block; }
+    .words .w::before { content: counter(w); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted-2); font-size: var(--fs-xs); z-index: 1; }
+    .words .w .input { padding-left: 30px; font-family: var(--font-mono); font-size: var(--fs-sm); }
+    .words .w.invalid .input { border-color: var(--danger); }
+    .strength { display: flex; align-items: center; gap: 10px; font-size: var(--fs-xs); color: var(--muted); }
+    .strength .progress { flex: 1; }
+    details.tips { border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 12px; font-size: var(--fs-sm); }
+    details.tips summary { cursor: pointer; font-weight: 600; }
+    details.tips ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+    details.tips li + li { margin-top: 4px; }
+  </style>
+</head>
+<body data-shell="auth" data-page="auth" data-root="../">
+  <main>
+    <div class="auth-card" data-wizard>
+      <div class="stepper mb-3">
+        <div class="step active"><span class="n">1</span><span class="t">Frase de recuperação</span></div>
+        <div class="step"><span class="n">2</span><span class="t">Nova senha</span></div>
+      </div>
+
+      <!-- Passo 1 · frase -->
+      <div data-step="1" class="active stack">
+        <div>
+          <p class="eyebrow">Recuperar acesso</p>
+          <h1 class="mt-1">Digite sua frase de recuperação</h1>
+          <p class="muted small mt-1">As 12 palavras, na ordem em que foram mostradas quando você criou a conta. O autocompletar usa a lista BIP-39 em português; palavras fora da lista não são aceitas. É a frase da sua <b>conta</b>, não a frase de recuperação da carteira de um item.</p>
+        </div>
+
+        <div class="alert alert-danger" role="alert"><i data-icon="x-circle"></i><div><span class="alert-title">A frase não corresponde a nenhuma conta</span>Confira a ordem e a grafia de cada palavra. Dica: a palavra 9 não está na lista. Você tem 4 tentativas restantes nesta hora.</div></div>
+
+        <div class="words" id="words">
+          <label class="w"><input class="input" list="bip39" value="amanhecer" aria-label="Palavra 1" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="bússola" aria-label="Palavra 2" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="lacre" aria-label="Palavra 3" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="moinho" aria-label="Palavra 4" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="sextante" aria-label="Palavra 5" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="tinta" aria-label="Palavra 6" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="farol" aria-label="Palavra 7" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="quartzo" aria-label="Palavra 8" autocomplete="off" spellcheck="false"></label>
+          <label class="w invalid"><input class="input" list="bip39" value="prima" aria-label="Palavra 9" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="lanterna" aria-label="Palavra 10" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="cartógrafo" aria-label="Palavra 11" autocomplete="off" spellcheck="false"></label>
+          <label class="w"><input class="input" list="bip39" value="arquivista" aria-label="Palavra 12" autocomplete="off" spellcheck="false"></label>
+        </div>
+        <datalist id="bip39">
+          <option value="abacate"><option value="abelha"><option value="acervo"><option value="agulha"><option value="alameda"><option value="amanhecer"><option value="ampola"><option value="andaime"><option value="arquivista"><option value="arquivo"><option value="aurora"><option value="azulejo">
+          <option value="baleia"><option value="bigorna"><option value="bússola"><option value="cabana"><option value="cartógrafo"><option value="caverna"><option value="cometa"><option value="coruja"><option value="dedal"><option value="estrela"><option value="farol"><option value="fivela">
+          <option value="geleia"><option value="girafa"><option value="hortelã"><option value="janela"><option value="lacre"><option value="lanterna"><option value="lousa"><option value="moinho"><option value="novelo"><option value="orvalho"><option value="pérola"><option value="prisma">
+          <option value="quartzo"><option value="relógio"><option value="sextante"><option value="tinta"><option value="trevo"><option value="urso"><option value="veleiro"><option value="vidraça"><option value="xadrez"><option value="zelador">
+        </datalist>
+
+        <details class="tips">
+          <summary>Dicas para digitar</summary>
+          <ul>
+            <li>Cole a frase inteira no campo 1: as 12 palavras se distribuem sozinhas.</li>
+            <li>Acentos são opcionais: "bussola" e "bússola" valem o mesmo.</li>
+            <li>A ordem importa. A frase é validada só depois das 12 palavras.</li>
+            <li>Após 5 tentativas erradas na mesma hora, a verificação pausa por 60 minutos.</li>
+          </ul>
+        </details>
+
+        <div class="row between">
+          <button type="button" class="btn btn-ghost btn-sm" id="limpar"><i data-icon="rotate-ccw"></i>Limpar tudo</button>
+          <button type="button" class="btn btn-primary" data-step-go="2"><i data-icon="check"></i>Verificar</button>
+        </div>
+
+        <div class="alert alert-warn"><i data-icon="alert-triangle"></i><div><span class="alert-title">Perdeu a frase? Não existe outro caminho.</span>Não guardamos a frase, só um hash dela. Nem a equipe consegue recuperar uma conta sem a frase. Não existe saldo preso: o que você pagou fica na carteira de cada item, e qualquer reembolso (pedido que expira, apoio que entrou depois do último marco de um lacre que falha) volta ao seu endereço de origem, com ou sem acesso à conta.</div></div>
+
+        <p class="small text-center"><a class="link" href="entrar.html">Voltar para entrar</a> · <a class="link" href="criar-conta.html">Criar outra conta</a></p>
+      </div>
+
+      <!-- Passo 2 · nova senha -->
+      <div data-step="2" class="stack">
+        <div>
+          <p class="eyebrow">Frase verificada</p>
+          <h1 class="mt-1">Defina uma nova senha</h1>
+          <p class="muted small mt-1">A frase de recuperação continua a mesma. Só a senha muda.</p>
+        </div>
+        <div class="alert alert-ok"><i data-icon="check-circle"></i><div>Frase confirmada para <span class="handle" data-handle="coruja-7f3a"></span>. Conta criada em mar/2026 · reputação 4,8 · 3 itens aprovados.</div></div>
+        <div class="field">
+          <label for="senha">Nova senha</label>
+          <input id="senha" type="password" class="input lg" minlength="12" autocomplete="new-password" value="sextante-prisma-amanhecer-91">
+          <div class="strength"><div class="progress thin"><div class="progress-bar" id="pw-bar" data-width="0%"></div></div><span id="pw-label">Digite para medir</span></div>
+          <span class="hint">Mínimo de 12 caracteres. Não reaproveite a senha antiga.</span>
+        </div>
+        <div class="field">
+          <label for="senha2">Confirmar nova senha</label>
+          <input id="senha2" type="password" class="input lg" minlength="12" autocomplete="new-password" value="sextante-prisma-amanhecer-91">
+        </div>
+
+        <div>
+          <h3>Sessões que serão encerradas</h3>
+          <div class="list">
+            <div class="list-item"><span class="li-icon"><i data-icon="monitor"></i></span><div class="li-body"><div class="li-title">Firefox · Linux</div><div class="li-sub">Última atividade: 26/10</div></div><span class="badge badge-warn">Encerrar</span></div>
+            <div class="list-item"><span class="li-icon"><i data-icon="smartphone"></i></span><div class="li-body"><div class="li-title">Safari · iPhone</div><div class="li-sub">Última atividade: 25/10</div></div><span class="badge badge-warn">Encerrar</span></div>
+            <div class="list-item"><span class="li-icon"><i data-icon="monitor"></i></span><div class="li-body"><div class="li-title">Este navegador</div><div class="li-sub">Continua conectado depois de salvar</div></div><span class="badge badge-ok">Mantida</span></div>
+          </div>
+        </div>
+        <label class="check"><input type="checkbox" checked><span>Encerrar todas as outras sessões<span class="desc">Recomendado se você acha que alguém teve acesso à conta.</span></span></label>
+
+        <dl class="kv panel">
+          <dt>Senha</dt><dd>Substituída agora</dd>
+          <dt>Frase</dt><dd>Continua a mesma, nunca é exibida de novo</dd>
+          <dt>Passkeys e TOTP</dt><dd>Continuam valendo</dd>
+          <dt>Cofre e apoios</dt><dd>Intactos: 7 acessos no cofre, 2 apoios em lacres abertos (US$ 250,00 na carteira do lcr-4m2x9) e 1 pedido aberto</dd>
+        </dl>
+        <div class="alert alert-info"><i data-icon="info"></i><div>Perdeu também o dispositivo do autenticador? Depois de entrar, desative o TOTP em <a class="link" href="../buyer/configuracoes.html">Configurações › Segurança</a> usando um código de backup.</div></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" data-step-go="1"><i data-icon="arrow-left"></i>Voltar</button>
+          <a class="btn btn-primary" href="../buyer/painel.html"><i data-icon="lock-keyhole"></i>Salvar e entrar</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var inputs = Array.prototype.slice.call(document.querySelectorAll('#words .input'));
+        inputs[0].addEventListener('paste', function (e) {
+          var text = (e.clipboardData || window.clipboardData).getData('text').trim().split(/\s+/);
+          if (text.length < 2) return;
+          e.preventDefault();
+          inputs.forEach(function (inp, i) { inp.value = text[i] || ''; inp.parentNode.classList.remove('invalid'); });
+        });
+        document.getElementById('limpar').addEventListener('click', function () {
+          inputs.forEach(function (inp) { inp.value = ''; inp.parentNode.classList.remove('invalid'); });
+          inputs[0].focus();
+          window.toast('Os 12 campos foram limpos', 'rotate-ccw');
+        });
+        var pw = document.getElementById('senha'), bar = document.getElementById('pw-bar'), lbl = document.getElementById('pw-label');
+        var levels = [['Muito fraca', '10%', 'var(--danger)'], ['Fraca', '30%', 'var(--danger)'], ['Razoável', '55%', 'var(--warn)'], ['Boa', '75%', 'var(--brass)'], ['Forte', '90%', 'var(--ok)'], ['Muito forte', '100%', 'var(--ok)']];
+        function measure() {
+          var v = pw.value, s = 0;
+          if (v.length >= 12) s++; if (v.length >= 20) s++; if (/[a-z]/.test(v) && /[A-Z0-9]/.test(v)) s++; if (/[^A-Za-z0-9]/.test(v)) s++; if (v.length >= 28) s++;
+          if (v.length < 12) s = Math.min(s, 1);
+          var l = levels[s];
+          bar.dataset.width = l[1]; bar.style.width = l[1]; bar.style.background = l[2];
+          lbl.textContent = v.length < 12 ? l[0] + ' · faltam ' + (12 - v.length) + ' caracteres' : l[0];
+        }
+        pw.addEventListener('input', measure);
+        measure();
+      })();
+    </script>
+  </main>
+</body>
+</html>

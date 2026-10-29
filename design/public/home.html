@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Início · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .handle { flex-wrap: wrap; }
+    .handle > span:not(.rep) { white-space: nowrap; }
+    .item-card .item-foot .handle { flex: none; }
+    a.preview { display: block; }
+    .x-card .social-card .sc-title { font-size: clamp(14px, 3.6vw, 18px); max-width: none; }
+    .card-head > svg.icon { width: 18px; height: 18px; color: var(--brass); flex: none; }
+    .guarantees { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 10px; }
+    .guarantees li { display: flex; gap: 10px; align-items: flex-start; color: var(--fg-2); font-size: var(--fs-sm); }
+    .guarantees svg { width: 18px; height: 18px; color: var(--brass); flex: none; margin-top: 1px; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .section-head p { color: var(--muted); margin-top: 6px; max-width: 60ch; }
+    .req-card { display: flex; flex-direction: column; }
+    .req-card .card-body { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .req-title { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-md); line-height: 1.3; }
+    .req-card .row.actions { margin-top: auto; }
+    .no-ask { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .no-ask li { display: flex; gap: 12px; align-items: center; padding: 9px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); font-size: var(--fs-sm); }
+    .no-ask svg { width: 16px; height: 16px; flex: none; }
+    .no-ask.deny svg { color: var(--danger); } .no-ask.keep svg { color: var(--ok); }
+    .no-ask li span.muted { margin-left: auto; font-size: var(--fs-xs); }
+    .cta { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .cta p { max-width: 56ch; color: var(--fg-2); }
+    .pillar .card-body { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+    .pillar h3 { font-size: var(--fs-md); }
+    .cstep { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); color: var(--fg-2); }
+    .cstep:first-child { padding-top: 0; }
+    .cstep:last-child { border-bottom: 0; padding-bottom: 0; }
+    .cstep .ci { width: 32px; height: 32px; border-radius: 50%; background: var(--brass-soft); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .cstep .ci svg { width: 16px; height: 16px; color: var(--brass); }
+    .cstep b { color: var(--fg); }
+  </style>
+</head>
+<body data-shell="public" data-page="home" data-root="../">
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="glow"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Marketplace curado de informação</p>
+          <h1 class="display mt-1" data-i18n>Informação com lacre. Anonimato dos dois lados.</h1>
+          <p class="lead mt-2" data-i18n>Documentos, bases de dados, fotografias, áudios e apurações de qualquer país, vendidos por pessoas que não precisam dizer quem são, para pessoas que também não precisam. Nada vai ao ar sem uma equipe humana ler tudo antes.</p>
+          <ul class="guarantees">
+            <li><i data-icon="shield"></i><span><b data-i18n>Anonimato total entre as partes.</b> Nenhuma conta pede nome, e-mail, telefone ou documento.</span></li>
+            <li><i data-icon="clipboard-check"></i><span><b data-i18n>Curadoria humana obrigatória.</b> Dois curadores em categorias de risco e revisão jurídica quando há terceiros citados.</span></li>
+            <li><i data-icon="badge-check"></i><span><b data-i18n>Prova pública de cada item.</b> Hash do pacote e carimbo de tempo publicados antes de qualquer venda.</span></li>
+          </ul>
+          <div class="row mt-3">
+            <a class="btn btn-lg btn-primary" href="explorar.html"><i data-icon="compass"></i><span data-i18n>Explorar o catálogo</span></a>
+            <a class="btn btn-lg" href="vendedor.html"><i data-icon="store"></i><span data-i18n>Vender informação</span></a>
+            <a class="btn btn-lg" href="../buyer/pedidos.html#novo-pedido"><i data-icon="file-search"></i><span data-i18n>Pedir uma informação</span></a>
+          </div>
+          <p class="xs muted mt-2">Hoje, 27/10/2026: 351 itens ativos de 41 países · 5 lacres coletivos em andamento · 6 pedidos em andamento.</p>
+        </div>
+        <article class="card item-card raised wax-edge">
+          <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span><span class="badge badge-wax">Em destaque</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span><span class="badge st-ativo">Ativo</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
+            <div class="goal-head"><span class="raised">US$ 54.120</span><span class="goal">meta US$ 80.000 · 68 %</span></div>
+            <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
+            <div class="progress-marks"><span style="left:25%">25 %</span><span style="left:50%">50 %</span><span style="left:75%">75 %</span><span style="left:100%">meta</span></div>
+            <div class="row between">
+              <span class="badge badge-outline"><i data-icon="users"></i>1.187 apoiadores</span>
+              <span class="badge badge-outline"><i data-icon="timer"></i>encerra em <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></span>
+            </div>
+            <p class="xs muted">Quando bater a meta, tudo fica público para todos. Se não bater até 15/11, o valor até o último marco batido (hoje US$ 40.000) fica com o vendedor e o resto volta aos apoiadores.</p>
+            <div class="item-foot">
+              <span class="handle" data-handle="sextante-21c9" data-rep="4,9 · 12 itens"></span>
+              <div class="row">
+                <a class="btn btn-sm btn-outline" href="prova.html"><i data-icon="badge-check"></i>Prova</a>
+                <a class="btn btn-sm btn-wax" href="item.html"><i data-icon="hand-coins"></i>Apoiar</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Faixa de confiança -->
+  <section class="section tight band">
+    <div class="container">
+      <div class="stat-grid">
+        <div class="stat"><span class="label">Itens curados</span><span class="value">412</span><span class="delta flat"><i data-icon="globe"></i>itens de 41 países</span></div>
+        <div class="stat"><span class="label">Lacres rompidos</span><span class="value">11</span><span class="delta flat">meta batida, conteúdo público para todos</span></div>
+        <div class="stat"><span class="label">Liberados ao público</span><span class="value">US$ 612 mil</span><span class="delta flat">arrecadados nos 11 lacres rompidos, todos públicos</span></div>
+        <div class="stat"><span class="label">Tempo mediano de curadoria</span><span class="value">36 h</span><span class="delta up"><i data-icon="trending-up"></i>91 % dentro de 48 h</span></div>
+      </div>
+      <div class="row mt-3">
+        <span class="badge badge-brass"><i data-icon="percent"></i>Comissão de 10 %, paga por quem vende</span><span class="badge badge-outline"><i data-icon="bitcoin"></i>Só cripto, da sua carteira: USDT, USDC, BTC</span><span class="badge badge-outline"><i data-icon="globe"></i>Preços em US$ · interface em pt, en e es</span>
+      </div>
+      <div class="row mt-2" style="gap:8px">
+        <span class="small muted" style="margin-right:4px">Jeitos de vender</span>
+        <a class="model-chip" data-model="copias" href="vendedor.html#modelos"><i data-icon="copy"></i>Cópias</a>
+        <a class="model-chip" data-model="exclusivo" href="vendedor.html#modelos"><i data-icon="crown"></i>Exclusivo</a>
+        <a class="model-chip" data-model="coletivo" href="vendedor.html#modelos"><i data-icon="hand-coins"></i>Lacre coletivo</a>
+        <a class="model-chip" data-model="leilao" href="vendedor.html#modelos"><i data-icon="gavel"></i>Leilão</a>
+        <a class="model-chip" data-model="camadas" href="vendedor.html#modelos"><i data-icon="layers"></i>Camadas</a>
+        <a class="model-chip" data-model="assinatura" href="vendedor.html#modelos"><i data-icon="repeat"></i>Assinatura</a>
+        <a class="model-chip" data-model="janela" href="vendedor.html#modelos"><i data-icon="timer"></i>Janela exclusiva</a>
+        <a class="model-chip" data-model="licenca" href="vendedor.html#modelos"><i data-icon="scale"></i>Licença</a>
+      </div>
+      <div class="row mt-2" style="gap:8px">
+        <span class="small muted" style="margin-right:4px">Jeitos de comprar</span>
+        <a class="model-chip" data-model="copias" href="explorar.html"><i data-icon="search"></i>Comprar no catálogo</a>
+        <a class="model-chip" data-model="coletivo" href="explorar.html?modelo=coletivo"><i data-icon="hand-coins"></i>Apoiar um lacre coletivo</a>
+        <a class="model-chip" data-model="pedido" href="pedidos.html"><i data-icon="file-search"></i>Pedido com recompensa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Missão -->
+  <section class="section" id="missao">
+    <div class="container">
+      <p class="eyebrow">Por que o Lacre existe</p>
+      <h2 class="display mt-1">Para a verdade sempre sair</h2>
+      <p class="lead mt-2">O Lacre existe para que informação de interesse público venha à tona. Quem tem a informação vende sem se expor. Quem quer saber financia, sozinho ou junto. A curadoria garante que nada ilegal seja publicado e que cada item seja o que promete. A prova pública mostra que o conteúdo existe.</p>
+      <div class="grid cols-3 mt-3">
+        <div class="card pillar"><div class="card-body feature"><span class="f-icon"><i data-icon="shield"></i></span><h3>Anonimato dos dois lados</h3><p class="small muted">Quem sabe conta sem se expor; quem paga não precisa dizer por quê. Nenhuma conta pede nome, e-mail, telefone ou documento, e cada um paga da própria carteira.</p></div></div>
+        <div class="card pillar"><div class="card-body feature"><span class="f-icon"><i data-icon="clipboard-check"></i></span><h3>Curadoria antes de publicar</h3><p class="small muted">Uma equipe humana lê tudo antes de ir ao ar: nada ilegal, nenhum dado pessoal sem necessidade, e o item precisa ser o que a prévia promete. Dois curadores nos casos de risco.</p></div></div>
+        <div class="card pillar"><div class="card-body feature"><span class="f-icon"><i data-icon="badge-check"></i></span><h3>Prova pública e dinheiro transparente</h3><p class="small muted">Hash e carimbo de tempo saem antes da venda. Cada item tem carteira própria com endereço público: qualquer pessoa confere quanto entrou. Em lacre coletivo, o conteúdo termina público.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section class="section band">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Como funciona</p><h2>Três passos de cada lado. A curadoria fica no meio.</h2><p>O conteúdo completo já está enviado e analisado antes de o item aparecer. Não existe “vou mandar depois”.</p></div>
+        <a class="btn btn-ghost" href="como-funciona.html">Ver em detalhe<i data-icon="arrow-right"></i></a>
+      </div>
+      <div class="grid cols-2">
+        <div class="card fill">
+          <div class="card-head"><i data-icon="vault"></i><h3>Para quem compra</h3></div>
+          <div class="card-body stack">
+            <div class="how-step"><span class="n">1</span><div><b>Crie uma conta anônima.</b><p class="small muted">Pseudônimo sorteado, senha ou passkey e uma frase de recuperação de 12 palavras. Nada mais.</p></div></div>
+            <div class="how-step"><span class="n">2</span><div><b>Pague da sua própria carteira cripto.</b><p class="small muted">USDT ou USDC, 1:1 com o dólar, direto para a carteira do item. Não guardamos saldo de ninguém. <a class="link" href="guia-cripto.html">Primeira vez? Guia em 10 minutos</a>.</p></div></div>
+            <div class="how-step"><span class="n">3</span><div><b>Compre, apoie ou peça.</b><p class="small muted">Cópia entregue na hora no cofre. Num lacre coletivo, quando a meta bate, tudo fica público. Você tem 72 h para abrir disputa se o conteúdo não bater com a prévia.</p></div></div>
+          </div>
+          <div class="card-foot"><a class="btn btn-sm btn-primary" href="../auth/criar-conta.html">Criar conta anônima</a><a class="btn btn-sm btn-ghost" href="explorar.html">Explorar sem conta</a></div>
+        </div>
+        <div class="card fill">
+          <div class="card-head"><i data-icon="upload"></i><h3>Para quem vende</h3></div>
+          <div class="card-body stack">
+            <div class="how-step"><span class="n">1</span><div><b>Envie o conteúdo completo.</b><p class="small muted">Até 20 GB. Metadados (autor, GPS, dispositivo) são removidos antes de qualquer pessoa da equipe ver o arquivo.</p></div></div>
+            <div class="how-step"><span class="n">2</span><div><b>Escolha o modelo e o preço.</b><p class="small muted">Cópias, exclusivo, lacre coletivo, leilão lacrado, camadas, assinatura ou licença. A curadoria pode sugerir, nunca impõe.</p></div></div>
+            <div class="how-step"><span class="n">3</span><div><b>Curadoria em até 48 h. Depois, publicação e prova pública.</b><p class="small muted">O Lacre fica com 10 % de comissão. Você recebe 90 %.</p></div></div>
+          </div>
+          <div class="card-foot"><a class="btn btn-sm btn-primary" href="../seller/novo-anuncio.html">Enviar um item</a><a class="btn btn-sm btn-ghost" href="vendedor.html">Modelos e taxas</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Primeira vez com cripto -->
+  <section class="section" id="cripto">
+    <div class="container">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Primeira vez com cripto?</p>
+          <h2 class="mt-1">Cinco passos, cerca de 10 minutos</h2>
+          <p class="lead mt-2">Para pagar no Lacre você precisa de uma carteira no navegador, um pouco de USDT na rede Polygon e uns centavos de POL para a taxa. Nenhum cadastro com a gente.</p>
+          <div class="row mt-3"><a class="btn btn-lg btn-primary" href="guia-cripto.html"><i data-icon="book-open"></i>Guia completo em 10 minutos</a></div>
+          <p class="xs muted mt-2">MetaMask é uma sugestão; qualquer carteira que você controle serve. Custa menos de US$ 1 em taxas.</p>
+        </div>
+        <div class="card"><div class="card-body">
+          <div class="cstep"><span class="ci"><i data-icon="download"></i></span><span><b>Instale a MetaMask</b> no navegador ou no celular, só pelo site oficial metamask.io.</span></div>
+          <div class="cstep"><span class="ci"><i data-icon="key"></i></span><span><b>Crie a carteira</b> e anote no papel a frase de 12 palavras. Ninguém a recupera por você, nem o Lacre.</span></div>
+          <div class="cstep"><span class="ci"><i data-icon="globe"></i></span><span><b>Ative a rede Polygon</b>: um clique, ela já vem na lista de redes populares.</span></div>
+          <div class="cstep"><span class="ci"><i data-icon="coins"></i></span><span><b>Coloque USDT</b> pelo botão "Comprar", por uma corretora (saque na rede Polygon) ou de quem já tem, e uns US$ 1 de POL para as taxas.</span></div>
+          <div class="cstep"><span class="ci"><i data-icon="send"></i></span><span><b>Pague no checkout</b>: USDT · Polygon, copie o endereço e envie o valor exato. Em cerca de 30 segundos o acesso libera sozinho.</span></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lacres coletivos em andamento -->
+  <section class="section band">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Lacre coletivo</p><h2>Lacres em andamento</h2><p>Uma meta, um prazo e conteúdo já analisado. A cada marco (25, 50, 75 e 90 %), uma prévia sai ao público. Quando a soma dos apoios bate a meta, o lacre rompe e todo o conteúdo fica público para todos. Se não bater, o valor até o último marco batido fica com o vendedor, que já liberou as prévias; o que entrou depois volta ao endereço de origem.</p></div>
+        <a class="btn btn-ghost" href="explorar.html#coletivos">Todos os lacres<i data-icon="arrow-right"></i></a>
+      </div>
+      <div class="grid cols-3">
+        <article class="card item-card">
+          <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="68%"></div></div>
+            <div class="item-foot"><div><div class="price wax">US$ 54.120<small>de US$ 80.000</small></div><div class="xs muted">1.187 apoiadores · <span class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></span></div></div><span class="handle" data-handle="sextante-21c9"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Governo e políticas públicas</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge st-rompido"><i data-icon="unlock"></i>Rompido hoje · aberto a todos</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">Base de 1.800 contratos de publicidade de prefeituras do interior de SP (2018–2025)</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="100%"></div></div>
+            <div class="item-foot"><div><div class="price wax">US$ 9.120<small>de US$ 9.000</small></div><div class="xs muted">203 apoiadores · público desde hoje, 10:40</div></div><span class="handle" data-handle="lanterna-b31d"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="audio" href="item.html"><div class="preview-tag"><span class="badge">Jornalismo e investigação</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="tag">AR</span></div>
+            <h3 class="item-title"><a href="item.html">Entrevistas em áudio com 25 ex-trabalhadores de minas de lítio em Jujuy, com transcrição em espanhol</a></h3>
+            <div class="progress"><div class="progress-bar wax" data-width="46%"></div></div>
+            <div class="item-foot"><div><div class="price wax">US$ 6.900<small>de US$ 15.000</small></div><div class="xs muted">312 apoiadores · <span class="countdown" data-deadline="2026-12-05T23:59:00-03:00"></span></div></div><span class="handle" data-handle="quebracho-8d1f"></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Novos no catálogo -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Catálogo</p><h2><span data-i18n>Novos no catálogo</span> <span class="badge badge-brass" id="novos-pais" hidden></span></h2><p>Aprovados nos últimos dias, de vários países. Cada card mostra o país (código ISO), o modelo de venda, o nível de autenticidade atribuído pela curadoria e o pseudônimo do vendedor.</p></div>
+        <a class="btn btn-ghost" href="explorar.html"><span data-i18n>Ver os 351 itens</span><i data-icon="arrow-right"></i></a>
+      </div>
+      <div class="grid cols-3" id="novos-grid">
+        <article class="card item-card">
+          <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Dados e bases</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 41/150</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BD</span></div>
+            <h3 class="item-title"><a href="item.html">Registro de 2.300 fábricas têxteis de Bangladesh com resultados de auditorias públicas de segurança (2014–2025)</a></h3>
+            <div class="item-foot"><div class="price">US$ 320<small>109 restantes</small></div><span class="handle" data-handle="meridiano-4b8e"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="imagem" href="item.html"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">340 fotografias em alta resolução da enchente de 2024 em Porto Alegre, com geolocalização e horário</a></h3>
+            <div class="item-foot"><div class="price">US$ 900<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Negócios e mercado</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="exclusivo"><i data-icon="crown"></i>Exclusivo</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">Mercado de energia solar distribuída no Brasil: projeções 2026–2030, 120 páginas</a></h3>
+            <div class="item-foot"><div class="price">US$ 25.000<small>ou oferta</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="imagem" href="item.html"><div class="preview-tag"><span class="badge">História e acervos</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Leilão lacrado</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">400 fotografias inéditas da construção de Brasília (1957–1960), acervo pessoal digitalizado</a></h3>
+            <div class="item-foot"><div><div class="price">7 lances<small>reserva não revelada</small></div><div class="xs muted">encerra em <span class="countdown" data-deadline="2026-11-02T20:00:00-03:00"></span></div></div><span class="handle" data-handle="arquivista-0d2e"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="documento" href="item.html"><div class="preview-tag"><span class="badge">Educação e métodos</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Camadas</span><span class="badge auth-plausivel"><i data-icon="shield"></i>Plausível</span><span class="tag">BR</span></div>
+            <h3 class="item-title"><a href="item.html">Como uma operação de última milha cortou 31% do custo: playbook, planilhas e modelo de roteirização</a></h3>
+            <div class="item-foot"><div class="price">US$ 190<small>4 camadas</small></div><span class="handle" data-handle="bussola-c4e1"></span></div>
+          </div>
+        </article>
+        <article class="card item-card">
+          <a class="preview" data-type="dados" href="item.html"><div class="preview-tag"><span class="badge">Imóveis e urbanismo</span></div><div class="preview-lock"><span data-seal></span></div></a>
+          <div class="item-body">
+            <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="tag">PT</span></div>
+            <h3 class="item-title"><a href="item.html">Preços de aluguel por freguesia em Lisboa e Porto, série mensal 2015–2026, com fontes</a></h3>
+            <div class="item-foot"><div class="price">US$ 140<small>96 vendidas</small></div><span class="handle" data-handle="azulejo-1c6d"></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pedidos com recompensa -->
+  <section class="section band">
+    <div class="container">
+      <div class="section-head">
+        <div><p class="eyebrow">Demanda primeiro</p><h2>Pedidos com recompensa</h2><p>Alguém descreve a informação que procura, define o valor por pessoa e paga agora um sinal de 25 %. Outras pessoas entram pelo mesmo valor, com o mesmo sinal. Quando alguém atende, cada pessoa vê uma prévia e só então paga os 75 % restantes. Também há pedidos por unidade: paga-se cada foto ou documento aceito.</p></div>
+        <a class="btn btn-ghost" href="pedidos.html">Ver o mural<i data-icon="arrow-right"></i></a>
+      </div>
+      <div class="grid cols-3">
+        <article class="card req-card" data-href="pedido.html">
+          <div class="card-body">
+            <div class="row between"><span class="row" style="gap:8px"><span class="eyebrow">Saúde e meio ambiente</span><span class="tag">BR</span></span><span class="badge st-ativo">Aberto</span></div>
+            <h3 class="req-title"><a href="pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a></h3>
+            <dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 800</dd></div><div><dt>Pessoas</dt><dd>4</dd></div><div><dt>Recompensa total</dt><dd>US$ 3.200</dd></div><div><dt>Sinais pagos</dt><dd>US$ 800</dd></div><div><dt>Prazo</dt><dd>30/11/2026</dd></div></dl>
+            <div class="row actions"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 800, sinal de US$ 200 agora</a><a class="btn btn-sm btn-primary" href="../seller/novo-anuncio.html?atender=ped-2c8d1"><i data-icon="upload"></i>Atender este pedido</a></div>
+          </div>
+        </article>
+        <article class="card req-card" data-href="pedido.html?p=ped-8b4u2">
+          <div class="card-body">
+            <div class="row between"><span class="row" style="gap:8px"><span class="eyebrow">Governo e políticas públicas</span><span class="tag">BR</span></span><span class="row"><span class="badge badge-brass"><i data-icon="layers"></i>Por unidade</span><span class="badge st-ativo">Aberto</span></span></div>
+            <h3 class="req-title"><a href="pedido.html?p=ped-8b4u2">Fotos dos boletins de urna (BU) afixados nas seções eleitorais de Minas Gerais no 2º turno de 2026 (25/10)</a></h3>
+            <div><div class="row between small"><span><b>1.112 de 5.000</b> fotos válidas</span><span class="muted">38 pessoas enviaram</span></div><div class="progress thin mt-1"><div class="progress-bar wax" data-width="22%"></div></div></div>
+            <dl class="kv-row"><div><dt>Por unidade</dt><dd class="wax">US$ 2 por foto válida</dd></div><div><dt>Pessoas</dt><dd>1</dd></div><div><dt>Sinal pago</dt><dd>US$ 2.500</dd></div><div><dt>Prazo</dt><dd>30/11/2026</dd></div></dl>
+            <div class="row actions"><a class="btn btn-sm btn-wax" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Entrar por US$ 2 por foto, sinal de US$ 2.500 agora</a><a class="btn btn-sm btn-primary" href="../seller/novo-anuncio.html?atender=ped-8b4u2"><i data-icon="upload"></i>Enviar fotos</a></div>
+          </div>
+        </article>
+        <article class="card req-card" data-href="pedido.html?p=ped-4k9e2">
+          <div class="card-body">
+            <div class="row between"><span class="row" style="gap:8px"><span class="eyebrow">Negócios e mercado</span><span class="tag">BR</span></span><span class="badge st-analise">Travado: atendimento em curadoria</span></div>
+            <h3 class="req-title"><a href="pedido.html?p=ped-4k9e2">Série de preços de aluguel por bairro em Belo Horizonte (2015–2026)</a></h3>
+            <dl class="kv-row"><div><dt>Por pessoa</dt><dd class="wax">US$ 290</dd></div><div><dt>Pessoas</dt><dd>5</dd></div><div><dt>Recompensa total</dt><dd>US$ 1.450</dd></div><div><dt>Sinais pagos</dt><dd>US$ 362,50</dd></div><div><dt>Prazo</dt><dd>20/11/2026</dd></div></dl>
+            <div class="row actions"><button class="btn btn-sm btn-wax" disabled><i data-icon="lock"></i>Entrar por US$ 290 · travado</button><span class="xs muted">travado desde 22/10: aprovado o atendimento, cada pessoa vê uma prévia e paga os 75 % restantes</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Anonimato -->
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Anonimato</p>
+          <h2 class="mt-1">O que não pedimos</h2>
+          <p class="lead mt-2">Uma conta no Lacre é um pseudônimo, uma senha e uma frase de recuperação. Se o nosso banco de dados vazar, o que vaza são pseudônimos e históricos de itens e pagamentos. Não há identidade para vazar.</p>
+          <ul class="no-ask deny mt-3">
+            <li><i data-icon="x"></i>Nome<span class="muted">nunca</span></li>
+            <li><i data-icon="x"></i>E-mail<span class="muted">nunca · notificações só dentro da plataforma e por push anônimo</span></li>
+            <li><i data-icon="x"></i>Telefone<span class="muted">nunca</span></li>
+            <li><i data-icon="x"></i>CPF, RG ou qualquer documento<span class="muted">nunca</span></li>
+            <li><i data-icon="x"></i>Endereço IP exato na sua conta<span class="muted">registros de acesso ficam em sistema separado, por exigência legal</span></li>
+          </ul>
+          <div class="row mt-3"><a class="btn" href="politicas.html#anonimato"><i data-icon="shield"></i>Anonimato e seus limites</a><a class="btn btn-ghost" href="../auth/criar-conta.html">Ver como a conta é criada</a></div>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><i data-icon="fingerprint"></i><h3>O que existe sobre uma conta</h3></div>
+            <div class="card-body">
+              <ul class="no-ask keep">
+                <li><i data-icon="check"></i><span class="handle" data-handle="coruja-7f3a"></span><span class="muted">pseudônimo sorteado, não editável</span></li>
+                <li><i data-icon="check"></i>Hash da senha ou chave pública da passkey</li>
+                <li><i data-icon="check"></i>Hash da frase de recuperação<span class="muted">só valida, não recupera</span></li>
+                <li><i data-icon="check"></i>Histórico de pagamentos por item<span class="muted">valor, rede, txid</span></li>
+                <li><i data-icon="check"></i>Itens, apoios e reputação do pseudônimo</li>
+                <li><i data-icon="check"></i>Data de criação e preferências</li>
+              </ul>
+            </div>
+          </div>
+          <div class="alert alert-anon"><i data-icon="scale"></i><div><span class="alert-title">O que não prometemos</span>Dinheiro entra e sai só em cripto e nenhuma moeda fiduciária toca a plataforma, mas a corretora ou o P2P onde você comprou a cripto conhece a sua identidade, e transações on-chain são públicas e analisáveis. Não guardamos esse vínculo; uma ordem judicial dirigida à corretora e a nós pode reconstruí-lo. A lei da jurisdição da sede (a definir; no Brasil, o Marco Civil exige 6 meses) pode nos obrigar a guardar registros de acesso em sistema separado e cifrado, entregues apenas por ordem judicial. Quem escreve o próprio nome dentro de um documento se identifica sozinho.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prova pública -->
+  <section class="section band">
+    <div class="container">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Prova pública</p>
+          <h2 class="mt-1">Cada item nasce com uma prova</h2>
+          <p class="lead mt-2">Antes de qualquer venda, publicamos uma página estável com o hash SHA-256 do pacote, o carimbo de tempo da aprovação, o nível de autenticidade e o número de curadores. O link sai no X, no Telegram e no Bluesky. Nunca com link direto para compra.</p>
+          <dl class="kv mt-3">
+            <dt>Hash do pacote</dt><dd class="mono">sha256: 3f9a…c21e</dd>
+            <dt>Aprovado em</dt><dd>20/10/2026 · 16:42 BRT · política de curadoria v1.2</dd>
+            <dt>Curadoria</dt><dd>2 curadores independentes + revisão jurídica</dd>
+            <dt>Autenticidade</dt><dd><span class="badge auth-parcial"><i data-icon="shield-check"></i>Verificado parcialmente</span></dd>
+          </dl>
+          <div class="row mt-3"><a class="btn btn-primary" href="prova.html"><i data-icon="badge-check"></i>Ver a prova deste item</a><a class="btn btn-ghost" href="como-funciona.html">Como verificar um hash</a></div>
+        </div>
+        <div class="x-card">
+          <div class="x-head"><span data-seal style="width:36px;height:36px;display:inline-block"></span><div><div class="x-name">Lacre</div><div class="x-at">@lacre · 21 out</div></div></div>
+          <div class="x-body">Lacre coletivo aberto · Jornalismo e investigação
+18 meses de apuração sobre a cadeia do ouro ilegal no Pará. Documentos públicos e entrevistas.
+Meta: US$ 80.000. A cada marco, uma prévia; quando bater, fica público para todo mundo.
+Apoie a partir de US$ 10 · lacre.app/p/4m2x9</div>
+          <div class="x-media">
+            <div class="social-card"><div class="preview" data-type="documento"></div><div class="row between"><span class="badge">Jornalismo e investigação</span><span class="badge badge-wax">Lacre coletivo</span></div><div class="sc-title">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</div><div><div class="progress thin" style="background:rgba(255,255,255,.15)"><div class="progress-bar wax" style="width:68%"></div></div><div class="sc-foot mt-1"><span>US$ 54.120 / 80.000 · 1.187 apoiadores</span><span>sha256 3f9a…c21e · lacre.app/p/4m2x9</span></div></div></div>
+          </div>
+          <div class="x-foot"><span>142 respostas</span><span>1,2 mil reposts</span><span>4,8 mil curtidas</span><span>310 mil visualizações</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <span data-seal class="seal-lg" style="display:inline-block"></span>
+        <h2 class="display">Crie uma conta anônima em dois minutos</h2>
+        <p>Sem e-mail, sem telefone, sem documento. Um pseudônimo sorteado, uma senha ou passkey e uma frase de recuperação que mostramos uma única vez. A mesma conta compra e vende.</p>
+        <div class="row">
+          <a class="btn btn-lg btn-primary" href="../auth/criar-conta.html"><i data-icon="user-x"></i>Criar conta anônima</a>
+          <a class="btn btn-lg btn-ghost" href="../auth/entrar.html">Já tenho conta</a>
+        </div>
+        <p class="xs muted">Sem e-mail não existe “esqueci minha senha”. A frase de recuperação é a única saída. Avisamos isso em cada passo.</p>
+      </div>
+    </div>
+  </section>
+  <script>
+    // País padrão: mostra primeiro os itens do país detectado (ou escolhido); sem itens, mostra todos.
+    document.addEventListener('lacre:ready', function () {
+      var L = window.Lacre.locale, t = window.Lacre.t, grid = document.getElementById('novos-grid'), chip = document.getElementById('novos-pais');
+      if (!grid || L.country === 'GLOBAL') return;
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.item-card'));
+      var mine = cards.filter(function (c) { var tg = c.querySelector('.item-meta .tag'); return tg && tg.textContent.trim() === L.country; });
+      if (mine.length) { cards.forEach(function (c) { c.hidden = mine.indexOf(c) < 0; }); chip.textContent = L.countryName(L.country); chip.hidden = false; }
+      else { chip.textContent = t('Nenhum item de {country} ainda. Mostrando todos os países.', { country: L.countryName(L.country) }); chip.className = 'badge badge-outline'; chip.hidden = false; }
+    });
+  </script>
+</main>
+</body>
+</html>

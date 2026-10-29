@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Painel · Lacre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/app.css">
+  <script src="../assets/app.js" defer></script>
+  <style>
+    .split > * { min-width: 0; }
+    @media (max-width: 600px) { .list-item { flex-wrap: wrap; } .list-item .li-body { flex: 1 1 calc(100% - 48px); } }
+    .greet { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .pledge { display: flex; flex-direction: column; gap: 8px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .pledge:last-child { border-bottom: 0; padding-bottom: 0; }
+    .pledge:first-child { padding-top: 0; }
+    .pledge .title { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-md); line-height: 1.3; }
+    .pledge .nums { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: var(--fs-xs); color: var(--muted); }
+    .pledge .nums b { color: var(--fg); font-variant-numeric: tabular-nums; }
+    .list-item .li-title a:hover { color: var(--brass); }
+    .alert .alert-actions { margin-left: auto; flex: none; }
+    @media (max-width: 600px) { .alert .alert-actions { margin-left: 0; width: 100%; } .alert { flex-wrap: wrap; } }
+  </style>
+</head>
+<body data-shell="buyer" data-page="painel" data-title="Painel" data-root="../">
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Comprador · segunda-feira, 27/10/2026</p>
+        <div class="greet mt-1"><h1>Olá,</h1><span class="handle lg" data-handle="coruja-7f3a" data-rep="4,8 · desde mar/2026"></span></div>
+        <p class="sub">1 apoio em andamento · 7 acessos no cofre · 2 pedidos (1 aberto, 1 atendido) · 1 disputa em análise · 1 leilão encerrando</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="../public/explorar.html"><i data-icon="compass"></i>Explorar catálogo</a>
+        <a class="btn btn-primary" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Pagamentos</a>
+      </div>
+    </div>
+
+    <div class="stat-grid mb-2">
+      <div class="stat"><span class="label">Pagamentos confirmados</span><span class="value">15 · US$ 3.030</span><span class="delta flat">9 itens e 3 pedidos · <a class="link" href="../buyer/pagamentos.html">ver pagamentos</a></span></div>
+      <div class="stat"><span class="label">Aguardando confirmação</span><span class="value">0</span><span class="delta flat">nenhuma transação vista na rede sem confirmar</span></div>
+      <div class="stat"><span class="label">Em lacres ainda abertos</span><span class="value">US$ 250,00</span><span class="delta flat">lcr-4m2x9 · US$ 100 garantidos ao vendedor + US$ 150 reembolsáveis se falhar antes do marco 75 %</span></div>
+      <div class="stat"><span class="label">Em pedidos abertos</span><span class="value">US$ 200,00</span><span class="delta flat">sinal no ped-2c8d1 · faltam US$ 600 depois da prévia</span></div>
+      <div class="stat"><span class="label">Em disputa</span><span class="value">US$ 490,00</span><span class="delta flat">lcr-9f2k7 · DSP-0207 · na carteira do item até a decisão</span></div>
+    </div>
+    <p class="xs muted mb-3">Sem saldo: o Lacre não guarda dinheiro de ninguém. Você paga da sua própria carteira direto para a carteira de cada item. Pedido que expira sem atendimento devolve o sinal (por desistência, não); lacre que falha devolve o que entrou depois do último marco batido.</p>
+
+    <!-- Alertas -->
+    <div class="stack-sm mb-3">
+      <div class="alert alert-info"><i data-icon="scale"></i><div><span class="alert-title">Disputa DSP-0207 em análise · decisão até <span class="countdown" data-deadline="2026-10-30T14:20:00-03:00"></span></span>12.400 licitações municipais do Nordeste (lcr-9f2k7): você abriu a disputa em 25/10 às 14:20. Os US$ 490,00 ficam na carteira do item até a decisão da curadoria; se for procedente, voltam ao seu endereço de origem.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/disputa.html">Acompanhar disputa</a></div></div>
+      <div class="alert alert-info"><i data-icon="repeat"></i><div><span class="alert-title">Assinatura vence em 25/11</span>Monitor semanal de patentes do setor farmacêutico (lcr-6d1k5): em 22/11 você recebe um endereço derivado para pagar os US$ 190,00 do próximo período, da sua carteira. Sem pagamento até 25/11, a assinatura pausa, sem multa.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/cofre.html">Gerenciar</a></div></div>
+      <div class="alert alert-wax"><i data-icon="gavel"></i><div><span class="alert-title">Leilão encerra em 6 dias · 02/11 às 20:00</span>400 fotografias inéditas da construção de Brasília (lcr-1w9s6). 7 lances lacrados, reserva não revelada. Você ainda não deu lance.</div><div class="alert-actions"><a class="btn btn-sm" href="../buyer/checkout.html">Dar lance</a></div></div>
+    </div>
+
+    <div class="split">
+      <div class="stack">
+        <!-- Apoios em andamento -->
+        <div class="card">
+          <div class="card-head"><h3>Apoios</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="../buyer/apoios.html">Ver todos (4)</a></div></div>
+          <div class="card-body">
+            <div class="pledge">
+              <div class="row between">
+                <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                <span class="badge st-ativo">Em andamento</span>
+              </div>
+              <a class="title" href="../public/item.html">Cadeia do ouro ilegal no Pará: 18 meses de apuração com documentos públicos e 31 entrevistas</a>
+              <div class="progress thick"><div class="progress-bar wax" data-width="68%"></div></div>
+              <div class="nums"><span><b>US$ 54.120</b> de US$ 80.000 · 68 %</span><span>1.187 apoiadores</span><span>encerra em <b class="countdown" data-deadline="2026-11-15T23:59:00-03:00"></b></span></div>
+              <div class="nums"><span>Você apoiou <b>US$ 250,00</b> (22/10 e 25/10) · ao bater a meta, tudo fica público para todos</span></div>
+              <div class="nums"><span>Marcos 25 % e 50 % batidos · <b>US$ 40.000</b> garantidos ao vendedor · seus US$ 100 de 22/10 já garantidos; os US$ 150 de 25/10 voltam se falhar antes do marco 75 % (US$ 60.000)</span></div>
+              <div class="row"><a class="btn btn-wax btn-sm" href="../buyer/checkout.html"><i data-icon="hand-coins"></i>Apoiar mais</a><button class="btn btn-sm btn-ghost" data-toast="Link anônimo copiado: lacre.app/p/4m2x9?r=k7"><i data-icon="share"></i>Compartilhar</button><span class="xs muted">Vendedor: <span class="handle" data-handle="sextante-21c9"></span></span></div>
+            </div>
+            <div class="pledge">
+              <div class="row between">
+                <span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span>
+                <span class="badge st-financiado">Rompido e público em 12/10</span>
+              </div>
+              <a class="title" href="../public/item.html">Transcrição de 200 h de audiências públicas da Câmara de SP sobre o PDE</a>
+              <div class="progress thick"><div class="progress-bar wax" data-width="100%"></div></div>
+              <div class="nums"><span><b>US$ 19.240</b> de US$ 18.000 · meta batida em 12/10</span><span>612 apoiadores</span><span>conteúdo público desde 12/10</span></div>
+              <div class="nums"><span>Você apoiou <b>US$ 300,00</b> (20/09) · acesso no cofre (ENT-7C1D) · selo "Rompeu este lacre" no seu perfil</span></div>
+              <div class="row"><a class="btn btn-sm" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a><a class="btn btn-sm btn-ghost" href="../public/prova.html"><i data-icon="badge-check"></i>Ver prova</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Novidades no cofre -->
+        <div class="card">
+          <div class="card-head"><h3>Novidades no cofre</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="../buyer/cofre.html">Ver cofre (7)</a></div></div>
+          <div class="card-body" style="padding-top:4px;padding-bottom:4px">
+            <div class="list">
+              <div class="list-item">
+                <span class="li-icon"><i data-icon="database"></i></span>
+                <div class="li-body">
+                  <div class="li-title"><a href="../buyer/visualizador.html">12.400 licitações municipais do Nordeste (2019–2025)</a></div>
+                  <div class="li-sub">Compra · 21/10 · CSV/XLSX 48 MB · download com marca d'água · ENT-3F9A · disputa DSP-0207 em análise</div>
+                </div>
+                <span class="badge st-liberado">Disponível</span>
+                <a class="btn btn-sm" href="../buyer/visualizador.html">Abrir</a>
+              </div>
+              <div class="list-item">
+                <span class="li-icon"><i data-icon="layers"></i></span>
+                <div class="li-body">
+                  <div class="li-title"><a href="../buyer/visualizador.html">Como uma operação de última milha cortou 31 % do custo</a></div>
+                  <div class="li-sub">Camada 1 · 23/10 · sumário executivo e 10 gráficos · <a class="link" href="../buyer/checkout.html">subir para a camada 2 por US$ 700</a></div>
+                </div>
+                <span class="badge st-liberado">Disponível</span>
+                <a class="btn btn-sm" href="../buyer/visualizador.html">Abrir</a>
+              </div>
+              <div class="list-item">
+                <span class="li-icon"><i data-icon="repeat"></i></span>
+                <div class="li-body">
+                  <div class="li-title"><a href="../buyer/visualizador.html">Monitor semanal de patentes do setor farmacêutico</a></div>
+                  <div class="li-sub">Assinatura · edição nº 43 de 24/10 · próxima edição 31/10 · somente leitura</div>
+                </div>
+                <span class="badge badge-brass">Nova edição</span>
+                <a class="btn btn-sm" href="../buyer/visualizador.html">Abrir</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Acompanhando -->
+        <div class="card">
+          <div class="card-head"><h3>Acompanhando</h3><span class="xs muted">alertas de preço, prazo e financiamento</span></div>
+          <div class="card-body" style="padding-top:4px;padding-bottom:4px">
+            <div class="list">
+              <div class="list-item">
+                <span class="li-icon"><i data-icon="gavel"></i></span>
+                <div class="li-body">
+                  <div class="li-title"><a href="../public/item.html">400 fotografias inéditas da construção de Brasília (1957–1960)</a></div>
+                  <div class="li-sub">Leilão lacrado · segundo preço · 7 lances · encerra em <span class="countdown" data-deadline="2026-11-02T20:00:00-03:00"></span> · <span class="handle" data-handle="arquivista-0d2e"></span></div>
+                </div>
+                <span class="badge badge-warn">Encerrando</span>
+                <a class="btn btn-sm" href="../buyer/checkout.html">Dar lance</a>
+              </div>
+              <div class="list-item">
+                <span class="li-icon"><i data-icon="crown"></i></span>
+                <div class="li-body">
+                  <div class="li-title"><a href="../public/item.html">Mercado de energia solar distribuída no Brasil: projeções 2026–2030</a></div>
+                  <div class="li-sub">Exclusivo · US$ 25.000 ou oferta a partir de US$ 15.000 · 2 ofertas recebidas · <span class="handle" data-handle="bussola-c4e1"></span></div>
+                </div>
+                <span class="badge badge-outline">2 ofertas</span>
+                <a class="btn btn-sm" href="../buyer/checkout.html">Fazer oferta</a>
+              </div>
+              <div class="list-item">
+                <span class="li-icon"><i data-icon="database"></i></span>
+                <div class="li-body">
+                  <div class="li-title"><a href="../public/item.html">Atas de 2.300 reuniões de conselhos municipais de saúde do Nordeste (2020–2025)</a></div>
+                  <div class="li-sub">Cópias · preço caiu de US$ 220 para US$ 180 em 26/10 · <span class="handle" data-handle="lanterna-b31d"></span></div>
+                </div>
+                <span class="badge badge-ok">Preço caiu</span>
+                <a class="btn btn-sm" href="../buyer/checkout.html">Comprar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <!-- Pedidos -->
+        <div class="card">
+          <div class="card-head"><h3>Pedidos que você fez</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="../buyer/pedidos.html">Meus pedidos</a></div></div>
+          <div class="card-body stack">
+            <div class="stack-sm">
+              <div class="row between"><span class="badge badge-brass">Você abriu</span><span class="badge st-ativo">Aberto</span></div>
+              <a class="strong" href="../public/pedido.html">Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV</a>
+              <div class="xs muted">ped-2c8d1 · valor por pessoa <b class="num">US$ 800</b> · 4 pessoas · recompensa total <b class="num">US$ 3.200</b> · sinais depositados US$ 800 · prazo 30/11</div>
+              <div class="xs muted">Você abriu em 12/10 com sinal de US$ 125 (valor US$ 500); o valor subiu em 18/10 e você completou o sinal em 20/10 (+US$ 75). Seus US$ 200 de sinal ficam na carteira do pedido; quando um atendimento for aprovado, você vê a prévia e tem 72 h para pagar os US$ 600 restantes. O sinal não volta por desistência; volta só se o pedido expirar sem atendimento.</div>
+              <div class="row"><a class="btn btn-sm" href="../buyer/checkout.html"><i data-icon="trending-up"></i>Subir o valor (mín. US$ 880)</a><span class="xs muted">0 atendimentos em curadoria</span></div>
+            </div>
+            <hr style="margin:0">
+            <div class="stack-sm">
+              <div class="row between"><span class="badge badge-brass">Você entrou</span><span class="badge st-entregue">Atendido</span></div>
+              <a class="strong" href="../public/pedido.html?p=ped-1b6j8">Fotografias dos interiores do Estádio do Pacaembu antes da reforma (2019–2020)</a>
+              <div class="xs muted">ped-1b6j8 · sinal de US$ 50 em 28/09 · prévia aprovada e US$ 150 restantes pagos em 07/10 · 3 pessoas · atendido em 08/10 por <span class="handle" data-handle="cartografo-5a77"></span></div>
+              <div class="row"><a class="btn btn-sm" href="../buyer/cofre.html"><i data-icon="vault"></i>Ver no cofre</a></div>
+            </div>
+            <div class="anon-note"><i data-icon="users"></i><span>Quem entra num pedido aparece pelo pseudônimo e pela data de entrada. Apoios a lacres aparecem só como contagem.</span></div>
+          </div>
+        </div>
+
+        <!-- Atalhos -->
+        <div class="card">
+          <div class="card-head"><h3>Atalhos</h3></div>
+          <div class="card-body stack-sm">
+            <a class="btn btn-block" href="../buyer/pagamentos.html"><i data-icon="receipt"></i>Pagamentos</a>
+            <a class="btn btn-block" href="../buyer/pagamentos.html#como-pagar"><i data-icon="qr-code"></i>Como pagar</a>
+            <a class="btn btn-block" href="../buyer/mensagens.html"><i data-icon="message-square"></i>Mensagens <span class="badge badge-brass">2</span></a>
+            <a class="btn btn-block" href="../buyer/notificacoes.html"><i data-icon="bell"></i>Notificações <span class="badge badge-brass">4</span></a>
+            <a class="btn btn-block" href="../seller/painel.html"><i data-icon="repeat"></i>Área do vendedor</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recomendados -->
+    <div class="row between mt-4 mb-2">
+      <div><h2>Recomendados para você</h2><p class="muted small">Baseado nas categorias e países que você segue: Dados e bases, Fotografia e vídeo, Imóveis e urbanismo · Brasil e Portugal.</p></div>
+      <a class="btn btn-sm btn-ghost" href="../public/explorar.html">Ver catálogo<i data-icon="arrow-right"></i></a>
+    </div>
+    <div class="grid cols-3">
+      <article class="card item-card">
+        <div class="preview" data-type="video"><div class="preview-tag"><span class="badge">Fotografia e vídeo</span></div><div class="preview-lock"><span data-seal></span></div></div>
+        <div class="item-body">
+          <div class="item-meta"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Licença</span><span class="badge auth-verificado"><i data-icon="badge-check"></i>Verificado</span><span class="tag">BR</span></div>
+          <h3 class="item-title"><a href="../public/item.html">Filmagem aérea 4K das queimadas no Pantanal, agosto de 2025: 6 horas de material bruto</a></h3>
+          <div class="item-foot"><div class="price">US$ 2.400<small>editorial</small></div><span class="handle" data-handle="cartografo-5a77"></span></div>
+        </div>
+      </article>
+      <article class="card item-card">
+        <div class="preview" data-type="dados"><div class="preview-tag"><span class="badge">Imóveis e urbanismo</span></div><div class="preview-lock"><span data-seal></span></div></div>
+        <div class="item-body">
+          <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 96 vendidas</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="tag">PT</span></div>
+          <h3 class="item-title"><a href="../public/item.html">Preços de aluguel por freguesia em Lisboa e Porto, série mensal 2015–2026, com fontes</a></h3>
+          <div class="item-foot"><div class="price">US$ 140</div><span class="handle" data-handle="azulejo-1c6d"></span></div>
+        </div>
+      </article>
+      <article class="card item-card">
+        <div class="preview" data-type="dados"><div class="preview-tag"><span class="badge">Dados e bases</span></div><div class="preview-lock"><span data-seal></span></div></div>
+        <div class="item-body">
+          <div class="item-meta"><span class="model-chip" data-model="copias"><i data-icon="copy"></i>Cópias · 41/200</span><span class="badge auth-parcial"><i data-icon="shield-check"></i>Parcial</span><span class="tag">BR</span></div>
+          <h3 class="item-title"><a href="../public/item.html">4.700 contratos de transporte escolar de municípios da Bahia (2021–2025), com valores e vencedores</a></h3>
+          <div class="item-foot"><div class="price">US$ 260</div><span class="handle" data-handle="lanterna-b31d"></span></div>
+        </div>
+      </article>
+    </div>
+
+    <p class="anon-note mt-4"><i data-icon="shield"></i><span>Este painel mostra tudo o que existe sobre a sua conta: pseudônimo, pagamentos feitos, acessos, apoios e pedidos. Não há nome, e-mail, telefone nem localização em lugar nenhum.</span></p>
+  </main>
+</body>
+</html>
