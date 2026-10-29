@@ -49,7 +49,7 @@ design/      protótipo navegável em HTML estático
 - **Comissão única de 10 %** em todos os modelos. Num lacre que não bate a meta, o valor do último marco batido fica com o vendedor (pagou as prévias já liberadas) e só o que entrou depois volta aos apoiadores.
 - **Compra com exclusividade.** Em Cópias, Lacre coletivo e Camadas, o vendedor pode definir um valor pelo qual um único comprador leva o item e o anúncio encerra (apoios devolvidos).
 - **Nada é publicado sem curadoria**. Checklist em 7 blocos, nível de autenticidade público, regra de dois olhos em categorias de risco alto, escalonamento jurídico.
-- **MVP com 4 modelos**: Cópias, Exclusivo, Lacre coletivo e Pedido com recompensa. Os outros 6 entram nas fases 2 e 3.
+- **Nove modelos no MVP**: Cópias, Exclusivo, Lacre coletivo, Pedido com recompensa, Leilão, Camadas, Assinatura, Janela exclusiva e Licença. Só a Consulta paga fica para a fase 3.
 - **Página de prova** por item, destino de todo post nas redes.
 
 ## Decisões que ainda precisam de vocês

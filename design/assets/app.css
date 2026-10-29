@@ -170,7 +170,7 @@ p { margin: 0; }
 .split.reverse { grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr); }
 .split-3 { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) minmax(300px, 1fr); gap: 16px; align-items: start; }
 @media (max-width: 1100px) { .split-3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .split-3 > :last-child { grid-column: 1 / -1; } .cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 900px) { .split, .split.reverse { grid-template-columns: minmax(0, 1fr); } .cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .split, .split.reverse { grid-template-columns: minmax(0, 1fr); } .split.side-first > aside { order: -1; position: static; } .cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .cols-2, .cols-3, .cols-4, .split-3 { grid-template-columns: minmax(0, 1fr); } }
 .grid > *, .split > *, .split-3 > *, .stack > *, .stack-sm > *, .stack-lg > * { min-width: 0; }
 .mt-1 { margin-top: 8px; } .mt-2 { margin-top: 16px; } .mt-3 { margin-top: 24px; } .mt-4 { margin-top: 40px; }
@@ -597,6 +597,18 @@ legend { padding: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--fg-
 .help-box.open { display: grid; gap: 6px; }
 .help-box p { margin: 0; }
 .help-box b { color: var(--fg); }
+/* Card recolhível: o cabeçalho é um botão; o corpo só aparece com .open (hash #id também abre) */
+.card.collapsible > .card-head { width: 100%; background: none; border: 0; border-bottom: 1px solid var(--border); color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.card.collapsible > .card-head .h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-md); letter-spacing: -.01em; }
+.card.collapsible > .card-head:hover .h3 { color: var(--brass); }
+.card.collapsible > .card-head .chev { display: inline-flex; color: var(--muted); }
+.card.collapsible > .card-head .chev svg { width: 18px; height: 18px; transition: transform .15s; }
+.card.collapsible:not(.open) > .card-head { border-bottom: 0; }
+.card.collapsible:not(.open) > .card-body { display: none; }
+.card.collapsible.open > .card-head .chev svg { transform: rotate(180deg); }
+/* Card inteiro clicável (data-href): o clique fora de links e botões abre o destino */
+[data-href] { cursor: pointer; }
+[data-href]:hover { border-color: var(--border-2); }
 .words { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; counter-reset: w; }
 .words span { counter-increment: w; background: var(--bg-2); border: 1px solid var(--border-2); border-radius: var(--r-sm); padding: 9px 10px 9px 32px; font-family: var(--font-mono); font-size: var(--fs-sm); position: relative; }
 .words span::before { content: counter(w); position: absolute; left: 10px; color: var(--muted-2); font-size: var(--fs-xs); top: 11px; }

@@ -33,7 +33,7 @@
 - Abertura com 30 itens ativos e 2 lacres coletivos de interesse público em destaque.
 
 ## Fase 2 · Expansão (meses 4–6)
-- **Leilão** (aberto, lacrado, holandês), **Camadas**, **Assinatura**.
+- Melhorias dos modelos que já estão no MVP: reembolso em massa de lances em mais redes, SLA de 24 h medido para edições de assinatura, camadas com mais de cinco níveis.
 - Preço escalonado, compra em grupo.
 - Análise expressa e destaque pagos; Conta Pro com alertas.
 - Instagram/Threads; cards por canal; melhores horários.
@@ -44,7 +44,7 @@
 - Canal de notificação externo opcional (Telegram bot) com aviso de vínculo.
 
 ## Fase 3 · Profundidade (meses 7–12)
-- **Janela exclusiva**, **Licença** com contratos gerados, **Consulta paga**.
+- **Consulta paga** (depende de reputação consolidada).
 - Âncora de prova em blockchain (OpenTimestamps).
 - API de catálogo e de datasets para compradores institucionais.
 - Apps móveis (PWA já cobre o essencial; nativo só se o push anônimo for insuficiente).

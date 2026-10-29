@@ -83,10 +83,10 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-head"><h3>Autenticação em duas etapas (TOTP)</h3><span class="badge badge-ok"><i data-icon="shield-check"></i>ativo desde 12/03/2026</span></div>
+          <div class="card-head"><h3>Autenticação em duas etapas (TOTP)</h3><span class="badge badge-ok" id="totp-badge"><i data-icon="shield-check"></i>ativo desde 12/03/2026</span></div>
           <div class="card-body stack-sm small">
             <p>App autenticador no celular. Exigido para entrar com senha, receber a carteira de um item finalizado (frase de recuperação do item), ver a frase de recuperação da conta e excluir a conta.</p>
-            <div class="row"><button class="btn btn-sm" data-toast="8 códigos de backup restantes. Exibidos uma vez."><i data-icon="list"></i>Códigos de backup</button><button class="btn btn-sm" data-toast="Novo QR gerado. O app antigo deixa de valer ao confirmar."><i data-icon="qr-code"></i>Trocar de app</button><button class="btn btn-sm btn-danger" data-modal-open="m-totp"><i data-icon="x"></i>Desativar</button></div>
+            <div class="row" id="totp-on-actions"><button class="btn btn-sm" data-modal-open="m-backup"><i data-icon="list"></i>Códigos de backup</button><button class="btn btn-sm" data-modal-open="m-app"><i data-icon="qr-code"></i>Trocar de app</button><button class="btn btn-sm btn-danger" data-modal-open="m-totp"><i data-icon="x"></i>Desativar</button></div><div class="row" id="totp-off-actions" hidden><button class="btn btn-sm btn-primary" data-modal-open="m-app"><i data-icon="shield-check"></i>Ativar de novo</button><span class="xs muted">Sem TOTP, a conta fica protegida só pela senha e pelas passkeys.</span></div>
           </div>
         </div>
         <div class="card">
@@ -290,9 +290,23 @@
     </div>
   </div>
 
-  <div class="modal-backdrop" id="m-totp"><div class="modal"><div class="modal-head"><h3>Desativar TOTP?</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Sem a segunda etapa, quem tiver a sua senha entra na conta e pode receber a carteira de um item finalizado. Passkeys continuam valendo.</p><div class="field"><label for="t-code">Código TOTP atual</label><input id="t-code" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div></div><div class="modal-foot"><button class="btn" data-modal-close>Manter ativo</button><button class="btn btn-danger" data-modal-close data-toast="TOTP desativado. Recomendamos reativar.">Desativar</button></div></div></div>
+  <div class="modal-backdrop" id="m-totp"><div class="modal"><div class="modal-head"><h3>Desativar TOTP?</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Sem a segunda etapa, quem tiver a sua senha entra na conta e pode receber a carteira de um item finalizado. Passkeys continuam valendo.</p><div class="field"><label for="t-code">Código TOTP atual</label><input id="t-code" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div></div><div class="modal-foot"><button class="btn" data-modal-close>Manter ativo</button><button class="btn btn-danger" id="totp-off" data-modal-close data-toast="TOTP desativado. Recomendamos reativar.">Desativar</button></div></div></div>
+  <div class="modal-backdrop" id="m-backup"><div class="modal"><div class="modal-head"><h3>Códigos de backup</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Cada código entra uma vez no lugar do app autenticador. Guarde fora do computador. Restam <b>8 de 10</b>; gerar novos invalida estes.</p><div class="words" style="grid-template-columns:repeat(2,1fr)"><span>4K7Q-2MXE</span><span>9PLA-6RTV</span><span>H2ND-8YCB</span><span>Q7WS-1FKM</span><span>ZB3T-5JGP</span><span>M8XR-4DQL</span><span>C6VY-9HNA</span><span>T1EK-7SBW</span></div><div class="row"><button class="btn btn-sm" data-copy="4K7Q-2MXE 9PLA-6RTV H2ND-8YCB Q7WS-1FKM ZB3T-5JGP M8XR-4DQL C6VY-9HNA T1EK-7SBW"><i data-icon="copy"></i>Copiar os 8</button><button class="btn btn-sm btn-ghost" data-modal-close data-toast="10 códigos novos gerados; os antigos deixaram de valer"><i data-icon="refresh"></i>Gerar novos</button></div></div><div class="modal-foot"><button class="btn" data-modal-close>Fechar</button></div></div></div>
+  <div class="modal-backdrop" id="m-app"><div class="modal"><div class="modal-head"><h3 id="m-app-title">Trocar de app autenticador</h3><button class="icon-btn" data-modal-close aria-label="Fechar"><i data-icon="x"></i></button></div><div class="modal-body stack-sm"><p class="small">Leia o QR no novo app (ou copie a chave) e confirme com o código que ele mostrar. O app antigo deixa de valer ao confirmar.</p><div class="row" style="gap:16px;align-items:flex-start"><div style="width:132px;height:132px;flex:none;border-radius:var(--r-sm);background:repeating-conic-gradient(var(--fg) 0 25%, var(--bg) 0 50%) 0 0 / 12px 12px;border:6px solid var(--bg);outline:1px solid var(--border)"></div><div class="stack-sm" style="flex:1;min-width:0"><div class="field"><label for="t-key">Chave manual</label><div class="hash wrap"><code id="t-key">LACR E7Q2 9MXT 4KDB 8NWA 3PFV</code><button class="btn btn-sm btn-ghost" data-copy="#t-key" aria-label="Copiar chave"><i data-icon="copy"></i></button></div></div><div class="field"><label for="t-new">Código do novo app</label><input id="t-new" class="input mono" inputmode="numeric" maxlength="6" placeholder="000000"></div></div></div></div><div class="modal-foot"><button class="btn" data-modal-close>Cancelar</button><button class="btn btn-primary" id="totp-on" data-modal-close data-toast="TOTP confirmado no novo app">Confirmar</button></div></div></div>
 
   <script>
+    // TOTP: desativar e reativar mudam o cartão (estado só no protótipo)
+    (function () {
+      var badge = document.getElementById('totp-badge'), onA = document.getElementById('totp-on-actions'), offA = document.getElementById('totp-off-actions');
+      function setTotp(active) {
+        badge.className = active ? 'badge badge-ok' : 'badge badge-outline';
+        badge.innerHTML = (window.Lacre ? window.Lacre.icon(active ? 'shield-check' : 'shield') : '') + (active ? 'ativo desde 27/10/2026' : 'desativado em 27/10/2026');
+        onA.hidden = !active; offA.hidden = active;
+        document.getElementById('m-app-title').textContent = active ? 'Trocar de app autenticador' : 'Ativar TOTP';
+      }
+      document.getElementById('totp-off').addEventListener('click', function () { setTotp(false); });
+      document.getElementById('totp-on').addEventListener('click', function () { setTotp(true); });
+    })();
     // seletor de tema (sistema / claro / escuro): usa a mesma chave de armazenamento do app.js
     document.querySelectorAll('#theme-seg [data-theme-set]').forEach(function (b) {
       b.addEventListener('click', function () {

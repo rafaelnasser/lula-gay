@@ -22,11 +22,11 @@ Convenções que valem para todos os modelos:
 | 2 | **Exclusivo** | Um único comprador leva, item sai do catálogo | Um | MVP |
 | 3 | **Lacre coletivo** | Meta de arrecadação; batida a meta, o conteúdo é liberado | Multidão | MVP |
 | 4 | **Pedido com recompensa** | Um comprador publica o que quer e o valor que paga; quem quer a mesma informação se junta pelo mesmo valor (ou cobre); quem entregar leva o total | Demanda primeiro | MVP |
-| 5 | **Leilão** | Maior lance leva (aberto, lacrado ou holandês) | Um | V2 |
-| 6 | **Camadas** | Conteúdo dividido em níveis com preços crescentes | Muitos | V2 |
-| 7 | **Assinatura** | Fonte recorrente; acesso enquanto pagar | Muitos | V2 |
-| 8 | **Janela exclusiva** | Exclusividade temporária e depois abertura para cópias | Um, depois muitos | V3 |
-| 9 | **Licença** | Direitos de uso por finalidade (editorial, comercial, exclusiva) | Muitos | V3 |
+| 5 | **Leilão** | Maior lance leva (aberto, lacrado ou holandês) | Um | MVP |
+| 6 | **Camadas** | Conteúdo dividido em níveis com preços crescentes | Muitos | MVP |
+| 7 | **Assinatura** | Fonte recorrente; acesso enquanto pagar | Muitos | MVP |
+| 8 | **Janela exclusiva** | Exclusividade temporária e depois abertura para cópias | Um, depois muitos | MVP |
+| 9 | **Licença** | Direitos de uso por finalidade (editorial, comercial, exclusiva) | Muitos | MVP |
 | 10 | **Consulta paga** | Comprador faz uma pergunta e paga pela resposta verificada | Um | V3 |
 
 Modificadores (combináveis): **compra com exclusividade (buyout)**, edição limitada, preço escalonado por volume, prévias por marco, pague o que quiser com mínimo, marcos garantidos vs. flexível, compra em grupo, marca d'água obrigatória, somente leitura (sem download).
@@ -124,7 +124,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 7. **Expirar:** sem nenhum vendedor até o prazo, o sinal de quem ainda participa volta ao endereço de origem. É o único caso em que o sinal volta.
 8. Interessados são públicos (pseudônimo e data de entrada). Janela de 48 h e incremento de 10 % são parâmetros da administração.
 9. **Extras (sub-itens opcionais).** Qualquer interessado ativo pode adicionar um extra ao pedido: algo próximo ou complementar ao que foi pedido (um vendedor que tem uma base parecida, por exemplo), com título, critérios, valor por pessoa próprio, prazo (nunca além do pedido) e carteira própria. Quem cria paga o valor ao criar; o extra passa pela curadoria antes de aparecer. Só interessados do pedido principal entram no extra, pelas mesmas regras (mesmo valor, cobrir ≥ +10 %, igualar ou sair em 48 h). **Não entrar no extra não muda nada no pedido principal**; sair do principal retira também dos extras. Um extra é atendido como um pedido, por qualquer vendedor e em qualquer momento (trava em análise; validado, 10 % separados e carteira do extra entregue). Vendedores podem **propor um extra** (título, descrição, valor sugerido); a proposta fica pública e só vira extra quando um interessado a cria e paga. Até 5 extras abertos por pedido; valor mínimo US$ 10. Extras seguem o mesmo sinal de 25 % e a mesma prévia antes dos 75 %.
-10. **Pedido por unidade (vários envios).** Para quem quer muitas unidades de uma coisa (ex.: fotos de boletins de urna, um documento público por cidade): define o que vale como **uma unidade** (critérios), o **valor por unidade**, o **limite** e o prazo; orçamento = valor × limite; sinal de **25 % do orçamento**. Qualquer conta envia unidades em **lotes**; a triagem descarta duplicadas e ilegíveis e a curadoria valida o lote (amostragem). Quem pediu vê a **prévia do lote** e paga as unidades aceitas; cada lote tem carteira própria, entregue a quem enviou (90 %) depois de 72 h sem disputa. Lote validado sem resposta em 72 h é pago com o sinal. No fim (prazo ou limite), o sinal que sobrar volta. Um único comprador por pedido por unidade (juntar-se fica para a fase 2).
+10. **Pedido por unidade (vários envios).** Para quem quer muitas unidades de uma coisa (ex.: fotos de boletins de urna, um documento público por cidade): define o que vale como **uma unidade** (critérios), o **valor por unidade**, o **limite** e o prazo; orçamento = valor × limite; sinal de **25 % do orçamento**. Qualquer conta envia unidades em **lotes**; a triagem descarta duplicadas e ilegíveis e a curadoria valida o lote (amostragem). Quem pediu vê a **prévia do lote** e paga as unidades aceitas; cada lote tem carteira própria, entregue a quem enviou (90 %) depois de 72 h sem disputa. Lote validado sem resposta em 72 h é pago com o sinal. No fim (prazo ou limite), o sinal que sobrar volta. **Entrar:** outras pessoas podem entrar num pedido por unidade pelas mesmas condições (mesmo valor por unidade e mesmo sinal de 25 % do orçamento). Cada participante paga cada lote validado e recebe as mesmas unidades; quem entra depois paga do sinal as unidades já validadas. A recompensa por unidade é o valor × pessoas. Quem deixa o pedido antes do prazo perde o que sobrou do sinal (fica com o Lacre, como nos outros pedidos).
 
 **Opção de quem abre.** "Depois de atendido, o vendedor pode vender o mesmo conteúdo como Cópias, nunca por menos que o valor por pessoa final." Desligada por padrão: o normal é o conteúdo ficar só com os interessados.
 
@@ -145,7 +145,7 @@ Modificadores (combináveis): **compra com exclusividade (buyout)**, edição li
 
 **Regras.**
 - Preço de reserva opcional (não revelado). Se não for atingido, não há venda.
-- Lance lacrado é pago na hora para um endereço derivado do item; quem não vence é reembolsado ao endereço de origem no encerramento (por isso leilões só em redes baratas). V2.
+- Lance lacrado é pago na hora para um endereço derivado do item; quem não vence é reembolsado ao endereço de origem no encerramento (por isso leilões só em redes baratas).
 
 **Interface.** Lance atual (ou "lances lacrados: 7"), incremento, tempo restante com prorrogação, campo de lance, histórico anônimo, para holandês: preço atual e próximo degrau com contagem regressiva.
 
@@ -254,7 +254,7 @@ Um item publicado para muitos compradores pode trazer, ao lado do preço normal 
 
 ## Decisão de MVP
 
-Lançar com **Cópias, Exclusivo, Lacre coletivo e Pedido com recompensa**. Os quatro cobrem os três fluxos de dinheiro (um para um, um para muitos, muitos para um) e já permitem a história completa nas redes. Leilão e Assinatura entram na V2 porque dependem de reembolsos em massa (lances não vencedores) e de SLA de curadoria mais curto.
+Lançar com os **nove modelos** do assistente de envio: Cópias, Exclusivo, Lacre coletivo, Pedido com recompensa, Leilão, Camadas, Assinatura, Janela exclusiva e Licença. Juntos cobrem os três fluxos de dinheiro (um para um, um para muitos, muitos para um) e a história completa nas redes. Leilão e Assinatura exigem desde o início reembolso em massa (lances não vencedores) em redes baratas e SLA de curadoria de 24 h para edições. Só a **Consulta paga** fica para a V3, porque depende de reputação consolidada.
 
 ## Estados comuns de um item
 

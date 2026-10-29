@@ -51,6 +51,7 @@
     </div>
 
     <div data-wizard class="stack">
+      <div class="alert alert-info" id="atender-banner" hidden><i data-icon="file-search"></i><div><span class="alert-title">Você está atendendo o pedido <span class="mono" id="ab-id"></span></span><span id="ab-text"></span> · <a class="link" id="ab-link" href="../public/pedido.html">ver o pedido</a>. O passo 4 já está marcado como <b>Pedido</b>, com os critérios de aceite; envie o material nos passos 1 a 3 como em qualquer item.</div></div>
       <div class="stepper">
         <div class="step active"><span class="n">1</span><span class="t">Tipo e categoria</span></div>
         <div class="step"><span class="n">2</span><span class="t">Arquivos</span></div>
@@ -224,13 +225,13 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           <div class="choice-cards">
             <label class="choice"><input type="radio" name="modelo" data-switch="copias"><span class="choice-title"><i data-icon="copy"></i>Cópias</span><span class="choice-desc">Preço fixo, vários compradores, com ou sem limite de unidades.</span><span class="choice-meta">Entrega imediata a cada compra</span></label>
             <label class="choice"><input type="radio" name="modelo" data-switch="exclusivo"><span class="choice-title"><i data-icon="crown"></i>Exclusivo</span><span class="choice-desc">Um único comprador leva; o item sai do catálogo.</span><span class="choice-meta">Preço fixo ou oferta · 24 meses de exclusividade</span></label>
-            <label class="choice"><input type="radio" name="modelo" data-switch="coletivo" checked><span class="choice-title"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="choice-desc">Meta em US$ e prazo. Cada marco libera uma prévia; ao bater a meta, tudo fica público para todos.</span><span class="choice-meta">Se não bater, você fica com o último marco batido</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="coletivo" checked><span class="choice-title"><i data-icon="hand-coins"></i>Lacre coletivo</span><span class="choice-desc">Meta em US$ e prazo. Cada marco libera uma prévia; ao bater a meta, tudo fica público para todos.</span><span class="choice-meta">Se não bater, você recebe 90 % do último marco batido</span></label>
             <label class="choice"><input type="radio" name="modelo" data-switch="pedido"><span class="choice-title"><i data-icon="file-search"></i>Pedido</span><span class="choice-desc">Atende um pedido com recompensa já publicado.</span><span class="choice-meta">Recompensa paga na validação da curadoria</span></label>
-            <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="gavel"></i>Leilão<span class="badge">em breve</span></span><span class="choice-desc">Aberto, lacrado (segundo preço) ou holandês.</span><span class="choice-meta">V2</span></label>
-            <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="layers"></i>Camadas<span class="badge">em breve</span></span><span class="choice-desc">Níveis com preços crescentes; o comprador prova antes.</span><span class="choice-meta">V2</span></label>
-            <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="repeat"></i>Assinatura<span class="badge">em breve</span></span><span class="choice-desc">Fonte recorrente; acesso enquanto pagar.</span><span class="choice-meta">V2</span></label>
-            <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="timer"></i>Janela exclusiva<span class="badge">em breve</span></span><span class="choice-desc">Exclusividade por N dias, depois abre como Cópias.</span><span class="choice-meta">V3</span></label>
-            <label class="choice soon"><input type="radio" name="modelo" disabled><span class="choice-title"><i data-icon="scale"></i>Licença<span class="badge">em breve</span></span><span class="choice-desc">Editorial, comercial ou exclusiva, com contrato gerado.</span><span class="choice-meta">V3</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="leilao"><span class="choice-title"><i data-icon="gavel"></i>Leilão</span><span class="choice-desc">Lacrado (segundo preço), aberto ou holandês; o maior lance leva o item só para si.</span><span class="choice-meta">Lances pagos na hora; quem não vence é reembolsado</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="camadas"><span class="choice-title"><i data-icon="layers"></i>Camadas</span><span class="choice-desc">Níveis com preços crescentes: o comprador paga a camada 1, vê se vale e sobe.</span><span class="choice-meta">Quem sobe de camada paga só a diferença</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="assinatura"><span class="choice-title"><i data-icon="repeat"></i>Assinatura</span><span class="choice-desc">Fonte recorrente: edições periódicas, acesso enquanto pagar.</span><span class="choice-meta">Cada edição passa pela curadoria em 24 h</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="janela"><span class="choice-title"><i data-icon="timer"></i>Janela exclusiva</span><span class="choice-desc">Um comprador paga pela dianteira por N dias; depois o item abre como Cópias.</span><span class="choice-meta">Dois preços públicos: a janela e o depois</span></label>
+            <label class="choice"><input type="radio" name="modelo" data-switch="licenca"><span class="choice-title"><i data-icon="scale"></i>Licença</span><span class="choice-desc">Fotos, vídeos e áudios: editorial, comercial ou exclusiva, com contrato gerado.</span><span class="choice-meta">Arquivo limpo só depois do pagamento</span></label>
           </div>
           <div class="split">
             <div class="stack">
@@ -246,7 +247,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                     <fieldset>
                       <legend>Regra de arrecadação</legend>
                       <div class="form-grid">
-                        <label class="radio"><input type="radio" name="arr" checked><span>Marcos garantidos (padrão)<span class="desc">Se o prazo vencer antes da meta, você fica com o valor do último marco batido (paga as prévias liberadas) e o que entrou depois volta aos apoiadores. Sem marco batido, tudo volta.</span></span></label>
+                        <label class="radio"><input type="radio" name="arr" checked><span>Marcos garantidos (padrão)<span class="desc">Se o prazo vencer antes da meta, você recebe 90 % do valor do último marco batido (ele paga as prévias liberadas; o Lacre fica com 10 %) e o que entrou depois volta aos apoiadores. Sem marco batido, tudo volta.</span></span></label>
                         <label class="radio"><input type="radio" name="arr"><span>Flexível<span class="desc">Libera com o que arrecadou se passar de um piso (70 % da meta = US$ 8.400). Precisa ser declarado antes de publicar.</span></span></label>
                       </div>
                     </fieldset>
@@ -268,7 +269,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                           <p><b>O que é:</b> um preço opcional para uma única pessoa levar o item só para ela antes de a meta ser batida. Desligado, ninguém pode fazer isso e o lacre segue até a meta.</p>
                           <p><b>Exemplo:</b> sua meta é US$ 12.000 e você liga a exclusividade por US$ 60.000. Se uma redação pagar US$ 60.000 antes da meta, só ela recebe o conteúdo e você recebe US$ 54.000 (90 %). O anúncio encerra, cada apoio volta para quem apoiou e você não pode vender nem publicar o mesmo conteúdo por 24 meses.</p>
                         </div>
-                        <label class="switch"><input type="checkbox" id="excl-on" data-excl="#excl-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Enquanto a meta não for batida, um único comprador pode levar o item só para si pagando o valor que você definir.</span></span></label>
+                        <label class="switch"><input type="checkbox" id="excl-on" data-shows="#excl-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Enquanto a meta não for batida, um único comprador pode levar o item só para si pagando o valor que você definir.</span></span></label>
                         <div class="field" id="excl-field" hidden><label for="excl">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl" class="input num" value="60.000,00" data-sim></div><span class="hint">Quem pagar leva o item só para si, o anúncio encerra na hora e os apoios são devolvidos. Sugestão: pelo menos 5× a meta.</span></div>
                       </div>
                     </fieldset>
@@ -295,7 +296,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                           <p><b>O que é:</b> um preço opcional para uma única pessoa encerrar as vendas e ficar com o item só para ela. Desligado, as cópias seguem à venda normalmente.</p>
                           <p><b>Exemplo:</b> você vende cópias a US$ 60 e liga a exclusividade por US$ 1.200. Depois de 8 cópias vendidas, alguém paga US$ 1.200: as vendas encerram, os 8 compradores mantêm o acesso e você recebe US$ 1.080 (90 %) pela exclusividade, além das cópias já vendidas. Você não pode vender nem publicar o mesmo conteúdo por 24 meses.</p>
                         </div>
-                        <label class="switch"><input type="checkbox" id="excl2-on" data-excl="#excl2-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Encerra as vendas de cópias; quem já comprou mantém o acesso.</span></span></label>
+                        <label class="switch"><input type="checkbox" id="excl2-on" data-shows="#excl2-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Encerra as vendas de cópias; quem já comprou mantém o acesso.</span></span></label>
                         <div class="field" id="excl2-field" hidden><label for="excl2">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl2" class="input num" value="1.200,00" data-sim></div><span class="hint">Quem pagar leva o item só para si e as vendas encerram na hora; quem já comprou mantém o acesso. Sugestão: pelo menos 20× o preço da cópia.</span></div>
                       </div>
                     </fieldset>
@@ -322,15 +323,128 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                 <div data-config="pedido">
                   <div class="stack">
                     <div class="row"><span class="model-chip" data-model="pedido"><i data-icon="file-search"></i>Atender um pedido</span></div>
-                    <div class="field"><label for="pedido-sel">Pedido que você está atendendo</label><select id="pedido-sel" class="select"><option>ped-9h2d5 · Lista de todos os editais de fomento cultural municipais do RS em 2025 · US$ 2.100 · 7 interessados × US$ 300</option><option>ped-2c8d1 · Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025) · US$ 3.200 · 4 × US$ 800</option><option>ped-7f1a3 · Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 · 1 × US$ 800</option><option>ped-5r2k8 · Contratos de concessão de portos no Chile (2000–2026) · US$ 900 · 3 × US$ 300</option><option>ped-2c8d1 · extra: Reclamações registradas na ouvidoria por UPA (2023–2025) · US$ 300 · 2 × US$ 150</option><option>ped-8b4u2 · por unidade: fotos dos boletins de urna de MG (2º turno 2026) · US$ 2 por foto válida · enviar um lote</option></select><span class="hint">Seu preço é a recompensa total: valor por pessoa × pessoas; você não define valor. Cada pessoa já pagou 25 % de sinal. Ao enviar, o pedido trava; aprovado pela curadoria, cada pessoa vê uma prévia do seu material e tem 72 h para pagar os 75 % restantes. Quem não pagar perde o sinal para o Lacre; você recebe 90 % do que cada pessoa pagou por inteiro. Um <b>extra</b> é atendido do mesmo jeito. Em <b>pedido por unidade</b>, você envia lotes e recebe por unidade aceita.</span></div>
+                    <div class="field"><label for="pedido-sel">Pedido que você está atendendo</label><select id="pedido-sel" class="select" data-sim><option value="ped-9h2d5">ped-9h2d5 · Lista de todos os editais de fomento cultural municipais do RS em 2025 · US$ 2.100 · 7 pessoas × US$ 300</option><option value="ped-2c8d1">ped-2c8d1 · Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025) · US$ 3.200 · 4 × US$ 800</option><option value="ped-7f1a3">ped-7f1a3 · Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951) · US$ 800 · 1 × US$ 800</option><option value="ped-5r2k8">ped-5r2k8 · Contratos de concessão de portos no Chile (2000–2026) · US$ 900 · 3 × US$ 300</option><option value="ext-2c8d1-a">ped-2c8d1 · extra: Reclamações registradas na ouvidoria por UPA (2023–2025) · US$ 300 · 2 × US$ 150</option><option value="ext-9h2d5-a">ped-9h2d5 · extra: Projetos selecionados e valores pagos nos editais do RS (2025) · US$ 80 · 1 × US$ 80</option><option value="ped-8b4u2">ped-8b4u2 · por unidade: fotos dos boletins de urna de MG (2º turno 2026) · US$ 2 por foto válida · enviar um lote</option></select><span class="hint">Seu preço é a recompensa total: valor por pessoa × pessoas; você não define valor. Cada pessoa já pagou 25 % de sinal. Ao enviar, o pedido trava; aprovado pela curadoria, cada pessoa vê uma prévia do seu material e tem 72 h para pagar os 75 % restantes. Quem não pagar perde o sinal para o Lacre; você recebe 90 % do que cada pessoa pagou por inteiro. Um <b>extra</b> é atendido do mesmo jeito. Em <b>pedido por unidade</b>, você envia lotes e recebe por unidade aceita.</span></div>
                     <div class="panel">
                       <div class="label">Critérios de aceite do pedido</div>
-                      <ol class="small mt-1" style="margin:0;padding-left:20px"><li>Todos os municípios do RS com edital publicado em 2025.</li><li>Link ou cópia do edital, valor total e prazo de inscrição.</li><li>Formato CSV ou XLSX, uma linha por edital.</li></ol>
+                      <ol class="small mt-1" style="margin:0;padding-left:20px" id="pedido-crit"><li>Município, órgão, objeto, valor total, prazo de inscrição, área cultural e link ou cópia do edital.</li><li>Pelo menos 90 % dos municípios do RS com edital publicado em 2025.</li><li>XLSX ou CSV, uma linha por edital, com fonte e data de coleta.</li><li>Nenhum nome de proponente ou contato.</li></ol>
                       <p class="xs muted mt-1">A curadoria confere cada critério antes de validar o atendimento. Se dois vendedores entregarem, vale o primeiro validado; o segundo pode publicar o dele como item normal.</p>
                     </div>
-                    <div class="alert alert-info"><i data-icon="lock"></i><div><span class="alert-title">Só para os interessados</span>Quem abriu este pedido não permitiu venda posterior como Cópias: o conteúdo entregue fica só com os 7 interessados. Quando o autor permite, você pode vendê-lo depois como Cópias, nunca por menos que o valor por interessado final.</div></div>
+                    <div class="alert alert-info" id="pedido-alert"><i data-icon="lock"></i><div><span class="alert-title" id="pedido-alert-title">Só para quem está no pedido</span><span id="pedido-alert-text">Quem abriu este pedido não permitiu venda posterior como Cópias: o conteúdo entregue fica só com as 7 pessoas do pedido.</span></div></div>
                   </div>
                 </div>
+              <div data-config="leilao">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="leilao"><i data-icon="gavel"></i>Configurar Leilão</span></div>
+                  <fieldset>
+                    <legend>Formato</legend>
+                    <div class="stack-sm">
+                      <label class="radio"><input type="radio" name="leilao-tipo" value="lacrado" checked data-sim><span>Lacrado, segundo preço (padrão)<span class="desc">Cada conta dá um único lance secreto, pago na hora. O maior leva e paga o segundo maior lance mais o incremento. Quem não vence é reembolsado ao endereço de origem no encerramento.</span></span></label>
+                      <label class="radio"><input type="radio" name="leilao-tipo" value="aberto" data-sim><span>Aberto<span class="desc">Lances visíveis (valor, nunca quem), com incremento mínimo e prorrogação automática de 10 min se houver lance nos últimos 10 min.</span></span></label>
+                      <label class="radio"><input type="radio" name="leilao-tipo" value="holandes" data-sim><span>Holandês (preço decrescente)<span class="desc">O preço começa alto e cai a cada intervalo até alguém comprar. Bom quando você não sabe quanto vale.</span></span></label>
+                    </div>
+                  </fieldset>
+                  <div class="form-grid">
+                    <div class="field"><label for="lance-min">Lance mínimo</label><div class="input-group"><span class="affix">US$</span><input id="lance-min" class="input num" value="5.000,00" data-sim></div><span class="hint">No holandês é o preço de partida; o preço cai até o preço de reserva.</span></div>
+                    <div class="field"><label for="incremento">Incremento mínimo</label><div class="input-group"><span class="affix">US$</span><input id="incremento" class="input num" value="250,00"></div><span class="hint">Lacrado: somado ao segundo maior lance. Aberto: diferença mínima entre lances. Holandês: queda a cada 6 h.</span></div>
+                    <div class="field"><label for="leilao-fim">Encerramento</label><input id="leilao-fim" class="input" value="12/11/2026 · 20:00 BRT" data-sim><span class="hint">Entre 3 e 30 dias depois da publicação. Só contas com carteira confirmada dão lances.</span></div>
+                    <div class="field"><label for="leilao-min-lances">Mínimo de lances</label><div class="input-group"><input id="leilao-min-lances" class="input num" value="2"><span class="affix">lances</span></div><span class="hint">Opcional. Com menos lances que isso, não há venda.</span></div>
+                  </div>
+                  <fieldset>
+                    <legend>Preço de reserva (opcional)</legend>
+                    <div class="stack-sm">
+                      <label class="switch"><input type="checkbox" id="reserva-on" data-shows="#reserva-field" checked data-sim><span class="track"></span><span>Só vender acima de um valor<span class="desc">Nunca é revelado. Se o maior lance não chegar nele, não há venda e todos os lances voltam.</span></span></label>
+                      <div class="field" id="reserva-field"><label for="reserva">Preço de reserva</label><div class="input-group"><span class="affix">US$</span><input id="reserva" class="input num" value="7.000,00" data-sim></div></div>
+                    </div>
+                  </fieldset>
+                  <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">Item exclusivo</span>O vencedor leva o item só para si: vale a declaração de exclusividade de 24 meses e o conteúdo é destruído dos nossos servidores após a janela de disputa.</div></div>
+                </div>
+              </div>
+              <div data-config="camadas">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="camadas"><i data-icon="layers"></i>Configurar Camadas</span></div>
+                  <p class="small muted">Divida o material em níveis com preços crescentes. O comprador paga a camada 1, vê se vale e sobe pagando só a diferença. Cada camada é um conjunto de arquivos do passo 2, analisado pela curadoria.</p>
+                  <fieldset>
+                    <legend>Camadas</legend>
+                    <div class="stack-sm">
+                      <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">Camada 1</span><input class="input" value="Índice das 40 entrevistas e 3 trechos de 5 min" aria-label="O que a camada 1 inclui"><div class="input-group"><span class="affix">US$</span><input class="input num" value="90,00" data-sim data-camada aria-label="Preço da camada 1"></div></div>
+                      <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">Camada 2</span><input class="input" value="Transcrições completas das 40 entrevistas" aria-label="O que a camada 2 inclui"><div class="input-group"><span class="affix">US$</span><input class="input num" value="390,00" data-sim data-camada aria-label="Preço da camada 2"></div></div>
+                      <div class="cfg-row"><span class="affix" style="border-radius:var(--r-sm)">Camada 3</span><input class="input" value="Áudios originais (18 h) e roteiro das entrevistas" aria-label="O que a camada 3 inclui"><div class="input-group"><span class="affix">US$</span><input class="input num" value="890,00" data-sim data-camada aria-label="Preço da camada 3"></div></div>
+                      <button class="btn btn-sm" data-toast="Camada 4 adicionada"><i data-icon="plus"></i>Adicionar camada</button>
+                    </div>
+                  </fieldset>
+                  <div class="form-grid">
+                    <div class="field"><label for="pacote">Pacote completo (com desconto)</label><div class="input-group"><span class="affix">US$</span><input id="pacote" class="input num" value="1.190,00" data-sim></div><span class="hint">Quem compra tudo de uma vez paga este valor; quem já tem camadas paga só a diferença.</span></div>
+                    <div class="field"><label for="lim-cam">Limite de compradores</label><div class="input-group"><input id="lim-cam" class="input num" value="" placeholder="ilimitado"><span class="affix">compradores</span></div><span class="hint">Vazio = ilimitado.</span></div>
+                  </div>
+                <fieldset>
+                  <legend>Compra com exclusividade (opcional)<button type="button" class="help-btn" data-toggle-class="open" data-target="#help-excl3" aria-controls="help-excl3" aria-expanded="false" aria-label="O que é a compra com exclusividade?">?</button></legend>
+                  <div class="stack-sm">
+                    <div class="help-box" id="help-excl3"><p><b>O que é:</b> um preço opcional para uma única pessoa encerrar as vendas e ficar com todas as camadas só para ela. Desligado, as camadas seguem à venda normalmente.</p><p><b>Exemplo:</b> você vende as camadas a US$ 90, US$ 390 e US$ 890 e liga a exclusividade por US$ 12.000. Alguém paga US$ 12.000: as vendas encerram, quem já comprou mantém o que tem e você recebe US$ 10.800 (90 %). Você não pode vender nem publicar o mesmo conteúdo por 24 meses.</p></div>
+                    <label class="switch"><input type="checkbox" id="excl3-on" data-shows="#excl3-field"><span class="track"></span><span>Permitir compra com exclusividade<span class="desc">Encerra as vendas; quem já comprou mantém o acesso.</span></span></label>
+                    <div class="field" id="excl3-field" hidden><label for="excl3">Valor para venda com exclusividade</label><div class="input-group"><span class="affix">US$</span><input id="excl3" class="input num" value="12.000,00" data-sim></div><span class="hint">Quem pagar leva tudo só para si e as vendas encerram na hora; quem já comprou mantém o acesso. Sugestão: pelo menos 10× o pacote.</span></div>
+                  </div>
+                </fieldset>
+                </div>
+              </div>
+              <div data-config="assinatura">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="assinatura"><i data-icon="repeat"></i>Configurar Assinatura</span></div>
+                  <p class="small muted">Você publica uma fonte: edições periódicas. O assinante paga por período, da própria carteira, e tem acesso a tudo que sair enquanto estiver ativo. Cada edição passa pela curadoria em até 24 h e tem carteira própria.</p>
+                  <div class="form-grid">
+                    <div class="field"><label for="periodo">Periodicidade</label><select id="periodo" class="select" data-sim><option value="mensal">Mensal</option><option value="quinzenal">Quinzenal</option><option value="semanal">Semanal</option></select><span class="hint">Se você atrasar mais de um período, o seguinte não é cobrado.</span></div>
+                    <div class="field"><label for="preco-ass">Preço por período</label><div class="input-group"><span class="affix">US$</span><input id="preco-ass" class="input num" value="90,00" data-sim></div><span class="hint">Mediana das fontes mensais: US$ 120.</span></div>
+                    <div class="field full"><label for="edicao">O que entra em cada edição</label><textarea id="edicao" class="textarea" style="min-height:70px">4 novas entrevistas transcritas por mês, com áudio, e um boletim com o que mudou nas linhas citadas.</textarea></div>
+                    <div class="field"><label for="primeira">Primeira edição</label><input id="primeira" class="input" value="05/11/2026" data-sim><span class="hint">Os arquivos do passo 2 são a edição 1.</span></div>
+                    <div class="field"><label for="minimo-ass">Assinantes para começar</label><div class="input-group"><input id="minimo-ass" class="input num" value="20" data-sim><span class="affix">assinantes</span></div><span class="hint">Opcional. Abaixo disso a fonte não começa e os pagamentos voltam.</span></div>
+                  </div>
+                  <fieldset>
+                    <legend>Edições anteriores</legend>
+                    <div class="stack-sm">
+                      <label class="switch"><input type="checkbox" id="avulsa-on" data-shows="#avulsa-field" checked data-sim><span class="track"></span><span>Vender edições anteriores avulsas<span class="desc">Quem não assina pode comprar uma edição antiga como Cópias.</span></span></label>
+                      <div class="field" id="avulsa-field"><label for="avulsa">Preço da edição avulsa</label><div class="input-group"><span class="affix">US$</span><input id="avulsa" class="input num" value="40,00" data-sim></div></div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+              <div data-config="janela">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="janela"><i data-icon="timer"></i>Configurar Janela exclusiva</span></div>
+                  <p class="small muted">O modelo do furo: uma redação paga pela dianteira e, passada a janela, o material abre como Cópias a um preço menor. Os dois preços ficam públicos desde o início.</p>
+                  <div class="form-grid">
+                    <div class="field"><label for="preco-jan">Preço da janela</label><div class="input-group"><span class="affix">US$</span><input id="preco-jan" class="input num" value="6.000,00" data-sim></div><span class="hint">Um único comprador durante a janela.</span></div>
+                    <div class="field"><label for="dias-jan">Duração da janela</label><div class="input-group"><input id="dias-jan" class="input num" value="7" data-sim><span class="affix">dias</span></div><span class="hint">Conta a partir do pagamento. Sem comprador em 30 dias, o item abre como Cópias direto.</span></div>
+                    <div class="field"><label for="preco-dep">Preço depois, como Cópias</label><div class="input-group"><span class="affix">US$</span><input id="preco-dep" class="input num" value="120,00" data-sim></div><span class="hint">Aberto para todos quando a janela fechar.</span></div>
+                    <div class="field"><label for="lim-dep">Limite de cópias depois</label><div class="input-group"><input id="lim-dep" class="input num" value="" placeholder="ilimitado"><span class="affix">cópias</span></div><span class="hint">Vazio = ilimitado.</span></div>
+                  </div>
+                  <fieldset>
+                    <legend>Como vender a janela</legend>
+                    <div class="stack-sm">
+                      <label class="radio"><input type="radio" name="jan-modo" value="fixo" checked data-sim><span>Preço fixo (padrão)<span class="desc">Quem pagar primeiro leva a janela.</span></span></label>
+                      <label class="radio"><input type="radio" name="jan-modo" value="leilao" data-sim><span>Leilão lacrado de 72 h<span class="desc">O preço acima vira o lance mínimo; o maior lance leva a janela.</span></span></label>
+                    </div>
+                  </fieldset>
+                  <div class="alert alert-info"><i data-icon="info"></i><div>Durante a janela só o comprador tem acesso e o catálogo mostra “aberto para todos a partir de DD/MM”. Depois, quem compra uma cópia recebe o mesmo material.</div></div>
+                </div>
+              </div>
+              <div data-config="licenca">
+                <div class="stack">
+                  <div class="row"><span class="model-chip" data-model="licenca"><i data-icon="scale"></i>Configurar Licença</span></div>
+                  <p class="small muted">Para fotos, vídeos e áudios. O comprador escolhe a finalidade e recebe o arquivo em alta resolução, sem marca d’água, com um contrato gerado na hora: pseudônimos das partes, hash do arquivo, finalidade, território e prazo.</p>
+                  <fieldset>
+                    <legend>Finalidades e preços</legend>
+                    <div class="stack-sm">
+                      <div class="cfg-row"><label class="switch"><input type="checkbox" id="lic-ed-on" checked data-sim><span class="track"></span><span>Editorial</span></label><span class="small muted">Uso em notícia, uma publicação, sem prazo.</span><div class="input-group"><span class="affix">US$</span><input id="lic-ed" class="input num" value="300,00" data-sim aria-label="Preço da licença editorial"></div></div>
+                      <div class="cfg-row"><label class="switch"><input type="checkbox" id="lic-com-on" checked data-sim><span class="track"></span><span>Comercial</span></label><span class="small muted">Campanha, com prazo e território definidos abaixo.</span><div class="input-group"><span class="affix">US$</span><input id="lic-com" class="input num" value="1.500,00" data-sim aria-label="Preço da licença comercial"></div></div>
+                      <div class="cfg-row"><label class="switch"><input type="checkbox" id="lic-ex-on" data-sim><span class="track"></span><span>Exclusiva</span></label><span class="small muted">Ninguém mais licencia; encerra as demais.</span><div class="input-group"><span class="affix">US$</span><input id="lic-ex" class="input num" value="9.000,00" data-sim aria-label="Preço da licença exclusiva"></div></div>
+                    </div>
+                  </fieldset>
+                  <div class="form-grid">
+                    <div class="field"><label for="lic-terr">Território (comercial)</label><select id="lic-terr" class="select" data-sim><option>Brasil</option><option>América Latina</option><option>Mundo</option></select></div>
+                    <div class="field"><label for="lic-prazo">Prazo (comercial)</label><select id="lic-prazo" class="select" data-sim><option>12 meses</option><option>24 meses</option><option>Sem prazo</option></select></div>
+                  </div>
+                  <div class="alert alert-anon"><i data-icon="stamp"></i><div><span class="alert-title">Prévia com marca d’água</span>A prévia pública sempre leva marca d’água; o arquivo limpo só é entregue depois do pagamento, no cofre do comprador, junto com o contrato.</div></div>
+                </div>
+              </div>
               </div>
               <fieldset>
                 <legend>Modificadores</legend>
@@ -344,7 +458,7 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <div class="card-body stack-sm">
                 <h3>Você recebe 90 %</h3>
                 <div><div class="xs muted" id="s-meta-label">Meta de US$ 12.000,00 batida</div><div class="big ok" id="s-liq">US$ 10.800,00</div></div>
-                <p class="xs muted" id="s-note">Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.</p>
+                <p class="xs muted" id="s-note">Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você recebe 90 % do valor do último marco batido; sem nenhum marco, os apoios voltam.</p>
                 <div class="stack-sm" id="s-excl-box" hidden>
                   <hr style="margin:4px 0">
                   <p class="small">Se alguém comprar a exclusividade: <b class="ok" id="s-excl">US$ 54.000,00</b></p>
@@ -415,11 +529,12 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
               <div class="card">
                 <div class="card-head"><h3>Modelo de venda</h3><div class="actions"><a class="btn btn-sm btn-ghost" href="#" data-step-go="4">Editar</a></div></div>
                 <div class="card-body"><dl class="kv">
-                  <dt>Modelo</dt><dd><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></dd>
-                  <dt>Meta e prazo</dt><dd><b>US$ 12.000</b> em 30 dias · até 26/11/2026 às 23:59 · apoios a partir de US$ 10</dd>
-                  <dt>Arrecadação</dt><dd>Marcos garantidos · se a meta não bater, você fica com o valor do último marco batido (25 % = US$ 3.000, 50 % = US$ 6.000, 75 % = US$ 9.000, 90 % = US$ 10.800, menos 10 %) e o que entrou depois volta aos apoiadores</dd>
-                  <dt>Liberação</dt><dd>Pública para todos ao bater a meta, com post nas redes · cada marco libera uma prévia · apoiadores ganham o selo “Rompeu este lacre”</dd>
-                  <dt>Marcos e prévias</dt><dd>
+                  <dt>Modelo</dt><dd id="r-modelo"><span class="model-chip" data-model="coletivo"><i data-icon="hand-coins"></i>Lacre coletivo</span></dd>
+                  <dt class="r-oth" hidden>Configuração</dt><dd class="r-oth" id="r-cfg" hidden></dd>
+                  <dt class="r-col">Meta e prazo</dt><dd class="r-col"><b>US$ 12.000</b> em 30 dias · até 26/11/2026 às 23:59 · apoios a partir de US$ 10</dd>
+                  <dt class="r-col">Arrecadação</dt><dd class="r-col">Marcos garantidos · se a meta não bater, você recebe 90 % do valor do último marco batido (25 % = US$ 2.700, 50 % = US$ 5.400, 75 % = US$ 8.100, 90 % = US$ 9.720; o Lacre fica com 10 %) e o que entrou depois volta aos apoiadores</dd>
+                  <dt class="r-col">Liberação</dt><dd class="r-col">Pública para todos ao bater a meta, com post nas redes · cada marco libera uma prévia · apoiadores ganham o selo “Rompeu este lacre”</dd>
+                  <dt class="r-col">Marcos e prévias</dt><dd class="r-col">
                     <div class="stack-sm" style="margin-top:4px">
                       <div class="row between"><span><b>25 %</b> · US$ 3.000</span><span class="small muted">libera o índice das 40 entrevistas (sem nomes)</span></div>
                       <div class="row between"><span><b>50 %</b> · US$ 6.000</span><span class="small muted">libera um trecho de 60 s de uma entrevista</span></div>
@@ -429,9 +544,9 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
                     </div>
                     <span class="xs muted">Cada marco batido é postado no X, no Telegram e no Bluesky com a prévia correspondente.</span>
                   </dd>
-                  <dt>Exclusividade</dt><dd id="r-excl">Desligada · ninguém pode levar o item só para si (opcional; dá para ligar no passo 4)</dd>
+                  <dt class="r-exc">Exclusividade</dt><dd id="r-excl" class="r-exc">Desligada · ninguém pode levar o item só para si (opcional; dá para ligar no passo 4)</dd>
                   <dt>Modificadores</dt><dd>Marca d'água por entitlement · download permitido</dd>
-                  <dt>Você recebe</dt><dd><b>US$ 10.800</b> se a meta bater (90 %)<span id="r-excl-liq" hidden> · <b>US$ 54.000</b> se alguém comprar a exclusividade</span> · a carteira do item é entregue a você na finalização, com a frase de recuperação, para transferir como quiser</dd>
+                  <dt>Você recebe</dt><dd><span id="r-liq-col"><b>US$ 10.800</b> se a meta bater (90 %)<span id="r-excl-liq" hidden> · <b>US$ 54.000</b> se alguém comprar a exclusividade</span></span><span id="r-liq-oth" hidden></span> · a carteira do item é entregue a você na finalização, com a frase de recuperação, para transferir como quiser</dd>
                 </dl></div>
               </div>
               <div class="card">
@@ -495,17 +610,65 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
           el.addEventListener('input', upd); upd();
         });
         function model() { var r = document.querySelector('[data-switch]:checked'); return r ? r.dataset.switch : 'coletivo'; }
+        var CHIP = { copias: ['copy', 'Cópias'], exclusivo: ['crown', 'Exclusivo'], coletivo: ['hand-coins', 'Lacre coletivo'], pedido: ['file-search', 'Pedido'], leilao: ['gavel', 'Leilão'], camadas: ['layers', 'Camadas'], assinatura: ['repeat', 'Assinatura'], janela: ['timer', 'Janela exclusiva'], licenca: ['scale', 'Licença'] };
+        // Pedidos que podem ser atendidos (os mesmos do mural). novo-anuncio.html?atender=<id> marca o modelo Pedido e vincula o pedido.
+        var ATENDER = {
+          'ped-9h2d5': { titulo: 'Lista de todos os editais de fomento cultural municipais do RS em 2025', resumo: 'US$ 300 por pessoa × 7 pessoas = US$ 2.100', prazo: '10/12/2026', total: 2100, pessoas: 7, crit: ['Município, órgão, objeto, valor total, prazo de inscrição, área cultural e link ou cópia do edital.', 'Pelo menos 90 % dos municípios do RS com edital publicado em 2025.', 'XLSX ou CSV, uma linha por edital, com fonte e data de coleta.', 'Nenhum nome de proponente ou contato.'] },
+          'ped-2c8d1': { titulo: 'Dados consolidados de tempo de espera em UPAs de São Paulo (2023–2025), por unidade e mês, em CSV', resumo: 'US$ 800 por pessoa × 4 pessoas = US$ 3.200', prazo: '30/11/2026', total: 3200, pessoas: 4, crit: ['Todas as UPAs municipais ativas em cada mês (pelo menos 28 unidades), jan/2023 a dez/2025.', 'Uma linha por unidade e mês: tempo médio e mediano em minutos e volume de atendimentos.', 'Origem documentada: resposta de LAI com protocolo, planilha da SMS ou extração do sistema com data.', 'CSV UTF-8 com dicionário de dados em Markdown.', 'Nenhum dado de paciente ou de servidor identificável.', 'Totais mensais compatíveis com os relatórios anuais da SMS (tolerância de 2 %).'] },
+          'ped-7f1a3': { titulo: 'Cópia digitalizada do catálogo da 1ª Bienal de São Paulo (1951)', resumo: 'US$ 800 por pessoa × 1 pessoa = US$ 800', prazo: '15/12/2026', total: 800, pessoas: 1, copias: true, crit: ['Todas as páginas, inclusive capa, colofão e anúncios, na ordem original.', '400 dpi ou mais, PDF com OCR e imagens individuais em TIFF ou PNG.', 'Declaração de que o exemplar é de acervo próprio ou de uso permitido.', 'Sem marca d’água de terceiros nem páginas de outras edições.'] },
+          'ped-5r2k8': { titulo: 'Lista de contratos de concessão de portos no Chile (2000–2026) com concessionárias e prazos', resumo: 'US$ 300 por pessoa × 3 pessoas = US$ 900', prazo: '20/12/2026', total: 900, pessoas: 3, crit: ['Todas as concessões de portos públicos desde 2000, vigentes e encerradas.', 'Concessionária, porto, prazo, valor e data de assinatura.', 'Fonte oficial por linha (MTT, empresas portuárias estatais ou Diario Oficial), com data.', 'CSV em espanhol com dicionário de dados.'] },
+          'ext-2c8d1-a': { titulo: 'Extra do ped-2c8d1: Reclamações registradas na ouvidoria por UPA (2023–2025), por mês', resumo: 'US$ 150 por pessoa × 2 pessoas = US$ 300', prazo: '30/11/2026', total: 300, pessoas: 2, crit: ['Uma linha por unidade e mês.', 'Número de reclamações e tema principal.', 'CSV com dicionário de dados.'] },
+          'ext-9h2d5-a': { titulo: 'Extra do ped-9h2d5: Projetos selecionados e valores pagos nos editais de fomento cultural do RS (2025)', resumo: 'US$ 80 por pessoa × 1 pessoa = US$ 80', prazo: '10/12/2026', total: 80, pessoas: 1, crit: ['Uma linha por projeto selecionado.', 'Valor pago e data do pagamento.', 'Mesma planilha, aba própria.'] },
+          'ped-8b4u2': { titulo: 'Fotos dos boletins de urna (BU) afixados nas seções eleitorais de Minas Gerais no 2º turno de 2026 (25/10)', resumo: 'US$ 2 por foto válida · até 5.000 fotos · 1.112 válidas até agora', prazo: '30/11/2026', unidade: true, unit: 2, crit: ['Uma foto por BU, legível, com o QR code inteiro e o número da seção visível.', 'Sem pessoas, cabines ou cédulas; nunca fotos de votos ou documentos de eleitores (a curadoria recusa o lote).', 'A triagem descarta duplicadas e ilegíveis; não contam como unidade.', 'Envio em lotes; a curadoria valida cada lote antes do pagamento.'] }
+        };
+        var pedSel = document.getElementById('pedido-sel');
+        function pedidoAtual() { return ATENDER[pedSel.value] || ATENDER['ped-9h2d5']; }
+        function applyPedido() {
+          var c = pedidoAtual();
+          document.getElementById('pedido-crit').innerHTML = c.crit.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+          var title = document.getElementById('pedido-alert-title'), text = document.getElementById('pedido-alert-text');
+          if (c.unidade) { title.textContent = 'Lotes pagos por foto válida'; text.textContent = 'Cada lote tem carteira própria. A triagem descarta duplicadas e ilegíveis, a curadoria valida o lote e quem participa do pedido paga as fotos válidas em até 72 h depois da prévia (senão o lote é pago com o sinal).'; }
+          else if (c.copias) { title.textContent = 'Venda posterior permitida'; text.textContent = 'Quem abriu este pedido permitiu venda posterior como Cópias: depois de entregar, você pode vender o mesmo conteúdo como Cópias, nunca por menos que o valor por pessoa do pedido.'; }
+          else { title.textContent = 'Só para quem está no pedido'; text.textContent = 'Quem abriu este pedido não permitiu venda posterior como Cópias: o conteúdo entregue fica só com ' + (c.pessoas === 1 ? 'a pessoa' : 'as ' + c.pessoas + ' pessoas') + ' do pedido.'; }
+        }
+        pedSel.addEventListener('change', applyPedido);
+        var atenderId = new URLSearchParams(location.search).get('atender');
+        if (atenderId && ATENDER[atenderId]) {
+          var ab = ATENDER[atenderId];
+          pedSel.value = atenderId;
+          var pr = document.querySelector('[data-switch="pedido"]'); pr.checked = true;
+          document.getElementById('ab-id').textContent = atenderId.replace(/^ext-(.*)-[a-z]$/, 'ped-$1');
+          document.getElementById('ab-text').textContent = ab.titulo + ' · ' + ab.resumo + ' · prazo ' + ab.prazo;
+          document.getElementById('ab-link').href = '../public/pedido.html' + (atenderId.indexOf('ped-2c8d1') === 0 || atenderId === 'ext-2c8d1-a' ? '' : '?p=' + atenderId.replace(/^ext-(.*)-[a-z]$/, 'ped-$1')) + (atenderId.indexOf('ext-') === 0 ? '#extras' : '');
+          document.getElementById('atender-banner').hidden = false;
+          document.querySelector('.page-head h1').textContent = ab.unidade ? 'Enviar um lote' : 'Atender um pedido';
+          document.body.dataset.title = ab.unidade ? 'Enviar um lote' : 'Atender um pedido';
+          document.title = (ab.unidade ? 'Enviar um lote · ' : 'Atender ') + atenderId + ' · Lacre';
+        }
+        applyPedido();
+        var pick = function (name) { var r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ''; };
+        var val = function (id) { var el = document.getElementById(id); return el ? el.value : ''; };
+        function review(cfg, liq) {
+          var m = model();
+          var rm = document.getElementById('r-modelo'); rm.innerHTML = '<span class="model-chip" data-model="' + m + '"><i data-icon="' + CHIP[m][0] + '"></i>' + CHIP[m][1] + '</span>'; if (window.Lacre) Lacre.render(rm);
+          document.querySelectorAll('.r-col').forEach(function (el) { el.hidden = m !== 'coletivo'; });
+          document.querySelectorAll('.r-exc').forEach(function (el) { el.hidden = !(m === 'coletivo' || m === 'copias' || m === 'camadas'); });
+          document.querySelectorAll('.r-oth').forEach(function (el) { el.hidden = m === 'coletivo'; });
+          document.getElementById('r-liq-col').hidden = m !== 'coletivo'; document.getElementById('r-liq-oth').hidden = m === 'coletivo';
+          if (m !== 'coletivo') { set('r-cfg', cfg); set('r-liq-oth', liq); }
+        }
         function sim() {
           var m = model(), label = document.getElementById('s-meta-label'), note = document.getElementById('s-note');
           var exclBox = document.getElementById('s-excl-box');
-          document.querySelectorAll('[data-excl]').forEach(function (cb) { document.querySelector(cb.dataset.excl).hidden = !cb.checked; });
+          document.querySelectorAll('[data-shows]').forEach(function (cb) { document.querySelector(cb.dataset.shows).hidden = !cb.checked; });
           var exOn = on('excl-on'), ex = num('excl'), rLiq = document.getElementById('r-excl-liq');
-          set('r-excl', exOn ? usd0(ex) + ' · quem pagar leva o item só para si; o anúncio encerra e os apoios são devolvidos · declaração de exclusividade de 24 meses' : 'Desligada · ninguém pode levar o item só para si (opcional; dá para ligar no passo 4)');
+          var exId = { coletivo: 'excl', copias: 'excl2', camadas: 'excl3' }[m], exOnM = exId ? on(exId + '-on') : false, exM = exId ? num(exId) : 0;
+          set('r-excl', exOnM ? usd0(exM) + ' · quem pagar leva o item só para si; as vendas encerram' + (m === 'coletivo' ? ' e os apoios são devolvidos' : ' e quem já comprou mantém o acesso') + ' · declaração de exclusividade de 24 meses' : 'Desligada · ninguém pode levar o item só para si (opcional; dá para ligar no passo 4)');
           rLiq.hidden = !exOn; rLiq.querySelector('b').textContent = usd0(ex * 0.90);
           if (m === 'coletivo') {
             var meta = num('meta'), excl = num('excl');
             label.textContent = 'Meta de ' + usd(meta) + ' batida'; set('s-liq', usd(meta * 0.90));
-            note.textContent = 'Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você fica com o valor do último marco batido; sem nenhum marco, os apoios voltam.';
+            note.textContent = 'Você recebe 72 h depois de a meta bater e o conteúdo ficar público. Se a meta não bater, você recebe 90 % do valor do último marco batido; sem nenhum marco, os apoios voltam.';
             set('s-excl', usd(excl * 0.90)); set('s-excl-base', usd(excl)); set('s-excl-note', 'O anúncio encerra na hora, os apoios são devolvidos e vale a declaração de exclusividade de 24 meses.'); exclBox.hidden = !exOn;
           } else if (m === 'copias') {
             var preco = num('preco'), lim = num('lim') || 0, excl2 = num('excl2');
@@ -517,14 +680,55 @@ Recrutamento por sindicato e indicação. Consentimento gravado no início de ca
             label.textContent = 'Venda exclusiva por ' + usd(pe); set('s-liq', usd(pe * 0.90));
             note.textContent = 'Você recebe 72 h após a entrega, se não houver disputa.';
             exclBox.hidden = true;
-          } else {
-            label.textContent = 'Recompensa do pedido · US$ 2.100,00 hoje (7 interessados × US$ 300)'; set('s-liq', usd(2100 * 0.90));
-            note.textContent = 'Novos interessados podem se juntar até você enviar o atendimento; aí o pedido trava. Você recebe quando a curadoria validar.';
+          } else if (m === 'pedido') {
+            var c = pedidoAtual();
+            if (c.unidade) { label.textContent = 'Pedido por unidade · US$ 2 por foto válida (até 5.000)'; set('s-liq', usd(c.unit * 0.90) + ' por foto válida'); note.textContent = 'Você recebe por lote: quem participa paga as fotos válidas em até 72 h depois da prévia (senão o lote é pago com o sinal). 72 h depois, sem disputa, a carteira do lote é sua.'; }
+            else { label.textContent = 'Recompensa do pedido · ' + usd(c.total) + ' hoje (' + c.resumo.replace(/ = .*$/, '') + ')'; set('s-liq', usd(c.total * 0.90)); note.textContent = 'Novas pessoas podem entrar até você enviar o atendimento; aí o pedido trava. Aprovado pela curadoria, cada pessoa vê uma prévia e tem 72 h para pagar os 75 % restantes; você recebe 90 % do que cada uma pagou por inteiro.'; }
+            exclBox.hidden = true;
+          } else if (m === 'leilao') {
+            var tipo = pick('leilao-tipo'), lm = num('lance-min'), resOn = on('reserva-on'), res = num('reserva');
+            var tipoNome = { lacrado: 'lacrado (segundo preço)', aberto: 'aberto', holandes: 'holandês' }[tipo] || 'lacrado';
+            label.textContent = 'Leilão ' + tipoNome + ' · ' + (tipo === 'holandes' ? 'preço de partida ' : 'lance mínimo ') + usd(lm); set('s-liq', usd((resOn ? Math.max(res, lm) : lm) * 0.90) + ' ou mais');
+            note.textContent = 'Você recebe 90 % do lance vencedor, 72 h após a entrega ao vencedor, se não houver disputa.' + (resOn ? ' Abaixo do preço de reserva (' + usd(res) + ') não há venda.' : '') + ' Quem não vence é reembolsado ao endereço de origem no encerramento (' + val('leilao-fim') + ').';
+            exclBox.hidden = true;
+          } else if (m === 'camadas') {
+            var cams = Array.prototype.map.call(document.querySelectorAll('[data-camada]'), function (el) { return parseFloat((el.value || '0').replace(/\./g, '').replace(',', '.')) || 0; }), pac = num('pacote');
+            label.textContent = cams.length + ' camadas · pacote completo por ' + usd(pac); set('s-liq', usd(pac * 0.90) + ' por quem levar tudo');
+            note.textContent = 'Camada 1: ' + usd(cams[0] * 0.90) + ' por comprador; quem sobe de camada paga só a diferença. Você recebe a cada camada entregue, 72 h depois, se não houver disputa.';
+            set('s-excl', usd(num('excl3') * 0.90)); set('s-excl-base', usd(num('excl3'))); set('s-excl-note', 'As vendas encerram na hora, quem já comprou mantém o acesso e vale a declaração de exclusividade de 24 meses.'); exclBox.hidden = !on('excl3-on');
+          } else if (m === 'assinatura') {
+            var per = val('periodo'), pa = num('preco-ass'), mins = num('minimo-ass') || 0, perNome = { mensal: 'mês', quinzenal: 'quinzena', semanal: 'semana' }[per] || 'período';
+            label.textContent = 'Assinatura ' + per + ' · ' + usd(pa) + ' por assinante'; set('s-liq', usd(pa * 0.90) + ' por assinante e ' + perNome);
+            note.textContent = (mins ? 'Com ' + mins + ' assinantes: ' + usd(pa * mins * 0.90) + ' por ' + perNome + '. ' : '') + 'Cada edição tem carteira própria, entregue a você 72 h após a publicação.' + (on('avulsa-on') ? ' Edições avulsas: ' + usd(num('avulsa') * 0.90) + ' cada.' : '');
+            exclBox.hidden = true;
+          } else if (m === 'janela') {
+            var pj = num('preco-jan'), dj = num('dias-jan') || 0, pd = num('preco-dep');
+            label.textContent = 'Janela de ' + dj + ' dias por ' + usd(pj) + (pick('jan-modo') === 'leilao' ? ' (lance mínimo)' : ''); set('s-liq', usd(pj * 0.90) + ' pela janela');
+            note.textContent = 'Depois da janela: ' + usd(pd * 0.90) + ' por cópia. Você recebe a janela 72 h após a entrega e as cópias quando encerrar as vendas.';
+            exclBox.hidden = true;
+          } else if (m === 'licenca') {
+            var tipos = [];
+            if (on('lic-ed-on')) tipos.push('editorial ' + usd(num('lic-ed') * 0.90));
+            if (on('lic-com-on')) tipos.push('comercial ' + usd(num('lic-com') * 0.90) + ' (' + val('lic-terr') + ', ' + val('lic-prazo') + ')');
+            if (on('lic-ex-on')) tipos.push('exclusiva ' + usd(num('lic-ex') * 0.90));
+            label.textContent = 'Por licença vendida'; set('s-liq', tipos.length ? (on('lic-ed-on') ? usd(num('lic-ed') * 0.90) + ' editorial' : tipos[0]) : 'Nenhuma finalidade ligada');
+            note.textContent = (tipos.length ? 'Você recebe 90 % de cada licença: ' + tipos.join(' · ') + '. ' : 'Ligue pelo menos uma finalidade. ') + 'A exclusiva encerra as demais. Pagamento 72 h após cada entrega, se não houver disputa.';
             exclBox.hidden = true;
           }
+          // revisão (passo 6) segue o modelo escolhido
+          var cfgTxt = '', liqTxt = document.getElementById('s-liq').textContent + ' · ' + note.textContent;
+          if (m === 'copias') cfgTxt = usd0(num('preco')) + ' por cópia · ' + (num('lim') ? num('lim') + ' cópias' : 'sem limite') + ' · preço escalonado nas primeiras 50 (US$ 45)';
+          else if (m === 'exclusivo') cfgTxt = usd0(num('preco-ex')) + ' · ' + val('prazo-ex') + ' · ofertas a partir de ' + usd0(num('min-oferta')) + ' · declaração de exclusividade de 24 meses';
+          else if (m === 'pedido') cfgTxt = pedidoAtual().titulo + ' · ' + pedidoAtual().resumo + ' · prazo ' + pedidoAtual().prazo;
+          else if (m === 'leilao') cfgTxt = 'Leilão ' + ({ lacrado: 'lacrado, segundo preço', aberto: 'aberto', holandes: 'holandês' }[pick('leilao-tipo')] || '') + ' · lance mínimo ' + usd0(num('lance-min')) + ' · incremento ' + usd0(num('incremento')) + (on('reserva-on') ? ' · preço de reserva (não revelado)' : ' · sem reserva') + ' · encerra ' + val('leilao-fim');
+          else if (m === 'camadas') cfgTxt = Array.prototype.map.call(document.querySelectorAll('[data-camada]'), function (el, i) { return 'camada ' + (i + 1) + ' ' + usd0(parseFloat((el.value || '0').replace(/\./g, '').replace(',', '.')) || 0); }).join(' · ') + ' · pacote ' + usd0(num('pacote')) + ' · quem sobe paga só a diferença';
+          else if (m === 'assinatura') cfgTxt = 'Edição ' + val('periodo') + ' · ' + usd0(num('preco-ass')) + ' por período · primeira edição ' + val('primeira') + (num('minimo-ass') ? ' · começa com ' + num('minimo-ass') + ' assinantes' : '') + (on('avulsa-on') ? ' · edições anteriores avulsas por ' + usd0(num('avulsa')) : ' · sem venda avulsa');
+          else if (m === 'janela') cfgTxt = usd0(num('preco-jan')) + ' por ' + num('dias-jan') + ' dias (' + (pick('jan-modo') === 'leilao' ? 'leilão lacrado de 72 h' : 'preço fixo') + ') · depois ' + usd0(num('preco-dep')) + ' por cópia' + (num('lim-dep') ? ' · ' + num('lim-dep') + ' cópias' : ' · sem limite');
+          else if (m === 'licenca') cfgTxt = [on('lic-ed-on') ? 'editorial ' + usd0(num('lic-ed')) : '', on('lic-com-on') ? 'comercial ' + usd0(num('lic-com')) + ' (' + val('lic-terr') + ', ' + val('lic-prazo') + ')' : '', on('lic-ex-on') ? 'exclusiva ' + usd0(num('lic-ex')) : ''].filter(Boolean).join(' · ') + ' · contrato gerado automaticamente · prévia com marca d’água';
+          review(cfgTxt, liqTxt);
         }
         document.querySelectorAll('[data-sim]').forEach(function (el) { el.addEventListener('input', sim); });
-        document.addEventListener('change', function (e) { if (e.target.matches('[data-switch],[data-excl]')) sim(); });
+        document.addEventListener('change', function (e) { if (e.target.matches('[data-switch],[data-shows],[data-sim]')) sim(); });
         sim();
       })();
     </script>

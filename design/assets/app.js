@@ -452,7 +452,7 @@
   function buildPublicFooter() {
     return '<footer class="site-footer"><div class="container"><div class="cols">' +
       '<div>' + brandHtml() + '<p class="mt-2" style="max-width:34ch">Marketplace curado de informação. Anonimato total entre as partes, curadoria humana obrigatória e prova pública de cada item.</p>' +
-      '<div class="row mt-2"><a class="chip" href="' + href('public/prova.html') + '">' + iconSvg('badge-check') + 'Provas públicas</a><a class="chip" href="#">' + iconSvg('rss') + 'Feed</a></div></div>' +
+      '<div class="row mt-2"><a class="chip" href="' + href('public/prova.html') + '">' + iconSvg('badge-check') + 'Provas públicas</a><a class="chip" href="#" data-toast="' + t('Feed RSS dos itens públicos e dos lacres rompidos: no produto final, em /feed.xml') + '">' + iconSvg('rss') + 'Feed</a></div></div>' +
       '<div><h4>Marketplace</h4><a href="' + href('public/explorar.html') + '">Explorar</a><a href="' + href('public/explorar.html') + '#coletivos">Lacres coletivos</a><a href="' + href('public/pedidos.html') + '">Pedidos com recompensa</a><a href="' + href('public/como-funciona.html') + '">Como funciona</a></div>' +
       '<div><h4>Sua conta</h4><a href="' + href('auth/criar-conta.html') + '">Criar conta anônima</a><a href="' + href('auth/entrar.html') + '">Entrar</a><a href="' + href('public/vendedor.html') + '">Vender informação</a><a href="' + href('public/como-funciona.html') + '#reputacao">Reputação</a></div>' +
       '<div><h4>Confiança</h4><a href="' + href('public/politicas.html') + '">Política de conteúdo</a><a href="' + href('public/politicas.html') + '#anonimato">Anonimato e seus limites</a><a href="' + href('public/prova.html') + '#denunciar">Denunciar um item</a><a href="' + href('public/politicas.html') + '#juridico">Pedidos jurídicos</a></div>' +
@@ -554,6 +554,22 @@
       if (t.hasAttribute('data-dismiss')) { e.preventDefault(); const tgt = t.closest(t.dataset.dismiss || '.alert'); if (tgt) tgt.remove(); return; }
     });
     document.addEventListener('click', (e) => { if (e.target.classList && e.target.classList.contains('modal-backdrop')) e.target.classList.remove('open'); });
+    // Segmentados sem ação própria (ex.: Manter | Tarjar) e paginação: marcam o botão escolhido.
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest('.segmented > button, .pagination > .btn'); if (!b) return;
+      if (['data-show', 'data-tab', 'data-amount', 'data-lang', 'data-country', 'data-theme-set', 'data-modal-open', 'data-toast', 'data-toggle-class'].some(a => b.hasAttribute(a))) return;
+      if (b.disabled) return;
+      const isPage = b.parentElement.classList.contains('pagination'), label = b.textContent.trim();
+      if (isPage && !/^\d+$/.test(label)) { window.toast('Paginação: só no produto final'); return; }
+      b.parentElement.querySelectorAll('button, .btn').forEach(x => x.classList.toggle('active', x === b));
+      if (isPage) window.toast('Página ' + label + ' (protótipo: mostra sempre a mesma lista)');
+    });
+    // Cards inteiros clicáveis: [data-href] abre o destino quando o clique não foi num link, botão ou campo.
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('[data-href]'); if (!card) return;
+      if (e.target.closest('a,button,input,select,textarea,label,[data-modal-open],[data-toast],[data-copy]')) return;
+      location.href = card.dataset.href;
+    });
     // Tags editáveis: clique remove; Enter ou vírgula adiciona; Backspace vazio remove a última.
     document.addEventListener('click', (e) => {
       const tag = e.target.closest('.tag-input .tag');
@@ -639,7 +655,7 @@
     bind();
     document.title = document.title || BRAND;
     // abre a aba indicada no hash (ex.: anuncio.html#curadoria)
-    const openHashTab = () => { const h = (location.hash || '').replace('#', ''); if (!h) return; const tabBtn = document.querySelector('.tabs [data-tab="' + h + '"]'); if (tabBtn) tabBtn.click(); const md = document.getElementById(h); if (md && md.classList.contains('modal-backdrop')) md.classList.add('open'); };
+    const openHashTab = () => { const h = (location.hash || '').replace('#', ''); if (!h) return; const tabBtn = document.querySelector('.tabs [data-tab="' + h + '"]'); if (tabBtn) tabBtn.click(); const md = document.getElementById(h); if (md && md.classList.contains('modal-backdrop')) md.classList.add('open'); if (md && md.classList.contains('collapsible')) { md.classList.add('open'); const hb = md.querySelector('[data-toggle-class][aria-expanded]'); if (hb) hb.setAttribute('aria-expanded', 'true'); } };
     openHashTab(); window.addEventListener('hashchange', openHashTab);
     document.dispatchEvent(new CustomEvent('lacre:ready', { detail: { locale } }));
   }
