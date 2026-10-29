@@ -15,7 +15,7 @@
 
 **Oferta**
 - Assistente de envio em 6 passos; upload direto ao S3; pipeline de ingestão (AV, metadados, hash, prévias, varreduras, OCR).
-- Modelos: **Cópias, Exclusivo (preço fixo + oferta), Lacre coletivo, Pedido com recompensa**, com o modificador **compra com exclusividade** em Cópias e Lacre coletivo.
+- Modelos: **Cópias, Exclusivo (preço fixo + oferta), Lacre coletivo, Pedido com recompensa (inclusive por unidade), Leilão, Camadas, Assinatura, Janela exclusiva e Licença**, com o modificador **compra com exclusividade** (opcional, desligado por padrão) em Cópias, Lacre coletivo e Camadas.
 - País e idioma em todo item e pedido; filtro de país no catálogo e no mural; interface em português, inglês e espanhol.
 - Painel do vendedor, lista de anúncios, feedback da curadoria, ganhos, reputação v1.
 
